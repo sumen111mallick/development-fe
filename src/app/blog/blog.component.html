@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Housing Street - Blog</title>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div *ngIf="showLoadingIndicator">
+            <div class="preloader"></div>
+        </div>
+        <app-topbardark-loader></app-topbardark-loader>
+        <section class="blog_post_container bgc-f7">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="breadcrumb_content style2">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
+                                <li class="breadcrumb-item active text-thm" aria-current="page">Blog
+                                </li>
+                            </ol>
+                            <h2 class="breadcrumb_title">Blog</h2>
+                            <h4 class="text-thm mt30" *ngIf="paginated_posts.data.length > 0">Showing post {{ paginated_posts.from }} to {{ paginated_posts.to
+                                }} of
+                                {{ paginated_posts.total }}</h4>
+                                
+                        </div>
+                    </div>
+                    <!--<div class="col-lg-4">
+                        <button class="btn btn-block btn-lg btn-thm circle" id="create_btn"
+                            (click)="createPost($event)">Create Post</button>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div *ngIf="paginated_posts.data.length == 0">
+                            <h4>There are no blog posts at the moment.</h4>
+                        </div>
+                        <div class="main_blog_post_content">
+                            <div *ngIf="paginated_posts">
+                                <div class="for_blog feat_property" *ngFor="let post of paginated_posts.data">
+                                    <div class="thumb">
+                                        <img class="img-whp" src="{{ images_folder }}/images/{{ post.image_path }}"
+                                            alt="post.image_path">
+                                        <div class="blog_tag">{{ post.category }}</div>
+                                    </div>
+                                    <div class="details">
+                                        <div class="tc_content">
+                                            <h4 class="mb15">{{ post.title }}</h4>
+                                            <!--<p>{{ post.description | slice:0:320 }}...</p> -->
+                                            <p [innerHTML]="post.description | truncateText:330 | safe: 'html'"></p>
+
+                                            <!--<p [innerHTML]="post.descrption"></p> -->
+                                        </div>
+                                        <div class="fp_footer">
+                                            <ul class="fp_meta float-left mb0">
+                                                <li class="list-inline-item"
+                                                    *ngIf="post.profile_pic !== null"><img
+                                                        src="{{ images_folder }}/{{ post.profile_pic }}"
+                                                        alt="profile_pic"></li>
+                                                <li class="list-inline-item" *ngIf="post.profile_pic == null">
+                                                    <img src="../../assets/images/default_avatar.png" alt="profile_pic">
+                                                </li>
+                                                <li class="list-inline-item">{{ post.name }}</li>
+                                                <li class="list-inline-item"><span
+                                                        class="flaticon-calendar pr10"></span> {{ post.updated_at |
+                                                    date: 'MMMM dd, yyyy' }}</li>
+                                            </ul>
+                                            <!--<a class="fp_pdate float-right text-thm" href="/single-post-blog?id={{post.id}}">Read More <span
+                                                    class="flaticon-next"></span></a> -->
+                                            <a class="fp_pdate float-right text-thm"
+                                                [routerLink]="['/blog-single-post', post.slug]"><span
+                                                    class="flaticon-next"></span>Read More </a>
+                                            <!--   <a class="fp_pdate float-right text-thm" [routerLink]="['/blog-single-post']"> </a> -->
+                                            <!--<button class="fp_pdate float-right text-thm" (click)="gotoPostDetails('/blog-single-post',post.slug)"><span
+                                                        class="flaticon-next"></span>Read More</button>  -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-thm" *ngIf="paginated_posts.data.length > 0">Showing post {{ paginated_posts.from }} to {{
+                                        paginated_posts.to }} of
+                                        {{ paginated_posts.total }}</h4>
+                                </div>
+                                <div class="mbp_pagination mt20" *ngIf="paginated_posts.data.length > 0">
+                                    <ul class="page_navigation">
+                                        <li class="page-item"
+                                            [ngClass]="{'active' : link.active == true, 'disabled' : link.url == null}"
+                                            *ngFor="let link of paginated_posts.links; index as i">
+                                            <!--<button type="button" (click)="gotoPage(link.url)" class="btn btn-white circle"><span
+                                                class="flaticon-left-arrow">{{ link.label }}</span></button>-->
+
+                                            <button type="button" (click)="gotoPage(link.url)"
+                                                class="btn btn-white circle page-link">
+                                                <span
+                                                    *ngIf="link.label.indexOf('Previous') == -1 && link.label.indexOf('Next') == -1"
+                                                    [innerHTML]="link.label"></span>
+                                                <span *ngIf="link.label.indexOf('Previous') > -1"
+                                                    class="flaticon-left-arrow"></span>
+                                                <span *ngIf="link.label.indexOf('Next') > -1"
+                                                    class="flaticon-right-arrow"></span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--<p>Showing post {{paginatedPosts.from}} to {{paginatedPosts.to}} of
+                                    {{paginatedPosts.total}}</p>
+                                <p>Page {{paginatedPosts.current_page}} of {{paginatedPosts.last_page}}</p>
+                                <div class="mbp_pagination mt20">
+                                    <ul class="page_navigation">
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-white circle page-link"
+                                                (click)="prevPage()" [disabled]="!paginatedPosts.prev_page_url"><span
+                                                    class="flaticon-left-arrow"></span> Prev</button>
+                                        </li>
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <span
+                                    class="flaticon-left-arrow"></span> Prev</a> 
+                                        <li class="page-item">
+                                            <button type="button" class="btn btn-white circle page-link"
+                                                (click)="nextPage()" [disabled]="!paginatedPosts.next_page_url"><span
+                                                    class="flaticon-right-arrow"></span> Next</button>
+                                        </li>
+                                    </ul>
+                                </div> -->
+                            </div>
+
+                            <!--<p *ngIf="service.isLoading">Loading...</p> -->
+                            <!--<div class="for_blog feat_property" *ngFor="let post of posts">
+                                <div class="thumb">
+                                    <img class="img-whp" src="{{ images_folder }}/images/{{ post.image_path }}"
+                                        alt="post.image_path">
+                                    <div class="blog_tag">Construction</div>
+                                </div>
+                                <div class="details">
+                                    <div class="tc_content">
+                                        <h4 class="mb15">{{ post.title }}</h4>
+                                        <p>{{ post.description | slice:0:320 }}...</p>
+                                    </div>
+                                    <div class="fp_footer">
+                                        <ul class="fp_meta float-left mb0">
+                                            <li class="list-inline-item"><a href="#"><img
+                                                        src="../../assets/css/images/property/pposter1.png"
+                                                        alt="pposter1.png"></a></li>
+                                            <li class="list-inline-item"><a href="#">Ali Tufan</a></li>
+                                            <li class="list-inline-item"><a href="#"><span
+                                                        class="flaticon-calendar pr10"></span> {{ post.updated_at |
+                                                    date: 'MMMM dd, yyyy' }}</a></li>
+                                        </ul> -->
+                            <!--<a class="fp_pdate float-right text-thm" href="/single-post-blog?id={{post.id}}">Read More <span
+                                                class="flaticon-next"></span></a> -->
+                            <!-- <a class="fp_pdate float-right text-thm" [routerLink]="['/blog-single-post', post.slug]"><span
+                                            class="flaticon-next"></span>Read More </a> -->
+                            <!--   <a class="fp_pdate float-right text-thm" [routerLink]="['/blog-single-post']"> </a> -->
+                            <!--<button class="fp_pdate float-right text-thm" (click)="gotoPostDetails('/blog-single-post',post.slug)"><span
+                                                    class="flaticon-next"></span>Read More</button> -->
+                            <!--</div>
+                                </div>
+                            </div> -->
+
+                            <!--<div class="for_blog feat_property">
+                                <div class="thumb">
+                                    <img class="img-whp" src="../../assets/css/images/blog/8.jpg" alt="8.jpg">
+                                    <div class="blog_tag">Construction</div>
+                                </div>
+                                <div class="details">
+                                    <div class="tc_content">
+                                        <h4 class="mb15">Redfin Ranks the Most Competitive Neighborhoods of 2020</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis et sem
+                                            sed
+                                            sollicitudin. Donec non odio neque. Aliquam hendrerit sollicitudin purus,
+                                            quis
+                                            rutrum mi accumsan nec. Quisque bibendum orci ac nibh
+                                            facilisis, at malesuada orci congue. Nullam tempus sollicitudin cursus. Ut
+                                            et
+                                            adipiscing erat. Curabitur this is a text link libero tempus congue.</p>
+                                    </div>
+                                    <div class="fp_footer">
+                                        <ul class="fp_meta float-left mb0">
+                                            <li class="list-inline-item"><a href="#"><img
+                                                        src="../../assets/css/images/property/pposter1.png" alt="pposter1.png"></a></li>
+                                            <li class="list-inline-item"><a href="#">Ali Tufan</a></li>
+                                            <li class="list-inline-item"><a href="#"><span
+                                                        class="flaticon-calendar pr10"></span> January 16, 2020</a></li>
+                                        </ul>
+                                        <a class="fp_pdate float-right text-thm" href="#">Read More <span
+                                                class="flaticon-next"></span></a>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="for_blog feat_property">
+                                <div class="thumb">
+                                    <img class="img-whp" src="../../assets/css/images/blog/9.jpg" alt="9.jpg">
+                                    <div class="blog_tag">Construction</div>
+                                </div>
+                                <div class="details">
+                                    <div class="tc_content">
+                                        <h4 class="mb15">Redfin Ranks the Most Competitive Neighborhoods of 2020</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis et sem
+                                            sed
+                                            sollicitudin. Donec non odio neque. Aliquam hendrerit sollicitudin purus,
+                                            quis
+                                            rutrum mi accumsan nec. Quisque bibendum orci ac nibh
+                                            facilisis, at malesuada orci congue. Nullam tempus sollicitudin cursus. Ut
+                                            et
+                                            adipiscing erat. Curabitur this is a text link libero tempus congue.</p>
+                                    </div>
+                                    <div class="fp_footer">
+                                        <ul class="fp_meta float-left mb0">
+                                            <li class="list-inline-item"><a href="#"><img
+                                                        src="../../assets/css/images/property/pposter1.png" alt="pposter1.png"></a></li>
+                                            <li class="list-inline-item"><a href="#">Ali Tufan</a></li>
+                                            <li class="list-inline-item"><a href="#"><span
+                                                        class="flaticon-calendar pr10"></span> January 16, 2020</a></li>
+                                        </ul>
+                                        <a class="fp_pdate float-right text-thm" href="#">Read More <span
+                                                class="flaticon-next"></span></a>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!--<div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mbp_pagination mt20">
+                                        <ul class="page_navigation">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true"> <span
+                                                        class="flaticon-left-arrow"></span> Prev</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#"></a></li>
+                                            </li> 
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item active" aria-current="page">
+                                                <a class="page-link" href="#">2 <span
+                                                        class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">29</a></li> 
+                                            <li class="page-item">
+                                                <a class="page-link" href="#"><span
+                                                        class="flaticon-right-arrow"></span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 col-xl-4">
+                        <!-- Blog Search bar goes here -->
+                        <app-blog-search></app-blog-search>
+                        <!-- Categories Property section goes here -->
+                        <app-blog-cat-property></app-blog-cat-property>
+                        <!-- Featured Listings section goes here -->
+                        <app-blog-featured-list></app-blog-featured-list>
+                        <!-- Tags section goes here -->
+                        <app-blog-tags></app-blog-tags>
+                    </div>
+                    <!--<ngx-spinner [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium"></ngx-spinner>-->
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

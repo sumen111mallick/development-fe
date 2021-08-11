@@ -1,0 +1,161 @@
+<header class="header-nav menu_style_home_one style2 menu-fixed main-menu">
+  <div class="container-fluid p0">
+    <!-- Ace Responsive Menu -->
+    <nav>
+      <!-- Menu Toggle btn-->
+      <div class="menu-toggle">
+        <img class="nav_logo_img img-fluid" src="./assets/css/images/header-logo.png" alt="header-logo.png">
+        <button type="button" id="menu-btn">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <a href="#" class="navbar_brand float-left dn-smd">
+        <img class="logo1 img-fluid" src="./assets/css/images/header-logo2.png" alt="header-logo.png">
+        <img class="logo2 img-fluid" src="./assets/css/images/header-logo2.png" alt="header-logo2.png">
+        <span></span>
+      </a>
+      <!-- Responsive Menu Structure-->
+      <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
+      <ul id="respMenu" class="ace-responsive-menu text-right" data-menu-style="horizontal">
+        <li>
+          <a href="/"><span class="title">Home</span></a>
+          <!-- Level Two-->
+        </li>
+        <li>
+          <a href="/productlisting"><span class="title">Listing</span></a>
+          <!-- Level Two-->
+
+        </li>
+
+        <li class="last">
+          <a href="/contact"><span class="title">Contact</span></a>
+        </li>
+        <!-- Code added by Radhika Start -->
+        <li class="last">
+          <a href="/blog"><span class="title">Blog</span></a>
+        </li>
+        <!-- Code added by Radhika End -->
+        <li class="user_setting" *ngIf="isLoggedIn">
+          <div class="dropdown">
+            <a class="btn dropdown-toggle" href="#" data-toggle="dropdown"><span class="flaticon-user"></span><span
+                class="dn-1199"> {{ currentUser }}</span></a>
+            <div class="dropdown-menu">
+              <div class="user_set_header">
+                <span *ngIf="userProfile"><img src="{{ftpstring}}{{userProfile}}" alt="login_user.png"></span>
+                <span *ngIf="!userProfile"><img class="float-left" src="./../../assets/css/images/team/e1.png"
+                    alt="login_user.png"></span>
+                <p> {{ roles }} <br><span class="address text-secondary"><a href="" class="__cf_email__ "
+                      data-cfemail="32535e5b464754535c72555f535b5e1c515d5f"
+                      style="color: black;">{{userEmail}}</a></span></p>
+              </div>
+              <div class="user_setting_content">
+                <a class="dropdown-item active" href="/profile">My Profile</a>
+                <!--<a class="dropdown-item" href="#">Messages</a>
+                <a class="dropdown-item" href="#">Purchase history</a>
+                <a class="dropdown-item" href="#">Help</a>-->
+                <a class="dropdown-item" href="/logout">Log out</a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-inline-item add_listing">
+          <a href="/insertproduct">
+            <span class="flaticon-plus"></span>
+            <span class="dn-lg"> List Property</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Header Nav For Mobile -->
+<div id="page" class="stylehome1 h0">
+  <div class="mobile-menu">
+    <div class="header stylehome1">
+      <div class="main_logo_home2 text-center">
+        <img class="nav_logo_img img-fluid mt20" src="./assets/css/images/header-logo2.png" alt="header-logo2.png">
+      </div>
+      <ul class="menu_bar_home2">
+        <li class="list-inline-item list_s"><a href="/profile" *ngIf="isLoggedIn"><span
+              class="flaticon-user"></span></a></li>
+        <li class="list-inline-item"><a href="#menu"><span></span></a></li>
+      </ul>
+    </div>
+  </div><!-- /.mobile-menu -->
+  <nav id="menu" class="stylehome1">
+    <ul>
+      <li>
+        <a href="">Home</a>
+      </li>
+      <li>
+        <a href="/productlisting">Listing</a>
+      </li>
+      <li>
+        <a href="/contact">Contact</a>
+      </li>
+      <li>
+        <a href="/blog">
+          <span class="title">Blog</span>
+        </a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a href="/logout">
+          <span class="title">Logout</span>
+        </a>
+      </li>
+      <li *ngIf="!isLoggedIn">
+        <a href="/login" class="mm-listitem__text">
+          <!--<span class="flaticon-user"></span>-->
+          Login
+        </a>
+      </li>
+      <li *ngIf="!isLoggedIn">
+        <a href="/register" class="mm-listitem__text">
+          <!--<span class="flaticon-edit"></span>-->
+          Register
+        </a>
+      </li>
+      <li class="cl_btn"><a class="btn btn-block btn-lg btn-thm circle" href="/insertproduct">
+          <span class="flaticon-plus"></span>
+          List Property
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="dashboard_sidebar_menu dn-992">
+  <ul class="sidebar-menu">
+    <li class="header"><img src="./assets/css/images/header-logo2.png" alt="header-logo2.png"> </li>
+    <div *ngIf="usertype != 1 ">
+      <li class="title"><span>Main</span></li>
+      <li class="treeview"><a (click)="redirect_control()"><i class="flaticon-layers"></i><span> Dashboard</span></a>
+      </li>
+    </div>
+    <li class="title"><span>Manage Listings</span></li>
+    <li *ngIf="usertype != 4 "><a href="/myproperties"><i class="flaticon-home"></i> <span>My Properties</span></a>
+    </li>
+    <li *ngIf="usertype != 4 "><a href="/savedsearches"><i class="flaticon-magnifying-glass"></i> <span>Saved
+          Search</span></a></li>
+    <li *ngIf="usertype != 4 "><a href="/reviews"><i class="flaticon-layers"></i> <span>Reviews</span></a></li>
+    <li *ngIf="usertype != 4 "><a href="/requirement"><i class="flaticon-box"></i> <span>Requirements</span></a></li>
+    <li *ngIf="usertype != 4 "><a href="/lawyers"><i class="flaticon-college-graduation"></i> <span>Lawyer
+          Services</span></a></li>
+    <li *ngIf="usertype == 4 "><a href="/lawyerservice"><i class="flaticon-magnifying-glass"></i> <span>Services
+          Offered</span></a></li>
+    <li *ngIf="usertype == 1 "><a href="/loancalc"><i class="flaticon-magnifying-glass"></i> <span>Loan
+          Calculator</span></a></li>
+    <!-- <li class="treeview">
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle"></i> My Reviews</a></li>
+            <li><a href="#"><i class="fa fa-circle"></i> Visitor Reviews</a></li>
+          </ul>
+        </li> -->
+    <li class="title"><span>Manage Account</span></li>
+    <li><a href="/profile"><i class="flaticon-user"></i> <span>My Profile</span></a></li>
+    <li><a href="/logout"><i class="flaticon-logout"></i> <span>Logout</span></a></li>
+  </ul>
+</div>

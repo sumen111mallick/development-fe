@@ -1,0 +1,9 @@
+/*.blog_post_container {
+    padding-left: 300px;
+} */
+
+@media only screen and (min-width: 990px) {
+    .main-title h2 {
+        margin-top: 40px;
+    } 
+}

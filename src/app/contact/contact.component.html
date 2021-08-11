@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:28:32 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords"
+		content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+	<meta name="description" content="FindHouse - Real Estate HTML Template">
+	<meta name="CreativeLayers" content="ATFN">
+	<!-- css file -->
+
+	<title>FindHouse - Real Estate HTML Template</title>
+	<!-- Favicon -->
+	<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+	<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="preloader"></div>
+
+		<app-topbardark></app-topbardark>
+		<!-- Inner Page Breadcrumb -->
+		<section class="inner_page_breadcrumb">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-6">
+						<div class="breadcrumb_content">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Contact</li>
+							</ol>
+							<h4 class="breadcrumb_title">Contact Us</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Our Contact -->
+		<section class="our-contact pb0 bgc-f7">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7 col-xl-8">
+						<div class="form_grid">
+							<h4 class="mb5">Send Us An Email</h4>
+							<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact_form" id="contact_form" name="contact_form" action="#" method="post" novalidate>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input id="form_name" formControlName="form_name" name="form_name" class="form-control"
+												required="required" type="text" placeholder="Name">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input id="form_email" formControlName="form_email" name="form_email" class="form-control required email"
+												required="required" type="email" placeholder="Email">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input id="form_phone" formControlName="form_phone" name="form_phone" class="form-control required phone"
+												required="required" type="phone" placeholder="Phone">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<input id="form_subject" formControlName="form_subject" name="form_subject" class="form-control required"
+												required="required" type="text" placeholder="Subject">
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group">
+											<textarea id="form_message" formControlName="form_message" name="form_message"
+												class="form-control required" rows="8" required="required"
+												placeholder="Your Message"></textarea>
+										</div>
+										<div class="form-group mb0">
+											<button type="submit" [disabled]="!contactForm.valid" class="btn btn-lg btn-thm">Send Message</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-5 col-xl-4">
+						<div class="contact_localtion">
+							<h4>Contact Us</h4>
+							<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida quis libero eleifend ornare. habitasse platea dictumst.</p>-->
+							<div class="content_list">
+								<h5>Address</h5>
+								<p>H. No B-165, <br>Ambedkar Colony, <br>Gali No 1, <br>Chhatarpur, <br>New Delhi -
+									110074</p>
+							</div>
+							<div class="content_list">
+								<h5>Phone</h5>
+								<p>+91-9818954521</p>
+							</div>
+							<div class="content_list">
+								<h5>Mail</h5>
+								<p><a href="mailto:support@housingstreet.com">support@housingstreet.com</a></p>
+							</div>
+							<div class="content_list">
+								<h5>Skype</h5>
+								<p></p>
+							</div>
+							<h5>Follow Us</h5>
+							<ul class="contact_form_social_area">
+								<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa fa-google"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		<!-- Start Partners -->
+		<section class="start-partners bgc-thm pt50 pb50">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="start_partner tac-smd">
+							<h2>Become a Real Estate Agent</h2>
+							<p>We only work with the best companies around the globe</p>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="parner_reg_btn text-right tac-smd">
+							<a class="btn btn-thm2" href="/agentregister">Register Now</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<app-footer></app-footer>
+
+
+		<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+	</div>
+
+</body>
+
+</html>

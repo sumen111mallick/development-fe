@@ -1,0 +1,80 @@
+<app-admindashtopbar></app-admindashtopbar>
+<!--<div class="preloader"></div> -->
+<!--<app-topbardark></app-topbardark> -->
+<!-- Blog Single Post -->
+<section class="our-dashboard dashboard bgc-f7 pb50">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-xl-3 dn-992 pl0"></div>
+            <div class="col-lg-8 col-xl-9 maxw100flex-992">
+                <div class="row">
+                    <div class="col-lg-4 col-xl-4 mb10">
+                        <div class="breadcrumb_content style2 mb30-991">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active text-thm" aria-current="page">Blog – {{ post_detail[0].title }}</li>
+                            </ol>
+                            <h2 class="breadcrumb_title">Blog</h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xl-8">
+                        <div class="text-right">
+                            <a [routerLink]="['/admin-blog']" class="fp_pdate float-right text-thm"><span
+                                    class="flaticon-left-arrow"></span> Back to Blog</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="main_blog_post_content">
+                        <div class="mbp_thumb_post">
+                            <div class="blog_sp_tag">
+                                <a href="#">{{post_detail[0].category}}</a>
+                            </div>
+
+                            <button (click)="editPost(post_detail[0].slug)"
+                                class="btn btn-primary float-right">Edit</button>
+                            <!--<a class="fp_pdate float-right text-thm" [routerLink]="['/blog-edit-post', post_detail[0].slug ]"><span
+                                    class="flaticon-edit"></span> Edit</a> -->
+                            <!--<a class="fp_pdate float-right text-thm" [routerLink]="['']">Edit </a>-->
+                            <!--<div class="blog_sp_tag float-right"><a href="#">Edit</a></div>-->
+                            <h3 class="blog_sp_title">{{ post_detail[0].title }}</h3>
+                            <ul class="blog_sp_post_meta">
+                                <li class="list-inline-item"><a href="#"><img
+                                            src="{{ images_folder }}/{{ post_detail[0].profile_pic }}" alt="profile_pic"></a>
+                                </li>
+                                <li class="list-inline-item"><a href="#">{{ post_detail[0].name }}</a></li>
+                                <li class="list-inline-item"><span class="flaticon-calendar"></span></li>
+                                <li class="list-inline-item"><a href="#">{{ post_detail[0].updated_at |
+                                        date: 'MMMM dd, yyyy' }}</a></li>
+                                <li class="list-inline-item"><span class="flaticon-view"></span></li>
+                                <li class="list-inline-item"><a href="#"> {{ post_detail[0].views}} views</a></li>
+                                <!--<li class="list-inline-item"><span class="flaticon-chat"></span></li>
+                                    <li class="list-inline-item"><a href="#">15</a></li> -->
+                            </ul>
+                            <div class="thumb">
+                                <img class="img-fluid" src="{{ images_folder }}/images/{{ post_detail[0].image_path }}"
+                                    alt="bs1.jpg">
+                            </div>
+                            <div class="details">
+                                <!--<p class="mb30">{{ post_detail[0].description }}</p> -->
+                                <p class="mb30 text-justify" [innerHTML]="post_detail[0].description"></p>
+                                <!--<p class="mb30"></p>
+                                        <h4 class="mb15"></h4>
+                                        <p></p>
+                                        <div class="mbp_blockquote">
+                                            <div class="blockquote">
+                                            <span class="font-italic"><i class="fa fa-quote-left"></i></span><br>
+                                            <em class="mb-0"></em>
+                                            </div>
+                                        </div>
+                                        <p class="mb25"></p>
+                                        <p class="mb25"></p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

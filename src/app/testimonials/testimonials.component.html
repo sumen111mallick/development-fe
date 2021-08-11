@@ -1,0 +1,87 @@
+<app-topbardark></app-topbardark>
+
+<!-- Our Testimonials -->
+<section *ngIf="testimonial.length>0" id="our-testimonials" class="our-testimonial" >
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 offset-lg-3">
+				<div class="main-title text-center">
+					<h2 class="color-white">Testimonials</h2>
+					<p class="color-white">Here could be a nice sub title</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2">
+				<ngb-carousel>
+					<ng-template ngbSlide *ngFor = "let testimoData of testimonial">
+						<div class="item">
+							<div class="testimonial_grid">
+								<div class="thumb">
+									<img src="./../../assets/css/images/property/pposter1.png" alt="user Testimonial image">
+								</div>
+								<div class="details">
+									<h4>{{testimoData.user_name}}</h4>
+									<p>{{testimoData.rev_subject}}</p>
+									<p class="mt10 mb10" *ngIf="testimoData.stars == 0">
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										</p>
+										
+										<p class="mt10 mb10" *ngIf="testimoData.stars == 1">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										</p>
+										
+										<p class="mt10 mb10" *ngIf="testimoData.stars == 2">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										</p>
+										
+										<p class="mt10 mb10" *ngIf="testimoData.stars == 3">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										</p>
+										
+										<p  class="mt10 mb10" *ngIf="testimoData.stars == 4">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star-o" aria-hidden="true"></i>
+										</p>
+										
+										<p class="mt10 mb10" *ngIf="testimoData.stars == 5">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										</p>																				
+									<p class="mt25 mb25">
+										{{testimoData.rev_content}}
+									</p>
+								</div>
+							</div>
+						</div>		  
+					</ng-template>
+				  </ngb-carousel>
+				
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Our Footer -->
+<app-footer></app-footer>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+    <meta name="description" content="FindHouse - Real Estate HTML Template">
+    <meta name="CreativeLayers" content="ATFN">
+    <!-- css file -->
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div *ngIf="showLoadingIndicator">
+            <div class="preloader"></div>
+        </div>
+        <app-admindashtopbar></app-admindashtopbar>
+        <section class="our-dashboard dashboard bgc-f7 pb50">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-xl-3 dn-992 pl0"></div>
+                    <div class="col-lg-8 col-xl-9 maxw100flex-992">
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-6 col-sm-6 col-xxs-6 mt30 pt30">
+                                <div class="breadcrumb_content style2">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                        <li class="breadcrumb-item active text-thm" aria-current="page">Blog List
+                                        </li>
+                                    </ol>
+                                    <h2 class="breadcrumb_title">Blog</h2>
+                                    <h4 class="text-thm">Showing post {{ paginated_posts.from }} to {{
+                                        paginated_posts.to }}
+                                        of
+                                        {{ paginated_posts.total }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-xl-6 col-sm-6 col-xxs-6 m-auto pt30 float-right">
+                                <div class="candidate_review_select style2 text-right">
+
+                                    <!--<button type="button" class="btn btn-lg btn-thm circle" id="create_btn"
+                                        (click)="createPost($event)">Create
+                                        Post</button>-->
+                                        <a href="/blog-create-post" class="btn btn-lg btn-thm circle">Create Post</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="my_dashboard_review mb40">
+                                <div class="property_table">
+                                    <div class="table-responsive mt0">
+                                        <table class="table">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">Blog Title</th>
+                                                    <th scope="col">Updated On</th>
+                                                    <th scope="col">Views</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let post of paginated_posts.data">
+                                                <tr>
+                                                    <th scope="row">
+                                                        <div class="feat_property list favorite_page style2">
+                                                            <div class="thumb">
+                                                                <a
+                                                                    [routerLink]="['/admin-blog-single-post', post.slug]"><img
+                                                                        class="img-whp"
+                                                                        src="{{ images_folder }}/images/{{ post.image_path }}"
+                                                                        alt="post.image_path"></a>
+                                                            </div>
+                                                            <div class="details">
+                                                                <div class="tc_content">
+                                                                    <h5>{{ post.title }}</h5>
+                                                                    <p></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <td>{{ post.updated_at | date: 'MMMM dd, yyyy' }}</td>
+                                                    <td>{{ post.views }}</td>
+                                                    <td>
+                                                        <ul class="view_edit_delete_list mb0">
+                                                            <li class="list-inline-item" data-toggle="tooltip"
+                                                                data-placement="top" title data-original-title="Edit">
+                                                                <a [routerLink]="['/blog-edit-post', post.slug]"><span
+                                                                        class="flaticon-edit"></span></a>
+                                                            </li>
+                                                            <!--<li class="list-inline-item" data-toggle="tooltip"
+                                                        data-placement="top" title data-original-title="Delete">
+                                                        <a (click)="deleteBlog(post.slug)"><span
+                                                                class="flaticon-garbage"></span></a>
+                                                    </li> -->
+                                                            <li class="list-inline-item" data-toggle="tooltip"
+                                                                data-placement="top" title data-original-title="Delete">
+                                                                <a (click)="openConfirmationDialog(post.slug)"><span
+                                                                        class="flaticon-garbage"></span></a>
+                                                            </li>
+                                                        </ul>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <h4 class="text-thm">Showing post {{ paginated_posts.from }} to {{
+                                        paginated_posts.to }}
+                                        of
+                                        {{ paginated_posts.total }}</h4>
+                                </div>
+                                <div class="mbp_pagination mt20">
+                                    <ul class="page_navigation">
+                                        <li class="page-item"
+                                            [ngClass]="{'active' : link.active == true, 'disabled' : link.url == null}"
+                                            *ngFor="let link of paginated_posts.links; index as i">
+                                            <!--<button type="button" (click)="gotoPage(link.url)"
+                                        class="btn btn-white circle"><span class="flaticon-left-arrow">{{ link.label }}</span></button> -->
+                                            <button type="button" (click)="gotoPage(link.url)"
+                                                class="btn btn-white circle page-link">
+                                                <!--<span [innerHTML]="link.label"></span>-->
+                                                <span
+                                                    *ngIf="link.label.indexOf('Previous') == -1 && link.label.indexOf('Next') == -1"
+                                                    [innerHTML]="link.label"></span>
+                                                <span *ngIf="link.label.indexOf('Previous') > -1"
+                                                    class="flaticon-left-arrow"></span>
+                                                <span *ngIf="link.label.indexOf('Next') > -1"
+                                                    class="flaticon-right-arrow"></span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

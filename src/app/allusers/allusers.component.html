@@ -1,0 +1,505 @@
+<app-admindashtopbar></app-admindashtopbar>
+
+
+<section class="our-dashbord dashbord bgc-f7 pb50">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-xl-2 dn-992 pl0"></div>
+      <div class="col-sm-12 col-lg-8 col-xl-10 maxw100flex-992">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="dashboard_navigationbar dn db-992">
+              <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard Navigation</button>
+                <ul id="myDropdown" class="dropdown-content">
+                  <li><a href="page-dashboard.html"><span class="flaticon-layers"></span> Dashboard</a></li>
+                  <li><a href="page-message.html"><span class="flaticon-envelope"></span> Message</a></li>
+                  <li class="active"><a href="page-my-properties.html"><span class="flaticon-home"></span> My Properties</a></li>
+                  <li><a href="page-my-favorites.html"><span class="flaticon-heart"></span> My Favorites</a></li>
+                  <li><a href="page-my-savesearch.html"><span class="flaticon-magnifying-glass"></span> Saved Search</a></li>
+                  <li><a href="page-my-review.html"><span class="flaticon-chat"></span> My Reviews</a></li>
+                  <li><a href="page-my-packages.html"><span class="flaticon-box"></span> My Package</a></li>
+                  <li><a href="page-my-profile.html"><span class="flaticon-user"></span> My Profile</a></li>
+                  <li><a href="page-add-new-property.html"><span class="flaticon-filter-results-button"></span> Add New Listing</a></li>
+                  <li><a href="page-login.html"><span class="flaticon-logout"></span> Logout</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-xl-4 mb10">
+            <div class="breadcrumb_content style2 mb30-991" style="margin-left: 30px;">
+              <h2 class="breadcrumb_title">All Users</h2>
+              <p>We are glad to see you again!</p>
+            </div>
+          </div>
+          <div class="col-lg-8 col-xl-8">
+            <div class="candidate_revew_select style2 text-right mb30-991">
+              <ul class="mb0">
+
+
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="my_dashboard_review mb40">
+              <div class="property_table">
+                <div class="table-responsive mt0">
+                  <span class="status_tag badge">USER</span>
+                  <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                          <th scope="col">User Name</th>
+                          <th scope="col">Date of Account Creation</th>
+                          <th scope="col">Status</th>
+                          <th scope="col"></th>
+                          <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let number of content_user">
+                          <th scope="row">
+                          <div class="feat_property list favorite_page style2">
+                            <div class="thumb">
+                              <img class="img-whp" src="{{ftpURL}}{{number.profile_pic}}" alt="fp1.jpg">
+                              <div class="thmb_cntnt">
+                                <ul class="tag mb0">
+                                  <li class="list-inline-item dn"></li>
+                                  <li class="list-inline-item" *ngIf=" number.blocked "><a >BLOCKED</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="details">
+                              <div class="tc_content">
+                                <h4>{{ number.name }}</h4>
+                                <p><span class="flaticon-placeholder"></span>City: {{ number.city }}</p>
+                                <p><span class="flaticon-placeholder"></span>Address: {{ number.address }}</p>
+                                <a class="fp_price text-thm" href="#">Phone No.:{{ number.other_mobile_number }}<small></small></a>
+                              </div>
+                            </div>
+                          </div>
+                          </th>
+                          <td>{{ number.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+
+                          <td><span class="status_tag badge" *ngIf="!number.phone_number_verification_status">Unverified</span><span class="status_tag" *ngIf="number.phone_number_verification_status">Verified</span></td>
+                          <td>{{ number.view_counter }}</td>
+                          <td>
+                            <ul class="view_edit_delete_list mb0">
+                              <!-- <li class="list-inline-item list_s"><a href="#" class="btn flaticon-user" data-toggle="modal" data-target=".bd-example-modal-lg"> <span class="dn-lg">Login/Register</span></a></li> -->
+
+                              <li class="list-inline-item" data-toggle="modal" data-placement="top" title="Edit"><a data-toggle="modal" data-target=".bd-example-modal-lg" (click)="user_details(number.id)" ><span class="flaticon-edit"></span></a></li>
+                              <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a></li>
+                            </ul>
+                          </td>
+                        </tr>
+
+
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-lg-12">
+            <div class="my_dashboard_review mb40">
+              <div class="property_table">
+                <div class="table-responsive mt0">
+                  <span class="status_tag badge">OWNER</span>
+                  <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                          <th scope="col">User Name</th>
+                          <th scope="col">Date of Account Creation</th>
+                          <th scope="col">Status</th>
+                          <th scope="col"></th>
+                          <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let number of content_owner">
+                          <th scope="row">
+                          <div class="feat_property list favorite_page style2">
+                            <div class="thumb">
+                              <img class="img-whp" src="{{ftpURL}}{{number.profile_pic}}" alt="fp1.jpg">
+                              <div class="thmb_cntnt">
+                                <ul class="tag mb0">
+                                  <li class="list-inline-item dn"></li>
+                                  <li class="list-inline-item" *ngIf=" number.blocked "><a >BLOCKED</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="details">
+                              <div class="tc_content">
+                                <h4>{{ number.name }}</h4>
+                                <p><span class="flaticon-placeholder"></span>City: {{ number.city }}</p>
+                                <p><span class="flaticon-placeholder"></span>Address: {{ number.address }}</p>
+                                <a class="fp_price text-thm" href="#">Phone No.:{{ number.other_mobile_number }}<small></small></a>
+                              </div>
+                            </div>
+                          </div>
+                          </th>
+                          <td>{{ number.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+
+                          <td><span class="status_tag badge" *ngIf="!number.phone_number_verification_status">Unverified</span><span class="status_tag" *ngIf="number.phone_number_verification_status">Verified</span></td>
+                          <td>{{ number.view_counter }}</td>
+                          <td>
+                            <ul class="view_edit_delete_list mb0">
+                              <li class="list-inline-item" data-toggle="modal" data-placement="top" title="Edit"><a data-toggle="modal" data-target=".bd-example-modal-lg" (click)="user_details(number.id)" ><span class="flaticon-edit"></span></a></li>
+                              <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a></li>
+                            </ul>
+                          </td>
+                        </tr>
+
+
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-12">
+            <div class="my_dashboard_review mb40">
+              <div class="property_table">
+                <div class="table-responsive mt0">
+                  <span class="status_tag badge">DEALER/COMPANY</span>
+                  <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                          <th scope="col">User Name</th>
+                          <th scope="col">Date of Account Creation</th>
+                          <th scope="col">Status</th>
+                          <th scope="col"></th>
+                          <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let number of content_dealer">
+                          <th scope="row">
+                          <div class="feat_property list favorite_page style2">
+                            <div class="thumb">
+                              <img class="img-whp" src="{{ftpURL}}{{number.profile_pic}}" alt="fp1.jpg">
+                              <div class="thmb_cntnt">
+                                <ul class="tag mb0">
+                                  <li class="list-inline-item dn"></li>
+                                  <li class="list-inline-item" *ngIf=" number.blocked "><a >BLOCKED</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="details">
+                              <div class="tc_content">
+                                <h4>{{ number.name }}</h4>
+                                <p><span class="flaticon-placeholder"></span>City: {{ number.city }}</p>
+                                <p><span class="flaticon-placeholder"></span>Address: {{ number.address }}</p>
+                                <a class="fp_price text-thm" href="#">Phone No.:{{ number.other_mobile_number }}<small></small></a>
+                              </div>
+                            </div>
+                          </div>
+                          </th>
+                          <td>{{ number.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+
+                          <td><span class="status_tag badge" *ngIf="!number.phone_number_verification_status">Unverified</span><span class="status_tag" *ngIf="number.phone_number_verification_status">Verified</span></td>
+                          <td>{{ number.view_counter }}</td>
+                          <td>
+                            <ul class="view_edit_delete_list mb0">
+                              <li class="list-inline-item" data-toggle="modal" data-placement="top" title="Edit"><a data-toggle="modal" data-target=".bd-example-modal-lg" (click)="user_details(number.id)" ><span class="flaticon-edit"></span></a></li>
+
+
+                              <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a></li>
+                            </ul>
+                          </td>
+                        </tr>
+
+
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-12">
+            <div class="my_dashboard_review mb40">
+              <div class="property_table">
+                <div class="table-responsive mt0">
+                  <span class="status_tag badge">LAWYER</span>
+                  <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                          <th scope="col">User Name</th>
+                          <th scope="col">Date of Account Creation</th>
+                          <th scope="col">Status</th>
+                          <th scope="col"></th>
+                          <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let number of content_lawyer">
+                          <th scope="row">
+                          <div class="feat_property list favorite_page style2">
+                            <div class="thumb">
+                              <img class="img-whp" src="{{ftpURL}}{{number.profile_pic}}" alt="fp1.jpg">
+                              <div class="thmb_cntnt">
+                                <ul class="tag mb0">
+                                  <li class="list-inline-item dn"></li>
+                                  <li class="list-inline-item" *ngIf=" number.blocked "><a >BLOCKED</a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="details">
+                              <div class="tc_content">
+                                <h4>{{ number.name }}</h4>
+                                <p><span class="flaticon-placeholder"></span>City: {{ number.city }}</p>
+                                <p><span class="flaticon-placeholder"></span>Address: {{ number.address }}</p>
+                                <a class="fp_price text-thm" href="#">Phone No.:{{ number.other_mobile_number }}<small></small></a>
+                              </div>
+                            </div>
+                          </div>
+                          </th>
+                          <td>{{ number.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+
+                          <td><span class="status_tag badge" *ngIf="!number.phone_number_verification_status">Unverified</span><span class="status_tag" *ngIf="number.phone_number_verification_status">Verified</span></td>
+                          <td>{{ number.view_counter }}</td>
+                          <td>
+                            <ul class="view_edit_delete_list mb0">
+                              <li class="list-inline-item" data-toggle="modal" data-placement="top" title="Edit"><a data-toggle="modal" data-target=".bd-example-modal-lg" (click)="user_details(number.id)" ><span class="flaticon-edit"></span></a></li>
+
+
+                              <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete"><a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a></li>
+                            </ul>
+                          </td>
+                        </tr>
+
+
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="sign_up_modal modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body container pb20">
+
+                  <div class="tab-content container" id="myTabContent">
+
+                      <div class="row mt25 tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="col-lg-6 col-xl-6">
+                          <div class="login_thumb">
+                            <div class="heading">
+                              <h4>User Details.</h4>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="currentUser">
+                                <label for="formGroupExampleInput1">Username: {{currentUser}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="company_name">
+                                <label for="formGroupExampleInput1">Company Name: {{company_name}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="company_url">
+                                <label for="formGroupExampleInput1">Company Url: {{company_url}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="address">
+                                <label for="formGroupExampleInput1">Address: {{address}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="city">
+                                <label for="formGroupExampleInput1">City: {{city}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="phn_no">
+                                <label for="formGroupExampleInput1">Phone Number: +91{{phn_no}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="landline_number">
+                                <label for="formGroupExampleInput1">Landline Number: {{landline_number}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="company_profile">
+                                <label for="formGroupExampleInput1">Company Profile: {{company_profile}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="pan_number">
+                                <label for="formGroupExampleInput1">Pan Number: {{pan_number}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="aadhar_number">
+                                <label for="formGroupExampleInput1">Aadhar Number: {{aadhar_number}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="provided_service">
+                                <label for="formGroupExampleInput1">Provided Service: {{provided_service}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="place_of_practice">
+                                <label for="formGroupExampleInput1">Place of Practice: {{place_of_practice}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="price_for_service">
+                                <label for="formGroupExampleInput1">Price for Service: {{price_for_service}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="law_firm_number">
+                                <label for="formGroupExampleInput1">Law Firm Number: {{law_firm_number}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="practice_number">
+                                <label for="formGroupExampleInput1">Practice Number: {{practice_number}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="email">
+                                <label for="formGroupExampleInput1">Email: {{email}}</label>
+                              </div>
+                              <div class="my_profile_setting_input form-group margin-bes" *ngIf="usercat">
+                                <label for="formGroupExampleInput1">User Type: {{usercat}}</label>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-xl-6">
+                        <div class="sign_up_form">
+                          <div class="heading">
+                            <h4>Edit.</h4>
+                          </div>
+                          <form action="#" name="form" (ngSubmit)="f.form.valid && onSubmitUpdate()" #f="ngForm">
+
+                            <div class="form-group input-group" *ngIf="currentUser">
+                                <input type="text" class="form-control" id="exampleInputName" name="name" #name="ngModel" [(ngModel)]="form.username" placeholder="User Name">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="flaticon-user"></i></div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group input-group" *ngIf="usercat">
+                                <input type="text" class="form-control" id="exampleInputName" name="usercat" #usercat="ngModel" [(ngModel)]="form.usercat" placeholder="User Type">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="flaticon-user"></i></div>
+                                </div>
+                            </div> -->
+                            <div class="form-group input-group" *ngIf="company_name">
+                                <input type="text" class="form-control" id="exampleInputName" name="company_name" #company_name="ngModel" [(ngModel)]="form.company_name" placeholder="Company Name">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="flaticon-user"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="company_url">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="company_url" #company_url="ngModel" [(ngModel)]="form.company_url" placeholder="Company Url">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="address">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="address" #address="ngModel" [(ngModel)]="form.address" placeholder="Address">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="city">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="city" #city="ngModel" [(ngModel)]="form.city" placeholder="City">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="phn_no">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="other_mobile_number" #other_mobile_number="ngModel" [(ngModel)]="form.other_mobile_number" placeholder="Phone Number">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="landline_number">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="landline_number" #rental_sale_condition="landline_number" [(ngModel)]="form.landline_number" placeholder="Landline Number">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="company_profile">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="company_profile" #company_profile="ngModel" [(ngModel)]="form.company_profile" placeholder="Company Profile">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="pan_number">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="pan_number" #pan_number="ngModel" [(ngModel)]="form.pan_number" placeholder="Pan Number">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="aadhar_number">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="aadhar_number" #aadhar_number="ngModel" [(ngModel)]="form.aadhar_number" placeholder="Aadhar Number">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="provided_service">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="provided_service" #provided_service="ngModel" [(ngModel)]="form.provided_service" placeholder="Provided Service">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="place_of_practice">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="place_of_practice" #place_of_practice="ngModel" [(ngModel)]="form.place_of_practice" placeholder="Place of Practice">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="price_for_service">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="price_for_service" #price_for_service="ngModel" [(ngModel)]="form.price_for_service" placeholder="Price for Service">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="law_firm_number">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="law_firm_number" #law_firm_number="ngModel" [(ngModel)]="form.law_firm_number" placeholder="Law Firm Number">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group" *ngIf="practice_number">
+                                <input type="email" class="form-control" id="exampleInputEmail2" name="practice_number" #practice_number="ngModel" [(ngModel)]="form.practice_number" placeholder="Practice Number">
+                                <div class="input-group-prepend">
+                                  <div class="input-group-text"><i class="fa fa-envelope-o"></i></div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group ui_kit_select_search mb0">
+                              <select class="selectpicker" data-live-search="true" data-width="100%">
+                                <option data-tokens="SelectRole">Single User</option>
+                                <option data-tokens="Agent/Agency">Agent</option>
+                                <option data-tokens="SingleUser">Multi User</option>
+                              </select>
+                            </div> -->
+                            <!-- <div class="form-group custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="exampleCheck2">
+                              <label class="custom-control-label" for="exampleCheck2">I have read and accept the Terms and Privacy Policy?</label>
+                            </div> -->
+                            <button type="submit" class="btn btn-log btn-block btn-thm">Update</button>
+                            <!-- <p class="text-center">Already have an account? <a class="text-thm" href="#">Log In</a></p> -->
+                          </form>
+                        </div>
+                        </div>
+                      </div>
+                  </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="row mt10">
+          <div class="col-lg-12">
+            <div class="copyright-widget text-center">
+              <p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

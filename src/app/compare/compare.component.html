@@ -1,0 +1,149 @@
+<app-topbardark-loader></app-topbardark-loader>
+	<!-- Our Pricing Table -->
+
+
+  <section class="inner_page_breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6">
+					<div class="breadcrumb_content">
+						<h4 class="breadcrumb_title">Compare</h4>
+						<ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="">Home</a></li>
+						    <li class="breadcrumb-item active" aria-current="page">Compare</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+	<section class="our-pricing bgc-fa">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3">
+					<div class="main-title text-center">
+						<h2>Compare Listings</h2>
+						<p>We provide full service at every step</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="membership_container">
+						<ul class="mc_parent_list">
+							<li class="list-inline-item">
+								<ul class="mc_child_list one">
+									<li><div class="membership_header dn"></div></li>
+									<li>City</li>
+									<li>Beds</li>
+									<li>Baths</li>
+									<li>Area</li>
+									<li>Year of build</li>
+									<li>Carpet Area</li>
+								</ul>
+							</li>
+
+							<li class="list-inline-item col-xl-3" *ngFor="let item of product_data1">
+								<ul class="mc_child_list three text-center">
+									<li>
+										<div class="membership_header ">
+											<div class="thumb">
+												<a href="#"><span class="flaticon-close"></span></a>
+												<img class="img-fluid w100" src="{{ ftpstring }}{{ item.product_image1 }}" alt="2.jpg">
+												<div *ngIf="item.expected_pricing != '0'" class="price">rs. {{ item.expected_pricing }}<span class="mnth"></span></div><br><hr>
+												<div *ngIf="item.expected_rent != '0'" class="price">rs. {{ item.expected_rent }}<span class="mnth">/mo</span></div>
+											</div>
+											<div class="details">
+												<h4>{{item.build_name}}</h4>
+												<p>{{ item.type }}</p>
+											</div>
+										</div>
+									</li>
+									<li><a href="#">{{ item.city }}</a></li>
+									<li><a href="#">{{ item.bedroom }}</a></li>
+									<li><a href="#">{{ item.bathroom }}</a></li>
+									<li><a href="#">{{ item.area }}/{{ item.area_unit }}</a></li>
+									<li><a href="#">{{ item.buildyear }}</a></li>
+									<li><a href="#">{{ item.carpet_area }}</a></li>
+								</ul>
+							</li>
+							<li class="list-inline-item col-xl-3" *ngFor="let item2 of product_data2">
+								<ul class="mc_child_list three text-center">
+									<li>
+										<div class="membership_header ">
+											<div class="thumb">
+												<a href="#"><span class="flaticon-close"></span></a>
+												<img class="img-fluid w100" src="{{ ftpstring }}{{ item2.product_image1 }}" alt="2.jpg">
+												<div *ngIf="item2.expected_pricing != '0'" class="price">rs. {{ item2.expected_pricing }}<span class="mnth"></span></div><br><hr>
+												<div *ngIf="item2.expected_rent != '0'" class="price">rs. {{ item2.expected_rent }}<span class="mnth">/mo</span></div>
+											</div>
+											<div class="details">
+												<h4>{{item2.build_name}}</h4>
+												<p>{{ item2.type }}</p>
+											</div>
+										</div>
+									</li>
+									<li><a href="#">{{ item2.city }}</a></li>
+									<li><a href="#">{{ item2.bedroom }}</a></li>
+									<li><a href="#">{{ item2.bathroom }}</a></li>
+									<li><a href="#">{{ item2.area }}/{{ item2.area_unit }}</a></li>
+									<li><a href="#">{{ item2.buildyear }}</a></li>
+									<li><a href="#">{{ item2.carpet_area }}</a></li>
+								</ul>
+							</li>
+							<li class="list-inline-item col-xl-3" *ngFor="let item3 of product_data3">
+								<ul class="mc_child_list three text-center">
+									<li>
+										<div class="membership_header ">
+											<div class="thumb">
+												<a href="#"><span class="flaticon-close"></span></a>
+												<img class="img-fluid w100" src="{{ ftpstring }}{{ item3.product_image1 }}" alt="2.jpg">
+												<div *ngIf="item3.expected_pricing != '0'" class="price">rs. {{ item3.expected_pricing }}<span class="mnth"></span></div><br><hr>
+												<div *ngIf="item3.expected_rent != '0'" class="price">rs. {{ item3.expected_rent }}<span class="mnth">/mo</span></div>
+											</div>
+											<div class="details">
+												<h4>{{item3.build_name}}</h4>
+												<p>{{ item3.type }}</p>
+											</div>
+										</div>
+									</li>
+									<li><a href="#">{{ item3.city }}</a></li>
+									<li><a href="#">{{ item3.bedroom }}</a></li>
+									<li><a href="#">{{ item3.bathroom }}</a></li>
+									<li><a href="#">{{ item3.area }}/{{ item3.area_unit }}</a></li>
+									<li><a href="#">{{ item3.buildyear }}</a></li>
+									<li><a href="#">{{ item3.carpet_area }}</a></li>
+								</ul>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Start Partners -->
+	<section class="start-partners bgc-thm pt50 pb50">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="start_partner tac-smd">
+						<h2>Become a Real Estate Agent</h2>
+						<p>We only work with the best companies around the globe</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="parner_reg_btn text-right tac-smd">
+						<a class="btn btn-thm2" href="/agentregister">Register Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+  <app-footer></app-footer>

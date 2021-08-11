@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:28:04 GMT -->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+    content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+  <meta name="description" content="FindHouse - Real Estate HTML Template">
+  <meta name="CreativeLayers" content="ATFN">
+  <!-- css file -->
+
+  <!-- Title -->
+  <title>FindHouse - Real Estate HTML Template</title>
+  <!-- Favicon -->
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div class="wrapper">
+    <!--<div class="preloader"></div>-->
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
+
+    <app-topbardark></app-topbardark>
+    <!-- Inner Page Breadcrumb -->
+    <section class="inner_page_breadcrumb">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6">
+            <div class="breadcrumb_content">
+              <h4 class="breadcrumb_title">Login</h4>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Login</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our LogIn Register -->
+    <section class="our-log bgc-fa">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6 offset-lg-3">
+            <div class="login_form inner_page">
+              <form action="#" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                novalidate>
+                <div class="heading">
+                  <h3 class="text-center">Login to your account</h3>
+                  <p class="text-center">Don't have an account? <a class="text-thm" href="/register">Sign Up!</a></p>
+                </div>
+                <div class="form-group">
+                  <input type="email" name="username" [(ngModel)]="form.email" required #username="ngModel"
+                    class="form-control" id="exampleInputEmail3" placeholder="Email Address">
+                  <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">
+                    Username is required!
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="password" name="password" [(ngModel)]="form.password" required minlength="6"
+                    #password="ngModel" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                  <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                    <div *ngIf="password.errors.required">Password is required</div>
+                    <div *ngIf="password.errors.minlength">
+                      Password must be at least 6 characters
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="exampleCheck3">
+                  <label class="custom-control-label" for="exampleCheck3">Remember me</label>
+                  <a class="tdu btn-fpswd float-right" href="#">Forgot Password?</a>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-log btn-block btn-thm2">Login</button>
+                </div>
+                <div class="form-group">
+                  <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                    Login failed: {{ errorMessage }}
+                  </div>
+                  <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                    Either you have Entered Wrong credentials or you have No Account on this site.
+                  </div>
+                  <ng-template #elseBlock>Login Succeeded</ng-template>
+                </div>
+
+
+
+              </form>
+              <div class="divide" *ngIf="isLoggedIn == false">
+                <span class="lf_divider">Or</span>
+                <hr>
+              </div>
+              <div class="row mt40" *ngIf="isLoggedIn == false">
+                <div class="col-lg">
+                  <button type="submit" (click)="redirect_login_facebook()"
+                    class="btn btn-block color-white bgc-fb mb0"><i class="fa fa-facebook float-left mt5"></i>
+                    Facebook</button>
+                </div>
+                <div class="col-lg">
+                  <button type="button" (click)="redirect_login_google()"
+                    class="btn btn2 btn-block color-white bgc-gogle mb0"><i class="fa fa-google float-left mt5"></i>
+                    Google</button>
+                </div>
+              </div>
+
+              <div *ngIf="isLoggedIn == true && productEntry!=true">
+                <div class="alert alert-success">
+                  Logged in as {{ roles }}.
+
+                </div>
+                <a href="/logout">
+                  <button class="btn btn-log btn-block btn-thm2">LOGOUT</button>
+                </a>
+                <a href="/profile">
+                  <button class="btn btn-log btn-block btn-thm2" routerLink="/profile">Profile</button>
+                </a>
+                <a (click)="dashboard()" *ngIf="!usertype">
+                  <button class="btn btn-log btn-block btn-thm2">Dashboard</button>
+                </a>
+
+              </div>
+              <!-- <a *ngIf="isLoggedIn">
+  <button class="btn btn-log btn-block btn-thm2"  (click)="onSubmitSale()" >Create Sale Listing</button>
+  <button class="btn btn-log btn-block btn-thm2"  (click)="onSubmitRent()" >Create rent Listing</button>
+
+</a> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Listing starts here-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Listing ends here-->
+
+
+    <!-- Start Partners -->
+    <section class="start-partners bgc-thm pt50 pb50" *ngIf="isLoggedIn == false">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="start_partner tac-smd">
+              <h2>Become a Real Estate Agent</h2>
+              <p>We only work with the best companies around the globe</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="parner_reg_btn text-right tac-smd">
+              <a class="btn btn-thm2" href="/agentregister">Register Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <app-footer></app-footer>
+
+    <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+  </div>
+  <!-- Wrapper End -->
+
+</body>
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:28:04 GMT -->
+
+</html>

@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-add-new-property.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:57 GMT -->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+    content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+  <meta name="description" content="FindHouse - Real Estate HTML Template">
+  <meta name="CreativeLayers" content="ATFN">
+  <!-- css file -->
+
+  <!-- Title -->
+  <title>FindHouse - Real Estate HTML Template</title>
+  <!-- Favicon -->
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div class="wrapper">
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
+
+    <!-- Main Header Nav -->
+    <app-dashboard-topbar></app-dashboard-topbar>
+
+    <!-- Main Header Nav For Mobile -->
+
+
+
+    <!-- Our Dashbord -->
+    <section class="our-dashbord dashbord bgc-f7 pb50">
+      <div class="container-fluid ovh">
+        <div class="row">
+          <div class="col-lg-3 col-xl-2 dn-992 pl0"></div>
+          <div class="col-lg-9 col-xl-10 maxw100flex-992">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="dashboard_navigationbar dn db-992">
+                  <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard
+                      Navigation</button>
+                    <ul id="myDropdown" class="dropdown-content">
+                      <li><a href="page-dashboard.html"><span class="flaticon-layers"></span> Dashboard</a></li>
+                      <li><a href="page-message.html"><span class="flaticon-envelope"></span> Message</a></li>
+                      <li><a href="page-my-properties.html"><span class="flaticon-home"></span> My Properties</a></li>
+                      <li><a href="page-my-favorites.html"><span class="flaticon-heart"></span> My Favorites</a></li>
+                      <li><a href="page-my-savesearch.html"><span class="flaticon-magnifying-glass"></span> Saved
+                          Search</a></li>
+                      <li><a href="page-my-review.html"><span class="flaticon-chat"></span> My Reviews</a></li>
+                      <li><a href="page-my-packages.html"><span class="flaticon-box"></span> My Package</a></li>
+                      <li><a href="page-my-profile.html"><span class="flaticon-user"></span> My Profile</a></li>
+                      <li class="active"><a href="page-add-new-property.html"><span
+                            class="flaticon-filter-results-button"></span> Add New Listing</a></li>
+                      <li><a href="page-login.html"><span class="flaticon-logout"></span> Logout</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 mb10">
+                <div class="breadcrumb_content style2" style="margin-left: 30px;">
+                  <h2 class="breadcrumb_title">Add New Property For Rent</h2>
+                  <p>We are glad to see you again!</p>
+                </div>
+              </div>
+              <form *ngIf="isLoggedIn" class="col-lg-12" action="#" name="form" #f="ngForm">
+                <div class="my_dashboard_review">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h2 class="mb30">Create Listing for Rent</h2>
+                      <div class="my_profile_setting_input form-group">
+                        <label for="propertyTitle">Property Name</label>
+                        <input type="text" class="form-control" name="build_name" #build_name="ngModel"
+                          [(ngModel)]="form.build_name" id="propertyTitle">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.build_name">{{errorMessage.build_name}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Type</label>
+                        <select class="form-control selectpicker" name="type" #type="ngModel" [(ngModel)]="form.type"
+                          required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Property Type</option>
+                          <option value="" disabled>
+                            <h3>ALL RESIDENTIAL</h3>
+                          </option>
+                          <option value="Flat/ Apartment">Flat/ Apartment</option>
+                          <option value="Residential House">Residential House</option>
+                          <option value="Villa">Villa</option>
+                          <option value="Builder Floor Apartment">Builder Floor Apartment</option>
+                          <option value="Residential Land/ Plot">Residential Land/ Plot</option>
+                          <option value="Penthouse">Penthouse</option>
+                          <option value="Studio Apartment">Studio Apartment</option>
+                          <option value="" disabled>
+                            <h3>ALL COMMERCIAL</h3>
+                          </option>
+                          <option value="Commercial Office Space">Commercial Office Space</option>
+                          <option value="Office in IT Park/ SEZ">Office in IT Park/ SEZ</option>
+                          <option value="Commercial Shop">Commercial Shop</option>
+                          <option value="Commercial Showroom">Commercial Showroom</option>
+                          <option value="Commercial Land">Commercial Land</option>
+                          <option value="Warehouse/ Godown">Warehouse/ Godown</option>
+                          <option value="Industrial Land">Industrial Land</option>
+                          <option value="Industrial Building">Industrial Building</option>
+                          <option value="Industrial Shed ">Industrial Shed</option>
+                          <option value="" disabled>
+                            <h3>ALL AGRICULTURAL</h3>
+                          </option>
+                          <option value="Agricultural Land">Agricultural Land</option>
+                          <option value="Farm House">Farm House</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.type">{{errorMessage.type}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <h3 class="mb30">Location</h3>
+                      <div class="my_profile_setting_input form-group" style="position: relative;">
+                        <label for="propertyAddress">Address</label>
+                        <input type="hidden" class="form-control" name="address" #address="ngModel"
+                          [(ngModel)]="form.address" id="propertyAddress">
+                        <input #search autocorrect="off" autocapitalize="off" spellcheck="off"
+                          [(ngModel)]="form.address" type="search" class="form-control input-text"
+                          placeholder="Enter Address" [ngModelOptions]="{ standalone: true }" />
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.address">{{errorMessage.address}}</p>
+                        </div>
+                        <span class="flaticon-maps-and-flags" style="position: absolute;top: 45px; right: 31px"></span>
+                        <agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus" [zoom]="15"
+                          class="main-card-agm-map">
+                          <agm-marker [latitude]="latCus" [longitude]="longCus" [markerDraggable]="true"
+                            (dragEnd)="markerDragEnd($event)">
+                            <agm-info-window> </agm-info-window>
+                          </agm-marker>
+                        </agm-map>
+                      </div>
+
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label class="">Display Address on Property page.</label>
+                        <select class="form-control selectpicker" name="display_address" #display_address="ngModel"
+                          [(ngModel)]="form.display_address" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select options</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.display_address">
+                            {{errorMessage.display_address}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="propertyCity">City</label>
+                        <input type="text" class="form-control" name="city" #city="ngModel" [(ngModel)]="form.city"
+                          id="propertyCity">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.city">{{errorMessage.city}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="locality">Locality</label>
+                        <input type="text" class="form-control" name="locality" #locality="ngModel"
+                          [(ngModel)]="form.locality" id="locality">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.locality">{{errorMessage.locality}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_textarea form-group">
+                        <label for="propertyDetail">Property Details</label>
+                        <textarea class="form-control" id="propertyDetail" name="property_detail"
+                          #property_detail="ngModel" [(ngModel)]="form.property_detail" rows="7"></textarea>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.property_detail">
+                            {{errorMessage.property_detail}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="nearest_landmark">Nearest Landmark</label>
+                        <input type="text" class="form-control" name="nearest_landmark" #nearest_landmark="ngModel"
+                          [(ngModel)]="form.nearest_landmark" id="nearest_landmark">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.nearest_landmark">
+                            {{errorMessage.nearest_landmark}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="map_latitude">Map Latitude</label>
+                        <input type="text" class="form-control" name="map_latitude" #map_latitude="ngModel"
+                          [(ngModel)]="form.map_latitude" id="map_latitude" readonly>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="map_longitude">Map Longitude</label>
+                        <input type="text" class="form-control" name="map_longitude" #map_longitude="ngModel"
+                          [(ngModel)]="form.map_longitude" id="map_longitude" readonly>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="my_dashboard_review mt30">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Detailed Information</h4>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="formGroupExampleArea">Area</label>
+                        <select class="form-control selectpicker" name="area" #area="ngModel" [(ngModel)]="form.area"
+                          id="formGroupExampleArea" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Area</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.area">{{errorMessage.area}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="sizePrefix">Carpet Area</label>
+                        <select class="form-control selectpicker" name="carpet_area" #carpet_area="ngModel"
+                          [(ngModel)]="form.carpet_area" id="formGroupExampleArea" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Carpet Area</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.carpet_area">{{errorMessage.carpet_area}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Area Unit</label>
+                        <select class="form-control selectpicker" name="area_unit" #area_unit="ngModel"
+                          [(ngModel)]="form.area_unit" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Area Units</option>
+                          <option value="sq.ft.">sq.ft.</option>
+                          <option value="sq.yards">sq.yards</option>
+                          <option value="sq.m.">sq.m.</option>
+                          <option value="acres">acres</option>
+                          <option value="marla">marla</option>
+                          <option value="cents">cents</option>
+                          <option value="bigha">bigha</option>
+                          <option value="kottah">kottah</option>
+                          <option value="kanal">kanal</option>
+                          <option value="grounds">grounds</option>
+                          <option value="ares">ares</option>
+                          <option value="biswa">biswa</option>
+                          <option value="guntha">guntha</option>
+                          <option value="aankadam">aankadam</option>
+                          <option value="hectares">hectares</option>
+                          <option value="rood">rood</option>
+                          <option value="chataks">chataks</option>
+                          <option value="perch">perch</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.area_unit">{{errorMessage.area_unit}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="bedRooms">Bedrooms</label>
+                        <select class="form-control selectpicker" name="bedroom" #bedroom="ngModel"
+                          [(ngModel)]="form.bedroom" id="bedRooms" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Bedrooms</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.bedroom">{{errorMessage.bedroom}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="bathRooms">Bathrooms</label>
+                        <select class="form-control selectpicker" name="bathroom" #bathroom="ngModel"
+                          [(ngModel)]="form.bathroom" id="bathRooms" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Bathrooms</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.bathroom">{{errorMessage.bathroom}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="balconies">Balconies</label>
+                        <select class="form-control selectpicker" name="balconies" #balconies="ngModel"
+                          [(ngModel)]="form.balconies" id="balconies" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Balconies</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.balconies">{{errorMessage.balconies}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="additional_rooms">Additional Rooms</label>
+                        <select class="form-control selectpicker" name="additional_rooms" #additional_rooms="ngModel"
+                          [(ngModel)]="form.additional_rooms" id="additional_rooms" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Additional Rooms</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.additional_rooms">
+                            {{errorMessage.additional_rooms}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="equipment">Equipment</label>
+                        <select class="form-control selectpicker" name="equipment" #equipment="ngModel"
+                          [(ngModel)]="form.equipment" id="equipment" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Equipment</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.equipment">{{errorMessage.equipment}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Features</label>
+                        <input type="text" class="form-control" name="features" #features="ngModel"
+                          [(ngModel)]="form.features" id="LASPostfix">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.features">{{errorMessage.features}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Nearby Places</label>
+                        <input type="text" class="form-control" name="nearby_places" #nearby_places="ngModel"
+                          [(ngModel)]="form.nearby_places" id="LASPostfix">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.nearby_places">
+                            {{errorMessage.nearby_places}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Age of Property</label>
+                        <input type="number" class="form-control" name="age_of_property" #age_of_property="ngModel"
+                          [(ngModel)]="form.age_of_property" id="LASPostfix">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.age_of_property">
+                            {{errorMessage.age_of_property}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Furnishings</label>
+                        <select class="form-control selectpicker" (change)="furnishStatus($event.target.value)"
+                          name="furnishing_status" #furnishing_status="ngModel" [(ngModel)]="form.furnishing_status"
+                          name="type" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Furnishing Status</option>
+                          <option value="FFR">Furnished</option>
+                          <option value="SFR">SemiFurnished</option>
+                          <option value="NFR">Not furnished</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.furnishing_status">
+                            {{errorMessage.furnishing_status}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="property_on_floor">Property is present on which Floor? (Type no for none.)</label>
+                        <select class="form-control selectpicker" name="property_on_floor" #property_on_floor="ngModel"
+                          [(ngModel)]="form.property_on_floor" id="property_on_floor" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Property is present on Floor</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.property_on_floor">
+                            {{errorMessage.property_on_floor}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="total_floors">Number of Floors in a property? (Type no if not applicable.)</label>
+                        <select class="form-control selectpicker" name="total_floors" #total_floors="ngModel"
+                          [(ngModel)]="form.total_floors" id="total_floors" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Property is present on Floor</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.total_floors">{{errorMessage.total_floors}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Facing Towards</label>
+                        <select class="form-control selectpicker" name="facing_towards" #facing_towards="ngModel"
+                          [(ngModel)]="form.facing_towards" name="type" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select the directions.</option>
+                          <option value="East">East</option>
+                          <option value="North East">North East</option>
+                          <option value="North">North</option>
+                          <option value="West">West</option>
+                          <option value="South">South</option>
+                          <option value="South East">South-East</option>
+                          <option value="North West">North West</option>
+                          <option value="South West">South West</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.facing_towards">
+                            {{errorMessage.facing_towards}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Rera Registration Status</label>
+                        <select class="form-control selectpicker" name="rera_registration_status"
+                          #rera_registration_status="ngModel" [(ngModel)]="form.rera_registration_status" name="type"
+                          required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select the options.</option>
+                          <option value="Registered">Registered</option>
+                          <option value="Applied For">Applied For</option>
+                          <option value="Not Applicable">Not Applicable</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.rera_registration_status">
+                            {{errorMessage.rera_registration_status}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Do you have Reserved Parking</label>
+                        <select class="form-control selectpicker" (change)="parkingStatus($event.target.value)"
+                          name="additional_parking_status" #additional_parking_status="ngModel"
+                          [(ngModel)]="form.additional_parking_status" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Parking Status</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.additional_parking_status">
+                            {{errorMessage.additional_parking_status}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="buildyear">Year Built</label>
+                        <select class="form-control selectpicker" name="buildyear" #buildyear="ngModel"
+                          [(ngModel)]="form.buildyear" id="buildyear" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Year Built</option>
+                          <option value="2012">2012</option>
+                          <option value="2013">2013</option>
+                          <option value="2014">2014</option>
+                          <option value="2015">2015</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.buildyear">{{errorMessage.buildyear}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Availability</label>
+                        <select class="form-control selectpicker" name="availability_condition"
+                          #availability_condition="ngModel" [(ngModel)]="form.availability_condition" required
+                          data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Availability</option>
+                          <option value="Under Construction">Under Construction</option>
+                          <option value="Ready To Move">Ready To Move</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.availability_condition">
+                            {{errorMessage.availability_condition}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Possession By</label>
+                        <select class="form-control selectpicker" name="possession_by" #possession_by="ngModel"
+                          [(ngModel)]="form.possession_by" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Possession Date</option>
+                          <option value="Now">Now</option>
+                          <option value="Within 3 months">Within 3 months</option>
+                          <option value="Within 6 months">Within 6 months</option>
+                          <option value="Within 9 months">Within 6 months</option>
+                          <option value="Within 1 year">Within 1 year</option>
+                          <option value="Within 2 year">Within 2 years</option>
+                          <option value="Within 3 year">Within 3 years</option>
+                          <option value="Within 4 year">Within 4 years</option>
+                          <option value="Within 5 year">Within 5 years</option>
+                          <option value="Within 6 year">Within 6 years</option>
+                          <option value="Within 7 year">Within 7 years</option>
+                          <option value="Within 8 year">Within 8 years</option>
+                          <option value="Within 9 year">Within 9 years</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.possession_by">
+                            {{errorMessage.possession_by}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="row p15">
+                        <div class="col-lg-12">
+                          <h4 class="text-thm3" id="show_advbtn"> Amenities <i class="flaticon-more pl10 flr-520"></i>
+                          </h4>
+                        </div>
+                        <div class="dropdown-content">
+                          <div class="row">
+                            <div class="col-xxs-6 col-sm col-lg-3" *ngFor="let menuData of amenitiesresult">
+                              <ul class="ui_kit_checkbox selectable-list">
+                                <li>
+                                  <div class="custom-control custom-checkbox ">
+                                    <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
+                                      value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)">
+                                    <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="col-lg-12 col-xl-12">
+                              <div class="mega_dropdown_content_closer">
+                                <h5 class="text-thm text-right mt15"><span id="hide_advbtn" class="curp">Hide</span>
+                                </h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- </div> -->
+                        <!-- <br>
+        <br>
+        <div class="col-xl-6 col-lg-6">
+          <ul class="order_list list-inline-item" >
+            <li *ngFor="let item of amenityArray"><a href="#"><span class="flaticon-tick"></span>{{ item }}</a></li>
+          </ul>
+        </div> -->
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+                <!-- rent conditions -->
+
+                <div class="my_dashboard_review mt30">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Rent Conditions</h4>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Willing To Rent Out To</label>
+                        <select class="form-control selectpicker" name="willing_to_rent_out_to"
+                          #willing_to_rent_out_to="ngModel" [(ngModel)]="form.willing_to_rent_out_to" required
+                          data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Preferred </option>
+                          <option value="Family">Family</option>
+                          <option value="Single Men">Single Men</option>
+                          <option value="Single Women">Single Women</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.willing_to_rent_out_to">
+                            {{errorMessage.willing_to_rent_out_to}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Agreement Type</label>
+                        <select class="form-control selectpicker" name="agreement_type" #agreement_type="ngModel"
+                          [(ngModel)]="form.agreement_type" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Preferred </option>
+                          <option value="Company Lease Agreement">Company Lease Agreement</option>
+                          <option value="Any">Any</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.agreement_type">
+                            {{errorMessage.agreement_type}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Available On</label>
+                        <input type="date" class="form-control" name="available_for" #available_for="ngModel"
+                          [(ngModel)]="form.available_for" id="LASPostfix">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.available_for">
+                            {{errorMessage.available_for}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Rent Condition</label>
+                        <input type="text" class="form-control" name="rent_cond" #rent_cond="ngModel"
+                          [(ngModel)]="form.rent_cond" id="LASPostfix">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.rent_cond">{{errorMessage.rent_cond}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Month Of Notice</label>
+                        <input type="text" class="form-control" name="month_of_notice" #month_of_notice="ngModel"
+                          [(ngModel)]="form.month_of_notice" id="LASPostfix">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.month_of_notice">
+                            {{errorMessage.month_of_notice}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Duration Of Rent Agreement</label>
+                        <select class="form-control selectpicker" name="duration_of_r
+            ent_aggreement" #duration_of_rent_aggreement="ngModel" [(ngModel)]="form.duration_of_rent_aggreement"
+                          required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select the Duration</option>
+                          <option value="One Year">One Year</option>
+                          <option value="Three Years">Three Years</option>
+                          <option value="Custom">Custom</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.duration_of_rent_aggreement">
+                            {{errorMessage.duration_of_rent_aggreement}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+
+
+                <div class="my_dashboard_review mt30" *ngIf="!parking">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Parking</h4>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label>Covered Parking</label>
+                        <input type="number" class="form-control" name="parking_covered_count"
+                          #parking_covered_count="ngModel" [(ngModel)]="form.parking_covered_count"
+                          id="parking_covered">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label>Open Parking</label>
+                        <input type="number" class="form-control" name="parking_open_count"
+                          #parking_open_count="ngModel" [(ngModel)]="form.parking_open_count" id="parking_covered">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="my_dashboard_review mt30" *ngIf="furnish">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Furnishings</h4>
+                    </div>
+
+                    <div class="col-lg-6 col-xl-12">
+                      <div class="col-sm-10 float-left"><input type="text" class="form-control"
+                          (change)="furnishing($event.target.value)" id="amenities"></div>
+                      <div class="col-lg-2 float-right"><button type="button"
+                          class="btn btn-thm2 float-right">Add</button></div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-xl-6 col-lg-6">
+                      <ul class="order_list list-inline-item">
+                        <li *ngFor="let items of furnishingArray"><a href="#"><span class="flaticon-tick"></span>{{
+                            items }}</a></li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div class="my_dashboard_review mt30">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Property Pricing</h4>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Ownership</label>
+                        <select class="form-control selectpicker" name="ownership" #ownership="ngModel"
+                          [(ngModel)]="form.ownership" name="type" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Ownership Type</option>
+                          <option value="Freehold">Freehold</option>
+                          <option value="Leasehold">Leasehold</option>
+                          <option value="Co-operative Society">Co-operative Society</option>
+                          <option value="Power of Attorney">Power of Attorney</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.ownership">{{errorMessage.ownership}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="locality">Expected Rent</label>
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <input type="number" class="form-control" name="expected_rent" #expected_rent="ngModel"
+                              [(ngModel)]="form.expected_rent">
+                          </div>
+                          <div class="col-lg-8">
+                            <ng5-slider [(value)]="form.expected_rent" [options]="options"></ng5-slider>
+                          </div>
+                        </div>
+                        <!-- <input type="number" class="form-control" name="expected_rent" #expected_rent="ngModel" [(ngModel)]="form.expected_rent"> -->
+                        <!-- <div class="text-center" id="errorId" *ngIf="errorMessage.expected_rent"><p class="alert alert-danger" >{{errorMessage.expected_rent}}</p></div> -->
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="locality">Security Deposit</label>
+                        <input type="number" class="form-control" name="security_deposit" #security_deposit="ngModel"
+                          [(ngModel)]="form.security_deposit">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.security_deposit">
+                            {{errorMessage.security_deposit}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label for="locality">Inclusive Electricity and Water Bill</label>
+                        <select class="form-control selectpicker" name="inc_electricity_and_water_bill"
+                          #inc_electricity_and_water_bill="ngModel" [(ngModel)]="form.inc_electricity_and_water_bill"
+                          name="type" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Option</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.inc_electricity_and_water_bill">
+                            {{errorMessage.inc_electricity_and_water_bill}}</p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Is Tax and Govt. Charges Included?</label>
+                        <select class="form-control selectpicker" name="tax_govt_charge" #tax_govt_charge="ngModel"
+                          [(ngModel)]="form.tax_govt_charge" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Option</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.tax_govt_charge">
+                            {{errorMessage.tax_govt_charge}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Is Price Negotiable?</label>
+                        <select class="form-control selectpicker" name="price_negotiable" #price_negotiable="ngModel"
+                          [(ngModel)]="form.price_negotiable" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Option</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.price_negotiable">
+                            {{errorMessage.price_negotiable}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Is Maintenance Charge Included?</label>
+                        <select class="form-control selectpicker" (change)="maintenanceStatus($event.target.value)"
+                          name="maintenance_charge_status" #maintenance_charge_status="ngModel"
+                          [(ngModel)]="form.maintenance_charge_status" required data-live-search="true"
+                          data-width="100%">
+                          <option value="0">No</option>
+                          <option value="1">Yes</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="locality">Brokerage Charge. (Leave Blank for none.)</label>
+                        <input type="text" class="form-control" name="brokerage_charges" #brokerage_charges="ngModel"
+                          [(ngModel)]="form.brokerage_charges" id="locality">
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.maintenance_charge">
+                            {{errorMessage.maintenance_charge}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="my_dashboard_review mt30" *ngIf="!maintenance">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Maintenance</h4>
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="locality">Maintenance Charge (in Rs.)</label>
+                        <input type="number" class="form-control" name="maintenance_charge"
+                          #maintenance_charge="ngModel" [(ngModel)]="form.maintenance_charge" id="locality">
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Maintenance Charge Condition</label>
+                        <select class="form-control " name="maintenance_charge_condition"
+                          #maintenance_charge_condition="ngModel" [(ngModel)]="form.maintenance_charge_condition"
+                          name="type">
+                          <option value="" disabled>Select Option</option>
+                          <option value="Monthly">Monthly</option>
+                          <option value="Annually">Annually</option>
+                          <option value="One Time">One Time</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.maintenance_charge_condition">
+                            {{errorMessage.maintenance_charge_condition}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="my_dashboard_review mt30">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Property Images</h4>
+                    </div>
+                    <div class="col-lg-12">
+                      <ul class="mb0">
+                        <li class="list-inline-item" *ngIf="image1">
+                          <span>Property Image1</span>
+                          <div class="portfolio_item">
+                            <img class="img-fluid" src="{{ image1 }}" alt="First Image">
+                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
+                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
+                                (click)="delete_pic1()"><span class="flaticon-garbage"></span></button></div>
+                          </div>
+                        </li>
+                        <li class="list-inline-item" *ngIf="image2">
+                          <span>Property Image2</span>
+                          <div class="portfolio_item">
+                            <img class="img-fluid" src="{{ image2 }}" alt="Second Image">
+                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
+                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
+                                (click)="delete_pic2()"><span class="flaticon-garbage"></span></button></div>
+                          </div>
+                        </li>
+                        <li class="list-inline-item" *ngIf="image3">
+                          <span>Property Image3</span>
+                          <div class="portfolio_item">
+                            <img class="img-fluid" src="{{ image3 }}" alt="Third Image">
+                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
+                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
+                                (click)="delete_pic3()"><span class="flaticon-garbage"></span></button></div>
+                          </div>
+                        </li>
+                        <li class="list-inline-item" *ngIf="image4">
+                          <span>Property Image4</span>
+                          <div class="portfolio_item">
+                            <img class="img-fluid" src="{{ image4 }}" alt="Fourth Image">
+                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
+                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
+                                (click)="delete_pic4()"><span class="flaticon-garbage"></span></button></div>
+                          </div>
+                        </li>
+                        <li class="list-inline-item" *ngIf="image5">
+                          <span>Property Image5</span>
+                          <div class="portfolio_item">
+                            <img class="img-fluid" src="{{ image5 }}" alt="Fifth Image">
+                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
+                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
+                                (click)="delete_pic5()"><span class="flaticon-garbage"></span></button></div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-lg-12 d-flex justify-content-center">
+                      <div class="col-lg-4">
+                        <div class="portfolio_upload">
+                          <input type="file" class="form-control" name="profile_pic" (change)="insert_image1($event)"
+                            id="image1" multiple>
+                          <div class="icon"><label for="image1" class="flaticon-download"></label></div>
+                          <label for="image1">
+                            <p>Click To Upload Multiple Image</p>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_textarea form-group">
+                        <label for="propertyDetail">Property Description</label>
+                        <textarea class="form-control" id="propertyDetail" name="description" #description="ngModel"
+                          [(ngModel)]="form.description" rows="7"></textarea>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.description">{{errorMessage.description}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- <div class="text-center" *ngIf="err_caused"><p class="alert alert-danger">{{errorMessage | json}}</p></div> -->
+
+                    <div class="col-xl-12">
+                      <div class="my_profile_setting_input ProductSubmitBTN">
+                        <button type="button" (click)="onSubmitRent()" class="btn btn2 float-right">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="row mt50">
+              <div class="col-lg-12">
+                <div class="copyright-widget text-center">
+                  <p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+  </div>
+  <!-- Wrapper End -->
+
+</body>
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-add-new-property.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:03 GMT -->
+
+</html>

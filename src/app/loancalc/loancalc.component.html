@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html//register by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:28:08 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+<meta name="description" content="FindHouse - Real Estate HTML Template">
+<meta name="CreativeLayers" content="ATFN">
+
+<!-- Favicon -->
+<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+	<div class="preloader"></div>
+
+  <app-dashboard-topbar></app-dashboard-topbar>
+
+
+
+
+	<!-- Inner Page Breadcrumb -->
+	<section class="inner_page_breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6">
+					<div class="breadcrumb_content" style="margin-left: 150px;">
+						<h4 class="breadcrumb_title">Loan Calculator</h4>
+						<ol class="breadcrumb">
+						    <li class="breadcrumb-item"><a href="#">Home</a></li>
+						    <li class="breadcrumb-item active" aria-current="page">Loan Calculator</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our LogIn Register -->
+	<section class="our-log-reg bgc-fa offset-2">
+		<div class="container">
+			<div class="row" >
+				<div class="col-xl-4 col-lg-4" style="margin-top: 100px;">
+					<div class="sign_up_form inner_page">
+						<div class="details">
+              <div class="details">
+                <h3>Calculate your Loan</h3>
+              <div class="">
+                <table>
+                  <tr><td>Amount of the loan (₹):</td>
+                  <td rowspan=8>
+                    </td></tr>
+                  <div class="form-group input-group margin-bes" >
+                  <tr style="margin-top:40px"><td>Annual interest (%):</td>
+                  </div><div class="form-group input-group margin-bes" >
+                  <tr style="margin-top:20px"><td>Repayment period (years):</td>
+                  </div><div class="form-group input-group margin-bes" >
+
+                  <tr style="margin-top:40px"><td>Zipcode (to find lenders):</td>
+                  </div><div class="form-group input-group margin-bes" >
+
+                  <tr style="margin-top:70px"><th>Approximate Payments:</th>
+                  </div><div class="form-group input-group margin-bes" >
+
+                  <tr><td>Monthly payment:</td>
+                    <td>₹<span class="output" id="payment"></span></td></tr>
+                  </div><div class="form-group input-group margin-bes" >
+
+                  <tr><td>Total payment:</td>
+                    <td>₹<span class="output" id="total"></span></td></tr>
+                  </div><div>
+
+                  <tr><td>Total interest:</td>
+                    <td>₹<span class="output" id="totalinterest"></span></td></tr>
+                  </div>
+                  </table>
+                </div>
+              </div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+        <div class="col-xl-4 col-lg-4">
+					<div class="sign_up_form inner_page">
+						<div class="heading">
+              <h3 class="text-center">Loan Calculator</h3>
+						</div>
+						<div class="details" style="margin-top:135px">
+              <div class="details">
+                <div>
+                    <form action="#" name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="amount" onchange="calculate();" name="amount" [(ngModel)]="form.amount" #amount="ngModel" placeholder="amount">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="apr" onchange="calculate();" name="apr" [(ngModel)]="form.apr" #apr="ngModel" placeholder="amount">
+                      </div>
+                      <div class="form-group" style="margin-top:10px">
+                        <input type="text" class="form-control" id="years" onchange="calculate();" name="years" [(ngModel)]="form.years" #years="ngModel" placeholder="years">
+                      </div>
+                      <div class="form-group" style="margin-top:30px">
+                        <input type="text" class="form-control" id="zipcode" onchange="calculate();" name="zipcode" [(ngModel)]="form.zipcode" #zipcode="ngModel" placeholder="zipcode">
+                      </div>
+
+                  <div class="form-group">
+                  <button onclick="calculate();" class="btn btn-log btn-thm1">Calculate</button>
+                </div>
+                </form>
+
+                  </div>
+              </div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+              <div class="col-lg-4 col-xl-4" style="margin-top: 150px;">
+                <div class="heading">
+                  <h4 class="text-center">Stats</h4>
+                </div>
+                <canvas id="graph" width="400" height="250"></canvas>
+              </div>
+
+
+
+              <div class="col-lg-12" style="margin-top: 75px;">
+                <div class="my_dashboard_review mb40">
+                  <div class="property_table">
+                    <div class="table-responsive mt0">
+                      <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                              <th scope="col">Banks</th>
+                              <th scope="col">Interest Rate</th>
+                              <th scope="col">Calculate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let number of content">
+                              <th scope="row">
+                              <div class="feat_property list favorite_page style2">
+                                <div class="details">
+                                  <div class="tc_content">
+                                    <h4>{{ number.bank }}</h4>
+                                    <p><span class="flaticon-placeholder"></span>{{ number.address }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                              </th>
+                              <!-- <td>{{ number.updated_at }}</td> -->
+                              <td>{{ number.interest_rate }}%</td>
+                              <td>
+                                <ul class="view_edit_delete_list mb0">
+                                  <li class="list-inline-item" data-toggle="modal" data-placement="top" title="Edit"><a data-toggle="modal" data-target=".bd-example-modal-lg"  onclick="calculate();" (click)="assign(number.interest_rate)" ><span class="flaticon-view"></span></a></li>
+                                </ul>
+                              </td>
+                            </tr>
+
+
+
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+</div>
+<!-- Wrapper End -->
+
+</body>
+<!-- Mirrored from grandetest.com/theme/findhouse-html//register by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:28:08 GMT -->
+</html>

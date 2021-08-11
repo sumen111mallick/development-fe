@@ -1,0 +1,79 @@
+<!--<div class="preloader"></div>-->
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="container">
+        <h4>EMI Calculator</h4>
+    </div>
+</div>
+
+<form [formGroup]="emiForm">
+    <div class="row mt50">
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="loan_amount">Loan Amount</label>
+                <span class="rupeeSymbol">&#8377;</span>
+                <input type="text" (keypress)="keyPressNumbers($event)" class="form-control h50 pl20" autocomplete="off"
+                    maxlength="10" formControlName="loan_amount" name="loan_amount"
+                    (ngModelChange)="loanDetailsChange($event)">
+
+                <div *ngIf="f.loan_amount.touched && f.loan_amount.invalid" class="alert alert-danger">
+
+                    <div *ngIf="f.loan_amount.errors.required">Loan Amount is required.</div>
+                    <div *ngIf="f.loan_amount.errors.minlength">Minimum amount is 100000</div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="tenure">Tenure</label>
+                <span class="tenYears" (click)="showOptions()">Years</span>
+                <ul class="tenDropdown hide" (click)="showOptions()">
+                    <li class="tenOptions" (click)="getValue($event)">Years</li>
+                    <li class="tenOptions" (click)="getValue($event)">Months</li>
+                </ul>
+                <input type="text" (keypress)="keyPressNumbers($event)" class="form-control h50"
+                    formControlName="loan_tenure" autocomplete="off" maxlength="3" value="10" name="loan_tenure"
+                    (ngModelChange)="loanDetailsChange($event)">
+                <div *ngIf="f.loan_tenure.invalid" class="alert alert-danger">
+                    <div *ngIf="f.loan_tenure.errors.required">Loan Tenure is required.</div>
+                    <div *ngIf="f.loan_tenure.errors.min || f.loan_tenure.errors.max">Loan Tenure is between {{ minNum
+                        }} and {{ maxNum }}.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="roi">Rate of Interest</label>
+                <span class="perSign">%</span>
+                <input type="text" (keypress)="keyPressNumbersDecimal($event)" class="form-control h50"
+                    formControlName="loan_roi" autocomplete="off" maxlength="5" value="9"
+                    (ngModelChange)="loanDetailsChange($event)" name="roi">
+
+                <div *ngIf="f.loan_roi.touched && f.loan_roi.invalid" class="alert alert-danger">
+                    <div *ngIf="f.loan_roi.errors.required">Rate of Interest is required.</div>
+                    <div *ngIf="f.loan_roi.errors.pattern">Range: 1.00% - 99.99%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="row mt30">
+    <div class="col-lg-8 col-md-8 col-sm-12">
+        <div class="chart">
+            <!--<canvas baseChart [data]="pieChartData" [labels]="pieChartLabels"
+                                    [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColor"
+                                    [legend]="pieChartLegend"></canvas> -->
+            <canvas id="pieChart"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 m-auto">
+        <h5 class="text-center">Monthly EMI</h5>
+        <h3 class="text-center"><span>&#8377; </span>{{ final_monthly_emi_fixed }}</h3>
+        <h6 class="text-center mt20">Total Payable Amount</h6>
+        <h3 class="text-center"><span>&#8377; </span>{{ final_total_payment }}</h3>
+    </div>
+</div>

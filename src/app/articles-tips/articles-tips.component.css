@@ -1,0 +1,24 @@
+.feat_property .thumb img{
+    height: 250px; 
+  }
+
+  .flaticon-user {
+    color: #ff5a5f;
+    font-size: 30px;
+  }
+
+  .tc_content {
+    height: 110px;
+    vertical-align: middle;
+  }
+
+  .feat_property:hover:before {
+    background-color: #ff5a5f;
+    bottom: 0;
+    content: "";
+    height: 5px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    width: 100%;
+}

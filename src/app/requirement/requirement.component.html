@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-add-new-property.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:57 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+<meta name="description" content="FindHouse - Real Estate HTML Template">
+<meta name="CreativeLayers" content="ATFN">
+<!-- css file -->
+
+<!-- Title -->
+<title>FindHouse - Real Estate HTML Template</title>
+<!-- Favicon -->
+<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+	<div class="preloader"></div>
+
+	<!-- Main Header Nav -->
+<app-dashboard-topbar></app-dashboard-topbar>
+	<!-- Our Dashbord -->
+	<section class="our-dashbord dashbord bgc-f7 pb50">
+		<div class="container-fluid ovh">
+			<div class="row">
+				<div class="col-lg-3 col-xl-2 dn-992 pl0"></div>
+				<div class="col-lg-9 col-xl-10 maxw100flex-992">
+					<div class="row">
+            <div class="col-lg-12">
+							<div class="dashboard_navigationbar dn db-992">
+								<div class="dropdown">
+									<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard Navigation</button>
+									<ul id="myDropdown" class="dropdown-content">
+										<!-- <li><a *ngIf="usertype != 2" href="/dashboard"><span class="flaticon-layers"></span> Dashboard</a></li>
+										<li><a *ngIf="usertype != 2" href="/properties"><span class="flaticon-home"></span> My Properties</a></li> -->
+										<li><a href="/profile"><span class="flaticon-user"></span> My Profile</a></li>
+										<li class="active"><a href="/requirements"><span class="flaticon-filter-results-button"></span> Requirements</a></li>
+										<li><a href="/logout"><span class="flaticon-logout"></span> Logout</a></li>
+									</ul>
+								</div>
+							</div>
+            </div>
+            <div class="text-center col-lg-12" *ngIf="!loginCheck"><p class="alert alert-danger">Login To Continue</p></div>
+            <div *ngIf="loginCheck">
+						<div class="col-lg-12 mb10">
+							<div class="breadcrumb_content style2" style="margin-left: 30px;">
+								<h2 class="breadcrumb_title">Requirements Form</h2>
+								<p>Enter your Requirement Details Here!</p>
+							</div>
+            </div>
+
+            <div class="text-center col-lg-12"><p class="alert alert-success" *ngIf="reqSubmitted">Requirement Submitted</p></div>
+						<div class="col-lg-12" *ngIf="!reqSubmitted">
+							<div class="my_dashboard_review">
+								<div class="row">
+									<div class="col-lg-12">
+										<h4 class="mb30">Requirements</h4>
+
+                  </div>
+                  <form action="#" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+                    <div class="col-lg-6 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                          <label for="rental_sale_condition">Rental Sale Condition</label>
+                          <input type="text" class="form-control" name="rental_sale_condition" #rental_sale_condition="ngModel" [(ngModel)]="form.rental_sale_condition" placeholder="State the condition that you want for the rent. (If Applicable)">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                          <label for="purchase_mode">Purchase Mode</label>
+                          <input type="text" class="form-control" name="purchase_mode" #purchase_mode="ngModel" [(ngModel)]="form.purchase_mode" placeholder="State the Purchase Mode you like." >
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                          <label for="cash_amount">Cash Amount</label>
+                          <input type="text" class="form-control" name="cash_amount" #cash_amount="ngModel" [(ngModel)]="form.cash_amount" placeholder="State the amount you are willing to pay by cash">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                          <label for="loan_amount">Loan Amount</label>
+                          <input type="text" class="form-control" name="loan_amount" #loan_amount="ngModel" [(ngModel)]="form.loan_amount" placeholder="State the Loan amount that you would like to take. (If Applicable)">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                          <label for="loan_amount">Property Type</label>
+                          <input type="text" class="form-control" name="property_type" #property_type="ngModel" [(ngModel)]="form.property_type" placeholder="State the Property Type that you would like to have.">
+                      </div>
+                    </div>
+									  <div class="col-lg-12">
+									  	<div class="my_profile_setting_textarea form-group">
+									  	    <label for="requirements">Please Enter your Requirements here.</label>
+									  	    <textarea type="text" name="requirements" [(ngModel)]="form.requirement" #requirement="ngModel" class="form-control" id="exampleInputEmail3" placeholder="Requirements" rows="15" cols="100"></textarea>
+									  	</div>
+									  </div>
+									  <div class="col-xl-12 form-group">
+									  	<div class="my_profile_setting_input">
+									  		<button type="submit" class="btn btn2 float-right">Submit</button>
+									  	</div>
+                    </div>
+                </form>
+								</div>
+							</div>
+              <div class="my_dashboard_review mt30" *ngFor="let number of content">
+                <div class="row">
+                  <div class="col-lg-12 col-xl-12">
+                    <h4 class="mb30">Requirement Posted</h4>
+                    <div class="my_profile_setting_input form-group col-lg-12 col-xl-12">
+                        <label for="propertyAddress">Rental/Sale Condition</label>
+                        <p>{{number.rental_sale_condition}}</p>
+                    </div>
+                    <div class="my_profile_setting_input form-group col-lg-12 w-100">
+                        <label for="propertyAddress">Purchase Mode</label>
+                        <p>{{number.purchase_mode}}</p>
+                    </div>
+                    <div class="my_profile_setting_input form-group col-lg-12">
+                        <label for="propertyAddress">Cash Amount</label>
+                        <p>{{number.cash_amount}}</p>
+                    </div>
+                    <div class="my_profile_setting_input form-group col-lg-12">
+                        <label for="propertyAddress">Loan Amount</label>
+                        <p>{{number.loan_amount}}</p>
+                    </div>
+                    <div class="my_profile_setting_input form-group col-lg-12">
+                        <label for="propertyAddress">Property Type</label>
+                        <p>{{number.property_type}}</p>
+                    </div>
+                    <div class="my_profile_setting_input form-group col-lg-12">
+                        <label for="propertyAddress">Requirement Details</label>
+                        <p>{{number.requirement}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+					</div>
+					<div class="row mt50">
+						<div class="col-lg-12">
+							<div class="copyright-widget text-center">
+								<p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+</div>
+<!-- Wrapper End -->
+
+</body>
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-add-new-property.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:03 GMT -->
+</html>

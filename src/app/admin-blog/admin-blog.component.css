@@ -1,0 +1,27 @@
+div .thumb a {
+    display: contents;
+}
+
+.feat_property .thumb img {
+    opacity: 1;
+}
+
+/*.page-link {
+    width: auto !important;
+    border-radius: 10% !important;
+} */
+
+body.modal-open {
+    overflow: auto !important; 
+    padding: 0px !important 
+}
+
+body.modal-close {
+    overflow: auto !important; 
+    padding: 0px !important 
+}
+
+body {
+    overflow: auto !important;
+    padding-right: 0 !important;
+}

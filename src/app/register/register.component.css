@@ -1,0 +1,25 @@
+.modal_links {
+    color: #007bff !important;
+}
+
+body.modal-open {
+    overflow: auto !important; 
+    padding: 0px !important 
+}
+
+body.modal-close {
+    overflow: auto !important; 
+    padding: 0px !important 
+}
+
+body {
+    padding-right: 0 !important;
+}
+
+.page_links {
+    color: #007bff !important;
+}
+
+.ml-custom {
+    margin-left: 2.5rem !important;
+}

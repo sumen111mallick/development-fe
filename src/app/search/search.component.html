@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-listing-grid-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:20 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+<meta name="description" content="FindHouse - Real Estate HTML Template">
+<meta name="CreativeLayers" content="ATFN">
+
+<!-- Title -->
+<title>FindHouse - Real Estate HTML Template</title>
+<!-- Favicon -->
+<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+  <!-- <div class="preloader"></div> -->
+
+ <!-- Main Header Nav -->
+<!-- <app-topbardark></app-topbardark> -->
+ <!-- Listing Grid View -->
+ <app-topbardark-loader></app-topbardark-loader>
+ <section class="our-listing bgc-f7 pb30-991">
+   <div class="container">
+     <div class="row">
+       <div class="col-lg-12">
+         <div class="listing_sidebar dn db-991">
+           <div class="sidebar_content_details style3">
+
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-lg-6">
+         <div class="breadcrumb_content style2 mb0-991">
+           <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href="">Home</a></li>
+               <li class="breadcrumb-item active text-thm" aria-current="page">Search Results</li>
+           </ol>
+           <h2 class="breadcrumb_title">Search Results</h2>
+         </div>
+       </div>
+       <div class="col-lg-6">
+         <div class="listing_list_style mb20-xsd tal-991">
+
+         </div>
+
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-lg-4 col-xl-4">
+         <div class="sidebar_listing_grid1 dn-991">
+
+         </div>
+       </div>
+       <div class="col-md-12 col-lg-12">
+         <div class="row">
+           <div class="grid_list_search_result">
+             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-5" >
+               <div class="left_area tac-xsd">
+                 <p >{{content.length}} Search results</p>
+               </div>
+             </div>
+             <div class="col-sm-12 col-md-8 col-lg-8 col-xl-7">
+               <div class="right_area text-right tac-xsd">
+
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col-md-4 col-lg-4" *ngFor = "let number of content">
+             <div class="feat_property home7 style4">
+               <div class="thumb">
+                 <div class="fp_single_item_slider">
+                   <div class="item">
+                     <img class="img-whp" src= "{{ftpstring}}{{ number.product_image1 }}" alt="fp1.jpg">
+                   </div>
+
+                 </div>
+                 <div class="thmb_cntnt style2">
+                   <ul class="tag mb0">
+
+                    <li class="list-inline-item" *ngIf=" number.rent_availability == 1"><a >For Rent</a></li>
+                    <li class="list-inline-item" *ngIf=" number.sale_availability == 1"><a >For Sale</a></li>
+                  </ul>
+                 </div>
+                 <div class="thmb_cntnt style3">
+                   <ul class="icon mb0">
+                     <li class="list-inline-item"><a ><span class="flaticon-transfer-1"></span></a></li>
+                     <li class="list-inline-item"><a ><span class="flaticon-heart"></span></a></li>
+                   </ul>
+                   <a *ngIf="number.expected_pricing != 0" class="fp_price" >{{ number.expected_pricing }}<small></small></a>
+                   <a *ngIf="number.expected_rent != 0" class="fp_price" >{{ number.expected_rent }}<small></small></a>
+                 </div>
+               </div>
+               <div class="details">
+                 <div class="tc_content">
+                   <p class="text-thm">{{ number.type }}</p>
+                   <h4>{{number.build_name}}</h4>
+                   <p><span class="flaticon-placeholder"></span> {{ number.address }}</p>
+                   <ul class="prop_details mb0">
+                     <li class="list-inline-item"><a >Beds: {{ number.bedroom }}</a></li>
+                     <li class="list-inline-item"><a >Baths: {{ number.bathroom }}</a></li>
+                     <li class="list-inline-item"><a >Sq Ft: {{ number.area }}</a></li>
+                   </ul>
+
+                 </div>
+                 <div class="fp_footer">
+                   <ul class="fp_meta float-left mb0">
+                   <!-- <li class="list-inline-item"> <h2 class="fp_pdate float-right">Available For: {{number.available_for}}</h2> </li> -->
+                     <!-- <li class="list-inline-item"><a >{{ number.username+1 }}</a></li> -->
+                   </ul>
+                   <div class="fp_pdate float-right"><a href="/productpage"><button type="button" (click)="prod_func(number.id)" class="btn btn-log btn-block btn-thm">Show Property</button></a></div>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+
+
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+</div>
+<!-- Wrapper End -->
+
+</body>
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-listing-grid-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:30 GMT -->
+</html>

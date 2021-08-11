@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html//profile by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:18 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords"
+		content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+	<meta name="description" content="FindHouse - Real Estate HTML Template">
+	<meta name="CreativeLayers" content="ATFN">
+	<!-- css file -->
+
+	<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+	<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+	<div class="wrapper">
+		<div *ngIf="showLoadingIndicator">
+            <div class="preloader"></div>
+        </div>
+
+		<app-dashboard-topbar></app-dashboard-topbar>
+
+		<!-- Our Dashbord -->
+		<section class="our-dashbord dashbord bgc-f7 pb50">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-3 col-xl-2 dn-992 pl0"></div>
+					<div class="col-lg-9 col-xl-10 maxw100flex-992">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="dashboard_navigationbar dn db-992">
+									<div class="dropdown">
+										<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i>
+											Dashboard Navigation</button>
+										<ul id="myDropdown" class="dropdown-content">
+											<li><a *ngIf="usertype != 2" href="/dashboard"><span
+														class="flaticon-layers"></span> Dashboard</a></li>
+											<li><a *ngIf="usertype != 2" href="/properties"><span
+														class="flaticon-home"></span> My Properties</a></li>
+											<li class="active"><a href="/profile"><span class="flaticon-user"></span> My
+													Profile</a></li>
+											<li><a href="page-add-new-property.html"><span
+														class="flaticon-filter-results-button"></span> Add New
+													Listing</a></li>
+											<li><a href="/logout"><span class="flaticon-logout"></span> Logout</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12 mb10">
+								<div class="breadcrumb_content style2" style="margin-left: 30px;">
+									<h2 class="breadcrumb_title">My Profile</h2>
+									<p>We are glad to see you <b>{{ currentUser }}</b></p>
+									<div class="text-center">
+										<p class="alert alert-danger" *ngIf="!email_verify">Please Verify your Phone
+											Number</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="my_dashboard_review">
+									<div class="row">
+										<div class="col-xl-12">
+											<h3 class="text-center">Profile Information</h3>
+										</div>
+										<hr>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card">
+												<div class="card-body">
+													<div class="row">
+														<div class="col-md-4">
+															<div class="card">
+																<div class="card-body">
+																	<div
+																		class="d-flex flex-column align-items-center text-center">
+																		<div class="wrap-custom-file">
+																			<img *ngIf="profile_pic !== null"
+																				class="img-whp" src="{{ profile_pic }}"
+																				alt="Profile Pic">
+																			<img *ngIf="profile_pic == null"
+																				class="img-whp"
+																				src="./../../assets/images/no_image_available.jpg"
+																				alt="Profile Pic">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-8">
+															<div class="card">
+																<div class="card-body">
+																	<div class="row">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">User Name</h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{currentUser}}
+																		</div>
+																	</div>
+																	<hr>
+
+																	<div class="row">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Email</h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{email}}
+																		</div>
+																	</div>
+																	<hr>
+
+																	<div class="row">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Phone Number</h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			+91{{phn_no}}
+																		</div>
+																	</div>
+																	<hr>
+
+																	<div class="row">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">User Type</h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{usercat}}
+																		</div>
+																	</div>
+																	<hr>
+
+																	<div class="row">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">ID Created At: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{id_created_at | date: 'MMM d, y, h:mm:ss
+																			a' }}
+																		</div>
+																	</div>
+																	<hr>
+
+																	<div class="row" *ngIf="company_name">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Company Name: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{company_name}}
+																		</div>
+																	</div>
+																	<hr *ngIf="company_name">
+
+																	<div class="row" *ngIf="company_url">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Company URL: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{company_url}}
+																		</div>
+																	</div>
+																	<hr *ngIf="company_url">
+
+																	<div class="row" *ngIf="address">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Address: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{address}}
+																		</div>
+																	</div>
+																	<hr *ngIf="address">
+
+																	<div class="row" *ngIf="city">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">City: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{city}}
+																		</div>
+																	</div>
+																	<hr *ngIf="city">
+
+																	<div class="row" *ngIf="landline_number">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Landline Number: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{landline_number}}
+																		</div>
+																	</div>
+																	<hr *ngIf="landline_number">
+
+																	<div class="row" *ngIf="company_profile">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Company Profile: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{company_profile}}
+																		</div>
+																	</div>
+																	<hr *ngIf="company_profile">
+
+																	<div class="row" *ngIf="pan_number">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">PAN Number: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{pan_number}}
+																		</div>
+																	</div>
+																	<hr *ngIf="pan_number">
+
+																	<div class="row" *ngIf="aadhar_number">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Aadhar Number: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{aadhar_number}}
+																		</div>
+																	</div>
+																	<hr *ngIf="aadhar_number">
+
+																	<div class="row" *ngIf="provided_service">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Provided Service: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{provided_service}}
+																		</div>
+																	</div>
+																	<hr *ngIf="provided_service">
+
+																	<div class="row" *ngIf="place_of_practice">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Place Of Practice: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{place_of_practice}}
+																		</div>
+																	</div>
+																	<hr *ngIf="place_of_practice">
+
+																	<div class="row" *ngIf="price_for_service">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Price For Service: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{price_for_service}}
+																		</div>
+																	</div>
+																	<hr *ngIf="price_for_service">
+
+																	<div class="row" *ngIf="law_firm_number">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Law Firm Number: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{law_firm_number}}
+																		</div>
+																	</div>
+																	<hr *ngIf="law_firm_number">
+
+																	<div class="row" *ngIf="practice_number">
+																		<div class="col-sm-3">
+																			<h6 class="mb-0">Practice Number: </h6>
+																		</div>
+																		<div class="col-sm-9 text-secondary">
+																			{{practice_number}}
+																		</div>
+																	</div>
+																	<hr *ngIf="practice_number">
+																	<div class="row">
+																		<div class="col-sm-12">
+																			<a data-toggle="modal"
+																				data-target=".bd-example-modal-lg"
+																				(click)="user_details(id)"><button
+																					class="btn btn-thm">Edit
+																					Profile</button></a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card mt-4">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-xl-12">
+													<div class="row">
+														<div class="col-xl-12 margin-bes">
+															<h3 class="text-center">Change Password</h3>
+															<form action="#" name="form"
+																(ngSubmit)="f.form.valid && onSubmitChange()"
+																#f="ngForm">
+																<div class="row">
+																	<div class="col-xl-6 offset-xl-3">
+																		<div class="form-group input-group margin-bes">
+																			<input type="password" class="form-control"
+																				id="exampleInputName"
+																				name="old_password"
+																				#old_password="ngModel"
+																				[(ngModel)]="form.old_password"
+																				placeholder="Old Password">
+																			<div class="input-group-prepend">
+																				<div class="input-group-text"><i
+																						class="flaticon-user"></i></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xl-6 offset-xl-3">
+																		<div class="form-group input-group">
+																			<input type="password" class="form-control"
+																				id="new_password" name="new_password"
+																				#new_password="ngModel"
+																				[(ngModel)]="form.new_password"
+																				placeholder="New Password">
+																			<div class="input-group-prepend">
+																				<div class="input-group-text"><i
+																						class="fa fa-envelope-o"></i>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xl-6 offset-xl-3">
+																		<div class="form-group input-group">
+																			<input type="password" class="form-control"
+																				id="confirm_password"
+																				name="confirm_password"
+																				#confirm_password="ngModel"
+																				[(ngModel)]="form.confirm_password"
+																				placeholder="Confirm New Password">
+																			<div class="input-group-prepend">
+																				<div class="input-group-text"><i
+																						class="fa fa-envelope-o"></i>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xl-6 offset-xl-3 text-center">
+																		<button type="submit"
+																			class="btn btn-log btn-block btn-thm m-auto">Update</button>
+																	</div>
+																</div>
+																<!-- <p class="text-center">Already have an account? <a class="text-thm" href="#">Log In</a></p> -->
+															</form>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="sign_up_modal modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+									aria-hidden="true">
+									<div class="modal-dialog modal-lg" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											</div>
+											<div class="modal-body container pb20">
+
+												<div class="tab-content container" id="myTabContent">
+
+													<div class="row mt25 tab-pane fade show active" id="profile"
+														role="tabpanel" aria-labelledby="profile-tab">
+														<div class="col-lg-6 col-xl-6">
+															<div class="login_thumb">
+																<div class="heading">
+																	<h4>User Details.</h4>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="currentUser">
+																		<label for="formGroupExampleInput1">Username:
+																			{{currentUser}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="company_name">
+																		<label for="formGroupExampleInput1">Company
+																			Name: {{company_name}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="company_url">
+																		<label for="formGroupExampleInput1">Company Url:
+																			{{company_url}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="address">
+																		<label for="formGroupExampleInput1">Address:
+																			{{address}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="city">
+																		<label for="formGroupExampleInput1">City:
+																			{{city}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="phn_no">
+																		<label for="formGroupExampleInput1">Phone
+																			Number: +91{{phn_no}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="landline_number">
+																		<label for="formGroupExampleInput1">Landline
+																			Number: {{landline_number}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="company_profile">
+																		<label for="formGroupExampleInput1">Company
+																			Profile: {{company_profile}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="pan_number">
+																		<label for="formGroupExampleInput1">Pan Number:
+																			{{pan_number}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="aadhar_number">
+																		<label for="formGroupExampleInput1">Aadhar
+																			Number: {{aadhar_number}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="provided_service">
+																		<label for="formGroupExampleInput1">Provided
+																			Service: {{provided_service}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="place_of_practice">
+																		<label for="formGroupExampleInput1">Place of
+																			Practice: {{place_of_practice}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="price_for_service">
+																		<label for="formGroupExampleInput1">Price for
+																			Service: {{price_for_service}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="law_firm_number">
+																		<label for="formGroupExampleInput1">Law Firm
+																			Number: {{law_firm_number}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="practice_number">
+																		<label for="formGroupExampleInput1">Practice
+																			Number: {{practice_number}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="email">
+																		<label for="formGroupExampleInput1">Email:
+																			{{email}}</label>
+																	</div>
+																	<div class="my_profile_setting_input form-group margin-bes"
+																		*ngIf="usercat">
+																		<label for="formGroupExampleInput1">User Type:
+																			{{usercat}}</label>
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														<div class="col-lg-6 col-xl-6">
+															<div class="sign_up_form">
+																<div class="heading">
+																	<h4>Edit.</h4>
+																</div>
+																<form action="#" name="form"
+																	(ngSubmit)="f.form.valid && onSubmitUpdate()"
+																	#f="ngForm">
+
+																	<div class="form-group input-group"
+																		*ngIf="currentUser">
+																		<input type="text" class="form-control"
+																			id="exampleInputName" name="name"
+																			#name="ngModel" [(ngModel)]="form.username"
+																			placeholder="User Name">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="flaticon-user"></i></div>
+																		</div>
+																	</div>
+
+
+																	<div class="form-group input-group"
+																		*ngIf="company_name">
+																		<input type="text" class="form-control"
+																			id="exampleInputName" name="company_name"
+																			#company_name="ngModel"
+																			[(ngModel)]="form.company_name"
+																			placeholder="Company Name">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="flaticon-user"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="company_url">
+																		<input type="email" class="form-control"
+																			id="company_url" name="company_url"
+																			#company_url="ngModel"
+																			[(ngModel)]="form.company_url"
+																			placeholder="Company Url">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group" *ngIf="address">
+																		<input type="email" class="form-control"
+																			id="address" name="address"
+																			#address="ngModel"
+																			[(ngModel)]="form.address"
+																			placeholder="Address">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group" *ngIf="city">
+																		<input type="email" class="form-control"
+																			id="city" name="city" #city="ngModel" 
+																			[(ngModel)]="form.city" placeholder="City">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group" *ngIf="phn_no">
+																		<input type="email" class="form-control"
+																			id="other_mobile_number"
+																			name="other_mobile_number"
+																			#other_mobile_number="ngModel"
+																			[(ngModel)]="form.other_mobile_number"
+																			placeholder="Phone Number">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="landline_number">
+																		<input type="email" class="form-control"
+																			id="landline_number" name="landline_number"
+																			#rental_sale_condition="landline_number"
+																			[(ngModel)]="form.landline_number"
+																			placeholder="Landline Number">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="company_profile">
+																		<input type="email" class="form-control"
+																			id="company_profile" name="company_profile"
+																			#company_profile="ngModel"
+																			[(ngModel)]="form.company_profile"
+																			placeholder="Company Profile">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="pan_number">
+																		<input type="email" class="form-control"
+																			id="pan_number" name="pan_number"
+																			#pan_number="ngModel"
+																			[(ngModel)]="form.pan_number"
+																			placeholder="Pan Number">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="aadhar_number">
+																		<input type="email" class="form-control"
+																			id="aadhar_number" name="aadhar_number"
+																			#aadhar_number="ngModel"
+																			[(ngModel)]="form.aadhar_number"
+																			placeholder="Aadhar Number">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="provided_service">
+																		<input type="email" class="form-control"
+																			id="provided_service"
+																			name="provided_service"
+																			#provided_service="ngModel"
+																			[(ngModel)]="form.provided_service"
+																			placeholder="Provided Service">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="place_of_practice">
+																		<input type="email" class="form-control"
+																			id="place_of_practice"
+																			name="place_of_practice"
+																			#place_of_practice="ngModel"
+																			[(ngModel)]="form.place_of_practice"
+																			placeholder="Place of Practice">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="price_for_service">
+																		<input type="email" class="form-control"
+																			id="price_for_service"
+																			name="price_for_service"
+																			#price_for_service="ngModel"
+																			[(ngModel)]="form.price_for_service"
+																			placeholder="Price for Service">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="law_firm_number">
+																		<input type="email" class="form-control"
+																			id="law_firm_number" name="law_firm_number"
+																			#law_firm_number="ngModel"
+																			[(ngModel)]="form.law_firm_number"
+																			placeholder="Law Firm Number">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+																	<div class="form-group input-group"
+																		*ngIf="practice_number">
+																		<input type="email" class="form-control"
+																			id="practice_number" name="practice_number"
+																			#practice_number="ngModel"
+																			[(ngModel)]="form.practice_number"
+																			placeholder="Practice Number">
+																		<div class="input-group-prepend">
+																			<div class="input-group-text"><i
+																					class="fa fa-envelope-o"></i></div>
+																		</div>
+																	</div>
+
+																	<button type="submit"
+																		class="btn btn-log btn-block btn-thm">Update</button>
+																	<!-- <p class="text-center">Already have an account? <a class="text-thm" href="#">Log In</a></p> -->
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="my_dashboard_review mt30">
+								<div class="row">
+									<div class="col-xl-2">
+										<h4>Social Media</h4>
+									</div>
+									<div class="col-xl-10">
+										<div class="row">
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleSkype">Skype</label>
+											    	<input type="text" class="form-control" id="formGroupExampleSkype" placeholder="alitfn">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleWebsite">Website</label>
+											    	<input type="text" class="form-control" id="formGroupExampleWebsite" placeholder="creativelayers@gmail.com">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleFaceBook">Facebook</label>
+											    	<input type="text" class="form-control" id="formGroupExampleFaceBook">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleTwitter">Twitter</label>
+											    	<input type="text" class="form-control" id="formGroupExampleTwitter">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleLinkedin">Linkedin</label>
+											    	<input type="text" class="form-control" id="formGroupExampleLinkedin">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleInstagram">Instagram</label>
+											    	<input type="text" class="form-control" id="formGroupExampleInstagram">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleGooglePlus">Google Plus</label>
+											    	<input type="text" class="form-control" id="formGroupExampleGooglePlus">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleYoutube">Youtube</label>
+											    	<input type="text" class="form-control" id="formGroupExampleYoutube">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExamplePinterest">Pinterest</label>
+											    	<input type="text" class="form-control" id="formGroupExamplePinterest">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleVimeo">Vimeo</label>
+											    	<input type="text" class="form-control" id="formGroupExampleVimeo">
+												</div>
+											</div>
+											<div class="col-xl-12 text-right">
+												<div class="my_profile_setting_input">
+													<button class="btn btn2">Update Profile</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+								<!-- <div class="my_dashboard_review mt30">
+								<div class="row">
+									<div class="col-xl-2">
+										<h4>Change password</h4>
+									</div>
+									<div class="col-xl-10">
+										<div class="row">
+											<div class="col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleOldPass">Old Password</label>
+											    	<input type="text" class="form-control" id="formGroupExampleOldPass" placeholder="alitfn">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleNewPass">New Password</label>
+											    	<input type="text" class="form-control" id="formGroupExampleNewPass">
+												</div>
+											</div>
+											<div class="col-lg-6 col-xl-6">
+												<div class="my_profile_setting_input form-group">
+											    	<label for="formGroupExampleConfPass">Confirm New Password</label>
+											    	<input type="text" class="form-control" id="formGroupExampleConfPass">
+												</div>
+											</div>
+											<div class="col-xl-12">
+												<div class="my_profile_setting_input float-left fn-520">
+													<button class="btn btn3 btn-dark">Update Profile</button>
+												</div>
+												<div class="my_profile_setting_input float-right fn-520">
+													<button class="btn btn2">Update Profile</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+							</div>
+						</div>
+						<div class="row mt10">
+							<div class="col-lg-12">
+								<div class="copyright-widget text-center">
+									<p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting
+										Private Limited.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+	</div>
+	<!-- Wrapper End -->
+
+</body>
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html//profile by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:18 GMT -->
+
+</html>

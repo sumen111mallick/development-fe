@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html//dashboard by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:03 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+<meta name="description" content="FindHouse - Real Estate HTML Template">
+<meta name="CreativeLayers" content="ATFN">
+<!-- css file -->
+
+<!-- Title -->
+
+<!-- Favicon -->
+<!-- <link href="./assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+<link href="./assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" /> -->
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+	<div class="preloader"></div>
+
+	<!-- Main Header Nav -->
+<app-dashboard-topbar></app-dashboard-topbar>
+
+	<!-- Our Dashbord -->
+	<section class="our-dashbord dashbord bgc-f7 pb50">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-3 col-xl-2 dn-992 pl0"></div>
+				<div class="col-lg-9 col-xl-10 maxw100flex-992">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="dashboard_navigationbar dn db-992">
+								<div class="dropdown">
+									<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard Navigation</button>
+									<ul id="myDropdown" class="dropdown-content">
+										<li class="active"><a href="/dashboard"><span class="flaticon-layers"></span> Dashboard</a></li>
+										<li><a href="page-message.html"><span class="flaticon-envelope"></span> Message</a></li>
+										<li><a href="page-my-properties.html"><span class="flaticon-home"></span> My Properties</a></li>
+										<li><a href="page-my-favorites.html"><span class="flaticon-heart"></span> My Favorites</a></li>
+										<li><a href="page-my-savesearch.html"><span class="flaticon-magnifying-glass"></span> Saved Search</a></li>
+										<li><a href="page-my-review.html"><span class="flaticon-chat"></span> My Reviews</a></li>
+										<li><a href="page-my-packages.html"><span class="flaticon-box"></span> My Package</a></li>
+										<li><a href="/profile"><span class="flaticon-user"></span> My Profile</a></li>
+										<li><a href="page-add-new-property.html"><span class="flaticon-filter-results-button"></span> Add New Listing</a></li>
+										<li><a href="/logout"><span class="flaticon-logout"></span> Logout</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-12 mb10">
+							<div class="breadcrumb_content style2" style="margin-left: 30px;">
+                <h2 class="breadcrumb_title">Howdy, {{ name }}</h2>
+								<p>We are glad to see you again!</p>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+							<div class="ff_one">
+								<div class="icon"><span class="flaticon-home"></span></div>
+								<div class="detais">
+									<div class="font-weight-bolder " style="font-size: 30px;">{{ property_count }}</div>
+									<p>All Properties</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+							<div class="ff_one style2">
+								<div class="icon"><span class="flaticon-view"></span></div>
+								<div class="detais">
+									<div class="font-weight-bolder " style="font-size: 30px;">{{ view_count }}</div>
+									<p>Total Views</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+							<div class="ff_one style3">
+								<div class="icon"><span class="flaticon-chat"></span></div>
+								<div class="detais">
+									<div class="font-weight-bolder " style="font-size: 30px;">{{ view_count }}</div>
+									<p>Total Visitor Reviews</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+							<div class="ff_one style4">
+								<div class="icon"><span class="flaticon-heart"></span></div>
+								<div class="detais">
+									<div class="font-weight-bolder " style="font-size: 30px;">{{ view_count }}</div>
+									<p>Total Favorites</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-7">
+							<div class="application_statics">
+								<h4>View Statistics</h4>
+								<div class="c_container"></div>
+							</div>
+						</div>
+						<div class="col-xl-5">
+							<div class="recent_job_activity">
+								<h4 class="title">Recent Activities</h4>
+								<div class="grid">
+									<ul>
+										<li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
+										<li class="list-inline-item"><p>Your listing <strong>Luxury Family Home</strong> has been approved!.</p></li>
+									</ul>
+								</div>
+								<div class="grid">
+									<ul>
+										<li class="list-inline-item"><div class="icon"><span class="flaticon-chat"></span></div></li>
+										<li class="list-inline-item"><p>Kathy Brown left a review  on <strong>Renovated Apartment</strong></p></li>
+									</ul>
+								</div>
+								<div class="grid">
+									<ul>
+										<li class="list-inline-item"><div class="icon"><span class="flaticon-heart"></span></div></li>
+										<li class="list-inline-item"><p>Someone favorites your <strong>Gorgeous Villa Bay View</strong> listing!</p></li>
+									</ul>
+								</div>
+								<div class="grid">
+									<ul>
+										<li class="list-inline-item"><div class="icon"><span class="flaticon-home"></span></div></li>
+										<li class="list-inline-item"><p>Your listing <strong>Luxury Family Home</strong> has been approved!</p></li>
+									</ul>
+								</div>
+								<div class="grid">
+									<ul>
+										<li class="list-inline-item"><div class="icon"><span class="flaticon-chat"></span></div></li>
+										<li class="list-inline-item"><p>Kathy Brown left a review on <strong>Renovated Apartment</strong></p></li>
+									</ul>
+								</div>
+								<div class="grid mb0">
+									<ul class="pb0 mb0 bb_none">
+										<li class="list-inline-item"><div class="icon"><span class="flaticon-heart"></span></div></li>
+										<li class="list-inline-item"><p>Someone favorites your <strong>Gorgeous Villa Bay</strong> View listing!</p></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row mt50">
+						<div class="col-lg-6 offset-lg-3">
+							<div class="copyright-widget text-center">
+								<p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+</div>
+<!-- Wrapper End -->
+
+</body>
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html//dashboard by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:06 GMT -->
+</html>

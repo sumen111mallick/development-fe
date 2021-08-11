@@ -1,0 +1,77 @@
+/* You can add global styles to this file; and also import other style files */
+
+
+
+@import       './assets/css/ace-responsive-menu.css';
+@import       './assets/css/animate.css';
+@import       './assets/css/bootstrap.min.css';
+@import       './assets/css/bootstrap-select.min.css';
+@import       './assets/css/dashbord_navitaion.css';
+@import       './assets/css/flaticon.css';
+@import       './assets/css/font-awesome.min.css';
+@import       './assets/css/font-awesome-animation.min.css';
+@import       './assets/css/jquery-ui.min.css';
+@import       './assets/css/magnific-popup.css';
+@import       './assets/css/megadropdown.css';
+@import       './assets/css/menu.css';
+@import       './assets/css/progressbar.css';
+@import       './assets/css/responsive.css';
+@import       './assets/css/simplebar.min.css';
+@import       './assets/css/slider.css';
+@import       './assets/css/style.css';
+@import       './assets/css/timecounter.css';
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Added by Radhika Start */
+/* To fix the padding right issue */
+.modal-open {
+  overflow:auto;
+  padding-right:0 !important;
+}
+
+/* Added by Radhika End */
+
+.reg_modal:before {
+  background-color: rgba(0, 0, 0, .9);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.reg_modal.modal .close:focus{
+  outline: none;
+}
+
+.reg_modal .tab-content .tab-pane.active{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
+
+/*#menu:not( .mm-menu ) {
+  display: none;
+}*/
+/* Added by Radhika 14 July Start */
+@media (min-width: 993px) {
+  #menu{
+      display: none !important;
+  }
+}
+/* Added by Radhika 14 July End */
