@@ -3,6 +3,7 @@ import { AuthService } from './../_services/auth.service';
 import { UserService } from './../_services/user.service';
 import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
+import { GlobalConstants } from './../global-constants';
 
 @Component({
   selector: 'app-topbar',
@@ -21,7 +22,7 @@ export class TopbarComponent implements OnInit {
   data;
   userEmail: string[] = null;
   userProfile: string[] = null;
-  
+  ftpstring: string = GlobalConstants.ftpURL;
   wishlist_length= 0;
 
 
@@ -41,7 +42,7 @@ export class TopbarComponent implements OnInit {
       }
     );
    
-    if (this.tokenStorage.getToken() != null){
+    /*if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().username;
       this.userEmail=this.tokenStorage.getUser().misc.email;
@@ -50,8 +51,29 @@ export class TopbarComponent implements OnInit {
       console.log(this.userProfile);
       this.wishlistcount();
 
-    }
+    } */
+    
+    console.log(this.tokenStorage.getToken());
+    console.log(this.tokenStorage.getUser());
+    if (this.tokenStorage.getToken() != null) {
+      this.isLoggedIn = true;
+      
+      if (this.tokenStorage.getUser().misc) {
+        this.roles = this.tokenStorage.getUser().username;
+        this.userEmail = this.tokenStorage.getUser().misc.email;
+        this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
+        this.currentUser = this.token.getUser().username;
+        this.usertype = this.token.getUser().usertype;
+      }
+      else {
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        this.roles = this.userDetails.name;
+        this.userEmail = this.userDetails.email;
+        this.userProfile = this.userDetails.profile_pic;
+      }
+      this.wishlistcount();
 
+    }
   }
   wishlistcount(): void{
     this.userService.getwishlistdata().pipe().subscribe(

@@ -123,13 +123,15 @@ export class PostproductComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log("1");
     this.showLoadingIndicator = true;
     this.form.expected_pricing="0";
-
+    console.log("2");
     
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder();
     });
+    console.log("3");
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(
         this.searchElementRef.nativeElement

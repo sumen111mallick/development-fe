@@ -98,7 +98,7 @@
                     <div class="col-lg-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Type</label>
-                        <select class="form-control selectpicker" name="type" #type="ngModel" [(ngModel)]="form.type"
+                        <select class="form-control" name="type" #type="ngModel" [(ngModel)]="form.type"
                           required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Property Type</option>
                           <option value="" disabled>
@@ -160,7 +160,7 @@
                     <div class="col-lg-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label class="">Display Address on Property page.</label>
-                        <select class="form-control selectpicker" name="display_address" #display_address="ngModel"
+                        <select class="form-control" name="display_address" #display_address="ngModel"
                           [(ngModel)]="form.display_address" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select options</option>
                           <option value="1">Yes</option>
@@ -244,7 +244,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="formGroupExampleArea">Area</label>
-                        <select class="form-control selectpicker" name="area" #area="ngModel" [(ngModel)]="form.area"
+                        <select class="form-control" name="area" #area="ngModel" [(ngModel)]="form.area"
                           id="formGroupExampleArea" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Area</option>
                           <option value="1">1</option>
@@ -266,7 +266,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="sizePrefix">Carpet Area</label>
-                        <select class="form-control selectpicker" name="carpet_area" #carpet_area="ngModel"
+                        <select class="form-control" name="carpet_area" #carpet_area="ngModel"
                           [(ngModel)]="form.carpet_area" id="formGroupExampleArea" required data-live-search="true"
                           data-width="100%">
                           <option value="" disabled>Select Carpet Area</option>
@@ -290,7 +290,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Area Unit</label>
-                        <select class="form-control selectpicker" name="area_unit" #area_unit="ngModel"
+                        <select class="form-control" name="area_unit" #area_unit="ngModel"
                           [(ngModel)]="form.area_unit" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Area Units</option>
                           <option value="sq.ft.">sq.ft.</option>
@@ -322,7 +322,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="bedRooms">Bedrooms</label>
-                        <select class="form-control selectpicker" name="bedroom" #bedroom="ngModel"
+                        <select class="form-control" name="bedroom" #bedroom="ngModel"
                           [(ngModel)]="form.bedroom" id="bedRooms" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Bedrooms</option>
                           <option value="1">1</option>
@@ -345,7 +345,7 @@
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="bathRooms">Bathrooms</label>
                         <!-- <input type="number" class="form-control" name="bathroom" #bathroom="ngModel" [(ngModel)]="form.bathroom" id="bathRooms"> -->
-                        <select class="form-control selectpicker" name="bathroom" #bathroom="ngModel"
+                        <select class="form-control" name="bathroom" #bathroom="ngModel"
                           [(ngModel)]="form.bathroom" id="bathRooms" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Bathrooms</option>
                           <option value="1">1</option>
@@ -367,7 +367,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="balconies">Balconies</label>
-                        <select class="form-control selectpicker" name="balconies" #balconies="ngModel"
+                        <select class="form-control" name="balconies" #balconies="ngModel"
                           [(ngModel)]="form.balconies" id="balconies" required data-live-search="true"
                           data-width="100%">
                           <option value="" disabled>Select Balconies</option>
@@ -390,7 +390,7 @@
                     <div class="col-lg-4 col-xl-4 col-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="additional_rooms">Additional Rooms</label>
-                        <select class="form-control selectpicker" name="additional_rooms" #additional_rooms="ngModel"
+                        <select class="form-control" name="additional_rooms" #additional_rooms="ngModel"
                           [(ngModel)]="form.additional_rooms" id="additional_rooms" required data-live-search="true"
                           data-width="100%">
                           <option value="" disabled>Select Additional Rooms</option>
@@ -414,7 +414,7 @@
                     <div class="col-lg-4 col-xl-4 col-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="equipment">Equipment</label>
-                        <select class="form-control selectpicker" name="equipment" #equipment="ngModel"
+                        <select class="form-control" name="equipment" #equipment="ngModel"
                           [(ngModel)]="form.equipment" id="equipment" required data-live-search="true"
                           data-width="100%">
                           <option value="" disabled>Select Equipment</option>
@@ -469,7 +469,7 @@
                     <div class="col-lg-4 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Furnishings</label>
-                        <select class="form-control selectpicker" (change)="furnishStatus($event.target.value)"
+                        <select class="form-control" (change)="furnishStatus($event.target.value)"
                           name="furnishing_status" #furnishing_status="ngModel" [(ngModel)]="form.furnishing_status"
                           name="type" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Furnishing Status</option>
@@ -486,7 +486,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="property_on_floor">Property is present on which Floor? (Type no for none.)</label>
-                        <select class="form-control selectpicker" name="property_on_floor" #property_on_floor="ngModel"
+                        <select class="form-control" name="property_on_floor" #property_on_floor="ngModel"
                           [(ngModel)]="form.property_on_floor" id="property_on_floor" required data-live-search="true"
                           data-width="100%">
                           <option value="" disabled>Select Property is present on Floor</option>
@@ -510,7 +510,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="total_floors">Number of Floors in a property? (Type no if not applicable.)</label>
-                        <select class="form-control selectpicker" name="total_floors" #total_floors="ngModel"
+                        <select class="form-control" name="total_floors" #total_floors="ngModel"
                           [(ngModel)]="form.total_floors" id="total_floors" required data-live-search="true"
                           data-width="100%">
                           <option value="" disabled>Select Property is present on Floor</option>
@@ -534,7 +534,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Facing Towards</label>
-                        <select class="form-control selectpicker" name="facing_towards" #facing_towards="ngModel"
+                        <select class="form-control" name="facing_towards" #facing_towards="ngModel"
                           [(ngModel)]="form.facing_towards" name="type" required data-live-search="true"
                           data-width="100%">
                           <option value="" disabled>Select the directions.</option>
@@ -556,7 +556,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Rera Registration Status</label>
-                        <select class="form-control selectpicker" name="rera_registration_status"
+                        <select class="form-control" name="rera_registration_status"
                           #rera_registration_status="ngModel" [(ngModel)]="form.rera_registration_status" name="type"
                           required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select the options.</option>
@@ -573,7 +573,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Do you have Reserved Parking</label>
-                        <select class="form-control selectpicker" (change)="parkingStatus($event.target.value)"
+                        <select class="form-control" (change)="parkingStatus($event.target.value)"
                           name="additional_parking_status" #additional_parking_status="ngModel"
                           [(ngModel)]="form.additional_parking_status" required data-live-search="true"
                           data-width="100%">
@@ -592,7 +592,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label for="buildyear">Year Built</label>
-                        <select class="form-control selectpicker" name="buildyear" #buildyear="ngModel"
+                        <select class="form-control" name="buildyear" #buildyear="ngModel"
                           [(ngModel)]="form.buildyear" id="buildyear" required data-live-search="true"
                           data-width="100%">
                           <option value="" disabled>Select Year Built</option>
@@ -615,7 +615,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Availability</label>
-                        <select class="form-control selectpicker" name="availability_condition"
+                        <select class="form-control" name="availability_condition"
                           #availability_condition="ngModel" [(ngModel)]="form.availability_condition" required
                           data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Availability</option>
@@ -631,7 +631,7 @@
                     <div class="col-lg-6 col-xl-4">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Possession By</label>
-                        <select class="form-control selectpicker" name="possession_by" #possession_by="ngModel"
+                        <select class="form-control" name="possession_by" #possession_by="ngModel"
                           [(ngModel)]="form.possession_by" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Possession Date</option>
                           <option value="Now">Now</option>
@@ -751,7 +751,7 @@
                     <div class="col-lg-6 col-xl-6 col-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Ownership</label>
-                        <select class="form-control selectpicker" name="ownership" #ownership="ngModel"
+                        <select class="form-control" name="ownership" #ownership="ngModel"
                           [(ngModel)]="form.ownership" name="type" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Ownership Type</option>
                           <option value="Freehold">Freehold</option>
@@ -805,7 +805,7 @@
                     <div class="col-lg-6 col-xl-6 col-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Is Tax and Govt. Charges Included?</label>
-                        <select class="form-control selectpicker" name="tax_govt_charge" #tax_govt_charge="ngModel"
+                        <select class="form-control" name="tax_govt_charge" #tax_govt_charge="ngModel"
                           [(ngModel)]="form.tax_govt_charge" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Option</option>
                           <option value="1">Yes</option>
@@ -820,7 +820,7 @@
                     <div class="col-lg-6 col-xl-6 col-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Is Price Negotiable?</label>
-                        <select class="form-control selectpicker" name="price_negotiable" #price_negotiable="ngModel"
+                        <select class="form-control" name="price_negotiable" #price_negotiable="ngModel"
                           [(ngModel)]="form.price_negotiable" required data-live-search="true" data-width="100%">
                           <option value="" disabled>Select Option</option>
                           <option value="1">Yes</option>
@@ -835,7 +835,7 @@
                     <div class="col-lg-6 col-xl-6 col-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Is Maintenance Charge Included?</label>
-                        <select class="form-control selectpicker" (change)="maintenanceStatus($event.target.value)"
+                        <select class="form-control" (change)="maintenanceStatus($event.target.value)"
                           name="maintenance_charge_status" #maintenance_charge_status="ngModel"
                           [(ngModel)]="form.maintenance_charge_status" required data-live-search="true"
                           data-width="100%">

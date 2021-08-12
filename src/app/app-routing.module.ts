@@ -57,10 +57,13 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { VerifyDetailsGuard } from './verify-details.guard';
 import { VerifyGuardGuard } from './verify-guard.guard';
 import { UpdateSalesPropertyComponent } from './update-sales-property/update-sales-property.component';
+import { AuthGuardGuard } from './auth-guard.guard';
+import { AdminUsercreatorComponent } from './admin-usercreator/admin-usercreator.component';
 
 const routes: Routes = [
 
   {path: '', component: HomeComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [VerifyGuard]},
   {path: 'productlisting', component: ProductListingComponent},
   {path: 'productpage/:id', component: ProductpageComponent},
@@ -116,6 +119,7 @@ const routes: Routes = [
   {path: 'about-us', component: AboutUsComponent},
   {path: 'UdateProperty/:id', component: UpdatepropertyComponent},
   {path: 'UdateSalesProperty/:id', component: UpdateSalesPropertyComponent},
+  {path: 'usercreator-new', component: AdminUsercreatorComponent},
   {path: '**', component: NotfoundComponent},
 
 ];

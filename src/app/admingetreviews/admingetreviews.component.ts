@@ -5,6 +5,7 @@ import { TokenStorageService } from './../_services/token-storage.service';
 import { Title } from '@angular/platform-browser';
 import { GlobalConstants } from './../global-constants';
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-admingetreviews',
@@ -23,6 +24,7 @@ export class AdmingetreviewsComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
+    private confirmationDialogService: ConfirmationDialogService
   ) { }
 
   ngOnInit(): void {
@@ -44,21 +46,31 @@ export class AdmingetreviewsComponent implements OnInit {
   }
 
   del_func(id){
-    {this.authService.property_delete(id).subscribe(
 
-        data => {
-          console.log(data)
-          window.location.reload();
-        },
-        err => {
-          console.log(err)
+    this.confirmationDialogService.confirm('Please confirm..', 'Are you sure you want to delete ?')
+      .then((confirmed) => {
+        console.log('User confirmed:', confirmed);
+        if (confirmed == true) {
+          this.authService.review_delete(id).subscribe(
+            data => {
+              console.log(data);
+              window.location.reload();
+            },
+            err => {
+              console.log(err)
+            }
+          );
         }
-      );
-    }
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+    
+    
   }
 
   onShare(event){
-    window.location.href=GlobalConstants.siteURL+"productpage" + "?id=" + event
+    console.log(event);
+    //window.location.href=GlobalConstants.siteURL+"productpage" + "?id=" + event;
+    window.location.href=GlobalConstants.siteURL+"productpage" + "/" + event;
     // alert("Your Shareable Link is \n" + this.sitestring + this.router.url + "?id=" + this.prod_id);
   }
 

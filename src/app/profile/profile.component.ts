@@ -4,6 +4,7 @@ import { GlobalConstants } from './../global-constants';
 import { Title } from '@angular/platform-browser';
 import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -40,6 +41,10 @@ export class ProfileComponent implements OnInit {
   form: any = {};
   formd: any = {};
   id;
+  public message: any;
+  public imagePath: any;
+  public imgURL: any;
+  public files: any;
 
   ftpstring: string = GlobalConstants.ftpURL;
 
@@ -52,6 +57,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
+    private toastr: ToastrService
 
   ) { }
 
@@ -71,10 +77,11 @@ export class ProfileComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.userService.getUserBoard().pipe().subscribe(
       (data: any) => {
+        console.log(data)
         this.content = data;
         this.id = data.id;
         this.currentUser = data.name;
-        this.profile_pic = data.profile_pic
+        this.profile_pic = data.profile_pic;
         this.email = data.email;
         this.usertype = data.usertype;
         this.phn_no = data.other_mobile_number;
@@ -102,9 +109,9 @@ export class ProfileComponent implements OnInit {
         this.id_created_at = data.created_at;
         console.log(this.content);
         this.showLoadingIndicator = false;
-        if (this.profile_pic.indexOf('googleusercontent.com') == -1) {
+        /*if (this.profile_pic.indexOf('googleusercontent.com') == -1) {
           this.profile_pic = this.ftpstring + this.profile_pic
-        }
+        } */
         if (this.usertype == 1) {
           this.usercat = "Customer";
         }
@@ -129,7 +136,7 @@ export class ProfileComponent implements OnInit {
         this.showLoadingIndicator = false;
       }
     )
-    
+
   }
 
 
@@ -243,5 +250,47 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+  onFileChange(event) {
+    console.log(event);
+     this.files = event.target.files;
+    if (this.files.length === 0)
+      return;
+
+    const mimeType = this.files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+    const reader = new FileReader();
+    console.log(reader);
+    this.imagePath = this.files;
+    console.log(this.imagePath);
+    reader.readAsDataURL(this.files[0]);
+    reader.onload = (event) => {
+      this.imgURL = event.target.result;
+    }
+  }
+
+  upload_image() {
+    console.log(this.files[0]);
+    console.log(this.id);
+    var formData: any = new FormData();
+    formData.append('profile_image', this.files[0], this.files[0].name);
+    formData.append('id', this.id);
+    console.log(formData);
+    this.authService.uploadProfile_Image(formData).subscribe(
+      data => {
+        console.log(data);
+        this.toastr.success(data.message);
+        setTimeout('window.location.reload()', 2000);
+        
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
 
 }

@@ -11,7 +11,7 @@ import { Output, EventEmitter } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
 import { MapsAPILoader, AgmMap } from '@agm/core';
 // import { google } from "google-maps";
-import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, NgZone, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   amenityArray = [];
   showLoadingIndicator = false;
   testimonial_length = 0;
-
+  $: any;
 
   // map google
   geoCoder: any;
@@ -103,6 +103,7 @@ export class HomeComponent implements OnInit {
     this.selectedItems = new Array<string>();
 
   }
+
   DeleteProd_function(data: any) {
     if (this.tokenStorage.getUser() != null) {
       this.isLoggedIn = true;
@@ -187,6 +188,7 @@ export class HomeComponent implements OnInit {
         err => {
           //this.content = JSON.parse(err.error).message;
           this.content = err.error.message;
+          this.showLoadingIndicator = false;
         }
       );
     } else {
@@ -199,6 +201,7 @@ export class HomeComponent implements OnInit {
           console.log(this.number);
         },
         err => {
+          this.showLoadingIndicator = false;
           //this.content = JSON.parse(err.error).message;
           this.content = err.error.message;
         }
@@ -207,6 +210,7 @@ export class HomeComponent implements OnInit {
   }
 
   amenities(): void {
+    this.showLoadingIndicator = true;
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
         //  console.log(amenitiesdata);
@@ -214,14 +218,17 @@ export class HomeComponent implements OnInit {
         this.amenitiesresult = this.amenities;
         console.log(this.amenitiesresult);
         //console.log(this.content);
+        this.showLoadingIndicator = false;
       },
       err => {
         //this.content = JSON.parse(err.error).message;
         this.content = err.error.message;
+        this.showLoadingIndicator = false;
       }
     );
   }
   gettestimonialdata(): void {
+    this.showLoadingIndicator = true;
     this.userService.gettestimonialdata().pipe().subscribe(
       (Reviewdata: any) => {
         this.contenttestimonial = Reviewdata.data;
@@ -229,9 +236,11 @@ export class HomeComponent implements OnInit {
         this.testimonial_length = this.contenttestimonial.length
         console.log(this.testimonial);
         //console.log(this.content);
+        this.showLoadingIndicator = false;
       },
       err => {
         this.content = err.error.message;
+        this.showLoadingIndicator = false;
       }
     );
   }

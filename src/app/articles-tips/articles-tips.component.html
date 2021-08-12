@@ -21,7 +21,7 @@
                         </div>
                         <div class="fp_footer">
                             <ul class="fp_meta float-left mb0">
-                                <li class="list-inline-item" *ngIf="post.profile_pic !== null"><img src="{{ images_folder }}/{{ post.profile_pic }}" alt="pposter1.png"></li>
+                                <li class="list-inline-item" *ngIf="post.profile_pic !== null"><img class="profile_image" src="{{ images_folder }}images/{{ post.profile_pic }}" alt="pposter1.png"></li>
                                 <li class="list-inline-item" *ngIf="post.profile_pic == null"><span class="flaticon-user"></span></li>
                                 <li class="list-inline-item">{{ post.name }}</li>
                             </ul>

@@ -1,9 +1,13 @@
 import { GlobalConstants } from './../global-constants';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TokenStorageService } from './../_services/token-storage.service';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { filter, pairwise } from 'rxjs/operators';
+/*0import { UrlService } from './../_services/url.service';*/
+import { RoutesRecognized } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-userlogin',
@@ -24,6 +28,8 @@ export class UserloginComponent implements OnInit {
   productEntryRent: boolean = false;
   showLoadingIndicator: boolean = false;
 
+  //previousUrl: any = this.urlService.previousUrl$;
+  currentUrl: string = null;
 
   image1;
   image2;
@@ -48,6 +54,8 @@ export class UserloginComponent implements OnInit {
   err_code: number;
   access_token: string;
   data;
+  public returnUrl: any;
+  public previous: any;
 
 
   constructor(
@@ -56,11 +64,41 @@ export class UserloginComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private router: Router,
     private route: ActivatedRoute,
+    //private urlService: UrlService
   ) { }
 
   ngOnInit(): void {
     this.showLoadingIndicator = true;
     this.titleService.setTitle('Login');
+    /*console.log(this.urlService.getPreviousUrl());*/
+    //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    //console.log(this.returnUrl);
+
+    /*this.previous = this.urlService.getPreviousUrl();
+    console.log(this.previous); */
+
+    /*this.urlService.previousUrl$
+       .subscribe((previousUrl: string) => {
+         this.previousUrl = previousUrl
+       });*/
+
+    /*this.urlService.previousUrl$.subscribe((previousUrl: string) => {
+      console.log('previous url: ', previousUrl);
+    }); */
+
+    /*this.router.events
+      .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
+      .subscribe((events: RoutesRecognized[]) => {
+        console.log('previous url', events[0].urlAfterRedirects);
+        console.log('current url', events[1].urlAfterRedirects);
+      }); */
+
+    /* this.router.events
+       .pipe(filter(event => event instanceof NavigationEnd))
+       .subscribe((event: NavigationEnd) => {
+         console.log('prev:', event.url);
+         this.previousUrl = event.url;
+       }); */
 
     {
       this.route.queryParams.subscribe(params => {
@@ -86,6 +124,7 @@ export class UserloginComponent implements OnInit {
         console.log(this.usertype);
       }
       this.showLoadingIndicator = false;
+      this.router.navigate([""]);
     }
     else {
       this.isLoggedIn = false;
@@ -113,7 +152,29 @@ export class UserloginComponent implements OnInit {
         // this.reloadPage();
         // window.location.href=GlobalConstants.siteURL+"";
         this.showLoadingIndicator = false;
-        this.redirect_to_profile();
+        this.router.navigateByUrl("")
+        .then(() => {
+          window.location.reload();
+        });
+        //this.router.navigateByUrl(this.returnUrl);
+        //this.redirect_to_profile();
+        //this.router.navigateByUrl(this.previousUrl);
+        //this.urlService.router.navigateByUrl(this.previous);
+
+        /*this.urlService.previousUrl$.subscribe((previousUrl: string) => {
+          console.log('previous url: ', previousUrl);
+
+        }); */
+
+        /*this.router.navigate(this.previousUrl.source._value);
+
+        console.log(this.previousUrl);
+        console.log(this.currentUrl); */
+
+        /*this.router.navigateByUrl(this.urlService.getPreviousUrl())
+        .then(() => {
+          window.location.reload();
+        });*/
       },
       err => {
         this.errorMessage = err.error.message;

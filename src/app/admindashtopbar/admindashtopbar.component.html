@@ -41,17 +41,30 @@
           <a href="/blog"><span class="title">Blog</span></a>
         </li>
         <!-- Code added by Radhika End -->
-        <li class="user_setting">
+        <li class="user_setting" *ngIf="isLoggedIn">
           <div class="dropdown">
             <a class="btn dropdown-toggle" href="#" data-toggle="dropdown"><span class="flaticon-user"></span><span
-                class="dn-1199">{{ name }}</span></a>
+                class="dn-1199"> {{ currentUser }}</span></a>
             <div class="dropdown-menu">
               <div class="user_set_header">
-                <span class="flaticon-user"></span>
-                <p>{{ name }} <br><span class="address"><a href="https://grandetest.com/cdn-cgi/l/email-protection"
-                      class="__cf_email__"
-                      data-cfemail="32535e5b464754535c72555f535b5e1c515d5f">[email&#160;protected]</a></span></p>
+                <div class="row">
+                  <div class="col-md-4 col-sm-4">
+                    <span *ngIf="userProfile" class="profile_image"><img src="{{ftpstring}}images/{{userProfile}}"
+                        alt="login_user.png"></span>
+                    <span *ngIf="!userProfile" class="profile_image"><img class="float-left"
+                        src="./../../assets/css/images/team/e1.png" alt="login_user.png"></span>
+                  </div>
+                  <div class="col-md-8 col-sm-8 m-auto">
+                    <p>{{ roles }}</p>
+                  </div>
+                </div>
+                <!--<div class="row">
+                  <div class="col-md-8 col-sm-8 m-auto" style="overflow-wrap:break-word">
+                    {{userEmail}}
+                  </div>
+                </div> -->
               </div>
+
               <div class="user_setting_content">
                 <a class="dropdown-item active" href="/profile">My Profile</a>
                 <!--<a class="dropdown-item" href="#">Messages</a>
@@ -122,12 +135,12 @@
 
       <li class="cl_btn">
         <a class="btn btn-block btn-lg btn-thm circle" href="/insertproduct">
-          <span class="flaticon-plus"></span> 
+          <span class="flaticon-plus"></span>
           List Property
         </a>
       </li>
     </ul>
-  </nav> 
+  </nav>
 </div>
 
 <div class="dashboard_sidebar_menu dn-992">

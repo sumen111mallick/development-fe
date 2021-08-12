@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col-lg-4 col-xl-3 dn-992 pl0"></div>
             <div class="col-lg-8 col-xl-9 maxw100flex-992">
-                <div class="row">
-                    <div class="col-lg-4 col-xl-4 mb10">
+                <div class="row mt50">
+                    <div class="col-lg-6 col-xl-6 mb10">
                         <div class="breadcrumb_content style2 mb30-991">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -17,7 +17,7 @@
                             <h2 class="breadcrumb_title">Blog</h2>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-xl-8">
+                    <div class="col-lg-6 col-xl-6">
                         <div class="text-right">
                             <a [routerLink]="['/admin-blog']" class="fp_pdate float-right text-thm"><span
                                     class="flaticon-left-arrow"></span> Back to Blog</a>
@@ -39,8 +39,11 @@
                             <!--<div class="blog_sp_tag float-right"><a href="#">Edit</a></div>-->
                             <h3 class="blog_sp_title">{{ post_detail[0].title }}</h3>
                             <ul class="blog_sp_post_meta">
-                                <li class="list-inline-item"><a href="#"><img
+                                <li class="list-inline-item" *ngIf="post_detail[0].profile_pic !== null"><a href="#"><img
                                             src="{{ images_folder }}/{{ post_detail[0].profile_pic }}" alt="profile_pic"></a>
+                                </li>
+                                <li class="list-inline-item" *ngIf="post_detail[0].profile_pic == null">
+                                    <img src="../../assets/images/default_avatar.png" alt="profile_pic">
                                 </li>
                                 <li class="list-inline-item"><a href="#">{{ post_detail[0].name }}</a></li>
                                 <li class="list-inline-item"><span class="flaticon-calendar"></span></li>

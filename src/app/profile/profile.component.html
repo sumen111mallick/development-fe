@@ -27,8 +27,8 @@
 <body>
 	<div class="wrapper">
 		<div *ngIf="showLoadingIndicator">
-            <div class="preloader"></div>
-        </div>
+			<div class="preloader"></div>
+		</div>
 
 		<app-dashboard-topbar></app-dashboard-topbar>
 
@@ -63,9 +63,10 @@
 								<div class="breadcrumb_content style2" style="margin-left: 30px;">
 									<h2 class="breadcrumb_title">My Profile</h2>
 									<p>We are glad to see you <b>{{ currentUser }}</b></p>
-									<div class="text-center">
-										<p class="alert alert-danger" *ngIf="!email_verify">Please Verify your Phone
-											Number</p>
+									<div class="alert alert-danger text-center" *ngIf="!email_verify">
+										<h5>Please Verify your Phone
+											Number</h5>
+										<a class="btn btn-thm2" href="verify-details">Verify</a>	
 									</div>
 								</div>
 							</div>
@@ -87,15 +88,29 @@
 																<div class="card-body">
 																	<div
 																		class="d-flex flex-column align-items-center text-center">
-																		<div class="wrap-custom-file">
-																			<img *ngIf="profile_pic !== null"
-																				class="img-whp" src="{{ profile_pic }}"
-																				alt="Profile Pic">
-																			<img *ngIf="profile_pic == null"
-																				class="img-whp"
-																				src="./../../assets/images/no_image_available.jpg"
-																				alt="Profile Pic">
-																		</div>
+
+																		<img *ngIf="profile_pic !== null"
+																			class="img-whp" src="{{ ftpstring }}images/{{ profile_pic }}"
+																			alt="Profile Pic">
+																		<img *ngIf="profile_pic == null" class="img-whp"
+																			src="./../../assets/images/no_image_available.jpg"
+																			alt="Profile Pic">
+																		<!--<img [src]="imgURL ? imgURL : './../../assets/images/no_image_available.jpg'"
+																			class="img-whp">-->
+
+																	</div>
+																	<hr>
+																	<div class="row">
+																		<button type="button" class="btn btn-thm m-auto"
+																			data-toggle="modal"
+																			data-target="#ProfileImageModal">Change
+																			Image</button>
+
+																		<!--<input type="file"
+																			(change)="onFileChange($event)"
+																			id="upload_pic" hidden />
+																		<label id="label_upload" for="upload_pic">Change
+																			Image</label> -->
 																	</div>
 																</div>
 															</div>
@@ -284,11 +299,11 @@
 																	</div>
 																	<hr *ngIf="practice_number">
 																	<div class="row">
-																		<div class="col-sm-12">
+																		<div class="col-sm-6 offset-sm-3 text-center">
 																			<a data-toggle="modal"
 																				data-target=".bd-example-modal-lg"
 																				(click)="user_details(id)"><button
-																					class="btn btn-thm">Edit
+																					class="btn btn-thm m-auto">Edit
 																					Profile</button></a>
 																		</div>
 																	</div>
@@ -541,7 +556,7 @@
 																	</div>
 																	<div class="form-group input-group" *ngIf="city">
 																		<input type="email" class="form-control"
-																			id="city" name="city" #city="ngModel" 
+																			id="city" name="city" #city="ngModel"
 																			[(ngModel)]="form.city" placeholder="City">
 																		<div class="input-group-prepend">
 																			<div class="input-group-text"><i
@@ -680,6 +695,36 @@
 														</div>
 													</div>
 												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Profile Image Modal -->
+								<div class="modal fade" id="ProfileImageModal" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Change Profile Image</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body text-center">
+												<img [src]="imgURL ? imgURL : '../../../assets/images/noImageSelected.jpg'"
+													class="img-whp">
+													<hr>
+												<input type="file" (change)="onFileChange($event)" id="upload_pic"
+													hidden />
+												<label id="label_upload" for="upload_pic">Change
+													Image</label>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Close</button>
+												<button type="button" class="btn btn-primary" (click)="upload_image()">Upload Image</button>
 											</div>
 										</div>
 									</div>

@@ -18,13 +18,13 @@ export class VerifyGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot){
     let url: string = state.url;
 
     return this.checkLogin(url);
     //return true;
   }
-  checkLogin(url: string): true | UrlTree {
+  checkLogin(url: string) {
     console.log("Url: " + url);
 
     //let val: string = this.tokenStorage.getUser().usertype;
@@ -33,10 +33,15 @@ export class VerifyGuard implements CanActivate {
     console.log(this.tokenStorage);
     if (val != null) {
       console.log("True");
+      //this.router.parseUrl(url);
+      this.router.parseUrl('/insertproduct');
       return true;
+      
     } else {
       console.log("false");
-      return this.router.parseUrl('/login');
+      //this.router.navigate(['/login'], { queryParams: { returnUrl: url }});
+      this.router.navigate(['/login']);
+      return false;
     }
   }
 

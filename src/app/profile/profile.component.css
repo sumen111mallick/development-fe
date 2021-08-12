@@ -54,3 +54,29 @@
 .col-sm-3 {
   margin: auto;
 }
+
+#label_upload{
+  display: inline-block;
+  background-color: rgb(255, 90, 95);;
+  color: white;
+  padding: 0.5rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin: auto;
+  background-image: none !important;
+}
+
+.img-whp {
+  height: 200px;
+  width: 200px !important;
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 1200px) {
+
+  .btn-thm {
+    width: 80%;
+  }
+  
+}

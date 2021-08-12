@@ -39,7 +39,7 @@
 
                         <div class="col-lg-8">
                             <div class="row"></div>
-                            <form action="#" [formGroup]="blogForm" (ngSubmit)="onSubmit()"
+                            <form #postForm action="#" [formGroup]="blogForm" (ngSubmit)="onSubmit()"
                                 enctype="multipart/form-data" novalidate>
 
                                 <div class="form-group">
@@ -52,28 +52,39 @@
                                 <div class="form-group">
                                     <label for="description">Description:</label>
                                     <editor formControlName="description" [init]="{
-                                base_url: '../assets/tinymce', 
-                                suffix: '.min',
-                                height: 300,
-                                menubar: true,
-                                plugins: [
-                                'advlist autolink lists link image charmap print',
-                                'preview anchor searchreplace visualblocks code',
-                                'fullscreen insertdatetime media table paste',
-                                'help wordcount'
-                                ],
-                                toolbar:
-                                'undo redo | formatselect | bold italic | \
-                                alignleft aligncenter alignright alignjustify | \
-                                bullist numlist outdent indent | help'
-                            }">
+                                        base_url: '../assets/tinymce', 
+                                        suffix: '.min',
+                                        height: 300,
+                                        menubar: true,
+                                        plugins: [
+                                        'advlist autolink lists link image charmap print',
+                                        'preview anchor searchreplace visualblocks code',
+                                        'fullscreen insertdatetime media table paste',
+                                        'help wordcount'
+                                        ],
+                                        toolbar:
+                                        'undo redo | formatselect | bold italic | \
+                                        alignleft aligncenter alignright alignjustify | \
+                                        bullist numlist outdent indent | help'
+                                    }">
                                     </editor>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="post_image">Choose Post Image:</label>
-                                    <input type="file" class="form-control" id="post_image" name="post_image"
+                                    <img [src]="imgURL ? imgURL : './../../assets/images/noImageSelected.jpg'"
+                                        class="img-whp">
+                                    <label *ngIf="!isAddMode" for="post_image">Change Post Image:</label>
+                                    <label *ngIf="isAddMode" for="post_image">Select Post Image:</label>
+                                    <input *ngIf="isAddMode" #post_image type="file" class="form-control"
+                                        formControlName="postImage" id="post_image" name="post_image" required
+                                        (change)="onFileChange($event)">
+                                    <input *ngIf="!isAddMode" #post_image type="file" class="form-control"
+                                        formControlName="postImage" id="post_image" name="post_image"
                                         (change)="onFileChange($event)">
                                 </div>
+                                <!--<div class="alert alert-danger" role="alert" *ngIf="blogForm.controls.postImage.errors?.required">
+                                    This field is required
+                                </div> -->
                                 <div class="form-group">
                                     <!--<div class="ui_kit_select_search">-->
                                     <label for="post_category">Choose Category:</label>

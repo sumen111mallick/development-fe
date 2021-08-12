@@ -15,31 +15,46 @@ export class DashboardTopbarComponent implements OnInit {
   roles: string[] = null;
   userEmail: string[] = null;
   userProfile: string[] = null;
+  ftpstring: string = GlobalConstants.ftpURL;
+  public userDetails: any;
 
   constructor(
     private token: TokenStorageService,
     private tokenStorage: TokenStorageService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken() != null){
+    console.log(this.tokenStorage.getToken());
+    console.log(this.tokenStorage.getUser());
+    if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().username;
-      this.userEmail=this.tokenStorage.getUser().misc.email;
-        this.userProfile=this.tokenStorage.getUser().misc.profile_pic;
-      this.currentUser = this.token.getUser().username;
-      this.usertype = this.token.getUser().usertype;
+      
+      if (this.tokenStorage.getUser().misc) {
+        this.roles = this.tokenStorage.getUser().username;
+        this.userEmail = this.tokenStorage.getUser().misc.email;
+        this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
+        this.currentUser = this.token.getUser().username;
+        this.usertype = this.token.getUser().usertype;
+        console.log(this.userProfile);
+      }
+      else {
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        this.roles = this.userDetails.name;
+        this.userEmail = this.userDetails.email;
+        this.userProfile = this.userDetails.profile_pic;
+        console.log(this.userProfile);
+      }
 
     }
   }
 
 
   redirect_control(): void {
-    if(this.usertype == 4){
-      window.location.href=GlobalConstants.siteURL+"lawyerservice"
+    if (this.usertype == 4) {
+      window.location.href = GlobalConstants.siteURL + "lawyerservice"
     }
-    else{
-      window.location.href=GlobalConstants.siteURL+"dashboard"
+    else {
+      window.location.href = GlobalConstants.siteURL + "dashboard"
     }
   }
 

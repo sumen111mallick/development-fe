@@ -4,9 +4,12 @@ import { BlogService } from './../_services/blog.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from './../_services/token-storage.service';
+import { GlobalConstants } from './../global-constants';
 
 import { Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-create-post',
@@ -27,13 +30,24 @@ export class BlogCreatePostComponent implements OnInit {
   slug: string;
   response;
   showLoadingIndicator;
+  public imagePath: any;
+  public imgURL: any;
+  public files: any;
+  ftpstring: string = GlobalConstants.ftpURL;
+  @ViewChild('post_image') 
+  myInputVariable: ElementRef;
+
+  public file = new Blob([
+    JSON.stringify({})
+  ], { type: 'application/json' });
+
   categories = [
-    {id: 1, name: "Construction"},
-    {id: 2, name: "Real Estate"},
-    {id: 3, name: "Luxury"},
-    {id: 4, name: "Loans"}
+    { id: 1, name: "Construction" },
+    { id: 2, name: "Real Estate" },
+    { id: 3, name: "Luxury" },
+    { id: 4, name: "Loans" }
   ];
-  
+
   blogForm = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
@@ -49,7 +63,8 @@ export class BlogCreatePostComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private blogService: BlogService, private route: ActivatedRoute,
-    private toastr: ToastrService, private tokenStorage: TokenStorageService) { }
+    private toastr: ToastrService, private tokenStorage: TokenStorageService,
+    private _router: Router) { }
 
   get f() {
     return this.blogForm.controls;
@@ -87,12 +102,15 @@ export class BlogCreatePostComponent implements OnInit {
     console.log(returnedPost);
     this.parsedData = JSON.parse(returnedPost);
     console.log(this.parsedData);
+    this.imgURL = this.ftpstring + "images/" + this.parsedData[0].image_path;
+    console.log(this.imgURL);
     this.blogForm.patchValue({
       title: this.parsedData[0].title,
       description: this.parsedData[0].description,
-      postImage: this.parsedData[0].image_path,
+      //postImage: this.parsedData[0].image_path,
       category: this.parsedData[0].category
     });
+    console.log(this.blogForm.controls);
   }
 
   onFileChange(event) {
@@ -100,11 +118,20 @@ export class BlogCreatePostComponent implements OnInit {
     console.log(event);
     this.selectedFile = event.target.files[0];
     console.log(this.selectedFile);
+    this.files = event.target.files;
     /*if (event.target.files && event.target.files.length > 0) {
       const file = (event.target.files[0] as File);
       console.log(file);
       this.blogForm.get('post_image').patchValue(file);
       console.log(this.blogForm.get('post_image').value);*/
+    const reader = new FileReader();
+    console.log(reader);
+    this.imagePath = this.files;
+    console.log(this.imagePath);
+    reader.readAsDataURL(this.files[0]);
+    reader.onload = (event) => {
+      this.imgURL = event.target.result;
+    }
   }
 
   onSubmit(): void {
@@ -118,6 +145,11 @@ export class BlogCreatePostComponent implements OnInit {
 
   private createPost() {
     this.showLoadingIndicator = true;
+
+    if (this.blogForm.invalid) {
+      this.showLoadingIndicator = false;
+      return;
+    }
     // TODO: Use EventEmitter with form value
     console.warn(this.blogForm.value);
     //var formData = new FormData();
@@ -144,6 +176,9 @@ export class BlogCreatePostComponent implements OnInit {
         this.showSuccess(this.response.message);
         this.blogForm.reset({});
         this.showLoadingIndicator = false;
+        this.imgURL = null;
+        this.myInputVariable.nativeElement.value = "";
+        this.selectedFile = null;
       },
       err => {
         this.errorMessage = err.error.message;
@@ -161,7 +196,11 @@ export class BlogCreatePostComponent implements OnInit {
     console.log(this.slug);
     updateFormData.append('title', this.blogForm.value.title);
     updateFormData.append('description', this.blogForm.value.description);
-    updateFormData.append('postImage', this.selectedFile, this.selectedFile.name);
+    if (this.selectedFile) {
+      updateFormData.append('postImage', this.selectedFile, this.selectedFile.name);
+      console.log(this.selectedFile);
+    }
+
     updateFormData.append('category', this.blogForm.value.category);
     updateFormData.append('created_by', this.UserToken.id);
 
@@ -178,6 +217,11 @@ export class BlogCreatePostComponent implements OnInit {
         this.showSuccess(this.response.message);
         this.blogForm.reset({});
         this.showLoadingIndicator = false;
+        this.imgURL = null;
+        console.log(this.myInputVariable);
+        this.myInputVariable.nativeElement.value = "";
+        this.selectedFile = null;
+        this._router.navigate(['admin-blog']);
       },
       err => {
         this.errorMessage = err.error.message;

@@ -28,6 +28,7 @@ export class TopbardarkComponent implements OnInit {
   wishlistcontent: any;
   wishlistresult: any;
   wishlist_length = 0;
+  public userDetails: any;
 
   constructor(
     private titleService: Title,
@@ -47,13 +48,44 @@ export class TopbardarkComponent implements OnInit {
     );
     // this.currentUser = this.token.getUser().username;
     // console.log(this.data);
-    if (this.tokenStorage.getToken() != null) {
+    /*if (this.tokenStorage.getToken() != null) {
+      console.log(this.tokenStorage.getToken());
+      console.log(this.tokenStorage.getUser());
+      this.userDetail = JSON.parse(this.tokenStorage.getUser());
+      console.log(this.userDetail);
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().username;
-      this.userEmail = this.tokenStorage.getUser().misc.email;
-      this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
+      //this.roles = this.tokenStorage.getUser().username;
+      this.roles = this.userDetail.name;
+      console.log(this.roles);
+      //this.userEmail = this.tokenStorage.getUser().misc.email;
+      this.userEmail = this.userDetail.email;
+      console.log(this.userEmail);
+      //this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
+      this.userProfile = this.userDetail.profile_pic;
       console.log(this.userEmail);
       console.log(this.userProfile);
+      this.wishlistcount();
+
+    } */
+
+    console.log(this.tokenStorage.getToken());
+    console.log(this.tokenStorage.getUser());
+    if (this.tokenStorage.getToken() != null) {
+      this.isLoggedIn = true;
+      
+      if (this.tokenStorage.getUser().misc) {
+        this.roles = this.tokenStorage.getUser().username;
+        this.userEmail = this.tokenStorage.getUser().misc.email;
+        this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
+        this.currentUser = this.tokenStorage.getUser().username;
+        this.usertype = this.tokenStorage.getUser().usertype;
+      }
+      else {
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        this.roles = this.userDetails.name;
+        this.userEmail = this.userDetails.email;
+        this.userProfile = this.userDetails.profile_pic;
+      }
       this.wishlistcount();
 
     }

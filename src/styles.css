@@ -53,6 +53,27 @@ input[type=number] {
   top: 0;
 }
 
+#ProfileImageModal::before {
+  background-color: rgba(0, 0, 0, .9);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#ProfileImageModal.modal .close:focus{
+  outline: none;
+}
+
+#ProfileImageModal .tab-content .tab-pane.active{
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+}
 .reg_modal.modal .close:focus{
   outline: none;
 }
@@ -75,3 +96,12 @@ input[type=number] {
   }
 }
 /* Added by Radhika 14 July End */
+
+/* Added by Radhika 5 Aug Start */
+
+.user_setting .dropdown-menu.show
+{
+  left: 150px !important;
+}
+
+/* Added by Radhika 5 Aug End */

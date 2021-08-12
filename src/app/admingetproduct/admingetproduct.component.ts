@@ -149,7 +149,8 @@ export class AdmingetproductComponent implements OnInit {
   }
 
   onShare(event){
-    window.location.href=GlobalConstants.siteURL+"productpage" + "?id=" + event
+    //window.location.href=GlobalConstants.siteURL+"productpage" + "?id=" + event
+    window.location.href=GlobalConstants.siteURL+"productpage" + "/" + event
     // alert("Your Shareable Link is \n" + this.sitestring + this.router.url + "?id=" + this.prod_id);
   }
 

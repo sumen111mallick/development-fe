@@ -93,6 +93,8 @@ import { UpdateSalesPropertyComponent } from './update-sales-property/update-sal
 import { Ng5SliderModule } from 'ng5-slider';
 import { SliderModule } from '@syncfusion/ej2-angular-inputs';
 import { AgmCoreModule  } from '@agm/core';
+import { UrlService } from './_services/url.service';
+import { AdminUsercreatorComponent } from './admin-usercreator/admin-usercreator.component';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 
@@ -172,6 +174,7 @@ import { AgmCoreModule  } from '@agm/core';
     VerifyDetailsComponent,
     UpdatepropertyComponent,
     UpdateSalesPropertyComponent,
+    AdminUsercreatorComponent,
   ],
   imports: [
     Ng5SliderModule,
@@ -198,8 +201,9 @@ import { AgmCoreModule  } from '@agm/core';
     Title,
     ConfirmationDialogService,
     ProductService,
+    UrlService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

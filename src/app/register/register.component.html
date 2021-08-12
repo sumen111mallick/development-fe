@@ -135,9 +135,9 @@
                         <select required class="selectpicker w100 show-tick" [(ngModel)]="form.select_type"
                           name="select_type" #select_type="ngModel">
                           <option disabled value="0">User Type</option>
-                          <option value="1">Individual</option>
-                          <option value="2">Agent</option>
-                          <option value="3">Builder</option>
+                          <option value="5">Individual</option>
+                          <option value="3">Agent</option>
+                          <option value="4">Builder</option>
                         </select>
                         <div class="alert-danger" *ngIf="f.submitted && select_type.errors?.required">
                           <div>Please select User Type</div>

@@ -43,13 +43,24 @@
                 class="dn-1199"> {{ currentUser }}</span></a>
             <div class="dropdown-menu">
               <div class="user_set_header">
-                <span *ngIf="userProfile"><img src="{{ftpstring}}{{userProfile}}" alt="login_user.png"></span>
-                <span *ngIf="!userProfile"><img class="float-left" src="./../../assets/css/images/team/e1.png"
-                    alt="login_user.png"></span>
-                <p> {{ roles }} <br><span class="address text-secondary"><a href="" class="__cf_email__ "
-                      data-cfemail="32535e5b464754535c72555f535b5e1c515d5f"
-                      style="color: black;">{{userEmail}}</a></span></p>
+                <div class="row">
+                  <div class="col-md-4 col-sm-4">
+                    <span *ngIf="userProfile" class="profile_image"><img src="{{ftpstring}}images/{{userProfile}}"
+                        alt="login_user.png"></span>
+                    <span *ngIf="!userProfile" class="profile_image"><img class="float-left"
+                        src="./../../assets/css/images/team/e1.png" alt="login_user.png"></span>
+                  </div>
+                  <div class="col-md-8 col-sm-8 m-auto">
+                    <p>{{ roles }}</p>
+                  </div>
+                </div>
+                <!--<div class="row">
+                  <div class="col-md-8 col-sm-8 m-auto" style="overflow-wrap:break-word">
+                    {{userEmail}}
+                  </div>
+                </div> -->
               </div>
+              
               <div class="user_setting_content">
                 <a class="dropdown-item active" href="/profile">My Profile</a>
                 <!--<a class="dropdown-item" href="#">Messages</a>

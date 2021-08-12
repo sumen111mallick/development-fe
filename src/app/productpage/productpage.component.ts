@@ -287,7 +287,7 @@ export class ProductpageComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.form)
-    this.authService.create_review(this.form, this.prod_id).subscribe(
+    this.authService.create_review(this.form, this.id).subscribe(
       data => {
         console.log(data)
         window.location.reload();

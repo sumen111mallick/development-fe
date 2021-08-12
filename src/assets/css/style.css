@@ -997,13 +997,14 @@ header.header-nav a.navbar_brand .logo2{
   display: none;
 }
 header.header-nav.menu_style_home_one ul.ace-responsive-menu li.add_listing{
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
   border-radius: 25px;
   height: 50px;  
   position: relative;
   text-align: center;
   vertical-align: middle;
   width: 180px;
+  border: double;
 }
 header.header-nav.menu_style_home_one ul.ace-responsive-menu li.add_listing.home5,
 header.header-nav.menu_style_home_one ul.ace-responsive-menu li.add_listing.home2.style2,
@@ -1018,9 +1019,12 @@ header.header-nav.menu_style_home_one.home9 ul.ace-responsive-menu li.add_listin
 }
 header.header-nav.menu_style_home_one ul.ace-responsive-menu li.add_listing a{
   font-family: "Nunito";
-  color: #ff5a5f;
-  line-height: 1.2;
-  top: -20px;
+  /*color: #ff5a5f;*/
+  color: #ffffff;
+  /*line-height: 1.2;*/
+  line-height: 1;
+  /*top: -20px;*/
+  top: -23px;
 }
 header.header-nav.menu_style_home_one.stricky-fixed .ace-responsive-menu li.add_listing{
   background-color: #ff5a5f;
@@ -11282,7 +11286,8 @@ a.btn.btn_error{
   content: "";
   height: 37px;
   position: absolute;
-  right: 40px;
+  /*right: 40px;*/
+  left: 40px;
   width: 37px;
   top: -7px;
   -webkit-transform: rotate(45deg);

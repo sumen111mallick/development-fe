@@ -378,7 +378,9 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-
+  review_delete($id) {
+    return this.http.delete(AUTH_API + 'admin/reviews/delete/' + $id);
+  }
 
   property_delete(id): Observable<any> {
     return this.http.post(AUTH_API + 'product/delete_product', JSON.stringify({
@@ -422,6 +424,11 @@ mobile_verify(data): Observable<any> {
       rev_content:  form.rev_content,
 
     }), httpOptions);
+  }
+
+  uploadProfile_Image(formdata): Observable<any> {
+    console.log(formdata.profile_image);
+    return this.http.post(AUTH_API + 'auth/upload_profile_pic', formdata);
   }
 
   password_update(form): Observable<any> {
