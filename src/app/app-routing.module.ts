@@ -117,8 +117,8 @@ const routes: Routes = [
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'terms-conditions', component: TermsConditionsComponent},
   {path: 'about-us', component: AboutUsComponent},
-  {path: 'UdateProperty/:id', component: UpdatepropertyComponent},
-  {path: 'UdateSalesProperty/:id', component: UpdateSalesPropertyComponent},
+  {path: 'update-property-rent/:id', component: UpdatepropertyComponent},
+  {path: 'update-Property-sales/:id', component: UpdateSalesPropertyComponent},
   {path: 'usercreator-new', component: AdminUsercreatorComponent},
   {path: '**', component: NotfoundComponent},
 

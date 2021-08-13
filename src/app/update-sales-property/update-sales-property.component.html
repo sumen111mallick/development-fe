@@ -12,7 +12,7 @@
 <!-- css file -->
 
 <!-- Title -->
-<title>FindHouse - Real Estate HTML Template</title>
+<title>Sales Property Update</title>
 <!-- Favicon -->
 <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
 <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
@@ -96,28 +96,8 @@
         <div class="my_profile_setting_input ui_kit_select_search form-group">
             <label>Type</label>
                 <select class="form-control" formControlName="type">
-                  <option value="" disabled >Please Select Type</option>
-                  <option value="" disabled ><h3>ALL RESIDENTIAL</h3></option>
-                  <option  value="Flat/ Apartment" selected>Flat/ Apartment</option>
-                  <option value="Residential House">Residential House</option>
-                  <option value="Villa">Villa</option>
-                  <option value="Builder Floor Apartment">Builder Floor Apartment</option>
-                  <option value="Residential Land/ Plot">Residential Land/ Plot</option>
-                  <option  value="Penthouse">Penthouse</option>
-                  <option value="Studio Apartment">Studio Apartment</option>
-                  <option value="" disabled ><h3>ALL COMMERCIAL</h3></option>
-                  <option value="Commercial Office Space">Commercial Office Space</option>
-                  <option value="Office in IT Park/ SEZ">Office in IT Park/ SEZ</option>
-                  <option value="Commercial Shop">Commercial Shop</option>
-                  <option value="Commercial Showroom">Commercial Showroom</option>
-                  <option value="Commercial Land">Commercial Land</option>
-                  <option value="Warehouse/ Godown">Warehouse/ Godown</option>
-                  <option value="Industrial Land">Industrial Land</option>
-                  <option value="Industrial Building">Industrial Building</option>
-                  <option value="Industrial Shed ">Industrial Shed</option>
-                  <option value="" disabled ><h3>ALL AGRICULTURAL</h3></option>
-                  <option value="Agricultural Land">Agricultural Land</option>
-                  <option value="Farm House">Farm House</option>
+                    <option value="" disabled >Select Property Type</option>
+                    <option  *ngFor="let property_type of property_type_result" [value]="property_type.id" >{{property_type.name}}</option>
                 </select>
           <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.type">{{errorMessage.type}}</p></div>
         </div>
@@ -144,22 +124,25 @@
             <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.address" >{{errorMessage.address}}</p></div>
             <span class="flaticon-maps-and-flags" style="position: absolute;top: 45px; right: 31px"></span>
           <agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus"  [zoom]="15"  class="main-card-agm-map" >
-                <agm-marker [latitude]="latCus" [longitude]="longCus" [markerDraggable]="true">
+                <agm-marker [latitude]="latCus" [longitude]="longCus"  [markerDraggable]="true"  (dragEnd)="markerDragEnd($event)">
                       <agm-info-window> </agm-info-window>
                 </agm-marker>
             </agm-map>
         </div>
       </div>
-      <div class="col-lg-12" >
+      <div class="col-lg-6 col-xl-6" >
         <div class="my_profile_setting_input form-group">
-        <label class="">Display Address on Property page.</label>
-        <select class="form-control" formControlName="display_address" >
-          <option value="" disabled >Select options</option>
-          <option value="1">Yes</option>
-          <option value="0">No</option>
-        </select>
-        <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.display_address" >{{errorMessage.display_address}}</p></div>
+            <label for="map_latitude">Map Latitude</label>
+            <input type="text" class="form-control" formControlName="map_latitude" id="map_latitude" name="map_latitude"
+            placeholder="Please Enter Map Latitude" readonly>
+        </div>
       </div>
+      <div class="col-lg-6 col-xl-6">
+        <div class="my_profile_setting_input form-group">
+            <label for="map_longitude">Map Longitude</label>
+            <input type="text" class="form-control"  formControlName="map_longitude" id="map_longitude" name="map_longitude"
+            placeholder="Plese Enter Map longitude" readonly>
+        </div>
       </div>
       <div class="col-lg-6 col-xl-6" >
         <div class="my_profile_setting_input form-group">
@@ -176,6 +159,17 @@
             placeholder="Please Enter Locality..." >
             <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.locality">{{errorMessage.locality}}</p></div>
         </div>
+      </div>
+      <div class="col-lg-12" >
+        <div class="my_profile_setting_input form-group">
+        <label class="">Display Address on Property page.</label>
+        <select class="form-control" formControlName="display_address" >
+          <option value="" disabled >Select options</option>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+        <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.display_address" >{{errorMessage.display_address}}</p></div>
+      </div>
       </div>
 
       <div class="col-lg-12" >
@@ -195,20 +189,6 @@
             <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.nearest_landmark">{{errorMessage.nearest_landmark}}</p></div>
           </div>
       </div>
-      <div class="col-lg-6 col-xl-6" >
-        <div class="my_profile_setting_input form-group">
-            <label for="map_latitude">Map Latitude</label>
-            <input type="text" class="form-control" formControlName="map_latitude" id="map_latitude" name="map_latitude"
-            placeholder="Please Enter Map Latitude" readonly>
-        </div>
-      </div>
-      <div class="col-lg-6 col-xl-6">
-        <div class="my_profile_setting_input form-group">
-            <label for="map_longitude">Map Longitude</label>
-            <input type="text" class="form-control"  formControlName="map_longitude" id="map_longitude" name="map_longitude"
-            placeholder="Plese Enter Map longitude" readonly>
-        </div>
-      </div>
     </div>
   </div>
   <div class="my_dashboard_review mt30">
@@ -218,39 +198,15 @@
       </div>
       <div class="col-lg-6 col-xl-4" >
         <div class="my_profile_setting_input ui_kit_select_search form-group">
-          <label> Area</label>
-                <select class="form-control" formControlName="area" >
-                  <option value="" disabled >Select Area</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
+          <label for="area"> Area</label>
+           <input type="text" class="form-control"  name="area"  formControlName="area" id="area"  placeholder="Please Enter the Area...">
           <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.area" >{{errorMessage.area}}</p></div>
       </div>
       </div>
       <div class="col-lg-6 col-xl-4">
         <div class="my_profile_setting_input ui_kit_select_search form-group">
-          <label>Carpet Area</label>
-                <select class="form-control" formControlName="carpet_area" >
-                  <option value="" disabled >Select Carpet Area</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
+          <label for="carpet_area">Carpet Area</label>
+          <input type="text" class="form-control"  name="carpet_area"  formControlName="carpet_area" id="carpet_area"  placeholder="Please Enter the Carpet Area...">
           <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.carpet_area" >{{errorMessage.carpet_area}}</p></div>
       </div>
       </div>
@@ -847,8 +803,7 @@
       <div class="col-lg-12">
         <h4 class="mb30">Property Images</h4>
       </div>
-      <div class="col-lg-12"  >
-        <h4 class="mb30">Previews Images</h4>
+      <div class="col-lg-12">
         <ul class="mb0">
           <li class="list-inline-item" *ngIf="imagePre1">
             <span>Property Image1</span>
@@ -914,42 +869,18 @@
         </div>
       </div>
       
-      <div class="col-lg-12" >
+      <div class="col-lg-12 UpdateProperty_select_img" *ngIf="product_img_length>0">
         <h2>Selected Images</h2>
         <ul class="mb0">
-          <li class="list-inline-item" *ngIf="imagedb1">
-            <span>Property Image1</span>
+          <li class="list-inline-item" *ngFor = "let p_images of product_img let i = index">
             <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{imagedb1}}" alt="First Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)="Pre_delete_pic1()" ><span class="flaticon-garbage"></span></button></div>
-            </div>
-          </li>
-          <li class="list-inline-item" *ngIf="imagedb2">
-            <span>Property Image2</span>
-            <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{ imagedb2 }}" alt="Second Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)="Pre_delete_pic2()"><span class="flaticon-garbage"></span></button></div>
-            </div>
-          </li>
-          <li class="list-inline-item" *ngIf="imagedb3">
-            <span>Property Image3</span>
-            <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{ imagedb3 }}" alt="Third Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)="Pre_delete_pic3()"><span class="flaticon-garbage"></span></button></div>
-            </div>
-          </li>
-          <li class="list-inline-item" *ngIf="imagedb4">
-            <span>Property Image4</span>
-            <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{ imagedb4 }}" alt="Fourth Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)="Pre_delete_pic4()"><span class="flaticon-garbage"></span></button></div>
-            </div>
-          </li>
-          <li class="list-inline-item" *ngIf="imagedb5">
-            <span>Property Image5 </span>
-            <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{ imagedb5 }}" alt="Fifth Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)="Pre_delete_pic5()"><span class="flaticon-garbage"></span></button></div>
+              <img class="img-fluid" src="{{ftpstring }}{{p_images.image}}" alt="Product Image">
+                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete">
+                  <button type="button" class="btn btn-thm2 float-right" (click)=" delete_Pro_img(p_images.id)" ><span class="flaticon-garbage"></span></button>
+                </div>
+                <div class="overlay">
+                  <h4>Sales Property Selected Image({{i+1}})</h4>
+                </div>
             </div>
           </li>
         </ul>

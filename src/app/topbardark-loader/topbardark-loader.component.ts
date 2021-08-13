@@ -20,9 +20,10 @@ export class TopbardarkLoaderComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = null;
-  wishlist_length = 0;
   ftpstring: string = GlobalConstants.ftpURL;
   public userDetails: any;
+  public wishlist_length:number= 0;
+  public property_comp_length:number= 0;
 
   data
   constructor(
@@ -37,6 +38,7 @@ export class TopbardarkLoaderComponent implements OnInit {
       (message: any) => {
         if (message == 'true') {
           this.wishlistcount();
+          this.pro_comp();
         }
       }
     );
@@ -61,8 +63,8 @@ export class TopbardarkLoaderComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().username;
         this.userEmail = this.tokenStorage.getUser().misc.email;
         this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
-        this.currentUser = this.token.getUser().username;
-        this.usertype = this.token.getUser().usertype;
+        this.currentUser = this.tokenStorage.getUser().username;
+        this.usertype = this.tokenStorage.getUser().usertype;
       }
       else {
         this.userDetails = JSON.parse(this.tokenStorage.getUser());
@@ -71,6 +73,7 @@ export class TopbardarkLoaderComponent implements OnInit {
         this.userProfile = this.userDetails.profile_pic;
       }
       this.wishlistcount();
+      this.pro_comp();
 
     }
 
@@ -82,6 +85,18 @@ export class TopbardarkLoaderComponent implements OnInit {
         this.wishlistresult = this.wishlistcontent;
         this.wishlist_length = this.wishlistcontent.length;
         console.log(this.wishlistresult);
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
+  }
+  pro_comp(): void{
+    this.userService.get_pro_comp().pipe().subscribe(
+      (wishlistdata: any) => {
+        this.property_comp = wishlistdata.data;
+        this.property_comp_length=this.property_comp.length;
+        console.log(this.property_comp);
       },
       err => {
         this.content = JSON.parse(err.error).message;

@@ -27,8 +27,9 @@ export class TopbardarkComponent implements OnInit {
   data;
   wishlistcontent: any;
   wishlistresult: any;
-  wishlist_length = 0;
   public userDetails: any;
+  public wishlist_length:number= 0;
+  public property_comp_length:number= 0;
 
   constructor(
     private titleService: Title,
@@ -43,33 +44,12 @@ export class TopbardarkComponent implements OnInit {
       (message: any) => {
         if (message == 'true') {
           this.wishlistcount();
+          this.pro_comp();
         }
       }
     );
-    // this.currentUser = this.token.getUser().username;
-    // console.log(this.data);
-    /*if (this.tokenStorage.getToken() != null) {
-      console.log(this.tokenStorage.getToken());
-      console.log(this.tokenStorage.getUser());
-      this.userDetail = JSON.parse(this.tokenStorage.getUser());
-      console.log(this.userDetail);
-      this.isLoggedIn = true;
-      //this.roles = this.tokenStorage.getUser().username;
-      this.roles = this.userDetail.name;
-      console.log(this.roles);
-      //this.userEmail = this.tokenStorage.getUser().misc.email;
-      this.userEmail = this.userDetail.email;
-      console.log(this.userEmail);
-      //this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
-      this.userProfile = this.userDetail.profile_pic;
-      console.log(this.userEmail);
-      console.log(this.userProfile);
-      this.wishlistcount();
-
-    } */
-
-    console.log(this.tokenStorage.getToken());
-    console.log(this.tokenStorage.getUser());
+    // console.log(this.tokenStorage.getToken());
+    // console.log(this.tokenStorage.getUser());
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
       
@@ -87,6 +67,7 @@ export class TopbardarkComponent implements OnInit {
         this.userProfile = this.userDetails.profile_pic;
       }
       this.wishlistcount();
+      this.pro_comp();
 
     }
   }
@@ -97,6 +78,18 @@ export class TopbardarkComponent implements OnInit {
         this.wishlistresult = this.wishlistcontent;
         this.wishlist_length = this.wishlistcontent.length;
         console.log(this.wishlistresult);
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
+  }
+  pro_comp(): void{
+    this.userService.get_pro_comp().pipe().subscribe(
+      (wishlistdata: any) => {
+        this.property_comp = wishlistdata.data;
+        this.property_comp_length=this.property_comp.length;
+        console.log(this.property_comp);
       },
       err => {
         this.content = JSON.parse(err.error).message;

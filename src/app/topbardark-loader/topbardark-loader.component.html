@@ -97,7 +97,12 @@
           <a href="Wishlist">
             <span class="title">Wishlist </span>
             <span class="flaticon-fa-gift"></span>
-            <span class="wishlistValue">{{wishlistresult.length}}</span>
+            <span class="wishlistValue">{{wishlist_length}}</span>
+          </a>
+        </li>
+        <li  class="list-inline-item" *ngIf="isLoggedIn != false">
+          <a href="compare" ><i class="fas fa-cart-plus"></i>
+          <span class="wishlistValue">{{property_comp_length}}</span>
           </a>
         </li>
 		 <li class="list-inline-item add_listing">
@@ -303,12 +308,7 @@
 																					  
         <a href="Wishlist">
           <span class="flaticon-fa-gift mm-listitem__text">
-            <span class="wishlistValue_mm">{{wishlistresult.length}}</span>
-										
-				
-																						 
-																						 
-																							  
+            <span class="wishlistValue_mm">{{wishlist_length}}</span>															  
 				 
           </span>
         </a>

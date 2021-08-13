@@ -14,7 +14,7 @@
   <!-- css file -->
 
   <!-- Title -->
-  <title>FindHouse - Real Estate HTML Template</title>
+  <title>Rental Property Insert</title>
   <!-- Favicon -->
   <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
   <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
@@ -89,47 +89,18 @@
                         </div>
                       </div>
                     </div>
-
                     <div class="col-lg-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Type</label>
-                        <select class="form-control" name="type" #type="ngModel" [(ngModel)]="form.type"
+                        <select class="form-control " name="type" #type="ngModel" [(ngModel)]="form.type"
                           required data-live-search="true" data-width="100%">
-                          <option value="" disabled>Select Property Type</option>
-                          <option value="" disabled>
-                            <h3>ALL RESIDENTIAL</h3>
-                          </option>
-                          <option value="Flat/ Apartment">Flat/ Apartment</option>
-                          <option value="Residential House">Residential House</option>
-                          <option value="Villa">Villa</option>
-                          <option value="Builder Floor Apartment">Builder Floor Apartment</option>
-                          <option value="Residential Land/ Plot">Residential Land/ Plot</option>
-                          <option value="Penthouse">Penthouse</option>
-                          <option value="Studio Apartment">Studio Apartment</option>
-                          <option value="" disabled>
-                            <h3>ALL COMMERCIAL</h3>
-                          </option>
-                          <option value="Commercial Office Space">Commercial Office Space</option>
-                          <option value="Office in IT Park/ SEZ">Office in IT Park/ SEZ</option>
-                          <option value="Commercial Shop">Commercial Shop</option>
-                          <option value="Commercial Showroom">Commercial Showroom</option>
-                          <option value="Commercial Land">Commercial Land</option>
-                          <option value="Warehouse/ Godown">Warehouse/ Godown</option>
-                          <option value="Industrial Land">Industrial Land</option>
-                          <option value="Industrial Building">Industrial Building</option>
-                          <option value="Industrial Shed ">Industrial Shed</option>
-                          <option value="" disabled>
-                            <h3>ALL AGRICULTURAL</h3>
-                          </option>
-                          <option value="Agricultural Land">Agricultural Land</option>
-                          <option value="Farm House">Farm House</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <option value=""  selected >Select Property Type</option>
+                          <option  *ngFor="let property_type of property_type_result" [value]="property_type.id" >{{property_type.name}}</option>                        </select>
+                           <div class="text-center" id="errorId" *ngIf="errorMessage">
                           <p class="alert alert-danger" *ngIf="errorMessage.type">{{errorMessage.type}}</p>
                         </div>
                       </div>
                     </div>
-
                     <div class="col-lg-12">
                       <h3 class="mb30">Location</h3>
                       <div class="my_profile_setting_input form-group" style="position: relative;">
@@ -151,21 +122,19 @@
                           </agm-marker>
                         </agm-map>
                       </div>
-
                     </div>
-                    <div class="col-lg-12">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label class="">Display Address on Property page.</label>
-                        <select class="form-control" name="display_address" #display_address="ngModel"
-                          [(ngModel)]="form.display_address" required data-live-search="true" data-width="100%">
-                          <option value="" disabled>Select options</option>
-                          <option value="1">Yes</option>
-                          <option value="0">No</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.display_address">
-                            {{errorMessage.display_address}}</p>
-                        </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="map_latitude">Map Latitude</label>
+                        <input type="text" class="form-control" name="map_latitude" #map_latitude="ngModel"
+                          [(ngModel)]="form.map_latitude" id="map_latitude" readonly>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="map_longitude">Map Longitude</label>
+                        <input type="text" class="form-control" name="map_longitude" #map_longitude="ngModel"
+                          [(ngModel)]="form.map_longitude" id="map_longitude" readonly>
                       </div>
                     </div>
                     <div class="col-lg-6 col-xl-6">
@@ -189,18 +158,6 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-12">
-                      <div class="my_profile_setting_textarea form-group">
-                        <label for="propertyDetail">Property Details</label>
-                        <textarea class="form-control" id="propertyDetail" name="property_detail"
-                          #property_detail="ngModel" [(ngModel)]="form.property_detail" rows="7"></textarea>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.property_detail">
-                            {{errorMessage.property_detail}}</p>
-                        </div>
-                      </div>
-                    </div>
-
                     <div class="col-lg-12 col-xl-12">
                       <div class="my_profile_setting_input form-group">
                         <label for="nearest_landmark">Nearest Landmark</label>
@@ -212,18 +169,31 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="map_latitude">Map Latitude</label>
-                        <input type="text" class="form-control" name="map_latitude" #map_latitude="ngModel"
-                          [(ngModel)]="form.map_latitude" id="map_latitude" readonly>
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label class="">Display Address on Property page.</label>
+                        <select class="form-control" name="display_address" #display_address="ngModel"
+                          [(ngModel)]="form.display_address" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select options</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.display_address">
+                            {{errorMessage.display_address}}</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="map_longitude">Map Longitude</label>
-                        <input type="text" class="form-control" name="map_longitude" #map_longitude="ngModel"
-                          [(ngModel)]="form.map_longitude" id="map_longitude" readonly>
+
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_textarea form-group">
+                        <label for="propertyDetail">Property Details</label>
+                        <textarea class="form-control" id="propertyDetail" name="property_detail"
+                          #property_detail="ngModel" [(ngModel)]="form.property_detail" rows="7"></textarea>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.property_detail">
+                            {{errorMessage.property_detail}}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -676,23 +646,10 @@
                             </div>
                           </div>
                         </div>
-                        <!-- </div> -->
-                        <!-- <br>
-        <br>
-        <div class="col-xl-6 col-lg-6">
-          <ul class="order_list list-inline-item" >
-            <li *ngFor="let item of amenityArray"><a href="#"><span class="flaticon-tick"></span>{{ item }}</a></li>
-          </ul>
-        </div> -->
                       </div>
-
                     </div>
-
-
                   </div>
                 </div>
-
-
                 <!-- rent conditions -->
 
                 <div class="my_dashboard_review mt30">

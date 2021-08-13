@@ -98,38 +98,11 @@
                     <div class="col-lg-12">
                       <div class="my_profile_setting_input ui_kit_select_search form-group">
                         <label>Type</label>
-                        <select class="form-control" name="type" #type="ngModel" [(ngModel)]="form.type"
+                        <select class="form-control " name="type" #type="ngModel" [(ngModel)]="form.type"
                           required data-live-search="true" data-width="100%">
-                          <option value="" disabled>Select Property Type</option>
-                          <option value="" disabled>
-                            <h3>ALL RESIDENTIAL</h3>
-                          </option>
-                          <option value="Flat/ Apartment">Flat/ Apartment</option>
-                          <option value="Residential House">Residential House</option>
-                          <option value="Villa">Villa</option>
-                          <option value="Builder Floor Apartment">Builder Floor Apartment</option>
-                          <option value="Residential Land/ Plot">Residential Land/ Plot</option>
-                          <option value="Penthouse">Penthouse</option>
-                          <option value="Studio Apartment">Studio Apartment</option>
-                          <option value="" disabled>
-                            <h3>ALL COMMERCIAL</h3>
-                          </option>
-                          <option value="Commercial Office Space">Commercial Office Space</option>
-                          <option value="Office in IT Park/ SEZ">Office in IT Park/ SEZ</option>
-                          <option value="Commercial Shop">Commercial Shop</option>
-                          <option value="Commercial Showroom">Commercial Showroom</option>
-                          <option value="Commercial Land">Commercial Land</option>
-                          <option value="Warehouse/ Godown">Warehouse/ Godown</option>
-                          <option value="Industrial Land">Industrial Land</option>
-                          <option value="Industrial Building">Industrial Building</option>
-                          <option value="Industrial Shed ">Industrial Shed</option>
-                          <option value="" disabled>
-                            <h3>ALL AGRICULTURAL</h3>
-                          </option>
-                          <option value="Agricultural Land">Agricultural Land</option>
-                          <option value="Farm House">Farm House</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <option value=""  selected >Select Property Type</option>
+                          <option  *ngFor="let property_type of property_type_result" [value]="property_type.id" >{{property_type.name}}</option>                        </select>
+                           <div class="text-center" id="errorId" *ngIf="errorMessage">
                           <p class="alert alert-danger" *ngIf="errorMessage.type">{{errorMessage.type}}</p>
                         </div>
                       </div>
@@ -138,38 +111,32 @@
                       <h3 class="mb30">Location</h3>
                       <div class="my_profile_setting_input form-group" style="position: relative;">
                         <label for="propertyAddress">Address</label>
-                        <input type="hidden" class="form-control" name="address" #address="ngModel"
-                          [(ngModel)]="form.address" id="propertyAddress">
-                        <input #search autocorrect="off" autocapitalize="off" spellcheck="off"
-                          [(ngModel)]="form.address" type="search" class="form-control input-text"
-                          placeholder="Enter Address" [ngModelOptions]="{ standalone: true }" />
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.address">{{errorMessage.address}}</p>
-                        </div>
+                        <input type="hidden" class="form-control" name="address" #address="ngModel" [(ngModel)]="form.address" id="propertyAddress">
+                        <input  #search  autocorrect="off" autocapitalize="off"  spellcheck="off" [(ngModel)]="form.address" type="search"  class="form-control input-text"
+                        placeholder="Enter Address"  [ngModelOptions]="{ standalone: true }" />
+                        <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.address" >{{errorMessage.address}}</p></div>
                         <span class="flaticon-maps-and-flags" style="position: absolute;top: 45px; right: 31px"></span>
-                        <agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus" [zoom]="15"
-                          class="main-card-agm-map">
-                          <agm-marker [latitude]="latCus" [longitude]="longCus" [markerDraggable]="true"
-                            (dragEnd)="markerDragEnd($event)">
-                            <agm-info-window> </agm-info-window>
-                          </agm-marker>
+                      <agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus"  [zoom]="15"  class="main-card-agm-map" >
+                            <agm-marker [latitude]="latCus" [longitude]="longCus" [markerDraggable]="true"   (dragEnd)="markerDragEnd($event)">
+                                  <agm-info-window> </agm-info-window>
+                            </agm-marker>
                         </agm-map>
-                      </div>
-
                     </div>
-                    <div class="col-lg-12">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label class="">Display Address on Property page.</label>
-                        <select class="form-control" name="display_address" #display_address="ngModel"
-                          [(ngModel)]="form.display_address" required data-live-search="true" data-width="100%">
-                          <option value="" disabled>Select options</option>
-                          <option value="1">Yes</option>
-                          <option value="0">No</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.display_address">
-                            {{errorMessage.display_address}}</p>
-                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="map_latitude">Map Latitude</label>
+                        <input type="text" class="form-control" name="map_latitude" #map_latitude="ngModel"
+                          [(ngModel)]="form.map_latitude" id="map_latitude" readonly>
+                        <!-- <div class="text-center" id="errorId" *ngIf="err_caused"><p class="alert alert-danger" >{{errorMessage.map_latitude}}</p></div> -->
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="map_longitude">Map Longitude</label>
+                        <input type="text" class="form-control" name="map_longitude" #map_longitude="ngModel"
+                          [(ngModel)]="form.map_longitude" id="map_longitude" readonly>
+                        <!-- <div class="text-center" id="errorId" *ngIf="err_caused"><p class="alert alert-danger" >{{errorMessage.map_longitude}}</p></div> -->
                       </div>
                     </div>
                     <div class="col-lg-6 col-xl-6">
@@ -193,20 +160,6 @@
                         </div>
                       </div>
                     </div>
-
-                    <div class="col-lg-12">
-                      <div class="my_profile_setting_textarea form-group">
-                        <label for="propertyDetail">Property Details</label>
-                        <textarea class="form-control" id="propertyDetail" name="property_detail"
-                          #property_detail="ngModel" [(ngModel)]="form.property_detail" rows="7"></textarea>
-
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.property_detail">
-                            {{errorMessage.property_detail}}</p>
-                        </div>
-                      </div>
-                    </div>
-
                     <div class="col-lg-12 col-xl-12">
                       <div class="my_profile_setting_input form-group">
                         <label for="nearest_landmark">Nearest Landmark</label>
@@ -218,20 +171,31 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="map_latitude">Map Latitude</label>
-                        <input type="text" class="form-control" name="map_latitude" #map_latitude="ngModel"
-                          [(ngModel)]="form.map_latitude" id="map_latitude" readonly>
-                        <!-- <div class="text-center" id="errorId" *ngIf="err_caused"><p class="alert alert-danger" >{{errorMessage.map_latitude}}</p></div> -->
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label class="">Display Address on Property page.</label>
+                        <select class="form-control" name="display_address" #display_address="ngModel"
+                          [(ngModel)]="form.display_address" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select options</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.display_address">
+                            {{errorMessage.display_address}}</p>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="map_longitude">Map Longitude</label>
-                        <input type="text" class="form-control" name="map_longitude" #map_longitude="ngModel"
-                          [(ngModel)]="form.map_longitude" id="map_longitude" readonly>
-                        <!-- <div class="text-center" id="errorId" *ngIf="err_caused"><p class="alert alert-danger" >{{errorMessage.map_longitude}}</p></div> -->
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_textarea form-group">
+                        <label for="propertyDetail">Property Details</label>
+                        <textarea class="form-control" id="propertyDetail" name="property_detail"
+                          #property_detail="ngModel" [(ngModel)]="form.property_detail" rows="7"></textarea>
+
+                        <div class="text-center" id="errorId" *ngIf="errorMessage">
+                          <p class="alert alert-danger" *ngIf="errorMessage.property_detail">
+                            {{errorMessage.property_detail}}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -661,25 +625,23 @@
                           </h4>
                         </div>
                         <div class="dropdown-content">
-                          <div class="row">
-                            <div class="col-xxs-6 col-sm col-lg-3" *ngFor="let menuData of amenitiesresult">
-                              <ul class="ui_kit_checkbox selectable-list">
-                                <li>
-                                  <div class="custom-control custom-checkbox ">
-                                    <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
-                                      value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)">
-                                    <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
+                         <div class="row">
+                                <div class="col-xxs-6 col-sm col-lg-3" *ngFor = "let menuData of amenitiesresult">
+                                  <ul class="ui_kit_checkbox selectable-list">
+                                    <li>
+                                      <div class="custom-control custom-checkbox ">
+                                        <input type="checkbox" class="custom-control-input" id="{{menuData.id}}" value="{{menuData.id}}"  (change)="onchangeAmenties($event,menuData.id)">
+                                        <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                                <div class="col-lg-12 col-xl-12">
+                                  <div class="mega_dropdown_content_closer">
+                                    <h5 class="text-thm text-right mt15"><span id="hide_advbtn" class="curp">Hide</span></h5>
                                   </div>
-                                </li>
-                              </ul>
-                            </div>
-                            <div class="col-lg-12 col-xl-12">
-                              <div class="mega_dropdown_content_closer">
-                                <h5 class="text-thm text-right mt15"><span id="hide_advbtn" class="curp">Hide</span>
-                                </h5>
-                              </div>
-                            </div>
-                          </div>
+                                </div>
+                                </div>
                         </div>
                         <!-- </div> -->
                         <!-- <br>

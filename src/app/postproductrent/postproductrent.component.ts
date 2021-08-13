@@ -101,12 +101,18 @@ export class PostproductrentComponent implements OnInit {
   nearby_places: any;
   equipment: any;
   features: any;
+  
+  public property_type:any;
+  public property_type_result:any;
+  product_img:any=[];
 
-
-  // value: number = 30000000;
   options: Options = {
+    // step:100,
     floor: 0,
-    ceil: 50000000
+    ceil: 500000,
+    translate: (value: number, label: LabelType): string => {
+      return '₹' + value.toLocaleString('en');
+    }
   };
   i: any;
   geoCoder: any;
@@ -165,6 +171,7 @@ export class PostproductrentComponent implements OnInit {
       });
     });
     this.amenities();
+    this.Property_type_data();
     this.titleService.setTitle('Create Listing');
 
     // Login check
@@ -188,6 +195,7 @@ export class PostproductrentComponent implements OnInit {
       this.isLoggedIn = false;
     }
     this.selectedItems = new Array<string>();
+    this.product_img = new Array<string>();
   }
   getLocation() {
     this.userService.getLocationService().then(resp => {
@@ -199,6 +207,26 @@ export class PostproductrentComponent implements OnInit {
       this.form.map_longitude = this.longCus;
     })
   }
+  markerDragEnd($event: google.maps.MouseEvent) {
+    this.latCus = $event.latLng.lat(); 
+    this.longCus = $event.latLng.lng();
+    this.form.map_latitude=this.latCus;
+    this.form.map_longitude=this.longCus;
+    this.geoCoder.geocode({ 'location': { lat: this.latCus, lng: this.longCus } }, (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          console.log(results[0].formatted_address);
+            this.form.address=results[0].formatted_address;
+        } else {
+          console.log('No results found');
+        }
+      } else {
+        console.log('Geocoder failed due to: ' + status);
+      }
+  
+    });
+    }
 
   redirect_to_home(): void {
     window.location.href = GlobalConstants.siteURL = "login"
@@ -278,74 +306,87 @@ export class PostproductrentComponent implements OnInit {
 
 
   }
-
   readThis1(inputValue: any): void {
-    var file: File = inputValue;
-    var myReader: FileReader = new FileReader();
+    var file:File = inputValue;
+    var myReader:FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image1 = myReader.result;
+      if(this.image1 != null){
+        this.product_img.push(this.image1);
+      }
     }
     myReader.readAsDataURL(file);
   }
 
-  insert_image2(event) {
+   insert_image2(event){
 
     this.readThis2(event.target)
 
   }
   readThis2(inputValue: any): void {
-    var file: File = inputValue;
-    var myReader: FileReader = new FileReader();
+    var file:File = inputValue;
+    var myReader:FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image2 = myReader.result;
+      if(this.image2 != null){
+        this.product_img.push(this.image2);
+      }
     }
     myReader.readAsDataURL(file);
   }
-  insert_image3(event) {
+  insert_image3(event){
 
     this.readThis3(event.target)
 
   }
   readThis3(inputValue: any): void {
-    var file: File = inputValue;
-    var myReader: FileReader = new FileReader();
+    var file:File = inputValue;
+    var myReader:FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image3 = myReader.result;
+      if(this.image3 != null){
+        this.product_img.push(this.image3);
+      }
     }
     myReader.readAsDataURL(file);
   }
-  insert_image4(event) {
+  insert_image4(event){
 
     this.readThis4(event.target)
 
   }
   readThis4(inputValue: any): void {
-    var file: File = inputValue;
-    var myReader: FileReader = new FileReader();
+    var file:File = inputValue;
+    var myReader:FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image4 = myReader.result;
+      if(this.image4 != null){
+        this.product_img.push(this.image4);
+      }
     }
     myReader.readAsDataURL(file);
   }
-  insert_image5(event) {
+  insert_image5(event){
 
     this.readThis5(event.target)
 
   }
   readThis5(inputValue: any): void {
-    var file: File = inputValue;
-    var myReader: FileReader = new FileReader();
+    var file:File = inputValue;
+    var myReader:FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image5 = myReader.result;
+      if(this.image5 != null){
+        this.product_img.push(this.image5);
+      }
     }
     myReader.readAsDataURL(file);
   }
-  z
 
   delete_pic1() {
     this.image1 = null;
@@ -400,11 +441,23 @@ export class PostproductrentComponent implements OnInit {
       }
     );
   }
+  Property_type_data(): void{
+    this.userService.get_property_type().pipe().subscribe(
+      (data: any) => {
+        this.property_type = data.data;
+        this.property_type_result = this.property_type;
+        console.log(this.property_type_result);
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
+  }
 
   onSubmitRent(): void {
     console.log(this.form);
     if (this.form.expected_rent >= 5000 && this.form.expected_rent <= 500000) {
-      this.authService.product_insert_rent(this.form, this.content, this.amenityArray, this.furnishingArray, this.image1, this.image2, this.image3, this.image4, this.image5).subscribe(
+      this.authService.product_insert_rent(this.form, this.content, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
         data => {
           console.log("successful" + data)
           this.toastr.success('Successfuly Saved', 'Property');

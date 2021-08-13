@@ -88,7 +88,7 @@
             <label for="build_name">Property Name</label>
             <input type="text" class="form-control"  formControlName="build_name" id="build_name" name="build_name"
             placeholder="Please Enter the Property Name...">
-            <div class="text-center" id="errorId" *ngIf="errorMessage.build_name"><p class="alert alert-danger" >{{errorMessage.build_name}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.build_name" >{{errorMessage.build_name}}</p></div>
         </div>
       </div>
 
@@ -96,30 +96,10 @@
         <div class="my_profile_setting_input ui_kit_select_search form-group">
             <label>Type</label>
                 <select class="form-control" formControlName="type">
-                  <option value="" disabled >Please Select Type</option>
-                  <option value="" disabled ><h3>ALL RESIDENTIAL</h3></option>
-                  <option  value="Flat/ Apartment" selected>Flat/ Apartment</option>
-                  <option value="Residential House">Residential House</option>
-                  <option value="Villa">Villa</option>
-                  <option value="Builder Floor Apartment">Builder Floor Apartment</option>
-                  <option value="Residential Land/ Plot">Residential Land/ Plot</option>
-                  <option  value="Penthouse">Penthouse</option>
-                  <option value="Studio Apartment">Studio Apartment</option>
-                  <option value="" disabled ><h3>ALL COMMERCIAL</h3></option>
-                  <option value="Commercial Office Space">Commercial Office Space</option>
-                  <option value="Office in IT Park/ SEZ">Office in IT Park/ SEZ</option>
-                  <option value="Commercial Shop">Commercial Shop</option>
-                  <option value="Commercial Showroom">Commercial Showroom</option>
-                  <option value="Commercial Land">Commercial Land</option>
-                  <option value="Warehouse/ Godown">Warehouse/ Godown</option>
-                  <option value="Industrial Land">Industrial Land</option>
-                  <option value="Industrial Building">Industrial Building</option>
-                  <option value="Industrial Shed ">Industrial Shed</option>
-                  <option value="" disabled ><h3>ALL AGRICULTURAL</h3></option>
-                  <option value="Agricultural Land">Agricultural Land</option>
-                  <option value="Farm House">Farm House</option>
+                  <option value="" disabled >Select Property Type</option>
+                    <option  *ngFor="let property_type of property_type_result" [value]="property_type.id" >{{property_type.name}}</option>
                 </select>
-          <!-- <div class="text-center" id="errorId" *ngIf="errorMessage.type"><p class="alert alert-danger" >{{errorMessage.type}}</p></div> -->
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.type" >{{errorMessage.type}}</p></div>
         </div>
       </div>
 <!-- 
@@ -141,32 +121,36 @@
             placeholder="Please Enter the Address...">
             <input  #search  autocorrect="off" autocapitalize="off"  spellcheck="off" formControlName="address" type="search"  class="form-control input-text"
             placeholder="Enter Address"   />
-            <div class="text-center" id="errorId" *ngIf="errorMessage.address"><p class="alert alert-danger" >{{errorMessage.address}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.address" >{{errorMessage.address}}</p></div>
             <span class="flaticon-maps-and-flags" style="position: absolute;top: 45px; right: 31px"></span>
           <agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus"  [zoom]="15"  class="main-card-agm-map" >
-                <agm-marker [latitude]="latCus" [longitude]="longCus" [markerDraggable]="true">
+                <agm-marker [latitude]="latCus" [longitude]="longCus" [markerDraggable]="true"  (dragEnd)="markerDragEnd($event)">
                       <agm-info-window> </agm-info-window>
                 </agm-marker>
             </agm-map>
         </div>
       </div>
-      <div class="col-lg-12" >
+      
+      <div class="col-lg-6 col-xl-6" >
         <div class="my_profile_setting_input form-group">
-        <label class="">Display Address on Property page.</label>
-        <select class="form-control" formControlName="display_address" >
-          <option value="" disabled >Select options</option>
-          <option value="1">Yes</option>
-          <option value="0">No</option>
-        </select>
-        <div class="text-center" id="errorId" *ngIf="errorMessage.display_address"><p class="alert alert-danger" >{{errorMessage.display_address}}</p></div>
+            <label for="map_latitude">Map Latitude</label>
+            <input type="text" class="form-control" formControlName="map_latitude" id="map_latitude" name="map_latitude"
+            placeholder="Please Enter Map Latitude" readonly>
+        </div>
       </div>
+      <div class="col-lg-6 col-xl-6">
+        <div class="my_profile_setting_input form-group">
+            <label for="map_longitude">Map Longitude</label>
+            <input type="text" class="form-control"  formControlName="map_longitude" id="map_longitude" name="map_longitude"
+            placeholder="Plese Enter Map longitude"  readonly>
+        </div>
       </div>
       <div class="col-lg-6 col-xl-6" >
         <div class="my_profile_setting_input form-group">
             <label for="city">City</label>
             <input type="text" class="form-control" formControlName="city" id="city" name="city"
             placeholder="Please Enter City..." >
-            <div class="text-center" id="errorId" *ngIf="errorMessage.city"><p class="alert alert-danger" >{{errorMessage.city}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.city">{{errorMessage.city}}</p></div>
         </div>
       </div>
       <div class="col-lg-6 col-xl-6" >
@@ -177,36 +161,31 @@
             <!-- <div class="text-center" id="errorId" *ngIf="errorMessage.locality"><p class="alert alert-danger" >{{errorMessage.locality}}</p></div> -->
         </div>
       </div>
-
-      <div class="col-lg-12" >
-        <div class="my_profile_setting_textarea form-group">
-            <label for="property_detail">Property Details</label>
-            <textarea class="form-control" formControlName="property_detail" id="property_detail" name="property_detail"
-            placeholder="Please Enter Property Details..."  rows="7"></textarea>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.property_detail"><p class="alert alert-danger" >{{errorMessage.property_detail}}</p></div>
-        </div>
-      </div>
-
       <div class="col-lg-12 col-xl-12" >
         <div class="my_profile_setting_input form-group">
             <label for="nearest_landmark">Nearest Landmark</label>
             <input type="text" class="form-control"  formControlName="nearest_landmark" id="nearest_landmark" name="nearest_landmark"
             placeholder="Please Enter Nearest Landmark...">
-            <div class="text-center" id="errorId" *ngIf="errorMessage.nearest_landmark"><p class="alert alert-danger" >{{errorMessage.nearest_landmark}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.nearest_landmark" >{{errorMessage.nearest_landmark}}</p></div>
           </div>
       </div>
-      <div class="col-lg-6 col-xl-6" >
+      <div class="col-lg-12" >
         <div class="my_profile_setting_input form-group">
-            <label for="map_latitude">Map Latitude</label>
-            <input type="text" class="form-control" formControlName="map_latitude" id="map_latitude" name="map_latitude"
-            placeholder="Please Enter Map Latitude">
-        </div>
+        <label class="">Display Address on Property page.</label>
+        <select class="form-control" formControlName="display_address" >
+          <option value="" disabled >Select options</option>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+        <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.display_address">{{errorMessage.display_address}}</p></div>
       </div>
-      <div class="col-lg-6 col-xl-6">
-        <div class="my_profile_setting_input form-group">
-            <label for="map_longitude">Map Longitude</label>
-            <input type="text" class="form-control"  formControlName="map_longitude" id="map_longitude" name="map_longitude"
-            placeholder="Plese Enter Map longitude" >
+      </div>
+      <div class="col-lg-12" >
+        <div class="my_profile_setting_textarea form-group">
+            <label for="property_detail">Property Details</label>
+            <textarea class="form-control" formControlName="property_detail" id="property_detail" name="property_detail"
+            placeholder="Please Enter Property Details..."  rows="7"></textarea>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.property_detail" >{{errorMessage.property_detail}}</p></div>
         </div>
       </div>
     </div>
@@ -218,40 +197,16 @@
       </div>
       <div class="col-lg-6 col-xl-4" >
         <div class="my_profile_setting_input ui_kit_select_search form-group">
-          <label> Area</label>
-                <select class="form-control" formControlName="area" >
-                  <option value="" disabled >Select Area</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.area"><p class="alert alert-danger" >{{errorMessage.area}}</p></div>
+          <label for="area"> Area</label>
+           <input type="text" class="form-control"  name="area"  formControlName="area" id="area"  placeholder="Please Enter the Area...">
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.area" >{{errorMessage.area}}</p></div>
       </div>
       </div>
       <div class="col-lg-6 col-xl-4">
         <div class="my_profile_setting_input ui_kit_select_search form-group">
-          <label>Carpet Area</label>
-                <select class="form-control" formControlName="carpet_area" >
-                  <option value="" disabled >Select Carpet Area</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.carpet_area"><p class="alert alert-danger" >{{errorMessage.carpet_area}}</p></div>
+          <label for="carpet_area">Carpet Area</label>
+          <input type="text" class="form-control"  name="carpet_area"  formControlName="carpet_area" id="carpet_area"  placeholder="Please Enter the Carpet Area...">
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.carpet_area" >{{errorMessage.carpet_area}}</p></div>
       </div>
       </div>
       <div class="col-lg-6 col-xl-4" >
@@ -278,7 +233,7 @@
                     <option value="chataks">chataks</option>
                     <option value="perch">perch</option>
                   </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.area_unit"><p class="alert alert-danger" >{{errorMessage.area_unit}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.area_unit">{{errorMessage.area_unit}}</p></div>
         </div>
       </div>
 
@@ -299,7 +254,7 @@
                   <option value="9">9</option>
                   <option value="10">10</option>
                 </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.bedroom"><p class="alert alert-danger" >{{errorMessage.bedroom}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.bedroom" >{{errorMessage.bedroom}}</p></div>
       </div>
       </div>
       <div class="col-lg-6 col-xl-4">
@@ -318,7 +273,7 @@
                   <option value="9">9</option>
                   <option value="10">10</option>
                 </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.bathroom"><p class="alert alert-danger" >{{errorMessage.bathroom}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.bathroom" >{{errorMessage.bathroom}}</p></div>
       </div>
       </div>
       <div class="col-lg-6 col-xl-4" >
@@ -337,7 +292,7 @@
                   <option value="9">9</option>
                   <option value="10">10</option>
                 </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.balconies"><p class="alert alert-danger" >{{errorMessage.balconies}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.balconies" >{{errorMessage.balconies}}</p></div>
       </div>
       </div>
       <div class="col-lg-4 col-xl-4">
@@ -356,7 +311,7 @@
                   <option value="9">9</option>
                   <option value="10">10</option>
                 </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.additional_rooms"><p class="alert alert-danger" >{{errorMessage.additional_rooms}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.additional_rooms" >{{errorMessage.additional_rooms}}</p></div>
       </div>
       </div>
       <div class="col-lg-4 col-xl-4" >
@@ -375,7 +330,7 @@
                   <option value="9">9</option>
                   <option value="10">10</option>
                 </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.equipment"><p class="alert alert-danger" >{{errorMessage.equipment}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.equipment">{{errorMessage.equipment}}</p></div>
       </div>
       </div>
       <div class="col-lg-4 col-xl-4">
@@ -383,7 +338,7 @@
             <label for="features">Features</label>
             <input type="text" class="form-control" formControlName="features" id="features" name="map_longitude"
             placeholder="Please Enter Features..."  >
-            <div class="text-center" id="errorId" *ngIf="errorMessage.features"><p class="alert alert-danger" >{{errorMessage.features}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.features">{{errorMessage.features}}</p></div>
         </div>
       </div>
       <div class="col-lg-4 col-xl-4"> 
@@ -399,7 +354,7 @@
             <label for="age_of_property">Age of Property</label>
             <input type="number" class="form-control"  formControlName="age_of_property" id="age_of_property" name="nearby_places"
             placeholder="Please Enter Age of Property..." >
-            <div class="text-center" id="errorId" *ngIf="errorMessage.age_of_property"><p class="alert alert-danger" >{{errorMessage.age_of_property}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.age_of_property" >{{errorMessage.age_of_property}}</p></div>
         </div>
       </div>
 
@@ -432,7 +387,7 @@
                   <option value="9">9</option>
                   <option value="10">10</option>
                 </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.property_on_floor"><p class="alert alert-danger" >{{errorMessage.property_on_floor}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.property_on_floor" >{{errorMessage.property_on_floor}}</p></div>
       </div>
       </div>
       <div class="col-lg-6 col-xl-4" >        
@@ -451,7 +406,7 @@
                   <option value="9">9</option>
                   <option value="10">10</option>
                 </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.total_floors"><p class="alert alert-danger" >{{errorMessage.total_floors}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.total_floors">{{errorMessage.total_floors}}</p></div>
       </div>
       </div>
       <div class="col-lg-6 col-xl-4"  >
@@ -468,7 +423,7 @@
                   <option value="North West">North West</option>
                   <option value="South West">South West</option>
                 </select>
-             <div class="text-center" id="errorId" *ngIf="errorMessage.facing_towards"><p class="alert alert-danger" >{{errorMessage.facing_towards}}</p></div>          
+             <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.facing_towards">{{errorMessage.facing_towards}}</p></div>          
         </div>
       </div>
       <div class="col-lg-6 col-xl-4" >
@@ -480,7 +435,7 @@
                 <option value="Applied For">Applied For</option>
                 <option value="Not Applicable">Not Applicable</option>
               </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.rera_registration_status"><p class="alert alert-danger" >{{errorMessage.rera_registration_status}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.rera_registration_status">{{errorMessage.rera_registration_status}}</p></div>
         </div>
       </div>
       <div class="col-lg-6 col-xl-4">
@@ -491,7 +446,7 @@
                <option value="1">Yes</option>
                <option value="0">No</option>
               </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.additional_parking_status"><p class="alert alert-danger" >{{errorMessage.additional_parking_status}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.additional_parking_status">{{errorMessage.additional_parking_status}}</p></div>
         </div>
       </div>
 
@@ -509,7 +464,7 @@
                   <option value="2020">2020</option>
                   <option value="2021">2021</option>
                 </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.buildyear"><p class="alert alert-danger" >{{errorMessage.buildyear}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.buildyear">{{errorMessage.buildyear}}</p></div>
       </div>
       </div>
       <div class="col-lg-6 col-xl-4">
@@ -520,7 +475,7 @@
               <option value="Under Construction">Under Construction</option>
               <option value="Ready To Move">Ready To Move</option>
             </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.availability_condition"><p class="alert alert-danger" >{{errorMessage.availability_condition}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.availability_condition">{{errorMessage.availability_condition}}</p></div>
         </div>
       </div>
       <div class="col-lg-6 col-xl-4">
@@ -542,7 +497,7 @@
               <option value="Within 8 year">Within 8 years</option>
               <option value="Within 9 year">Within 9 years</option>
             </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.possession_by"><p class="alert alert-danger" >{{errorMessage.possession_by}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.possession_by" >{{errorMessage.possession_by}}</p></div>
             
       </div>
       </div>
@@ -616,7 +571,7 @@
                 <option value="Single Men">Single Men</option>
                 <option value="Single Women">Single Women</option>
               </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.willing_to_rent_out_to"><p class="alert alert-danger" >{{errorMessage.willing_to_rent_out_to}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.willing_to_rent_out_to">{{errorMessage.willing_to_rent_out_to}}</p></div>
         </div>
       </div>
       <div class="col-lg-6 col-xl-6">
@@ -627,7 +582,7 @@
                 <option value="Company Lease Agreement">Company Lease Agreement</option>
                 <option value="Any">Any</option>
               </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.agreement_type"><p class="alert alert-danger" >{{errorMessage.agreement_type}}</p></div>
+          <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.agreement_type" >{{errorMessage.agreement_type}}</p></div>
         </div>
       </div>
       <div class="col-lg-6 col-xl-6">
@@ -635,7 +590,7 @@
             <label for="available_for">Available On</label>
             <input type="date" class="form-control"  formControlName="available_for" id="available_for" name="available_for"
             placeholder="Please Enter Available For...">
-            <div class="text-center" id="errorId" *ngIf="errorMessage.available_for"><p class="alert alert-danger" >{{errorMessage.available_for}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.available_for">{{errorMessage.available_for}}</p></div>
         </div>
       </div>
       <div class="col-lg-6 col-xl-6">
@@ -663,7 +618,7 @@
                 <option value="Three Years">Three Years</option>
                 <option value="Custom">Custom</option>
               </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.duration_of_rent_aggreement"><p class="alert alert-danger" >{{errorMessage.duration_of_rent_aggreement}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.duration_of_rent_aggreement" >{{errorMessage.duration_of_rent_aggreement}}</p></div>
         </div>
       </div>
     </div>
@@ -760,7 +715,7 @@
             <label for="security_deposit">Security Deposit</label>
             <input type="number" class="form-control" formControlName="security_deposit" id="security_deposit" name="security_deposit"
             placeholder="Please Enter Expected Rent...">
-            <div class="text-center" id="errorId" *ngIf="errorMessage.security_deposit"><p class="alert alert-danger" >{{errorMessage.security_deposit}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.security_deposit" >{{errorMessage.security_deposit}}</p></div>
           </div>
       </div>
       <div class="col-lg-6 col-xl-6">
@@ -771,7 +726,7 @@
                 <option value="1">Yes</option>
                 <option value="0">No</option>
               </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.inc_electricity_and_water_bill"><p class="alert alert-danger" >{{errorMessage.inc_electricity_and_water_bill}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.inc_electricity_and_water_bill">{{errorMessage.inc_electricity_and_water_bill}}</p></div>
         </div>
       </div>
 
@@ -784,7 +739,7 @@
               <option selected value="1">Yes</option>
               <option value="0">No</option>
             </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.tax_govt_charge"><p class="alert alert-danger" >{{errorMessage.tax_govt_charge}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"  *ngIf="errorMessage.tax_govt_charge" >{{errorMessage.tax_govt_charge}}</p></div>
         </div>
       </div>
       <div class="col-lg-6 col-xl-6" >
@@ -795,7 +750,7 @@
                 <option value="1">Yes</option>
                 <option value="0">No</option>
               </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.price_negotiable"><p class="alert alert-danger" >{{errorMessage.price_negotiable}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.price_negotiable">{{errorMessage.price_negotiable}}</p></div>
         </div>
       </div>
       <div class="col-lg-6 col-xl-6" >
@@ -839,7 +794,7 @@
                 <option value="Annually">Annually</option>
                 <option value="One Time">One Time</option>
               </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.maintenance_charge_condition"><p class="alert alert-danger" >{{errorMessage.maintenance_charge_condition}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger"   *ngIf="errorMessage.maintenance_charge_condition">{{errorMessage.maintenance_charge_condition}}</p></div>
            </div>
   </div>
   </div>
@@ -906,7 +861,7 @@
             <label for="description">Property Description</label>
             <textarea class="form-control"formControlName="description" id="description" name="description"
             placeholder="Please Enter  Properties Details"   rows="7"></textarea>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.description"><p class="alert alert-danger" >{{errorMessage.description}}</p></div>
+            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.description">{{errorMessage.description}}</p></div>
         </div>
       </div>
 
@@ -918,42 +873,18 @@
         </div>
       </div>
       
-      <div class="col-lg-12" >
+      <div class="col-lg-12 UpdateProperty_select_img" *ngIf="product_img_length>0">
         <h2>Selected Images</h2>
         <ul class="mb0">
-          <li class="list-inline-item" *ngIf="imagedb1">
-            <span>Property Image1</span>
+          <li class="list-inline-item" *ngFor = "let p_images of product_img let i = index">
             <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{imagedb1}}" alt="First Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)=" Pre_delete_pic1()" ><span class="flaticon-garbage"></span></button></div>
-            </div>
-          </li>
-          <li class="list-inline-item" *ngIf="imagedb2">
-            <span>Property Image2</span>
-            <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{ imagedb2 }}" alt="Second Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)=" Pre_delete_pic2()"><span class="flaticon-garbage"></span></button></div>
-            </div>
-          </li>
-          <li class="list-inline-item" *ngIf="imagedb3">
-            <span>Property Image3</span>
-            <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{ imagedb3 }}" alt="Third Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)=" Pre_delete_pic3()"><span class="flaticon-garbage"></span></button></div>
-            </div>
-          </li>
-          <li class="list-inline-item" *ngIf="imagedb4">
-            <span>Property Image4</span>
-            <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{ imagedb4 }}" alt="Fourth Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)=" Pre_delete_pic4()"><span class="flaticon-garbage"></span></button></div>
-            </div>
-          </li>
-          <li class="list-inline-item" *ngIf="imagedb5">
-            <span>Property Image5 </span>
-            <div class="portfolio_item">
-              <img class="img-fluid" src="{{ftpstring }}{{ imagedb5 }}" alt="Fifth Image">
-                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right" (click)=" Pre_delete_pic5()"><span class="flaticon-garbage"></span></button></div>
+              <img class="img-fluid" src="{{ftpstring }}{{p_images.image}}" alt="Product Image">
+                <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete">
+                  <button type="button" class="btn btn-thm2 float-right" (click)=" delete_Pro_img(p_images.id)" ><span class="flaticon-garbage"></span></button>
+                </div>
+                <div class="overlay">
+                  <h4>Rent Property Selected Image({{i+1}})</h4>
+                </div>
             </div>
           </li>
         </ul>

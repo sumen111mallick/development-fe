@@ -41,10 +41,11 @@ export class ProfileComponent implements OnInit {
   form: any = {};
   formd: any = {};
   id;
-  public message: any;
+  // public message: any;
   public imagePath: any;
   public imgURL: any;
   public files: any;
+  public message: any={};
 
   ftpstring: string = GlobalConstants.ftpURL;
 
@@ -238,15 +239,31 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmitChange(): void {
-
     console.log(this.form)
     this.authService.password_update(this.form).subscribe(
       data => {
         console.log(data);
         // window.location.reload();
+        this.message = data.message;
+        if(data.status==200){
+          this.form.old_password="";
+          this.form.new_password="";
+          this.form.confirm_password="";
+          this.toastr.success(this.message, 'Password', {
+            timeOut: 3000,
+          });
+        }else{
+          this.toastr.error(this.message, 'Something Error', {
+            timeOut: 3000,
+          }); 
+        }
       },
       err => {
         console.log(err);
+        this.message = err.message;
+        this.toastr.error(this.message, 'Something Error', {
+          timeOut: 3000,
+        });
       }
     );
   }

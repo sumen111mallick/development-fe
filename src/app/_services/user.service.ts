@@ -32,6 +32,16 @@ on<T>(): Observable<T>{
    return this._subject.asObservable();
 }
 // topbar wishlist refresh functionalty end
+// topbar property comparision refresh functionalty start
+public pro_comp_subject = new BehaviorSubject<any>('');
+pro_comp_emit<T>(data: T){
+  this.pro_comp_subject.next(data);
+}
+
+pro_comp_on<T>(): Observable<T>{
+   return this.pro_comp_subject.asObservable();
+}
+// topbar property comparision functionalty ends
 
   constructor(private http: HttpClient) { }
 
@@ -80,6 +90,9 @@ on<T>(): Observable<T>{
   getproductlistingfeatured(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/get_product_featured', { responseType: 'json' });
   }
+  product_list_featured(): Observable<any> {
+    return this.http.get(GlobalConstants.apiURL + 'product/product_list_featured', { responseType: 'json' });
+  }
   getRecently_viewProperty(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/getRecently_viewProperty', { responseType: 'json' });
   }
@@ -88,6 +101,9 @@ on<T>(): Observable<T>{
     return this.http.get(GlobalConstants.apiURL + 'product/get_requ', { responseType: 'json' });
   }
 
+  feature_property(): Observable<any> {
+    return this.http.get(GlobalConstants.apiURL + 'product/feature_property', { responseType: 'json' });
+  }
   getdashboard(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/views', { responseType: 'json' });
   }
@@ -152,6 +168,9 @@ on<T>(): Observable<T>{
   getamenitiesdata():Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'amenities', { responseType: 'json' });
   }
+  get_property_type():Observable<any> {
+    return this.http.get(GlobalConstants.apiURL + 'property_type', { responseType: 'json' });
+  }
 
   // wishlist data fetch
   getwishlistdata():Observable<any> {
@@ -160,6 +179,9 @@ on<T>(): Observable<T>{
   wishlistcount():Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/wishlist', { responseType: 'json' });
   }
-
+ // property  comparision 
+ get_pro_comp():Observable<any> {
+  return this.http.get(GlobalConstants.apiURL + 'product/Product_comp', { responseType: 'json' });
+}
 
 }

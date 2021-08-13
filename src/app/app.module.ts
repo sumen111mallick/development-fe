@@ -8,7 +8,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { ChartsModule } from 'ng2-charts';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { EscapeHtmlPipe } from './render-html.pipe';
-
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -95,6 +94,7 @@ import { SliderModule } from '@syncfusion/ej2-angular-inputs';
 import { AgmCoreModule  } from '@agm/core';
 import { UrlService } from './_services/url.service';
 import { AdminUsercreatorComponent } from './admin-usercreator/admin-usercreator.component';
+import { NgxStarRatingModule } from 'ngx-star-rating';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 
@@ -195,7 +195,8 @@ import { AdminUsercreatorComponent } from './admin-usercreator/admin-usercreator
     ReactiveFormsModule,
     NgImageSliderModule,
     CarouselModule,
-    NgbModule
+    NgbModule,
+    NgxStarRatingModule
   ],
   providers: [
     Title,

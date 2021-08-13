@@ -4,8 +4,13 @@ import { GlobalConstants } from './../global-constants';
 import { ProductService } from './../_services/product.service';
 import { AuthService } from './../_services/auth.service';
 import { Title } from '@angular/platform-browser';
-import { Component, OnInit } from '@angular/core';
+// import { Component, OnInit } from '@angular/core';
 import { UserService } from './../_services/user.service';
+import { MapsAPILoader,AgmMap } from '@agm/core';
+// import { google } from "google-maps";
+import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { NgxStarRatingModule } from 'ngx-star-rating';
 
 @Component({
   selector: 'app-productpage',
@@ -16,29 +21,45 @@ export class ProductpageComponent implements OnInit {
   [x: string]: any;
 
   prod_id: any ;
-  user_data: [];
-  login_userID:string[] = null;
-  login_usertype:string[] = null;
-  product_data: [];
-  ftpstring: string = GlobalConstants.ftpURL;
-  sitestring: string = GlobalConstants.siteURL;
-  p_img1= null;
-  p_img2= null;
-  p_img3= null;
-  p_img4= null;
-  p_img5= null;
+  public user_data:any={};
+  public login_userID:number= null;
+  public login_usertype:number = null;
+  public productdata:any={};
+  public ftpstring: string = GlobalConstants.ftpURL;
+  public sitestring: string = GlobalConstants.siteURL;
+  public p_img1:string=null;
+  public p_img2:string=null;
+  public p_img3:string=null;
+  public p_img4:string=null;
+  public p_img5:string=null;
+  e: any={};
+  // p_img2= null;
+  // p_img3= null;
+  // p_img4= null;
+  // p_img5= null;
+  
+  public errorMessage:any ={};
+  Message: any={};
   form: any = {};
-  Review;
-  map_url;
-  cityValue;
+  Review: any;
+  map_url: string;
+  cityValue: any;
+  
+  public showLoadingIndicator:boolean= false;
   content: any = {};
-  isLoggedIn;
+  isLoggedIn:boolean=false;
   first_prod = null;
   second_prod = null;
   third_prod = null;
-  showLoadingIndicator = true;
   product_amenties_length=null;
   product_amenties:any={};
+  public product_images:any={};
+  public product_img_length:number=null;
+  public latCus:number;
+  public longCus:number;
+  public feature_property_data:any={};
+  public Recently_User_Data:any={};
+  public recently_length:number=null;
 
   constructor(
     private titleService: Title,
@@ -49,43 +70,31 @@ export class ProductpageComponent implements OnInit {
     private route:ActivatedRoute,
     private userService: UserService,
     private tokenStorage: TokenStorageService,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone:NgZone,
+    private toastr: ToastrService
   ) { 
         this.route.params.subscribe((params) => {
         this.id = params["id"];
-        this.showLoadingIndicator = true;
         this.single_property_data(this.id);
      }); }
 
   ngOnInit(): void {
-    // console.log(this.id,"Proudct Id");
-    // this.prodservice.setData(1);
-    // this.prod_id = this.prodservice.getData();
     this.titleService.setTitle('Property Page');
     this.prod_id = this.idService.getProdId();
-   
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.login_userID = this.idService.getUser().id;
+      console.log(this.login_userID);
       this.login_usertype = this.idService.getUser().usertype;
+      console.log(this.login_usertype);
 
     }
+    
   
-    // this.login_userID=this.login_user.id;
-    // this.login_usertype=this.login_user.usertype;
-    //console.log(this.router.url);
-    // {this.route.queryParams.subscribe(params => {
-    //     let id = params['id'];
-    //     console.log(id);
-    //     if(id != null){
-    //       this.prod_id = id;
-    //     }
-    //   })
-    // }
-   
-
     if( this.idService.getUser() != null)
     {
-      this.authService.saveSearch(this.idService.getUser().id, this.prod_id).subscribe(
+      this.authService.saveSearch(this.idService.getUser().id, this.id).subscribe(
         data => {
           console.log(data)
         },
@@ -94,8 +103,8 @@ export class ProductpageComponent implements OnInit {
         }
       )
     }
-
     this.get_review();
+    this.Property_type_data();
     this.amenities();
     this.feature_property();
     this.idService.saveCdata(null);
@@ -106,74 +115,76 @@ export class ProductpageComponent implements OnInit {
       this.loginuser_coutData();
     }
   }
-  single_property_data(id){
+  single_property_data(id: any){
     console.log(id);
     this.showLoadingIndicator = true;
-    this.authService.product_see(id).subscribe(
-    data => {
-      console.log(data);
-      this.user_data = data["user_data"];
-      this.product_data = data["product"];
-      this.p_img1 =  data["product"]["0"]["product_image1"];
-      this.p_img2 = data["product"]["0"]["product_image2"];
-      this.p_img3 =  data["product"]["0"]["product_image3"];
-      this.p_img4 =  data["product"]["0"]["product_image4"];
-      this.p_img5 =  data["product"]["0"]["product_image5"];
-      this.map_url = "https://maps.google.com/?q=" + data["product"]["0"]["map_latitude"] + "," + data["product"]["0"]["map_longitude"];
-      console.log(this.map_url)
-      this.product_amenties= data["product"]["0"].amenities;
-      this.product_amenties_length= data["product"]["0"].amenities.length;
-      console.log(this.product_amenties_length);
-      console.log(this.product_amenties);
-      console.log(this.user_data);
-      this.cityValue=data["product"]["0"]["city"];
-      this.similarproperty(this.cityValue);
-      this.showLoadingIndicator = false;
+    if(this.tokenStorage.getUser() != null){
+      this.isLoggedIn = true;
+      console.log(this.isLoggedIn);
+      this.authService.product_login_see(id).subscribe(
+        data => {
+          console.log(data);
+          console.log(data["product"]["0"].product_img[0].image);
+          this.product_images=data["product"]["0"].product_img;
+          this.product_img_length=this.product_images;
+          this.productdata = data["product"];
+          this.map_url = "https://maps.google.com/?q=" + data["product"]["0"]["map_latitude"] + "," + data["product"]["0"]["map_longitude"];
+          console.log(this.map_url)
+          this.product_amenties= data["product"]["0"].amenities;
+          this.product_amenties_length= data["product"]["0"].amenities.length;
+          console.log(this.product_amenties_length);
+          console.log(this.product_amenties);
+          this.cityValue=data["product"]["0"]["city"];
+          this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
+          console.log(this.latCus);
+          this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
+          console.log(this.longCus);
+          this.similarproperty(this.cityValue);
+          this.showLoadingIndicator = false;
+  
+        },
+          err => {
+            console.log(err);
+          }
+        );
+    }else{
+      this.authService.product_see(id).subscribe(
+      data => {
+        console.log(data);
+        // console.log(data["product"]["0"].product_img[0].image);
+        this.product_images=data["product"]["0"].product_img;
+        this.product_img_length=this.product_images;
+        this.productdata = data["product"];
+        this.map_url = "https://maps.google.com/?q=" + data["product"]["0"]["map_latitude"] + "," + data["product"]["0"]["map_longitude"];
+        console.log(this.map_url)
+        this.product_amenties= data["product"]["0"].amenities;
+        this.product_amenties_length= data["product"]["0"].amenities.length;
+        console.log(this.product_amenties_length);
+        console.log(this.product_amenties);
+        this.cityValue=data["product"]["0"]["city"];
+        this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
+        console.log(this.latCus);
+        this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
+        console.log(this.longCus);
+        this.similarproperty(this.cityValue);
+        this.showLoadingIndicator = false;
 
-    },
-      err => {
-        console.log(err);
-      }
-    );
+      },
+        err => {
+          console.log(err);
+        }
+      );
+    }
   }
   
-  // recently_view():void{
-  //   this.userService.getRecently_viewProperty().subscribe(
-  //     viewproperty => { 
-  //       this.view_property = viewproperty.data;
-  //       console.log("recently_view");
-  //       console.log(this.view_property);  
-  //       console.log(this.login_userID);
-  //       console.log(this.login_usertype);        
-  //     },
-  //     err => {
-  //       this.content = JSON.parse(err.error).message;
-  //     }
-  //   );
-  // }
-  
-  // amenities(): void{
-  //   this.userService.getamenitiesdata().pipe().subscribe(
-  //     (amenitiesdata: any) => {
-  //       //  console.log(amenitiesdata);
-  //       this.amenities = amenitiesdata.data;
-  //       console.log(this.amenities);
-  //       //console.log(this.content);
-  //     },
-  //     err => {
-  //       this.content = JSON.parse(err.error).message;
-  //     }
-  //   );
-  // }
-
    amenities(): void{
+    this.showLoadingIndicator = true;
      this.userService.getamenitiesdata().pipe().subscribe(
        (amenitiesdata: any) => {
-         //  console.log(amenitiesdata);
          this.amenities = amenitiesdata.data;
          this.amenitiesresult = this.amenities;
          this.Amenties_length=this.amenitiesresult.length;
-         //console.log(this.content);
+         this.showLoadingIndicator = false;
        },
        err => {
          this.content = JSON.parse(err.error).message;
@@ -181,16 +192,19 @@ export class ProductpageComponent implements OnInit {
      );
    }
   loginuser_coutData(){
-    this.authService.get_CountData().subscribe(
+    this.showLoadingIndicator = true;
+    this.authService.recently_view().subscribe(
       data => {
         console.log(data.data);
-        this.Recently_UserData = data.data;
+        this.Recently_User_Data = data.data;
+        this.recently_length=this.Recently_User_Data.length;
+        this.showLoadingIndicator = false;
         console.log("Recently Views Properties");
-         console.log(this.Recently_UserData);
+         console.log(this.Recently_User_Data.length);
       });
   
   }
-  loginuser_countProduct(id){
+  loginuser_countProduct(id: any){
     console.log(this.id);
      this.authService.User_productCount(this.id).subscribe(
        data => {
@@ -198,40 +212,95 @@ export class ProductpageComponent implements OnInit {
        });
    
    }
-
-  prod_function(data: any){
-    // Login check
-    if(this.tokenStorage.getUser() != null){
-      // this.isLoggedIn = true
-      // console.log(this.isLoggedIn);
-    }
-    else{
-      this.redirect_to_home();
-    }
-        if (this.tokenStorage.getToken()){
-      // this.isLoggedIn = true;      
-      this.authService.Wishlist(data).pipe().subscribe(
-        (result: any) =>{
-          console.log(result);
+   
+// product comaprision functinalty 
+product_comp(id:number){
+  console.log(id);
+  // Login check
+  if(this.tokenStorage.getUser() != null){
+    this.isLoggedIn = true;
+    console.log(this.isLoggedIn);
+    this.maintenance = true;
+    this.parking = false;     
+      this.authService.Crete_product_comp(id).pipe().subscribe(
+        (data: any) =>{
+          console.log(data);
           this.similarproperty(this.cityValue);
+          this.single_property_data(this.id);
+          console.log(data.data.length);
+          if(data.data.length>4){
+            this.toastr.info('Bucket are the Full...!!!', 'Property', {
+              timeOut: 3000,
+            });
+          }else{
+            this.toastr.success('Succesfully Added in Bucket...', 'Property', {
+              timeOut: 3000,
+            });
+          }
         },
         err => {
           console.log(err.error);
         }
       );
-
+  }
+  else{
+    this.redirect_to_home();
+  }
+}
+// pricre convert functionalty
+Price_convert(num: number) {
+  if (num >= 1000000000) {
+     return (num / 1000000000).toFixed(2).replace(/\.0$/, '') + 'G';
+  }
+  if (num >= 10000000) {
+    return (num / 10000000).toFixed(2).replace(/\.0$/, '') + 'Crore';
+  }
+  if (num >= 100000) {
+    return (num / 100000).toFixed(2).replace(/\.0$/, '') + 'Lac';
+  }
+  if (num >= 1000) {
+    this.e=num;
+    var t = (this.e = this.e ? this.e.toString() : "").substring(this.e.length - 3)
+    , n = this.e.substring(0, this.e.length - 3);
+    return "" !== n && (t = "," + t),
+    n.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + t
+  }
+  return num;
+}
+   wishlist_added(data: any){
+    // Login check
+    if(this.tokenStorage.getUser() != null){
+      if (this.tokenStorage.getToken()){
+        // this.isLoggedIn = true;      
+        this.authService.Wishlist(data).pipe().subscribe(
+          (result: any) =>{
+            console.log(result);
+            this.similarproperty(this.cityValue);
+            this.single_property_data(this.id);
+          },
+          err => {
+            console.log(err.error);
+          }
+        );
+      }
+      else{
+        this.isLoggedIn = false ;
+      }
     }
     else{
-      this.isLoggedIn = false ;
+      this.redirect_to_home();
     }
+        
   }
-  DeleteProd_function(data: any){
+  
+  Wishlist_remove(data: any){
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
        this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) =>{
           console.log(result);
           this.similarproperty(this.cityValue);
+          this.single_property_data(this.id);
         },
         err => {
           console.log(err.error);
@@ -259,23 +328,45 @@ export class ProductpageComponent implements OnInit {
 }
 
 
-  similarproperty(cityValue){
+Property_type_data(): void{
+  this.userService.get_property_type().pipe().subscribe(
+    (data: any) => {
+      //  console.log(amenitiesdata);
+      this.property_type = data.count;
+      this.property_type_count=data.count;
+      console.log(this.property_type_count);
+      this.property_type_result = this.property_type;
+      console.log(this.property_type_result);
+      //console.log(this.content);
+    },
+    err => {
+      this.content = JSON.parse(err.error).message;
+    }
+  );
+}
+
+  similarproperty(cityValue: any){
     if(this.tokenStorage.getToken()){
+      this.showLoadingIndicator = true;
     this.authService.login_similarproperty(this.cityValue).subscribe(
       data => {
-        this.content = data["product"];
-        console.log(this.content);
-        this.sendinformation();
+        this.similar_property = data["product"];
+        console.log(this.similar_property);
+        this.wishlist_info();
+        this.pro_comp_refresh();
+        this.showLoadingIndicator = false;
       },
         err => {
           console.log(err);
         }
       );
     }else{
+      this.showLoadingIndicator = true;
       this.authService.product_similarproperty(this.cityValue).subscribe(
       data => {
-        this.content = data["product"];
-        console.log(this.content);
+        this.similar_property = data["product"];
+        console.log(this.similar_property);
+        this.showLoadingIndicator = false;
       },
         err => {
           console.log(err);
@@ -286,21 +377,36 @@ export class ProductpageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // Login check
+    if(this.tokenStorage.getUser() != null){
     console.log(this.form)
     this.authService.create_review(this.form, this.id).subscribe(
       data => {
         console.log(data)
-        window.location.reload();
+        this.toastr.success('Reviews Succesfully', 'Property', {
+          timeOut: 3000,
+        });
       },
       err => {
         console.log(err.error);
+        this.errorMessage = err.error.errors;
+        console.log(this.errorMessage.length);
+        this.Message = err.error.message;
+        console.log(this.Message);
+        this.toastr.error(this.Message, 'Something Error', {
+          timeOut: 3000,
+        });
       }
     );
+  }
+  else{
+    this.redirect_to_home();
+  }
 }
 
   get_review(): void {
     console.log(this.form)
-    this.authService.product_review(this.prod_id).subscribe(
+    this.authService.product_review(this.id).subscribe(
       data => {
         console.log('sfesf')
         console.log(data)
@@ -312,12 +418,12 @@ export class ProductpageComponent implements OnInit {
     );
 }
 
-feature_property():void{
-  this.userService.getRecently_viewProperty().subscribe(
-    featureproperty => { 
-      this.feature_property = featureproperty.data;
+feature_property(){
+  this.userService.feature_property().subscribe(
+    data => { 
+      this.feature_property_data = data.data;
       console.log("feature_properties");
-      console.log(this.feature_property);        
+      console.log(this.feature_property_data);        
     },
     err => {
       this.content = JSON.parse(err.error).message;
@@ -326,34 +432,9 @@ feature_property():void{
 }
 
   onShare(){
-    alert("Your Shareable Link is \n" + this.sitestring + this.router.url + "?id=" + this.prod_id);
+    alert("Your Shareable Link is \n" + this.sitestring + this.router.url );
   }
-  onComp(data){
-
-
-    // Old code
-
-    // console.log(this.idservice.getCdata());
-    // console.log(this.idservice.getProdId());
-
-
-    // if(this.idservice.getCdata() != null){
-    //   this.idservice.saveProdId(data);
-    //   console.log(this.idservice.getCdata());
-    //   console.log(this.idservice.getProdId());
-    //   console.log("1rd");
-    // }
-
-    // if(this.idservice.getCdata()){
-
-    //   this.prod_if = this.idservice.getCdata;
-    //   this.idservice.saveProdId(this.prod_if);
-    //   this.idservice.saveCdata(data);
-    //   console.log(this.idservice.getCdata());
-    //   console.log(this.idservice.getProdId());
-    //   console.log("3rd");
-    // }
-
+  onComp(data: any){
 
     if(this.first_prod == null){
       this.first_prod = data
@@ -391,8 +472,17 @@ feature_property():void{
     window.location.href=GlobalConstants.siteURL="login"
   }
    // topbar searching functionalty
-    sendinformation(){
+   wishlist_info(){
       this.userService.emit<string>('true');
    } 
+   // topbar proeprty comparion functionalty
+  pro_comp_refresh(){
+    this.userService.pro_comp_emit<string>('true');
+  } 
+
+  // property comparision redirect comapre page 
+  redirect_to_compare(): void {
+    window.location.href=GlobalConstants.siteURL="compare"
+  }
 
 }

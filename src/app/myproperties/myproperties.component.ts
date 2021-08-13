@@ -17,8 +17,10 @@ export class MypropertiesComponent implements OnInit {
   showLoadingIndicator :boolean= false;
   content: [];
   ftpstring: string = GlobalConstants.ftpURL;
-  usertype;
-  contentLenght=null;
+  usertype:any;
+  page: number = 1;
+ public p: number;
+  public contentLenght:number=0;
 
   constructor(
     private titleService: Title,
@@ -36,6 +38,12 @@ export class MypropertiesComponent implements OnInit {
     this.usertype = this.tokenStorage.getUser().usertype;
   
     this.showLoadingIndicator = true;
+    this.Myproperty();
+   
+
+  }
+  Myproperty(){
+    this.showLoadingIndicator = true;
     this.userService.getproperties().pipe().subscribe(
       (data: any) => {
         this.contentLenght=data.data.data.length;
@@ -49,20 +57,18 @@ export class MypropertiesComponent implements OnInit {
         console.log(err)
       }
     )
-
   }
-
   del_func(id){
-    {this.authService.property_delete(id).subscribe(
+    this.showLoadingIndicator = true;
+    this.authService.property_delete(id).subscribe(
         data => {
-          console.log(data)
-          // window.location.reload();
+          console.log(data);
+          this.Myproperty();
         },
         err => {
           console.log(err)
         }
       );
-    }
   }
 
   redirect_to_home(): void {

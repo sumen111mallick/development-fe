@@ -87,6 +87,9 @@ export class PostproductComponent implements OnInit {
   equipment: any;
   features: any;
   i:any;
+  public property_type:any;
+  public property_type_result:any;
+  product_img:any=[];
 
   // map google
   geoCoder:any;
@@ -155,6 +158,7 @@ export class PostproductComponent implements OnInit {
     });
 
     this.amenities();
+    this.Property_type_data();
     this.titleService.setTitle('Create Listing');
     // Login check
     if(this.tokenStorage.getUser() != null){
@@ -176,6 +180,7 @@ export class PostproductComponent implements OnInit {
       this.isLoggedIn = false ;
     }
     this.selectedItems = new Array<string>();
+    this.product_img = new Array<string>();
   }
 
   redirect_to_home(): void {
@@ -286,16 +291,18 @@ export class PostproductComponent implements OnInit {
         });
       }
   }
+ 
   readThis1(inputValue: any): void {
     var file:File = inputValue;
     var myReader:FileReader = new FileReader();
-
     myReader.onloadend = (e) => {
       this.image1 = myReader.result;
+      if(this.image1 != null){
+        this.product_img.push(this.image1);
+      }
     }
     myReader.readAsDataURL(file);
   }
-
   insert_image2(event){
 
     this.readThis2(event.target)
@@ -307,6 +314,9 @@ export class PostproductComponent implements OnInit {
 
     myReader.onloadend = (e) => {
       this.image2 = myReader.result;
+      if(this.image2 != null){
+        this.product_img.push(this.image2);
+      }
     }
     myReader.readAsDataURL(file);
   }
@@ -322,6 +332,9 @@ export class PostproductComponent implements OnInit {
 
     myReader.onloadend = (e) => {
       this.image3 = myReader.result;
+      if(this.image3 != null){
+        this.product_img.push(this.image3);
+      }
     }
     myReader.readAsDataURL(file);
   }
@@ -337,6 +350,9 @@ export class PostproductComponent implements OnInit {
 
     myReader.onloadend = (e) => {
       this.image4 = myReader.result;
+      if(this.image4 != null){
+        this.product_img.push(this.image4);
+      }
     }
     myReader.readAsDataURL(file);
   }
@@ -352,10 +368,14 @@ export class PostproductComponent implements OnInit {
 
     myReader.onloadend = (e) => {
       this.image5 = myReader.result;
+      if(this.image5 != null){
+        this.product_img.push(this.image5);
+      }
     }
     myReader.readAsDataURL(file);
   }
-z
+
+
 
   delete_pic1(){
     this.image1 = null;
@@ -392,15 +412,29 @@ z
       this.parking = false
     }
   }
+  Property_type_data(): void{
+    this.userService.get_property_type().pipe().subscribe(
+      (data: any) => {
+        //  console.log(amenitiesdata);
+        this.property_type = data.data;
+        this.property_type_result = this.property_type;
+        console.log(this.property_type_result);
+        //console.log(this.content);
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
+  }
 
   onSubmitSale(): void {
     console.log(this.form);
     if(this.form.expected_pricing>=500000 && this.form.expected_pricing<=50000000){
-    this.authService.product_insert_sale(this.form, this.content.id, this.amenityArray, this.furnishingArray, this.image1, this.image2, this.image3, this.image4, this.image5).subscribe(
+    this.authService.product_insert_sale(this.form, this.content.id, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
       data => {
         console.log(data);
         this.toastr.success('Successfuly Saved', 'Property');
-        window.location.href=GlobalConstants.siteURL+"myproperties"
+        // window.location.href=GlobalConstants.siteURL+"myproperties"
       },
       err => {
         this.err_caused = true;
