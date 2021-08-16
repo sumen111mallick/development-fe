@@ -9,6 +9,7 @@ const LAWYER_ID = 'data';
 const PROD_ID = 'data';
 const PROD2_ID = 'data';
 const form_Data ='form_data';
+const pro_type = 'pro_data';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,17 @@ export class TokenStorageService {
   }
   public RemoveSearch(): any{
     window.sessionStorage.removeItem(SEARCH_DATA);
+  }
+  // search_pro_type
+  public search_pro_type(pro_data: any): void{
+    window.sessionStorage.removeItem(pro_type);
+    window.sessionStorage.setItem(pro_type, JSON.stringify(pro_data));
+  }
+  public get_pro_type(): any{
+    return JSON.parse(sessionStorage.getItem(pro_type));
+  }
+  public Remove_pro_type(): any{
+    window.sessionStorage.removeItem(pro_type);
   }
    // form data
    public search_formData(form_data: any): void{

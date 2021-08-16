@@ -63,7 +63,7 @@ export class CompareComponent implements OnInit {
         this.pro_comp_refresh();
         if(this.property_comp_length <2){
             this.toastr.warning('Comparision Minimun Two','Property', {
-              timeOut: 6000,
+              timeOut: 4000,
             });
             this.redirect_to_home();
          }

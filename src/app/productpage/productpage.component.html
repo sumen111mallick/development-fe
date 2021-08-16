@@ -1229,11 +1229,9 @@
 							</ul> -->
 							</div>
 						</div>
-
-						<div class="terms_condition_widget">
+						<div class="terms_condition_widget" *ngIf="feature_pro_length>0"> 
 							<h4 class="title">Featured Properties</h4>
 							<div class="sidebar_feature_property_slider" *ngFor = "let feature_pro of feature_property_data">
-								
 								<div class="item">
 									<div class="feat_property home7 agent">
 										<div class="thumb">
@@ -1241,11 +1239,11 @@
 											<!-- <img class="img-whp" src="./../../assets/css/images/property/fp5.jpg" alt="fp5.jpg"> -->
 											<div class="thmb_cntnt">
 												<ul class="tag mb0">
-													<li class="list-inline-item" *ngIf=" feature_pro.rent_availability "><a href="#">For Rent</a></li>
-													<li class="list-inline-item"  *ngIf=" feature_pro.sale_availability "><a href="#">Featured</a></li>
+													<li class="list-inline-item" *ngIf=" feature_pro.rent_availability != null"><a href="#">For Rent</a></li>
+													<li class="list-inline-item"  *ngIf=" feature_pro.sale_availability != null"><a href="#">Featured</a></li>
 												</ul>
-												<a class="fp_price" href="/productlisting" *ngIf="feature_pro.expected_pricing != null">Rs.{{  Price_convert(feature_pro.expected_pricing) }}<small></small></a>
-												<a *ngIf="feature_pro.expected_rent != null" class="fp_price"  >Rs.{{  Price_convert(feature_pro.expected_rent) }}<small></small></a>
+												<a class="fp_price" *ngIf="feature_pro.expected_pricing != null">₹ {{ Price_convert(feature_pro.expected_pricing)}}<small></small></a>
+												<a class="fp_price" *ngIf="feature_pro.expected_rent != null">₹ {{ Price_convert(feature_pro.expected_rent)}}<small></small></a>
 												<h4 class="posr color-white">{{feature_pro.build_name | titlecase}}</h4>
 											</div>
 										</div>
@@ -1257,36 +1255,33 @@
 							<h4 class="title">Categories Property</h4>
 							<div class="widget_list">
 								<ul class="list_details">
-									<li *ngFor = "let property_type of property_type_count">
-										<a href="#"><i class="fa fa-caret-right mr10"></i>{{property_type.pro_type}} <span class="float-right">{{property_type.pro_count}} properties</span></a>
+									<li class="Categories-list" *ngFor = "let property_type of property_type_count">
+										<a (click)="Property_type_search(property_type.id,property_type.pro_type)"><i class="fa fa-caret-right mr10"></i>{{property_type.pro_type}} <span class="float-right">{{property_type.pro_count}} properties</span></a>
 									  </li>
 								</ul>
 							</div>
 						</div>
-						<div class="sidebar_feature_listing rentlyView_singlepage"  *ngIf="recently_length != null">
+						<div class="sidebar_feature_listing rentlyView_singlepage "   *ngIf="Recent_user_length>0">
 							<h4 class="title">Recently Viewed</h4>
-							<div class="media" *ngFor = "let Recently_view of Recently_User_Data">
+							<div class="media" *ngFor="let Recently_view of Recently_UserData">
 								<!-- {{Recently_view | json}} -->
-							  <img style="width: 100px;" class="align-self-start mr-3" src="{{ftpstring}}{{Recently_view.product_img[0].image}}" alt="fls1.jpg">
-							  <ul class="tag mb0 Single-page-recently-view" >
-								<li class="list-inline-item" *ngIf=" Recently_view.productdetails.rent_availability ">For Rent</li>
-								<li class="list-inline-item"  *ngIf=" Recently_view.productdetails.sale_availability ">For Sale</li>
-							  </ul>
-							  <div class="media-body">
-								  <h5 class="mt-0 post_title">{{Recently_view.productdetails.build_name | titlecase}}</h5>
-								  
-								  <a *ngIf="Recently_view.productdetails.expected_pricing != null" class="fp_price" >₹ {{  Price_convert(Recently_view.productdetails.expected_pricing) }}</a>
-								  <a *ngIf="Recently_view.productdetails.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(Recently_view.productdetails.expected_rent) }}</a>
+							<span><img style="width: 100px;" class="align-self-start mr-3" src="{{ftpstring}}{{Recently_view.product_img[0].image}}" alt="fls1.jpg"></span><ul class="tag mb0 Single-page-recently-view" >
+									<li class="list-inline-item" *ngIf=" Recently_view.productdetails.rent_availability != null">For Rent</li>
+									<li class="list-inline-item"  *ngIf=" Recently_view.productdetails.sale_availability != null">For Sale</li>
+								</ul>
+							<div class="media-body">
+								<h5 class="mt-0 post_title">{{Recently_view.productdetails.build_name | titlecase}}</h5>
+								<a *ngIf="Recently_view.productdetails.expected_pricing != null" class="fp_price" >₹ {{Price_convert(Recently_view.productdetails.expected_pricing) }}<small></small></a>
+								<a *ngIf="Recently_view.productdetails.expected_rent != null" class="fp_price"  >₹ {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
 								
-								  <ul class="mb0">
+								<ul class="mb0">
 									<li class="list-inline-item">Beds: {{Recently_view.productdetails.bedroom}}</li>
 									<li class="list-inline-item">Baths: {{Recently_view.productdetails.bathroom}}</li>
 									<li class="list-inline-item">Sq Ft: {{Recently_view.productdetails.equipment}}</li>
-								  </ul>
-							  </div>
+								</ul>
+							</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>

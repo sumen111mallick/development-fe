@@ -21,27 +21,38 @@
       <!--Note: declare the Menu style in the data-menu-style="horizontal" (options: horizontal, vertical, accordion) -->
       <ul id="respMenu" class="ace-responsive-menu text-right" data-menu-style="horizontal">
         <li>
+          <!-- <a href="" routerLinkActive="menu-active" [routerLinkActiveOptions]="{exact:true}" routerLink="">Home</a> -->
           <a href="">Home</a>
         </li>
         <li>
-          <a href="/productlisting"><span class="title">Listing</span></a>
+          <!-- <a href="/productlisting" routerLinkActive="menu-active" routerLink="/productlisting"> -->
+            <a href="/productlisting">
+            <span class="title">Listing</span>
+          </a>
           <!-- Level Two-->
 		</li>
 
 
         <li class="last">
-          <a href="/contact"><span class="title">Contact</span></a>
+          <!-- <a href="/contact" routerLinkActive="menu-active" routerLink="/contact"> -->
+            <a href="/contact">
+            <span class="title">Contact</span>
+          </a>
         </li>
 		<!--<li class="last">
           <a href="/testimonials"><span class="title">Testimonials</span></a>
         </li> -->
         <!-- Code added by Radhika Start -->
         <li class="last">
-          <a href="/blog"><span class="title">Blog</span></a>
+          <!-- <a href="/blog" routerLinkActive="menu-active" routerLink="/blog"> -->
+            <a href="/blog">
+            <span class="title">Blog</span>
+          </a>
         </li>
         <!-- Code added by Radhika End -->
         <li class="list-inline-item list_s" *ngIf="!isLoggedIn">
-          <a href="/login" class="btn flaticon-user" data-toggle="" data-target=".bd-example-modal-lg">
+          <!-- <a href="/login"  routerLinkActive="menu-active"  routerLink="/login" class="btn flaticon-user" data-toggle="" data-target=".bd-example-modal-lg"> -->
+            <a href="/login" class="btn flaticon-user" data-toggle="" data-target=".bd-example-modal-lg">
             <span class="dn-lg">Login/Register</span>
           </a>
         </li>
@@ -84,29 +95,33 @@
               </div>
               
               <div class="user_setting_content">
+                <!-- <a class="dropdown-item text-secondary" href="/profile"  routerLinkActive="menu-active">My Profile</a> -->
                 <a class="dropdown-item text-secondary" href="/profile">My Profile</a>
-																			 
-																					 
-																		 
+								
+                <!-- <a class="dropdown-item text-secondary" href="/logout"  routerLinkActive="menu-active"  routerLink="/logout">Log out</a> -->
                 <a class="dropdown-item text-secondary" href="/logout">Log out</a>
               </div>
             </div>
           </div>
         </li>
         <li class="list-inline-item" *ngIf="isLoggedIn">
-          <a href="Wishlist">
+          <!-- <a href="/Wishlist" routerLinkActive="menu-active"  routerLink="/Wishlist"> -->
+            <a href="/Wishlist">
             <span class="title">Wishlist </span>
             <span class="flaticon-fa-gift"></span>
             <span class="wishlistValue">{{wishlist_length}}</span>
           </a>
         </li>
         <li  class="list-inline-item" *ngIf="isLoggedIn != false">
-          <a href="compare" ><i class="fas fa-cart-plus"></i>
+          <!-- <a href="/compare" routerLinkActive="menu-active"  routerLink="/compare"> -->
+            <a href="/compare">
+            <i class="fas fa-cart-plus"></i>
           <span class="wishlistValue">{{property_comp_length}}</span>
           </a>
         </li>
 		 <li class="list-inline-item add_listing">
-          <a href="/insertproduct">
+          <!-- <a href="/insertproduct" routerLinkActive="menu-active"  routerLink="/insertproduct"> -->
+            <a href="/insertproduct">
             <span class="flaticon-plus"></span>
             <span class="dn-lg"> List Property</span>
           </a>

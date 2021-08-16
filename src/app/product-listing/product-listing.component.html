@@ -34,7 +34,7 @@
  <section class="our-listing bgc-f7 pb30-991">
    <div class="container">
      <div class="row">
-       <div class="col-lg-6">
+       <!-- <div class="col-lg-6">
          <div class="breadcrumb_content style2 mb0-991">
            <ol class="breadcrumb">
                <li class="breadcrumb-item"><a >Home</a></li>
@@ -42,7 +42,23 @@
            </ol>
            <h2 class="breadcrumb_title">Product Listing</h2>
          </div>
-       </div>
+       </div> -->
+       <div class="grid_list_search_result">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
+          <div class="left_area tac-xsd">
+            <div class="row">
+              <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6">
+                <p>Home / <span class="active">Property Listing</span> 
+                </p>
+              </div>
+              <div class="col-sm-12 col-md-4 col-lg-6 col-xl-6 listing_page_navbar">
+                <p>These <span class="active">{{product_type}}</span> Properties are Favorites!!!... 
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
        <div class="col-lg-6">
          <div class="listing_list_style mb20-xsd tal-991">
            <!-- <ul class="mb0">
@@ -136,28 +152,28 @@
                         <select  class="form-control  selectpicker show-tick"  name="type"  [(ngModel)]="form.type" #type="ngModel" id="type">
                           <!-- <option  value="" >Select Property Type</option> -->
                           <!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
-                          <option value="Property Type">Property Type</option>
-                          <option value="ALL RESIDENTIAL">ALL RESIDENTIAL</option>
-                          <option value="Flat/ Apartment">Flat/ Apartment</option>
-                          <option value="Residential House">Residential House</option>
-                          <option value="Villa">Villa</option>
-                          <option value="Builder Floor Apartment">Builder Floor Apartment</option>
-                          <option value="Residential Land/ Plot">Residential Land/ Plot</option>
-                          <option value="Penthouse">Penthouse</option>
-                          <option value="Studio Apartment">Studio Apartment</option>
-                          <option value="ALL COMMERCIAL">ALL COMMERCIAL</option>
-                          <option value="Commercial Office Space">Commercial Office Space</option>
-                          <option value="Office in IT Park/ SEZ">Office in IT Park/ SEZ</option>
-                          <option value="Commercial Shop">Commercial Shop</option>
-                          <option value="Commercial Showroom">Commercial Showroom</option>
-                          <option value="Commercial Land">Commercial Land</option>
-                          <option value="Warehouse/ Godown">Warehouse/ Godown</option>
-                          <option value="Industrial Land">Industrial Land</option>
-                          <option value="Industrial Building">Industrial Building</option>
-                          <option value="Industrial Shed">Industrial Shed</option>
-                          <option value="ALL AGRICULTURAL">ALL AGRICULTURAL</option>
-                          <option value="Agricultural Land">Agricultural Land</option>
-                          <option value="Farm House">Farm House</option>
+                          <option value="" disbale>Property Type</option>
+                          <option value="1">Flat/ Apartment</option>
+                          <option value="2">Residential House</option>
+                          <option value="3">Villa</option>
+                          <option value="4">Builder Floor Apartment</option>
+                          <option value="5">Residential Land/ Plot</option>
+                          <option value="6">Penthouse</option>
+                          <option value="7">Studio Apartment</option>
+                          <option value="8">ALL COMMERCIAL</option>
+                          <option value="9">Commercial Office Space</option>
+                          <option value="10">Office in IT Park/ SEZ</option>
+                          <option value="11">Commercial Shop</option>
+                          <option value="12">Commercial Showroom</option>
+                          <option value="13">Commercial Land</option>
+                          <option value="14">Warehouse/ Godown</option>
+                          <option value="15">Industrial Land</option>
+                          <option value="16">Industrial Building</option>
+                          <option value="17">Industrial Shed</option>
+                          <option value="18">ALL AGRICULTURAL</option>
+                          <option value="19">Agricultural Land</option>
+                          <option value="20">Farm House</option>
+                          <option value="21">ALL RESIDENTIAL</option>
                         </select>
                         </div>
                         </div>
@@ -211,21 +227,6 @@
                   <div class="search_option_two">
                     <div class="candidate_revew_select">
                       <div class="dropdown bootstrap-select w100 show-tick">
-									    	<label>Availability</label>
-                          <select class="selectpicker show-tick form-control" name="availability_condition"  [(ngModel)]="form.availability_condition" #type="ngModel" id="availability_condition" (ngModelChange)="OnPropertyCheck()">
-                            <option>Select Availability</option>
-                          <option value="rent">Rental Property</option>
-                          <option value="sales">Sales Property</option>
-                          <!-- <option value="Others">Others</option> -->
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="search_option_two">
-                    <div class="candidate_revew_select">
-                      <div class="dropdown bootstrap-select w100 show-tick">
 									    	<label>Years</label>
                           <select class="selectpicker show-tick form-control" name="Years"  [(ngModel)]="form.Years" #type="ngModel" id="Years">
                           <option value="" >Select Bulid Years</option>
@@ -243,23 +244,40 @@
                     </div>
                   </div>
                 </li>
+                <li>
+                  <div class="search_option_two">
+                    <div class="candidate_revew_select">
+                      <div class="dropdown bootstrap-select w100 show-tick">
+									    	<label>Availability</label>
+                          <select class="selectpicker show-tick form-control" name="availability_condition"  [(ngModel)]="form.availability_condition" #type="ngModel" id="availability_condition" (ngModelChange)="OnPropertyCheck()">
+                            <option value="Select Availability">Select Availability</option>
+                          <option value="rent">Rental Property</option>
+                          <option value="sales">Sales Property</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </li>
                 <li class="min_area list-inline-item">
                     <div class="form-group">
                       <label for="Minimum">Min Price</label>
-                      <input type="text" class="form-control" id="Minimum" placeholder="Min Price" name="Minimum" [(ngModel)]="form.Minimum" #Minimum="ngModel">
+                      <input type="hidden" class="form-control" id="Minimum" placeholder="Min Price" name="Minimum" [(ngModel)]="form.Minimum" #Minimum="ngModel">
                     </div>
                 </li>
                 <li class="max_area  list-inline-item">
                     <div class="form-group">
                       <label for="Maximum">Max Price</label>
-                      <input type="text" class="form-control" id="Maximum" placeholder="Max Price" name="Maximum" [(ngModel)]="form.Maximum" #Maximum="ngModel" >
+                      <input type="hidden" class="form-control" id="Maximum" placeholder="Max Price" name="Maximum" [(ngModel)]="form.Maximum" #Maximum="ngModel" >
                     </div>
                 </li>
                 <li  *ngIf="rent_range_slider== true">
-                  <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options"></ng5-slider>
+                  <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_rent"></ng5-slider>
                 </li>
                 <li  *ngIf="buyyer_range_slider== true">
-                  <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options1" ></ng5-slider>
+                  <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_sales" ></ng5-slider>
+                </li>
+                <li  *ngIf="range_slider== true">
+                  <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options" ></ng5-slider>
                 </li>
                
                 <li>
@@ -300,26 +318,29 @@
                       </div>
                   </div>
                 </li>
-                <li>
-                  <div class="search_option_button">
+                <li class="search_btn_form">
+                  <div class="search_button">
                       <button type="button"  (click)="searchForm.form.valid && onSearch()" class="btn btn-block btn-thm">Search</button>
                   </div>
+                  <div class="reset_button">
+                    <button type="button"  (click)="reset_Search()" class="btn btn-primary ">Reset </button>
+                </div>
                 </li>
                 </form>
               </ul>
             </div>
           </div>
-          <div class="terms_condition_widget">
+          <div class="terms_condition_widget Categories_property">
             <h4 class="title">Categories Property</h4>
             <div class="widget_list">
               <ul class="list_details">
-                <li *ngFor = "let pro_type_data of property_type_count">
-                  <a href="#"><i class="fa fa-caret-right mr10"></i>{{pro_type_data.pro_type}} <span class="float-right">{{pro_type_data.pro_count}} properties</span></a>
+                <li class="Categories-list" *ngFor = "let pro_type_data of property_type_count;let i = index" [ngClass]="{'active': clickedIndex == i}" (click)="clickedIndex == i? clickedIndex = null : clickedIndex = i">
+                  <a  (click)="Property_type_search(pro_type_data.id,pro_type_data.pro_type)"><i class="fa fa-caret-right mr10"></i>{{pro_type_data.pro_type}} <span class="float-right" [ngClass]="{'active': clickedIndex == i}" (click)="clickedIndex == i? clickedIndex = null : clickedIndex = i">{{pro_type_data.pro_count}} properties</span></a>
                 </li>
                  </ul>
             </div>
           </div>
-          <div class="terms_condition_widget">
+          <div class="terms_condition_widget" *ngIf="feature_pro_length>0"> 
 						<h4 class="title">Featured Properties</h4>
 						<div class="sidebar_feature_property_slider" *ngFor = "let feature_pro of feature_property_data">
 							<div class="item">
@@ -329,11 +350,11 @@
 										<!-- <img class="img-whp" src="./../../assets/css/images/property/fp5.jpg" alt="fp5.jpg"> -->
 										<div class="thmb_cntnt">
 											<ul class="tag mb0">
-												<li class="list-inline-item" *ngIf=" feature_pro.rent_availability "><a href="#">For Rent</a></li>
-												<li class="list-inline-item"  *ngIf=" feature_pro.sale_availability "><a href="#">Featured</a></li>
+												<li class="list-inline-item" *ngIf=" feature_pro.rent_availability != null"><a href="#">For Rent</a></li>
+												<li class="list-inline-item"  *ngIf=" feature_pro.sale_availability != null"><a href="#">Featured</a></li>
 											</ul>
-											<a class="fp_price" href="/productlisting" *ngIf="feature_pro.expected_pricing != null">₹ {{ Price_convert(feature_pro.expected_pricing)}}<small></small></a>
-											<a *ngIf="feature_pro.expected_rent != null" class="fp_price">₹ {{ Price_convert(feature_pro.expected_rent)}}<small></small></a>
+											<a class="fp_price" *ngIf="feature_pro.expected_pricing != null">₹ {{ Price_convert(feature_pro.expected_pricing)}}<small></small></a>
+											<a class="fp_price" *ngIf="feature_pro.expected_rent != null">₹ {{ Price_convert(feature_pro.expected_rent)}}<small></small></a>
 											<h4 class="posr color-white">{{feature_pro.build_name | titlecase}}</h4>
 										</div>
 									</div>
@@ -342,13 +363,13 @@
 						</div>
 					</div>
           
-          <div class="sidebar_feature_listing rentlyView_singlepage "   *ngIf="isLoggedIn">
+          <div class="sidebar_feature_listing rentlyView_singlepage "   *ngIf="Recent_user_length>0">
 						<h4 class="title">Recently Viewed</h4>
 						<div class="media" *ngFor="let Recently_view of Recently_UserData">
 							<!-- {{Recently_view | json}} -->
 						  <span><img style="width: 100px;" class="align-self-start mr-3" src="{{ftpstring}}{{Recently_view.product_img[0].image}}" alt="fls1.jpg"></span><ul class="tag mb0 Single-page-recently-view" >
-								<li class="list-inline-item" *ngIf=" Recently_view.productdetails.rent_availability ">For Rent</li>
-								<li class="list-inline-item"  *ngIf=" Recently_view.productdetails.sale_availability ">For Sale</li>
+								<li class="list-inline-item" *ngIf=" Recently_view.productdetails.rent_availability != null">For Rent</li>
+								<li class="list-inline-item"  *ngIf=" Recently_view.productdetails.sale_availability != null">For Sale</li>
 							  </ul>
 						  <div class="media-body">
 							  <h5 class="mt-0 post_title">{{Recently_view.productdetails.build_name | titlecase}}</h5>
@@ -370,7 +391,7 @@
           <div class="grid_list_search_result">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
               <div class="left_area tac-xsd">
-                <p>{{Search_data_length}} Search results</p>
+                <p>{{Search_data_length}} Properties Searching </p>
               </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
@@ -410,8 +431,8 @@
                   <div class="thumb">
                      <div class="thmb_cntnt style2">
                       <ul class="tag mb0">
-                        <li class="list-inline-item" *ngIf=" number.rent_availability "><a >For Rent</a></li>
-                        <li class="list-inline-item" *ngIf=" number.sale_availability "><a >For Sale</a></li>
+                        <li class="list-inline-item" *ngIf=" number.rent_availability != null"><a >For Rent</a></li>
+                        <li class="list-inline-item" *ngIf=" number.sale_availability != null"><a >For Sale</a></li>
                       </ul>
                     </div>
                     <div class="thmb_cntnt style3">
@@ -434,7 +455,7 @@
                   </div>
                 </ng-template>  
               </owl-carousel-o> <div class="details">
-                <a href="/productpage/{{number.id}}"  >
+                <a href="/productpage?id={{number.id}}"  >
                   <div class="tc_content">
                     <p class="text-thm">{{ number.property__type.name | titlecase }}</p>
                     <h4>{{number.build_name | titlecase}}</h4>

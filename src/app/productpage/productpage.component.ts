@@ -58,7 +58,9 @@ export class ProductpageComponent implements OnInit {
   public latCus:number;
   public longCus:number;
   public feature_property_data:any={};
+  public feature_pro_length:number=0;
   public Recently_User_Data:any={};
+  public Recent_user_length:number=0;
   public recently_length:number=null;
 
   constructor(
@@ -72,14 +74,18 @@ export class ProductpageComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone:NgZone,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private tokenService: TokenStorageService
   ) { 
-        this.route.params.subscribe((params) => {
-        this.id = params["id"];
+        this.route.queryParams.subscribe((params) => {
+          // console.log(params.id);
+        this.id = params.id;
         this.single_property_data(this.id);
-     }); }
+        }); 
+    }
 
   ngOnInit(): void {
+    console.log(this.id);
     this.titleService.setTitle('Property Page');
     this.prod_id = this.idService.getProdId();
     if (this.tokenStorage.getToken() != null){
@@ -191,16 +197,14 @@ export class ProductpageComponent implements OnInit {
        }
      );
    }
-  loginuser_coutData(){
-    this.showLoadingIndicator = true;
+   loginuser_coutData(){
     this.authService.recently_view().subscribe(
       data => {
         console.log(data.data);
-        this.Recently_User_Data = data.data;
-        this.recently_length=this.Recently_User_Data.length;
-        this.showLoadingIndicator = false;
+        this.Recently_UserData = data.data;
+        this.Recent_user_length=data.data.length;
         console.log("Recently Views Properties");
-         console.log(this.Recently_User_Data.length);
+         console.log(this.Recently_UserData);
       });
   
   }
@@ -408,25 +412,53 @@ Property_type_data(): void{
     console.log(this.form)
     this.authService.product_review(this.id).subscribe(
       data => {
-        console.log('sfesf')
-        console.log(data)
-        this.Review = data.data
+        console.log(data);
+        this.Review = data.data;
       },
       err => {
         console.log(err.error);
       }
     );
 }
-
+Property_type_search(id: number,pro_type: string):void{
+  console.log(id);
+  if(this.tokenStorage.getToken()){
+    console.log('logging');
+    this.authService.search_pro_type_login(id).subscribe(
+        
+      data => {
+        this.tokenService.searchData(data);
+          console.log(this.tokenService.returnSearch());
+          this.data_session=[id,pro_type];
+          this.tokenService.search_pro_type(this.data_session);
+          window.location.href=GlobalConstants.siteURL+"productlisting";
+      },
+      err => {
+        console.log(err.error);
+      }
+    );
+  }
+  else{
+    this.authService.search_pro_type(id).subscribe(
+      data => {
+        this.tokenService.searchData(data);
+        console.log(this.tokenService.returnSearch());
+        this.data_session=[id,pro_type];
+        this.tokenService.search_pro_type(this.data_session);
+        window.location.href=GlobalConstants.siteURL+"productlisting";
+      },
+      err => {
+        console.log(err.error);
+      }
+    );
+  }
+}
 feature_property(){
   this.userService.feature_property().subscribe(
     data => { 
-      this.feature_property_data = data.data;
-      console.log("feature_properties");
-      console.log(this.feature_property_data);        
-    },
-    err => {
-      this.content = JSON.parse(err.error).message;
+      console.log(data);
+      this.feature_property_data = data.data; 
+      this.feature_pro_length =  this.feature_property_data.length;  
     }
   );
 }

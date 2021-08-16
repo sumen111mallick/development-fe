@@ -331,7 +331,7 @@ mobile_verify(data): Observable<any> {
     }),httpOptions);
   }
   product_SearchingLogin(data,amenityArray): Observable<any> {
-    return this.http.post(GlobalConstants.apiURL + 'product/product_Searching_login', JSON.stringify({
+    return this.http.post(AUTH_API+ 'product/product_Searching_login', JSON.stringify({
       build_name: data.build_name,
       Location:data.Location,
       area_unit:data.area_unit,
@@ -346,7 +346,17 @@ mobile_verify(data): Observable<any> {
       amenities: amenityArray,
     }),httpOptions);
   }
-
+  search_pro_type(id): Observable<any> {
+    console.log(id);
+    return this.http.post(GlobalConstants.apiURL + 'product/search_pro_type', JSON.stringify({
+      id: id,
+    }), httpOptions);
+  }  
+  search_pro_type_login(id): Observable<any> {
+    return this.http.post(AUTH_API + 'product/search_pro_type_login', JSON.stringify({
+      id: id,
+    }), httpOptions);
+  }
   admin_loans(data): Observable<any> {
     return this.http.post(AUTH_API + 'admin/admin_loans', JSON.stringify({
       bank: data.bank,

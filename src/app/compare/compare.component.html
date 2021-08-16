@@ -21,10 +21,6 @@
 		</div>
 	</div>
 </section>
-
-
-
-
 <section class="our-pricing bgc-fa">
 	<div class="container">
 		<div class="row">
@@ -49,6 +45,7 @@
 								<li class="list-inline-item">
 									<ul class="mc_child_list one">
 										<li class="compare_page"><div class="membership_header dn"></div></li>
+										<li>Type</li>
 										<li>City</li>
 										<li>Beds</li>
 										<li>Baths</li>
@@ -61,7 +58,7 @@
 							</div>
 							<div class="col-xl-10">
 								<li class="list-inline-item col-xl-3" *ngFor="let item of property_comp">
-									<ul class="mc_child_list three text-center">
+									<ul class="mc_child_list three text-center property_compare">
 										<li>
 											<div class="membership_header ">
 												<div class="thumb">
@@ -71,12 +68,12 @@
 													<div *ngIf="item.productdetails.expected_rent != null" class="price">Rs. {{ Price_convert(item.productdetails.expected_rent) }}<span class="mnth">/mo</span></div>
 												</div>
 												<div class="details">
-													<h4>{{item.productdetails.build_name | titlecase}}</h4>
-													<!-- <p>{{ item.productdetails.type | titlecase}}</p> -->
-													<p *ngIf=" item.productdetails.rent_availability "><a >For Rent</a></p>
-													<p *ngIf=" item.productdetails.sale_availability "><a >For Sale</a></p>
+													<h5>{{item.productdetails.build_name | titlecase}}</h5>
 												</div>
 											</div>
+										</li>
+										<li>
+											<a href=""><p><span>({{ item.productdetails.property__type.name | titlecase}})</span></p></a>
 										</li>
 										<li><a href="#">{{ item.productdetails.city | titlecase}}</a></li>
 										<li><a href="#">{{ item.productdetails.bedroom }}</a></li>

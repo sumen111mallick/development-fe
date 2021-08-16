@@ -13,7 +13,8 @@ import { MapsAPILoader,AgmMap } from '@agm/core';
 import { Options,LabelType } from 'ng5-slider';
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-
+import * as CryptoJS  from 'crypto-js';
+import { stringify } from '@angular/compiler/src/util';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -48,7 +49,7 @@ export class HomeComponent implements OnInit {
       return '₹' + value.toLocaleString('en');
     },
   };
-  options1: Options = {
+  options_sales: Options = {
     step:500,
     floor: 500000,
     ceil: 50000000,
@@ -60,24 +61,17 @@ export class HomeComponent implements OnInit {
   public property_type:any;
   public property_type_result:any;
   public property_type_count:any;
-
-
-
-  // searchhome = { 
-    build_name:any;
-    Location:any; 
-    type:any;
-    Bathrooms:any;
-    Bedrooms:any;
-    availability_condition:any;
-    area_unit:any;
-    Years:number;
-    Minimum:number=0;
-    Maximum:number=500000;
-    // };
-    // map google
+  build_name:any;
+  Location:any; 
+  type:number;
+  Bathrooms:any;
+  Bedrooms:any;
+  availability_condition:any;
+  area_unit:any;
+  Years:number;
+  Minimum:number=0;
+  Maximum:number=500000;
   geoCoder:any;
-  // searchElementRef:any;
   latCus=78.89;
   longCus=76.897;
   @ViewChild("search") searchElementRef: ElementRef;
@@ -139,11 +133,13 @@ export class HomeComponent implements OnInit {
     this.amenities();
     this.Property_type_data();
     this.gettestimonialdata();
-    this.titleService.setTitle('Housing Street');
-    this.currentUser = this.tokenService.getUser().username;
-    this.currentUserid = this.tokenService.getUser().id;
-    this.login = this.tokenService.getToken();
     
+    if (this.tokenStorage.getToken() != null){
+      this.titleService.setTitle('Housing Street');
+      this.currentUser = this.tokenService.getUser().username;
+      this.currentUserid = this.tokenService.getUser().id;
+      this.login = this.tokenService.getToken();
+    }
   }
 
 // product comaprision functinalty 
@@ -209,6 +205,13 @@ product_comp(id:number){
     }
   }
   
+  // encryptData(data) {
+  //   try {
+  //     return CryptoJS.AES.encrypt(JSON.stringify(data), this.encryptSecretKey).toString();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
   Wishlist_remove(data: any){
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
@@ -368,6 +371,7 @@ product_comp(id:number){
           console.log(this.tokenService.returnSearch());
           this.data_session=[this.form,this.amenityArray];
           this.tokenService.search_formData(this.data_session);
+          console.log(this.tokenService.get_formData());
           window.location.href=GlobalConstants.siteURL+"productlisting"
         },
         err => {
@@ -418,32 +422,6 @@ product_comp(id:number){
   // comparison funtion property
   
   onComp(data){
-
-
-    // Old code
-
-    // console.log(this.idservice.getCdata());
-    // console.log(this.idservice.getProdId());
-
-
-    // if(this.idservice.getCdata() != null){
-    //   this.idservice.saveProdId(data);
-    //   console.log(this.idservice.getCdata());
-    //   console.log(this.idservice.getProdId());
-    //   console.log("1rd");
-    // }
-
-    // if(this.idservice.getCdata()){
-
-    //   this.prod_if = this.idservice.getCdata;
-    //   this.idservice.saveProdId(this.prod_if);
-    //   this.idservice.saveCdata(data);
-    //   console.log(this.idservice.getCdata());
-    //   console.log(this.idservice.getProdId());
-    //   console.log("3rd");
-    // }
-
-
     if(this.first_prod == null){
       this.first_prod = data
     }

@@ -42,6 +42,14 @@ export class TopbardarkLoaderComponent implements OnInit {
         }
       }
     );
+    this.userService.pro_comp_on<string>().subscribe(
+      (message: any) => {
+        if (message == 'true') {
+          this.pro_comp();
+        }
+      }
+    );
+    
     /*this.data = this.tokenStorage.getToken();
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;

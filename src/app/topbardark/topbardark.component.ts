@@ -44,6 +44,13 @@ export class TopbardarkComponent implements OnInit {
       (message: any) => {
         if (message == 'true') {
           this.wishlistcount();
+        }
+      }
+    );
+    
+    this.userService.pro_comp_on<string>().subscribe(
+      (message: any) => {
+        if (message == 'true') {
           this.pro_comp();
         }
       }

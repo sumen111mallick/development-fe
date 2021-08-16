@@ -70,29 +70,30 @@
 												  <div class="search_option_two">
 													  <div class=" form-group candidate_revew_select">
 														  <select class="selectpicker w100 show-tick form-control" name="type"  [(ngModel)]="form.type" #type="ngModel" id="type">
-															  <option value="Property Type">Property Type</option>
-															  <option value="ALL RESIDENTIAL">ALL RESIDENTIAL</option>
-															  <option value="Flat/ Apartment">Flat/ Apartment</option>
-															  <option value="Residential House">Residential House</option>
-															  <option value="Villa">Villa</option>
-															  <option value="Builder Floor Apartment">Builder Floor Apartment</option>
-															  <option value="Residential Land/ Plot">Residential Land/ Plot</option>
-															  <option value="Penthouse">Penthouse</option>
-															  <option value="Studio Apartment">Studio Apartment</option>
-															  <option value="ALL COMMERCIAL">ALL COMMERCIAL</option>
-															  <option value="Commercial Office Space">Commercial Office Space</option>
-															  <option value="Office in IT Park/ SEZ">Office in IT Park/ SEZ</option>
-															  <option value="Commercial Shop">Commercial Shop</option>
-															  <option value="Commercial Showroom">Commercial Showroom</option>
-															  <option value="Commercial Land">Commercial Land</option>
-															  <option value="Warehouse/ Godown">Warehouse/ Godown</option>
-															  <option value="Industrial Land">Industrial Land</option>
-															  <option value="Industrial Building">Industrial Building</option>
-															  <option value="Industrial Shed">Industrial Shed</option>
-															  <option value="ALL AGRICULTURAL">ALL AGRICULTURAL</option>
-															  <option value="Agricultural Land">Agricultural Land</option>
-															  <option value="Farm House">Farm House</option>
-  
+															 <!-- <option  value="" >Select Property Type</option> --> 
+															 <!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
+															<option value="" disbale>Select Property Type</option>
+															<option value="1">Flat/ Apartment</option>
+															<option value="2">Residential House</option>
+															<option value="3">Villa</option>
+															<option value="4">Builder Floor Apartment</option>
+															<option value="5">Residential Land/ Plot</option>
+															<option value="6">Penthouse</option>
+															<option value="7">Studio Apartment</option>
+															<option value="8">ALL COMMERCIAL</option>
+															<option value="9">Commercial Office Space</option>
+															<option value="10">Office in IT Park/ SEZ</option>
+															<option value="11">Commercial Shop</option>
+															<option value="12">Commercial Showroom</option>
+															<option value="13">Commercial Land</option>
+															<option value="14">Warehouse/ Godown</option>
+															<option value="15">Industrial Land</option>
+															<option value="16">Industrial Building</option>
+															<option value="17">Industrial Shed</option>
+															<option value="18">ALL AGRICULTURAL</option>
+															<option value="19">Agricultural Land</option>
+															<option value="20">Farm House</option>
+															<option value="21">ALL RESIDENTIAL</option>
 														  </select>
 														  <!-- <input type="text" class="form-control" name="type" [(ngModel)]="form.type" #type="ngModel" id="type" placeholder="Enter keywords..."> -->
 												  
@@ -123,7 +124,7 @@
 												<div class="search_option_two">
 													<div class="candidate_revew_select">
 													  <div class="dropdown bootstrap-select w100 show-tick">
-														<ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options1"></ng5-slider>
+														<ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_sales"></ng5-slider>
 														<input type="hidden" class="form-control" id="Minimum" placeholder="Min Price" name="Minimum" [(ngModel)]="form.Minimum" #Minimum="ngModel">
 														<input type="hidden" class="form-control" id="Maximum" placeholder="Max Price" name="Maximum" [(ngModel)]="form.Maximum" #Maximum="ngModel">
 														  <!-- <option value="Others">Others</option> -->
@@ -317,8 +318,8 @@
 						  <div class="thmb_cntnt style2">
 							<ul class="tag mb0">
 		
-							  <li class="list-inline-item" *ngIf=" number.rent_availability "><a >For Rent </a></li>
-							  <li class="list-inline-item" *ngIf=" number.sale_availability "><a >For Sale</a></li>
+							  <li class="list-inline-item" *ngIf=" number.rent_availability != null"><a >For Rent </a></li>
+							  <li class="list-inline-item" *ngIf=" number.sale_availability != null"><a >For Sale</a></li>
 							</ul>
 						  </div>
 						  <div class="thmb_cntnt style3">
@@ -340,7 +341,7 @@
 						   </div>
 						</div>
 						<div class="details">
-							<a href="/productpage/{{number.id}}">
+							<a href="/productpage?id={{number.id}}">
 								<div class="tc_content">
 									<p class="text-thm">{{ number.property__type.name | titlecase}}</p>
 									<h4>{{number.build_name | titlecase}}</h4>

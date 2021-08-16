@@ -197,6 +197,29 @@ export class PostproductComponent implements OnInit {
      })
   }
 
+  
+markerDragEnd($event: google.maps.MouseEvent) {
+  this.latCus = $event.latLng.lat(); 
+  this.longCus = $event.latLng.lng();
+  this.form.map_latitude=this.latCus;
+  this.form.map_longitude=this.longCus;
+  this.geoCoder.geocode({ 'location': { lat: this.latCus, lng: this.longCus } }, (results, status) => {
+    if (status === 'OK') {
+      if (results[0]) {
+        this.zoom = 12;
+        console.log(results[0].formatted_address);
+          this.form.address=results[0].formatted_address;
+      } else {
+        console.log('No results found');
+      }
+    } else {
+      console.log('Geocoder failed due to: ' + status);
+    }
+
+  });
+  }
+
+
 
   furnishStatus(event): void{
     console.log(event);

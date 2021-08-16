@@ -17136,3 +17136,41 @@ color: #28B928;
     font-size: 36px;
 
   }
+  .terms_condition_widget .Categories-list,span{
+    cursor: pointer;
+  }
+  .terms_condition_widget .Categories-list:hover{
+    color: #ff5a5f!important;
+  }
+  
+  .terms_condition_widget .Categories-list:hover span{
+    color: #ff5a5f!important;
+  }
+  .menu-active{
+    color: #ff5a5f!important;
+    font-weight: 900!important;
+  }
+  .property_compare li a p span{
+    color: #ff5a5f;
+   
+  }
+  .Categories_property .active{
+    color: #ff5a5f;
+  }
+  .active{
+    color: #ff5a5f;
+    cursor: pointer;
+  }
+  .search_btn_form{
+    display: flex;
+    justify-content: space-between;
+  }
+  .search_btn_form .search_button{
+    width: 60%;
+  }
+  .search_button .reset_button{
+    width: 40%!important;
+  }
+  .listing_page_navbar p{
+    text-align: right;
+  }

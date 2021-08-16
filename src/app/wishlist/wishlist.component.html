@@ -25,7 +25,9 @@
 </head>
 <body>
 <div class="wrapper">
-  <div class="preloader"></div>
+  <div *ngIf="showLoadingIndicator">
+     <div class="preloader"></div>
+  </div>
 
  <!-- Main Header Nav -->
 <!-- <app-topbardark></app-topbardark> -->
@@ -59,21 +61,21 @@
 
        </div>
      </div>
-     <div class="row" *ngIf="showLoadingIndicator">
+     <!-- <div class="row" *ngIf="showLoadingIndicator">
       <div class="col-md-12 col-lg-12"  class="loaderClass">
         <div class="preloader1"></div>
       </div>
-    </div> 
+    </div>  -->
      <div class="row">
         <div class="grid_list_search_result">
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
             <div class="left_area tac-xsd">
-              <p >{{wishlist_length}} Search results
+              <p >{{wishlist_length}} Wishlist  results
 
               </p>
             </div>
           </div>
-          </div>
+        </div>
        <div class="col-md-12 col-lg-12">
          <div class="row">
 <!-- left sidebar code end iqbal -->
@@ -86,51 +88,15 @@
                         <div class="thumb">
                             <div class="fp_single_item_slider owl-carousel owl-theme owl-loaded">
                                 
-                                
-                            <div class="owl-stage-outer">
-                              <div class="owl-stage" style="transform: translate3d(-1412px, 0px, 0px); transition: all 2s ease 0s; width: 2118px;">
-                                <div class="owl-item cloned" style="width: 338px; margin-right: 15px;">
-                                    <div class="item">
-                                      <img class="img-whp" src="{{ftpstring}}{{ data.productdetails.product_image1}}" alt="fp1.jpg">
-                                  </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 338px; margin-right: 15px;">
-                                  <div class="item">
-                                      <img class="img-whp" src="{{ftpstring}}{{ data.productdetails.product_image5}}" alt="fp2.jpg">
-                                  </div>
-                                </div>
-                                <div class="owl-item" style="width: 338px; margin-right: 15px;">
-                                  <div class="item">
-                                    <img class="img-whp" src="{{ftpstring}}{{data.productdetails.product_image3}}" alt="fp3.jpg">
-                                  </div>
-                                </div>
-                                <div class="owl-item" style="width: 338px; margin-right: 15px;">
-                                  <div class="item">
-                                    <img class="img-whp" src="{{ftpstring}}{{data.productdetails.product_image4}}" alt="fp4.jpg">
-                                  </div>
-                                </div>
-                                <div class="owl-item cloned active" style="width: 338px; margin-right: 15px;">
-                                  <div class="item" *ngIf="data.productdetails.product_image1 != NULL">
-                                    <img class="img-whp" src="{{ftpstring}}{{data.productdetails.product_image1}}" alt="fp5.jpg">
-                                  </div>
-                                  <div class="item" *ngIf="data.productdetails.product_image1 == NULL">
-                                    <img class="img-whp" src="./assets/css/images/property/no_pro.png" alt="no property">
-                                  </div>
-                                </div>
-                                <div class="owl-item cloned" style="width: 338px; margin-right: 15px;">
-                                  <div class="item">
-                                    <img class="img-whp" src="{{ftpstring}}{{ data.productdetails.product_image2}}" alt="fp1.jpg">
-                                  </div>
-                                </div>
+                              
+                          <div class="fp_single_item_slider">
+                            <div class="item" *ngIf="data.product_img[0] != NULL">
+                              <img class="img-whp" src= "{{ftpstring}}{{data.product_img[0].image}}" alt="fp1.jpg">
+                            </div>
+                            <div class="item" *ngIf="data.product_img[0] == NULL">
+                              <img class="img-whp" src="./assets/css/images/property/no_pro.png" alt="no property">
                               </div>
-                             </div>
-                             <div class="owl-controls">
-                               <div class="owl-nav">
-                                 <div class="owl-prev" style=""><i class="flaticon-left-arrow-1"></i></div>
-                                 <div class="owl-next" style=""><i class="flaticon-right-arrow"></i></div>
-                                </div>
-                                <div class="owl-dots" style="display: none;"></div>
-                              </div>
+                            </div>
                             </div>
                             <div class="thmb_cntnt style2">
                                 <ul class="tag mb0">
@@ -141,29 +107,36 @@
                             <div class="thmb_cntnt style3">
                                 <ul class="icon mb0">
                                     <!-- <li class="list-inline-item" *ngIf="data.productdetails.expected_pricing != null" class="fp_price"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
-                                    <li class="list-inline-item"  class="fp_price"><a (click)="DeleteProd_function(data.product_id)"><span class="flaticon-fa-heart"></span></a></li>
+                                    <li class="list-inline-item"  class="fp_price"><a (click)="wishlist_remove(data.product_id)"><span class="flaticon-fa-heart"></span></a></li>
                                 </ul>
-                                <a *ngIf="data.productdetails.expected_pricing != null" class="fp_price" >${{data.productdetails.expected_pricing }}<small></small></a>
-                                <a *ngIf="data.productdetails.expected_rent != null" class="fp_price"  >${{ data.productdetails.expected_rent }}<small></small></a>
+                                <a *ngIf="data.productdetails.expected_pricing != null" class="fp_price" >Rs.{{Price_convert(data.productdetails.expected_pricing) }}<small></small></a>
+                                <a *ngIf="data.productdetails.expected_rent != null" class="fp_price"  >Rs.{{Price_convert(data.productdetails.expected_rent)}}<small></small></a>
                             </div>
                         </div>
                         <div class="details">
+                          <a href="/productpage/{{data.id}}">
                             <div class="tc_content">
-                                <p class="text-thm">{{ data.productdetails.type }}</p>
-                                <h4>{{ data.productdetails.build_name }}</h4>
-                                <p><span class="flaticon-placeholder"></span> {{ data.productdetails.address }}</p>
+                                <p class="text-thm">{{ data.productdetails.property__type.name | titlecase  }}</p>
+                                <h4>{{ data.productdetails.build_name | titlecase  }}</h4>
+                                <p><span class="flaticon-placeholder"></span> {{ data.productdetails.address | titlecase  }}</p>
                                 <ul class="prop_details mb0">
                                     <li class="list-inline-item"><a >Beds: {{ data.productdetails.bedroom }}</a></li>
                                     <li class="list-inline-item"><a >Baths: {{ data.productdetails.bathroom }}</a></li>
                                     <li class="list-inline-item"><a >Sq Ft: {{ data.productdetails.area }}</a></li>
                                 </ul>
                             </div>
-                            <div class="fp_footer">
-                                <ul class="fp_meta float-left mb0">
-                                    <li class="list-inline-item"><a href="#"><img src="./../../assets/css/images/property/pposter1.png" alt="pposter1.png"></a></li>
-                                    <li class="list-inline-item"><a href="#">{{data.user_detail.name}}</a></li>
-                                </ul>
-                                <div class="fp_pdate float-right">4 years ago</div>
+                            </a>
+                            <div class="fp_footer" id="user_details">
+                              <ul class="fp_meta float-left mb0">
+                                <li class="list-inline-item"><a href="#"><img src="./../../assets/css/images/team/e1.png" alt="pposter1.png"></a></li>
+                                <li class="list-inline-item"><a href="#">{{data.user_detail.name | titlecase}}</a></li>
+                                <div class="fp_pdate float-right" *ngIf="data.product_comparision==null">
+                                  <button type="button" (click)="product_comp(data.product_id)"  class="btn btn-log btn-block btn-thm bg-white text-black-50">Add to compare</button>
+                                </div>
+                                <div class="fp_pdate float-right" *ngIf="data.product_comparision !=null">
+                                  <button type="button"  class="btn  text-black-50 bucket-btn">Added To Compare</button>
+                                </div>
+                              </ul>
                             </div>
                         </div>
                     </div>

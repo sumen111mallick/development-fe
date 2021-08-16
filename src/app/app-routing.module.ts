@@ -66,7 +66,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [VerifyGuard]},
   {path: 'productlisting', component: ProductListingComponent},
-  {path: 'productpage/:id', component: ProductpageComponent},
+  {path: 'productpage', component: ProductpageComponent},
   //{path: 'register', component: UserregisterComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [VerifyGuard]},

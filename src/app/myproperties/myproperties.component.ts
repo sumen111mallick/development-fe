@@ -46,11 +46,11 @@ export class MypropertiesComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.userService.getproperties().pipe().subscribe(
       (data: any) => {
-        this.contentLenght=data.data.data.length;
+        this.contentLenght=data.data.length;
         console.log(this.contentLenght);
-        this.content = data.data.data;
+        this.content = data.data;
         this.showLoadingIndicator = false;
-        console.log(data.data.data);
+        console.log(data.data);
 
       },
       err => {
