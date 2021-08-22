@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder } from '@angular/forms';
 import { Options,LabelType } from 'ng5-slider';
 import { MapsAPILoader,AgmMap } from '@agm/core';
+import { Validators } from '@angular/forms';
 // import { google } from "google-maps";
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 @Component({
@@ -18,8 +19,6 @@ import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angula
 })
 export class PostproductComponent implements OnInit {
   [x: string]: any;
-
-
   form: any = {};
   ared: any = {};
   isLoggedIn = false;
@@ -29,15 +28,12 @@ export class PostproductComponent implements OnInit {
   showLoadingIndicator :boolean= false;
   saleValue: boolean = true;
   rentValue: boolean = false;
-
   furnish: boolean = false;
-
   maintenance: boolean = true;
-
   parking: boolean = false;
-
   amenityArray = [];
   varAmenity: string;
+  public step:any=1;
 
   furnishingArray = [];
   varfurnishing: string;
@@ -45,6 +41,7 @@ export class PostproductComponent implements OnInit {
   text : string;
 
   content: any = {};
+  user_id:any={};
 
   err_caused:boolean = false;
   selectedItems:string[];
@@ -90,21 +87,93 @@ export class PostproductComponent implements OnInit {
   public property_type:any;
   public property_type_result:any;
   product_img:any=[];
+  public submitted:boolean=false;
+  public Expected_PriceEroor:boolean=false;
+
+  insert_property_sales = new FormGroup({
+    Property_Details: new FormGroup({
+      build_name: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required),
+      display_address: new FormControl('', Validators.required),
+      property_detail: new FormControl('', Validators.required)
+    }),
+    
+    Property_Location: new FormGroup({
+      address: new FormControl('',Validators.required),
+      map_latitude: new FormControl('', Validators.required),
+      map_longitude: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      locality: new FormControl('', Validators.required),
+      nearest_landmark: new FormControl('', Validators.required)
+    }),
+    
+    Property_area: new FormGroup({
+      area: new FormControl('', Validators.required),
+      carpet_area: new FormControl('', Validators.required),
+      area_unit: new FormControl('', Validators.required),
+      bedroom: new FormControl('', Validators.required),
+      bathroom: new FormControl('', Validators.required),
+      balconies: new FormControl('', Validators.required),
+      additional_rooms: new FormControl('', Validators.required),
+      equipment: new FormControl('', Validators.required),
+      features: new FormControl('', Validators.required),
+      furnishings:new FormControl(''),
+      nearby_places: new FormControl('', Validators.required),
+      age_of_property: new FormControl('', Validators.required),
+      furnishing_status: new FormControl(''),
+      facing_towards: new FormControl('', Validators.required),
+      rera_registration_status: new FormControl('', Validators.required),
+      additional_parking_status: new FormControl('', Validators.required),
+      buildyear: new FormControl('', Validators.required),
+      availability_condition: new FormControl('', Validators.required),
+      possession_by: new FormControl('', Validators.required),
+      property_on_floor: new FormControl(''),
+      total_floors: new FormControl('', Validators.required)
+    }),
+
+    Property_parking: new FormGroup({
+      parking_covered_count: new FormControl(''),
+      parking_open_count: new FormControl('')
+    }),
+
+    Property_Pricing: new FormGroup({
+      ownership: new FormControl('', Validators.required),
+      expected_pricing: new FormControl('500001', Validators.required),
+      security_deposit: new FormControl('', Validators.required),
+      inc_electricity_and_water_bill: new FormControl('', Validators.required),
+      tax_govt_charge: new FormControl('', Validators.required),
+      price_negotiable: new FormControl('', Validators.required),
+      maintenance_charge_status: new FormControl('', Validators.required),
+      maintenance_charge: new FormControl(''),
+      maintenance_charge_condition:new FormControl(''),
+      inclusive_pricing_details:new FormControl(''),
+      brokerage_charges:new FormControl('')
+    }),
+    Property_descption: new FormGroup({
+      description: new FormControl('', Validators.required)
+    })
+    
+  });
 
   // map google
   geoCoder:any;
   // searchElementRef:any;
-  latCus=78.89;
-  longCus=76.897;
+  latCus:any={};
+  longCus:any={};
   @ViewChild("search") searchElementRef: ElementRef;
   @ViewChild(AgmMap,{static: true}) public agmMap: AgmMap;
   zoom: number;
   location: string;
+  nativeElement:any;
+  
 
   // value: number = 30000000;
   options: Options = {
     floor: 0,
-    ceil: 50000000
+    ceil: 50000000,
+    translate: (value: number, label: LabelType): string => {
+      return '₹' + value.toLocaleString('en');
+    }
   };
 
    constructor(
@@ -114,7 +183,8 @@ export class PostproductComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone:NgZone
+    private ngZone:NgZone,
+    private fb: FormBuilder
     ) {
       
     this.getLocation();
@@ -122,36 +192,35 @@ export class PostproductComponent implements OnInit {
 
     eventListen(event){
       console.log(event);
-    }
-
-
+    }  
   ngOnInit(): void {
-    console.log("1");
     this.showLoadingIndicator = true;
-    this.form.expected_pricing="0";
-    console.log("2");
+      this.expected_pricing=500001;
     
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder();
     });
-    console.log("3");
     this.mapsAPILoader.load().then(() => {
+      console.log(this.searchElementRef);
       let autocomplete = new google.maps.places.Autocomplete(
+        
         this.searchElementRef.nativeElement
       );
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          this.latCus = place.geometry.location.lat();
+          this.latCus = place.geometry.location.lat();                             
           this.longCus = place.geometry.location.lng();
           this.location = place.formatted_address;
           this.zoom = 15;
           console.log(this.latCus);
           console.log(this.location);
-          this.form.address=this.location;
-          this.form.map_latitude=this.latCus;
-          this.form.map_longitude=this.longCus;
+          this.insert_property_sales.controls.Property_Location.patchValue({
+            address:this.location,
+            map_latitude:this.latCus,
+            map_longitude:this.longCus,
+            });
         
         });
       });
@@ -161,23 +230,18 @@ export class PostproductComponent implements OnInit {
     this.Property_type_data();
     this.titleService.setTitle('Create Listing');
     // Login check
-    if(this.tokenStorage.getUser() != null){
-      this.isLoggedIn = true
-      console.log(this.isLoggedIn)
-    }
-    else{
-      this.redirect_to_home();
-    }
-    console.log(this.form);
-    this.content = this.tokenStorage.getUser().id;
-    this.maintenance = true;
-    this.parking = false;
+  
     if (this.tokenStorage.getToken()){
-      this.isLoggedIn = true;
+      console.log(this.isLoggedIn)
+      this.isLoggedIn = true;  
+      this.user_id = this.tokenStorage.getUser().id;
+      this.maintenance = true;
+      this.parking = false;
       this.roles = this.tokenStorage.getUser().username;
     }
     else{
-      this.isLoggedIn = false ;
+      this.isLoggedIn = false;
+      this.redirect_to_home();
     }
     this.selectedItems = new Array<string>();
     this.product_img = new Array<string>();
@@ -188,37 +252,38 @@ export class PostproductComponent implements OnInit {
   }
   getLocation(){
     this.userService.getLocationService().then(resp=>{
-     console.log(resp.lng);
-     console.log(resp); 
      this.longCus=resp.lng;
      this.latCus=resp.lat; 
-     this.form.map_latitude=this.latCus;
-     this.form.map_longitude=this.longCus;
+     this.insert_property_sales.controls.Property_Location.patchValue({
+      map_latitude:this.latCus,
+      map_longitude:this.longCus,
+      });
      })
   }
 
-  
-markerDragEnd($event: google.maps.MouseEvent) {
-  this.latCus = $event.latLng.lat(); 
-  this.longCus = $event.latLng.lng();
-  this.form.map_latitude=this.latCus;
-  this.form.map_longitude=this.longCus;
-  this.geoCoder.geocode({ 'location': { lat: this.latCus, lng: this.longCus } }, (results, status) => {
-    if (status === 'OK') {
-      if (results[0]) {
-        this.zoom = 12;
-        console.log(results[0].formatted_address);
-          this.form.address=results[0].formatted_address;
+  markerDragEnd($event: google.maps.MouseEvent) {
+    this.latCus = $event.latLng.lat(); 
+    this.longCus = $event.latLng.lng();
+   
+    this.geoCoder.geocode({ 'location': { lat: this.latCus, lng: this.longCus } }, (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          console.log(results[0].formatted_address);
+          this.insert_property_sales.controls.Property_Location.patchValue({
+            address:results[0].formatted_address,
+            map_latitude:this.latCus,
+            map_longitude:this.longCus,
+            });
+        } else {
+          console.log('No results found');
+        }
       } else {
-        console.log('No results found');
+        console.log('Geocoder failed due to: ' + status);
       }
-    } else {
-      console.log('Geocoder failed due to: ' + status);
+  
+    });
     }
-
-  });
-  }
-
 
 
   furnishStatus(event): void{
@@ -450,32 +515,145 @@ markerDragEnd($event: google.maps.MouseEvent) {
     );
   }
 
+  Previous():void{
+    if(this.step > 1){
+    this.step= this.step-1;
+    }else{
+      console.log("step 1");
+      this.step=1;
+    }
+  }
+
+  // controls checker
+  get Property_Details(){
+    // console.log(this.insert_property_sales.controls['Property_Details']['controls']);
+    return this.insert_property_sales.controls['Property_Details']['controls'];
+  }
+  get Property_Location(){
+    // console.log(this.insert_property_sales.controls['Property_Location']['controls']);
+    return this.insert_property_sales.controls['Property_Location']['controls'];
+  }
+  get Property_area(){
+    // console.log(this.insert_property_sales.controls['Property_area']['controls']);
+    return this.insert_property_sales.controls['Property_area']['controls'];
+  }
+  get Property_parking(){
+    // console.log(this.insert_property_sales.controls['Property_parking']['controls']);
+    return this.insert_property_sales.controls['Property_parking']['controls'];
+  }
+  get Property_Pricing(){
+    // console.log(this.insert_property_sales.controls['Property_Pricing']['controls']);
+    return this.insert_property_sales.controls['Property_Pricing']['controls'];
+  }
+  get Property_descption(){
+    // console.log(this.insert_property_sales.controls['Property_descption']['controls']);
+    return this.insert_property_sales.controls['Property_descption']['controls'];
+  }
+  
+  
+next():void{
+  this.submitted=false;
+  console.log(this.insert_property_sales.value);
+  if(this.insert_property_sales.controls.Property_Details.invalid &&  this.step == 1){
+    this.submitted=true;
+    return;
+  }
+  if(this.insert_property_sales.controls.Property_Location.invalid &&  this.step == 1){
+    this.submitted=true;
+    return;
+  }
+  
+  if(this.insert_property_sales.controls.Property_area.invalid && this.step == 2){
+    this.submitted=true;
+    return;
+  }
+  if(this.insert_property_sales.controls.Property_parking.invalid && this.step == 3){
+    this.submitted=true;
+    return;
+  }
+  if(this.insert_property_sales.controls.Property_Pricing.invalid && this.step == 4){
+    this.submitted=true;
+    return;
+  }if(this.insert_property_sales.controls.Property_descption.invalid && this.step == 5){
+    this.submitted=true;
+    return;
+  }
+  if(this.step >= 5){
+    console.log("step 5");
+      this.step=5;
+  }else{
+      this.step= this.step+1;
+  }
+ 
+}
+
   onSubmitSale(): void {
-    console.log(this.form);
-    if(this.form.expected_pricing>=500000 && this.form.expected_pricing<=50000000){
-    this.authService.product_insert_sale(this.form, this.content.id, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
-      data => {
-        console.log(data);
-        this.toastr.success('Successfuly Saved', 'Property');
-        // window.location.href=GlobalConstants.siteURL+"myproperties"
-      },
-      err => {
-        this.err_caused = true;
-        this.errorMessage = err.error.errors;
-        this.errorMessage1 = err.error.message;
-        console.log(this.errorMessage);
-        this.toastr.error(this.errorMessage1, 'Something Error', {
-          timeOut: 3000,
-        });
-      }
-    );
+      console.log(this.insert_property_sales.value);
+      if(this.insert_property_sales.value.Property_Pricing.expected_pricing>=500000 && this.insert_property_sales.value.Property_Pricing.expected_pricing<=50000000){
+      this.authService.product_insert_sale(this.insert_property_sales.value, this.user_id, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
+        data => {
+          console.log(data);
+          this.toastr.success('Successfuly Saved', 'Property');
+          window.location.href=GlobalConstants.siteURL+"myproperties"
+        },
+        err => {
+          this.err_caused = true;
+          this.errorMessage = err.error.errors;
+          this.errorMessage1 = err.error.message;
+          console.log(this.errorMessage);
+          this.toastr.error(this.errorMessage1, 'Something Error', {
+            timeOut: 3000,
+          });
+        }
+      );
+    }else{
+      this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
+        timeOut: 2000,
+      });
+    }
+   
+}
+
+keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+  var charCode = (event.which) ? event.which : event.keyCode;
+  // Only Numbers 0-9
+  if ((charCode < 48 || charCode > 57)) {
+    event.preventDefault();
+    return false;
+  } else {
+    return true;
+  }
+}
+RangeSlider_Price(event: number){
+  // this.expected_pricing=500001;
+  this.insert_property_sales.controls.Property_Pricing.patchValue({
+    expected_pricing:event,
+    });
+    if(event<=500000 || event>=50000000){
+      this.Expected_PriceEroor=true;
+    }else{
+      this.Expected_PriceEroor=false;
+    }
+}
+rangeInput_Price(event: number){
+  // this.expected_pricing=500001;
+  this.insert_property_sales.controls.Property_Pricing.patchValue({
+    expected_pricing:event,
+    });
+  if(event<=500000 || event>=50000000){
+    this.Expected_PriceEroor=true;
+  }else{
+    this.Expected_PriceEroor=false;
+  }
+}
+Expected_Price(event: number){
+  if(event>=500000 && event<=50000000){
   }else{
     this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
-      timeOut: 2000,
+      timeOut: 1500,
     });
   }
 }
-
 
   saleButton(): void{
     this.saleValue = true;

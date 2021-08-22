@@ -199,7 +199,10 @@ export class UpdatepropertyComponent implements OnInit {
   options: Options = {
     // step:500,
     floor: 0,
-    ceil: 500000
+    ceil: 500000,
+    translate: (value: number, label: LabelType): string => {
+      return '₹' + value.toLocaleString('en');
+    }
   };
  
  

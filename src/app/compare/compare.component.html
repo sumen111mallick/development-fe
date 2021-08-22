@@ -63,7 +63,9 @@
 											<div class="membership_header ">
 												<div class="thumb">
 													<a (click)="delete_comp(item.id)"><span class="flaticon-close"></span></a>
-													<img class="img-fluid w100" src="{{ ftpstring }}{{ item.product_img['0'].image}}" alt="2.jpg">
+													<img class="img-fluid w100"  *ngIf="item.product_img.length>0;else OtherImage"  src="{{ ftpstring }}{{ item.product_img['0'].image}}" alt="2.jpg"><ng-template #OtherImage>
+														<img class="img-whp" src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
+													  </ng-template>
 													<div *ngIf="item.productdetails.expected_pricing != null" class="price">Rs. {{ Price_convert(item.productdetails.expected_pricing)}}<span class="mnth"></span></div><br><hr>
 													<div *ngIf="item.productdetails.expected_rent != null" class="price">Rs. {{ Price_convert(item.productdetails.expected_rent) }}<span class="mnth">/mo</span></div>
 												</div>

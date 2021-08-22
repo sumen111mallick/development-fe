@@ -130,7 +130,7 @@ export class ProductpageComponent implements OnInit {
       this.authService.product_login_see(id).subscribe(
         data => {
           console.log(data);
-          console.log(data["product"]["0"].product_img[0].image);
+          // console.log(data["product"]["0"].product_img[0].image);
           this.product_images=data["product"]["0"].product_img;
           this.product_img_length=this.product_images;
           this.productdata = data["product"];

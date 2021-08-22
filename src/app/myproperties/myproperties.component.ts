@@ -21,6 +21,7 @@ export class MypropertiesComponent implements OnInit {
   page: number = 1;
  public p: number;
   public contentLenght:number=0;
+  e: any;
 
   constructor(
     private titleService: Title,
@@ -82,5 +83,12 @@ export class MypropertiesComponent implements OnInit {
   property_details(id){
     console.log(id);
     this.router.navigate(["UdateProperty/", id]);
+  }
+  price_comma(value:number):void{
+    this.e=value;
+    var t = (this.e = this.e ? this.e.toString() : "").substring(this.e.length - 3)
+    , n = this.e.substring(0, this.e.length - 3);
+  return "" !== n && (t = "," + t),
+    n.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + t
   }
 }

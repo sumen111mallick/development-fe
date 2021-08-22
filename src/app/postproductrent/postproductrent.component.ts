@@ -9,6 +9,8 @@ import { MapsAPILoader, AgmMap } from '@agm/core';
 // import { google } from "google-maps";
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
+import { Validators } from '@angular/forms';
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-postproductrent',
@@ -24,6 +26,7 @@ export class PostproductrentComponent implements OnInit {
   isFormSubmitted = false;
   public errorMessage: any = {};
   roles: string[] = [];
+  public submitted:boolean=false;
 
   saleValue: boolean = true;
   rentValue: boolean = false;
@@ -105,6 +108,81 @@ export class PostproductrentComponent implements OnInit {
   public property_type:any;
   public property_type_result:any;
   product_img:any=[];
+  public step:any=1;
+  public Expected_PriceEroor:boolean=false;
+
+  insert_property_rent= new FormGroup({
+    Property_Details: new FormGroup({
+      build_name: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required),
+      display_address: new FormControl('', Validators.required),
+      property_detail: new FormControl('', Validators.required)
+    }),
+    
+    Property_Location: new FormGroup({
+      address: new FormControl('',Validators.required),
+      map_latitude: new FormControl('', Validators.required),
+      map_longitude: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      locality: new FormControl('', Validators.required),
+      nearest_landmark: new FormControl('', Validators.required)
+    }),
+    
+    Property_area: new FormGroup({
+      area: new FormControl('', Validators.required),
+      carpet_area: new FormControl('', Validators.required),
+      area_unit: new FormControl('', Validators.required),
+      bedroom: new FormControl('', Validators.required),
+      bathroom: new FormControl('', Validators.required),
+      balconies: new FormControl('', Validators.required),
+      additional_rooms: new FormControl('', Validators.required),
+      equipment: new FormControl('', Validators.required),
+      features: new FormControl('', Validators.required),
+      furnishings:new FormControl(''),
+      nearby_places: new FormControl('', Validators.required),
+      age_of_property: new FormControl('', Validators.required),
+      furnishing_status: new FormControl('',Validators.required),
+      facing_towards: new FormControl('', Validators.required),
+      rera_registration_status: new FormControl('', Validators.required),
+      additional_parking_status: new FormControl('', Validators.required),
+      buildyear: new FormControl('', Validators.required),
+      availability_condition: new FormControl('', Validators.required),
+      possession_by: new FormControl('', Validators.required),
+      property_on_floor: new FormControl('',Validators.required),
+      total_floors: new FormControl('', Validators.required)
+    }),
+    Property_Rent_Condition: new FormGroup({
+      willing_to_rent_out_to: new FormControl('', Validators.required),
+      agreement_type: new FormControl('', Validators.required),
+      available_for: new FormControl('', Validators.required),
+      rent_cond: new FormControl('', Validators.required),
+      month_of_notice: new FormControl('', Validators.required),
+      duration_of_rent_aggreement: new FormControl('', Validators.required)
+    }),
+
+    Property_parking: new FormGroup({
+      parking_covered_count: new FormControl(''),
+      parking_open_count: new FormControl('')
+    }),
+
+    Property_Pricing: new FormGroup({
+      ownership: new FormControl('', Validators.required),
+      expected_rent: new FormControl('5001', Validators.required),
+      security_deposit: new FormControl('', Validators.required),
+      inc_electricity_and_water_bill: new FormControl('', Validators.required),
+      tax_govt_charge: new FormControl('', Validators.required),
+      price_negotiable: new FormControl('', Validators.required),
+      maintenance_charge_status: new FormControl('', Validators.required),
+      brokerage_charges:new FormControl('')
+    }),
+    Property_descption: new FormGroup({
+      description: new FormControl('', Validators.required)
+    })
+    
+  });
+
+
+
 
   options: Options = {
     // step:100,
@@ -144,7 +222,7 @@ export class PostproductrentComponent implements OnInit {
 
   ngOnInit(): void {
     this.showLoadingIndicator = true;
-    this.form.expected_rent = "0";
+    this.expected_rent = 5001;
 
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder();
@@ -163,9 +241,11 @@ export class PostproductrentComponent implements OnInit {
           this.zoom = 15;
           console.log(this.latCus);
           console.log(this.location);
-          this.form.address = this.location;
-          this.form.map_latitude = this.latCus;
-          this.form.map_longitude = this.longCus;
+          this.insert_property_rent.controls.Property_Location.patchValue({
+            address:this.location,
+            map_latitude:this.latCus,
+            map_longitude:this.longCus,
+            });
 
         });
       });
@@ -203,8 +283,10 @@ export class PostproductrentComponent implements OnInit {
       console.log(resp);
       this.longCus = resp.lng;
       this.latCus = resp.lat;
-      this.form.map_latitude = this.latCus;
-      this.form.map_longitude = this.longCus;
+      this.insert_property_rent.controls.Property_Location.patchValue({
+        map_latitude:this.latCus,
+        map_longitude:this.longCus,
+        });
     })
   }
   markerDragEnd($event: google.maps.MouseEvent) {
@@ -217,7 +299,11 @@ export class PostproductrentComponent implements OnInit {
         if (results[0]) {
           this.zoom = 12;
           console.log(results[0].formatted_address);
-            this.form.address=results[0].formatted_address;
+          this.insert_property_rent.controls.Property_Location.patchValue({
+            address:results[0].formatted_address,
+            map_latitude:this.latCus,
+            map_longitude:this.longCus,
+            });
         } else {
           console.log('No results found');
         }
@@ -453,11 +539,91 @@ export class PostproductrentComponent implements OnInit {
       }
     );
   }
+  Previous():void{
+    if(this.step > 1){
+    this.step= this.step-1;
+    }else{
+      console.log("step 1");
+      this.step=1;
+    }
+  }
+  
+next():void{
+  this.submitted=false;
+  console.log(this.insert_property_rent.value);
+  if(this.insert_property_rent.controls.Property_Details.invalid &&  this.step == 1){
+    this.submitted=true;
+    return;
+  }
+  if(this.insert_property_rent.controls.Property_Location.invalid &&  this.step == 1){
+    this.submitted=true;
+    return;
+  }
+  
+  if(this.insert_property_rent.controls.Property_area.invalid && this.step == 2){
+    this.submitted=true;
+    return;
+  }
+  if(this.insert_property_rent.controls.Property_Rent_Condition.invalid && this.step == 3){
+    this.submitted=true;
+    return;
+  }
+  if(this.insert_property_rent.controls.Property_parking.invalid && this.step == 4){
+    this.submitted=true;
+    return;
+  }
+  if(this.insert_property_rent.controls.Property_Pricing.invalid && this.step == 5){
+    this.submitted=true;
+    return;
+  }if(this.insert_property_rent.controls.Property_descption.invalid && this.step == 6){
+    this.submitted=true;
+    return;
+  }
+  if(this.step >= 6){
+    console.log("step 6");
+      this.step=6;
+  }else{
+      this.step= this.step+1;
+  }
+ 
+}
 
+  // controls checker
+  get Property_Details(){
+    // console.log(this.insert_property_sales.controls['Property_Details']['controls']);
+    return this.insert_property_rent.controls['Property_Details']['controls'];
+  }
+  get Property_Location(){
+    // console.log(this.insert_property_sales.controls['Property_Location']['controls']);
+    return this.insert_property_rent.controls['Property_Location']['controls'];
+  }
+  get Property_area(){
+    // console.log(this.insert_property_sales.controls['Property_area']['controls']);
+    return this.insert_property_rent.controls['Property_area']['controls'];
+  }
+  
+  get Property_Rent_Condition(){
+    // console.log(this.insert_property_sales.controls['Property_Pricing']['controls']);
+    return this.insert_property_rent.controls['Property_Rent_Condition']['controls'];
+  }
+  get Property_parking(){
+    // console.log(this.insert_property_sales.controls['Property_parking']['controls']);
+    return this.insert_property_rent.controls['Property_parking']['controls'];
+  }
+  get Property_Pricing(){
+    // console.log(this.insert_property_sales.controls['Property_Pricing']['controls']);
+    return this.insert_property_rent.controls['Property_Pricing']['controls'];
+  }
+  get Property_descption(){
+    // console.log(this.insert_property_sales.controls['Property_descption']['controls']);
+    return this.insert_property_rent.controls['Property_descption']['controls'];
+  }
+  
+  
   onSubmitRent(): void {
-    console.log(this.form);
-    if (this.form.expected_rent >= 5000 && this.form.expected_rent <= 500000) {
-      this.authService.product_insert_rent(this.form, this.content, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
+    console.log(this.insert_property_rent.value);
+    if (this.insert_property_rent.value.Property_Pricing.expected_rent>= 5000 && this.insert_property_rent.value.Property_Pricing.expected_rent <= 500000) {
+      this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
         data => {
           console.log("successful" + data)
           this.toastr.success('Successfuly Saved', 'Property');
@@ -479,6 +645,38 @@ export class PostproductrentComponent implements OnInit {
         timeOut: 2000,
       }
       );
+    }
+  }
+  keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+  RangeSlider_Price(event: number){
+    // this.expected_pricing=500001;
+    this.insert_property_rent.controls.Property_Pricing.patchValue({
+      expected_rent:event,
+      });
+      if(event<=5000 || event>=500000){
+        this.Expected_PriceEroor=true;
+      }else{
+        this.Expected_PriceEroor=false;
+      }
+  }
+  rangeInput_Price(event: number){
+    // this.expected_pricing=500001;
+    this.insert_property_rent.controls.Property_Pricing.patchValue({
+      expected_rent:event,
+      });
+    if(event<=5000 || event>=500000){
+      this.Expected_PriceEroor=true;
+    }else{
+      this.Expected_PriceEroor=false;
     }
   }
 

@@ -200,7 +200,10 @@ export class UpdateSalesPropertyComponent implements OnInit {
   options: Options = {
     // step:500,
     floor: 0,
-    ceil: 50000000
+    ceil: 50000000,
+     translate: (value: number, label: LabelType): string => {
+      return '₹' + value.toLocaleString('en');
+    }
   };
   files_length: number;
  
@@ -241,13 +244,18 @@ export class UpdateSalesPropertyComponent implements OnInit {
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder();
     });
+    console.log("map1");
+    
     this.mapsAPILoader.load().then(() => {
+      console.log("map2");
+      console.log( this.searchElementRef);
       let autocomplete = new google.maps.places.Autocomplete(
         this.searchElementRef.nativeElement
       );
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
-          
+          console.log("map3");
+    
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
           this.latCus = place.geometry.location.lat();
           this.longCus = place.geometry.location.lng();

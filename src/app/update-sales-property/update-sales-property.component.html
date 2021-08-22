@@ -117,30 +117,32 @@
         <div class="my_profile_setting_input form-group" style="position: relative;">
             <label for="propertyAddress">Address</label>
            
-            <input type="hidden" class="form-control" formControlName="address" id="address" name="address"
+            <input type="text" class="form-control" formControlName="address" id="address" name="address"
             placeholder="Please Enter the Address...">
-            <input  #search  autocorrect="off" autocapitalize="off"  spellcheck="off" formControlName="address" type="search"  class="form-control input-text"
-            placeholder="Enter Address" />
-            <div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.address" >{{errorMessage.address}}</p></div>
-            <span class="flaticon-maps-and-flags" style="position: absolute;top: 45px; right: 31px"></span>
-          <agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus"  [zoom]="15"  class="main-card-agm-map" >
-                <agm-marker [latitude]="latCus" [longitude]="longCus"  [markerDraggable]="true"  (dragEnd)="markerDragEnd($event)">
-                      <agm-info-window> </agm-info-window>
-                </agm-marker>
-            </agm-map>
+
+<input  #search  autocorrect="off" autocapitalize="off"  spellcheck="off" formControlName="address" type="search"  class="form-control input-text"
+placeholder="Enter Address" />
+
+<div class="text-center" id="errorId" *ngIf="errorMessage"><p class="alert alert-danger" *ngIf="errorMessage.address" >{{errorMessage.address}}</p></div>
+<span class="flaticon-maps-and-flags" style="position: absolute;top: 45px; right: 31px"></span>
+<agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus"  [zoom]="15"  class="main-card-agm-map" >
+<agm-marker [latitude]="latCus" [longitude]="longCus"  [markerDraggable]="true"  (dragEnd)="markerDragEnd($event)">
+<agm-info-window> </agm-info-window>
+</agm-marker>
+</agm-map>
         </div>
       </div>
       <div class="col-lg-6 col-xl-6" >
         <div class="my_profile_setting_input form-group">
-            <label for="map_latitude">Map Latitude</label>
-            <input type="text" class="form-control" formControlName="map_latitude" id="map_latitude" name="map_latitude"
+            <!-- <label for="map_latitude">Map Latitude</label> -->
+            <input type="hidden" class="form-control" formControlName="map_latitude" id="map_latitude" name="map_latitude"
             placeholder="Please Enter Map Latitude" readonly>
         </div>
       </div>
       <div class="col-lg-6 col-xl-6">
         <div class="my_profile_setting_input form-group">
-            <label for="map_longitude">Map Longitude</label>
-            <input type="text" class="form-control"  formControlName="map_longitude" id="map_longitude" name="map_longitude"
+            <!-- <label for="map_longitude">Map Longitude</label> -->
+            <input type="hidden" class="form-control"  formControlName="map_longitude" id="map_longitude" name="map_longitude"
             placeholder="Plese Enter Map longitude" readonly>
         </div>
       </div>

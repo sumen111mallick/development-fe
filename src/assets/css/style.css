@@ -13545,8 +13545,8 @@ a.btn.btn_error{
   color: #ffffff;  
 }
 .btn-thm2 {
-  background-color: #ff787c;
-  border-color: #ff787c;
+  background-color: #ff5a5f;
+  border-color: #ff5a5f;
   color: #ffffff;
   border-radius: 0px;
   -webkit-transition: all 0.3s ease;
@@ -13557,8 +13557,8 @@ a.btn.btn_error{
 .btn-thm2:active,
 .btn-thm2:focus {
   background-color: #ffffff;
-  border-color: #ff787c;
-  color: #ff787c; }
+  border-color: #ff5a5f;
+  color: #ff5a5f; }
 
 .btn-thm3 {
   background-color: #ff1053;
@@ -17031,7 +17031,7 @@ justify-content: flex-end;
   z-index: 999;
  }
  .compare_page{
-   padding: 115px 0px!important;
+   padding: 105px 0px!important;
  }
 ul.mc_parent_list ul.mc_child_list.one li{
   font-weight: bold;
@@ -17174,3 +17174,200 @@ color: #28B928;
   .listing_page_navbar p{
     text-align: right;
   }
+  .toast-container{
+    z-index: 10000000000!important;
+  }
+  .my_profile_setting_input .btn3{
+    width: 150px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #ff5a5f;
+    color: #fff;
+    border-color: #ff5a5f;
+  }
+  .my_profile_setting_input .btn3:hover{
+  border-color: #ff5a5f;
+  color: #ff5a5f;
+  }
+  .form-group span{
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .9px;
+  }
+  .form_pagination_ul{
+    display: flex;
+  }
+  .form_pagination_ul li{
+    padding: 7px 12px;
+    color: #ff5a5f;
+    cursor: pointer;
+  }
+  .form_pagination_ul .active{
+    color:#fff!important;
+    background-color: #ff5a5f!important;
+  }
+  .form_pagination_ul .form_pagination_previous:before{
+    content: '«';
+    display: inline-block;
+    margin-right: 7px;
+    cursor: pointer;
+  }
+  .form_pagination_ul .form_pagination_next:after {
+    content: '»';
+    display: inline-block;
+    margin-left: 7px;
+    cursor: pointer;
+  }
+  .form_pagination_ul .disabled{
+    cursor: not-allowed;
+  }
+  .row_pagination{
+    display: flex;
+    justify-content: flex-end;
+    padding: 40px 0px 0px;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 19% 19% 19% 19% 20%;
+    grid-gap: 10px;
+    border-bottom: 1px solid #ff5a5f;
+  }
+  .grid-container .form_tab{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ff5a5f;
+    border-bottom: none;
+    padding: 8px 0px;
+    cursor: pointer;
+  }
+  .grid-container .form_tab h5{
+    border-radius: 86px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: #fff;
+    font-weight: 600;
+    background: #ff5a5f;
+    font-size: 14px;
+    margin: 0px;
+  }
+  .grid-container .form_tab P{
+    text-align: center;
+    padding: 0px 0px 0px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0px;
+    font-weight: 600;
+  }
+  .grid-container .active{
+    background-color: #fff;
+    cursor: pointer;
+    border-top: 10px solid #ff5a5f;
+    border-bottom: none;
+    height: 102%;
+
+  }
+  .grid-container .active h5{
+    border-radius: 86px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: #fff;
+    background: #ff5a5f;
+    font-size: 14px;
+    margin: 0px;
+    font-weight: 600;
+  }
+.grid-container .active p{
+  color: #ff5a5f!important;
+}
+#wrapper-class{
+  border-color: #ff5a5f!important;
+  width: 100%;
+  border-top: none;
+  border-radius: none!important;
+}
+.property_sales_form{
+  padding: 0px 0px 0px 0px;
+  border-radius: 0px;
+}
+.property_rent_form{
+  padding: 0px 0px 0px 0px;
+  border-radius: 0px;
+}
+.property_rent_form .my_dashboard_review, .my_listing_single{
+  border-radius: 0px!important;
+}
+.property_sales_form .my_dashboard_review, .my_listing_single {
+border-radius: 0px!important;
+}
+.Rent_property  .grid-container {
+  display: grid;
+  grid-template-columns: 16% 15% 17% 16% 16% 15%;
+  grid-gap: 10px;
+  border-bottom: 1px solid #ff5a5f;
+}
+.Rent_property  .grid-container .form_tab{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ff5a5f;
+  border-bottom: none;
+  padding: 8px 0px;
+  cursor: pointer;
+}
+.Rent_property   .grid-container .form_tab h5{
+  border-radius: 86px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  font-weight: 600;
+  background: #ff5a5f;
+  font-size: 14px;
+  margin: 0px;
+}
+.Rent_property   .grid-container .form_tab P{
+  text-align: center;
+  padding: 0px 0px 0px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0px;
+  font-weight: 600;
+}
+.Rent_property .grid-container .active{
+  background-color: #fff;
+  cursor: pointer;
+  border-top: 10px solid #ff5a5f;
+  border-bottom: none;
+  height: 102%;
+
+}
+.Rent_property .grid-container .active h5{
+  border-radius: 86px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  background: #ff5a5f;
+  font-size: 14px;
+  margin: 0px;
+  font-weight: 600;
+}
+.Rent_property .grid-container .active p{
+  color: #ff5a5f!important;
+}

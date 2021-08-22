@@ -308,12 +308,14 @@
 					  <div class="feat_property home7 style4">
 						<div class="thumb">
 						  <div class="fp_single_item_slider">
-							<div class="item" *ngIf="number.product_img != NULL">
+							<div class="item" *ngIf="number.product_img.length>0;else OtherImage">
 							  <img class="img-whp" src= "{{ftpstring}}{{number.product_img[0].image}}" alt="fp1.jpg">
 							</div>
-							<div class="item" *ngIf="number.product_img== NULL">
-								<img class="img-whp" src="./assets/css/images/property/no_pro.png" alt="no property">
-							  </div>
+							<ng-template #OtherImage>
+								<div class="item">
+									<img class="img-whp" src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
+								</div>
+							  </ng-template>
 						  </div>
 						  <div class="thmb_cntnt style2">
 							<ul class="tag mb0">
