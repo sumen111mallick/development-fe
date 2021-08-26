@@ -113,17 +113,45 @@ export class ProfileComponent implements OnInit {
         /*if (this.profile_pic.indexOf('googleusercontent.com') == -1) {
           this.profile_pic = this.ftpstring + this.profile_pic
         } */
-        if (this.usertype == 1) {
-          this.usercat = "Customer";
-        }
-        if (this.usertype == 2) {
-          this.usercat = "Owner";
-        }
-        if (this.usertype == 3) {
-          this.usercat = "Dealer/Company";
+        /*if (this.usertype == 3) {
+									
+		 
+								 
+								 
+		 
+								 
+          this.usercat = "Agent";
         }
         if (this.usertype == 4) {
-          this.usercat = "Lawyer";
+          this.usercat = "Builder";
+        }
+        if (this.usertype == 5) {
+          this.usercat = "Individual";
+        } */
+      switch(this.usertype) {
+          case 3: {
+            this.usercat = "Agent";
+            break;
+          }
+          case 4: {
+            this.usercat = "Builder";
+            break;
+          }
+          case 5: {
+            this.usercat = "Individual";
+            break;
+          }
+          case 8: {
+            this.usercat = "Internal User";
+            break;
+          }
+          case 11: {
+            this.usercat = "Admin";
+            break;
+          }
+          default: {
+            break;
+          }
         }
 
         /*if (this.email_verifyd != 0) {
@@ -190,19 +218,16 @@ export class ProfileComponent implements OnInit {
         this.form.phone_number_verification_status = this.phone_number_verification_status
 
 
-
-        if (this.usertype == 1) {
-          this.usercat = "Customer";
-        }
-        if (this.usertype == 2) {
-          this.usercat = "Owner";
-        }
         if (this.usertype == 3) {
-          this.usercat = "Dealer/Company";
+          this.usercat = "Agent";
         }
         if (this.usertype == 4) {
-          this.usercat = "Lawyer";
+          this.usercat = "Builder";
         }
+        if (this.usertype == 5) {
+          this.usercat = "Individual";
+        }
+      
         this.email_verifyd = data.data.phone_number_verification_status;
         if (this.email_verifyd != 0) {
           this.email_verify = true;

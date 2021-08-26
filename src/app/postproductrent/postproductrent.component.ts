@@ -26,7 +26,7 @@ export class PostproductrentComponent implements OnInit {
   isFormSubmitted = false;
   public errorMessage: any = {};
   roles: string[] = [];
-  public submitted:boolean=false;
+  public submitted: boolean = false;
 
   saleValue: boolean = true;
   rentValue: boolean = false;
@@ -104,30 +104,30 @@ export class PostproductrentComponent implements OnInit {
   nearby_places: any;
   equipment: any;
   features: any;
-  
-  public property_type:any;
-  public property_type_result:any;
-  product_img:any=[];
-  public step:any=1;
-  public Expected_PriceEroor:boolean=false;
 
-  insert_property_rent= new FormGroup({
+  public property_type: any;
+  public property_type_result: any;
+  product_img: any = [];
+  public step: any = 1;
+  public Expected_PriceEroor: boolean = false;
+
+  insert_property_rent = new FormGroup({
     Property_Details: new FormGroup({
       build_name: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required),
       display_address: new FormControl('', Validators.required),
       property_detail: new FormControl('', Validators.required)
     }),
-    
+
     Property_Location: new FormGroup({
-      address: new FormControl('',Validators.required),
+      address: new FormControl('', Validators.required),
       map_latitude: new FormControl('', Validators.required),
       map_longitude: new FormControl('', Validators.required),
       city: new FormControl('', Validators.required),
       locality: new FormControl('', Validators.required),
       nearest_landmark: new FormControl('', Validators.required)
     }),
-    
+
     Property_area: new FormGroup({
       area: new FormControl('', Validators.required),
       carpet_area: new FormControl('', Validators.required),
@@ -138,17 +138,17 @@ export class PostproductrentComponent implements OnInit {
       additional_rooms: new FormControl('', Validators.required),
       equipment: new FormControl('', Validators.required),
       features: new FormControl('', Validators.required),
-      furnishings:new FormControl(''),
+      furnishings: new FormControl(''),
       nearby_places: new FormControl('', Validators.required),
       age_of_property: new FormControl('', Validators.required),
-      furnishing_status: new FormControl('',Validators.required),
+      furnishing_status: new FormControl('', Validators.required),
       facing_towards: new FormControl('', Validators.required),
       rera_registration_status: new FormControl('', Validators.required),
       additional_parking_status: new FormControl('', Validators.required),
       buildyear: new FormControl('', Validators.required),
       availability_condition: new FormControl('', Validators.required),
       possession_by: new FormControl('', Validators.required),
-      property_on_floor: new FormControl('',Validators.required),
+      property_on_floor: new FormControl('', Validators.required),
       total_floors: new FormControl('', Validators.required)
     }),
     Property_Rent_Condition: new FormGroup({
@@ -173,12 +173,12 @@ export class PostproductrentComponent implements OnInit {
       tax_govt_charge: new FormControl('', Validators.required),
       price_negotiable: new FormControl('', Validators.required),
       maintenance_charge_status: new FormControl('', Validators.required),
-      brokerage_charges:new FormControl('')
+      brokerage_charges: new FormControl('')
     }),
     Property_descption: new FormGroup({
       description: new FormControl('', Validators.required)
     })
-    
+
   });
 
 
@@ -242,10 +242,10 @@ export class PostproductrentComponent implements OnInit {
           console.log(this.latCus);
           console.log(this.location);
           this.insert_property_rent.controls.Property_Location.patchValue({
-            address:this.location,
-            map_latitude:this.latCus,
-            map_longitude:this.longCus,
-            });
+            address: this.location,
+            map_latitude: this.latCus,
+            map_longitude: this.longCus,
+          });
 
         });
       });
@@ -284,35 +284,35 @@ export class PostproductrentComponent implements OnInit {
       this.longCus = resp.lng;
       this.latCus = resp.lat;
       this.insert_property_rent.controls.Property_Location.patchValue({
-        map_latitude:this.latCus,
-        map_longitude:this.longCus,
-        });
+        map_latitude: this.latCus,
+        map_longitude: this.longCus,
+      });
     })
   }
   markerDragEnd($event: google.maps.MouseEvent) {
-    this.latCus = $event.latLng.lat(); 
+    this.latCus = $event.latLng.lat();
     this.longCus = $event.latLng.lng();
-    this.form.map_latitude=this.latCus;
-    this.form.map_longitude=this.longCus;
+    this.form.map_latitude = this.latCus;
+    this.form.map_longitude = this.longCus;
     this.geoCoder.geocode({ 'location': { lat: this.latCus, lng: this.longCus } }, (results, status) => {
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
           console.log(results[0].formatted_address);
           this.insert_property_rent.controls.Property_Location.patchValue({
-            address:results[0].formatted_address,
-            map_latitude:this.latCus,
-            map_longitude:this.longCus,
-            });
+            address: results[0].formatted_address,
+            map_latitude: this.latCus,
+            map_longitude: this.longCus,
+          });
         } else {
           console.log('No results found');
         }
       } else {
         console.log('Geocoder failed due to: ' + status);
       }
-  
+
     });
-    }
+  }
 
   redirect_to_home(): void {
     window.location.href = GlobalConstants.siteURL = "login"
@@ -393,81 +393,81 @@ export class PostproductrentComponent implements OnInit {
 
   }
   readThis1(inputValue: any): void {
-    var file:File = inputValue;
-    var myReader:FileReader = new FileReader();
+    var file: File = inputValue;
+    var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image1 = myReader.result;
-      if(this.image1 != null){
+      if (this.image1 != null) {
         this.product_img.push(this.image1);
       }
     }
     myReader.readAsDataURL(file);
   }
 
-   insert_image2(event){
+  insert_image2(event) {
 
     this.readThis2(event.target)
 
   }
   readThis2(inputValue: any): void {
-    var file:File = inputValue;
-    var myReader:FileReader = new FileReader();
+    var file: File = inputValue;
+    var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image2 = myReader.result;
-      if(this.image2 != null){
+      if (this.image2 != null) {
         this.product_img.push(this.image2);
       }
     }
     myReader.readAsDataURL(file);
   }
-  insert_image3(event){
+  insert_image3(event) {
 
     this.readThis3(event.target)
 
   }
   readThis3(inputValue: any): void {
-    var file:File = inputValue;
-    var myReader:FileReader = new FileReader();
+    var file: File = inputValue;
+    var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image3 = myReader.result;
-      if(this.image3 != null){
+      if (this.image3 != null) {
         this.product_img.push(this.image3);
       }
     }
     myReader.readAsDataURL(file);
   }
-  insert_image4(event){
+  insert_image4(event) {
 
     this.readThis4(event.target)
 
   }
   readThis4(inputValue: any): void {
-    var file:File = inputValue;
-    var myReader:FileReader = new FileReader();
+    var file: File = inputValue;
+    var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image4 = myReader.result;
-      if(this.image4 != null){
+      if (this.image4 != null) {
         this.product_img.push(this.image4);
       }
     }
     myReader.readAsDataURL(file);
   }
-  insert_image5(event){
+  insert_image5(event) {
 
     this.readThis5(event.target)
 
   }
   readThis5(inputValue: any): void {
-    var file:File = inputValue;
-    var myReader:FileReader = new FileReader();
+    var file: File = inputValue;
+    var myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.image5 = myReader.result;
-      if(this.image5 != null){
+      if (this.image5 != null) {
         this.product_img.push(this.image5);
       }
     }
@@ -527,7 +527,7 @@ export class PostproductrentComponent implements OnInit {
       }
     );
   }
-  Property_type_data(): void{
+  Property_type_data(): void {
     this.userService.get_property_type().pipe().subscribe(
       (data: any) => {
         this.property_type = data.data;
@@ -539,90 +539,90 @@ export class PostproductrentComponent implements OnInit {
       }
     );
   }
-  Previous():void{
-    if(this.step > 1){
-    this.step= this.step-1;
-    }else{
+  Previous(): void {
+    if (this.step > 1) {
+      this.step = this.step - 1;
+    } else {
       console.log("step 1");
-      this.step=1;
+      this.step = 1;
     }
   }
-  
-next():void{
-  this.submitted=false;
-  console.log(this.insert_property_rent.value);
-  if(this.insert_property_rent.controls.Property_Details.invalid &&  this.step == 1){
-    this.submitted=true;
-    return;
+
+  next(): void {
+    this.submitted = false;
+    console.log(this.insert_property_rent.value);
+    if (this.insert_property_rent.controls.Property_Details.invalid && this.step == 1) {
+      this.submitted = true;
+      return;
+    }
+    if (this.insert_property_rent.controls.Property_Location.invalid && this.step == 1) {
+      this.submitted = true;
+      return;
+    }
+
+    if (this.insert_property_rent.controls.Property_area.invalid && this.step == 2) {
+      this.submitted = true;
+      return;
+    }
+    if (this.insert_property_rent.controls.Property_Rent_Condition.invalid && this.step == 3) {
+      this.submitted = true;
+      return;
+    }
+    if (this.insert_property_rent.controls.Property_parking.invalid && this.step == 4) {
+      this.submitted = true;
+      return;
+    }
+    if (this.insert_property_rent.controls.Property_Pricing.invalid && this.step == 5) {
+      this.submitted = true;
+      return;
+    } if (this.insert_property_rent.controls.Property_descption.invalid && this.step == 6) {
+      this.submitted = true;
+      return;
+    }
+    if (this.step >= 6) {
+      console.log("step 6");
+      this.step = 6;
+    } else {
+      this.step = this.step + 1;
+    }
+
   }
-  if(this.insert_property_rent.controls.Property_Location.invalid &&  this.step == 1){
-    this.submitted=true;
-    return;
-  }
-  
-  if(this.insert_property_rent.controls.Property_area.invalid && this.step == 2){
-    this.submitted=true;
-    return;
-  }
-  if(this.insert_property_rent.controls.Property_Rent_Condition.invalid && this.step == 3){
-    this.submitted=true;
-    return;
-  }
-  if(this.insert_property_rent.controls.Property_parking.invalid && this.step == 4){
-    this.submitted=true;
-    return;
-  }
-  if(this.insert_property_rent.controls.Property_Pricing.invalid && this.step == 5){
-    this.submitted=true;
-    return;
-  }if(this.insert_property_rent.controls.Property_descption.invalid && this.step == 6){
-    this.submitted=true;
-    return;
-  }
-  if(this.step >= 6){
-    console.log("step 6");
-      this.step=6;
-  }else{
-      this.step= this.step+1;
-  }
- 
-}
 
   // controls checker
-  get Property_Details(){
+  get Property_Details() {
     // console.log(this.insert_property_sales.controls['Property_Details']['controls']);
     return this.insert_property_rent.controls['Property_Details']['controls'];
   }
-  get Property_Location(){
+  get Property_Location() {
     // console.log(this.insert_property_sales.controls['Property_Location']['controls']);
     return this.insert_property_rent.controls['Property_Location']['controls'];
   }
-  get Property_area(){
+  get Property_area() {
     // console.log(this.insert_property_sales.controls['Property_area']['controls']);
     return this.insert_property_rent.controls['Property_area']['controls'];
   }
-  
-  get Property_Rent_Condition(){
+
+  get Property_Rent_Condition() {
     // console.log(this.insert_property_sales.controls['Property_Pricing']['controls']);
     return this.insert_property_rent.controls['Property_Rent_Condition']['controls'];
   }
-  get Property_parking(){
+  get Property_parking() {
     // console.log(this.insert_property_sales.controls['Property_parking']['controls']);
     return this.insert_property_rent.controls['Property_parking']['controls'];
   }
-  get Property_Pricing(){
+  get Property_Pricing() {
     // console.log(this.insert_property_sales.controls['Property_Pricing']['controls']);
     return this.insert_property_rent.controls['Property_Pricing']['controls'];
   }
-  get Property_descption(){
+  get Property_descption() {
     // console.log(this.insert_property_sales.controls['Property_descption']['controls']);
     return this.insert_property_rent.controls['Property_descption']['controls'];
   }
-  
-  
+
+
   onSubmitRent(): void {
     console.log(this.insert_property_rent.value);
-    if (this.insert_property_rent.value.Property_Pricing.expected_rent>= 5000 && this.insert_property_rent.value.Property_Pricing.expected_rent <= 500000) {
+    if (this.insert_property_rent.value.Property_Pricing.expected_rent >= 5000 && this.insert_property_rent.value.Property_Pricing.expected_rent <= 500000) {
       this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
         data => {
           console.log("successful" + data)
@@ -657,26 +657,26 @@ next():void{
       return true;
     }
   }
-  RangeSlider_Price(event: number){
+  RangeSlider_Price(event: number) {
     // this.expected_pricing=500001;
     this.insert_property_rent.controls.Property_Pricing.patchValue({
-      expected_rent:event,
-      });
-      if(event<=5000 || event>=500000){
-        this.Expected_PriceEroor=true;
-      }else{
-        this.Expected_PriceEroor=false;
-      }
+      expected_rent: event,
+    });
+    if (event <= 5000 || event >= 500000) {
+      this.Expected_PriceEroor = true;
+    } else {
+      this.Expected_PriceEroor = false;
+    }
   }
-  rangeInput_Price(event: number){
+  rangeInput_Price(event: number) {
     // this.expected_pricing=500001;
     this.insert_property_rent.controls.Property_Pricing.patchValue({
-      expected_rent:event,
-      });
-    if(event<=5000 || event>=500000){
-      this.Expected_PriceEroor=true;
-    }else{
-      this.Expected_PriceEroor=false;
+      expected_rent: event,
+    });
+    if (event <= 5000 || event >= 500000) {
+      this.Expected_PriceEroor = true;
+    } else {
+      this.Expected_PriceEroor = false;
     }
   }
 

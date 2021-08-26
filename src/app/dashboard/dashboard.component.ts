@@ -30,8 +30,11 @@ export class DashboardComponent implements OnInit {
     this.titleService.setTitle('Dashboard');
     this.name = this.tokenStorage.getUser().username;
 
-    if(this.tokenStorage.getUser().usertype > 6){
-      window.location.href=GlobalConstants.siteURL+"adminpanel"}
+    if(this.tokenStorage.getUser().usertype == 11) {
+      window.location.href=GlobalConstants.siteURL + "adminpanel";
+    } else if (this.tokenStorage.getUser().usertype == 8) {
+      window.location.href=GlobalConstants.siteURL + "internal-users-panel";
+    }
 
 
     this.userService.getdashboard().pipe().subscribe(
@@ -47,8 +50,6 @@ export class DashboardComponent implements OnInit {
         console.log(err)
       }
     )
-
-
 
   }
 

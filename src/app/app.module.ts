@@ -94,7 +94,16 @@ import { SliderModule } from '@syncfusion/ej2-angular-inputs';
 import { AgmCoreModule  } from '@agm/core';
 import { UrlService } from './_services/url.service';
 import { AdminUsercreatorComponent } from './admin-usercreator/admin-usercreator.component';
+import { InternalUsersPanelComponent } from './internal-users-panel/internal-users-panel.component';
+import { CreateRolesComponent } from './create-roles/create-roles.component';
+import { ManageRolesComponent } from './manage-roles/manage-roles.component';
+
 import { NgxStarRatingModule } from 'ngx-star-rating';
+import { ViewRolesComponent } from './view-roles/view-roles.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { InsertproductSaleComponent } from './insertproduct-sale/insertproduct-sale.component';
+import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-rent.component';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 
@@ -175,10 +184,18 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
     UpdatepropertyComponent,
     UpdateSalesPropertyComponent,
     AdminUsercreatorComponent,
+	InternalUsersPanelComponent,
+    CreateRolesComponent,
+    ManageRolesComponent,
+    ViewRolesComponent,
+    AccessDeniedComponent,
+    InsertproductSaleComponent,
+    InsertproductRentComponent,							
   ],
   imports: [
     Ng5SliderModule,
     SliderModule,
+    NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({  
     apiKey: 'AIzaSyC2S5kHeGYkW9cL4d7_uxfauTBfQEtN4HA', libraries: ['places']
   }), 
@@ -191,7 +208,8 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
     HttpClientModule,
     RouterModule,
     FormsModule,
-    ToastrModule.forRoot({ timeOut: 1500, progressBar: true }),
+    //ToastrModule.forRoot({ timeOut: 1500, progressBar: true }),
+    ToastrModule.forRoot({ timeOut: 2500 }),
     ReactiveFormsModule,
     NgImageSliderModule,
     CarouselModule,

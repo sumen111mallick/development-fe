@@ -4,6 +4,7 @@ import { UserService } from './../_services/user.service';
 import { AuthService } from './../_services/auth.service';
 import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-admingetusers',
@@ -14,17 +15,13 @@ export class AdmingetusersComponent implements OnInit {
 
   form: any =  {};
   errorMessage = '';
-
-
-
-
-  content_user
-  content_owner
-  content_dealer
-  content_lawyer
+  content_agent;
+  content_builder
+  content_individual
+  content_internal_user
   content_admin
 
-  ftpURL = GlobalConstants.ftpURL
+  ftpURL = GlobalConstants.ftpURL;
 
   id
   content
@@ -52,23 +49,44 @@ export class AdmingetusersComponent implements OnInit {
   id_created_at
   phone_number_verification_status
 
+  userForm = this.fb.group({
+    username: [''],
+    email: [''],
+    phone: [''],
+    address1: [''],
+    address2: [''],
+    password: [''],
+    confirm_password: [''],
+    branch: [''],
+    user_type: [''],
+    area_name: [''],
+    all_usersControl: [false],
+    propertiesControl: [false],
+    blogControl: [false],
+    requirementsControl: [false],
+    reviewsControl: [false],
+    lawyerControl: [false],
+    loanControl: [false],
+    user_creatorControl: [false]
+  });
 
   constructor(
     private titleservice: Title,
     private userService: UserService,
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.titleservice.setTitle('All Properties')
     this.userService.getAdmin_users().pipe().subscribe(
       data => {
-        this.content_user = data.data
-        this.content_owner = data.data_owner
-        this.content_dealer = data.data_dealer
-        this.content_lawyer = data.data_lawyer
-        this.content_admin = data.data_admin
+        this.content_agent = data.data_agent;
+        this.content_builder = data.data_builder;
+        this.content_individual = data.data_individual;
+        this.content_internal_user = data.data_internal_user;
+        this.content_admin = data.data_admin;
         console.log(data)
 
       },
@@ -80,9 +98,10 @@ export class AdmingetusersComponent implements OnInit {
   }
 
   user_details(data): void {
+    console.log(data);
     this.authService.user_get(data).subscribe(
       (data: any) => {
-        console.log(data.data.id)
+        console.log(data);
         this.content = data.data.data;
         this.id = data.data.id;
         this.currentUser = data.data.name;

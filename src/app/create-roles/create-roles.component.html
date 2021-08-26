@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html//register by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:28:08 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+    <meta name="description" content="FindHouse - Real Estate HTML Template">
+    <meta name="CreativeLayers" content="ATFN">
+
+    <!-- Favicon -->
+    <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+    <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="wrapper">
+        <!--<div class="preloader"></div>-->
+        <div *ngIf="showLoadingIndicator">
+			<div class="preloader"></div>
+		</div>
+        <app-admindashtopbar></app-admindashtopbar>
+
+
+
+        <!-- Inner Page Breadcrumb -->
+        <!--<section class="inner_page_breadcrumb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-xl-2">
+                    </div>
+                    <div class="col-lg-9 col-xl-10">
+                        <div class="breadcrumb_content">
+                            <h4 class="breadcrumb_title">User Creator</h4>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">User Creator</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+        <section class="our-dashbord dashbord bgc-f7">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-2 col-xl-2"></div>
+                    <div class="col-lg-10 col-xl-10">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
+                                <li class="breadcrumb-item active" *ngIf="isAddMode" aria-current="page">Create Role</li>
+                                <li class="breadcrumb-item active" *ngIf="!isAddMode" aria-current="page">Edit Role</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid bgc-f7">
+                <div class="row">
+                    <div class="col-lg-2 col-xl-2"></div>
+                    <div class="col-lg-10 col-xl-10">
+                        <div class="card">
+                            <form #f="ngForm" name="form" [formGroup]="roleForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+                                <!--<h4 class="card-header text-center" *ngIf="isAddMode">Create Role</h4>
+                                <h4 class="card-header text-center" *ngIf="!isAddMode">Edit Role</h4>-->
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 *ngIf="isAddMode">Create Role</h4>
+                                            <h4 *ngIf="!isAddMode">Edit Role</h4>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <button type="button" (click)="role_list()" class="btn btn-info">Role List</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="rolename">Role Name</label>
+                                                <input type="text" class="form-control" formControlName="rolename"
+                                                    id="rolename" name="rolename" required>
+                                                <div class="alert-danger" *ngIf="f.submitted && roleForm.controls.rolename.invalid">
+                                                    <div *ngIf="roleForm.controls.rolename.errors.required">
+                                                       Role Name is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="role_id">Role ID</label>
+                                                <input type="text" class="form-control" formControlName="role_id"
+                                                    id="role_id" name="role_id" required>
+                                                <div class="alert-danger" *ngIf="f.submitted && roleForm.controls.role_id.invalid">
+                                                    <div *ngIf="roleForm.controls.role_id.errors.required">
+                                                        Role ID is required
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 text-center mb30">
+                                            <h4>Permissions</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">All Users</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="all_users" formControlName="all_usersControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                        <!--<span>{{ checkbox_status }}</span>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">Properties</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="properties" formControlName="propertiesControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">Manage Blog</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="manage_blog" formControlName="blogControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">Manage Roles</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="manage_roles" formControlName="roleControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">Requirements</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="requirements" formControlName="requirementsControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">Reviews</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="reviews" formControlName="reviewsControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">Lawyer Services</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="lawyer_services" formControlName="lawyerControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">Loan Control</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="loan_control" formControlName="loanControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">User Creator</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="user_creator" formControlName="user_creatorControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-6 col-sm-6 col-md-6 text-center">
+                                                        <label for="">List Property</label>
+                                                    </div>
+                                                    <div class="col-6 col-sm-6 col-md-6">
+                                                        <label class="switch">
+                                                            <input type="checkbox" value="list_property" formControlName="listPropertyControl"
+                                                                (change)="getStats($event.target.value, $event.target.checked)">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="form-group row">
+                                        <div class="col-sm-4 offset-lg-4 text-center">
+                                            <button type="submit" *ngIf="isAddMode" class="btn btn-log btn-block btn-thm2">Create
+                                                Role</button>
+                                                <button type="submit" *ngIf="!isAddMode" class="btn btn-log btn-block btn-thm2">Update
+                                                    Role</button>
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+    </div>
+    <!-- Wrapper End -->
+
+</body>
+<!-- Mirrored from grandetest.com/theme/findhouse-html//register by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:28:08 GMT -->
+
+</html>

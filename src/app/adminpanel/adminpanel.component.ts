@@ -20,6 +20,11 @@ export class AdminpanelComponent implements OnInit {
   product
   events
   showLoadingIndicator;
+  public agent_length: any;
+  public builder_length: any;
+  public individual_length: any;
+  public internal_user_length: any;
+  public total_user_length: any;
 
   constructor(
     private titleservice: Title,
@@ -37,8 +42,12 @@ export class AdminpanelComponent implements OnInit {
 
     this.userService.getAdmin_users().pipe().subscribe(
       data => {
-        this.user = data.data
-        console.log(data.data)
+        console.log(data);
+        this.agent_length = data.data_agent.length;
+        this.builder_length = data.data_builder.length;
+        this.individual_length = data.data_individual.length;
+        this.internal_user_length = data.data_internal_user.length;
+        this.total_user_length = this.agent_length + this.builder_length + this.individual_length + this.internal_user_length;
       },
       err => {
         console.log(err)

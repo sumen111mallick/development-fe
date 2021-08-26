@@ -59,21 +59,40 @@ import { VerifyGuardGuard } from './verify-guard.guard';
 import { UpdateSalesPropertyComponent } from './update-sales-property/update-sales-property.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { AdminUsercreatorComponent } from './admin-usercreator/admin-usercreator.component';
+import { InternalUsersPanelComponent } from './internal-users-panel/internal-users-panel.component';
+import { CreateRolesComponent } from './create-roles/create-roles.component';
+import { ManageRolesComponent } from './manage-roles/manage-roles.component';
+import { ViewRolesComponent } from './view-roles/view-roles.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { CheckLoginGuard } from './check-login.guard';
+import { InsertproductSaleComponent } from './insertproduct-sale/insertproduct-sale.component';
+import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-rent.component';
+import { MobileVerifyGuard } from './mobile-verify.guard';
 
 const routes: Routes = [
 
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [VerifyGuard]},
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [CheckLoginGuard],
+    data: {
+      permission: ['dashboard']
+    }
+  },
   {path: 'productlisting', component: ProductListingComponent},
   {path: 'productpage', component: ProductpageComponent},
   //{path: 'register', component: UserregisterComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [VerifyGuard]},
+  {
+    path: 'profile', component: ProfileComponent, canActivate: [CheckLoginGuard],
+    data: {
+      permission: ['profile']
+    }
+  },
   {path: 'logout', component: UserlogoutComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'insertproductsale', component: PostproductComponent, canActivate: [VerifyDetailsGuard]},
-  {path: 'insertproductrent', component: PostproductrentComponent, canActivate: [VerifyDetailsGuard]},
+  //{path: 'insertproductsale', component: PostproductComponent, canActivate: [VerifyDetailsGuard]},
+  //{path: 'insertproductrent', component: PostproductrentComponent, canActivate: [VerifyDetailsGuard]},
   {path: 'search', component: SearchComponent},
   //{path: 'agentregister', component: BoardAgentComponent},
   {path: 'agentregister', component: RegisterComponent},
@@ -85,31 +104,81 @@ const routes: Routes = [
   {path: 'savedsearches', component: SavedsearchesComponent},
   {path: 'reviews', component: ReviewsComponent},
   {path: 'admin', component: BoardAdminComponent},
-  {path: 'adminpanel', component: AdminpanelComponent, canActivate: [VerifyGuard]},
+  {
+    path: 'adminpanel', component: AdminpanelComponent, canActivate: [CheckLoginGuard],
+    data: {
+      permission: ['adminpanel']
+    }
+  },
   {path: 'editproduct', component: EditproductComponent},
   {path: 'editproductrent', component: EditproductrentComponent},
-  {path: 'adminusers', component: AdmingetusersComponent},
-  {path: 'adminproducts', component: AdmingetproductComponent},
+  {
+    path: 'adminusers', component: AdmingetusersComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_all_users']
+    }
+  },
+  {
+    path: 'adminproducts', component: AdmingetproductComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_properties']
+    }
+  },
   {path: 'adminrequirements', component: AdmingetrequirementsComponent},
-  {path: 'adminreviews', component: AdmingetreviewsComponent},
+  {
+    path: 'adminreviews', component: AdmingetreviewsComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_reviews']
+    }
+  },
   {path: 'usercreator', component: UsercreatorComponent},
   {path: 'lawyerservice', component: LawyerserviceComponent},
   {path: 'lawyers', component: LawyerpageComponent},
   {path: 'lawyerprofile', component: LawyerprofileComponent},
-  {path: 'adminlawyerservices', component: AdminlawyerservicesComponent},
+  {
+    path: 'adminlawyerservices', component: AdminlawyerservicesComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_lawyer_services']
+    }
+  },
   {path: 'allusers', component: AllusersComponent},
   {path: 'loancalc', component: LoancalcComponent},
-  {path: 'adminloan', component: AdminloanComponent},
+  {
+    path: 'adminloan', component: AdminloanComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_loan_control']
+    }
+  },
   {path: 'testimonials', component: TestimonialsComponent},
   {path: 'Wishlist', component: WishlistComponent},
   {path: 'blog', component: BlogComponent},
-  {path: 'blog-create-post', component: BlogCreatePostComponent, canActivate: [PostsGuard]},
+  {
+    path: 'blog-create-post', component: BlogCreatePostComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_manage_blog']
+    }
+  },
   {path: 'blog-single-post/:slug', component: BlogSinglePostComponent},
-  {path: 'blog-edit-post/:slug', component: BlogCreatePostComponent},
+ {
+    path: 'blog-edit-post/:slug', component: BlogCreatePostComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_manage_blog']
+    }
+  },
   //{path:'blog-edit-post/:slug', component: BlogEditPostComponent},
   //{path: 'blog-single-post', component: BlogSinglePostComponent},
-  {path: 'admin-blog', component: AdminBlogComponent, canActivate: [PostsGuard]},
-  {path: 'admin-blog-single-post/:slug', component: AdminBlogSinglePostComponent},
+  {
+    path: 'admin-blog', component: AdminBlogComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_manage_blog']
+    }
+  },
+  {
+    path: 'admin-blog-single-post/:slug', component: AdminBlogSinglePostComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_manage_blog']
+    }
+  },
   {path: 'verify-details', component:  VerifyDetailsComponent, canActivate: [VerifyGuardGuard]},
   {path: 'emi-calculator', component: EmiCalculatorComponent},
   {path: 'plans', component: SubscriptionPlansComponent},
@@ -119,7 +188,46 @@ const routes: Routes = [
   {path: 'about-us', component: AboutUsComponent},
   {path: 'update-property-rent/:id', component: UpdatepropertyComponent},
   {path: 'update-Property-sales/:id', component: UpdateSalesPropertyComponent},
-  {path: 'usercreator-new', component: AdminUsercreatorComponent},
+  {
+    path: 'usercreator-new', component: AdminUsercreatorComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_user_creator']
+    }
+  },
+  {
+    path: 'usercreator-edit/:slug', component: AdminUsercreatorComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_user_creator']
+    }
+  },
+  { path: 'internal-users-panel', component: InternalUsersPanelComponent },
+  {
+    path: 'create-roles', component: CreateRolesComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_manage_roles']
+    }
+  },
+  {
+    path: 'edit-roles/:id', component: CreateRolesComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_manage_roles']
+    }
+  },
+  {
+    path: 'manage-roles', component: ManageRolesComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_manage_roles']
+    }
+  },
+  {
+    path: 'view-roles/:id', component: ViewRolesComponent, canActivate: [AuthGuardGuard],
+    data: {
+      permission: ['access_manage_roles']
+    }
+  },
+  { path: 'access-denied', component: AccessDeniedComponent },
+  {path: 'insertproduct-sale', component: InsertproductSaleComponent, canActivate: [VerifyDetailsGuard]},
+  {path: 'insertproduct-rent', component: InsertproductRentComponent, canActivate: [VerifyDetailsGuard]},
   {path: '**', component: NotfoundComponent},
 
 ];

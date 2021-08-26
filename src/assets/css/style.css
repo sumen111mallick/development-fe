@@ -13545,8 +13545,8 @@ a.btn.btn_error{
   color: #ffffff;  
 }
 .btn-thm2 {
-  background-color: #ff5a5f;
-  border-color: #ff5a5f;
+  background-color: #ff787c;
+  border-color: #ff787c;
   color: #ffffff;
   border-radius: 0px;
   -webkit-transition: all 0.3s ease;
@@ -13557,8 +13557,8 @@ a.btn.btn_error{
 .btn-thm2:active,
 .btn-thm2:focus {
   background-color: #ffffff;
-  border-color: #ff5a5f;
-  color: #ff5a5f; }
+  border-color: #ff787c;
+  color: #ff787c; }
 
 .btn-thm3 {
   background-color: #ff1053;
@@ -16945,7 +16945,8 @@ button.gm-ui-hover-effect:focus {
   padding: 25px;
 }
 .menu_style_home_one.style2.menu-fixed{
-  z-index: 1000000;
+  /*z-index: 1000000;*/
+  z-index: 1000;
 }
 .dashboard_sidebar_menu{
   z-index: 100000000;
@@ -17128,9 +17129,9 @@ color: #28B928;
   .home_seaching_advance .dropdown-menu.show{
     display: grid!important;
   }
-  .property_table .table td, .property_table .table th{
+  /*.property_table .table td, .property_table .table th{
     padding-left: 0px!important;
-  }
+  }*/
   #carouselExampleIndicators span i{
     color: #ff5a5f;
     font-size: 36px;

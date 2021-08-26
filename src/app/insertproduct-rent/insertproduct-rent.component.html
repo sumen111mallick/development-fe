@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+    <meta name="description" content="FindHouse - Real Estate HTML Template">
+    <meta name="CreativeLayers" content="ATFN">
+    <!-- css file -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <!-- Title -->
+    <title>Sales Property Update</title>
+    <!-- Favicon -->
+    <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+    <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div *ngIf="showLoadingIndicator">
+            <div class="preloader"></div>
+        </div>
+
+        <app-dashboard-topbar></app-dashboard-topbar>
+        <section class="our-dashbord dashbord bgc-f7 pb50">
+            <div class="container-fluid ovh">
+                <div class="row">
+                    <div class="col-lg-3 col-xl-2 dn-992 pl0"></div>
+                    <div class="col-lg-9 col-xl-10 maxw100flex-992">
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 form-box">
+                                <form role="form" action="" method="post" class="f1" [formGroup]="insert_property_rent">
+
+                                    <h3>List Property</h3>
+                                    <p class="text-center">Fill in the form to list your property</p>
+                                    <div class="f1-steps">
+                                        <div class="f1-progress">
+                                            <div class="f1-progress-line" data-now-value="10" data-number-of-steps="5"
+                                                style="width: 10%;"></div>
+                                        </div>
+                                        <div class="f1-step active">
+                                            <!--<div class="f1-step-icon"><i class="fa fa-user"></i></div>-->
+                                            <div class="f1-step-icon"><span>1</span></div>
+                                            <p>Property Details</p>
+                                        </div>
+                                        <div class="f1-step">
+                                            <div class="f1-step-icon"><span>2</span></div>
+                                            <p>Property Address</p>
+                                        </div>
+                                        <div class="f1-step">
+                                            <div class="f1-step-icon"><span>3</span></div>
+                                            <p>Additional Details</p>
+                                        </div>
+                                        <div class="f1-step">
+                                            <div class="f1-step-icon"><span>4</span></div>
+                                            <p>Amenities & Rent Information</p>
+                                        </div>
+                                        <div class="f1-step">
+                                            <div class="f1-step-icon"><span>5</span></div>
+                                            <p>Pricing & Images</p>
+                                        </div>
+                                    </div>
+
+                                    <fieldset formGroupName="Property_Details">
+                                        <!--<h4>Tell us who you are:</h4>-->
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="build_name">Property name</label>
+                                                        <input type="text" name="build_name"
+                                                            placeholder="Property Name..." class="form-control"
+                                                            id="build_name" formControlName="build_name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="type">Property Type</label>
+                                                        <select class="form-control" formControlName="type">
+                                                            <option value="" disabled selected>Select Property Type
+                                                            </option>
+                                                            <option *ngFor="let property_type of property_type_result"
+                                                                [value]="property_type.id">{{property_type.name}}
+                                                            </option>
+                                                        </select>
+                                                        <!--<input type="text" name="f1-last-name" placeholder="Last name..."
+                                                        class="f1-last-name form-control" id="f1-last-name">-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="display_address">Display Address?</label>
+                                                        <select class="form-control" formControlName="display_address">
+                                                            <option value="" disabled selected>Select Option</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="0">No</option>
+                                                        </select>
+                                                        <!--<textarea name="f1-about-yourself" placeholder="About yourself..."
+                                                        class="f1-about-yourself form-control"
+                                                        id="f1-about-yourself"></textarea>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="area"> Area</label>
+                                                        <input type="text" class="form-control" name="area"
+                                                            formControlName="area" id="area"
+                                                            placeholder="Please Enter the Area...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="carpet_area">Carpet Area</label>
+                                                        <input type="text" class="form-control" name="carpet_area"
+                                                            formControlName="carpet_area" id="carpet_area"
+                                                            placeholder="Please Enter the Carpet Area...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Area Unit</label>
+                                                        <select class="form-control" formControlName="area_unit">
+                                                            <option value="" disabled>Select Area Units</option>
+                                                            <option value="sq.ft.">sq.ft.</option>
+                                                            <option value="sq.yards">sq.yards</option>
+                                                            <option value="sq.m.">sq.m.</option>
+                                                            <option value="acres">acres</option>
+                                                            <option value="marla">marla</option>
+                                                            <option value="cents">cents</option>
+                                                            <option value="bigha">bigha</option>
+                                                            <option value="kottah">kottah</option>
+                                                            <option value="kanal">kanal</option>
+                                                            <option value="grounds">grounds</option>
+                                                            <option value="ares">ares</option>
+                                                            <option value="biswa">biswa</option>
+                                                            <option value="guntha">guntha</option>
+                                                            <option value="aankadam">aankadam</option>
+                                                            <option value="hectares">hectares</option>
+                                                            <option value="rood">rood</option>
+                                                            <option value="chataks">chataks</option>
+                                                            <option value="perch">perch</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label> Bedrooms</label>
+                                                        <select class="form-control" formControlName="bedroom">
+                                                            <option value="" disabled>Select bedroom</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label> Bathrooms</label>
+                                                        <select class="form-control" formControlName="bathroom">
+                                                            <option value="" disabled>Select Bathrooms</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label> Balconies</label>
+                                                        <select class="form-control" formControlName="balconies">
+                                                            <option value="" disabled>Select Balconies</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="property_detail">Property Description</label>
+                                                        <textarea class="form-control" formControlName="property_detail"
+                                                            id="property_detail" name="property_detail"
+                                                            placeholder="Enter Property Description..."
+                                                            rows="8"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="f1-buttons">
+                                                        <button type="button" class="btn btn-next">Next</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset formGroupName="Property_address">
+                                        <!--<h4>Set up your account:</h4>-->
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="hidden" class="form-control"
+                                                            formControlName="address" id="address" name="address"
+                                                            placeholder="Enter the address...">
+                                                        <input #search autocorrect="off" autocapitalize="off"
+                                                            spellcheck="off" formControlName="address" type="search"
+                                                            class="form-control input-text"
+                                                            placeholder="Enter Address" />
+                                                        <span class="flaticon-maps-and-flags"
+                                                            style="position: absolute;top: 240px; right: 55px"></span>
+                                                        <agm-map style="height: 300px;" [latitude]="latCus"
+                                                            [longitude]="longCus" [zoom]="15" class="main-card-agm-map">
+                                                            <agm-marker [latitude]="latCus" [longitude]="longCus"
+                                                                [markerDraggable]="true"
+                                                                (dragEnd)="markerDragEnd($event)">
+                                                                <agm-info-window> </agm-info-window>
+                                                            </agm-marker>
+                                                        </agm-map>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="hidden" class="form-control"
+                                                            formControlName="map_latitude" id="map_latitude"
+                                                            name="map_latitude" placeholder="Please Enter Map Latitude"
+                                                            readonly>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="hidden" class="form-control"
+                                                            formControlName="map_longitude" id="map_longitude"
+                                                            name="map_longitude" placeholder="Plese Enter Map longitude"
+                                                            readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="city">City</label>
+                                                        <input type="text" class="form-control" formControlName="city"
+                                                            id="city" name="city" placeholder="Enter City Name...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="locality">Locality</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="locality" id="locality" name="locality"
+                                                            placeholder="Please Enter Locality...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="nearest_landmark">Nearest Landmark</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="nearest_landmark" id="nearest_landmark"
+                                                            name="nearest_landmark"
+                                                            placeholder="Please Enter Nearest Landmark...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="nearby_places">Nearby Places</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="nearby_places" id="nearby_places"
+                                                            name="nearby_places"
+                                                            placeholder="Please Enter Nearby Place...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <button type="button"
+                                                        class="btn btn-previous ml25">Previous</button>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="f1-buttons">
+                                                        <button type="button" class="btn btn-next ml25">Next</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+
+                                    <fieldset formGroupName="Property_additional_details">
+                                        <!--<h4>Set up your account:</h4>-->
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label> Additional Rooms</label>
+                                                        <select class="form-control" formControlName="additional_rooms">
+                                                            <option value="" disabled>Please select Additional Rooms
+                                                            </option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label> Equipment</label>
+                                                        <select class="form-control" formControlName="equipment">
+                                                            <option value="" disabled>Please Select Equipment</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="features">Features</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="features" id="features" name="features"
+                                                            placeholder="Please Enter Features...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="age_of_property">Age of Property</label>
+                                                        <input type="number" class="form-control"
+                                                            formControlName="age_of_property" id="age_of_property"
+                                                            name="nearby_places"
+                                                            placeholder="Please Enter Age of Property...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Furnishings</label>
+                                                        <select class="form-control "
+                                                            (change)="furnishStatus($event.target.value)"
+                                                            formControlName="furnishing_status">
+                                                            <option value="" disabled>Select Furnishing Status</option>
+                                                            <option value="FFR">Furnished</option>
+                                                            <option value="SFR">SemiFurnished</option>
+                                                            <option value="NFR">Not furnished</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Facing Towards</label>
+                                                        <select class="form-control " formControlName="facing_towards">
+                                                            <option value="" disabled>Select the directions.</option>
+                                                            <option value="East">East</option>
+                                                            <option value="North East">North East</option>
+                                                            <option value="North">North</option>
+                                                            <option value="West">West</option>
+                                                            <option value="South">South</option>
+                                                            <option value="South East">South-East</option>
+                                                            <option value="North West">North West</option>
+                                                            <option value="South West">South West</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Rera Registration Status</label>
+                                                        <select class="form-control "
+                                                            formControlName="rera_registration_status">
+                                                            <option value="" disabled>Select Rera Registration Status.
+                                                            </option>
+                                                            <option value="Registered">Registered</option>
+                                                            <option value="Applied For">Applied For</option>
+                                                            <option value="Not Applicable">Not Applicable</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Reserved Parking?</label>
+                                                        <select class="form-control"
+                                                            formControlName="additional_parking_status"
+                                                            (change)="parkingStatus($event.target.value)">
+                                                            <option value="" disabled>Select Parking Status</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="0">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Year Built</label>
+                                                        <select class="form-control" formControlName="buildyear">
+                                                            <option value="" disabled>Select Year Built </option>
+                                                            <option value="2015">2015</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021">2021</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Availability</label>
+                                                        <select class="form-control"
+                                                            formControlName="availability_condition">
+                                                            <option value="" disabled>Select Availability</option>
+                                                            <option value="Under Construction">Under Construction
+                                                            </option>
+                                                            <option value="Ready To Move">Ready To Move</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Possession By</label>
+                                                        <select class="form-control" formControlName="possession_by">
+                                                            <option value="" disabled>Select Possession Date</option>
+                                                            <option value="Now">Now</option>
+                                                            <option value="Within 3 months">Within 3 months</option>
+                                                            <option value="Within 6 months">Within 6 months</option>
+                                                            <option value="Within 9 months">Within 6 months</option>
+                                                            <option value="Within 1 year">Within 1 year</option>
+                                                            <option value="Within 2 year">Within 2 years</option>
+                                                            <option value="Within 3 year">Within 3 years</option>
+                                                            <option value="Within 4 year">Within 4 years</option>
+                                                            <option value="Within 5 year">Within 5 years</option>
+                                                            <option value="Within 6 year">Within 6 years</option>
+                                                            <option value="Within 7 year">Within 7 years</option>
+                                                            <option value="Within 8 year">Within 8 years</option>
+                                                            <option value="Within 9 year">Within 9 years</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Property is present on which Floor?</label>
+                                                        <select class="form-control"
+                                                            formControlName="property_on_floor">
+                                                            <option value="" disabled>Select Present Floors </option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Number of Floors in the property?</label>
+                                                        <select class="form-control" formControlName="total_floors">
+                                                            <option value="" disabled>Select Number of Floors </option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <button type="button"
+                                                        class="btn btn-previous ml25">Previous</button>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="f1-buttons">
+                                                        <button type="button" class="btn btn-next ml25">Next</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset formGroupName="Property_amenities_rent">
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <h3> Amenities</h3>
+                                                    <div class="row">
+                                                        <div class="col-xxs-6 col-sm col-lg-3"
+                                                            *ngFor="let menuData of amenitiesresult">
+                                                            <!-- {{product_amenties.id}} -->
+                                                            <ul class="ui_kit_checkbox selectable-list">
+                                                                <li>
+                                                                    <div class="custom-control custom-checkbox ">
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input"
+                                                                            id="{{menuData.id}}" value="{{menuData.id}}"
+                                                                            (change)="onchangeAmenties($event,menuData.id)">
+                                                                        <label class="custom-control-label"
+                                                                            for="{{menuData.id}}">{{menuData.name}}</label>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Willing To Rent Out To</label>
+                                                        <select class="form-control "
+                                                            formControlName="willing_to_rent_out_to">
+                                                            <option value="" disabled>Select Preferred </option>
+                                                            <option value="Family">Family</option>
+                                                            <option value="Single Men">Single Men</option>
+                                                            <option value="Single Women">Single Women</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Agreement Type</label>
+                                                        <select class="form-control " formControlName="agreement_type">
+                                                            <option value="" disabled>Select Preferred </option>
+                                                            <option value="Company Lease Agreement">Company Lease
+                                                                Agreement</option>
+                                                            <option value="Any">Any</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="available_for">Available On</label>
+                                                        <input type="number" class="form-control"
+                                                            formControlName="available_for" id="available_for"
+                                                            name="available_for">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="rent_cond">Rent Condition</label>
+                                                        <input type="number" class="form-control"
+                                                            formControlName="rent_cond" id="rent_cond" name="rent_cond"
+                                                            placeholder="Please Enter Rent Condition...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="locality">Month Of Notice</label>
+                                                        <select class="form-control" formControlName="month_of_notice">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Duration Of Rent Agreement</label>
+                                                        <select class="form-control"
+                                                            formControlName="duration_of_rent_aggreement">
+                                                            <option value="" disabled>Select the Duration</option>
+                                                            <option value="One Year">One Year</option>
+                                                            <option value="Three Years">Three Years</option>
+                                                            <option value="Custom">Custom</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Ownership</label>
+                                                        <select class="form-control " formControlName="ownership">
+                                                            <option value="" disabled>Select Ownership Type</option>
+                                                            <option value="Freehold">Freehold</option>
+                                                            <option value="Leasehold">Leasehold</option>
+                                                            <option value="Co-operative Society">Co-operative Society
+                                                            </option>
+                                                            <option value="Power of Attorney">Power of Attorney</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Covered Parking</label>
+                                                        <select class="form-control"
+                                                            formControlName="parking_covered_count"
+                                                            id="parking_covered_count" name="parking_covered_count"
+                                                            placeholder="Please Enter Covered Parking...">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="parking_open_count">Open Parking</label>
+                                                        <select class="form-control"
+                                                            formControlName="parking_open_count" id="parking_open_count"
+                                                            name="parking_open_count">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <button type="button"
+                                                        class="btn btn-previous ml25">Previous</button>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="f1-buttons">
+                                                        <button type="button" class="btn btn-next ml25">Next</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset formGroupName="Property_price_images">
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="expected_rent">Expected Rent</label>
+                                                        <div class="row">
+                                                            <div class="col-lg-8 col-xl-8">
+                                                                <ng5-slider [(value)]="expected_rent"
+                                                                    [options]="options"
+                                                                    (valueChange)="RangeSlider_Price($event)">
+                                                                </ng5-slider>
+                                                            </div>
+                                                            <div class="col-lg-4 col-xl-4">
+                                                                <!-- (ngModelChange)="Expected_Price($event)" -->
+                                                                <input type="number" class="form-control"
+                                                                    formControlName="expected_rent" id="expected_rent"
+                                                                    name="expected_rent"
+                                                                    placeholder="Please Enter Expected Rent..."
+                                                                    maxlength="10" (keypress)="keyPressNumbers($event)"
+                                                                    (ngModelChange)="rangeInput_Price($event)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="security_deposit">Security Deposit</label>
+                                                        <input type="number" class="form-control"
+                                                            formControlName="security_deposit" id="security_deposit"
+                                                            name="security_deposit">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="locality">Inclusive Electricity and Water
+                                                            Bill</label>
+                                                        <select class="form-control"
+                                                            formControlName="inc_electricity_and_water_bill">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="0">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Is Tax and Govt. Charges Included?</label>
+                                                        <select class="form-control" formControlName="tax_govt_charge">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option selected value="1">Yes</option>
+                                                            <option value="0">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Is Price Negotiable?</label>
+                                                        <select class="form-control" formControlName="price_negotiable">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="1">Yes</option>
+                                                            <option value="0">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Is Maintenance Charge Included?</label>
+                                                        <select class="form-control"
+                                                            formControlName="maintenance_charge_status"
+                                                            (change)="maintenanceStatus($event.target.value)">
+                                                            <option value="" disabled>Select options</option>
+                                                            <option value="0">No</option>
+                                                            <option value="1">Yes</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="locality">Brokerage Charge</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="brokerage_charges">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jumbotron">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <ul class="mb0">
+                                                        <li class="list-inline-item" *ngIf="image1">
+                                                            <span>Property Image1</span>
+                                                            <div class="portfolio_item">
+                                                                <img class="img-fluid" src="{{ image1 }}"
+                                                                    alt="First Image">
+                                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete"
+                                                                    data-original-title="Delete"><button type="button"
+                                                                        class="btn btn-thm2 float-right"
+                                                                        (click)="delete_pic1()"><span
+                                                                            class="flaticon-garbage"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-inline-item" *ngIf="image2">
+                                                            <span>Property Image2</span>
+                                                            <div class="portfolio_item">
+                                                                <img class="img-fluid" src="{{ image2 }}"
+                                                                    alt="Second Image">
+                                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete"
+                                                                    data-original-title="Delete"><button type="button"
+                                                                        class="btn btn-thm2 float-right"
+                                                                        (click)="delete_pic2()"><span
+                                                                            class="flaticon-garbage"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-inline-item" *ngIf="image3">
+                                                            <span>Property Image3</span>
+                                                            <div class="portfolio_item">
+                                                                <img class="img-fluid" src="{{ image3 }}"
+                                                                    alt="Third Image">
+                                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete"
+                                                                    data-original-title="Delete"><button type="button"
+                                                                        class="btn btn-thm2 float-right"
+                                                                        (click)="delete_pic3()"><span
+                                                                            class="flaticon-garbage"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-inline-item" *ngIf="image4">
+                                                            <span>Property Image4</span>
+                                                            <div class="portfolio_item">
+                                                                <img class="img-fluid" src="{{ image4 }}"
+                                                                    alt="Fourth Image">
+                                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete"
+                                                                    data-original-title="Delete"><button type="button"
+                                                                        class="btn btn-thm2 float-right"
+                                                                        (click)="delete_pic4()"><span
+                                                                            class="flaticon-garbage"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-inline-item" *ngIf="image5">
+                                                            <span>Property Image5</span>
+                                                            <div class="portfolio_item">
+                                                                <img class="img-fluid" src="{{ image5 }}"
+                                                                    alt="Fifth Image">
+                                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete"
+                                                                    data-original-title="Delete"><button type="button"
+                                                                        class="btn btn-thm2 float-right"
+                                                                        (click)="delete_pic5()"><span
+                                                                            class="flaticon-garbage"></span></button>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div
+                                                    class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+                                                    <div class="col-lg-4">
+                                                        <div class="portfolio_upload">
+                                                            <input type="file" class="form-control"
+                                                                accept=".jpg,.png,.jpeg" name="profile_pic"
+                                                                (change)="insert_image1($event)" id="image1" multiple>
+                                                            <div class="icon"><label for="image1"
+                                                                    class="flaticon-download"></label></div>
+                                                            <label for="image1">
+                                                                <p>Click To Upload Multiple Image</p>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <button type="button"
+                                                        class="btn btn-previous ml25">Previous</button>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="f1-buttons">
+                                                        <button type="submit" (click)="onSubmitRent()"
+                                                            class="btn btn-submit">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

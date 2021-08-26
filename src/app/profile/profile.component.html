@@ -63,7 +63,7 @@
 								<div class="breadcrumb_content style2" style="margin-left: 30px;">
 									<h2 class="breadcrumb_title">My Profile</h2>
 									<p>We are glad to see you <b>{{ currentUser }}</b></p>
-									<div class="alert alert-danger text-center" *ngIf="!email_verify">
+									<div class="alert alert-danger text-center" *ngIf="!email_verify && usertype != 8">
 										<h5>Please Verify your Phone
 											Number</h5>
 										<a class="btn btn-thm2" href="verify-details">Verify</a>	
@@ -299,7 +299,7 @@
 																	</div>
 																	<hr *ngIf="practice_number">
 																	<div class="row">
-																		<div class="col-sm-6 offset-sm-3 text-center">
+																		<div class="col-sm-6 offset-sm-3 text-center" *ngIf="usertype != 8">
 																			<a data-toggle="modal"
 																				data-target=".bd-example-modal-lg"
 																				(click)="user_details(id)"><button
@@ -846,7 +846,7 @@
 							</div> -->
 							</div>
 						</div>
-						<div class="row mt10">
+						<div class="row mt100">
 							<div class="col-lg-12">
 								<div class="copyright-widget text-center">
 									<p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting

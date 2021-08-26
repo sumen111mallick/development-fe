@@ -68,7 +68,8 @@
   margin: 0px 8px;
 }
 .sidebar-menu {
-width:258px!important;
+/*width:258px!important;*/
+width: 275px !important;
 }
 .owl-carousel .owl-stage:after {
   content: ".";
