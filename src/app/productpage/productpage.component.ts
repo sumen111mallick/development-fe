@@ -85,15 +85,15 @@ export class ProductpageComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log(this.id);
+    //console.log(this.id);
     this.titleService.setTitle('Property Page');
     this.prod_id = this.idService.getProdId();
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.login_userID = this.idService.getUser().id;
-      console.log(this.login_userID);
+      //console.log(this.login_userID);
       this.login_usertype = this.idService.getUser().usertype;
-      console.log(this.login_usertype);
+      //console.log(this.login_usertype);
 
     }
     
@@ -102,10 +102,10 @@ export class ProductpageComponent implements OnInit {
     {
       this.authService.saveSearch(this.idService.getUser().id, this.id).subscribe(
         data => {
-          console.log(data)
+          //console.log(data)
         },
         err => {
-          console.log(err)
+          //console.log(err)
         }
       )
     }
@@ -122,62 +122,62 @@ export class ProductpageComponent implements OnInit {
     }
   }
   single_property_data(id: any){
-    console.log(id);
+    //console.log(id);
     this.showLoadingIndicator = true;
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
-      console.log(this.isLoggedIn);
+      //console.log(this.isLoggedIn);
       this.authService.product_login_see(id).subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           // console.log(data["product"]["0"].product_img[0].image);
           this.product_images=data["product"]["0"].product_img;
           this.product_img_length=this.product_images;
           this.productdata = data["product"];
           this.map_url = "https://maps.google.com/?q=" + data["product"]["0"]["map_latitude"] + "," + data["product"]["0"]["map_longitude"];
-          console.log(this.map_url)
+          //console.log(this.map_url)
           this.product_amenties= data["product"]["0"].amenities;
           this.product_amenties_length= data["product"]["0"].amenities.length;
-          console.log(this.product_amenties_length);
-          console.log(this.product_amenties);
+          //console.log(this.product_amenties_length);
+          //console.log(this.product_amenties);
           this.cityValue=data["product"]["0"]["city"];
           this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
-          console.log(this.latCus);
+          //console.log(this.latCus);
           this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
-          console.log(this.longCus);
+          //console.log(this.longCus);
           this.similarproperty(this.cityValue);
           this.showLoadingIndicator = false;
   
         },
           err => {
-            console.log(err);
+            //console.log(err);
           }
         );
     }else{
       this.authService.product_see(id).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         // console.log(data["product"]["0"].product_img[0].image);
         this.product_images=data["product"]["0"].product_img;
         this.product_img_length=this.product_images;
         this.productdata = data["product"];
         this.map_url = "https://maps.google.com/?q=" + data["product"]["0"]["map_latitude"] + "," + data["product"]["0"]["map_longitude"];
-        console.log(this.map_url)
+        //console.log(this.map_url)
         this.product_amenties= data["product"]["0"].amenities;
         this.product_amenties_length= data["product"]["0"].amenities.length;
-        console.log(this.product_amenties_length);
-        console.log(this.product_amenties);
+        //console.log(this.product_amenties_length);
+        //console.log(this.product_amenties);
         this.cityValue=data["product"]["0"]["city"];
         this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
-        console.log(this.latCus);
+        //console.log(this.latCus);
         this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
-        console.log(this.longCus);
+        //console.log(this.longCus);
         this.similarproperty(this.cityValue);
         this.showLoadingIndicator = false;
 
       },
         err => {
-          console.log(err);
+          //console.log(err);
         }
       );
     }
@@ -200,38 +200,38 @@ export class ProductpageComponent implements OnInit {
    loginuser_coutData(){
     this.authService.recently_view().subscribe(
       data => {
-        console.log(data.data);
+        //console.log(data.data);
         this.Recently_UserData = data.data;
         this.Recent_user_length=data.data.length;
-        console.log("Recently Views Properties");
-         console.log(this.Recently_UserData);
+        //console.log("Recently Views Properties");
+         //console.log(this.Recently_UserData);
       });
   
   }
   loginuser_countProduct(id: any){
-    console.log(this.id);
+    //console.log(this.id);
      this.authService.User_productCount(this.id).subscribe(
        data => {
-         console.log(data);
+         //console.log(data);
        });
    
    }
    
 // product comaprision functinalty 
 product_comp(id:number){
-  console.log(id);
+  //console.log(id);
   // Login check
   if(this.tokenStorage.getUser() != null){
     this.isLoggedIn = true;
-    console.log(this.isLoggedIn);
+    //console.log(this.isLoggedIn);
     this.maintenance = true;
     this.parking = false;     
       this.authService.Crete_product_comp(id).pipe().subscribe(
         (data: any) =>{
-          console.log(data);
+          //console.log(data);
           this.similarproperty(this.cityValue);
           this.single_property_data(this.id);
-          console.log(data.data.length);
+          //console.log(data.data.length);
           if(data.data.length>4){
             this.toastr.info('Bucket are the Full...!!!', 'Property', {
               timeOut: 3000,
@@ -243,7 +243,7 @@ product_comp(id:number){
           }
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
   }
@@ -278,12 +278,12 @@ Price_convert(num: number) {
         // this.isLoggedIn = true;      
         this.authService.Wishlist(data).pipe().subscribe(
           (result: any) =>{
-            console.log(result);
+            //console.log(result);
             this.similarproperty(this.cityValue);
             this.single_property_data(this.id);
           },
           err => {
-            console.log(err.error);
+            //console.log(err.error);
           }
         );
       }
@@ -302,12 +302,12 @@ Price_convert(num: number) {
       this.isLoggedIn = true;
        this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) =>{
-          console.log(result);
+         // console.log(result);
           this.similarproperty(this.cityValue);
           this.single_property_data(this.id);
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
     }
@@ -338,9 +338,9 @@ Property_type_data(): void{
       //  console.log(amenitiesdata);
       this.property_type = data.count;
       this.property_type_count=data.count;
-      console.log(this.property_type_count);
+      //console.log(this.property_type_count);
       this.property_type_result = this.property_type;
-      console.log(this.property_type_result);
+      //console.log(this.property_type_result);
       //console.log(this.content);
     },
     err => {
@@ -355,13 +355,13 @@ Property_type_data(): void{
     this.authService.login_similarproperty(this.cityValue).subscribe(
       data => {
         this.similar_property = data["product"];
-        console.log(this.similar_property);
+        //console.log(this.similar_property);
         this.wishlist_info();
         this.pro_comp_refresh();
         this.showLoadingIndicator = false;
       },
         err => {
-          console.log(err);
+         // console.log(err);
         }
       );
     }else{
@@ -369,11 +369,11 @@ Property_type_data(): void{
       this.authService.product_similarproperty(this.cityValue).subscribe(
       data => {
         this.similar_property = data["product"];
-        console.log(this.similar_property);
+        //console.log(this.similar_property);
         this.showLoadingIndicator = false;
       },
         err => {
-          console.log(err);
+          //console.log(err);
         }
       );
 
@@ -383,20 +383,20 @@ Property_type_data(): void{
   onSubmit(): void {
     // Login check
     if(this.tokenStorage.getUser() != null){
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.create_review(this.form, this.id).subscribe(
       data => {
-        console.log(data)
+        //console.log(data)
         this.toastr.success('Reviews Succesfully', 'Property', {
           timeOut: 3000,
         });
       },
       err => {
-        console.log(err.error);
+        //console.log(err.error);
         this.errorMessage = err.error.errors;
-        console.log(this.errorMessage.length);
+        //console.log(this.errorMessage.length);
         this.Message = err.error.message;
-        console.log(this.Message);
+        //console.log(this.Message);
         this.toastr.error(this.Message, 'Something Error', {
           timeOut: 3000,
         });
@@ -409,32 +409,32 @@ Property_type_data(): void{
 }
 
   get_review(): void {
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.product_review(this.id).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.Review = data.data;
       },
       err => {
-        console.log(err.error);
+        //console.log(err.error);
       }
     );
 }
 Property_type_search(id: number,pro_type: string):void{
-  console.log(id);
+  //console.log(id);
   if(this.tokenStorage.getToken()){
-    console.log('logging');
+    //console.log('logging');
     this.authService.search_pro_type_login(id).subscribe(
         
       data => {
         this.tokenService.searchData(data);
-          console.log(this.tokenService.returnSearch());
+          //console.log(this.tokenService.returnSearch());
           this.data_session=[id,pro_type];
           this.tokenService.search_pro_type(this.data_session);
           window.location.href=GlobalConstants.siteURL+"productlisting";
       },
       err => {
-        console.log(err.error);
+        //console.log(err.error);
       }
     );
   }
@@ -442,13 +442,13 @@ Property_type_search(id: number,pro_type: string):void{
     this.authService.search_pro_type(id).subscribe(
       data => {
         this.tokenService.searchData(data);
-        console.log(this.tokenService.returnSearch());
+        //console.log(this.tokenService.returnSearch());
         this.data_session=[id,pro_type];
         this.tokenService.search_pro_type(this.data_session);
         window.location.href=GlobalConstants.siteURL+"productlisting";
       },
       err => {
-        console.log(err.error);
+        //console.log(err.error);
       }
     );
   }
@@ -456,7 +456,7 @@ Property_type_search(id: number,pro_type: string):void{
 feature_property(){
   this.userService.feature_property().subscribe(
     data => { 
-      console.log(data);
+      //console.log(data);
       this.feature_property_data = data.data; 
       this.feature_pro_length =  this.feature_property_data.length;  
     }
@@ -482,7 +482,7 @@ feature_property(){
       }
     }
 
-    console.log(this.first_prod+"|"+this.second_prod+"|"+this.third_prod)
+    //console.log(this.first_prod+"|"+this.second_prod+"|"+this.third_prod)
 
     if (this.first_prod != null && this.second_prod != null && this.third_prod != null){
 
@@ -494,9 +494,9 @@ feature_property(){
       window.location.href=GlobalConstants.siteURL+"compare"
     }
 
-    console.log(this.idService.getProdId());
-    console.log(this.idService.getProd2Id());
-    console.log(this.idService.getCdata());
+    //console.log(this.idService.getProdId());
+    //console.log(this.idService.getProd2Id());
+    //console.log(this.idService.getCdata());
   }
 
   

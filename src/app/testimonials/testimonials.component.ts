@@ -21,7 +21,7 @@ export class TestimonialsComponent implements OnInit {
       (Reviewdata: any) => {
         this.contenttestimonial = Reviewdata.data;
         this.testimonial = this.contenttestimonial;
-        console.log(this.testimonial);
+        //console.log(this.testimonial);
         //console.log(this.content);
       },
       err => {

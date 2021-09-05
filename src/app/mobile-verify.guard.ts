@@ -17,7 +17,7 @@ export class MobileVerifyGuard implements CanActivate {
     return new Observable<boolean>(obs => {
       this.userService.getUserPhoneDetails().subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           if (data !== 1) {
             this.router.navigateByUrl('verify-details');
             obs.next(false);

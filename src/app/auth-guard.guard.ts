@@ -40,13 +40,13 @@ export class AuthGuardGuard implements CanActivate {
       let url: string = state.url;
       this.permission = route.data.permission;
 
-      console.log(route.data);
-      console.log("Permission: " + this.permission);
-      console.log("State: " + state);
-      console.log("Url: " + url);
+      //console.log(route.data);
+      //console.log("Permission: " + this.permission);
+      //console.log("State: " + state);
+      //console.log("Url: " + url);
 
       if (this.tokenStorage.getToken() != null) {
-        console.log("User Logged In");
+        //console.log("User Logged In");
 
         if (this.tokenStorage.getUser().misc) {
           this.userEmail = this.tokenStorage.getUser().misc.email;
@@ -54,29 +54,29 @@ export class AuthGuardGuard implements CanActivate {
         }
         else {
           this.userDetails = JSON.parse(this.tokenStorage.getUser());
-          console.log(this.userDetails);
+          //console.log(this.userDetails);
           this.userEmail = this.userDetails.email;
           this.usertype = this.userDetails.usertype;
         }
-        console.log(this.usertype);
+        //console.log(this.usertype);
 
         if (this.usertype > 6) {
 
           this.internalUserService.get_access_rights(this.userEmail).subscribe(
             data => {
-              console.log(data);
-              console.log(data[0]);
+              //console.log(data);
+              //console.log(data[0]);
               this.response = data;
-              console.log(this.response);
+              //console.log(this.response);
 
               switch (this.permission[0]) {
                 case 'access_all_users': {
-                  console.log("All Users");
+                  //console.log("All Users");
                   if (this.response[0].access_all_users == 1) {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                    //console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -84,12 +84,12 @@ export class AuthGuardGuard implements CanActivate {
                 }
 
                 case 'access_lawyer_services': {
-                  console.log("Lawyer Services");
+                  //console.log("Lawyer Services");
                   if (this.response[0].access_lawyer_services == 1) {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                    //console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -97,12 +97,12 @@ export class AuthGuardGuard implements CanActivate {
                 }
 
                 case 'access_loan_control': {
-                  console.log("Loan Control");
+                  //console.log("Loan Control");
                   if (this.response[0].access_loan_control == 1) {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                    //console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -110,12 +110,12 @@ export class AuthGuardGuard implements CanActivate {
                 }
 
                 case 'access_manage_blog': {
-                  console.log("Manage Blog");
+                  //console.log("Manage Blog");
                   if (this.response[0].access_manage_blog == 1) {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                    //console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -123,12 +123,12 @@ export class AuthGuardGuard implements CanActivate {
                 }
 
                 case 'access_manage_roles': {
-                  console.log("Manage Roles");
+                  //console.log("Manage Roles");
                   if (this.response[0].access_manage_roles == 1) {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                    //console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -140,7 +140,7 @@ export class AuthGuardGuard implements CanActivate {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                   // console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -152,7 +152,7 @@ export class AuthGuardGuard implements CanActivate {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                    //console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -164,7 +164,7 @@ export class AuthGuardGuard implements CanActivate {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                   // console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -176,7 +176,7 @@ export class AuthGuardGuard implements CanActivate {
                     obs.next(true);
                   }
                   else {
-                    console.log("Access Denied");
+                    //console.log("Access Denied");
                     this.router.navigateByUrl('access-denied');
                     obs.next(false);
                   }
@@ -185,19 +185,19 @@ export class AuthGuardGuard implements CanActivate {
               }
             },
             err => {
-              console.log(err);
+              //console.log(err);
             }
           );
         }
         else {
-          console.log("User logged in but is an external User. Access Denied");
+          //console.log("User logged in but is an external User. Access Denied");
           this.router.navigateByUrl('access-denied');
           obs.next(false);
         }
 
       }
       else {
-        console.log("User not logged in. Access Denied");
+        //console.log("User not logged in. Access Denied");
         this.router.navigateByUrl('access-denied');
         obs.next(false);
       }

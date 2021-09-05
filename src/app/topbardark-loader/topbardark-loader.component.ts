@@ -62,8 +62,8 @@ export class TopbardarkLoaderComponent implements OnInit {
 
     } */
 
-    console.log(this.tokenStorage.getToken());
-    console.log(this.tokenStorage.getUser());
+    //console.log(this.tokenStorage.getToken());
+    //console.log(this.tokenStorage.getUser());
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
       
@@ -92,7 +92,7 @@ export class TopbardarkLoaderComponent implements OnInit {
         this.wishlistcontent = wishlistdata.data;
         this.wishlistresult = this.wishlistcontent;
         this.wishlist_length = this.wishlistcontent.length;
-        console.log(this.wishlistresult);
+        //console.log(this.wishlistresult);
       },
       err => {
         this.content = JSON.parse(err.error).message;
@@ -104,7 +104,7 @@ export class TopbardarkLoaderComponent implements OnInit {
       (wishlistdata: any) => {
         this.property_comp = wishlistdata.data;
         this.property_comp_length=this.property_comp.length;
-        console.log(this.property_comp);
+        //console.log(this.property_comp);
       },
       err => {
         this.content = JSON.parse(err.error).message;

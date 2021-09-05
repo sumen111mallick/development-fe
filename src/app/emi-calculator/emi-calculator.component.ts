@@ -2,7 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ChartType, ChartOptions, Chart } from 'chart.js';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import  ChartDataLabels  from 'chartjs-plugin-datalabels';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Options } from '@angular-slider/ngx-slider';
 
 @Component({
   selector: 'app-emi-calculator',
@@ -33,6 +34,7 @@ export class EmiCalculatorComponent implements OnInit {
     loan_amount: new FormControl('1000000', [Validators.required, Validators.minLength(6)]),
     loan_tenure: new FormControl('5', [Validators.required, Validators.max(30), Validators.min(2)]),
     loan_roi: new FormControl('9.5', [Validators.required, Validators.pattern(/^(\d{0,2}(\.\d{0,2})?)$/)]),
+    sliderControl: new FormControl('500000')
   });
 
   constructor(private el: ElementRef) { }
@@ -81,7 +83,7 @@ export class EmiCalculatorComponent implements OnInit {
     this.maxNum = 30;
     this.minNum = 2;
     this.tenType = this.el.nativeElement.querySelector(".tenYears").innerHTML;
-    console.log(this.tenType);
+    //console.log(this.tenType);
     this.calculateEmi(this.tenType);
 
     this.PieChart = new Chart('pieChart', {
@@ -131,12 +133,12 @@ export class EmiCalculatorComponent implements OnInit {
             afterLabel: function (tooltipItem, data) {
               var dataset = data['datasets'][0];
               var datalabels = data['labels'];
-              console.log(data['labels']);
-              console.log(datalabels[tooltipItem['index']]);
+              //console.log(data['labels']);
+              //console.log(datalabels[tooltipItem['index']]);
               var percent = dataset['data'][tooltipItem['index']];
               return datalabels[tooltipItem['index']] + ": " + percent + " %";
 
-            } 
+            }
           }
         }
 
@@ -159,21 +161,22 @@ export class EmiCalculatorComponent implements OnInit {
     let tenure_loan = this.emiForm.value.loan_tenure;
     let roi_loan = this.emiForm.value.loan_roi;
 
-    let p = this.amount_loan.replace(/,/g, '');
+    //let p = this.amount_loan.replace(/,/g, '');
+    let p = this.amount_loan
     let r = roi_loan / 100 / 12;
-    console.log(tenureType);
+    //console.log(tenureType);
     if (tenureType == "Years") {
       this.n = tenure_loan * 12;
       //this.maxNum = 30;
       //this.minNum = 2;
-      console.log("Tenure is: " + this.n);
+      //console.log("Tenure is: " + this.n);
     }
     else if (tenureType == "Months") {
       this.n = tenure_loan;
       //this.maxNum = this.maxNum * 12;
       //this.minNum = this.minNum * 12;
 
-      console.log("Tenure is: " + this.n);
+      //console.log("Tenure is: " + this.n);
     }
 
 
@@ -184,17 +187,17 @@ export class EmiCalculatorComponent implements OnInit {
     this.total_interest = (monthly_emi * this.n - p).toFixed();
     this.total_payment = (monthly_emi * this.n).toFixed();
     this.final_total_payment = this.commaSeperated(this.total_payment);
-    console.log(this.final_total_payment);
+    //console.log(this.final_total_payment);
     let interest_perc: any = (this.total_interest * 100) / this.total_payment;
     let principal_perc: any = (p * 100) / this.total_payment;
     this.interest_perc_fixed = interest_perc.toFixed(2);
     this.principal_perc_fixed = principal_perc.toFixed(2);
 
-    console.log(monthly_emi.toFixed());
-    console.log(interest_perc.toFixed(2));
-    console.log(principal_perc.toFixed(2));
+    //console.log(monthly_emi.toFixed());
+    //console.log(interest_perc.toFixed(2));
+    //console.log(principal_perc.toFixed(2));
 
-    console.log(this.PieChart.data);
+    //console.log(this.PieChart.data);
     //this.PieChart.data.datasets[0].data[0] = this.principal_perc_fixed;
     //this.PieChart.data.datasets[0].data[1] = this.interest_perc_fixed;
 
@@ -226,9 +229,9 @@ export class EmiCalculatorComponent implements OnInit {
   }
 
   showOptions() {
-    console.log(this);
+    //console.log(this);
     let myTag = this.el.nativeElement.querySelector(".tenDropdown");
-    console.log(myTag);
+    //console.log(myTag);
     myTag.hide = !myTag.hide;
     if (myTag.classList.contains('hide')) {
       myTag.classList.remove('hide');
@@ -240,31 +243,39 @@ export class EmiCalculatorComponent implements OnInit {
   }
 
   getValue(event) {
-    console.log(event.path[0].innerHTML);
+    //console.log(event.path[0].innerHTML);
     this.selTenure = event.path[0].innerHTML;
     this.myTag = this.el.nativeElement.querySelector(".tenYears");
-    console.log(this.myTag);
+    //console.log(this.myTag);
     this.myTag.innerHTML = event.path[0].innerHTML;
     if (this.selTenure == "Years") {
       //this.maxNum = 30;
       //this.minNum = 2;
       this.minNum = 2;
       this.maxNum = 30;
-      console.log(this.maxNum);
-      console.log(this.minNum);
+      //console.log(this.maxNum);
+      //console.log(this.minNum);
+
     }
     else if (this.selTenure == "Months") {
       //this.maxNum = this.maxNum * 12;      
       //this.minNum = this.minNum * 12;
       this.minNum = 24;
       this.maxNum = 360;
-      console.log(this.maxNum);
-      console.log(this.minNum);
+      //console.log(this.maxNum);
+      //console.log(this.minNum);
     }
+    this.ten_options = {
+      floor: this.minNum,
+      ceil: this.maxNum,
+      showSelectionBar: true
+    }
+    //console.log(this.ten_options);
+    
     //this.emiForm.get('loan_tenure').setValidators([Validators.min(this.minNum), Validators.max(this.maxNum)]);
     this.emiForm.controls["loan_tenure"].setValidators([Validators.min(this.minNum), Validators.max(this.maxNum), Validators.required]);
     this.emiForm.controls["loan_tenure"].updateValueAndValidity();
-    console.log(this.emiForm);
+    //console.log(this.emiForm);
     this.calculateEmi(this.selTenure);
     this.PieChart.data.datasets[0].data[0] = this.principal_perc_fixed;
     this.PieChart.data.datasets[0].data[1] = this.interest_perc_fixed;
@@ -275,15 +286,15 @@ export class EmiCalculatorComponent implements OnInit {
   }
 
   loanDetailsChange(event) {
-    console.log(event);
+    //console.log(event);
     this.myTag = this.el.nativeElement.querySelector(".tenYears").innerHTML;
-    console.log(this.myTag);
-    console.log(this.commaSeperated(this.emiForm.controls['loan_amount'].value));
+    //console.log(this.myTag);
+    //console.log(this.commaSeperated(this.emiForm.controls['loan_amount'].value));
     this.emiForm.controls['loan_amount'].patchValue = this.commaSeperated(this.emiForm.controls['loan_amount'].value);
     this.emiForm.controls['loan_amount'].updateValueAndValidity();
     //this.maxNum = 30;
     //this.minNum = 2;
-    console.log(this.emiForm.controls);
+    //console.log(this.emiForm.controls);
     if (this.emiForm.get('loan_amount').valid && this.emiForm.get('loan_roi').valid && this.emiForm.get('loan_tenure').valid) {
       this.calculateEmi(this.myTag);
       this.PieChart.data.datasets[0].data[0] = this.principal_perc_fixed;
@@ -294,6 +305,40 @@ export class EmiCalculatorComponent implements OnInit {
       });
     }
 
+  }
+
+  value: number = 2000000;
+  options: Options = {
+    floor: 100000,
+    ceil: 50000000,
+    step: 50000,
+    animate: true,
+    showSelectionBar: true,
+    translate: (value: number, label): string => {
+      return this.commaSeperated(value);
+    }
+  };
+
+  value_ten: number = 5;
+  ten_options: Options = {
+    floor: 2,
+    ceil: 30,
+    step: 1,
+    animate: true,
+    showSelectionBar: true,
+  };
+
+  value_int: number = 5;
+  int_options: Options = {
+    floor: 2,
+    ceil: 30,
+    step: 0.5,
+    animate: true,
+    showSelectionBar: true,
+  };
+
+  addCommas() {
+    this.value = this.commaSeperated(this.value);
   }
 
 }

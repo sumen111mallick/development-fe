@@ -22,7 +22,8 @@
 @import       './assets/css/style.css';
 @import       './assets/css/timecounter.css';
 @import       './assets/css/form-elements.css';
-@import       './assets/css/wizard-style.css';
+
+/*@import       './assets/css/wizard-style.css';*/
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -117,4 +118,54 @@ ng-multiselect-dropdown .dropdown-btn {
 .multiselect-dropdown .dropdown-btn .selected-item span {
   height: 35px;
   font-size: 13px;
+}
+/*html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
+
+/* For Angular Material Toolbar and Sidenav */
+
+.material-icons {
+  vertical-align: middle;
+}
+
+.stricky-fixed {
+  background-color: #ffffff !important;
+  color: #000 !important;
+}
+
+.stricky-fixed a {
+  color: #000 !important;
+}
+
+.stricky-fixed a img {
+  src: url('./assets/css/images/header-logo2.png') !important;
+}
+
+.stricky-fixed a.img_logo .logo1 {
+  display: none;
+}
+
+a.img_logo .logo1 {
+  display: none;
+}
+
+
+.stricky-fixed a.img_logo .logo2 {
+  display: inline-block;
+}
+
+.add_listing{
+  border-radius: 25px;
+  height: 50px;  
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  width: 180px;
+  border: double;
+  color: darkgrey;
+}
+
+.navigation-items >li > a {
+  vertical-align: middle;
+  vertical-align: -webkit-baseline-middle;
 }

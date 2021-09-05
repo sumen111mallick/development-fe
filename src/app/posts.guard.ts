@@ -22,11 +22,11 @@ export class PostsGuard implements CanActivate {
    }
 
    checkLogin(url: string): true | UrlTree {
-      console.log("Url: " + url);
+      //console.log("Url: " + url);
 
       //let val: string = this.tokenStorage.getUser().usertype;
       let val = this.tokenStorage.getUser();
-      console.log(val);
+      //console.log(val);
 
       if (val != null && val.usertype == "11") {
          if (url == "/login")

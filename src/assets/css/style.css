@@ -2253,7 +2253,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
   z-index: -1;
 }
 .home_adv_srch_opt{
-  margin-top: 145px;
+  margin-top: 175px;
   position: relative;
 }
 .home_adv_srch_opt .nav-pills{
@@ -3065,8 +3065,8 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   top: 5%;
 }
 .animated  {
-  -webkit-animation-duration :3s;
-  animation-duration :3s;
+  -webkit-animation-duration :1s;
+  animation-duration :1s;
   -webkit-animation-delay :500ms;
   animation-delay :500ms;
 }
@@ -16690,16 +16690,17 @@ button.gm-ui-hover-effect:focus {
    margin-left: 30px!important;
  }
  .our-dashbord.dashbord{
-   padding: 20px 0px!important;
+   padding-top: 65px;
  }
  .our-dashbord.dashbord .container-fluid{
    padding: 0px 15px!important;
+   margin-top: 15px;
  }
  h2, .h2 {
   font-size: 20px!important;
 }
 .my_dashboard_review ul li{
-  width: 100%!important;
+  width: 50%!important;
 }
 .portfolio_item{
   width: 100%!important;
@@ -16712,6 +16713,12 @@ button.gm-ui-hover-effect:focus {
 .breadcrumb_content.style2{
   margin: 5px 0px!important;
   text-align: center!important;
+}
+
+.our-dashbord.dashbord{
+  padding-top: 100px;
+  /* Added by Radhika to fix the content issue */
+  padding-left: 0;				 
 }
 }
 .imageAdd_btn
@@ -16843,6 +16850,10 @@ button.gm-ui-hover-effect:focus {
   .plans_tab li.nav-item .nav-link {
     font-size: 16px;
   }
+
+  .our-dashbord.dashbord {
+    margin-left: 120px;
+  }
   
 }
 
@@ -16850,13 +16861,13 @@ button.gm-ui-hover-effect:focus {
 					  
 			 
 {
+
+  .our-dashbord.dashbord {
+    margin-left: 0;
+  }
+
   .plans_tab li.nav-item{
-						 
-			 
     width: 100%;
-								   
-			  
-					  
   }
 
   .plans_tab li.nav-item .nav-link
@@ -16949,7 +16960,7 @@ button.gm-ui-hover-effect:focus {
   z-index: 1000;
 }
 .dashboard_sidebar_menu{
-  z-index: 100000000;
+  z-index: 100;
 }
 .UpdateProperty_select_img .portfolio_item .overlay h4{
   color: #fff;
@@ -17029,7 +17040,7 @@ justify-content: flex-end;
   position: absolute;
   top: 0px;
   width: 100%;
-  z-index: 999;
+  z-index: 997;
  }
  .compare_page{
    padding: 105px 0px!important;

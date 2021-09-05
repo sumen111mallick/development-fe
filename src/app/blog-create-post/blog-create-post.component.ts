@@ -74,12 +74,12 @@ export class BlogCreatePostComponent implements OnInit {
 
     this.showLoadingIndicator = true;
     this.UserToken = this.tokenStorage.getUser();
-    console.log(this.UserToken);
+    //console.log(this.UserToken);
 
     this.route.paramMap.subscribe(params => {
       const slugPost = params.get('slug');
       this.isAddMode = !slugPost;
-      console.log(this.isAddMode);
+      //console.log(this.isAddMode);
       this.showLoadingIndicator = false;
       if (slugPost) {
         this.getSelectedPost(slugPost);
@@ -99,25 +99,25 @@ export class BlogCreatePostComponent implements OnInit {
   }
 
   editPost(returnedPost) {
-    console.log(returnedPost);
+    //console.log(returnedPost);
     this.parsedData = JSON.parse(returnedPost);
-    console.log(this.parsedData);
+    //console.log(this.parsedData);
     this.imgURL = this.ftpstring + "images/" + this.parsedData[0].image_path;
-    console.log(this.imgURL);
+    //console.log(this.imgURL);
     this.blogForm.patchValue({
       title: this.parsedData[0].title,
       description: this.parsedData[0].description,
       //postImage: this.parsedData[0].image_path,
       category: this.parsedData[0].category
     });
-    console.log(this.blogForm.controls);
+    //console.log(this.blogForm.controls);
   }
 
   onFileChange(event) {
 
-    console.log(event);
+    //console.log(event);
     this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile);
+    //console.log(this.selectedFile);
     this.files = event.target.files;
     /*if (event.target.files && event.target.files.length > 0) {
       const file = (event.target.files[0] as File);
@@ -125,9 +125,9 @@ export class BlogCreatePostComponent implements OnInit {
       this.blogForm.get('post_image').patchValue(file);
       console.log(this.blogForm.get('post_image').value);*/
     const reader = new FileReader();
-    console.log(reader);
+    //console.log(reader);
     this.imagePath = this.files;
-    console.log(this.imagePath);
+    //console.log(this.imagePath);
     reader.readAsDataURL(this.files[0]);
     reader.onload = (event) => {
       this.imgURL = event.target.result;
@@ -162,16 +162,16 @@ export class BlogCreatePostComponent implements OnInit {
 
     //formData.append('postImage', this.selectedFile, this.selectedFile.name);
     //formData.append('postImage', this.selectedFile.type, this.selectedFile.name);
-    console.log(formData.get('postImage'));
-    console.log(formData.get('title'));
-    console.log(formData.get('description'));
-    console.log(formData.get('category'));
-    console.log(formData.get('created_by'));
+    //console.log(formData.get('postImage'));
+    //console.log(formData.get('title'));
+    //console.log(formData.get('description'));
+    //console.log(formData.get('category'));
+    //console.log(formData.get('created_by'));
     //this.blogForm.patchValue({postImage: this.selectedFile.name});
     //this.blogForm.patchValue({postImage: this.selectedFile.name});
     this.blogService.addPost(formData).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.response = res;
         this.showSuccess(this.response.message);
         this.blogForm.reset({});
@@ -182,7 +182,7 @@ export class BlogCreatePostComponent implements OnInit {
       },
       err => {
         this.errorMessage = err.error.message;
-        console.log(err);
+        //console.log(err);
         this.showLoadingIndicator = false;
       }
     );
@@ -190,42 +190,42 @@ export class BlogCreatePostComponent implements OnInit {
 
   private updatePost() {
     this.showLoadingIndicator = true;
-    console.log("Hello. This is Update Operation.");
+    //console.log("Hello. This is Update Operation.");
     var updateFormData: any = new FormData();
     this.slug = this.route.snapshot.params['slug'];
-    console.log(this.slug);
+    //console.log(this.slug);
     updateFormData.append('title', this.blogForm.value.title);
     updateFormData.append('description', this.blogForm.value.description);
     if (this.selectedFile) {
       updateFormData.append('postImage', this.selectedFile, this.selectedFile.name);
-      console.log(this.selectedFile);
+      //console.log(this.selectedFile);
     }
 
     updateFormData.append('category', this.blogForm.value.category);
     updateFormData.append('created_by', this.UserToken.id);
 
-    console.log(updateFormData.get('postImage'));
-    console.log(updateFormData.get('title'));
-    console.log(updateFormData.get('description'));
-    console.log(updateFormData.get('category'));
-    console.log(updateFormData.get('created_by'));
+    //console.log(updateFormData.get('postImage'));
+    //console.log(updateFormData.get('title'));
+    //console.log(updateFormData.get('description'));
+    //console.log(updateFormData.get('category'));
+    //console.log(updateFormData.get('created_by'));
 
     this.blogService.updatePostDetails(updateFormData, this.slug).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.response = res;
         this.showSuccess(this.response.message);
         this.blogForm.reset({});
         this.showLoadingIndicator = false;
         this.imgURL = null;
-        console.log(this.myInputVariable);
+        //console.log(this.myInputVariable);
         this.myInputVariable.nativeElement.value = "";
         this.selectedFile = null;
         this._router.navigate(['admin-blog']);
       },
       err => {
         this.errorMessage = err.error.message;
-        console.log(err);
+        //console.log(err);
         this.showLoadingIndicator = false;
       }
     );

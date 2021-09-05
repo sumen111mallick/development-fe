@@ -43,11 +43,11 @@ export class DashboardComponent implements OnInit {
         this.data = data;
         this.view_count = data['view_count'];
         this.property_count = data['property_count'];
-        console.log(data);
+        //console.log(data);
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 

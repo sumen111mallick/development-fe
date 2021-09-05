@@ -25,11 +25,11 @@ export class InsertselectorComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle('Create Listing');
     this.usertype = this.tokenStorage.getUser().usertype
-    console.log(this.usertype)
+    //console.log(this.usertype)
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true
       if(this.usertype != 1){
-        console.log(this.isLoggedIn)
+        //console.log(this.isLoggedIn)
       }
       else{
         this.redirect_to_profile();

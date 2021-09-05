@@ -92,7 +92,7 @@ export class CreateRolesComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const roleid = params.get('id');
       this.isAddMode = !roleid;
-      console.log(this.isAddMode);
+      //console.log(this.isAddMode);
       this.showLoadingIndicator = false;
       if (roleid) {
         this.getSelectedRole(roleid);
@@ -112,11 +112,11 @@ export class CreateRolesComponent implements OnInit {
   }
 
   editRole(returnedData) {
-    console.log(returnedData);
+    //console.log(returnedData);
     this.roleForm.controls['rolename'].disable();
     this.roleForm.controls['role_id'].disable();
     this.parsedData = JSON.parse(returnedData);
-    console.log(this.parsedData);
+    //console.log(this.parsedData);
 
     switch(this.parsedData[0].access_all_users) {
       case "0": {
@@ -243,7 +243,7 @@ export class CreateRolesComponent implements OnInit {
       user_creatorControl: this.user_creatorControl_value,
       listPropertyControl: this.listPropertyControl_value
     });
-    console.log(this.roleForm.controls);
+    //console.log(this.roleForm.controls);
   }
 
 
@@ -258,20 +258,20 @@ export class CreateRolesComponent implements OnInit {
 
   private createRole() {
     this.showLoadingIndicator = true;
-    console.log("Role Creation Form Submitted");
-    console.log(this.roleForm);
-    console.log(this.roleForm.controls);
-    console.log(this.roleForm.controls['all_usersControl'].value);
+    //console.log("Role Creation Form Submitted");
+    //console.log(this.roleForm);
+    //console.log(this.roleForm.controls);
+    //console.log(this.roleForm.controls['all_usersControl'].value);
     this.authService.create_role(this.roleForm).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.response = data;
         this.showSuccess(this.response.message);
         this.showLoadingIndicator = false;
         this._router.navigate(['manage-roles']);
       },
       err => {
-        console.log(err);
+        //console.log(err);
         this.showLoadingIndicator = false;
       }
     );
@@ -279,10 +279,10 @@ export class CreateRolesComponent implements OnInit {
 
   private updateRole() {
     this.showLoadingIndicator = true;
-    console.log("Role Update Form Submitted");
+    //console.log("Role Update Form Submitted");
     var updateRoleData: any = new FormData();
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id);
+    //console.log(this.id);
 
     switch(this.roleForm.value.all_usersControl) {
       case false: {
@@ -407,7 +407,7 @@ export class CreateRolesComponent implements OnInit {
 
     this.authService.update_role(updateRoleData, this.id).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.response = res;
         this.showSuccess(this.response.message);
         this.showLoadingIndicator = false;
@@ -415,7 +415,7 @@ export class CreateRolesComponent implements OnInit {
       },
       err => {
         this.showLoadingIndicator = false;
-        console.log(err);
+        //console.log(err);
       }
     );
     
@@ -423,8 +423,8 @@ export class CreateRolesComponent implements OnInit {
 
 
   getStats(checkbox_value: any, isChecked: boolean) {
-    console.log(checkbox_value);
-    console.log(isChecked);
+    //console.log(checkbox_value);
+    //console.log(isChecked);
     this.checkbox_status = isChecked;
   }
 

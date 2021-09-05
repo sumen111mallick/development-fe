@@ -31,13 +31,13 @@
     padding-left: 3px 60px 10px 10px;
     bottom: 30px;
     font-weight: 600;
-    top: 45px;
+    top: 120px;
 }
 
 .tenYears {
     color: #999;
     right: 0;
-    top: 45px;
+    top: 115px;
     font-size: 16px;
     left: auto;
     cursor: pointer;
@@ -98,3 +98,15 @@
 canvas {
     height: 300px !important;
 }
+
+/* New Styles 30 Aug 2021 */
+
+.loan_amt_range {
+    display: block;
+    height: 50px;
+    width: 100%;
+}
+
+  .ngx-slider .ngx-slider-pointer {
+      background-color: #cd5700 !important;
+  }

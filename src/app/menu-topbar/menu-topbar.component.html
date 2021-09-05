@@ -1,0 +1,113 @@
+<mat-toolbar color="primary" class="navbar-scrolltofixed stricky">
+    <div fxHide.gt-sm>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div class="m-auto">
+        <a class="img_logo" href="/">
+            <img class="logo1 img-fluid" src="./../../assets/css/images/header-logo.png" alt="header-logo.png">
+            <img class="logo2 img-fluid" src="./../../assets/css/images/header-logo2.png" alt="header-logo2.png">
+        </a>
+    </div>
+    <div fxHide.gt-sm>
+        <button mat-icon-button [matMenuTriggerFor]="user_info" aria-label="">
+            <span class="material-icons">
+                person
+            </span>
+            <span class="material-icons">
+                expand_more
+            </span>
+        </button>
+        <mat-menu #user_info="matMenu">
+            <button mat-menu-item disabled *ngIf="isLoggedIn">
+                <span>{{ roles }}</span>
+            </button>
+            <button mat-menu-item *ngIf="isLoggedIn">
+                <span>
+                    <a class="dropdown-item text-secondary" href="/profile">My Profile</a>
+                </span>
+            </button>
+            <button mat-menu-item *ngIf="isLoggedIn">
+                <span><a class="dropdown-item text-secondary" href="/logout">Log out</a></span>
+            </button>
+            <button mat-menu-item *ngIf="!isLoggedIn">
+                <span><a class="dropdown-item text-secondary" href="/login">Login</a></span>
+            </button>
+        </mat-menu>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="end" fxHide.lt-md>
+        <ul fxLayout fxLayoutGap="30px" class="navigation-items">
+            <li>
+                <a href="">Home</a>
+            </li>
+            <li>
+                <a routerLink="/productlisting">Listing</a>
+            </li>
+            <li>
+                <a routerLink="/contact">Contact</a>
+            </li>
+            <li>
+                <a routerLink="/plans">Plans</a>
+            </li>
+            <li>
+                <a routerLink="/blog">Blog</a>
+            </li>
+            <li *ngIf="!isLoggedIn">
+                <a routerLink="/login">Login/Register</a>
+            </li>
+            <li *ngIf="isLoggedIn" class="user_acc">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <span class="material-icons">
+                        person
+                    </span>
+                    <span class="material-icons">
+                        expand_more
+                    </span>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <span *ngIf="userProfile"><img class="profile_image" src="{{ftpstring}}images/{{userProfile}}"
+                                alt="login_user.png"></span>
+                        <span *ngIf="!userProfile"><img class="profile_image"
+                                src="./../../assets/css/images/team/e1.png" alt="login_user.png"></span>
+                    </button>
+                    <button mat-menu-item disabled>
+                        <span>{{ roles }}</span>
+                    </button>
+                    <button mat-menu-item>
+                        <span>
+                            <a class="dropdown-item text-secondary" href="/profile">My Profile</a>
+                        </span>
+                    </button>
+                    <button mat-menu-item>
+                        <span><a class="dropdown-item text-secondary" (click)="log_out()" href="/logout">Log out</a></span>
+                    </button>
+                </mat-menu>
+
+            </li>
+            <li *ngIf="isLoggedIn">
+                <a href="/Wishlist">
+                    <span class="material-icons wishlist_icon">favorite_border</span>
+                    <span class="wishlistValue">{{wishlist_length}}</span>
+                </a>
+            </li>
+            <li *ngIf="isLoggedIn">
+                <a href="/compare">
+                    <span class="material-icons">
+                        compare_arrows
+                    </span>
+                    <span class="wishlistValue">{{property_comp_length}}</span>
+                </a>
+            </li>
+            <li class="add_listing">
+                <a href="/insertproduct">
+                    <span class="material-icons">
+                        add_circle_outline
+                    </span>
+                    <span> List Property</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</mat-toolbar>

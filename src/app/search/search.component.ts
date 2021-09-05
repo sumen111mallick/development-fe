@@ -24,10 +24,10 @@ export class SearchComponent implements OnInit {
     this.titleService.setTitle('Search Results');
     this.contentdata = this.dataService.returnSearch();
     this.content=this.contentdata['product'];
-    console.log(this.content);
-    console.log(this.contentdata['product']);
+    //console.log(this.content);
+    //console.log(this.contentdata['product']);
     // this.content= this.contentdata[] ;
-    console.log(this.dataService.returnSearch());
+    //console.log(this.dataService.returnSearch());
   }
   prod_func(data){
     this.dataService.saveProdId(data);

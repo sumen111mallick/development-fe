@@ -50,7 +50,7 @@ export class WishlistComponent implements OnInit {
       // Login check
       if(this.tokenStorage.getUser() != null){
         this.isLoggedIn = true
-        console.log(this.isLoggedIn)
+        //console.log(this.isLoggedIn)
       }
       else{
         this.redirect_to_home();
@@ -74,16 +74,16 @@ export class WishlistComponent implements OnInit {
   
 // product comaprision functinalty 
 product_comp(id:number){
-  console.log(id);
+  //console.log(id);
   // Login check
   if(this.tokenStorage.getUser() != null){
     this.isLoggedIn = true;
-    console.log(this.isLoggedIn);
+    //console.log(this.isLoggedIn);
     this.maintenance = true;
     this.parking = false;     
       this.authService.Crete_product_comp(id).pipe().subscribe(
         (data: any) =>{
-          console.log(data);
+          //console.log(data);
           this.getwishlist();
           if(data.data.length>4){
             this.toastr.info('Bucket are the Full...!!!', 'Property', {
@@ -96,7 +96,7 @@ product_comp(id:number){
           }
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
   }
@@ -111,7 +111,7 @@ product_comp(id:number){
         this.wishlistcontent = wishlistdata.data;
         this.wishlistresult = this.wishlistcontent;
         this.wishlist_length =this.wishlistcontent.length;
-        console.log(this.wishlistresult);
+        //console.log(this.wishlistresult);
         this.showLoadingIndicator = false;
         this.wishlist_info();
         this.pro_comp_refresh();
@@ -126,11 +126,11 @@ product_comp(id:number){
       this.isLoggedIn = true
         this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) =>{
-          console.log(result);
+          //console.log(result);
           this.getwishlist();
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
     }
@@ -164,7 +164,7 @@ product_comp(id:number){
       window.location.href=GlobalConstants.siteURL="login"
     }
     prod_func(data){
-      console.log(this.idservice.saveProdId(data));
+      //console.log(this.idservice.saveProdId(data));
       // this.myservice.setData(data);
       // this.router.navigate(["/productpage"])
     }

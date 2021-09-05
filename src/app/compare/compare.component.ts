@@ -57,9 +57,9 @@ export class CompareComponent implements OnInit {
       (data: any) => {
         this.property_comp = data.data;
         this.property_comp_length=this.property_comp.length;
-        console.log(this.property_comp[0].amenities);
-        console.log(this.property_comp);
-        console.log(this.property_comp_length);
+        //console.log(this.property_comp[0].amenities);
+        //console.log(this.property_comp);
+        //console.log(this.property_comp_length);
         this.pro_comp_refresh();
         if(this.property_comp_length <2){
             this.toastr.warning('Comparision Minimun Two','Property', {
@@ -80,7 +80,7 @@ export class CompareComponent implements OnInit {
         //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
         this.amenitiesresult = this.amenities;
-        console.log(this.amenitiesresult);
+        //console.log(this.amenitiesresult);
         //console.log(this.content);
       },
       err => {
@@ -103,16 +103,16 @@ export class CompareComponent implements OnInit {
   }
 }
   delete_comp(id:number):void{
-    console.log(id);
+    //console.log(id);
     this.showLoadingIndicator = true;
     this.authService.pro_comp_delete(id).subscribe(
         data => {
-        console.log(data); 
+        //console.log(data); 
         this.pro_comp();
         // this.showLoadingIndicator = false;
         },
         err => {
-          console.log(err)
+          //console.log(err)
         }
       );
   }

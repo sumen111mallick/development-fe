@@ -216,7 +216,7 @@ export class PostproductrentComponent implements OnInit {
   }
 
   eventListen(event) {
-    console.log(event);
+    //console.log(event);
   }
 
 
@@ -239,8 +239,8 @@ export class PostproductrentComponent implements OnInit {
           this.longCus = place.geometry.location.lng();
           this.location = place.formatted_address;
           this.zoom = 15;
-          console.log(this.latCus);
-          console.log(this.location);
+          //console.log(this.latCus);
+          //console.log(this.location);
           this.insert_property_rent.controls.Property_Location.patchValue({
             address: this.location,
             map_latitude: this.latCus,
@@ -257,14 +257,14 @@ export class PostproductrentComponent implements OnInit {
     // Login check
     if (this.tokenStorage.getUser() != null) {
       this.isLoggedIn = true
-      console.log(this.isLoggedIn)
+      //console.log(this.isLoggedIn)
     }
     else {
       this.redirect_to_home();
     }
 
     this.content = this.tokenStorage.getUser().id;
-    console.log(this.content);
+    //console.log(this.content);
     this.maintenance = true;
     this.parking = false;
     if (this.tokenStorage.getToken()) {
@@ -279,8 +279,8 @@ export class PostproductrentComponent implements OnInit {
   }
   getLocation() {
     this.userService.getLocationService().then(resp => {
-      console.log(resp.lng);
-      console.log(resp);
+      //console.log(resp.lng);
+      //console.log(resp);
       this.longCus = resp.lng;
       this.latCus = resp.lat;
       this.insert_property_rent.controls.Property_Location.patchValue({
@@ -298,17 +298,17 @@ export class PostproductrentComponent implements OnInit {
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
-          console.log(results[0].formatted_address);
+          //console.log(results[0].formatted_address);
           this.insert_property_rent.controls.Property_Location.patchValue({
             address: results[0].formatted_address,
             map_latitude: this.latCus,
             map_longitude: this.longCus,
           });
         } else {
-          console.log('No results found');
+          //console.log('No results found');
         }
       } else {
-        console.log('Geocoder failed due to: ' + status);
+        //console.log('Geocoder failed due to: ' + status);
       }
 
     });
@@ -320,7 +320,7 @@ export class PostproductrentComponent implements OnInit {
 
 
   furnishStatus(event): void {
-    console.log(event);
+    //console.log(event);
     if (event == 'SFR' || event == 'FFR') {
       this.furnish = true;
     }
@@ -336,29 +336,29 @@ export class PostproductrentComponent implements OnInit {
   }
 
   amenity(event): void {
-    console.log(event)
+    //console.log(event)
     this.amenityArray.push(event);
 
-    console.log(this.amenityArray);
+    //console.log(this.amenityArray);
   }
   onchangeAmenties(e: any, id: string) {
     if (e.target.checked) {
-      console.log(id + 'Checked');
+      //console.log(id + 'Checked');
       this.selectedItems.push(id);
     } else {
-      console.log(id + 'UNChecked');
+      //console.log(id + 'UNChecked');
       this.selectedItems = this.selectedItems.filter(m => m != id);
     }
     this.amenityArray = this.selectedItems;
-    console.log(this.amenityArray);
+    //console.log(this.amenityArray);
 
   }
 
   furnishing(event): void {
-    console.log(event)
+    //console.log(event)
     this.furnishingArray.push(event);
 
-    console.log(this.furnishingArray);
+    //console.log(this.furnishingArray);
   }
 
 
@@ -501,7 +501,7 @@ export class PostproductrentComponent implements OnInit {
   }
 
   parkingStatus(event): void {
-    console.log(event)
+    //console.log(event)
     if (event == 0) {
       this.parking = true;
     }
@@ -517,7 +517,7 @@ export class PostproductrentComponent implements OnInit {
         //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
         this.amenitiesresult = this.amenities;
-        console.log(this.amenitiesresult);
+        //console.log(this.amenitiesresult);
         //console.log(this.content);
         this.showLoadingIndicator = false;
       },
@@ -532,7 +532,7 @@ export class PostproductrentComponent implements OnInit {
       (data: any) => {
         this.property_type = data.data;
         this.property_type_result = this.property_type;
-        console.log(this.property_type_result);
+        //console.log(this.property_type_result);
       },
       err => {
         this.content = JSON.parse(err.error).message;
@@ -543,14 +543,14 @@ export class PostproductrentComponent implements OnInit {
     if (this.step > 1) {
       this.step = this.step - 1;
     } else {
-      console.log("step 1");
+      //console.log("step 1");
       this.step = 1;
     }
   }
 
   next(): void {
     this.submitted = false;
-    console.log(this.insert_property_rent.value);
+    //console.log(this.insert_property_rent.value);
     if (this.insert_property_rent.controls.Property_Details.invalid && this.step == 1) {
       this.submitted = true;
       return;
@@ -580,7 +580,7 @@ export class PostproductrentComponent implements OnInit {
       return;
     }
     if (this.step >= 6) {
-      console.log("step 6");
+      //console.log("step 6");
       this.step = 6;
     } else {
       this.step = this.step + 1;
@@ -621,11 +621,11 @@ export class PostproductrentComponent implements OnInit {
 
 
   onSubmitRent(): void {
-    console.log(this.insert_property_rent.value);
+    //console.log(this.insert_property_rent.value);
     if (this.insert_property_rent.value.Property_Pricing.expected_rent >= 5000 && this.insert_property_rent.value.Property_Pricing.expected_rent <= 500000) {
       this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
         data => {
-          console.log("successful" + data)
+          //console.log("successful" + data)
           this.toastr.success('Successfuly Saved', 'Property');
           window.location.href = GlobalConstants.siteURL + "myproperties"
         },
@@ -633,8 +633,8 @@ export class PostproductrentComponent implements OnInit {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.Message = err.error.message;
-          console.log(this.errorMessage);
-          console.log(this.Message);
+         // console.log(this.errorMessage);
+         // console.log(this.Message);
           this.toastr.error(this.Message, 'Something Error', {
             timeOut: 3000,
           });

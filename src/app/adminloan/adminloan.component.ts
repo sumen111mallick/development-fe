@@ -31,11 +31,11 @@ export class AdminloanComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
-        console.log(data.data);
+        //console.log(data.data);
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
@@ -44,25 +44,25 @@ export class AdminloanComponent implements OnInit {
   del_func(id): void{
     {this.authService.admin_loan_delete(id).subscribe(
         data => {
-          console.log(data)
+          //console.log(data)
           window.location.href=GlobalConstants.siteURL+"adminloan"
         },
         err => {
-          console.log(err)
+          //console.log(err)
         }
       )
     }
   }
 
   onSubmit(): void {
-      console.log(this.form)
+      //console.log(this.form)
       this.authService.admin_loans(this.form).subscribe(
         data => {
-          console.log(data)
+          //console.log(data)
           window.location.href=GlobalConstants.siteURL+"adminloan"
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
   }

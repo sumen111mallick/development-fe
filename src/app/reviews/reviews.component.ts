@@ -33,11 +33,11 @@ export class ReviewsComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
-        console.log(data);
+        //console.log(data);
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
@@ -47,11 +47,11 @@ export class ReviewsComponent implements OnInit {
     {this.authService.property_delete(id).subscribe(
 
         data => {
-          console.log(data)
+          //console.log(data)
           window.location.reload();
         },
         err => {
-          console.log(err)
+          //console.log(err)
         }
       );
     }

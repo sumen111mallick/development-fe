@@ -31,8 +31,8 @@ export class BlogComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.blogService.getPosts().then(paginatedPosts => {
       this.paginated_posts = paginatedPosts;
-      console.log(this.paginated_posts);
-      console.log(this.paginated_posts.data.length);
+      //console.log(this.paginated_posts);
+      //console.log(this.paginated_posts.data.length);
       this.showLoadingIndicator = false;
       //this.total_pages = Math.round(this.paginated_posts.total /this.paginated_posts.per_page) ;
     });
@@ -65,7 +65,7 @@ export class BlogComponent implements OnInit {
   gotoPage(link_url) {
     //this.SpinnerService.show();
     this.showLoadingIndicator = true;
-    console.log(link_url);
+    //console.log(link_url);
     this.blogService.getPostsAtUrl(link_url).then(paginatedPosts => {
       this.paginated_posts = paginatedPosts;
       this.showLoadingIndicator = false;
@@ -88,7 +88,7 @@ export class BlogComponent implements OnInit {
 
   createPost($event) {
     this.showLoadingIndicator = true;
-    console.log($event.target.innerHTML);
+    //console.log($event.target.innerHTML);
     this._router.navigate(['/blog-create-post']);
     this.showLoadingIndicator = false;
   }
@@ -96,10 +96,10 @@ export class BlogComponent implements OnInit {
   public gotoPostDetails(url, id) {
     this._router.navigate([url, id]).then((e) => {
       if (e) {
-        console.log("Navigation is successful!");
-        console.log(e);
+        //console.log("Navigation is successful!");
+        //console.log(e);
       } else {
-        console.log("Navigation has failed!");
+        //console.log("Navigation has failed!");
       }
     });
   }

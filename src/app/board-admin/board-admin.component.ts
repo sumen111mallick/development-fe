@@ -35,7 +35,7 @@ export class BoardAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Admin Login');
-    console.log(this.tokenStorage.getToken())
+    //console.log(this.tokenStorage.getToken())
     if (this.tokenStorage.getToken()){
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().username;
@@ -47,7 +47,7 @@ export class BoardAdminComponent implements OnInit {
     this.authService.admin_login(this.form).subscribe(
       data => {
         this.tokenStorage.saveToken(data.access_token);
-        console.log(this.tokenStorage.getToken());
+        //console.log(this.tokenStorage.getToken());
         this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
@@ -57,7 +57,7 @@ export class BoardAdminComponent implements OnInit {
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
-        console.log(err)
+        //console.log(err)
       }
     );
 

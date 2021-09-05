@@ -29,17 +29,17 @@ export class LoancalcComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
-        console.log(data.data);
+        //console.log(data.data);
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
   }
 
   assign(id): void{
-    console.log(id)
+    //console.log(id)
     this.form.amount = 1
     this.form.apr = id
     this.form.years = 1

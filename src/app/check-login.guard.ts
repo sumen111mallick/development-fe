@@ -32,12 +32,12 @@ export class CheckLoginGuard implements CanActivate {
   }
 
   checkLogin(url: string) {
-    console.log("Url: " + url);
+    //console.log("Url: " + url);
 
     //let val: string = this.tokenStorage.getUser().usertype;
     let val = this.tokenStorage.getUser();
-    console.log(val);
-    console.log(this.tokenStorage);
+    //console.log(val);
+    //console.log(this.tokenStorage);
     if (val != null) {
       if (this.tokenStorage.getUser().misc) {
         this.userEmail = this.tokenStorage.getUser().misc.email;
@@ -45,12 +45,12 @@ export class CheckLoginGuard implements CanActivate {
       }
       else {
         this.userDetails = JSON.parse(this.tokenStorage.getUser());
-        console.log(this.userDetails);
+        //console.log(this.userDetails);
         this.userEmail = this.userDetails.email;
         this.usertype = this.userDetails.usertype;
       }
-      console.log("UserType: " + this.usertype);
-      console.log("True");
+      //console.log("UserType: " + this.usertype);
+      //console.log("True");
 
       switch (this.permission[0]) {
         case 'dashboard':
@@ -64,7 +64,7 @@ export class CheckLoginGuard implements CanActivate {
             return true;
           }
           else {
-            console.log("Access Denied");
+            //console.log("Access Denied");
             this.router.navigateByUrl('access-denied');
             return false;
           }
@@ -73,7 +73,7 @@ export class CheckLoginGuard implements CanActivate {
 
 
     } else {
-      console.log("false");
+      //console.log("false");
       //this.router.navigate(['/login'], { queryParams: { returnUrl: url }});
       this.router.navigate(['/login']);
       return false;

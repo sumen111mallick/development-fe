@@ -54,7 +54,7 @@ export class VerifyDetailsComponent implements OnInit {
         this.showLoadingIndicator = false;
       },
       err => {
-        console.log(err);
+        //console.log(err);
         this.showLoadingIndicator = false;
       }
       );
@@ -63,8 +63,8 @@ export class VerifyDetailsComponent implements OnInit {
 
   onSubmit() {
     this.showLoadingIndicator = true;
-    console.log("Submitted");
-    console.log(this.verify);
+    //console.log("Submitted");
+    //console.log(this.verify);
     this.submitted = true;
 
     if (this.verifyForm.invalid) {
@@ -74,16 +74,16 @@ export class VerifyDetailsComponent implements OnInit {
 
     this.authService.mobile_verify(this.verifyForm.value).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.verify = true;
-        console.log(this.verify);
+        //console.log(this.verify);
         this.number = this.verifyForm.value.form_phone;
         this.showLoadingIndicator = false;
       },
       err => {
         this.errorMessage = err.error;
         this.isFailedVerify = true;
-        console.log(err);
+        //console.log(err);
         this.showLoadingIndicator = false;
       }
     );
@@ -101,7 +101,7 @@ export class VerifyDetailsComponent implements OnInit {
       this.authService.verify_mobile(this.number, this.otpForm.value.otp_password, this.currentUserId).subscribe(
 
         data => {
-          console.log(data);
+          //console.log(data);
           this.isVerified = true;
           this.verify = false;
           this.router.navigateByUrl('profile');
@@ -111,7 +111,7 @@ export class VerifyDetailsComponent implements OnInit {
           this.errorMessage = err.error;
           this.verify = true;
           this.isFailedVerify_otp = true;
-          console.log(err);
+          //console.log(err);
           this.showLoadingIndicator = false;
         }
       );

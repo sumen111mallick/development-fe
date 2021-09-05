@@ -17,7 +17,7 @@
   }
   .pricing .table th {
     width: 25%;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 400;
     border-bottom: 0;
     background:#3e4c66;
@@ -27,9 +27,7 @@
   .pricing .table th.highlight{
     border-top: 4px solid #4caf50 !important;
   }
-  .pricing .table tr:nth-child(odd){
-    background: #e2e7eb;
-  }
+  
   .pricing .table td:first-child{
     padding-left: 20px;
     text-align: left;
@@ -67,10 +65,10 @@
   }
   .pricing .ptable-price {
     display: block;
-    font-size: 20px;
+    font-size: 18px;
   }
   .pricing tr td {
-    font-size: 22px;
+    font-size: 20px;
     line-height:32px;
     vertical-align: middle;
     /*text-transform:uppercase;*/
@@ -118,4 +116,85 @@
     display:inline;
     margin-bottom:0px;
     font-size:22px;
+  }
+
+  .checkmark {
+    color: #00D100;
+  }
+
+  hr {
+    border-top: 1px solid #fff;
+  }
+
+  .visible-xs {
+    display: none;
+  }
+
+  thead > tr > th > tr {
+    height: 45px;
+    text-align: center;
+  }
+
+  thead > tr > th {
+    text-align: center;
+    text-align: -webkit-center;
+  }
+
+  @media only screen and (max-width: 992px) {
+    .pricing tr td .ptable-title {
+      font-size: 18px;
+      font-weight:300;
+      color: #fff;
+    }
+
+    .pricing .table th {
+      font-size: 24px;
+    }
+
+    .pricing tr td {
+      font-size: 18px;
+      line-height:24px;
+    }
+    thead > tr > th > tr {
+      height: 60px;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    thead > tr > th > tr {
+      height: 60px;
+    }
+  }
+
+  @media only screen and (max-width: 576px){
+    .pricing tr td .ptable-title {
+      font-size: 16px;
+      font-weight:300;
+      color: #fff;
+    }
+
+    .pricing .table th {
+      width: 33%;
+      font-size: 22px;
+    }
+
+    .pricing tr td {
+      font-size: 16px;
+      line-height:20px;
+    }
+
+    .visible-xs {
+      display: table-row;
+      background: #efefef;
+    }
+
+    td:first-child,
+    th:first-child {
+    display: none;
+  }
+
+  thead > tr > th > tr {
+    height: 60px;
+  }
+
   }

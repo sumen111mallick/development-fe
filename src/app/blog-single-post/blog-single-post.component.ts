@@ -24,14 +24,14 @@ export class BlogSinglePostComponent implements OnInit {
 
     this.showLoadingIndicator = true;
     this.activatedRouteSnapshot = this._ActivatedRoute.snapshot.params.slug;
-    console.log(this.activatedRouteSnapshot);
+    //console.log(this.activatedRouteSnapshot);
 
     this.blogService.getPostDetails(this.activatedRouteSnapshot).subscribe(
       res => {
         
-        console.log(res);
+        //console.log(res);
         this.post_detail = JSON.parse(res);
-        console.log(this.post_detail);
+        //console.log(this.post_detail);
         this.showLoadingIndicator = false;
         this._router.navigate(['/blog-single-post', this.activatedRouteSnapshot ]);
         //this.gotoPostDetails(BLOG_API + '/blog-single-post', this.activatedRouteSnapshot);
@@ -40,7 +40,7 @@ export class BlogSinglePostComponent implements OnInit {
       err => {
         this.showLoadingIndicator = false;
         this.errorMessage = err.error.message;
-        console.log(err);
+        //console.log(err);
       }
     );
 

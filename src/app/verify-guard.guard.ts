@@ -21,12 +21,12 @@ export class VerifyGuardGuard implements CanActivate {
       if (val != null) {
         this.userService.getUserPhoneDetails().subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             if (data !== 1) {
               obs.next(true);
             }
             else {
-              console.log("You have already verified your mobile number");
+              //console.log("You have already verified your mobile number");
               this.router.navigateByUrl('/profile');
               obs.next(false);
             }
@@ -34,7 +34,7 @@ export class VerifyGuardGuard implements CanActivate {
         );
       }
       else {
-        console.log("You are not logged in");
+        //console.log("You are not logged in");
         obs.next(false);
         this.router.navigateByUrl('');
       }

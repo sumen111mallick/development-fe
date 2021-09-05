@@ -191,7 +191,7 @@ export class PostproductComponent implements OnInit {
   }
 
   eventListen(event) {
-    console.log(event);
+   // console.log(event);
   }
   ngOnInit(): void {
     this.showLoadingIndicator = true;
@@ -201,7 +201,7 @@ export class PostproductComponent implements OnInit {
       this.geoCoder = new google.maps.Geocoder();
     });
     this.mapsAPILoader.load().then(() => {
-      console.log(this.searchElementRef);
+      //console.log(this.searchElementRef);
       let autocomplete = new google.maps.places.Autocomplete(
 
         this.searchElementRef.nativeElement
@@ -214,8 +214,8 @@ export class PostproductComponent implements OnInit {
           this.longCus = place.geometry.location.lng();
           this.location = place.formatted_address;
           this.zoom = 15;
-          console.log(this.latCus);
-          console.log(this.location);
+          //console.log(this.latCus);
+          //console.log(this.location);
           this.insert_property_sales.controls.Property_Location.patchValue({
             address: this.location,
             map_latitude: this.latCus,
@@ -232,7 +232,7 @@ export class PostproductComponent implements OnInit {
     // Login check
 
     if (this.tokenStorage.getToken()) {
-      console.log(this.isLoggedIn)
+      //console.log(this.isLoggedIn)
       this.isLoggedIn = true;
       this.user_id = this.tokenStorage.getUser().id;
       this.maintenance = true;
@@ -269,17 +269,17 @@ export class PostproductComponent implements OnInit {
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
-          console.log(results[0].formatted_address);
+          //console.log(results[0].formatted_address);
           this.insert_property_sales.controls.Property_Location.patchValue({
             address: results[0].formatted_address,
             map_latitude: this.latCus,
             map_longitude: this.longCus,
           });
         } else {
-          console.log('No results found');
+          //console.log('No results found');
         }
       } else {
-        console.log('Geocoder failed due to: ' + status);
+        //console.log('Geocoder failed due to: ' + status);
       }
 
     });
@@ -287,7 +287,7 @@ export class PostproductComponent implements OnInit {
 
 
   furnishStatus(event): void {
-    console.log(event);
+    //console.log(event);
     if (event == 'SFR' || event == 'FFR') {
       this.furnish = true;
     }
@@ -303,7 +303,7 @@ export class PostproductComponent implements OnInit {
         //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
         this.amenitiesresult = this.amenities;
-        console.log(this.amenitiesresult);
+        //console.log(this.amenitiesresult);
         //console.log(this.content);
         this.showLoadingIndicator = false;
       },
@@ -316,15 +316,15 @@ export class PostproductComponent implements OnInit {
 
   onchangeAmenties(e: any, id: string) {
     if (e.target.checked) {
-      console.log(id + 'Checked');
+      //console.log(id + 'Checked');
       this.selectedItems.push(id);
     } else {
 
-      console.log(id + 'UNChecked');
+      //console.log(id + 'UNChecked');
       this.selectedItems = this.selectedItems.filter(m => m != id);
     }
     this.amenityArray = this.selectedItems;
-    console.log(this.amenityArray);
+    //console.log(this.amenityArray);
 
   }
 
@@ -336,17 +336,17 @@ export class PostproductComponent implements OnInit {
   }
 
   amenity(event): void {
-    console.log(event)
+    //console.log(event)
     this.amenityArray.push(event);
 
-    console.log(this.amenityArray);
+    //console.log(this.amenityArray);
   }
 
   furnishing(event): void {
-    console.log(event)
+    //console.log(event)
     this.furnishingArray.push(event);
 
-    console.log(this.furnishingArray);
+    //console.log(this.furnishingArray);
   }
 
 
@@ -492,7 +492,7 @@ export class PostproductComponent implements OnInit {
   }
 
   parkingStatus(event): void {
-    console.log(event)
+    //console.log(event)
     if (event == 0) {
       this.parking = true;
     }
@@ -506,7 +506,7 @@ export class PostproductComponent implements OnInit {
         //  console.log(amenitiesdata);
         this.property_type = data.data;
         this.property_type_result = this.property_type;
-        console.log(this.property_type_result);
+        //console.log(this.property_type_result);
         //console.log(this.content);
       },
       err => {
@@ -519,7 +519,7 @@ export class PostproductComponent implements OnInit {
     if (this.step > 1) {
       this.step = this.step - 1;
     } else {
-      console.log("step 1");
+      //console.log("step 1");
       this.step = 1;
     }
   }
@@ -553,7 +553,7 @@ export class PostproductComponent implements OnInit {
 
   next(): void {
     this.submitted = false;
-    console.log(this.insert_property_sales.value);
+    //console.log(this.insert_property_sales.value);
     if (this.insert_property_sales.controls.Property_Details.invalid && this.step == 1) {
       this.submitted = true;
       return;
@@ -579,7 +579,7 @@ export class PostproductComponent implements OnInit {
       return;
     }
     if (this.step >= 5) {
-      console.log("step 5");
+      //console.log("step 5");
       this.step = 5;
     } else {
       this.step = this.step + 1;
@@ -588,11 +588,11 @@ export class PostproductComponent implements OnInit {
   }
 
   onSubmitSale(): void {
-    console.log(this.insert_property_sales.value);
+    //console.log(this.insert_property_sales.value);
     if (this.insert_property_sales.value.Property_Pricing.expected_pricing >= 500000 && this.insert_property_sales.value.Property_Pricing.expected_pricing <= 50000000) {
       this.authService.product_insert_sale(this.insert_property_sales.value, this.user_id, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.toastr.success('Successfuly Saved', 'Property');
           window.location.href = GlobalConstants.siteURL + "myproperties"
         },
@@ -600,7 +600,7 @@ export class PostproductComponent implements OnInit {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.errorMessage1 = err.error.message;
-          console.log(this.errorMessage);
+         // console.log(this.errorMessage);
           this.toastr.error(this.errorMessage1, 'Something Error', {
             timeOut: 3000,
           });

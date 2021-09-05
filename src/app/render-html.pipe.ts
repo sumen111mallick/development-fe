@@ -8,7 +8,7 @@ export class EscapeHtmlPipe implements PipeTransform {
   }
 
   transform(value: any, type: string): SafeHtml | SafeStyle {
-      console.log('Pipe called');
+      //console.log('Pipe called');
       switch(type){
         case 'html': return this.sanitizer.bypassSecurityTrustHtml(value);
         case 'style': return this.sanitizer.bypassSecurityTrustStyle(value);

@@ -1,0 +1,57 @@
+/* for sidenav to take a whole page */
+html, body { 
+    margin: 0;
+    height: 100%;
+  }
+  
+  a {
+    text-decoration: none;
+    /*color: white;*/
+  }
+  
+  a:hover, a:active{
+    color: #ff5a5f;
+  }
+  
+  .navigation-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  mat-toolbar{
+    border-radius: 3px;
+    border-bottom: 1px solid darkgrey;
+  }
+  
+  /*a.img_logo .logo2 {
+    display: none;
+  }*/
+  
+  @media(max-width: 959px){
+    mat-toolbar{
+        border-radius: 0px;
+    }
+  }
+  
+  ::ng-deep .mat-toolbar{
+    z-index: 998;
+    position: fixed;
+    height: 100px;
+    width: 100% !important;
+    top: 0;
+  }
+  
+  .profile_image {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .user_acc {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .wishlist_icon {
+    color: orangered;
+  }

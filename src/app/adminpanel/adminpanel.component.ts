@@ -42,7 +42,7 @@ export class AdminpanelComponent implements OnInit {
 
     this.userService.getAdmin_users().pipe().subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.agent_length = data.data_agent.length;
         this.builder_length = data.data_builder.length;
         this.individual_length = data.data_individual.length;
@@ -50,40 +50,40 @@ export class AdminpanelComponent implements OnInit {
         this.total_user_length = this.agent_length + this.builder_length + this.individual_length + this.internal_user_length;
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
     this.userService.getAdmin_product().pipe().subscribe(
       data => {
         this.product = data.data
-        console.log(data.data)
+        //console.log(data.data)
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
     this.userService.getAdmin_productviews().pipe().subscribe(
       data => {
         this.view_count = data.data
-        console.log(data.data)
+        //console.log(data.data)
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
     this.userService.getAdmin_reviewcount().pipe().subscribe(
       data => {
         this.review_count = data.data
-        console.log(data.data)
+        //console.log(data.data)
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
@@ -91,12 +91,12 @@ export class AdminpanelComponent implements OnInit {
       (data: any) => {
 
         this.events = data.data.data;
-        console.log(this.events);
+        //console.log(this.events);
         //console.log(this.content);
       },
       err => {
         this.events = JSON.parse(err.error).message;
-        console.log(err);
+        //console.log(err);
       }
     );
     this.showLoadingIndicator = false;

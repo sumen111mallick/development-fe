@@ -48,14 +48,14 @@ export class MypropertiesComponent implements OnInit {
     this.userService.getproperties().pipe().subscribe(
       (data: any) => {
         this.contentLenght=data.data.length;
-        console.log(this.contentLenght);
+        //console.log(this.contentLenght);
         this.content = data.data;
         this.showLoadingIndicator = false;
-        console.log(data.data);
+        //console.log(data.data);
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
   }
@@ -63,11 +63,11 @@ export class MypropertiesComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.authService.property_delete(id).subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.Myproperty();
         },
         err => {
-          console.log(err)
+          //console.log(err)
         }
       );
   }
@@ -81,7 +81,7 @@ export class MypropertiesComponent implements OnInit {
     // this.router.navigate(["/productpage"])
   }
   property_details(id){
-    console.log(id);
+    //console.log(id);
     this.router.navigate(["UdateProperty/", id]);
   }
   price_comma(value:number):void{

@@ -30,9 +30,7 @@
         <div *ngIf="showLoadingIndicator">
 			<div class="preloader"></div>
 		</div>
-        <app-admindashtopbar></app-admindashtopbar>
-
-
+        <!--<app-admindashtopbar></app-admindashtopbar>-->
 
         <!-- Inner Page Breadcrumb -->
         <!--<section class="inner_page_breadcrumb">
@@ -55,7 +53,9 @@
         <section class="our-dashbord dashbord bgc-f7">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-2 col-xl-2"></div>
+                    <div class="col-lg-2 col-xl-2">
+                        <app-menu-sidebar></app-menu-sidebar>
+                    </div>
                     <div class="col-lg-10 col-xl-10">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -82,7 +82,7 @@
                                             <h4 *ngIf="isAddMode">Create Role</h4>
                                             <h4 *ngIf="!isAddMode">Edit Role</h4>
                                         </div>
-                                        <div class="col-md-6 text-right">
+                                        <div class="col-md-6 text-align">
                                             <button type="button" (click)="role_list()" class="btn btn-info">Role List</button>
                                         </div>
                                     </div>

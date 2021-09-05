@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.userService.getUserBoard().pipe().subscribe(
       (data: any) => {
-        console.log(data)
+        //console.log(data)
         this.content = data;
         this.id = data.id;
         this.currentUser = data.name;
@@ -100,7 +100,7 @@ export class ProfileComponent implements OnInit {
         this.law_firm_number = data.law_firm_number;
         this.practice_number = data.practice_number;
         this.email_verifyd = data.phone_number_verification_status;
-        console.log(this.email_verifyd);
+        //console.log(this.email_verifyd);
         if (this.email_verifyd != 0) {
           this.email_verify = true;
         }
@@ -108,7 +108,7 @@ export class ProfileComponent implements OnInit {
           this.email_verify = false;
         }
         this.id_created_at = data.created_at;
-        console.log(this.content);
+        //console.log(this.content);
         this.showLoadingIndicator = false;
         /*if (this.profile_pic.indexOf('googleusercontent.com') == -1) {
           this.profile_pic = this.ftpstring + this.profile_pic
@@ -173,7 +173,7 @@ export class ProfileComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.authService.user_get(this.id).subscribe(
       (data: any) => {
-        console.log(data)
+        //console.log(data)
         this.content = data.data.data;
         this.id = data.data.id;
         this.currentUser = data.data.name;
@@ -251,23 +251,23 @@ export class ProfileComponent implements OnInit {
 
   onSubmitUpdate(): void {
 
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.user_update(this.form, this.id).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         window.location.reload();
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     );
   }
 
   onSubmitChange(): void {
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.password_update(this.form).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         // window.location.reload();
         this.message = data.message;
         if(data.status==200){
@@ -278,15 +278,15 @@ export class ProfileComponent implements OnInit {
             timeOut: 3000,
           });
         }else{
-          this.toastr.error(this.message, 'Something Error', {
+          this.toastr.error(this.message, 'Error', {
             timeOut: 3000,
           }); 
         }
       },
       err => {
-        console.log(err);
+        //console.log(err);
         this.message = err.message;
-        this.toastr.error(this.message, 'Something Error', {
+        this.toastr.error(this.message, 'Error', {
           timeOut: 3000,
         });
       }
@@ -294,7 +294,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileChange(event) {
-    console.log(event);
+    //console.log(event);
      this.files = event.target.files;
     if (this.files.length === 0)
       return;
@@ -305,9 +305,9 @@ export class ProfileComponent implements OnInit {
       return;
     }
     const reader = new FileReader();
-    console.log(reader);
+    //console.log(reader);
     this.imagePath = this.files;
-    console.log(this.imagePath);
+    //console.log(this.imagePath);
     reader.readAsDataURL(this.files[0]);
     reader.onload = (event) => {
       this.imgURL = event.target.result;
@@ -315,21 +315,21 @@ export class ProfileComponent implements OnInit {
   }
 
   upload_image() {
-    console.log(this.files[0]);
-    console.log(this.id);
+    //console.log(this.files[0]);
+    //console.log(this.id);
     var formData: any = new FormData();
     formData.append('profile_image', this.files[0], this.files[0].name);
     formData.append('id', this.id);
-    console.log(formData);
+    //console.log(formData);
     this.authService.uploadProfile_Image(formData).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.toastr.success(data.message);
         setTimeout('window.location.reload()', 2000);
         
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     );
   }

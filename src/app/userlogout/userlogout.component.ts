@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserlogoutComponent implements OnInit {
 
+  isLoggedIn = false;
 
   constructor(
     private titleService: Title,
@@ -19,17 +20,18 @@ export class UserlogoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.tokenStorage.signout();
     this.titleService.setTitle('Logout');
     this.userService.getLogout().subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
 
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     );
-    this.tokenStorage.signout();
+    
 
   }
 

@@ -23,8 +23,8 @@ export class TopbarComponent implements OnInit {
   userEmail: string[] = null;
   userProfile: string[] = null;
   ftpstring: string = GlobalConstants.ftpURL;
-  public wishlist_length:number=0;
-  public property_comp_length:number= 0;
+  public wishlist_length: number = 0;
+  public property_comp_length: number = 0;
 
 
   constructor(
@@ -33,16 +33,16 @@ export class TopbarComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private userService: UserService,
 
-    ) { }
+  ) { }
   ngOnInit(): void {
     this.userService.on<string>().subscribe(
       (message: any) => {
-        if(message=='true'){
+        if (message == 'true') {
           this.wishlistcount();
         }
       }
     );
-    
+
     this.userService.pro_comp_on<string>().subscribe(
       (message: any) => {
         if (message == 'true') {
@@ -50,7 +50,7 @@ export class TopbarComponent implements OnInit {
         }
       }
     );
-   
+
     /*if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().username;
@@ -61,12 +61,12 @@ export class TopbarComponent implements OnInit {
       this.wishlistcount();
 
     } */
-    
+
     // console.log(this.tokenStorage.getToken());
-    console.log(this.tokenStorage.getUser());
+    //console.log(this.tokenStorage.getUser());
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
-      
+
       if (this.tokenStorage.getUser().misc) {
         this.roles = this.tokenStorage.getUser().username;
         this.userEmail = this.tokenStorage.getUser().misc.email;
@@ -85,33 +85,31 @@ export class TopbarComponent implements OnInit {
 
     }
   }
-  wishlistcount(): void{
+  wishlistcount(): void {
     this.userService.getwishlistdata().pipe().subscribe(
       (wishlistdata: any) => {
         this.wishlistcontent = wishlistdata.data;
         this.wishlistresult = this.wishlistcontent;
-        this.wishlist_length=this.wishlistcontent.length;
-        console.log(this.wishlist_length);
-        console.log(this.wishlistresult);
+        this.wishlist_length = this.wishlistcontent.length;
+        //console.log(this.wishlist_length);
+        //console.log(this.wishlistresult);
       },
       err => {
         this.content = err.error.message;
       }
     );
   }
-  pro_comp(): void{
+  pro_comp(): void {
     this.userService.get_pro_comp().pipe().subscribe(
       (wishlistdata: any) => {
         this.property_comp = wishlistdata.data;
-        this.property_comp_length=this.property_comp.length;
-        console.log(this.property_comp);
+        this.property_comp_length = this.property_comp.length;
+        //console.log(this.property_comp);
       },
       err => {
         this.content = JSON.parse(err.error).message;
       }
     );
   }
-  
-
 
 }

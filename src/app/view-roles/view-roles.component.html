@@ -30,7 +30,7 @@
         <div *ngIf="showLoadingIndicator">
             <div class="preloader"></div>
         </div>
-        <app-admindashtopbar></app-admindashtopbar>
+        <!--<app-admindashtopbar></app-admindashtopbar>-->
 
 
 
@@ -55,7 +55,9 @@
         <section class="our-dashbord dashbord bgc-f7">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-2 col-xl-2"></div>
+                    <div class="col-lg-2 col-xl-2">
+                        <app-menu-sidebar></app-menu-sidebar>
+                    </div>
                     <div class="col-lg-10 col-xl-10">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -79,7 +81,7 @@
                                         <div class="col-md-6">
                                             <h4>View Role Details</h4>
                                         </div>
-                                        <div class="col-md-6 text-right">
+                                        <div class="col-md-6 text-align">
                                             <button type="button" (click)="role_list()" class="btn btn-info">Back to Role List</button>
                                         </div>
                                     </div>

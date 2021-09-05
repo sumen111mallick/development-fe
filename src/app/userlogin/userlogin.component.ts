@@ -104,31 +104,31 @@ export class UserloginComponent implements OnInit {
       this.route.queryParams.subscribe(params => {
         let token = params['token'];
         let data = params['data'];
-        console.log(token);
-        console.log(data);
+        //console.log(token);
+        //console.log(data);
         if (token != null) {
           this.tokenStorage.saveToken(token);
-          console.log(this.tokenStorage.getToken());
+          //console.log(this.tokenStorage.getToken());
           this.tokenStorage.saveUser(data);
           this.roles = this.tokenStorage.getUser().name;
         }
       })
     }
 
-    console.log(this.tokenStorage.getUser())
+    //console.log(this.tokenStorage.getUser())
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().username;
       if (this.tokenStorage.getUser().usertype == 1) {
         this.usertype = true;
-        console.log(this.usertype);
+        //console.log(this.usertype);
       }
       this.showLoadingIndicator = false;
       this.router.navigate([""]);
     }
     else {
       this.isLoggedIn = false;
-      console.log(this.isLoggedIn);
+      //console.log(this.isLoggedIn);
       this.showLoadingIndicator = false;
     }
 
@@ -139,8 +139,9 @@ export class UserloginComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.authService.login(this.form).subscribe(
       data => {
+        //console.log(data.access_token);
         this.tokenStorage.saveToken(data.access_token);
-        console.log(this.tokenStorage.getToken());
+        //console.log(this.tokenStorage.getToken());
         this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
@@ -180,7 +181,7 @@ export class UserloginComponent implements OnInit {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.err_code = err
-        console.log(this.err_code);
+        //console.log(this.err_code);
         this.showLoadingIndicator = false;
       }
     );

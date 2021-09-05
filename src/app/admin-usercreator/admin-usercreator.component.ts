@@ -78,11 +78,11 @@ export class AdminUsercreatorComponent implements OnInit {
     this.internalUserService.get_role_details().subscribe(
       data => {
         this.response = data;
-        console.log(data);
+        //console.log(data);
         this.showLoadingIndicator = false;
       },
       err => {
-        console.log(err);
+        //console.log(err);
         this.showLoadingIndicator = false;
       }
     );
@@ -90,17 +90,17 @@ export class AdminUsercreatorComponent implements OnInit {
     this.internalUserService.get_areas().subscribe(
       data => {
         //this.dropdownList = data;
-        console.log(data);
-        console.log(data.length);
+        //console.log(data);
+        //console.log(data.length);
         for (let i = 0; i < data.length; i++) {
           //this.dropdownList[i] = "{item_id: " + i + "," + "item_text: " + "'" + data[i].area + "'}";
           //console.log(this.dropdownList[i]);
           this.dropdownList = this.dropdownList.concat({item_id: i, item_text: data[i].area});
         }
-        console.log(this.dropdownList);
+        //console.log(this.dropdownList);
       },
       err => {
-        console.log(err);
+        //console.log(err);
 
       }
     );
@@ -108,10 +108,10 @@ export class AdminUsercreatorComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
-    console.log(item);
+    //console.log(item);
   }
   onSelectAll(items: any) {
-    console.log(items);
+    //console.log(items);
   }
 
   get f() {
@@ -133,19 +133,19 @@ export class AdminUsercreatorComponent implements OnInit {
 
     myReader.onloadend = (e) => {
       this.image = myReader.result;
-      console.log(myReader.result);
+      //console.log(myReader.result);
     }
     myReader.readAsDataURL(file);
   }
 
   onSubmit() {
     this.showLoadingIndicator = true;
-    console.log("User creation Form Submitted");
-    console.log(this.userForm);
-    console.log(this.userForm.controls);
+    //console.log("User creation Form Submitted");
+    //console.log(this.userForm);
+    //console.log(this.userForm.controls);
     this.authService.register_internal_user(this.userForm).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.showLoadingIndicator = false;
         this.isSignUpFailed = false;
         this.showSuccess(data.message);
@@ -184,7 +184,7 @@ export class AdminUsercreatorComponent implements OnInit {
 
       },
       err => {
-        console.log(err);
+        //console.log(err);
         this.errorMessage = err.error;
         this.showLoadingIndicator = false;
         this.isSignUpFailed = true;
@@ -193,8 +193,8 @@ export class AdminUsercreatorComponent implements OnInit {
   }
 
   getStats(checkbox_value: any, isChecked: boolean) {
-    console.log(checkbox_value);
-    console.log(isChecked);
+    //console.log(checkbox_value);
+    //console.log(isChecked);
     this.checkbox_status = isChecked;
   }
 

@@ -48,9 +48,9 @@ export class ViewRolesComponent implements OnInit {
 
     this.internalUserService.get_role(this.activatedRouteSnapshot).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.role_detail = JSON.parse(res);
-        console.log(this.role_detail);
+        //console.log(this.role_detail);
 
         switch (this.role_detail[0].access_all_users) {
           case "0": {
@@ -178,7 +178,7 @@ export class ViewRolesComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     );
   }

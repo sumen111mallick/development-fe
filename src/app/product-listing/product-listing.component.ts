@@ -170,11 +170,11 @@ export class ProductListingComponent implements OnInit {
   loginuser_coutData(){
     this.authService.recently_view().subscribe(
       data => {
-        console.log(data.data);
+        //console.log(data.data);
         this.Recently_UserData = data.data;
         this.Recent_user_length=data.data.length;
-        console.log("Recently Views Properties");
-         console.log(this.Recently_UserData);
+        //console.log("Recently Views Properties");
+         //console.log(this.Recently_UserData);
       });
   
   }
@@ -182,25 +182,25 @@ export class ProductListingComponent implements OnInit {
   getpropertyData(): void{
     this.showLoadingIndicator = true;
     if(this.idservice.returnSearch() != null ){
-      console.log("session");
+      //console.log("session");
       this.content_session = this.idservice.returnSearch();
       this.Searchcontent =this.idservice.returnSearch()['data'];
-      console.log(this.content_session['data']);
+      //console.log(this.content_session['data']);
       this.Search_data_length=this.Searchcontent.length;
           if(this.idservice.get_pro_type() != null){
-            console.log(this.idservice.get_pro_type());
+            //console.log(this.idservice.get_pro_type());
             this.form.type=this.idservice.get_pro_type()['0'];  
             this.product_type=this.idservice.get_pro_type()['1'];
-            console.log(this.form.type);
+            //console.log(this.form.type);
           }
-      console.log( this.Searchcontent);  
+      //console.log( this.Searchcontent);  
       this.homepage_data=this.idservice.get_formData();
-      console.log(this.homepage_data);
+      //console.log(this.homepage_data);
         if(this.homepage_data != null){
           this.form.build_name=this.homepage_data['0']['build_name'];
           this.form.Location=this.homepage_data['0']['Location'];
           this.form.type=this.homepage_data['0']['type'];
-          console.log(this.form.type);
+          //console.log(this.form.type);
           this.form.Bathrooms=this.homepage_data['0']['Bathrooms'];
           this.form.Bedrooms=this.homepage_data['0']['Bedrooms'];
           this.form.Years=this.homepage_data['0']['Years'];
@@ -210,18 +210,18 @@ export class ProductListingComponent implements OnInit {
           this.form.availability_condition=this.homepage_data['0']['search_type'];
           this.form.search_type=this.homepage_data['0']['search_type'];
           this.secach_amenties_length=this.homepage_data['1'].length;
-          console.log( this.secach_amenties_length);
+          //console.log( this.secach_amenties_length);
           this.search_type=this.form.search_type;
           if(this.search_type=='rent'){ 
-            console.log(this.form.Minimum);
-            console.log(this.form.Maximum); 
+            //console.log(this.form.Minimum);
+            //console.log(this.form.Maximum); 
             this.rent_range_slider=true;
             this.buyyer_range_slider=false;
             this.range_slider=false;
           }
           if(this.search_type=='sales'){  
-            console.log(this.form.Minimum);
-            console.log(this.form.Maximum);
+            //console.log(this.form.Minimum);
+            //console.log(this.form.Maximum);
             this.rent_range_slider=false;
             this.buyyer_range_slider=true;
             this.range_slider=false;
@@ -229,7 +229,7 @@ export class ProductListingComponent implements OnInit {
         } 
       this.showLoadingIndicator = false;
     }else{
-      console.log("without session");
+      //console.log("without session");
       if(this.tokenStorage.getToken()){
         this.isLoggedIn = true;  
         this.authService.product_listing_wishlist().pipe().subscribe(
@@ -238,9 +238,9 @@ export class ProductListingComponent implements OnInit {
             this.Searchcontent = this.content;
             this.Search_data_length=this.Searchcontent.length;
             // console.log(data.data[0]['0']);
-            console.log(this.Searchcontent);
+            //console.log(this.Searchcontent);
             // console.log(this.Searchcontent[0].product_img);
-            console.log(this.Search_data_length);
+            //console.log(this.Search_data_length);
             this.wishlist_info();
             this.pro_comp_refresh();
             this.showLoadingIndicator = false;
@@ -255,8 +255,8 @@ export class ProductListingComponent implements OnInit {
             this.content = data.data;
             this.Searchcontent = this.content;
             this.Search_data_length=this.Searchcontent.length;
-            console.log(this.Searchcontent); 
-            console.log(this.Search_data_length);  
+            //console.log(this.Searchcontent); 
+            //console.log(this.Search_data_length);  
             this.showLoadingIndicator = false;       
           },
           err => {
@@ -269,14 +269,14 @@ export class ProductListingComponent implements OnInit {
   }
 
   OnPropertyCheck():void{
-    console.log(this.form.availability_condition);
+    //console.log(this.form.availability_condition);
     if(this.form.availability_condition=='rent'){ 
       this.form.Minimum=1;
       this.form.Maximum=500000; 
       this.rent_range_slider=true;
       this.buyyer_range_slider=false;
       this.range_slider=false;
-      console.log('rent');
+      //console.log('rent');
    }
    if(this.form.availability_condition=='sales'){ 
     this.form.Minimum=500000;
@@ -284,7 +284,7 @@ export class ProductListingComponent implements OnInit {
      this.rent_range_slider=false;
      this.buyyer_range_slider=true;
      this.range_slider=false;
-     console.log('sales');
+     //console.log('sales');
   }
   if(this.form.availability_condition=='Select Availability'){ 
    this.form.Minimum=1;
@@ -292,7 +292,7 @@ export class ProductListingComponent implements OnInit {
     this.rent_range_slider=false;
     this.buyyer_range_slider=false;
     this.range_slider=true;
-    console.log('Nothing');
+    //console.log('Nothing');
  }
     
   }
@@ -302,7 +302,7 @@ export class ProductListingComponent implements OnInit {
         //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
         this.amenitiesresult = this.amenities;
-        console.log(this.amenitiesresult);
+        //console.log(this.amenitiesresult);
         //console.log(this.content);
       },
       err => {
@@ -314,12 +314,12 @@ export class ProductListingComponent implements OnInit {
   Property_type_data(): void{
     this.userService.get_property_type().pipe().subscribe(
       (data: any) => {
-         console.log(data);
+         //console.log(data);
         this.property_type_data = data.data;
         this.property_type_result = this.property_type;
         this.property_type_count=data.count;
-        console.log(this.property_type_count);
-        console.log(this.property_type_data);
+        //console.log(this.property_type_count);
+        //console.log(this.property_type_data);
         //console.log(this.content);
       },
       err => {
@@ -341,7 +341,7 @@ export class ProductListingComponent implements OnInit {
 feature_property(){
   this.userService.feature_property().subscribe(
     data => { 
-      console.log(data);
+      //console.log(data);
       this.feature_property_data = data.data; 
       this.feature_pro_length =  this.feature_property_data.length;  
     }
@@ -350,18 +350,18 @@ feature_property(){
 
 // product comaprision functinalty 
 product_comp(id:number){
-  console.log(id);
+  //console.log(id);
   // Login check
   if(this.tokenStorage.getUser() != null){
     this.isLoggedIn = true;
-    console.log(this.isLoggedIn);
+    //console.log(this.isLoggedIn);
     this.maintenance = true;
     this.parking = false;     
       this.authService.Crete_product_comp(id).pipe().subscribe(
         (data: any) =>{
-          console.log(data);
+          //console.log(data);
           this.getpropertyData();
-          console.log(data.data.length);
+          //console.log(data.data.length);
           if(data.data.length>4){
             this.toastr.info('Bucket are the Full...!!!', 'Property', {
               timeOut: 3000,
@@ -373,7 +373,7 @@ product_comp(id:number){
           }
         },
         err => {
-          console.log(err.error);
+         // console.log(err.error);
         }
       );
   }
@@ -385,16 +385,16 @@ product_comp(id:number){
     // Login check
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true
-      console.log(this.isLoggedIn);
+      //console.log(this.isLoggedIn);
       this.maintenance = true;
       this.parking = false;    
         this.authService.Wishlist(data).pipe().subscribe(
           (result: any) =>{
-            console.log(result);
+            //console.log(result);
             this.getpropertyData();
           },
           err => {
-            console.log(err.error);
+            //console.log(err.error);
           }
         );
     }
@@ -409,11 +409,11 @@ product_comp(id:number){
       this.isLoggedIn = true;
        this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) =>{
-          console.log(result);
+          //console.log(result);
           this.getpropertyData();
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
     }
@@ -445,15 +445,15 @@ product_comp(id:number){
 
   onchangeAmenties(e:any,id:string){
     if(e.target.checked){
-      console.log(id + 'Checked');
+      //console.log(id + 'Checked');
       this.selectedItems.push(id);
     }else{
       
-      console.log(id + 'UNChecked');
+      //console.log(id + 'UNChecked');
       this.selectedItems= this.selectedItems.filter(m=>m!=id);
     }
     this.amenityArray=this.selectedItems;
-   console.log(this.amenityArray);
+   //console.log(this.amenityArray);
 
   }
 
@@ -504,7 +504,7 @@ product_comp(id:number){
       }
     }
 
-    console.log(this.first_prod+"|"+this.second_prod+"|"+this.third_prod)
+    //console.log(this.first_prod+"|"+this.second_prod+"|"+this.third_prod)
 
     if (this.first_prod != null && this.second_prod != null && this.third_prod != null){
 
@@ -516,9 +516,9 @@ product_comp(id:number){
       window.location.href=GlobalConstants.siteURL+"compare"
     }
 
-    console.log(this.idservice.getProdId());
-    console.log(this.idservice.getProd2Id());
-    console.log(this.idservice.getCdata());
+    //console.log(this.idservice.getProdId());
+    //console.log(this.idservice.getProd2Id());
+    //console.log(this.idservice.getCdata());
 
 
 
@@ -528,7 +528,7 @@ product_comp(id:number){
     }
 
     onchangeSearch():void{
-      console.log(this.form.property_status);
+      //console.log(this.form.property_status);
       this.onSearch();
     }
     Property_type_search(id: number,pro_type: string):void{
@@ -536,48 +536,48 @@ product_comp(id:number){
       this.tokenService.Remove_form_data();
       this.tokenService.Remove_pro_type();
       this.form.type=id;
-      console.log(this.form.type);
+      //console.log(this.form.type);
       if(this.tokenStorage.getToken()){
-        console.log('logging');
+        //console.log('logging');
         this.authService.search_pro_type_login(id).subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             this.Searchcontent = data.data;
             this.Search_data_length=this.Searchcontent.length;
           },
           err => {
-            console.log(err.error);
+            //console.log(err.error);
           }
         );
       }
       else{
         this.authService.search_pro_type(id).subscribe(
           data => {
-            console.log(data);
+            //console.log(data);
             this.Searchcontent = data.data;
             this.Search_data_length=this.Searchcontent.length;
           },
           err => {
-            console.log(err.error);
+            //console.log(err.error);
           }
         );
       }
     }
 
     onSearch(): void{
-      console.log(this.form);
-      console.log(this.amenityArray);
+     //console.log(this.form);
+      //console.log(this.amenityArray);
         if(this.tokenStorage.getToken()){
           this.isLoggedIn = true;  
           this.showLoadingIndicator = true;
           this.authService.product_SearchingLogin(this.form,this.amenityArray).subscribe(
             searchData => {
-              console.log("login");
-              console.log(searchData);
+              //console.log("login");
+              //console.log(searchData);
               this.Searchcontent = searchData.data;
               if(this.Searchcontent){
                  this.number = this.Searchcontent;
-                 console.log(this.number);
+                // console.log(this.number);
                  this.Search_data_length=this.Searchcontent.length;
                  this.showLoadingIndicator = false;
                  this.pro_comp_refresh();
@@ -588,27 +588,27 @@ product_comp(id:number){
             err => {
               this.err_caused = true;
               this.errorMessage = err.error.errors;
-              console.log(this.errorMessage);
+              //console.log(this.errorMessage);
             } 
           );
         }else{
           this.showLoadingIndicator = true;
           this.authService.product_Searching(this.form,this.amenityArray).subscribe(
             searchData => {
-              console.log("without_login");
+              //console.log("without_login");
               this.Searchcontent = searchData.data;
               if(this.Searchcontent){
                 this.showLoadingIndicator = false;
                 this.Search_data_length=this.Searchcontent.length;
                 this.number = this.Searchcontent;
-              console.log(this.number);
+              //console.log(this.number);
               }
               
             },
             err => {
               this.err_caused = true;
               this.errorMessage = err.error.errors;
-              console.log(this.errorMessage);
+              //console.log(this.errorMessage);
             }
             );
         }

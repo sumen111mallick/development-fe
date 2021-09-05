@@ -13,7 +13,6 @@ import { MapsAPILoader,AgmMap } from '@agm/core';
 import { Options,LabelType } from 'ng5-slider';
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import * as CryptoJS  from 'crypto-js';
 import { stringify } from '@angular/compiler/src/util';
 @Component({
   selector: 'app-home',
@@ -144,18 +143,18 @@ export class HomeComponent implements OnInit {
 
 // product comaprision functinalty 
 product_comp(id:number){
-  console.log(id);
+  //console.log(id);
   // Login check
   if(this.tokenStorage.getUser() != null){
     this.isLoggedIn = true
-    console.log(this.isLoggedIn);
+    //console.log(this.isLoggedIn);
     this.maintenance = true;
     this.parking = false;     
       this.authService.Crete_product_comp(id).pipe().subscribe(
         (data: any) =>{
-          console.log(data);
+          //console.log(data);
           this.home_call();
-          console.log(data.data.length);
+          //console.log(data.data.length);
           if(data.data.length>4){
             this.toastr.info('Bucket are the Full...!!!', 'Property', {
               timeOut: 3000,
@@ -167,7 +166,7 @@ product_comp(id:number){
           }
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
   }
@@ -180,7 +179,7 @@ product_comp(id:number){
     // Login check
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true
-      console.log(this.isLoggedIn);
+      //console.log(this.isLoggedIn);
     }
     else{
       this.redirect_to_home();
@@ -191,11 +190,11 @@ product_comp(id:number){
       this.isLoggedIn = true;      
       this.authService.Wishlist(data).pipe().subscribe(
         (result: any) =>{
-          console.log(result);
+          //console.log(result);
           this.home_call();
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
 
@@ -217,11 +216,11 @@ product_comp(id:number){
       this.isLoggedIn = true;
        this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) =>{
-          console.log(result);
+          //console.log(result);
           this.home_call();
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
     }
@@ -241,7 +240,7 @@ product_comp(id:number){
           //  console.log(amenitiesdata);
           this.wishlistcontent = wishlistdata.data;
           this.wishlistresult = this.wishlistcontent;
-          console.log(this.wishlistresult);
+          //console.log(this.wishlistresult);
           //console.log(this.content);
         },
         err => {
@@ -281,8 +280,8 @@ product_comp(id:number){
           this.content = product.data;
           this.number = this.content;
           this.product_length=this.content.length;
-          console.log(this.number);
-          console.log(this.number.length);
+          //console.log(this.number);
+          //console.log(this.number.length);
           this.showLoadingIndicator = false;
           this.wishlist_info();
           this.pro_comp_refresh();
@@ -301,7 +300,7 @@ product_comp(id:number){
           this.product_length=this.content.length;
           
           this.showLoadingIndicator = false;
-          console.log(this.number);        
+          //console.log(this.number);        
         },
         err => {
           //this.content = JSON.parse(err.error).message;
@@ -317,7 +316,7 @@ product_comp(id:number){
         //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
         this.amenitiesresult = this.amenities;
-        console.log(this.amenitiesresult);
+        //console.log(this.amenitiesresult);
         //console.log(this.content);
       },
       err => {
@@ -332,7 +331,7 @@ product_comp(id:number){
         this.contenttestimonial = Reviewdata.data;
         this.testimonial = this.contenttestimonial;
         this.testimonial_length= this.testimonial.length;
-        console.log(this.testimonial);
+        //console.log(this.testimonial);
         //console.log(this.content);
       },
       err => {
@@ -342,61 +341,61 @@ product_comp(id:number){
   }
   
   viewStationData(id: number) {
-    console.log(id);
+    //console.log(id);
     this.router.navigate(["productpage/", id]);
   }
   
  onchangeAmenties(e:any,id:string){
     if(e.target.checked){
-      console.log(id + 'Checked');
+      //console.log(id + 'Checked');
       this.selectedItems.push(id);
     }else{
       
-      console.log(id + 'UNChecked');
+      //console.log(id + 'UNChecked');
       this.selectedItems= this.selectedItems.filter(m=>m!=id);
     }
     this.amenityArray=this.selectedItems;
-   console.log(this.amenityArray);
+   //console.log(this.amenityArray);
 
   }
   onSearch(): void{
-    console.log(this.form,this.amenityArray);
+    //console.log(this.form,this.amenityArray);
     if(this.tokenStorage.getToken()){
-      console.log("login");
+      //console.log("login");
       this.isLoggedIn = true; 
       this.authService.Login_search_home(this.form,this.amenityArray).subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.tokenService.searchData(data);
-          console.log(this.tokenService.returnSearch());
+          //console.log(this.tokenService.returnSearch());
           this.data_session=[this.form,this.amenityArray];
           this.tokenService.search_formData(this.data_session);
-          console.log(this.tokenService.get_formData());
+          //console.log(this.tokenService.get_formData());
           window.location.href=GlobalConstants.siteURL+"productlisting"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
-          console.log(this.errorMessage);
+          //console.log(this.errorMessage);
         }
       );
     }
     else{
-       console.log("withoutlogin");
+       //console.log("withoutlogin");
       this.authService.search(this.form,this.amenityArray).subscribe(
         data => {
-          console.log(data);
+          //console.log(data);
           this.tokenService.searchData(data);
-          console.log(this.tokenService.returnSearch());
+          //console.log(this.tokenService.returnSearch());
           this.data_session=[this.form,this.amenityArray];
           this.tokenService.search_formData(this.data_session);
-          console.log(this.tokenService.get_formData());
+          //console.log(this.tokenService.get_formData());
           window.location.href=GlobalConstants.siteURL+"productlisting"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
-          console.log(this.errorMessage);
+          //console.log(this.errorMessage);
         }
       );
     }
@@ -404,16 +403,16 @@ product_comp(id:number){
   
 
   property_search(event: any): void{
-    console.log(event)
+    //console.log(event)
     this.authService.city_search(event).subscribe(
       data => {
         this.tokenService.searchData(data);
       },
       err => {
-        console.log(err.error.message);
+        //console.log(err.error.message);
       }
     );
-    console.log(this.tokenService.returnSearch().product.data);
+    //console.log(this.tokenService.returnSearch().product.data);
       window.location.href=GlobalConstants.siteURL+"search"
       // this.router.navigate(["/search"])
 
@@ -436,7 +435,7 @@ product_comp(id:number){
       }
     }
 
-    console.log(this.first_prod+"|"+this.second_prod)
+    //console.log(this.first_prod+"|"+this.second_prod)
 
     if (this.first_prod != null && this.second_prod != null && this.third_prod != null){
 
@@ -448,9 +447,9 @@ product_comp(id:number){
       window.location.href=GlobalConstants.siteURL+"compare"
     }
 
-    console.log(this.idservice.getProdId());
-    console.log(this.idservice.getProd2Id());
-    console.log(this.idservice.getCdata());
+    //console.log(this.idservice.getProdId());
+    //console.log(this.idservice.getProd2Id());
+    //console.log(this.idservice.getCdata());
 
 
 
@@ -473,12 +472,12 @@ product_comp(id:number){
   Property_type_data(): void{
     this.userService.get_property_type().pipe().subscribe(
       (data: any) => {
-         console.log(data);
+         //console.log(data);
         this.property_type_data = data.data;
         this.property_type_result = this.property_type;
         this.property_type_count=data.count;
-        console.log(this.property_type_count);
-        console.log(this.property_type_data);
+        //console.log(this.property_type_count);
+        //console.log(this.property_type_data);
         //console.log(this.content);
       },
       err => {

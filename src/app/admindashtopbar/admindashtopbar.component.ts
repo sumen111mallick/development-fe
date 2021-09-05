@@ -39,16 +39,16 @@ export class AdmindashtopbarComponent implements OnInit {
   ngOnInit(): void {
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
-      console.log(this.isLoggedIn);
+      //console.log(this.isLoggedIn);
       if (this.tokenStorage.getUser().misc) {
         this.roles = this.tokenStorage.getUser().username;
         this.userEmail = this.tokenStorage.getUser().misc.email;
         this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
         this.currentUser = this.tokenStorage.getUser().username;
         this.usertype = this.tokenStorage.getUser().usertype;
-        console.log(this.usertype);
-        console.log(this.userProfile);
-        console.log(this.currentUser);
+        //console.log(this.usertype);
+        //console.log(this.userProfile);
+        //console.log(this.currentUser);
       }
       else {
         this.userDetails = JSON.parse(this.tokenStorage.getUser());
@@ -56,7 +56,7 @@ export class AdmindashtopbarComponent implements OnInit {
         this.userEmail = this.userDetails.email;
         this.userProfile = this.userDetails.profile_pic;
         this.usertype = this.userDetails.usertype;
-        console.log(this.userProfile);
+        //console.log(this.userProfile);
       }
 
       switch (this.usertype) {
@@ -75,8 +75,8 @@ export class AdmindashtopbarComponent implements OnInit {
         case 8: {
           this.internalUserService.get_access_rights(this.userEmail).subscribe(
             data => {
-              console.log(data);
-              console.log(data[0].access_all_users);
+              //console.log(data);
+              //console.log(data[0].access_all_users);
               switch (data[0].access_all_users) {
                 case "1": {
                   this.all_users_access = true;
@@ -178,7 +178,7 @@ export class AdmindashtopbarComponent implements OnInit {
 
             },
             err => {
-              console.log(err);
+              //console.log(err);
             }
           );
           break;

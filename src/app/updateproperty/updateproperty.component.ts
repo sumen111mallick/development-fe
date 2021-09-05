@@ -254,8 +254,8 @@ export class UpdatepropertyComponent implements OnInit {
           this.longCus = place.geometry.location.lng();
           this.location = place.formatted_address;
           this.zoom = 15;
-          console.log(this.latCus);
-          console.log(this.location);
+         //console.log(this.latCus);
+          //console.log(this.location);
           this.PropertyUpdate.patchValue({
             address:this.location,
             map_latitude:this.latCus,
@@ -276,8 +276,8 @@ export class UpdatepropertyComponent implements OnInit {
 
    getLocation(){
     this.userService.getLocationService().then(resp=>{
-     console.log(resp.lng);
-     console.log(resp); 
+     //console.log(resp.lng);
+     //console.log(resp); 
      this.longCus=resp.lng;
      this.latCus=resp.lat; 
      this.form.map_latitude=this.latCus;
@@ -293,17 +293,17 @@ export class UpdatepropertyComponent implements OnInit {
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
-          console.log(results[0].formatted_address);
+          //console.log(results[0].formatted_address);
           this.PropertyUpdate.patchValue({
             address:results[0].formatted_address,
             map_latitude:this.latCus,
             map_longitude:this.longCus,
             });
         } else {
-          console.log('No results found');
+          //console.log('No results found');
         }
       } else {
-        console.log('Geocoder failed due to: ' + status);
+        //console.log('Geocoder failed due to: ' + status);
       }
   
     });
@@ -311,24 +311,24 @@ export class UpdatepropertyComponent implements OnInit {
     
 
    property_details(p_id): void {
-     console.log(p_id);
+     //console.log(p_id);
      this.id=p_id;
      this.showLoadingIndicator = true;
      this.authService.Propery_get_id(this.id).subscribe(
        (data: any) => {
-        console.log(data);
+        //console.log(data);
         this.data_id=data.data.id;
          if( this.data_id == 0){
           this.redirect_to_myproperties();
          } 
         this.product_img=data.data.product_img;
         this.product_img_length=this.product_img.length;
-        console.log(this.product_img);
-        console.log(this.product_img_length);
+        //console.log(this.product_img);
+        //console.log(this.product_img_length);
          this.product_amenties=data.data.amenities;
-         console.log(this.product_amenties);
+         //console.log(this.product_amenties);
          this.product_amenties_length= data.data.amenities.length;
-         console.log(this.product_amenties_length);
+         //console.log(this.product_amenties_length);
          
          this.url=this.ftpstring;
          
@@ -444,7 +444,7 @@ export class UpdatepropertyComponent implements OnInit {
    }
 
    furnishStatus(event): void{
-     console.log(event);
+     //console.log(event);
      if(event == 'SFR' || event == 'FFR')
      {
        this.furnish = true;
@@ -455,7 +455,7 @@ export class UpdatepropertyComponent implements OnInit {
      }
    }
    price_nego_Change(event){
-     console.log(event);
+     //console.log(event);
    }
    onChange(UpdatedValue : string) :void
    {
@@ -464,36 +464,36 @@ export class UpdatepropertyComponent implements OnInit {
    }
  
    amenity(event): void{
-     console.log(event)
+     //console.log(event)
      this.amenityArray.push(event);
  
-       console.log(this.amenityArray);
+       //console.log(this.amenityArray);
    }
    onchangeAmenties(e:any,id:string){
-    console.log(e.target.checked);
+    //console.log(e.target.checked);
     if(e.target.checked){
-      console.log(id + 'Checked');
+      //console.log(id + 'Checked');
       this.selectedItems.push(id);
       this.Uncheck_Items= this.Uncheck_Items.filter(m=>m!=id);
     }else{
       
-      console.log(id + 'UNChecked');
+      //console.log(id + 'UNChecked');
       this.Uncheck_Items.push(id);
       this.selectedItems= this.selectedItems.filter(m=>m!=id);
     }
     this.amenityArray=this.selectedItems; 
     this.amenity_Uncheck=this.Uncheck_Items;
-   console.log(this.amenity_Uncheck); 
-   console.log(this.amenityArray);
+   //console.log(this.amenity_Uncheck); 
+   //console.log(this.amenityArray);
   
   }
   
  
    furnishing(event): void{
-     console.log(event)
+     //console.log(event)
      this.furnishingArray.push(event);
  
-       console.log(this.furnishingArray);
+       //console.log(this.furnishingArray);
    }
 
    insert_image1(event: { target: { files: string | any[]; }; }){
@@ -638,7 +638,7 @@ export class UpdatepropertyComponent implements OnInit {
    }
  
    parkingStatus(event): void {
-     console.log(event)
+     //console.log(event)
      if (event == 0){
        this.parking = true;
      }
@@ -653,7 +653,7 @@ export class UpdatepropertyComponent implements OnInit {
         //  console.log(amenitiesdata);
         this.property_type = data.data;
         this.property_type_result = this.property_type;
-        console.log(this.property_type_result);
+        //console.log(this.property_type_result);
         //console.log(this.content);
       },
       err => {
@@ -746,11 +746,11 @@ export class UpdatepropertyComponent implements OnInit {
 delete_Pro_img(id: any){
   this.authService.delete_pro_img(id).subscribe(
        data => {
-         console.log(data);
+         //console.log(data);
        this.property_details(this.id);
        },
        err => {
-         console.log(err)
+         //console.log(err)
        }
      );
  }
@@ -759,7 +759,7 @@ delete_Pro_img(id: any){
     if(this.PropertyUpdate.value.expected_rent>=5000 && this.PropertyUpdate.value.expected_rent<=500000){
       this.authService.product_rent_update(this.PropertyUpdate.value, this.id, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
         data => {
-          console.log("successful Updated" + data)
+          //console.log("successful Updated" + data)
           this.toastr.success('Successfuly Updated', 'Property Rent');
           window.location.href=GlobalConstants.siteURL+"myproperties"
         },
@@ -767,7 +767,7 @@ delete_Pro_img(id: any){
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.Message = err.error.message;
-          console.log(this.errorMessage);
+          //console.log(this.errorMessage);
           this.toastr.error(this.Message, 'Something Error', {
             timeOut: 3000,
           });

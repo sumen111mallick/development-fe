@@ -105,15 +105,17 @@
         <li class="list-inline-item" *ngIf="isLoggedIn">
           <!-- <a href="/Wishlist" routerLinkActive="menu-active"  routerLink="/Wishlist"> -->
             <a href="/Wishlist">
-            <span class="title">Wishlist </span>
-            <span class="flaticon-fa-gift"></span>
+            <!--<span class="title">Wishlist </span>-->
+            <!--<span class="flaticon-fa-gift"></span>-->
+            <span><img class="wishlist_img" src="./../../assets/images/wishlist_3.png" alt=""></span>
             <span class="wishlistValue">{{wishlist_length}}</span>
           </a>
         </li>
         <li  class="list-inline-item" *ngIf="isLoggedIn != false">
           <!-- <a href="/compare" routerLinkActive="menu-active"  routerLink="/compare"> -->
             <a href="/compare">
-            <i class="fas fa-cart-plus"></i>
+            <!--<i class="fas fa-cart-plus"></i>-->
+            <span><img class="wishlist_img" src="./../../assets/images/compare_icon.png" alt=""></span>
           <span class="wishlistValue">{{property_comp_length}}</span>
           </a>
         </li>

@@ -40,11 +40,11 @@ export class ManageRolesComponent implements OnInit {
     this.internalUserService.get_role_details().subscribe(
       data => {
         this.response = data;
-        console.log(data);
+        //console.log(data);
         this.showLoadingIndicator = false;
       },
       err => {
-        console.log(err);
+        //console.log(err);
         this.showLoadingIndicator = false;
       });
   }
@@ -56,7 +56,7 @@ export class ManageRolesComponent implements OnInit {
   public openConfirmationDialog(role_id) {
     this.confirmationDialogService.confirm('Please confirm..', 'Are you sure you want to delete ?')
       .then((confirmed) => {
-        console.log('User confirmed:', confirmed);
+        //console.log('User confirmed:', confirmed);
         if (confirmed == true) {
           this.deleteRole(role_id);
         }
@@ -68,25 +68,25 @@ export class ManageRolesComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.internalUserService.deleteRole(role_id).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.response = res;
-        console.log(this.response);
+        //console.log(this.response);
         this.showSuccess(this.response.message);
         this.internalUserService.get_role_details().subscribe(
           data => {
             this.response = data;
-            console.log(data);
+            //console.log(data);
             this.showLoadingIndicator = false;
           },
           err => {
-            console.log(err);
+            //console.log(err);
             this.showLoadingIndicator = false;
           });
       },
       err => {
         this.showLoadingIndicator = false;
         this.errorMessage = err.error.message;
-        console.log(err);
+        //console.log(err);
       }
     );
   }

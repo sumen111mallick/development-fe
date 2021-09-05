@@ -31,7 +31,7 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.contactForm.value);
+    //console.log(this.contactForm.value);
     var formData: any = new FormData();
     formData.append('name', this.contactForm.value.form_name);
     formData.append('email', this.contactForm.value.form_email);
@@ -40,13 +40,13 @@ export class ContactComponent implements OnInit {
     formData.append('message', this.contactForm.value.form_message);
     this.contactService.saveContact(formData).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.response = res;
         this.contactForm.reset({});
       },
       err => {
         this.errorMessage = err.error.message;
-        console.log(err);
+        //console.log(err);
       }
     );
   }

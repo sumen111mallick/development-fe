@@ -70,11 +70,11 @@ export class AllusersComponent implements OnInit {
         this.content_dealer = data.data_dealer
         this.content_lawyer = data.data_lawyer
         this.content_admin = data.data_admin
-        console.log(data)
+        //console.log(data)
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
@@ -83,7 +83,7 @@ export class AllusersComponent implements OnInit {
   user_details(data): void {
     this.authService.user_get(data).subscribe(
       (data: any) => {
-        console.log(data.data.id)
+        //console.log(data.data.id)
         this.content = data.data.data;
         this.id = data.data.id;
         this.currentUser = data.data.name;
@@ -155,14 +155,14 @@ export class AllusersComponent implements OnInit {
 
   onSubmitUpdate(): void {
 
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.user_update(this.form, this.id).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         window.location.reload();
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     );
   }

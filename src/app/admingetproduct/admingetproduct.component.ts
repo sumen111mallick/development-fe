@@ -94,11 +94,11 @@ export class AdmingetproductComponent implements OnInit {
     this.userService.getAdmin_product().pipe().subscribe(
       data => {
         this.content = data.data
-        console.log(data.data)
+        //console.log(data.data)
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
@@ -108,11 +108,11 @@ export class AdmingetproductComponent implements OnInit {
     {this.authService.property_delete_admin(id).subscribe(
 
         data => {
-          console.log(data)
+          //console.log(data)
           window.location.reload();
         },
         err => {
-          console.log(err)
+          //console.log(err)
         }
       );
     }
@@ -120,14 +120,14 @@ export class AdmingetproductComponent implements OnInit {
 
   onSubmitUpdate(): void {
 
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.user_update(this.form, this.id).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         window.location.reload();
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     );
   }
@@ -137,7 +137,7 @@ export class AdmingetproductComponent implements OnInit {
       (data: any) => {
         this.content = data["product"]["0"]["id"]
         this.tokenStorage.setProduct(this.content)
-        console.log(this.tokenStorage.getProduct())
+        //console.log(this.tokenStorage.getProduct())
 
         this.redirect_to_edit();
 

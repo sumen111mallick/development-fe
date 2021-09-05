@@ -204,7 +204,7 @@ export class InsertproductRentComponent implements OnInit {
   }
 
   eventListen(event) {
-    console.log(event);
+    //console.log(event);
   }
 
   ngOnInit(): void {
@@ -226,8 +226,8 @@ export class InsertproductRentComponent implements OnInit {
           this.longCus = place.geometry.location.lng();
           this.location = place.formatted_address;
           this.zoom = 15;
-          console.log(this.latCus);
-          console.log(this.location);
+          //console.log(this.latCus);
+          //console.log(this.location);
           this.insert_property_rent.controls.Property_address.patchValue({
             address: this.location,
             map_latitude: this.latCus,
@@ -251,7 +251,7 @@ export class InsertproductRentComponent implements OnInit {
     } */
 
     this.content = this.tokenStorage.getUser().id;
-    console.log(this.content);
+    //console.log(this.content);
     this.maintenance = true;
     this.parking = false;
 
@@ -268,8 +268,8 @@ export class InsertproductRentComponent implements OnInit {
 
   getLocation() {
     this.userService.getLocationService().then(resp => {
-      console.log(resp.lng);
-      console.log(resp);
+      //console.log(resp.lng);
+      //console.log(resp);
       this.longCus = resp.lng;
       this.latCus = resp.lat;
       this.insert_property_rent.controls.Property_address.patchValue({
@@ -288,17 +288,17 @@ export class InsertproductRentComponent implements OnInit {
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 12;
-          console.log(results[0].formatted_address);
+          //console.log(results[0].formatted_address);
           this.insert_property_rent.controls.Property_address.patchValue({
             address: results[0].formatted_address,
             map_latitude: this.latCus,
             map_longitude: this.longCus,
           });
         } else {
-          console.log('No results found');
+         // console.log('No results found');
         }
       } else {
-        console.log('Geocoder failed due to: ' + status);
+        //console.log('Geocoder failed due to: ' + status);
       }
 
     });
@@ -310,7 +310,7 @@ export class InsertproductRentComponent implements OnInit {
 
 
   furnishStatus(event): void {
-    console.log(event);
+    //console.log(event);
     if (event == 'SFR' || event == 'FFR') {
       this.furnish = true;
     }
@@ -325,29 +325,29 @@ export class InsertproductRentComponent implements OnInit {
   }
 
   amenity(event): void {
-    console.log(event)
+    //console.log(event)
     this.amenityArray.push(event);
 
-    console.log(this.amenityArray);
+    //console.log(this.amenityArray);
   }
   onchangeAmenties(e: any, id: string) {
     if (e.target.checked) {
-      console.log(id + 'Checked');
+     // console.log(id + 'Checked');
       this.selectedItems.push(id);
     } else {
-      console.log(id + 'UNChecked');
+      //console.log(id + 'UNChecked');
       this.selectedItems = this.selectedItems.filter(m => m != id);
     }
     this.amenityArray = this.selectedItems;
-    console.log(this.amenityArray);
+    //console.log(this.amenityArray);
 
   }
 
   furnishing(event): void {
-    console.log(event)
+    //console.log(event)
     this.furnishingArray.push(event);
 
-    console.log(this.furnishingArray);
+    //console.log(this.furnishingArray);
   }
 
   insert_image1(event) {
@@ -483,7 +483,7 @@ export class InsertproductRentComponent implements OnInit {
   }
 
   parkingStatus(event): void {
-    console.log(event)
+    //console.log(event)
     if (event == 0) {
       this.parking = true;
     }
@@ -498,7 +498,7 @@ export class InsertproductRentComponent implements OnInit {
         //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
         this.amenitiesresult = this.amenities;
-        console.log(this.amenitiesresult);
+        //console.log(this.amenitiesresult);
         //console.log(this.content);
         this.showLoadingIndicator = false;
       },
@@ -514,7 +514,7 @@ export class InsertproductRentComponent implements OnInit {
       (data: any) => {
         this.property_type = data.data;
         this.property_type_result = this.property_type;
-        console.log(this.property_type_result);
+        //console.log(this.property_type_result);
       },
       err => {
         this.content = JSON.parse(err.error).message;
@@ -546,7 +546,7 @@ export class InsertproductRentComponent implements OnInit {
   }
 
   onSubmitRent(): void {
-    console.log(this.insert_property_rent.value);
+    //console.log(this.insert_property_rent.value);
     if (this.insert_property_rent.invalid) {
       //this.showLoadingIndicator = false;
       return;
@@ -554,7 +554,7 @@ export class InsertproductRentComponent implements OnInit {
     if (this.insert_property_rent.value.Property_price_images.expected_rent >= 5000 && this.insert_property_rent.value.Property_price_images.expected_rent <= 500000) {
       this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
         data => {
-          console.log("successful" + data)
+          //console.log("successful" + data)
           this.toastr.success('Successfuly Saved', 'Property');
           window.location.href = GlobalConstants.siteURL + "myproperties"
         },
@@ -562,8 +562,8 @@ export class InsertproductRentComponent implements OnInit {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.Message = err.error.message;
-          console.log(this.errorMessage);
-          console.log(this.Message);
+          //console.log(this.errorMessage);
+          //console.log(this.Message);
           this.toastr.error(this.Message, 'Something Error', {
             timeOut: 3000,
           });

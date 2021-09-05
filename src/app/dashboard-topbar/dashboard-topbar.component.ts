@@ -36,8 +36,8 @@ export class DashboardTopbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.tokenStorage.getToken());
-    console.log(this.tokenStorage.getUser());
+    //console.log(this.tokenStorage.getToken());
+    //console.log(this.tokenStorage.getUser());
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
       
@@ -47,16 +47,16 @@ export class DashboardTopbarComponent implements OnInit {
         this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
         this.currentUser = this.token.getUser().username;
         this.usertype = this.token.getUser().usertype;
-        console.log(this.userProfile);
+        //console.log(this.userProfile);
       }
       else {
         this.userDetails = JSON.parse(this.tokenStorage.getUser());
-        console.log(this.userDetails);
+        //console.log(this.userDetails);
         this.roles = this.userDetails.name;
         this.userEmail = this.userDetails.email;
         this.userProfile = this.userDetails.profile_pic;
         this.usertype = this.userDetails.usertype;
-        console.log(this.userProfile);
+        //console.log(this.userProfile);
       }
 
       switch (this.usertype) {
@@ -75,8 +75,8 @@ export class DashboardTopbarComponent implements OnInit {
         case 8: {
           this.internalUserService.get_access_rights(this.userEmail).subscribe(
             data => {
-              console.log(data);
-              console.log(data[0].access_all_users);
+              //console.log(data);
+              //console.log(data[0].access_all_users);
               switch (data[0].access_all_users) {
                 case "1": {
                   this.all_users_access = true;
@@ -178,7 +178,7 @@ export class DashboardTopbarComponent implements OnInit {
 
             },
             err => {
-              console.log(err);
+              //console.log(err);
             }
           );
           break;

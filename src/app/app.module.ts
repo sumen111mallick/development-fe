@@ -104,6 +104,19 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { InsertproductSaleComponent } from './insertproduct-sale/insertproduct-sale.component';
 import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-rent.component';
+import { TopbarTestComponent } from './topbar-test/topbar-test.component';
+import { TestComponent } from './test/test.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { MenuTopbarComponent } from './menu-topbar/menu-topbar.component';
+import { MenuSidebarComponent } from './menu-sidebar/menu-sidebar.component';
+import { SidenavListComponent } from './sidenav-list/sidenav-list.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import {MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatMenuModule } from '@angular/material/menu';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 
@@ -190,11 +203,24 @@ import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-r
     ViewRolesComponent,
     AccessDeniedComponent,
     InsertproductSaleComponent,
-    InsertproductRentComponent,							
+    InsertproductRentComponent,
+    TopbarTestComponent,
+    TestComponent,
+    MenuTopbarComponent,
+    MenuSidebarComponent,
+    SidenavListComponent,							
   ],
   imports: [
     Ng5SliderModule,
     SliderModule,
+    NgxSliderModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    FlexLayoutModule,
     NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({  
     apiKey: 'AIzaSyC2S5kHeGYkW9cL4d7_uxfauTBfQEtN4HA', libraries: ['places']

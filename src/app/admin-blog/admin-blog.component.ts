@@ -38,7 +38,7 @@ export class AdminBlogComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.blogService.getPosts().then(paginatedPosts => {
       this.paginated_posts = paginatedPosts;
-      console.log(this.paginated_posts);
+      //console.log(this.paginated_posts);
       this.showLoadingIndicator = false;
       //this.total_pages = Math.round(this.paginated_posts.total /this.paginated_posts.per_page) ;
     });
@@ -71,7 +71,7 @@ export class AdminBlogComponent implements OnInit {
   public openConfirmationDialog(slug_post) {
     this.confirmationDialogService.confirm('Please confirm..', 'Are you sure you want to delete ?')
       .then((confirmed) => {
-        console.log('User confirmed:', confirmed);
+        //console.log('User confirmed:', confirmed);
         if (confirmed == true) {
           this.deleteBlog(slug_post);
         }
@@ -85,7 +85,7 @@ export class AdminBlogComponent implements OnInit {
 
   gotoPage(link_url) {
     this.showLoadingIndicator = true;
-    console.log(link_url);
+    //console.log(link_url);
     this.blogService.getPostsAtUrl(link_url).then(paginatedPosts => {
       this.paginated_posts = paginatedPosts;
       this.showLoadingIndicator = false;
@@ -103,7 +103,7 @@ export class AdminBlogComponent implements OnInit {
 
   createPost($event) {
     this.showLoadingIndicator = true;
-    console.log($event.target.innerHTML);
+    //console.log($event.target.innerHTML);
     this._router.navigate(['/blog-create-post']).then(() => {
       window.location.reload();
       this.showLoadingIndicator = false;
@@ -113,10 +113,10 @@ export class AdminBlogComponent implements OnInit {
   public gotoPostDetails(url, id) {
     this._router.navigate([url, id]).then((e) => {
       if (e) {
-        console.log("Navigation is successful!");
-        console.log(e);
+        //console.log("Navigation is successful!");
+        //console.log(e);
       } else {
-        console.log("Navigation has failed!");
+        //console.log("Navigation has failed!");
       }
     });
   }
@@ -125,12 +125,12 @@ export class AdminBlogComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.blogService.deletePost(post_slug).subscribe(
       res => {
-        console.log(res);
+        //console.log(res);
         this.response = res;
-        console.log(this.response);
+        //console.log(this.response);
         this.blogService.getPosts().then(paginatedPosts => {
           this.paginated_posts = paginatedPosts;
-          console.log(this.paginated_posts);
+          //console.log(this.paginated_posts);
           this.showLoadingIndicator = false;
           this.showSuccess(this.response.message);
           //this.total_pages = Math.round(this.paginated_posts.total /this.paginated_posts.per_page) ;
@@ -139,7 +139,7 @@ export class AdminBlogComponent implements OnInit {
       err => {
         this.showLoadingIndicator = false;
         this.errorMessage = err.error.message;
-        console.log(err);
+       // console.log(err);
       }
     );
   }

@@ -132,7 +132,7 @@ export class EditproductComponent implements OnInit {
     ) { }
 
     eventListen(event){
-      console.log(event);
+      //console.log(event);
     }
 
 
@@ -141,7 +141,7 @@ export class EditproductComponent implements OnInit {
     // Login check
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true
-      console.log(this.isLoggedIn)
+      //console.log(this.isLoggedIn)
     }
     else{
       this.redirect_to_home();
@@ -163,7 +163,7 @@ export class EditproductComponent implements OnInit {
       this.authService.product_see(this.id).subscribe(
         (data: any) => {
           this.content = data["product"]["0"]
-          console.log(this.content.possession_by)
+          //console.log(this.content.possession_by)
 
           this.form.build_name = this.content.build_name
           this.form.type = this.content.type
@@ -243,7 +243,7 @@ export class EditproductComponent implements OnInit {
           if(!this.content.security_deposit){this.form.security_deposit = 0}
           if(!this.content.brokerage_charges){this.form.brokerage_charges = 0}
 
-          console.log(this.content.view_counter)
+          //console.log(this.content.view_counter)
 
           if (this.additional_parking_status){
             this.parking = true;
@@ -271,7 +271,7 @@ export class EditproductComponent implements OnInit {
 
 
   furnishStatus(event): void{
-    console.log(event);
+    //console.log(event);
     if(event == 'SFR' || event == 'FFR')
     {
       this.furnish = true;
@@ -290,17 +290,17 @@ export class EditproductComponent implements OnInit {
   }
 
   amenity(event): void{
-    console.log(event)
+    //console.log(event)
     this.amenityArray.push(event);
 
-      console.log(this.amenityArray);
+      //console.log(this.amenityArray);
   }
 
   furnishing(event): void{
-    console.log(event)
+    //console.log(event)
     this.furnishingArray.push(event);
 
-      console.log(this.furnishingArray);
+      //console.log(this.furnishingArray);
   }
 
 
@@ -410,7 +410,7 @@ z
   }
 
   parkingStatus(event): void {
-    console.log(event)
+    //console.log(event)
     if (event == 1){
       this.parking = true;
     }
@@ -421,16 +421,16 @@ z
 
   onSubmitSale(): void {
 
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.product_sale_update(this.id, this.form, this.content.furnishings,  this.content.amenities).subscribe(
       data => {
-        console.log(data)
+        //console.log(data)
         window.location.reload();
       },
       err => {
         this.err_caused = true;
         this.errorMessage = err.error.errors;
-        console.log(this.errorMessage);
+        //console.log(this.errorMessage);
       }
     );
   }

@@ -14,10 +14,10 @@
         <div *ngIf="showLoadingIndicator">
             <div class="preloader"></div>
         </div>
-        <app-topbardark-loader></app-topbardark-loader>
+        <!--<app-topbardark-loader></app-topbardark-loader>-->
         <section class="blog_post_container bgc-f7">
 
-            <div class="container">
+            <div class="container mt65">
                 <div class="row">
                     <div class="col-xl-4">
                         <div class="breadcrumb_content style2">
@@ -62,11 +62,11 @@
                                         <div class="fp_footer">
                                             <ul class="fp_meta float-left mb0">
                                                 <li class="list-inline-item"
-                                                    *ngIf="post.profile_pic !== null"><img
-                                                        src="{{ images_folder }}/{{ post.profile_pic }}"
+                                                    *ngIf="post.profile_pic !== null"><img class="profile_pic"
+                                                        src="{{ images_folder }}images/{{ post.profile_pic }}"
                                                         alt="profile_pic"></li>
                                                 <li class="list-inline-item" *ngIf="post.profile_pic == null">
-                                                    <img src="../../assets/images/default_avatar.png" alt="profile_pic">
+                                                    <img class="profile_pic" src="../../assets/images/default_avatar.png" alt="profile_pic">
                                                 </li>
                                                 <li class="list-inline-item">{{ post.name }}</li>
                                                 <li class="list-inline-item"><span
@@ -76,8 +76,8 @@
                                             <!--<a class="fp_pdate float-right text-thm" href="/single-post-blog?id={{post.id}}">Read More <span
                                                     class="flaticon-next"></span></a> -->
                                             <a class="fp_pdate float-right text-thm"
-                                                [routerLink]="['/blog-single-post', post.slug]"><span
-                                                    class="flaticon-next"></span>Read More </a>
+                                                [routerLink]="['/blog-single-post', post.slug]">Read More <span
+                                                class="flaticon-next"></span></a>
                                             <!--   <a class="fp_pdate float-right text-thm" [routerLink]="['/blog-single-post']"> </a> -->
                                             <!--<button class="fp_pdate float-right text-thm" (click)="gotoPostDetails('/blog-single-post',post.slug)"><span
                                                         class="flaticon-next"></span>Read More</button>  -->
@@ -98,7 +98,7 @@
                                                 class="flaticon-left-arrow">{{ link.label }}</span></button>-->
 
                                             <button type="button" (click)="gotoPage(link.url)"
-                                                class="btn btn-white circle page-link">
+                                                class="page-link">
                                                 <span
                                                     *ngIf="link.label.indexOf('Previous') == -1 && link.label.indexOf('Next') == -1"
                                                     [innerHTML]="link.label"></span>

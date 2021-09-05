@@ -23,13 +23,13 @@ export class ArticlesTipsComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.blogService.getLatestPosts().subscribe (
       res => {
-        console.log(res);
+        //console.log(res);
         this.showLoadingIndicator = false;
         this.response = res;
       },
       err => {
         this.errorMessage = err.error.message;
-        console.log(err);
+        //console.log(err);
         this.showLoadingIndicator = false;
       }
     )

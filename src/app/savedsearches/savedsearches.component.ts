@@ -31,11 +31,11 @@ export class SavedsearchesComponent implements OnInit {
     {
       {this.userService.getSearch().pipe().subscribe(
           data => {
-              console.log(data.data)
+              //console.log(data.data)
               this.content = data.data;
             },
           err => {
-              console.log(err)
+              //console.log(err)
             }
         )
       }

@@ -35,11 +35,11 @@ export class AdmingetreviewsComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
-        console.log(data);
+        //console.log(data);
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
@@ -49,15 +49,15 @@ export class AdmingetreviewsComponent implements OnInit {
 
     this.confirmationDialogService.confirm('Please confirm..', 'Are you sure you want to delete ?')
       .then((confirmed) => {
-        console.log('User confirmed:', confirmed);
+        //console.log('User confirmed:', confirmed);
         if (confirmed == true) {
           this.authService.review_delete(id).subscribe(
             data => {
-              console.log(data);
+              //console.log(data);
               window.location.reload();
             },
             err => {
-              console.log(err)
+              //console.log(err)
             }
           );
         }
@@ -68,7 +68,7 @@ export class AdmingetreviewsComponent implements OnInit {
   }
 
   onShare(event){
-    console.log(event);
+    //console.log(event);
     //window.location.href=GlobalConstants.siteURL+"productpage" + "?id=" + event;
     window.location.href=GlobalConstants.siteURL+"productpage" + "/" + event;
     // alert("Your Shareable Link is \n" + this.sitestring + this.router.url + "?id=" + this.prod_id);

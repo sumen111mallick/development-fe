@@ -87,21 +87,21 @@ export class AdmingetusersComponent implements OnInit {
         this.content_individual = data.data_individual;
         this.content_internal_user = data.data_internal_user;
         this.content_admin = data.data_admin;
-        console.log(data)
+        //console.log(data)
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
   }
 
   user_details(data): void {
-    console.log(data);
+    //console.log(data);
     this.authService.user_get(data).subscribe(
       (data: any) => {
-        console.log(data);
+        //console.log(data);
         this.content = data.data.data;
         this.id = data.data.id;
         this.currentUser = data.data.name;
@@ -173,14 +173,14 @@ export class AdmingetusersComponent implements OnInit {
 
   onSubmitUpdate(): void {
 
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.user_update(this.form, this.id).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         window.location.reload();
       },
       err => {
-        console.log(err);
+        //console.log(err);
       }
     );
   }

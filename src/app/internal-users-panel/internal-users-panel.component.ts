@@ -34,7 +34,7 @@ export class InternalUsersPanelComponent implements OnInit {
     if (this.tokenStorage.getUser().usertype < 6)
       this.panel_check();
     this.name = this.tokenStorage.getUser().username;
-    console.log(this.tokenStorage.getUser());
+    //console.log(this.tokenStorage.getUser());
     this.showLoadingIndicator = false;
   }
 

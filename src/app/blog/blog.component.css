@@ -6,3 +6,9 @@
 .loaderWrapper {
     position: relative;
 }
+
+.profile_pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}

@@ -1,12 +1,12 @@
 /* iqbal css  */
-@media(min-width: 993px) {
+/*@media(min-width: 993px) {
 	.main-menu {
 		display: block;
 	}
 	.mobile-menu {
 		display: none;
 	}
-}
+} */
 .testimonial_grid .details p i{
   font-size: 20px!important;
     padding: 0px 5px;

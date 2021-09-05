@@ -31,11 +31,11 @@ export class AdminlawyerservicesComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
-        console.log(data.data);
+        //console.log(data.data);
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
@@ -49,24 +49,24 @@ export class AdminlawyerservicesComponent implements OnInit {
   del_func(id): void{
     {this.authService.lawyer_service_delete(id).subscribe(
         data => {
-          console.log(data)
+         // console.log(data)
         },
         err => {
-          console.log(err)
+          //console.log(err)
         }
       )
     }
   }
 
   onSubmit(): void {
-      console.log(this.form)
+      //console.log(this.form)
       this.authService.lawyer_create_service(this.form).subscribe(
         data => {
-          console.log(data)
+          //console.log(data)
           window.location.href=GlobalConstants.siteURL+"lawyerservice"
         },
         err => {
-          console.log(err.error);
+          //console.log(err.error);
         }
       );
   }

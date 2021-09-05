@@ -31,7 +31,7 @@ export class RequirementComponent implements OnInit {
     this.titleService.setTitle('Requirements');
     if(this.tokenService.getToken())
     {
-      console.log(this.tokenService.getUser())
+      //console.log(this.tokenService.getUser())
       this.user_id = this.tokenService.getUser().id
       this.loginCheck = true;
     }
@@ -39,27 +39,27 @@ export class RequirementComponent implements OnInit {
     this.authService.requirement_index(this.user_id).subscribe(
       data => {
         this.content = data.requirements.data
-        console.log(data.requirements.data)
+        //console.log(data.requirements.data)
       }
     )
   }
 
   onSubmit(): void{
-    console.log(this.form)
+    //console.log(this.form)
     this.authService.requirements(this.form, this.user_id).subscribe(
       data => {
         this.reqSubmitted = true;
-        console.log(data)
+        //console.log(data)
         this.userService.getrequirements().pipe().subscribe(
           (data: any) => {
             this.content =data.data.data;
-            console.log(this.content)
+            //console.log(this.content)
             window.location.reload();
           }
         );
       },
       err => {
-        console.log(err.error);
+        //console.log(err.error);
       }
     );
   }

@@ -41,20 +41,20 @@ export class RegisterComponent implements OnInit {
       this.authService.register_new(this.form).subscribe(
 
         data => {
-          console.log(data);
+          //console.log(data);
           this.isSuccessful = true;
           this.isSignUpFailed = false;
           this.number = this.form.other_mobile_number;
           this.verify = true;
-          console.log(this.number);
+          //console.log(this.number);
           this.showLoadingIndicator = false;
         },
         err => {
           this.errorMessage = err.error;
           this.isSignUpFailed = true;
-          console.log(this.form);
-          console.log(err);
-          console.log(this.errorMessage);
+          //console.log(this.form);
+          //console.log(err);
+          //console.log(this.errorMessage);
           this.showLoadingIndicator = false;
         }
       );
@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
       this.authService.verify(this.number, this.otp.password).subscribe(
 
         data => {
-          console.log(data);
+          //console.log(data);
           this.isVerified = true;
           this.verify = false;
         },
@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
           this.errorMessage = err.error.message;
           this.verify = true;
           this.isFailedVerify = true;
-          console.log(err);
+          //console.log(err);
         }
       );
     }
@@ -92,7 +92,7 @@ export class RegisterComponent implements OnInit {
 
     myReader.onloadend = (e) => {
       this.image = myReader.result;
-      console.log(myReader.result);
+      //console.log(myReader.result);
     }
     myReader.readAsDataURL(file);
   }

@@ -52,7 +52,7 @@ export class LawyerprofileComponent implements OnInit {
     this.id = this.tokenStorage.getLawyer();
     this.authService.lawyer_get(this.id).subscribe(
       (data: any) => {
-        console.log(data.data.name)
+        //console.log(data.data.name)
         this.content = data.data.data;
         this.currentUser = data.data.name;
         this.profile_pic = data.data.profile_pic

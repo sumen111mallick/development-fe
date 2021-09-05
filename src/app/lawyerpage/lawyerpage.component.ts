@@ -31,11 +31,11 @@ export class LawyerpageComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
-        console.log(data.data);
+        //console.log(data.data);
 
       },
       err => {
-        console.log(err)
+        //console.log(err)
       }
     )
 
