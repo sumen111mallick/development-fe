@@ -42,14 +42,14 @@
 .dashboard_navigationbar .dropdown-content li{
   height: 50px;
   line-height: 30px;
-  padding-left: 0;
+  padding-left: 20px;
   position: relative;	
 }
 .dashboard_navigationbar .dropdown-content li a{
   font-size: 16px;
 }
 .dashboard_navigationbar .dropdown-content li a span{
-  font-size: 23px;
+  font-size: 16px;
   padding-right: 10px;
 }
 .dashboard_navigationbar .dropdown-content li.active{

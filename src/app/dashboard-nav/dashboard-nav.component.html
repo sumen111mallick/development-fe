@@ -1,0 +1,236 @@
+<!--<div class="dashboard_navigationbar dn db-992">
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i>
+            Dashboard Navigation</button>
+        <ul id="myDropdown" class="dropdown-content">
+            <li class="title"><span>Main</span></li>
+            <li><a (click)="redirect_control()"><i class="flaticon-layers"></i><span> Dashboard</span></a></li>
+            <li *ngIf="blog_access"><a href="/admin-blog"><i class="flaticon-layers"></i> <span> Manage Blog</span></a>
+            </li>
+            <li *ngIf="roles_access"><a href="/manage-roles"><i class="flaticon-layers"></i> <span> Manage
+                        Roles</span></a></li>
+            <li class="title"><span>Manage Listings</span></li>
+
+            <li *ngIf="usertype < 6"><a href="/myproperties"><i class="flaticon-home"></i> <span> My
+                        Properties</span></a></li>
+            <li *ngIf="usertype < 6"><a href="/savedsearches"><i class="flaticon-magnifying-glass"></i> <span> Saved
+                        Search</span></a></li>
+            <li *ngIf="usertype < 6"><a href="/reviews"><i class="flaticon-layers"></i> <span> Reviews</span></a></li>
+            
+            <li *ngIf="usertype < 6"><a href="/lawyers"><i class="flaticon-college-graduation"></i> <span> Lawyer
+                        Services</span></a></li>
+            <li *ngIf="usertype < 6"><a href="/lawyerservice"><i class="flaticon-magnifying-glass"></i> <span> Services
+                        Offered</span></a></li>
+            <li *ngIf="all_users_access"><a href="/adminusers"><i class="flaticon-user"></i> <span> All Users</span></a>
+            </li>
+            <li *ngIf="properties_access"><a href="/adminproducts"><i class="flaticon-home"></i>
+                    <span> Properties</span></a>
+            </li>
+            
+            <li *ngIf="reviews_access"><a href="/adminreviews"><i class="flaticon-calendar"></i>
+                    <span> Reviews</span></a></li>
+            <li *ngIf="lawyer_services_access"><a href="/adminlawyerservices"><i
+                        class="flaticon-college-graduation"></i>
+                    <span> Lawyer Services</span></a></li>
+            <li *ngIf="loan_control_access"><a href="/adminloan"><i class="flaticon-user"></i> <span> Loan
+                        Control</span></a>
+            </li>
+            <li *ngIf="user_creator_access"><a href="/usercreator-new"><i class="flaticon-street-view"></i> <span> User
+                        Creator</span></a></li>
+            <li class="title"><span>Manage Account</span></li>
+            <li><a href="/profile"><i class="flaticon-user"></i> <span> My Profile</span></a></li>
+            <li><a (click)="log_out()" href="/logout"><i class="flaticon-logout"></i> <span> Logout</span></a></li>
+        </ul>
+    </div>
+</div>-->
+
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mb50">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Dashboard Navigation
+        </mat-panel-title>
+        <!--<mat-panel-description>
+        Currently I am {{panelOpenState ? 'open' : 'closed'}}
+      </mat-panel-description>-->
+    </mat-expansion-panel-header>
+    <mat-list id="myDropdown">
+        <mat-list-item class="title"><span>Main</span></mat-list-item>
+
+        <mat-list-item>
+            <a (click)="redirect_control()">
+                <span class="material-icons">
+                    dashboard
+                </span>
+                <span> Dashboard</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="blog_access">
+            <a href="/admin-blog">
+                <span class="material-icons">
+                    article
+                </span>
+                <span> Manage Blog</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="roles_access">
+            <a href="/manage-roles">
+                <span class="material-icons">
+                    people
+                </span>
+                <span> Manage Roles</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item class="title"><span>Manage Listings</span></mat-list-item>
+
+        <mat-list-item *ngIf="usertype < 6">
+            <a href="/myproperties">
+                <span class="material-icons">
+                    maps_home_work
+                </span>
+                <span> My Properties</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="usertype < 6">
+            <a href="/savedsearches">
+                <span class="material-icons">
+                    manage_search
+                </span>
+                <span> Saved Search</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="usertype < 6">
+            <a href="/reviews">
+                <span class="material-icons">
+                    reviews
+                </span>
+                <span> Reviews</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="usertype < 6">
+            <a href="/lawyers">
+                <span class="material-icons">
+                    school
+                </span>
+                <span> Lawyer Services</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="usertype < 6">
+            <a href="/lawyerservice">
+                <span class="material-icons">
+                    info
+                </span>
+                <span> Services Offered</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="all_users_access">
+            <a href="/adminusers">
+                <span class="material-icons">
+                    assignment_ind
+                </span>
+                <span> All Users</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="properties_access">
+            <a href="/adminproducts">
+                <span class="material-icons">
+                    maps_home_work
+                </span>
+                <span> Properties</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="reviews_access">
+            <a href="/adminreviews">
+                <span class="material-icons">
+                    reviews
+                </span>
+                <span> Reviews</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="lawyer_services_access">
+            <a href="/adminlawyerservices">
+                <span class="material-icons">
+                    school
+                </span>
+                <span> Lawyer Services</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="loan_control_access">
+            <a href="/adminloan">
+                <span class="material-icons">
+                    credit_score
+                </span>
+                <span> Loan Control</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+
+        <mat-list-item *ngIf="user_creator_access">
+            <a href="/usercreator-new">
+                <span class="material-icons">
+                    person_add
+                </span>
+                <span> User Creator</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+        <mat-list-item class="title"><span>Manage Account</span></mat-list-item>
+
+        <mat-list-item>
+            <a href="/profile">
+                <span class="material-icons">
+                    badge
+                </span>
+                <span> My Profile</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+        <mat-list-item>
+            <a (click)="log_out()" href="/logout">
+                <span class="material-icons">
+                    logout
+                </span>
+                <span> Logout</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+    </mat-list>
+</mat-expansion-panel>

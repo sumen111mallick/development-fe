@@ -28,8 +28,8 @@
     <div class="wrapper">
         <!--<div class="preloader"></div>-->
         <div *ngIf="showLoadingIndicator">
-			<div class="preloader"></div>
-		</div>
+            <div class="preloader"></div>
+        </div>
         <!--<app-admindashtopbar></app-admindashtopbar>-->
 
         <!-- Inner Page Breadcrumb -->
@@ -57,10 +57,15 @@
                         <app-menu-sidebar></app-menu-sidebar>
                     </div>
                     <div class="col-lg-10 col-xl-10">
+                        <div class="col-lg-12">
+                            <!-- Dashboard navigation goes here -->
+                            <app-dashboard-nav></app-dashboard-nav>
+                        </div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Home</a></li>
-                                <li class="breadcrumb-item active" *ngIf="isAddMode" aria-current="page">Create Role</li>
+                                <li class="breadcrumb-item active" *ngIf="isAddMode" aria-current="page">Create Role
+                                </li>
                                 <li class="breadcrumb-item active" *ngIf="!isAddMode" aria-current="page">Edit Role</li>
                             </ol>
                         </nav>
@@ -73,7 +78,8 @@
                     <div class="col-lg-2 col-xl-2"></div>
                     <div class="col-lg-10 col-xl-10">
                         <div class="card">
-                            <form #f="ngForm" name="form" [formGroup]="roleForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+                            <form #f="ngForm" name="form" [formGroup]="roleForm" (ngSubmit)="f.form.valid && onSubmit()"
+                                novalidate>
                                 <!--<h4 class="card-header text-center" *ngIf="isAddMode">Create Role</h4>
                                 <h4 class="card-header text-center" *ngIf="!isAddMode">Edit Role</h4>-->
                                 <div class="card-header">
@@ -83,7 +89,8 @@
                                             <h4 *ngIf="!isAddMode">Edit Role</h4>
                                         </div>
                                         <div class="col-md-6 text-align">
-                                            <button type="button" (click)="role_list()" class="btn btn-info">Role List</button>
+                                            <button type="button" (click)="role_list()" class="btn btn-info">Role
+                                                List</button>
                                         </div>
                                     </div>
                                 </div>
@@ -94,9 +101,10 @@
                                                 <label for="rolename">Role Name</label>
                                                 <input type="text" class="form-control" formControlName="rolename"
                                                     id="rolename" name="rolename" required>
-                                                <div class="alert-danger" *ngIf="f.submitted && roleForm.controls.rolename.invalid">
+                                                <div class="alert-danger"
+                                                    *ngIf="f.submitted && roleForm.controls.rolename.invalid">
                                                     <div *ngIf="roleForm.controls.rolename.errors.required">
-                                                       Role Name is required
+                                                        Role Name is required
                                                     </div>
                                                 </div>
                                             </div>
@@ -106,7 +114,8 @@
                                                 <label for="role_id">Role ID</label>
                                                 <input type="text" class="form-control" formControlName="role_id"
                                                     id="role_id" name="role_id" required>
-                                                <div class="alert-danger" *ngIf="f.submitted && roleForm.controls.role_id.invalid">
+                                                <div class="alert-danger"
+                                                    *ngIf="f.submitted && roleForm.controls.role_id.invalid">
                                                     <div *ngIf="roleForm.controls.role_id.errors.required">
                                                         Role ID is required
                                                     </div>
@@ -115,7 +124,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <hr>
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 text-center mb30">
@@ -131,7 +140,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="all_users" formControlName="all_usersControl"
+                                                            <input type="checkbox" value="all_users"
+                                                                formControlName="all_usersControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -148,7 +158,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="properties" formControlName="propertiesControl"
+                                                            <input type="checkbox" value="properties"
+                                                                formControlName="propertiesControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -166,7 +177,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="manage_blog" formControlName="blogControl"
+                                                            <input type="checkbox" value="manage_blog"
+                                                                formControlName="blogControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -182,7 +194,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="manage_roles" formControlName="roleControl"
+                                                            <input type="checkbox" value="manage_roles"
+                                                                formControlName="roleControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -216,7 +229,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="reviews" formControlName="reviewsControl"
+                                                            <input type="checkbox" value="reviews"
+                                                                formControlName="reviewsControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -232,7 +246,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="lawyer_services" formControlName="lawyerControl"
+                                                            <input type="checkbox" value="lawyer_services"
+                                                                formControlName="lawyerControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -250,7 +265,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="loan_control" formControlName="loanControl"
+                                                            <input type="checkbox" value="loan_control"
+                                                                formControlName="loanControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -266,7 +282,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="user_creator" formControlName="user_creatorControl"
+                                                            <input type="checkbox" value="user_creator"
+                                                                formControlName="user_creatorControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -284,7 +301,8 @@
                                                     </div>
                                                     <div class="col-6 col-sm-6 col-md-6">
                                                         <label class="switch">
-                                                            <input type="checkbox" value="list_property" formControlName="listPropertyControl"
+                                                            <input type="checkbox" value="list_property"
+                                                                formControlName="listPropertyControl"
                                                                 (change)="getStats($event.target.value, $event.target.checked)">
                                                             <span class="slider round"></span>
                                                         </label>
@@ -293,18 +311,20 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="form-group row">
                                         <div class="col-sm-4 offset-lg-4 text-center">
-                                            <button type="submit" *ngIf="isAddMode" class="btn btn-log btn-block btn-thm2">Create
+                                            <button type="submit" *ngIf="isAddMode"
+                                                class="btn btn-log btn-block btn-thm2">Create
                                                 Role</button>
-                                                <button type="submit" *ngIf="!isAddMode" class="btn btn-log btn-block btn-thm2">Update
-                                                    Role</button>
-                                                
+                                            <button type="submit" *ngIf="!isAddMode"
+                                                class="btn btn-log btn-block btn-thm2">Update
+                                                Role</button>
+
                                         </div>
                                     </div>
                                 </div>

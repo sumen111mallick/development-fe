@@ -2,90 +2,75 @@
 <html dir="ltr" lang="en">
 
 <!-- Mirrored from grandetest.com/theme/findhouse-html/page-add-new-property.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:57 GMT -->
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
-<meta name="description" content="FindHouse - Real Estate HTML Template">
-<meta name="CreativeLayers" content="ATFN">
-<!-- css file -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+    content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+  <meta name="description" content="FindHouse - Real Estate HTML Template">
+  <meta name="CreativeLayers" content="ATFN">
+  <!-- css file -->
 
-<!-- Title -->
-<title>FindHouse - Real Estate HTML Template</title>
-<!-- Favicon -->
-<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
-<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+  <!-- Title -->
+  <title>FindHouse - Real Estate HTML Template</title>
+  <!-- Favicon -->
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
-<div class="wrapper">
-	<div class="preloader"></div>
+  <div class="wrapper">
+    <div class="preloader"></div>
 
-	<!-- Main Header Nav -->
-  <!--<app-admindashtopbar></app-admindashtopbar>-->
+    <!-- Main Header Nav -->
+    <!--<app-admindashtopbar></app-admindashtopbar>-->
 
-	<!-- Main Header Nav For Mobile -->
-
-
-
-	<!-- Our Dashbord -->
-	<section class="our-dashbord dashbord bgc-f7 pb50">
-		<div class="container-fluid ovh">
-			<div class="row">
-				<div class="col-lg-3 col-xl-2 dn-992 pl0">
-          <app-menu-sidebar></app-menu-sidebar>
-        </div>
-				<div class="col-lg-9 col-xl-10 maxw100flex-992">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="dashboard_navigationbar dn db-992">
-								<div class="dropdown">
-									<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard Navigation</button>
-									<ul id="myDropdown" class="dropdown-content">
-										<li><a href="page-dashboard.html"><span class="flaticon-layers"></span> Dashboard</a></li>
-										<li><a href="page-message.html"><span class="flaticon-envelope"></span> Message</a></li>
-										<li><a href="page-my-properties.html"><span class="flaticon-home"></span> My Properties</a></li>
-										<li><a href="page-my-favorites.html"><span class="flaticon-heart"></span> My Favorites</a></li>
-										<li><a href="page-my-savesearch.html"><span class="flaticon-magnifying-glass"></span> Saved Search</a></li>
-										<li><a href="page-my-review.html"><span class="flaticon-chat"></span> My Reviews</a></li>
-										<li><a href="page-my-packages.html"><span class="flaticon-box"></span> My Package</a></li>
-										<li><a href="page-my-profile.html"><span class="flaticon-user"></span> My Profile</a></li>
-										<li class="active"><a href="page-add-new-property.html"><span class="flaticon-filter-results-button"></span> Add New Listing</a></li>
-										<li><a href="page-login.html"><span class="flaticon-logout"></span> Logout</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-12 mb10">
-							<div class="breadcrumb_content style2"  style="margin-left: 30px;">
-								<h2 class="breadcrumb_title">Edit Sale Property</h2>
-                <p>We are glad to see you again!</p>
-
-							</div>
-            </div>
+    <!-- Main Header Nav For Mobile -->
 
 
 
+    <!-- Our Dashbord -->
+    <section class="our-dashbord dashbord bgc-f7 pb50">
+      <div class="container-fluid ovh">
+        <div class="row">
+          <div class="col-lg-3 col-xl-2 dn-992 pl0">
+            <app-menu-sidebar></app-menu-sidebar>
+          </div>
+          <div class="col-lg-9 col-xl-10 maxw100flex-992">
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Dashboard navigation goes here -->
+                <app-dashboard-nav></app-dashboard-nav>
+              </div>
+              <div class="col-lg-12 col-md-12 mb10">
+                <div class="breadcrumb_content style2" style="margin-left: 30px;">
+                  <h2 class="breadcrumb_title">Edit Sale Property</h2>
+                  <p>We are glad to see you again!</p>
+                </div>
+              </div>
 
-						<form *ngIf="isLoggedIn" class="col-lg-12" action="#" name="form" (ngSubmit)="onSubmitSale()" #f="ngForm">
-							<div class="my_dashboard_review">
-								<div class="row">
-									<div class="col-lg-12">
-										<h2 class="mb30">Edit</h2>
-										<div class="my_profile_setting_input form-group">
-									    	<label for="propertyTitle">Property Name</label>
-									    	<input type="text" class="form-control" name="build_name" #build_name="ngModel" [(ngModel)]="form.build_name" id="propertyTitle">
-										</div>
-									</div>
+              <form *ngIf="isLoggedIn" class="col-lg-12" action="#" name="form" (ngSubmit)="onSubmitSale()" #f="ngForm">
+                <div class="my_dashboard_review">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h2 class="mb30">Edit</h2>
+                      <div class="my_profile_setting_input form-group">
+                        <label for="propertyTitle">Property Name</label>
+                        <input type="text" class="form-control" name="build_name" #build_name="ngModel"
+                          [(ngModel)]="form.build_name" id="propertyTitle">
+                      </div>
+                    </div>
 
-									<!-- <div class="col-lg-12">
+                    <!-- <div class="col-lg-12">
 										<div class="my_profile_setting_input ui_kit_select_search form-group">
 									    	<label>Type</label>
 											<select class="form-control" name="type" #type="ngModel" [(ngModel)]="form.type"  required data-live-search="true" data-width="100%">
@@ -114,87 +99,98 @@
 										</div>
                   </div> -->
 
-                  <div class="col-lg-12">
-										<h3 class="mb30">Location</h3>
-										<div class="my_profile_setting_input form-group">
-									    	<label for="propertyAddress">Address</label>
-									    	<input type="text" class="form-control" name="address" #address="ngModel" [(ngModel)]="form.address" id="propertyAddress">
-										</div>
-                  </div>
-                  <div class="col-lg-12">
-                    <div class="my_profile_setting_input form-group">
-										<label class="">Display Address on Property page.</label>
-                    <select class="form-control" name="display_address" #display_address="ngModel" [(ngModel)]="form.display_address" required data-live-search="true" data-width="100%">
-                      <option value="" disabled >Select options</option>
-                      <option value="1">Yes</option>
-                      <option value="0">No</option>
-                    </select>
+                    <div class="col-lg-12">
+                      <h3 class="mb30">Location</h3>
+                      <div class="my_profile_setting_input form-group">
+                        <label for="propertyAddress">Address</label>
+                        <input type="text" class="form-control" name="address" #address="ngModel"
+                          [(ngModel)]="form.address" id="propertyAddress">
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_input form-group">
+                        <label class="">Display Address on Property page.</label>
+                        <select class="form-control" name="display_address" #display_address="ngModel"
+                          [(ngModel)]="form.display_address" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select options</option>
+                          <option value="1">Yes</option>
+                          <option value="0">No</option>
+                        </select>
 
 
-                  </div>
-                  </div>
-                  <div class="col-lg-6 col-xl-6">
-                    <div class="my_profile_setting_input form-group">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
                         <label for="propertyCity">City</label>
-                        <input type="text" class="form-control" name="city" #city="ngModel" [(ngModel)]="form.city" id="propertyCity">
+                        <input type="text" class="form-control" name="city" #city="ngModel" [(ngModel)]="form.city"
+                          id="propertyCity">
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-xl-6">
-                    <div class="my_profile_setting_input form-group">
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
                         <label for="locality">Locality</label>
-                        <input type="text" class="form-control" name="locality" #locality="ngModel" [(ngModel)]="form.locality" id="locality">
+                        <input type="text" class="form-control" name="locality" #locality="ngModel"
+                          [(ngModel)]="form.locality" id="locality">
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="col-lg-12">
-										<div class="my_profile_setting_textarea form-group">
-										    <label for="propertyDetail">Property Details</label>
-										    <textarea class="form-control" id="propertyDetail" name="property_detail" #property_detail="ngModel" [(ngModel)]="form.property_detail" rows="7"></textarea>
-										</div>
-                  </div>
+                    <div class="col-lg-12">
+                      <div class="my_profile_setting_textarea form-group">
+                        <label for="propertyDetail">Property Details</label>
+                        <textarea class="form-control" id="propertyDetail" name="property_detail"
+                          #property_detail="ngModel" [(ngModel)]="form.property_detail" rows="7"></textarea>
+                      </div>
+                    </div>
 
-                  <div class="col-lg-12 col-xl-12">
-                    <div class="my_profile_setting_input form-group">
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
                         <label for="nearest_landmark">Nearest Landmark</label>
-                        <input type="text" class="form-control" name="nearest_landmark" #nearest_landmark="ngModel" [(ngModel)]="form.nearest_landmark" id="nearest_landmark">
+                        <input type="text" class="form-control" name="nearest_landmark" #nearest_landmark="ngModel"
+                          [(ngModel)]="form.nearest_landmark" id="nearest_landmark">
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-xl-6">
-                    <div class="my_profile_setting_input form-group">
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
                         <label for="map_latitude">Map Latitude</label>
-                        <input type="text" class="form-control" name="map_latitude" #map_latitude="ngModel" [(ngModel)]="form.map_latitude" id="map_latitude">
+                        <input type="text" class="form-control" name="map_latitude" #map_latitude="ngModel"
+                          [(ngModel)]="form.map_latitude" id="map_latitude">
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-xl-6">
-                    <div class="my_profile_setting_input form-group">
+                    <div class="col-lg-6 col-xl-6">
+                      <div class="my_profile_setting_input form-group">
                         <label for="map_longitude">Map Longitude</label>
-                        <input type="text" class="form-control" name="map_longitude" #map_longitude="ngModel" [(ngModel)]="form.map_longitude" id="map_longitude">
+                        <input type="text" class="form-control" name="map_longitude" #map_longitude="ngModel"
+                          [(ngModel)]="form.map_longitude" id="map_longitude">
+                      </div>
                     </div>
                   </div>
-								</div>
-							</div>
-							<div class="my_dashboard_review mt30">
-								<div class="row">
-									<div class="col-lg-12">
-										<h4 class="mb30">Detailed Information</h4>
-									</div>
-									<div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="formGroupExampleArea">Area</label>
-									    	<input type="number" class="form-control" name="area" #area="ngModel" [(ngModel)]="form.area" id="formGroupExampleArea">
-										</div>
-                  </div>
-                  <div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="sizePrefix">Carpet Area</label>
-									    	<input type="number" class="form-control" name="carpet_area" #carpet_area="ngModel" [(ngModel)]="form.carpet_area" id="sizePrefix">
-										</div>
-									</div>
-									<div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input ui_kit_select_search form-group">
-									    	<label>Area Unit</label>
-                        <select class="form-control" name="area_unit" #area_unit="ngModel" [(ngModel)]="form.area_unit" required data-live-search="true" data-width="100%">
-                          <option value="" disabled >Select Area Units</option>
+                </div>
+                <div class="my_dashboard_review mt30">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Detailed Information</h4>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="formGroupExampleArea">Area</label>
+                        <input type="number" class="form-control" name="area" #area="ngModel" [(ngModel)]="form.area"
+                          id="formGroupExampleArea">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="sizePrefix">Carpet Area</label>
+                        <input type="number" class="form-control" name="carpet_area" #carpet_area="ngModel"
+                          [(ngModel)]="form.carpet_area" id="sizePrefix">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Area Unit</label>
+                        <select class="form-control" name="area_unit" #area_unit="ngModel" [(ngModel)]="form.area_unit"
+                          required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Area Units</option>
                           <option value="sq.ft.">sq.ft.</option>
                           <option value="sq.yards">sq.yards</option>
                           <option value="sq.m.">sq.m.</option>
@@ -214,60 +210,68 @@
                           <option value="chataks">chataks</option>
                           <option value="perch">perch</option>
                         </select>
-										</div>
-                  </div>
+                      </div>
+                    </div>
 
 
-                  <div class="col-lg-6 col-xl-4">
-                    <div class="my_profile_setting_input form-group">
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
                         <label for="bedRooms">Bedrooms</label>
-                        <input type="number" class="form-control" name="bedroom" #bedroom="ngModel" [(ngModel)]="form.bedroom" id="bedRooms">
+                        <input type="number" class="form-control" name="bedroom" #bedroom="ngModel"
+                          [(ngModel)]="form.bedroom" id="bedRooms">
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-xl-4">
-                    <div class="my_profile_setting_input form-group">
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
                         <label for="bathRooms">Bathrooms</label>
-                        <input type="number" class="form-control" name="bathroom" #bathroom="ngModel" [(ngModel)]="form.bathroom" id="bathRooms">
+                        <input type="number" class="form-control" name="bathroom" #bathroom="ngModel"
+                          [(ngModel)]="form.bathroom" id="bathRooms">
+                      </div>
                     </div>
-                  </div>
-									<div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="balconies">Balconies</label>
-									    	<input type="number" class="form-control" name="balconies" #nalconies="ngModel" [(ngModel)]="form.balconies" id="balconies">
-										</div>
-									</div>
-									<div class="col-lg-12 col-xl-12">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="LASPostfix">Additional Rooms</label>
-									    	<input type="number" class="form-control" name="additional_rooms" #additional_rooms="ngModel" [(ngModel)]="form.additional_rooms" id="LASPostfix">
-										</div>
-                  </div>
-									<div class="col-lg-12 col-xl-12">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="LASPostfix">Equipment</label>
-									    	<input type="text" class="form-control" name="equipment" #equipment="ngModel" [(ngModel)]="form.equipment" id="LASPostfix">
-										</div>
-                  </div>
-									<div class="col-lg-12 col-xl-12">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="LASPostfix">Features</label>
-									    	<input type="text" class="form-control" name="features" #features="ngModel" [(ngModel)]="form.features" id="LASPostfix">
-										</div>
-                  </div>
-									<div class="col-lg-12 col-xl-12">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="LASPostfix">Nearby Places</label>
-									    	<input type="text" class="form-control" name="nearby_places" #nearby_places="ngModel" [(ngModel)]="form.nearby_places" id="LASPostfix">
-										</div>
-                  </div>
-									<div class="col-lg-12 col-xl-12">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="LASPostfix">Age of Property</label>
-									    	<input type="number" class="form-control" name="age_of_property" #age_of_property="ngModel" [(ngModel)]="form.age_of_property" id="LASPostfix">
-										</div>
-                  </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="balconies">Balconies</label>
+                        <input type="number" class="form-control" name="balconies" #nalconies="ngModel"
+                          [(ngModel)]="form.balconies" id="balconies">
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Additional Rooms</label>
+                        <input type="number" class="form-control" name="additional_rooms" #additional_rooms="ngModel"
+                          [(ngModel)]="form.additional_rooms" id="LASPostfix">
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Equipment</label>
+                        <input type="text" class="form-control" name="equipment" #equipment="ngModel"
+                          [(ngModel)]="form.equipment" id="LASPostfix">
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Features</label>
+                        <input type="text" class="form-control" name="features" #features="ngModel"
+                          [(ngModel)]="form.features" id="LASPostfix">
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Nearby Places</label>
+                        <input type="text" class="form-control" name="nearby_places" #nearby_places="ngModel"
+                          [(ngModel)]="form.nearby_places" id="LASPostfix">
+                      </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="LASPostfix">Age of Property</label>
+                        <input type="number" class="form-control" name="age_of_property" #age_of_property="ngModel"
+                          [(ngModel)]="form.age_of_property" id="LASPostfix">
+                      </div>
+                    </div>
 
-<!--
+                    <!--
                   <div class="col-lg-6 col-xl-4">
 										<div class="my_profile_setting_input ui_kit_select_search form-group">
 									    	<label>Furnishings</label>
@@ -292,19 +296,21 @@
 
 
 
-									<div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="garages">Property is present on which Floor? (Type no for none.)</label>
-									    	<input type="number" class="form-control" name="property_on_floor" #property_on_floor="ngModel" [(ngModel)]="form.property_on_floor" id="garages">
-										</div>
-									</div>
-									<div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="garages">Number of Floors in a property? (Type no if not applicable.)</label>
-									    	<input type="number" class="form-control" name="total_floors" #total_floors="ngModel" [(ngModel)]="form.total_floors" id="garages">
-										</div>
-									</div>
-									<!-- <div class="col-lg-6 col-xl-4">
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="garages">Property is present on which Floor? (Type no for none.)</label>
+                        <input type="number" class="form-control" name="property_on_floor" #property_on_floor="ngModel"
+                          [(ngModel)]="form.property_on_floor" id="garages">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="garages">Number of Floors in a property? (Type no if not applicable.)</label>
+                        <input type="number" class="form-control" name="total_floors" #total_floors="ngModel"
+                          [(ngModel)]="form.total_floors" id="garages">
+                      </div>
+                    </div>
+                    <!-- <div class="col-lg-6 col-xl-4">
 										<div class="my_profile_setting_input ui_kit_select_search form-group">
 									    	<label>Facing Towards</label>
                         <select class="form-control" name="facing_towards" #facing_towards="ngModel" [(ngModel)]="form.facing_towards" name="type" required data-live-search="true" data-width="100%">
@@ -319,48 +325,56 @@
                         </select>
 										</div>
                   </div> -->
-                  <div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input ui_kit_select_search form-group">
-									    	<label>Rera Registration Status</label>
-                        <select class="form-control" name="rera_registration_status" #rera_registration_status="ngModel" [(ngModel)]="form.rera_registration_status" name="type" required data-live-search="true" data-width="100%">
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Rera Registration Status</label>
+                        <select class="form-control" name="rera_registration_status" #rera_registration_status="ngModel"
+                          [(ngModel)]="form.rera_registration_status" name="type" required data-live-search="true"
+                          data-width="100%">
                           <option value="Registered">Registered</option>
                           <option value="Applied For">Applied For</option>
                           <option value="Not Applicable">Not Applicable</option>
                         </select>
-										</div>
-                  </div>
-									<div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input ui_kit_select_search form-group">
-									    	<label>Do you have Reserved Parking</label>
-                        <select class="form-control" (change)="parkingStatus($event.target.value)" name="additional_parking_status" #additional_parking_status="ngModel" [(ngModel)]="form.additional_parking_status" required data-live-search="true" data-width="100%">
-                          <option value="" disabled >Select Parking Status</option>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Do you have Reserved Parking</label>
+                        <select class="form-control" (change)="parkingStatus($event.target.value)"
+                          name="additional_parking_status" #additional_parking_status="ngModel"
+                          [(ngModel)]="form.additional_parking_status" required data-live-search="true"
+                          data-width="100%">
+                          <option value="" disabled>Select Parking Status</option>
                           <option value="1">Yes</option>
                           <option value="0">No</option>
                         </select>
-										</div>
-                  </div>
+                      </div>
+                    </div>
 
 
-									<div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input form-group">
-									    	<label for="yearBuild">Year Built</label>
-									    	<input type="number" class="form-control" name="buildyear" #buildyear="ngModel" [(ngModel)]="form.buildyear" id="yearBuild">
-										</div>
-                  </div>
-                  <div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input ui_kit_select_search form-group">
-									    	<label>Availability</label>
-                        <select class="form-control" name="availability_condition" #availability_condition="ngModel" [(ngModel)]="form.availability_condition" required data-live-search="true" data-width="100%">
-                          <option value="" disabled >Select Availability</option>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input form-group">
+                        <label for="yearBuild">Year Built</label>
+                        <input type="number" class="form-control" name="buildyear" #buildyear="ngModel"
+                          [(ngModel)]="form.buildyear" id="yearBuild">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Availability</label>
+                        <select class="form-control" name="availability_condition" #availability_condition="ngModel"
+                          [(ngModel)]="form.availability_condition" required data-live-search="true" data-width="100%">
+                          <option value="" disabled>Select Availability</option>
                           <option value="Under Construction">Under Construction</option>
                           <option value="Ready To Move">Ready To Move</option>
                         </select>
-										</div>
-                  </div>
-                  <div class="col-lg-6 col-xl-4">
-										<div class="my_profile_setting_input ui_kit_select_search form-group">
-									    	<label>Possession By</label>
-                        <select class="form-control" name="possession_by" #possession_by="ngModel" [(ngModel)]="form.possession_by" required data-live-search="true" data-width="100%">
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                      <div class="my_profile_setting_input ui_kit_select_search form-group">
+                        <label>Possession By</label>
+                        <select class="form-control" name="possession_by" #possession_by="ngModel"
+                          [(ngModel)]="form.possession_by" required data-live-search="true" data-width="100%">
                           <option value="{{ content.possession_by }}">{{ content.possession_by }}</option>
                           <option value="Now">Now</option>
                           <option value="Within 3 months">Within 3 months</option>
@@ -376,14 +390,14 @@
                           <option value="Within 8 year">Within 8 years</option>
                           <option value="Within 9 year">Within 9 years</option>
                         </select>
-										</div>
-                  </div>
-                  <div class="col-xl-12">
-										<div class="my_profile_setting_input">
-											<button type="submit" class="btn btn2 float-right">Submit</button>
-										</div>
-									</div>
-                  <!-- <div class="col-lg-12 col-xl-12">
+                      </div>
+                    </div>
+                    <div class="col-xl-12">
+                      <div class="my_profile_setting_input">
+                        <button type="submit" class="btn btn2 float-right">Submit</button>
+                      </div>
+                    </div>
+                    <!-- <div class="col-lg-12 col-xl-12">
 										<div class="my_profile_setting_input form-group">
 									    	<label for="amenities">Amenities</label>
                         <div class="col-lg-6 col-xl-6">
@@ -401,58 +415,64 @@
                   </div> -->
 
 
-								</div>
-              </div>
+                  </div>
+                </div>
 
-              <div class="my_dashboard_review mt30"  *ngIf="parking">
-								<div class="row">
-									<div class="col-lg-12">
-										<h4 class="mb30">Parking</h4>
-									</div>
-                  <div class="col-lg-12 col-xl-12">
-                    <div class="my_profile_setting_input form-group">
+                <div class="my_dashboard_review mt30" *ngIf="parking">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Parking</h4>
+                    </div>
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
                         <label>Conered Parking</label>
-                        <input type="number" class="form-control" name="parking_covered_count" #parking_covered_count="ngModel" [(ngModel)]="form.parking_covered_count" id="parking_covered">
+                        <input type="number" class="form-control" name="parking_covered_count"
+                          #parking_covered_count="ngModel" [(ngModel)]="form.parking_covered_count"
+                          id="parking_covered">
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-lg-12 col-xl-12">
-                    <div class="my_profile_setting_input form-group">
+                    <div class="col-lg-12 col-xl-12">
+                      <div class="my_profile_setting_input form-group">
                         <label>Open Parking</label>
-                        <input type="number" class="form-control" name="parking_open_count" #parking_open_count="ngModel" [(ngModel)]="form.parking_open_count" id="parking_covered">
+                        <input type="number" class="form-control" name="parking_open_count"
+                          #parking_open_count="ngModel" [(ngModel)]="form.parking_open_count" id="parking_covered">
+                      </div>
                     </div>
                   </div>
-								</div>
-              </div>
+                </div>
 
-              <div class="my_dashboard_review mt30"  *ngIf="furnish">
-								<div class="row">
-									<div class="col-lg-12">
-										<h4 class="mb30">Furnishings</h4>
-									</div>
+                <div class="my_dashboard_review mt30" *ngIf="furnish">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <h4 class="mb30">Furnishings</h4>
+                    </div>
 
-                  <div class="col-lg-6 col-xl-12">
-                    <div class="col-sm-10 float-left"><input type="text" class="form-control" (change)="furnishing($event.target.value)" id="amenities"></div>
-                    <div class="col-lg-2 float-right"><button type="button" class="btn btn-thm2 float-right" >Add</button></div>
+                    <div class="col-lg-6 col-xl-12">
+                      <div class="col-sm-10 float-left"><input type="text" class="form-control"
+                          (change)="furnishing($event.target.value)" id="amenities"></div>
+                      <div class="col-lg-2 float-right"><button type="button"
+                          class="btn btn-thm2 float-right">Add</button></div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-xl-6 col-lg-6">
+                      <ul class="order_list list-inline-item">
+                        <li *ngFor="let items of furnishingArray"><a href="#"><span class="flaticon-tick"></span>{{
+                            items }}</a></li>
+                      </ul>
+                    </div>
+
                   </div>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <div class="col-xl-6 col-lg-6">
-                    <ul class="order_list list-inline-item" >
-                      <li *ngFor="let items of furnishingArray"><a href="#"><span class="flaticon-tick"></span>{{ items }}</a></li>
-                    </ul>
-                  </div>
-
-								</div>
-              </div>
+                </div>
 
 
-              <!-- <div class="my_dashboard_review mt30">
+                <!-- <div class="my_dashboard_review mt30">
 								<div class="row">
 									<div class="col-lg-12">
 										<h4 class="mb30">Property Pricing</h4>
@@ -527,7 +547,7 @@
               </div> -->
 
 
-              <!-- <div class="my_dashboard_review mt30"  *ngIf="!maintenance">
+                <!-- <div class="my_dashboard_review mt30"  *ngIf="!maintenance">
 								<div class="row">
 									<div class="col-lg-12">
 										<h4 class="mb30">Maintenance</h4>
@@ -553,7 +573,7 @@
               </div> -->
 
 
-							<!-- <div class="my_dashboard_review mt30">
+                <!-- <div class="my_dashboard_review mt30">
 								<div class="row">
 									<div class="col-lg-12">
 										<h4 class="mb30">Property Details</h4>
@@ -646,27 +666,28 @@
 								</div>
               </div> -->
 
-            </form>
+              </form>
 
 
 
-					</div>
-					<div class="row mt100">
-						<div class="col-lg-12">
-							<div class="copyright-widget text-center">
-								<p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
-</div>
-<!-- Wrapper End -->
+            </div>
+            <div class="row mt100">
+              <div class="col-lg-12">
+                <div class="copyright-widget text-center">
+                  <p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+  </div>
+  <!-- Wrapper End -->
 
 </body>
 
 <!-- Mirrored from grandetest.com/theme/findhouse-html/page-add-new-property.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:03 GMT -->
+
 </html>

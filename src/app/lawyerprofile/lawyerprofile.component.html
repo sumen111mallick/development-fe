@@ -2,152 +2,163 @@
 <html dir="ltr" lang="en">
 
 <!-- Mirrored from grandetest.com/theme/findhouse-html//profile by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:18 GMT -->
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
-<meta name="description" content="FindHouse - Real Estate HTML Template">
-<meta name="CreativeLayers" content="ATFN">
-<!-- css file -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords"
+		content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+	<meta name="description" content="FindHouse - Real Estate HTML Template">
+	<meta name="CreativeLayers" content="ATFN">
+	<!-- css file -->
 
-<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
-<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+	<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+	<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
-<div class="wrapper">
-	<div class="preloader"></div>
+	<div class="wrapper">
+		<div class="preloader"></div>
 
-<!--<app-dashboard-topbar></app-dashboard-topbar>-->
+		<!--<app-dashboard-topbar></app-dashboard-topbar>-->
 
-	<!-- Our Dashbord -->
-	<section class="our-dashbord dashbord bgc-f7 pb50">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-3 col-xl-2 dn-992 pl0">
-					<app-menu-sidebar></app-menu-sidebar>
-				</div>
-				<div class="col-lg-9 col-xl-10 maxw100flex-992">
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="dashboard_navigationbar dn db-992">
-								<div class="dropdown">
-									<button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard Navigation</button>
-									<ul id="myDropdown" class="dropdown-content">
-										<li><a *ngIf="usertype != 2" href="/dashboard"><span class="flaticon-layers"></span> Dashboard</a></li>
-										<li><a *ngIf="usertype != 2" href="/properties"><span class="flaticon-home"></span> My Properties</a></li>
-										<li class="active"><a href="/profile"><span class="flaticon-user"></span> My Profile</a></li>
-										<li><a href="page-add-new-property.html"><span class="flaticon-filter-results-button"></span> Add New Listing</a></li>
-										<li><a href="/logout"><span class="flaticon-logout"></span> Logout</a></li>
-									</ul>
+		<!-- Our Dashbord -->
+		<section class="our-dashbord dashbord bgc-f7 pb50">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-3 col-xl-2 dn-992 pl0">
+						<app-menu-sidebar></app-menu-sidebar>
+					</div>
+					<div class="col-lg-9 col-xl-10 maxw100flex-992">
+						<div class="row">
+							<div class="col-lg-12">
+								<!-- Dashboard navigation goes here -->
+								<app-dashboard-nav></app-dashboard-nav>
+							</div>
+							<div class="col-lg-12 mb10">
+								<div class="breadcrumb_content style2" style="margin-left: 30px;">
+									<h2 class="breadcrumb_title">My Profile</h2>
+									<p>We are glad to see you {{ currentUser }}</p>
+									<div class="text-center">
+										<p class="alert alert-danger" *ngIf="!email_verify">Please Verify your Phone
+											Number</p>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-12 mb10" >
-							<div class="breadcrumb_content style2" style="margin-left: 30px;">
-								<h2 class="breadcrumb_title">My Profile</h2>
-                <p>We are glad to see you {{ currentUser }}</p>
-                <div class="text-center"><p class="alert alert-danger" *ngIf="!email_verify">Please Verify your Phone Number</p></div>
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="my_dashboard_review">
-								<div class="row">
-									<div class="col-xl-2">
-										<h4>Profile Information</h4>
-									</div>
-									<div class="col-xl-10">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="wrap-custom-file">
-											<img class="img-whp" src= "{{ftpstring}}{{ profile_pic }}" alt="fp1.jpg">
+							<div class="col-lg-12">
+								<div class="my_dashboard_review">
+									<div class="row">
+										<div class="col-xl-2">
+											<h4>Profile Information</h4>
+										</div>
+										<div class="col-xl-10">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="wrap-custom-file">
+														<img class="img-whp" src="{{ftpstring}}{{ profile_pic }}"
+															alt="fp1.jpg">
+													</div>
 												</div>
-											</div>
-											<div class="col-lg-12 col-xl-12">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleInput1">Username: {{currentUser}}</label>
+												<div class="col-lg-12 col-xl-12">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleInput1">Username:
+															{{currentUser}}</label>
+													</div>
 												</div>
-											</div>
-											<div class="col-lg-12 col-xl-12">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Email: {{email}}</label>
+												<div class="col-lg-12 col-xl-12">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Email: {{email}}</label>
+													</div>
 												</div>
-                      </div>
-                      <div class="col-lg-12 col-xl-12">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Phone Number: +91{{phn_no}}</label>
+												<div class="col-lg-12 col-xl-12">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Phone Number:
+															+91{{phn_no}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="company_name">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Company Name: {{company_name}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="company_name">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Company Name:
+															{{company_name}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="company_url">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Company URL: {{company_url}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="company_url">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Company URL:
+															{{company_url}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="address">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Address: {{address}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="address">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Address: {{address}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="city">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">City: {{city}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="city">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">City: {{city}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="landline_number">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Landline Number: {{landline_number}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="landline_number">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Landline Number:
+															{{landline_number}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="company_profile">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Company Profile: {{company_profile}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="company_profile">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Company Profile:
+															{{company_profile}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="pan_number">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">PAN Number: {{pan_number}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="pan_number">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">PAN Number:
+															{{pan_number}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="aadhar_number">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Aadhar Number: {{aadhar_number}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="aadhar_number">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Aadhar Number:
+															{{aadhar_number}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="place_of_practice">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Provided Service: {{place_of_practice}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="place_of_practice">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Provided Service:
+															{{place_of_practice}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="provided_service">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Place Of Practice: {{provided_service}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="provided_service">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Place Of Practice:
+															{{provided_service}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="price_for_service">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Price For Service: {{price_for_service}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="price_for_service">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Price For Service:
+															{{price_for_service}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="law_firm_number">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Law Firm Number: {{law_firm_number}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="law_firm_number">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Law Firm Number:
+															{{law_firm_number}}</label>
+													</div>
 												</div>
-											</div>
-                      <div class="col-lg-12 col-xl-12" *ngIf="practice_number">
-												<div class="my_profile_setting_input form-group">
-											    	<label for="formGroupExampleEmail">Practice Number: {{practice_number}}</label>
+												<div class="col-lg-12 col-xl-12" *ngIf="practice_number">
+													<div class="my_profile_setting_input form-group">
+														<label for="formGroupExampleEmail">Practice Number:
+															{{practice_number}}</label>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -155,23 +166,24 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row mt100">
-						<div class="col-lg-12">
-							<div class="copyright-widget text-center">
-								<p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
+						<div class="row mt100">
+							<div class="col-lg-12">
+								<div class="copyright-widget text-center">
+									<p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting
+										Private Limited.</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
-</div>
-<!-- Wrapper End -->
+		</section>
+		<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+	</div>
+	<!-- Wrapper End -->
 
 </body>
 
 <!-- Mirrored from grandetest.com/theme/findhouse-html//profile by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:18 GMT -->
+
 </html>

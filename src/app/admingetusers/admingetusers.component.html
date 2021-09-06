@@ -10,42 +10,16 @@
       <div class="col-sm-12 col-lg-8 col-xl-10 maxw100flex-992">
         <div class="row">
           <div class="col-lg-12">
-            <div class="dashboard_navigationbar dn db-992">
-              <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn"><i class="fa fa-bars pr10"></i> Dashboard
-                  Navigation</button>
-                <ul id="myDropdown" class="dropdown-content">
-                  <li><a href="page-dashboard.html"><span class="flaticon-layers"></span> Dashboard</a></li>
-                  <li><a href="page-message.html"><span class="flaticon-envelope"></span> Message</a></li>
-                  <li class="active"><a href="page-my-properties.html"><span class="flaticon-home"></span> My
-                      Properties</a></li>
-                  <li><a href="page-my-favorites.html"><span class="flaticon-heart"></span> My Favorites</a></li>
-                  <li><a href="page-my-savesearch.html"><span class="flaticon-magnifying-glass"></span> Saved Search</a>
-                  </li>
-                  <li><a href="page-my-review.html"><span class="flaticon-chat"></span> My Reviews</a></li>
-                  <li><a href="page-my-packages.html"><span class="flaticon-box"></span> My Package</a></li>
-                  <li><a href="page-my-profile.html"><span class="flaticon-user"></span> My Profile</a></li>
-                  <li><a href="page-add-new-property.html"><span class="flaticon-filter-results-button"></span> Add New
-                      Listing</a></li>
-                  <li><a href="page-login.html"><span class="flaticon-logout"></span> Logout</a></li>
-                </ul>
-              </div>
-            </div>
+            <!-- Dashboard navigation goes here -->
+            <app-dashboard-nav></app-dashboard-nav>
           </div>
-          <div class="col-lg-4 col-xl-4 mb10">
+          <div class="col-lg-12 col-xl-12 mb10">
             <div class="breadcrumb_content style2 mb30-991" style="margin-left: 30px;">
               <h2 class="breadcrumb_title">All Users</h2>
               <p>We are glad to see you again!</p>
             </div>
           </div>
-          <div class="col-lg-8 col-xl-8">
-            <div class="candidate_revew_select style2 text-right mb30-991">
-              <ul class="mb0">
-
-
-              </ul>
-            </div>
-          </div>
+          
           <div class="col-lg-12">
             <div class="my_dashboard_review mb40">
               <div class="property_table">
@@ -144,9 +118,9 @@
                           <div class="feat_property list favorite_page style2">
                             <div class="thumb">
                               <img *ngIf="number.profile_pic !== null" class="img-whp"
-                              src="{{ftpURL}}images/{{number.profile_pic}}" alt="Profile Pic">
-                            <img *ngIf="number.profile_pic == null" class="img-whp"
-                              src="./../../assets/images/no_image_available.jpg" alt="Profile Pic">
+                                src="{{ftpURL}}images/{{number.profile_pic}}" alt="Profile Pic">
+                              <img *ngIf="number.profile_pic == null" class="img-whp"
+                                src="./../../assets/images/no_image_available.jpg" alt="Profile Pic">
                               <div class="thmb_cntnt">
                                 <ul class="tag mb0">
                                   <li class="list-inline-item dn"></li>
@@ -293,9 +267,9 @@
                           <div class="feat_property list favorite_page style2">
                             <div class="thumb">
                               <img *ngIf="number.profile_pic !== null" class="img-whp"
-                              src="{{ftpURL}}images/{{number.profile_pic}}" alt="Profile Pic">
-                            <img *ngIf="number.profile_pic == null" class="img-whp"
-                              src="./../../assets/images/no_image_available.jpg" alt="Profile Pic">
+                                src="{{ftpURL}}images/{{number.profile_pic}}" alt="Profile Pic">
+                              <img *ngIf="number.profile_pic == null" class="img-whp"
+                                src="./../../assets/images/no_image_available.jpg" alt="Profile Pic">
                               <div class="thmb_cntnt">
                                 <ul class="tag mb0">
                                   <li class="list-inline-item dn"></li>

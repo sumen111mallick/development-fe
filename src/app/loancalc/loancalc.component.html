@@ -29,14 +29,21 @@
     <div class="preloader"></div>
 
     <!--<app-dashboard-topbar></app-dashboard-topbar>-->
-    <app-menu-sidebar></app-menu-sidebar>
+
 
     <!-- Inner Page Breadcrumb -->
-    <section class="inner_page_breadcrumb">
+    <section>
       <div class="container">
-        <div class="row">
-          <div class="col-xl-6">
-            <div class="breadcrumb_content" style="margin-left: 150px;">
+        <div class="row mt150">
+          <div class="col-xl-3 col-lg-3">
+            <app-menu-sidebar></app-menu-sidebar>
+          </div>
+          <div class="col-xl-9 col-lg-9">
+            <div class="col-lg-12">
+              <!-- Dashboard navigation goes here -->
+              <app-dashboard-nav></app-dashboard-nav>
+            </div>
+            <div class="breadcrumb_content">
               <h4 class="breadcrumb_title">Loan Calculator</h4>
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -52,6 +59,9 @@
     <section class="our-log-reg bgc-fa offset-2">
       <div class="container">
         <div class="row">
+          <div class="col-xl-3 col-lg-3">
+
+          </div>
           <div class="col-lg-3 col-xl-2 dn-992 pl0">
             <div class="sign_up_form inner_page">
               <div class="details">
@@ -111,7 +121,7 @@
           </div>
 
 
-          <div class="col-sm-12 col-lg-8 col-xl-10 maxw100flex-992">
+          <div class="col-sm-12 col-lg-6 col-xl-6 maxw100flex-992">
             <div class="sign_up_form inner_page">
               <div class="heading">
                 <h3 class="text-center">Loan Calculator</h3>
@@ -148,14 +158,20 @@
             </div>
           </div>
 
-          <div class="col-lg-4 col-xl-4" style="margin-top: 150px;">
+          <div class="col-xl-3 col-lg-3">
+
+          </div>
+          <div class="col-lg-9 col-xl-9" style="margin-top: 150px;">
             <div class="heading">
               <h4 class="text-center">Stats</h4>
             </div>
             <canvas id="graph" width="400" height="250"></canvas>
           </div>
 
-          <div class="col-lg-12" style="margin-top: 75px;">
+          <div class="col-xl-3 col-lg-3">
+
+          </div>
+          <div class="col-xl-9 col-lg-9" style="margin-top: 75px;">
             <div class="my_dashboard_review mb40">
               <div class="property_table">
                 <div class="table-responsive mt0">

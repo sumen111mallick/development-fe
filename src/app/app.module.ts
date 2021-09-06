@@ -117,6 +117,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBadgeModule} from '@angular/material/badge';
+import { DashboardNavComponent } from './dashboard-nav/dashboard-nav.component';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 
@@ -208,7 +211,8 @@ import { MatMenuModule } from '@angular/material/menu';
     TestComponent,
     MenuTopbarComponent,
     MenuSidebarComponent,
-    SidenavListComponent,							
+    SidenavListComponent,
+    DashboardNavComponent,							
   ],
   imports: [
     Ng5SliderModule,
@@ -220,6 +224,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    MatExpansionModule,
+    MatBadgeModule,
     FlexLayoutModule,
     NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({  

@@ -38,7 +38,7 @@ jQuery(document).ready(function() {
     */
     $('.f1 fieldset:first').fadeIn('slow');
     
-    $('.f1 input[type="text"], .f1 input[type="password"], .f1 input[type="search"], .f1 input[type="number"], .f1 textarea, .f1 select').on('focus', function() {
+    $('.f1 input[type="text"], .f1 input[type="password"], .f1 input[type="search"], .f1 input[type="number"], .f1 textarea, .f1 select, .f1 ng-multiselect-dropdown').on('focus', function() {
     	$(this).removeClass('input-error');
     });
     
@@ -51,12 +51,12 @@ jQuery(document).ready(function() {
     	var progress_line = $(this).parents('.f1').find('.f1-progress-line');
     	
     	// fields validation
-    	parent_fieldset.find('input[type="text"], input[type="password"], input[type="search"], input[type="number"], textarea, select').each(function() {
+    	parent_fieldset.find('input[type="text"], input[type="password"], input[type="search"], input[type="number"], textarea, select, ng-multiselect-dropdown').each(function() {
 			console.log($(this));
 			console.log($(this).val());
     		if( $(this).val() == "" || $(this).val() == null ) {
     			$(this).addClass('input-error');
-    			next_step = false;
+    			//next_step = false;
     		}
     		else {
     			$(this).removeClass('input-error');
@@ -101,7 +101,7 @@ jQuery(document).ready(function() {
     $('.f1').on('submit', function(e) {
     	
     	// fields validation
-    	$(this).find('input[type="text"], input[type="password"], input[type="search"], input[type="number"], textarea, select').each(function() {
+    	$(this).find('input[type="text"], input[type="password"], input[type="search"], input[type="number"], textarea, select, ng-multiselect-dropdown').each(function() {
     		if( $(this).val() == "" || $(this).val() == null ) {
     			e.preventDefault();
     			$(this).addClass('input-error');

@@ -35,6 +35,10 @@
                     <div class="col-lg-9 col-xl-10 maxw100flex-992">
 
                         <div class="row">
+                            <div class="col-lg-12">
+                                <!-- Dashboard navigation goes here -->
+                                <app-dashboard-nav></app-dashboard-nav>
+                            </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 form-box">
                                 <form role="form" action="" method="post" class="f1"
                                     [formGroup]="insert_property_sales">
@@ -166,6 +170,19 @@
                                                             id="property_detail" name="property_detail"
                                                             placeholder="Enter Property Description..."
                                                             rows="8"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="selectedItems">Area</label>
+                                                        <ng-multiselect-dropdown [placeholder]="'Select Areas'"
+                                                            [settings]="dropdownSettings" [data]="dropdownList"
+                                                            formControlName="selectedItems" class="form-control"
+                                                            (onSelect)="onItemSelect($event)"
+                                                            (onSelectAll)="onSelectAll($event)">
+                                                        </ng-multiselect-dropdown>
                                                     </div>
                                                 </div>
                                             </div>

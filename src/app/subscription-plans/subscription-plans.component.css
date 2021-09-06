@@ -13,7 +13,7 @@
   .pricing .table td {
     padding: 20px 10px;
     border:1px solid #ddd;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #eee;
   }
   .pricing .table th {
     width: 25%;
@@ -68,8 +68,8 @@
     font-size: 18px;
   }
   .pricing tr td {
-    font-size: 20px;
-    line-height:32px;
+    font-size: 18px;
+    line-height:26px;
     vertical-align: middle;
     /*text-transform:uppercase;*/
   }
@@ -79,7 +79,7 @@
   }
 
   .pricing tr td.bg-green{
-    background: #4caf50;
+    background: #196F3D ;
   }
 
   .pricing tr td.bg-lblue{

@@ -10,6 +10,8 @@ import { Options, LabelType } from 'ng5-slider';
 import { MapsAPILoader, AgmMap } from '@agm/core';
 import { Validators } from '@angular/forms';
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { InternalUserService } from './../_services/internal-user.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-insertproduct-sale',
@@ -99,6 +101,7 @@ export class InsertproductSaleComponent implements OnInit {
       carpet_area: new FormControl('', Validators.required),
       area_unit: new FormControl('', Validators.required),
       property_detail: new FormControl('', Validators.required),
+      selectedItems: new FormControl('', Validators.required)
     }),
 
     Property_Location: new FormGroup({
@@ -184,6 +187,7 @@ export class InsertproductSaleComponent implements OnInit {
     private userService: UserService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
+    private internalUserService: InternalUserService,
     private fb: FormBuilder) {
     this.getLocation();
   }
@@ -192,7 +196,41 @@ export class InsertproductSaleComponent implements OnInit {
     //console.log(event);
   }
 
+  dropdownList = [];
+  
+  dropdownSettings: IDropdownSettings;
+
+
   ngOnInit(): void {
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      maxHeight: 250
+    };
+
+    this.internalUserService.get_areas().subscribe(
+      data => {
+        //this.dropdownList = data;
+        //console.log(data);
+        //console.log(data.length);
+        for (let i = 0; i < data.length; i++) {
+          //this.dropdownList[i] = "{item_id: " + i + "," + "item_text: " + "'" + data[i].area + "'}";
+          //console.log(this.dropdownList[i]);
+          this.dropdownList = this.dropdownList.concat({item_id: i, item_text: data[i].area});
+        }
+        //console.log(this.dropdownList);
+      },
+      err => {
+        //console.log(err);
+
+      }
+    );
 
     this.showLoadingIndicator = true;
     this.expected_pricing = 500001;
@@ -246,6 +284,14 @@ export class InsertproductSaleComponent implements OnInit {
     
     this.selectedItems = new Array<string>();
     this.product_img = new Array<string>();
+  }
+
+  onSelectAll(items: any) {
+    //console.log(items);
+  }
+
+  onItemSelect(item: any) {
+    //console.log(item);
   }
 
   redirect_to_home(): void {

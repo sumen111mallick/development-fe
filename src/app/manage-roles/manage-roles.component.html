@@ -54,6 +54,10 @@
                         <app-menu-sidebar></app-menu-sidebar>
                     </div>
                     <div class="col-lg-10 col-xl-10">
+                        <div class="col-lg-12">
+                            <!-- Dashboard navigation goes here -->
+                            <app-dashboard-nav></app-dashboard-nav>
+                        </div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Home</a></li>
@@ -76,7 +80,8 @@
                                         <h4>Manage Roles</h4>
                                     </div>
                                     <div class="col-md-6 text-align">
-                                        <button type="button" (click)="role_create()" class="btn btn-info">Create Role</button>
+                                        <button type="button" (click)="role_create()" class="btn btn-info">Create
+                                            Role</button>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +112,8 @@
                                                                         data-placement="top" title=""
                                                                         data-original-title="View">
                                                                         <a [routerLink]="['/view-roles', role.role_id]">
-                                                                            <span class="flaticon-view"></span></a></li>
+                                                                            <span class="flaticon-view"></span></a>
+                                                                    </li>
                                                                     <li class="list-inline-item" data-toggle="tooltip"
                                                                         data-placement="top" title
                                                                         data-original-title="Edit">
@@ -118,7 +124,8 @@
                                                                     <li class="list-inline-item" data-toggle="tooltip"
                                                                         data-placement="top" title
                                                                         data-original-title="Delete">
-                                                                        <a (click)="openConfirmationDialog(role.role_id)"><span
+                                                                        <a
+                                                                            (click)="openConfirmationDialog(role.role_id)"><span
                                                                                 class="flaticon-garbage"></span></a>
                                                                     </li>
                                                                 </ul>
@@ -143,5 +150,3 @@
     <!-- Wrapper End -->
 
 </body>
-
-

@@ -1,0 +1,14 @@
+.title {
+    color: #eee;
+    background-color: #483C32;
+}
+
+mat-expansion-panel {
+    display: none;
+}
+
+@media only screen and (max-width: 992px) {
+    mat-expansion-panel {
+        display: block;
+    }
+}
