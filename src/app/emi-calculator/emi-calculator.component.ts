@@ -145,7 +145,7 @@ export class EmiCalculatorComponent implements OnInit {
 
       }
     })
-    console.warn(this.emiForm.value);
+    console.log(this.emiForm.value);
 
   }
 

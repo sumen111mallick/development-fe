@@ -104,8 +104,8 @@
 									</div>
 									
 									<ng-template #OtherImage>
-										<div class="d-flex justify-content-center"  >
-											<div class="d-flex justify-content-center" style="height: 330px;">
+										<div class="d-flex justify-content-center" id="single_page_banner">
+											<div class="d-flex justify-content-center">
 											  <img class="img-whp" src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
 											</div>
 										</div>
@@ -451,27 +451,17 @@
 					</div>
 				</div>
 				<div class="row" *ngFor = "let product_data of productdata">
-					<div class="col-lg-6 col-xl-6">
-						<!-- <div class="dn db-991 mt30 mb0">
-						<div id="main2">
-							<span id="open2" class="flaticon-filter-results-button filter_open_btn style3"> Show Filter</span>
-						</div>
-					</div> -->
-						<div class="single_property_title mt30-767 mb30-767">
-							<!-- <h2>{{product_data.build_name}}</h2> -->
-							<h5>{{product_data.address | titlecase}}</h5>
-						</div>
+					<div class="col-lg-5 col-xl-5 single_page_column_address">
+						  <h5>{{product_data.build_name | titlecase}}</h5>
 					</div>
-					<div class="col-lg-6 col-xl-6">
+					<div class="col-lg-7 col-xl-7 single_page_column_share">
 						<div class="single_property_social_share">
-							<div class="price float-left fn-400" *ngIf="product_data.expected_rent != null">
-								<h2 *ngIf="product_data.expected_rent != 0">₹ 
-									{{Price_convert(product_data.expected_rent) }}<small>/{{product_data.duration_of_rent_aggreement}}</small></h2>
+							<div class="price float-left fn-400" >
+							   <h2 *ngIf="product_data.expected_rent != null">₹ {{Price_convert(product_data.expected_rent) }}<small>/{{product_data.duration_of_rent_aggreement}}</small>
+								</h2>
+								<h2 *ngIf="product_data.expected_pricing != null">₹ {{Price_convert(product_data.expected_pricing)}}</h2>
 							</div>
-							<div class="price float-left fn-400" *ngIf="product_data.expected_pricing != null">
-								<h2 *ngIf="product_data.expected_pricing != 0">₹  {{Price_convert(product_data.expected_pricing)}}<small>{{product_data.duration_of_rent_aggreement}}</small></h2>
-							</div>
-							<div class="spss mt20 text-right tal-400 single-page-share">
+							<div class="spss text-right tal-400 single-page-share">
 								<ul class="mb0">
 									<li class="list-inline-item" *ngIf="product_data.product_comparision==null">
 										<a><span class="flaticon-transfer-1" (click)="product_comp(product_data.id)"></span></a>
@@ -499,56 +489,35 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12 col-lg-8 mt50">
+					<div class="col-md-12 col-lg-8 mt30">
 						<div class="row">
-							<div class="col-lg-12">
+							<div class="col-lg-12 single-page_inner_column">
 								<div class="listing_single_description">
 									<div class="lsd_list">
 										<ul class="mb0">
 											<li class="list-inline-item"><a href="#">Beds: {{product_data.bedroom}}</a></li>
 											<li class="list-inline-item"><a href="#">Baths: {{product_data.bathroom}}</a></li>
 											<li class="list-inline-item"><a href="#">Sq Ft: {{product_data.area}}</a></li>
-											<li class="list-inline-item"><a
-													href="#">{{product_data.rera_registration_status}}</a>
+											<li class="list-inline-item">
+												<a href="#">{{product_data.rera_registration_status}}</a>
 											</li>
 										</ul>
 									</div>
-									<h4 class="mb30">Description</h4>
-									<p class="mb25">{{product_data.description}}</p>
-									<p class="gpara second_para white_goverlay mt10 mb10">Fully furnished. Elegantly
-										appointed condominium unit situated on premier location. PS6. The wide entry
-										hall leads to a large living room with dining area. This expansive 2 bedroom and
-										2 renovated marble bathroom apartment has great windows. Despite the interior
-										views, the apartments Southern and Eastern exposures allow for lovely natural
-										light to fill every room. The master suite is surrounded by handcrafted milkwork
-										and features incredible walk-in closet and storage space.</p>
-									<div class="collapse" id="collapseExample">
-										<div class="card card-body">
-											<p class="mt10 mb10">Fully furnished. Elegantly appointed condominium unit
-												situated on premier location. PS6. The wide entry hall leads to a large
-												living room with dining area. This expansive 2 bedroom and 2 renovated
-												marble bathroom apartment has great windows. Despite the interior views,
-												the apartments Southern and Eastern exposures allow for lovely natural
-												light to fill every room. The master suite is surrounded by handcrafted
-												milkwork and features incredible walk-in closet and storage space.</p>
-											<p class="mt10 mb10">Fully furnished. Elegantly appointed condominium unit
-												situated on premier location. PS6. The wide entry hall leads to a large
-												living room with dining area. This expansive 2 bedroom and 2 renovated
-												marble bathroom apartment has great windows. Despite the interior views,
-												the apartments Southern and Eastern exposures allow for lovely natural
-												light to fill every room. The master suite is surrounded by handcrafted
-												milkwork and features incredible walk-in closet and storage space.</p>
-										</div>
-									</div>
-									<p class="overlay_close">
-										<a class="text-thm fz14" data-toggle="collapse" href="#collapseExample"
-											role="button" aria-expanded="false" aria-controls="collapseExample">
-											Show More <span class="flaticon-download-1 fz12"></span>
-										</a>
+									<h4 class="mb10">Description</h4>
+									<p class="gpara second_para mt10 mb10" [ngClass]="{'limitTextHeight': isReadMore}">
+										{{product_data.property_detail}}
+										
+									</p>
+									
+									<p class="overlay_close" *ngIf="product_data.property_detail.length>215">
+										<button type="button" (click)="showText()">
+											{{limitTextHeight}}
+											{{ isReadMore ? 'Read More...': 'Read Less' }}
+										  </button>
 									</p>
 								</div>
 							</div>
-							<div class="col-lg-12">
+							<div class="col-lg-12 single-page_inner_column">
 								<div class="additional_details">
 									<div class="row">
 										<div class="col-lg-12">
@@ -574,7 +543,8 @@
 													<p><span>{{product_data.id}}</span></p>
 												</li>
 												<li>
-													<p><span>₹ {{product_data.expected_pricing}}</span></p>
+													<p  *ngIf="product_data.expected_pricing != null"><span>₹ {{product_data.expected_pricing}}</span></p>
+													<p  *ngIf="product_data.expected_rent != null"><span>₹ {{product_data.expected_rent}}</span></p>
 												</li>
 												<li>
 													<p><span>{{product_data.area_unit}}</span></p>
@@ -610,14 +580,14 @@
 													<p><span>{{product_data.rera_registration_status}}</span></p>
 												</li>
 												<li>
-													<p><span>{{product_data.type}}</span></p>
+													<p><span>{{product_data.property__type.name}}</span></p>
 												</li>
 											</ul>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-12">
+							<div class="col-lg-12 single-page_inner_column">
 								<div class="additional_details">
 									<div class="row">
 										<div class="col-lg-12">
@@ -664,8 +634,9 @@
 													<p><span>{{product_data.buildyear}}</span></p>
 												</li>
 												<li>
-													<p><span>{{product_data.maintenance_charge}}/{{product_data.maintenance_charge_condition
-															}}</span></p>
+													<p>
+													   <span>{{product_data.maintenance_charge}}/{{product_data.maintenance_charge_condition}}</span>
+													</p>
 												</li>
 												<li>
 													<p><span>{{product_data.equipment}}/{{product_data.area_unit}}</span></p>
@@ -675,7 +646,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-12">
+							<div class="col-lg-12 single-page_inner_column">
 								<div class="property_attachment_area">
 									<h4 class="mb30">Property Attachments</h4>
 									<div class="iba_container style2">
@@ -697,39 +668,39 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-12">
+							<div class="col-lg-12 single-page_inner_column" *ngIf="product_data.amenities.length>0">
 								<div class="application_statics mt30 single-property-amenties">
 									<div class="row">
 										<div class="col-lg-12">
 											<h4 class="mb10">Amenities</h4>
 										</div>
-										<div class="col-sm-6  col-md-6 col-lg-4" *ngFor="let amenitiesData of amenitiesresult">
-											<ul class="order_list list-inline-item">
-												<li *ngIf="Amenties_funtion(amenitiesData.id)==true,else OtherAmenties">
-														<i class="fas fa-check-circle"></i>	
+										<div class="col-12 col-lg-12">
+											<ul class="order_list list-inline-item" *ngFor="let amenitiesData of amenitiesresult">
+												<li *ngIf="Amenties_funtion(amenitiesData.id)==true">
+													<span class="checkmark">&#10004;</span>	
 														<p class="paraclass">{{amenitiesData.name}}</p>
 												</li>
-												<ng-template #OtherAmenties>
+												<!-- <ng-template #OtherAmenties>
 												<li>
-														<i class="fas fa-times-circle"></i>
-														<p class="paraclass">{{amenitiesData.name}}</p>
+													<i class="fas fa-times-circle"></i>
+													<p class="paraclass">{{amenitiesData.name}}</p>
 												</li>
-											</ng-template> 
+											</ng-template>  -->
 											</ul>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-12" *ngIf="login_usertype==1 || product_data.user_id==login_userID">
+							<div class="col-lg-12 single-page_inner_column" *ngIf="login_usertype==1 || product_data.user_id==login_userID">
 								<div class="application_statics mt30">
 									<div class="row">
-										<div class="col-lg-3" ><h4 class="mb20">Location</h4></div>
+										<div class="col-lg-3" ><h4 class="Map_heading mb20">Location</h4></div>
 										<div class="col-lg-9 single_page_address" ><h6 class="mb20" >{{product_data.address}}</h6></div>
 									</div>
 									<div class="property_video p0">
 										<div class="thumb">
 											<div class="overlay_icon">
-												<agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus"  [zoom]="15"  class="main-card-agm-map" >
+												<agm-map [latitude]="latCus" [longitude]="longCus"  [zoom]="15"  class="main-card-agm-map" >
 													<agm-marker [latitude]="latCus" [longitude]="longCus">
 													</agm-marker>
 												</agm-map>
@@ -738,7 +709,25 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-12" *ngIf="login_usertype==1 || product_data.user_id==login_userID">
+							<!-- google_map blur funtionalty  -->
+							<!-- <div class="col-lg-12" *ngIf="!isLoggedIn">
+								<div class="application_statics mt30">
+									<div class="row">
+										<div class="col-lg-3" ><h4 class="Map_heading mb20">Location</h4></div>
+										<div class="col-lg-9 single_page_address" ><h6 class="mb20" >Google Map See After Login <a href="/login"><span>Login</span></a></h6></div>
+									</div>
+									<div class="property_video p0">
+										<div class="thumb">
+											<div class="overlay_icon">
+												<img src="./../../assets/css/images/google_map.png" alt="blur-img.png">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+							<!-- google_map blur funtionalty  -->
+
+							<!-- <div class="col-lg-12" *ngIf="login_usertype==1 || product_data.user_id==login_userID">
 								<div class="application_statics mt30">
 									<h4 class="mb30">Floor plans</h4>
 									<div class="faq_according style2">
@@ -785,28 +774,22 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-12">
+							</div> -->
+							<div class="col-lg-12 single-page_inner_column" *ngIf="product_data.video_link.length>5">
 								<div class="shop_single_tab_content style2 mt30">
 									<ul class="nav nav-tabs" id="myTab" role="tablist">
 										<li class="nav-item">
 											<a class="nav-link active" id="description-tab" data-toggle="tab"
 												href="#description" role="tab" aria-controls="description"
-												aria-selected="true">Property video</a>
+												aria-selected="true">Property video </a>
 										</li>
 									</ul>
-									<div class="tab-content" id="myTabContent2">
+									<div class="tab-content" id="myTabContent2" >
 										<div class="tab-pane fade show active" id="description" role="tabpanel"
 											aria-labelledby="description-tab">
 											<div class="property_video">
 												<div class="thumb">
-													<img class="pro_img img-fluid w100"
-														src="./../../assets/css/images/background/7.jpg" alt="7.jpg">
-													<div class="overlay_icon">
-														<a class="video_popup_btn popup-img red popup-youtube"
-															href="https://www.youtube.com/watch?v=oqNZOOWF8qM"><span
-																class="flaticon-play"></span></a>
-													</div>
+													<iframe width="560" height="315" [src]='safeURL' frameborder="0"></iframe>
 												</div>
 											</div>
 										</div>
@@ -1006,7 +989,7 @@
 							</div> -->
 							<!-- Code added by Radhika for EMI Calculator Start -->
 
-							<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="col-lg-12 col-md-12 col-sm-12 single-page_inner_column">
 								<div class="application_statics mt30">
 
 									<app-emi-calculator></app-emi-calculator>
@@ -1102,10 +1085,11 @@
 								</div>
 							</div>
 						</div> -->
-							<div class="col-lg-12">
-								<h4 class="mt30 mb30">Similar Properties</h4>
+							<div class="col-lg-12 mb20 mt20 single-page_inner_column similar_property_heading">
+								<h4 class="">Similar Properties</h4>
 							</div>
-							<div class="col-lg-6" *ngFor="let property of similar_property">
+							<div class="col-lg-6 similar_property" *ngFor="let property of similar_property">
+                               <!-- <div *ngIf="property.id != Product_id"> -->
 								<div class="feat_property">
 									<div class="thumb">
 										<img class="img-whp" *ngIf="property.product_img.length>0;else OtherImage" src="{{ftpstring}}{{property.product_img[0].image}}"
@@ -1118,7 +1102,7 @@
 												<li class="list-inline-item" *ngIf=" property.rent_availability "><a>For
 														Rent</a></li>
 												<li class="list-inline-item" *ngIf=" property.sale_availability ">
-													<a>Featured</a>
+													<a>For Sales</a>
 												</li>
 											</ul>
 											<ul class="icon mb0">
@@ -1142,6 +1126,7 @@
 										</div>
 									</div>
 									<div class="details">
+										<a href="/productpage?id={{property.id}}">
 										<div class="tc_content">
 											<p class="text-thm">{{ property.property__type.name | titlecase}}</p>
 											<h4>{{property.build_name | titlecase}}</h4>
@@ -1164,12 +1149,14 @@
 												  </div>
 											</ul>
 										</div>
+										</a>
 									</div>
 								</div>
+								<!-- </div> -->
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-xl-4 mt50" >
+					<div class="col-lg-4 col-xl-4 mt30 single-page_rigth_sidebar" >
 						<div class="sidebar_listing_list">
 							<div class="sidebar_advanced_search_widget">
 								<div class="sl_creator">
@@ -1184,34 +1171,31 @@
 										</div>  
 									</div> -->        
 								</div>
-								<form action="#" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+								<form action="#" name="form" [formGroup]="review_form">
 									<div class="col-lg-6 col-xl-12">
 										<div class="my_profile_setting_input form-group">
 											<label for="stars">Stars</label>
-												<ngx-star-rating name="stars" #stars="ngModel"
-												[(ngModel)]="form.stars"  [id]="'rating'"></ngx-star-rating>
+												<ngx-star-rating name="stars" id="stars"  formControlName="stars"  [id]="'rating'"></ngx-star-rating>
     
 										</div>
 									</div>
 
 									<div class="col-lg-6 col-xl-12">
 										<div class="my_profile_setting_input form-group">
-											<label for="price">Review Subject</label>
-											<input type="text" class="form-control" name="rev_subject"
-												#rev_subject="ngModel" [(ngModel)]="form.rev_subject" placeholder="">
+											<label for="rev_subject">Review Subject</label>
+											<input type="text" class="form-control" name="rev_subject" id="rev_subject" formControlName="rev_subject" placeholder="">
 										</div>
 									</div>
 									<div class="col-lg-12">
 										<div class="my_profile_setting_textarea form-group">
-											<label for="service_details">Review Content</label>
-											<textarea type="text" name="rev_content" [(ngModel)]="form.rev_content"
-												#rev_content="ngModel" class="form-control" id="exampleInputEmail3"
+											<label for="rev_content">Review Content</label>
+											<textarea type="text" name="rev_content" formControlName="rev_content" class="form-control" id="rev_content"
 												rows="5" cols="100"></textarea>
 										</div>
 									</div>
 									<div class="col-xl-12 form-group">
 										<div class="my_profile_setting_input">
-											<button type="submit" class="btn btn2 ">Submit</button>
+											<button type="submit"  (click)="onSubmit()"  class="btn btn2 ">Submit</button>
 										</div>
 									</div>
 								</form>
@@ -1244,9 +1228,9 @@
 							</ul> -->
 							</div>
 						</div>
-						<div class="terms_condition_widget" *ngIf="feature_pro_length>0"> 
-							<h4 class="title">Featured Properties</h4>
-							<div class="sidebar_feature_property_slider" *ngFor = "let feature_pro of feature_property_data">
+						<div class="terms_condition_widget Featured_row" *ngIf="feature_pro_length>0"> 
+							<div class="col-12 col-lg-12"><h4 class="title">Featured Properties</h4></div>
+							<div class="sidebar_feature_property_slider  col-6 col-lg-12" *ngFor = "let feature_pro of feature_property_data">
 								<div class="item">
 									<div class="feat_property home7 agent">
 										<div class="thumb">
@@ -1269,38 +1253,37 @@
 								</div>
 							</div>
 						</div>
-						<div class="terms_condition_widget">
+						<div class="terms_condition_widget Categories_Property">
 							<h4 class="title">Categories Property</h4>
 							<div class="widget_list">
 								<ul class="list_details">
 									<li class="Categories-list" *ngFor = "let property_type of property_type_count">
 										<a (click)="Property_type_search(property_type.id,property_type.pro_type)"><i class="fa fa-caret-right mr10"></i>{{property_type.pro_type}} <span class="float-right">{{property_type.pro_count}} properties</span></a>
-									  </li>
+									</li>
 								</ul>
 							</div>
 						</div>
-						<div class="sidebar_feature_listing rentlyView_singlepage "   *ngIf="Recent_user_length>0">
+						<div class="sidebar_feature_listing rentlyView_singlepage " *ngIf="Recent_user_length>0">
 							<h4 class="title">Recently Viewed</h4>
 							<div class="media" *ngFor="let Recently_view of Recently_UserData">
-								<img style="width: 100px;" class="align-self-start mr-3" *ngIf="Recently_view.product_img.length>0;else OtherImage" src="{{ftpstring}}{{Recently_view.product_img[0].image}}" alt="fls1.jpg">
+								<img  class="align-self-start mr-3" *ngIf="Recently_view.product_img.length>0;else OtherImage" src="{{ftpstring}}{{Recently_view.product_img[0].image}}" alt="fls1.jpg">
 								<ng-template #OtherImage>
-									<img class="img-whp" src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
-								  </ng-template>
+									<img style="width: 100px;"  class="align-self-start mr-3"  src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
+								</ng-template>
 								<ul class="tag mb0 Single-page-recently-view" >
 									<li class="list-inline-item" *ngIf=" Recently_view.productdetails.rent_availability != null">For Rent</li>
 									<li class="list-inline-item"  *ngIf=" Recently_view.productdetails.sale_availability != null">For Sale</li>
 								</ul>
-							<div class="media-body">
-								<h5 class="mt-0 post_title">{{Recently_view.productdetails.build_name | titlecase}}</h5>
-								<a *ngIf="Recently_view.productdetails.expected_pricing != null" class="fp_price" >₹ {{Price_convert(Recently_view.productdetails.expected_pricing) }}<small></small></a>
-								<a *ngIf="Recently_view.productdetails.expected_rent != null" class="fp_price"  >₹ {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
-								
-								<ul class="mb0">
-									<li class="list-inline-item">Beds: {{Recently_view.productdetails.bedroom}}</li>
-									<li class="list-inline-item">Baths: {{Recently_view.productdetails.bathroom}}</li>
-									<li class="list-inline-item">Sq Ft: {{Recently_view.productdetails.equipment}}</li>
-								</ul>
-							</div>
+								<div class="media-body">
+									<h5 class="mt-0 post_title">{{Recently_view.productdetails.build_name | titlecase}}</h5>
+									<a *ngIf="Recently_view.productdetails.expected_pricing != null" class="fp_price" >₹ {{Price_convert(Recently_view.productdetails.expected_pricing) }}<small></small></a>
+									<a *ngIf="Recently_view.productdetails.expected_rent != null" class="fp_price"  >₹ {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
+									<ul class="mb0">
+										<li class="list-inline-item">Beds: {{Recently_view.productdetails.bedroom}}</li>
+										<li class="list-inline-item">Baths: {{Recently_view.productdetails.bathroom}}</li>
+										<li class="list-inline-item">Sq Ft: {{Recently_view.productdetails.equipment}}</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -14,6 +14,7 @@ export class ArticlesTipsComponent implements OnInit {
   showLoadingIndicator;
   errorMessage = '';
   response;
+  public response_length:number=0;
   images_folder: string = GlobalConstants.ftpURL;
 
   constructor(private blogService: BlogService) { }
@@ -26,6 +27,7 @@ export class ArticlesTipsComponent implements OnInit {
         //console.log(res);
         this.showLoadingIndicator = false;
         this.response = res;
+        this.response_length=this.response.length;
       },
       err => {
         this.errorMessage = err.error.message;

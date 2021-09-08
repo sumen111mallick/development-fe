@@ -66,8 +66,8 @@
         <div class="preloader1"></div>
       </div>
     </div>  -->
-     <div class="row">
-        <div class="grid_list_search_result">
+     <div class="row  wishlist_search_row">
+        <div class="grid_list_search_result wishlist_search_result">
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
             <div class="left_area tac-xsd">
               <p >{{wishlist_length}} Wishlist  results
@@ -101,7 +101,7 @@
                             <div class="thmb_cntnt style2">
                                 <ul class="tag mb0">
                                     <li class="list-inline-item" *ngIf=" data.productdetails.rent_availability "><a href="#">For Rent</a></li>
-                                    <li class="list-inline-item" *ngIf=" data.productdetails.sale_availability "><a href="#">Featured</a></li>
+                                    <li class="list-inline-item" *ngIf=" data.productdetails.sale_availability "><a href="#">For Sales</a></li>
                                 </ul>
                             </div>
                             <div class="thmb_cntnt style3">
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="details">
-                          <a href="/productpage/{{data.id}}">
+                            <a href="/productpage?id={{data.id}}">
                             <div class="tc_content">
                                 <p class="text-thm">{{ data.productdetails.property__type.name | titlecase  }}</p>
                                 <h4>{{ data.productdetails.build_name | titlecase  }}</h4>

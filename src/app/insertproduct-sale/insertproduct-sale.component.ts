@@ -32,8 +32,9 @@ export class InsertproductSaleComponent implements OnInit {
   rentValue: boolean = false;
   furnish: boolean = false;
   maintenance: boolean = true;
-  parking: boolean = false;
+  parking_row: boolean = false;
   amenityArray = [];
+  additional_room_array=[];
   varAmenity: string;
   public step: any = 1;
 
@@ -47,6 +48,7 @@ export class InsertproductSaleComponent implements OnInit {
 
   err_caused: boolean = false;
   selectedItems: string[];
+  selected_room: string[];
 
   amenitiesresult: () => void;
   Message: any = {};
@@ -66,7 +68,8 @@ export class InsertproductSaleComponent implements OnInit {
   bedroom: any;
   bathroom: any;
   balconies: any;
-  additional_rooms: any;
+  additional_rooms:[];
+  additional_rooms_status:any;
   furnishing_status: any;
   furnishings: any;
   total_floors: any;
@@ -77,13 +80,14 @@ export class InsertproductSaleComponent implements OnInit {
   possession_by: any;
   tax_govt_charge: any;
   price_negotiable: any;
+  negotiable_status:any;
   facing_towards: any;
   availability_condition: any;
   buildyear: any;
   age_of_property: any;
   description: any;
   nearby_places: any;
-  equipment: any;
+  addtional_room:any=[]
   features: any;
   i: any;
   public property_type: any;
@@ -91,14 +95,21 @@ export class InsertproductSaleComponent implements OnInit {
   product_img: any = [];
   public submitted: boolean = false;
   public Expected_PriceEroor: boolean = false;
+  public Add_room_tab:boolean=false;
+  public furnish_row:boolean=false;
+  public price_negotiable_row:boolean=false;
+  public maintenance_row:boolean=false;
+
+  dropdownSettings: IDropdownSettings;
+  dropdownList = [];
 
   insert_property_sales = new FormGroup({
     Property_Details: new FormGroup({
       build_name: new FormControl('', Validators.required),
       type: new FormControl('', Validators.required),
-      display_address: new FormControl('', Validators.required),
+      // display_address: new FormControl('', Validators.required),
       area: new FormControl('', Validators.required),
-      carpet_area: new FormControl('', Validators.required),
+      // carpet_area: new FormControl('', Validators.required),
       area_unit: new FormControl('', Validators.required),
       property_detail: new FormControl('', Validators.required),
       selectedItems: new FormControl('', Validators.required)
@@ -108,33 +119,28 @@ export class InsertproductSaleComponent implements OnInit {
       address: new FormControl('', Validators.required),
       map_latitude: new FormControl('', Validators.required),
       map_longitude: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      locality: new FormControl('', Validators.required),
-      nearest_landmark: new FormControl('', Validators.required)
+      city: new FormControl('Delhi', Validators.required),
+      locality: new FormControl(''),
+      nearest_landmark: new FormControl('', Validators.required),
+      pincode: new FormControl('')
     }),
 
     Property_additional_details: new FormGroup({
       bedroom: new FormControl('', Validators.required),
       bathroom: new FormControl('', Validators.required),
       balconies: new FormControl('', Validators.required),
-      additional_rooms: new FormControl('', Validators.required),
-      equipment: new FormControl('', Validators.required),
-      features: new FormControl('', Validators.required),
+      additional_rooms_status: new FormControl('0', Validators.required),
+      additional_rooms: new FormControl(''),
       furnishings: new FormControl(''),
-      nearby_places: new FormControl('', Validators.required),
-      age_of_property: new FormControl('', Validators.required),
-      furnishing_status: new FormControl(''),
-      facing_towards: new FormControl('', Validators.required),
+      furnishing_status: new FormControl('NFR'),
+      facing_towards: new FormControl(''),
       rera_registration_status: new FormControl('', Validators.required),
-      additional_parking_status: new FormControl('', Validators.required),
+      additional_parking_status: new FormControl('0', Validators.required),
       buildyear: new FormControl('', Validators.required),
-      availability_condition: new FormControl('', Validators.required),
-      possession_by: new FormControl('', Validators.required),
+      availability_condition: new FormControl(''),
+      possession_by: new FormControl(''),
       property_on_floor: new FormControl(''),
-      total_floors: new FormControl('', Validators.required)
-    }),
-
-    Property_amenities: new FormGroup({
+      total_floors: new FormControl(''),
       parking_covered_count: new FormControl(''),
       parking_open_count: new FormControl('')
     }),
@@ -142,15 +148,17 @@ export class InsertproductSaleComponent implements OnInit {
     Property_price_images: new FormGroup({
       ownership: new FormControl('', Validators.required),
       expected_pricing: new FormControl('500001', Validators.required),
-      security_deposit: new FormControl('', Validators.required),
-      inc_electricity_and_water_bill: new FormControl('', Validators.required),
-      tax_govt_charge: new FormControl('', Validators.required),
-      price_negotiable: new FormControl('', Validators.required),
-      maintenance_charge_status: new FormControl('', Validators.required),
+      // security_deposit: new FormControl('', Validators.required),
+      inc_electricity_and_water_bill: new FormControl(''),
+      tax_govt_charge: new FormControl(''),
+      price_negotiable: new FormControl(''),
+      negotiable_status: new FormControl('0'),
+      maintenance_charge_status: new FormControl('0'),
+      month_of_notice: new FormControl(''),
       maintenance_charge: new FormControl(''),
-      maintenance_charge_condition: new FormControl(''),
-      inclusive_pricing_details: new FormControl(''),
-      brokerage_charges: new FormControl('')
+      // inclusive_pricing_details: new FormControl(''),
+      // brokerage_charges: new FormControl(''),
+      video_link: new FormControl('')
     }),
     /*Property_descption: new FormGroup({
       description: new FormControl('', Validators.required)
@@ -187,51 +195,15 @@ export class InsertproductSaleComponent implements OnInit {
     private userService: UserService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private internalUserService: InternalUserService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private internalUserService: InternalUserService) {
     this.getLocation();
   }
 
   eventListen(event) {
     //console.log(event);
   }
-
-  dropdownList = [];
-  
-  dropdownSettings: IDropdownSettings;
-
-
   ngOnInit(): void {
-
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true,
-      maxHeight: 250
-    };
-
-    this.internalUserService.get_areas().subscribe(
-      data => {
-        //this.dropdownList = data;
-        //console.log(data);
-        //console.log(data.length);
-        for (let i = 0; i < data.length; i++) {
-          //this.dropdownList[i] = "{item_id: " + i + "," + "item_text: " + "'" + data[i].area + "'}";
-          //console.log(this.dropdownList[i]);
-          this.dropdownList = this.dropdownList.concat({item_id: i, item_text: data[i].area});
-        }
-        //console.log(this.dropdownList);
-      },
-      err => {
-        //console.log(err);
-
-      }
-    );
-
     this.showLoadingIndicator = true;
     this.expected_pricing = 500001;
 
@@ -263,14 +235,22 @@ export class InsertproductSaleComponent implements OnInit {
         });
       });
     });
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'item_id',
+      textField: 'item_text',
+      itemsShowLimit: 1,
+      allowSearchFilter: true,
+      maxHeight: 250
+    };
 
     this.amenities();
     this.Property_type_data();
+    this.get_area();
     this.titleService.setTitle('Create Listing');
     // Login check
 
-    /*if (this.tokenStorage.getToken()) {
-      console.log(this.isLoggedIn)
+    if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.user_id = this.tokenStorage.getUser().id;
       this.maintenance = true;
@@ -280,18 +260,12 @@ export class InsertproductSaleComponent implements OnInit {
     else {
       this.isLoggedIn = false;
       this.redirect_to_home();
-    } */
+    } 
     
     this.selectedItems = new Array<string>();
     this.product_img = new Array<string>();
-  }
-
-  onSelectAll(items: any) {
-    //console.log(items);
-  }
-
-  onItemSelect(item: any) {
-    //console.log(item);
+    this.selected_room = new Array<string>();
+    
   }
 
   redirect_to_home(): void {
@@ -307,7 +281,7 @@ export class InsertproductSaleComponent implements OnInit {
       });
     })
   }
-
+  
   markerDragEnd($event: google.maps.MouseEvent) {
     this.latCus = $event.latLng.lat();
     this.longCus = $event.latLng.lng();
@@ -333,15 +307,35 @@ export class InsertproductSaleComponent implements OnInit {
     });
   }
 
-  furnishStatus(event): void {
-    //console.log(event);
-    if (event == 'SFR' || event == 'FFR') {
-      this.furnish = true;
-    }
-    else {
-      this.furnish = false;
-    }
+  get_area():void{
+    this.internalUserService.get_areas().subscribe(
+      data => {
+        // this.dropdownList = data;
+        for (let i = 1; i < data.length; i++) {
+          this.dropdownList = this.dropdownList.concat({item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode});
+        }
+      },
+      err => {
+        console.log(err);
+
+      }
+    );
   }
+  
+  onchange_locality(id:any){
+    this.authService.get_pincodebyid(id).subscribe(
+      data => {;
+        this.insert_property_sales.controls.Property_Location.patchValue({
+          pincode: data.data.pincode,
+        });
+      },
+      err => {
+        console.log(err);
+
+      }
+    );
+  }
+  
 
   amenities(): void {
     this.userService.getamenitiesdata().pipe().subscribe(
@@ -359,7 +353,15 @@ export class InsertproductSaleComponent implements OnInit {
       }
     );
   }
+  onchange_rooms(e: any, id: string) {
+    if (e.target.checked) {
+      this.selected_room.push(id);
+    } else {
+      this.selected_room = this.selected_room.filter(m => m != id);
+    }
+    this.additional_room_array = this.selected_room;
 
+  }
   onchangeAmenties(e: any, id: string) {
     if (e.target.checked) {
      // console.log(id + 'Checked');
@@ -373,7 +375,46 @@ export class InsertproductSaleComponent implements OnInit {
     //console.log(this.amenityArray);
 
   }
-
+  onchange_add_room(event:any){
+    if(event==1){
+      this.Add_room_tab=true;
+    }else{
+      this.Add_room_tab=false;
+    }
+  }
+  furnishStatus(event): void {
+    if (event == 'FFR') {
+      this.furnish_row=true;
+    }
+    else {
+      this.furnish_row=false;
+    }
+  }
+  parkingStatus(event): void {
+    if (event == 1) {
+      this.parking_row = true;
+    }
+    else {
+      this.parking_row = false;
+    }
+   }
+  price_negotiable_status(event): void {
+    if (event == 1) {
+      this.price_negotiable_row = true;
+    }
+    else {
+      this.price_negotiable_row = false;
+    }
+  }
+  
+  maintenanceStatus(event): void {
+    if (event == 1) {
+      this.maintenance_row = true;
+    }
+    else {
+      this.maintenance_row = false;
+    }
+  }
   onChange(UpdatedValue: string): void {
     this.text = UpdatedValue;
     this.amenityArray.push(UpdatedValue);
@@ -523,25 +564,6 @@ export class InsertproductSaleComponent implements OnInit {
     this.image5 = null;
   }
 
-  maintenanceStatus(event): void {
-    if (event == 0) {
-      this.maintenance = true;
-    }
-    else {
-      this.maintenance = false
-    }
-  }
-
-  parkingStatus(event): void {
-    //console.log(event)
-    if (event == 0) {
-      this.parking = true;
-    }
-    else {
-      this.parking = false
-    }
-  }
-
   Property_type_data(): void {
     this.userService.get_property_type().pipe().subscribe(
       (data: any) => {
@@ -579,10 +601,7 @@ export class InsertproductSaleComponent implements OnInit {
     // console.log(this.insert_property_sales.controls['Property_area']['controls']);
     return this.insert_property_sales.controls['Property_additional_details']['controls'];
   }
-  get Property_parking() {
-    // console.log(this.insert_property_sales.controls['Property_parking']['controls']);
-    return this.insert_property_sales.controls['Property_amenities']['controls'];
-  }
+  
   get Property_Pricing() {
     // console.log(this.insert_property_sales.controls['Property_Pricing']['controls']);
     return this.insert_property_sales.controls['Property_price_images']['controls'];
@@ -593,23 +612,18 @@ export class InsertproductSaleComponent implements OnInit {
   }*/
 
   onSubmitSale(): void {
-    //console.log(this.insert_property_sales.value);
-    if (this.insert_property_sales.invalid) {
-      //this.showLoadingIndicator = false;
-      return;
-    }
     if (this.insert_property_sales.value.Property_price_images.expected_pricing >= 500000 && this.insert_property_sales.value.Property_price_images.expected_pricing <= 50000000) {
-      this.authService.product_insert_sale(this.insert_property_sales.value, this.user_id, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
+      this.authService.product_insert_sale(this.insert_property_sales.value, this.user_id, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
         data => {
          // console.log(data);
           this.toastr.success('Successfuly Saved', 'Property');
-          window.location.href = GlobalConstants.siteURL + "myproperties"
+          // window.location.href = GlobalConstants.siteURL + "myproperties"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.errorMessage1 = err.error.message;
-          //console.log(this.errorMessage);
+          console.log(this.errorMessage);
           this.toastr.error(this.errorMessage1, 'Something Error', {
             timeOut: 3000,
           });

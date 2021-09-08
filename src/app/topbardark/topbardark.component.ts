@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalConstants } from './../global-constants';
 import { AuthService } from './../_services/auth.service';
 import { UserService } from './../_services/user.service';
+import { RouterModule } from '@angular/router';
+import { HostListener } from "@angular/core";
 import { Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-topbardark',
@@ -30,20 +33,23 @@ export class TopbardarkComponent implements OnInit {
   public userDetails: any;
   public wishlist_length:number= 0;
   public property_comp_length:number= 0;
-
+  public devicetype:number;
+  data:any;
   constructor(
     private titleService: Title,
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private userService: UserService,
-
-  ) { }
+  ) { 
+    this.getScreenSize();
+  }
 
   ngOnInit(): void {
     this.userService.on<string>().subscribe(
       (message: any) => {
         if (message == 'true') {
           this.wishlistcount();
+          this.pro_comp();
         }
       }
     );
@@ -78,6 +84,15 @@ export class TopbardarkComponent implements OnInit {
 
     }
   }
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth <768){
+      this.devicetype=2;
+    }else{
+      this.devicetype=4;
+    }
+ }
   wishlistcount(): void {
     this.userService.getwishlistdata().pipe().subscribe(
       (wishlistdata: any) => {
@@ -95,13 +110,17 @@ export class TopbardarkComponent implements OnInit {
     this.userService.get_pro_comp().pipe().subscribe(
       (wishlistdata: any) => {
         this.property_comp = wishlistdata.data;
-        this.property_comp_length=this.property_comp.length;
-        //console.log(this.property_comp);
+        for (let i = 0; i < this.property_comp.length; i++) {
+         if( this.property_comp.length<=this.devicetype){
+           this.property_comp_length=this.property_comp.length;
+         }
+        }
       },
       err => {
         this.content = JSON.parse(err.error).message;
       }
     );
   }
+  
 
 }

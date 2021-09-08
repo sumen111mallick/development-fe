@@ -40,61 +40,67 @@
 							  <div class="preloader2"></div>
 							</div>
 						  </div> 
-						<div class="row">
-							<div class="col-xl-2">
+						<div class="row wrapper_compare_row">
+							<div class="col-xl-2 col-3 inner_column">
 								<li class="list-inline-item">
 									<ul class="mc_child_list one">
 										<li class="compare_page"><div class="membership_header dn"></div></li>
-										<li>Type</li>
-										<li>City</li>
-										<li>Beds</li>
-										<li>Baths</li>
-										<li>Area</li>
-										<li>Year of build</li>
-										<li>Carpet Area</li>
-										<li *ngFor="let amenties of amenitiesresult">{{amenties.name}}</li>
+										<li class="list_heading">Type</li>
+										<li class="list_heading">City</li>
+										<li class="list_heading">Bedroom</li>
+										<li class="list_heading">Bathroom</li>
+										<li class="list_heading">Area</li>
+										<li class="list_heading">Year of build</li>
+										<li class="list_heading">Carpet Area</li>
+										<li class="list_heading" *ngFor="let amenties of amenitiesresult">{{amenties.name}}</li>
 									</ul>
 								</li>
 							</div>
-							<div class="col-xl-10">
-								<li class="list-inline-item col-xl-3" *ngFor="let item of property_comp">
+							<div class="col-xl-10 col-9">
+								<div class="row">
+								<li class="list-inline-item col-xl-3 col-6 inner_column1" *ngFor="let item of property_comp; let i = index">
+									<div *ngIf="i+1<=devicetype">
 									<ul class="mc_child_list three text-center property_compare">
-										<li>
 											<div class="membership_header ">
 												<div class="thumb">
 													<a (click)="delete_comp(item.id)"><span class="flaticon-close"></span></a>
-													<img class="img-fluid w100"  *ngIf="item.product_img.length>0;else OtherImage"  src="{{ ftpstring }}{{ item.product_img['0'].image}}" alt="2.jpg"><ng-template #OtherImage>
+													<img class="img-fluid w100"  *ngIf="item.product_img.length>0;else OtherImage"  src="{{ ftpstring }}{{ item.product_img['0'].image}}" alt="2.jpg">
+													<ng-template #OtherImage>
 														<img class="img-whp" src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
 													  </ng-template>
 													<div *ngIf="item.productdetails.expected_pricing != null" class="price">Rs. {{ Price_convert(item.productdetails.expected_pricing)}}<span class="mnth"></span></div><br><hr>
 													<div *ngIf="item.productdetails.expected_rent != null" class="price">Rs. {{ Price_convert(item.productdetails.expected_rent) }}<span class="mnth">/mo</span></div>
+												                 
 												</div>
 												<div class="details">
 													<h5>{{item.productdetails.build_name | titlecase}}</h5>
+													<p *ngIf="item.productdetails.rent_availability != null" class="price">(For Rent)</p>
+													<p *ngIf="item.productdetails.sale_availability != null" class="price">(For Sale)</p> 
 												</div>
 											</div>
+										<li class="list_data">
+											<a href=""><p><span>{{ item.productdetails.property__type.name | titlecase}}</span></p></a>
 										</li>
-										<li>
-											<a href=""><p><span>({{ item.productdetails.property__type.name | titlecase}})</span></p></a>
-										</li>
-										<li><a href="#">{{ item.productdetails.city | titlecase}}</a></li>
-										<li><a href="#">{{ item.productdetails.bedroom }}</a></li>
-										<li><a href="#">{{ item.productdetails.bathroom }}</a></li>
-										<li><a href="#">{{ item.productdetails.area }}/{{ item.productdetails.area_unit }}</a></li>
-										<li><a href="#">{{ item.productdetails.buildyear }}</a></li>
-										<li><a href="#">{{ item.productdetails.carpet_area }}</a></li>
+										<li class="list_data"><a href="#">{{ item.productdetails.city | titlecase}}</a></li>
+										<li class="list_data"><a href="#">{{ item.productdetails.bedroom }}</a></li>
+										<li class="list_data"><a href="#">{{ item.productdetails.bathroom }}</a></li>
+										<li class="list_data"><a href="#">{{ item.productdetails.area }}/{{ item.productdetails.area_unit }}</a></li>
+										<li class="list_data"><a href="#">{{ item.productdetails.buildyear }}</a></li>
+										<li class="list_data"><a href="#">{{ item.productdetails.carpet_area }}</a></li>
 										<li class="amenties-check-comparision" *ngFor="let Amenties of amenitiesresult let i=index">
 											<div *ngIf="Amenties_funtion(Amenties.id,item.product_id)==true,else OtherAmenties">
-												<i class="fas fa-check-circle"></i>												
+												<span  class="checkmark">&#10004;</span>											
 											</div>
 											<ng-template #OtherAmenties>
 												<div>
-													<i class="fas fa-times-circle"></i>
+													<span class="uncheckmark">&#10006;</span>
 												</div>
 											</ng-template>
 										</li>
 									</ul>
+								</div>
 								</li>
+							</div>
 							</div>
 						</div>
 					</ul>
@@ -123,4 +129,16 @@
 	</div>
 </section>
 
-<app-footer></app-footer>
+ <!-- Our Footer -->
+ <app-footer></app-footer>
+ <a class="scrollToHome" href="#"><i class="fa fa-angle-double-up"></i></a>
+ <!-- </div> -->
+ <!-- Wrapper End -->
+ 
+ 
+ <!-- Custom script for all pages -->
+ 
+ <!-- -->
+ 
+ 
+ <router-outlet></router-outlet>

@@ -72,28 +72,28 @@
 														  <select class="selectpicker w100 show-tick form-control" name="type"  [(ngModel)]="form.type" #type="ngModel" id="type">
 															 <!-- <option  value="" >Select Property Type</option> --> 
 															 <!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
-															<option value="" disbale>Select Property Type</option>
-															<option value="1">Flat/ Apartment</option>
-															<option value="2">Residential House</option>
-															<option value="3">Villa</option>
-															<option value="4">Builder Floor Apartment</option>
-															<option value="5">Residential Land/ Plot</option>
-															<option value="6">Penthouse</option>
-															<option value="7">Studio Apartment</option>
-															<option value="8">ALL COMMERCIAL</option>
-															<option value="9">Commercial Office Space</option>
-															<option value="10">Office in IT Park/ SEZ</option>
-															<option value="11">Commercial Shop</option>
-															<option value="12">Commercial Showroom</option>
-															<option value="13">Commercial Land</option>
-															<option value="14">Warehouse/ Godown</option>
-															<option value="15">Industrial Land</option>
-															<option value="16">Industrial Building</option>
-															<option value="17">Industrial Shed</option>
-															<option value="18">ALL AGRICULTURAL</option>
-															<option value="19">Agricultural Land</option>
-															<option value="20">Farm House</option>
-															<option value="21">ALL RESIDENTIAL</option>
+															 <option value="" disabled >Select Property Type</option>
+                                                            <option value="" disabled ><h3>ALL RESIDENTIAL</h3></option>
+                                                            <option value="1">Flat/ Apartment</option>
+                                                            <option value="2">Residential House</option>
+                                                            <option value="3">Villa</option>
+                                                            <option value="4">Builder Floor Apartment</option>
+                                                            <option value="5">Residential Land/ Plot</option>
+                                                            <option value="6">Penthouse</option>
+                                                            <option value="7">Studio Apartment</option>
+                                                            <option value="" disabled ><h3>ALL COMMERCIAL</h3></option>
+                                                            <option value="8">Commercial Office Space</option>
+                                                            <option value="9">Office in IT Park/ SEZ</option>
+                                                            <option value="10">Commercial Shop</option>
+                                                            <option value="11">Commercial Showroom</option>
+                                                            <option value="12">Commercial Land</option>
+                                                            <option value="13">Warehouse/ Godown</option>
+                                                            <option value="14">Industrial Land</option>
+                                                            <option value="15">Industrial Building</option>
+                                                            <option value="16 ">Industrial Shed</option>
+                                                            <option value="" disabled ><h3>ALL AGRICULTURAL</h3></option>
+                                                            <option value="17">Agricultural Land</option>
+                                                            <option value="18">Farm House</option>
 														  </select>
 														  <!-- <input type="text" class="form-control" name="type" [(ngModel)]="form.type" #type="ngModel" id="type" placeholder="Enter keywords..."> -->
 												  
@@ -140,8 +140,13 @@
 														  <span id="show_advbtn" class="dropbtn">Advanced <i class="flaticon-more pl10 flr-520"></i></span>
 														  <div class="dropdown-content">
 																<div class="row p15">
-																	<div class="col-lg-12">
+																	<div class="col-lg-12 col-9">
 																		<h4 class="text-thm3">Amenities</h4>
+																	</div>
+																	<div class="col-lg-3 col-3 hidden-md hidden-lg">
+																		<div class="mega_dropdown_content_closer">
+																			<h5 class="text-thm text-right mt15"><span id="hide_advbtn" class="curp">Hide</span></h5>
+																		</div>
 																	</div>
 																  <div class="col-xxs-6 col-sm col-lg-3" *ngFor = "let menuData of amenitiesresult">
 																	  <ul class="ui_kit_checkbox selectable-list">
@@ -393,7 +398,7 @@
 				  </ul>
 				</div>
 			  </div> -->
-					<div *ngIf="product_length<1">
+					<div *ngIf="product_length == 0">
 						<h2 class="breadcrumb_title">Product Listing Not Found!!!...</h2>
 					</div>
 		        </div>
@@ -431,7 +436,7 @@
 						  <div class="thumb"><img class="img-fluid w100" src="./assets/css/images/property/pc2.jpg" alt="pc2.jpg"></div>
 						  <div class="overlay">
 							  <div class="details">
-								  <h4>Delhi</h4>
+								  <p>Delhi</p>
 								  <!-- <p>18 Properties</p> -->
 							  </div>
 						  </div>
@@ -442,7 +447,7 @@
 						  <div class="thumb"><img class="img-fluid w100" src="./assets/css/images/property/pc3.jpg" alt="pc3.jpg"></div>
 						  <div class="overlay">
 							  <div class="details">
-								  <h4>Chennai</h4>
+								  <p>Chennai</p>
 								  <!-- <p>89 Properties</p> -->
 							  </div>
 						  </div>
@@ -453,7 +458,7 @@
 						  <div class="thumb"><img class="img-fluid w100" src="./assets/css/images/property/pc4.jpg" alt="pc4.jpg"></div>
 						  <div class="overlay">
 							  <div class="details">
-								  <h4>Kolkata</h4>
+								  <p>Kolkata</p>
 								  <!-- <p>47 Properties</p> -->
 							  </div>
 						  </div>
@@ -684,27 +689,27 @@
 				  </div>
 			  </div>
 			  <div class="row">
-				  <div class="col-sm-6 col-md-4 col-lg">
+				  <div class="col-4 col-sm-6 col-md-4 col-lg">
 					  <div class="our_partner">
 						  <img class="img-fluid" src="./assets/css/images/partners/1.png" alt="1.png">
 					  </div>
 				  </div>
-				  <div class="col-sm-6 col-md-4 col-lg">
+				  <div class="col-4  col-sm-6 col-md-4 col-lg">
 					  <div class="our_partner">
 						  <img class="img-fluid" src="./assets/css/images/partners/2.png" alt="2.png">
 					  </div>
 				  </div>
-				  <div class="col-sm-6 col-md-4 col-lg">
+				  <div class="col-4  col-sm-6 col-md-4 col-lg">
 					  <div class="our_partner">
 						  <img class="img-fluid" src="./assets/css/images/partners/3.png" alt="3.png">
 					  </div>
 				  </div>
-				  <div class="col-sm-6 col-md-4 col-lg">
+				  <div class="col-4  col-sm-6 col-md-4 col-lg">
 					  <div class="our_partner">
 						  <img class="img-fluid" src="./assets/css/images/partners/4.png" alt="4.png">
 					  </div>
 				  </div>
-				  <div class="col-sm-6 col-md-4 col-lg">
+				  <div class="col-4  col-sm-6 col-md-4 col-lg">
 					  <div class="our_partner">
 						  <img class="img-fluid" src="./assets/css/images/partners/5.png" alt="5.png">
 					  </div>

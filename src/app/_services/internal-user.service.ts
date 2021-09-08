@@ -39,4 +39,8 @@ export class InternalUserService {
   get_areas(): Observable<any> {
     return this.http.get(AUTH_API + 'auth/get_areas', httpOptions);
   }
+  get_pincodebyid(id): Observable<any> {
+    console.log(id);
+    return this.http.post(AUTH_API + 'auth/get_pincodebyid', httpOptions);
+  }
 }

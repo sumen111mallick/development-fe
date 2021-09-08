@@ -10,6 +10,7 @@ import { MapsAPILoader, AgmMap } from '@agm/core';
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Options, LabelType } from 'ng5-slider';
 import { Validators } from '@angular/forms';
+import { InternalUserService } from './../_services/internal-user.service';
 @Component({
   selector: 'app-insertproduct-rent',
   templateUrl: './insertproduct-rent.component.html',
@@ -36,6 +37,7 @@ export class InsertproductRentComponent implements OnInit {
   parking: boolean = false;
 
   amenityArray = [];
+  additional_room_array=[];
   varAmenity: string;
 
   furnishingArray = [];
@@ -45,6 +47,7 @@ export class InsertproductRentComponent implements OnInit {
 
   err_caused: boolean = false;
   selectedItems: string[];
+  selected_room: string[];
 
   content: any = {};
 
@@ -85,6 +88,7 @@ export class InsertproductRentComponent implements OnInit {
   possession_by: any;
   tax_govt_charge: any;
   price_negotiable: any;
+  negotiable_status:any;
   facing_towards: any;
   availability_condition: any;
   buildyear: any;
@@ -102,74 +106,80 @@ export class InsertproductRentComponent implements OnInit {
   nearby_places: any;
   equipment: any;
   features: any;
+  pincode:any;
+  maintenance_charge:any;
+  maintenance_charge_status:any;
 
   public property_type: any;
   public property_type_result: any;
   product_img: any = [];
   public step: any = 1;
   public Expected_PriceEroor: boolean = false;
+  dropdownList = [];
+  public Add_room_tab:boolean=false;
+  public furnish_row:boolean=false;
+  public price_negotiable_row:boolean=false;
+  public maintenance_row:boolean=false;
+  parking_row: boolean = false;
 
   insert_property_rent = new FormGroup({
     Property_Details: new FormGroup({
-      build_name: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required),
-      display_address: new FormControl('', Validators.required),
-      area: new FormControl('', Validators.required),
-      carpet_area: new FormControl('', Validators.required),
-      area_unit: new FormControl('', Validators.required),
-      bedroom: new FormControl('', Validators.required),
-      bathroom: new FormControl('', Validators.required),
-      balconies: new FormControl('', Validators.required),
-      property_detail: new FormControl('', Validators.required)
+      build_name: new FormControl(''),
+      type: new FormControl(''),
+      display_address: new FormControl(''),
+      area: new FormControl(''),
+      carpet_area: new FormControl(''),
+      area_unit: new FormControl(''),
+      bedroom: new FormControl(''),
+      bathroom: new FormControl(''),
+      balconies: new FormControl(''),
+      property_detail: new FormControl('')
     }),
 
     Property_address: new FormGroup({
-      address: new FormControl('', Validators.required),
-      map_latitude: new FormControl('', Validators.required),
-      map_longitude: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      locality: new FormControl('', Validators.required),
-      nearest_landmark: new FormControl('', Validators.required),
-      nearby_places: new FormControl('', Validators.required)
+      address: new FormControl(''),
+      map_latitude: new FormControl(''),
+      map_longitude: new FormControl(''),
+      city: new FormControl('Delhi', Validators.required),
+      locality: new FormControl(''),
+      pincode:new FormControl(''),
+      nearest_landmark: new FormControl(''),
+      nearby_places: new FormControl('')
     }),
 
     Property_additional_details: new FormGroup({
-      additional_rooms: new FormControl('', Validators.required),
-      equipment: new FormControl('', Validators.required),
-      features: new FormControl('', Validators.required),
-      age_of_property: new FormControl('', Validators.required),
+      additional_rooms: new FormControl('0', Validators.required),
       furnishings: new FormControl(''),
-      furnishing_status: new FormControl('', Validators.required),
-      facing_towards: new FormControl('', Validators.required),
-      rera_registration_status: new FormControl('', Validators.required),
-      additional_parking_status: new FormControl('', Validators.required),
-      buildyear: new FormControl('', Validators.required),
-      availability_condition: new FormControl('', Validators.required),
-      possession_by: new FormControl('', Validators.required),
-      property_on_floor: new FormControl('', Validators.required),
-      total_floors: new FormControl('', Validators.required)
-    }),
-
-    Property_amenities_rent: new FormGroup({
-      willing_to_rent_out_to: new FormControl('', Validators.required),
-      agreement_type: new FormControl('', Validators.required),
-      available_for: new FormControl('', Validators.required),
-      rent_cond: new FormControl('', Validators.required),
-      month_of_notice: new FormControl('', Validators.required),
-      duration_of_rent_aggreement: new FormControl('', Validators.required),
-      ownership: new FormControl('', Validators.required),
+      furnishing_status: new FormControl('NFR'),
+      facing_towards: new FormControl(''),
+      rera_registration_status: new FormControl(''),
+      additional_parking_status: new FormControl('0'),
+      buildyear: new FormControl(''),
+      availability_condition: new FormControl(''),
+      possession_by: new FormControl(''),
+      property_on_floor: new FormControl(''),
+      total_floors: new FormControl(''),
+      willing_to_rent_out_to: new FormControl(''),
+      agreement_type: new FormControl(''),
+      available_for: new FormControl(''),
+      rent_cond: new FormControl(''),
+      duration_of_rent_aggreement: new FormControl(''),
+      ownership: new FormControl(''),
+      month_of_notice: new FormControl(''),
       parking_covered_count: new FormControl(''),
       parking_open_count: new FormControl('')
     }),
 
     Property_price_images: new FormGroup({
       expected_rent: new FormControl('5001', Validators.required),
-      security_deposit: new FormControl('', Validators.required),
-      inc_electricity_and_water_bill: new FormControl('', Validators.required),
-      tax_govt_charge: new FormControl('', Validators.required),
-      price_negotiable: new FormControl('', Validators.required),
-      maintenance_charge_status: new FormControl('', Validators.required),
-      brokerage_charges: new FormControl('')
+      security_deposit: new FormControl(''),
+      inc_electricity_and_water_bill: new FormControl(''),
+      tax_govt_charge: new FormControl(''),
+      price_negotiable: new FormControl(''),
+      negotiable_status: new FormControl('0'),
+      maintenance_charge_status: new FormControl('0'),
+      maintenance_charge: new FormControl(''),
+      video_link: new FormControl('')
     })
 
   });
@@ -199,7 +209,8 @@ export class InsertproductRentComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) {
+    private ngZone: NgZone,
+    private internalUserService: InternalUserService) {
     this.getLocation();
   }
 
@@ -239,6 +250,7 @@ export class InsertproductRentComponent implements OnInit {
     });
     this.amenities();
     this.Property_type_data();
+    this.get_area();
     this.titleService.setTitle('Create Listing');
 
     // Login check
@@ -264,6 +276,7 @@ export class InsertproductRentComponent implements OnInit {
     } */
     this.selectedItems = new Array<string>();
     this.product_img = new Array<string>();
+    this.selected_room = new Array<string>();
   }
 
   getLocation() {
@@ -307,18 +320,6 @@ export class InsertproductRentComponent implements OnInit {
   redirect_to_home(): void {
     window.location.href = GlobalConstants.siteURL = "login"
   }
-
-
-  furnishStatus(event): void {
-    //console.log(event);
-    if (event == 'SFR' || event == 'FFR') {
-      this.furnish = true;
-    }
-    else {
-      this.furnish = false;
-    }
-  }
-
   onChange(UpdatedValue: string): void {
     this.text = UpdatedValue;
     this.amenityArray.push(UpdatedValue);
@@ -327,6 +328,14 @@ export class InsertproductRentComponent implements OnInit {
   amenity(event): void {
     //console.log(event)
     this.amenityArray.push(event);
+  }
+  onchange_rooms(e: any, id: string) {
+    if (e.target.checked) {
+      this.selected_room.push(id);
+    } else {
+      this.selected_room = this.selected_room.filter(m => m != id);
+    }
+    this.additional_room_array = this.selected_room;
 
     //console.log(this.amenityArray);
   }
@@ -473,23 +482,74 @@ export class InsertproductRentComponent implements OnInit {
     this.image5 = null;
   }
 
-  maintenanceStatus(event): void {
-    if (event == 0) {
-      this.maintenance = true;
+  onchange_add_room(event:any){
+    if(event==1){
+      this.Add_room_tab=true;
+    }else{
+      this.Add_room_tab=false;
+    }
+  }
+  furnishStatus(event): void {
+    if (event == 'FFR') {
+      this.furnish_row=true;
     }
     else {
-      this.maintenance = false
+      this.furnish_row=false;
     }
   }
 
   parkingStatus(event): void {
-    //console.log(event)
-    if (event == 0) {
-      this.parking = true;
+    if (event == 1) {
+      this.parking_row = true;
     }
     else {
-      this.parking = false
+      this.parking_row = false;
     }
+   }
+  price_negotiable_status(event): void {
+    if (event == 1) {
+      this.price_negotiable_row = true;
+    }
+    else {
+      this.price_negotiable_row = false;
+    }
+  }
+  
+  maintenanceStatus(event): void {
+    if (event == 1) {
+      this.maintenance_row = true;
+    }
+    else {
+      this.maintenance_row = false;
+    }
+  }
+  
+  get_area():void{
+    this.internalUserService.get_areas().subscribe(
+      data => {
+        for (let i = 1; i < data.length; i++) {
+          this.dropdownList = this.dropdownList.concat({item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode});
+        }
+      },
+      err => {
+        console.log(err);
+
+      }
+    );
+  }
+  
+  onchange_locality(id:any){
+    this.authService.get_pincodebyid(id).subscribe(
+      data => {;
+        this.insert_property_rent.controls.Property_address.patchValue({
+          pincode: data.data.pincode,
+        });
+      },
+      err => {
+        console.log(err);
+
+      }
+    );
   }
 
   amenities(): void {
@@ -536,27 +596,19 @@ export class InsertproductRentComponent implements OnInit {
     return this.insert_property_rent.controls['Property_additional_details']['controls'];
   }
 
-  get Property_amenities_rent() {
-    // console.log(this.insert_property_sales.controls['Property_Pricing']['controls']);
-    return this.insert_property_rent.controls['Property_amenities_rent']['controls'];
-  }
+  
   get Property_price_images() {
     // console.log(this.insert_property_sales.controls['Property_parking']['controls']);
     return this.insert_property_rent.controls['Property_price_images']['controls'];
   }
 
   onSubmitRent(): void {
-    //console.log(this.insert_property_rent.value);
-    if (this.insert_property_rent.invalid) {
-      //this.showLoadingIndicator = false;
-      return;
-    }
     if (this.insert_property_rent.value.Property_price_images.expected_rent >= 5000 && this.insert_property_rent.value.Property_price_images.expected_rent <= 500000) {
-      this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.amenityArray, this.furnishingArray, this.product_img).subscribe(
+      this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
         data => {
           //console.log("successful" + data)
           this.toastr.success('Successfuly Saved', 'Property');
-          window.location.href = GlobalConstants.siteURL + "myproperties"
+          // window.location.href = GlobalConstants.siteURL + "myproperties"
         },
         err => {
           this.err_caused = true;

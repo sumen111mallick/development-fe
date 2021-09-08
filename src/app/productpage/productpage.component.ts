@@ -11,6 +11,9 @@ import { MapsAPILoader,AgmMap } from '@agm/core';
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgxStarRatingModule } from 'ngx-star-rating';
+import { Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-productpage',
@@ -32,6 +35,7 @@ export class ProductpageComponent implements OnInit {
   public p_img3:string=null;
   public p_img4:string=null;
   public p_img5:string=null;
+  public Product_id:number=0;
   e: any={};
   // p_img2= null;
   // p_img3= null;
@@ -42,9 +46,19 @@ export class ProductpageComponent implements OnInit {
   Message: any={};
   form: any = {};
   Review: any;
-  map_url: string;
+  youtube_url: string;
   cityValue: any;
   
+  
+  
+  youtube: string= "https://www.youtube.com/embed/";
+
+  review_form = new FormGroup({
+    stars: new FormControl('', Validators.required),
+    rev_subject: new FormControl('', Validators.required),
+    rev_content: new FormControl('', Validators.required)
+  });
+
   public showLoadingIndicator:boolean= false;
   content: any = {};
   isLoggedIn:boolean=false;
@@ -62,8 +76,10 @@ export class ProductpageComponent implements OnInit {
   public Recently_User_Data:any={};
   public Recent_user_length:number=0;
   public recently_length:number=null;
+  public isReadMore :boolean=true;
 
   constructor(
+    private _sanitizer: DomSanitizer,
     private titleService: Title,
     private authService: AuthService,
     private idService: TokenStorageService,
@@ -80,6 +96,7 @@ export class ProductpageComponent implements OnInit {
         this.route.queryParams.subscribe((params) => {
           // console.log(params.id);
         this.id = params.id;
+        this.Product_id=this.id;
         this.single_property_data(this.id);
         }); 
     }
@@ -91,10 +108,7 @@ export class ProductpageComponent implements OnInit {
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.login_userID = this.idService.getUser().id;
-      //console.log(this.login_userID);
-      this.login_usertype = this.idService.getUser().usertype;
-      //console.log(this.login_usertype);
-
+      this.login_usertype = this.idService.getUser().usertype; 
     }
     
   
@@ -129,20 +143,21 @@ export class ProductpageComponent implements OnInit {
       //console.log(this.isLoggedIn);
       this.authService.product_login_see(id).subscribe(
         data => {
-          //console.log(data);
-          // console.log(data["product"]["0"].product_img[0].image);
+          if(data.product.length== 0){
+          this.redirect_to_home_page();
+          } 
           this.product_images=data["product"]["0"].product_img;
           this.product_img_length=this.product_images;
           this.productdata = data["product"];
-          this.map_url = "https://maps.google.com/?q=" + data["product"]["0"]["map_latitude"] + "," + data["product"]["0"]["map_longitude"];
-          //console.log(this.map_url)
+          this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";          
+          this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.youtube_url);
+          
           this.product_amenties= data["product"]["0"].amenities;
           this.product_amenties_length= data["product"]["0"].amenities.length;
-          //console.log(this.product_amenties_length);
-          //console.log(this.product_amenties);
+         
           this.cityValue=data["product"]["0"]["city"];
           this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
-          //console.log(this.latCus);
+          
           this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
           //console.log(this.longCus);
           this.similarproperty(this.cityValue);
@@ -156,13 +171,15 @@ export class ProductpageComponent implements OnInit {
     }else{
       this.authService.product_see(id).subscribe(
       data => {
-        //console.log(data);
-        // console.log(data["product"]["0"].product_img[0].image);
+        if(data.product.length== 0){
+          this.redirect_to_home_page();
+         } 
         this.product_images=data["product"]["0"].product_img;
         this.product_img_length=this.product_images;
         this.productdata = data["product"];
-        this.map_url = "https://maps.google.com/?q=" + data["product"]["0"]["map_latitude"] + "," + data["product"]["0"]["map_longitude"];
-        //console.log(this.map_url)
+        this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";            
+        this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.youtube_url);
+          
         this.product_amenties= data["product"]["0"].amenities;
         this.product_amenties_length= data["product"]["0"].amenities.length;
         //console.log(this.product_amenties_length);
@@ -206,8 +223,7 @@ export class ProductpageComponent implements OnInit {
         //console.log("Recently Views Properties");
          //console.log(this.Recently_UserData);
       });
-  
-  }
+   }
   loginuser_countProduct(id: any){
     //console.log(this.id);
      this.authService.User_productCount(this.id).subscribe(
@@ -250,6 +266,9 @@ product_comp(id:number){
   else{
     this.redirect_to_home();
   }
+}
+showText() {
+  this.isReadMore = !this.isReadMore
 }
 // pricre convert functionalty
 Price_convert(num: number) {
@@ -383,10 +402,9 @@ Property_type_data(): void{
   onSubmit(): void {
     // Login check
     if(this.tokenStorage.getUser() != null){
-    //console.log(this.form)
-    this.authService.create_review(this.form, this.id).subscribe(
+    this.authService.create_review(this.review_form.value, this.id).subscribe(
       data => {
-        //console.log(data)
+        this.review_form.reset();
         this.toastr.success('Reviews Succesfully', 'Property', {
           timeOut: 3000,
         });
@@ -503,6 +521,10 @@ feature_property(){
   redirect_to_home(): void {
     window.location.href=GlobalConstants.siteURL="login"
   }
+  redirect_to_home_page(): void {
+    window.location.href=GlobalConstants.siteURL
+  }
+  
    // topbar searching functionalty
    wishlist_info(){
       this.userService.emit<string>('true');

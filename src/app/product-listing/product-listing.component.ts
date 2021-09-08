@@ -96,6 +96,7 @@ export class ProductListingComponent implements OnInit {
   public property_type_result:any;
   public property_type_count:any;
 
+  displayStyle = "none";
   first_prod = null;
   second_prod = null;
   third_prod = null;
@@ -295,7 +296,7 @@ export class ProductListingComponent implements OnInit {
     //console.log('Nothing');
  }
     
-  }
+}
   amenities(): void{
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
@@ -382,15 +383,15 @@ product_comp(id:number){
   }
 }
   wishlist_added(data: any){
+    console.log(data);
     // Login check
     if(this.tokenStorage.getUser() != null){
-      this.isLoggedIn = true
-      //console.log(this.isLoggedIn);
+      this.isLoggedIn = true;
       this.maintenance = true;
       this.parking = false;    
         this.authService.Wishlist(data).pipe().subscribe(
           (result: any) =>{
-            //console.log(result);
+            console.log(result);
             this.getpropertyData();
           },
           err => {
@@ -636,6 +637,15 @@ product_comp(id:number){
   // property comparision redirect comapre page 
   redirect_to_compare(): void {
     window.location.href=GlobalConstants.siteURL="compare"
+  }
+
+
+// modal popup funtionalty  
+  openPopup() {
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
   }
    // carosule image
    customOptions: OwlOptions = {

@@ -5,6 +5,7 @@ import { GlobalConstants } from './../global-constants';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './../_services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-compare',
@@ -12,10 +13,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./compare.component.css']
 })
 export class CompareComponent implements OnInit {
+  [x: string]: any;
 
   sitestring:string = GlobalConstants.siteURL;
   prod_id1: any;
   prod_id2: any;
+  
+  screenWidth: number;
 
   product_data1: [];
   user_data1: [];
@@ -30,6 +34,11 @@ export class CompareComponent implements OnInit {
   showLoadingIndicator = false;
   public amenitiesresult:any={};
   e: any={};
+  public devicetype:number;
+  public  amenties_uncheck: any = [];
+  product_amenties:any=[];
+  public unique_ameties:any=[];
+  filter_amenties:any=[];
 
 
   constructor(
@@ -40,6 +49,7 @@ export class CompareComponent implements OnInit {
     private toastr: ToastrService,
     private tokenStorage: TokenStorageService,
   ) { 
+      this.getScreenSize();
       if (this.tokenStorage.getToken() == null){
         this.redirect_to_login();    
       }
@@ -48,25 +58,43 @@ export class CompareComponent implements OnInit {
 
   ngOnInit(): void {
     this.pro_comp();
-    this.amenities();
 
   }
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth <768){
+      this.devicetype=2;
+    }else{
+      this.devicetype=4;
+    }
+ }
   pro_comp(): void{
     this.showLoadingIndicator = true;
     this.userService.get_pro_comp().pipe().subscribe(
       (data: any) => {
         this.property_comp = data.data;
         this.property_comp_length=this.property_comp.length;
-        //console.log(this.property_comp[0].amenities);
-        //console.log(this.property_comp);
-        //console.log(this.property_comp_length);
+          for(let i=0;i<this.property_comp.length;i++){
+            if(i<this.devicetype){
+              for(let j=0;j<this.property_comp[i].amenities.length;j++){
+                this.product_amenties.push(this.property_comp[i].amenities[j].amenties);
+              }
+            }
+          }
+          console.log(this.product_amenties);
+        const expected = new Set();
+        const unique = this.product_amenties.filter(item => !expected.has(JSON.stringify(item)) ? expected.add(JSON.stringify(item)) : false);
+        this.unique_ameties=unique;
+        console.log(this.unique_ameties);
+        this.amenities();
         this.pro_comp_refresh();
-        if(this.property_comp_length <2){
+         if(this.property_comp_length <2){
             this.toastr.warning('Comparision Minimun Two','Property', {
               timeOut: 4000,
             });
             this.redirect_to_home();
-         }
+          }
         this.showLoadingIndicator = false;
       },
       err => {
@@ -77,31 +105,45 @@ export class CompareComponent implements OnInit {
   amenities(): void{
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
-        //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
-        this.amenitiesresult = this.amenities;
-        //console.log(this.amenitiesresult);
-        //console.log(this.content);
+        console.log(this.amenities.length);
+        for(let i=0; i<this.amenities.length;i++){
+          if (this.filter_amenties_fun(this.amenities[i].id)) {
+            this.filter_amenties.push(this.amenities[i]);
+          }
+        }
+        this.amenitiesresult = this.filter_amenties;
+        console.log(this.amenitiesresult);
       },
       err => {
         this.content = JSON.parse(err.error).message;
       }
     );
   }
+  filter_amenties_fun(amenties_id:any){
+    if(this.unique_ameties.length !=null){
+      for (let i=0; i<this.unique_ameties.length; i++) {
+        if(this.unique_ameties[i]==amenties_id){
+          console.log(amenties_id);
+           return true;
+          }
+        }
+      }
+   }
+  
   Amenties_funtion(Amenties_id:any,pro_id: any){
-    // var len= this.product_amenties.length;
-  if(this.property_comp_length !=null){
-    for (let i = 0; i < this.property_comp.length; i++) {
-      if(this.property_comp[i].product_id==pro_id){
-        for(let j=0;j< this.property_comp[i].amenities.length; j++){
-          if(Amenties_id==this.property_comp[i].amenities[j].amenties){
-            return  true;
+    if(this.property_comp_length !=null){
+      for (let i = 0; i < this.property_comp.length; i++) {
+        if(this.property_comp[i].product_id==pro_id){
+          for(let j=0;j< this.property_comp[i].amenities.length; j++){
+            if(Amenties_id==this.property_comp[i].amenities[j].amenties){
+              return  true;
+            }
           }
         }
       }
     }
   }
-}
   delete_comp(id:number):void{
     //console.log(id);
     this.showLoadingIndicator = true;
@@ -110,6 +152,7 @@ export class CompareComponent implements OnInit {
         //console.log(data); 
         this.pro_comp();
         // this.showLoadingIndicator = false;
+        window.location.href=GlobalConstants.siteURL="compare"
         },
         err => {
           //console.log(err)

@@ -1,6 +1,10 @@
 (function ($) {
 
     "use strict";
+    // <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+      });
 
     /* ----- Preloader ----- */
     function preloaderLoad() {

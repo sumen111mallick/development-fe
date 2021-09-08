@@ -98,6 +98,7 @@ width: 275px !important;
   top: 20px;
   position: absolute;
   width: 20px;
+  height: 25px!important;
   border-radius: 50px;
   text-align: center;
   cursor: pointer;

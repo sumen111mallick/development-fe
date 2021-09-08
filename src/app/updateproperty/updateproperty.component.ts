@@ -84,6 +84,7 @@ export class UpdatepropertyComponent implements OnInit {
   ownership:any;
   available_for:any;
   nearby_places: any;
+  video_link:any;
   equipment: any;
   features: any;
    userEmail: any;
@@ -168,7 +169,8 @@ export class UpdatepropertyComponent implements OnInit {
     features:  ['', Validators.required],
     maintenance_charge:  ['', Validators.required],
     maintenance_charge_status:  ['', Validators.required],
-    parking_open_count:  ['', Validators.required]
+    parking_open_count:  ['', Validators.required],
+    video_link:  ['', Validators.required]
   });
 
   imagePre1: any;
@@ -709,7 +711,7 @@ export class UpdatepropertyComponent implements OnInit {
       this.PropertyUpdate.patchValue({
         expected_rent:this.expected_rent,
       });
-      if(event<=5000 || event>=500000){
+      if(event<5000 || event>500000){
         this.Expected_PriceEroor=true;
       }else{
         this.Expected_PriceEroor=false;
@@ -717,7 +719,7 @@ export class UpdatepropertyComponent implements OnInit {
   }
   rangeInput_Price(event){
     this.expected_rent=event;
-    if(event<=5000 || event>=500000){
+    if(event<5000 || event>500000){
       this.Expected_PriceEroor=true;
     }else{
       this.Expected_PriceEroor=false;

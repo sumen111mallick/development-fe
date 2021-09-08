@@ -82,6 +82,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
   available_for: any;
   nearby_places: any;
   equipment: any;
+  video_link:any;
   features: any;
   userEmail: any;
   userProfile: any;
@@ -125,52 +126,53 @@ export class UpdateSalesPropertyComponent implements OnInit {
     build_name: ['', Validators.required],
     type: ['', Validators.required],
     willing_to_rent_out_to: ['', Validators.required],
-    agreement_type: ['', Validators.required],
-    address: ['', Validators.required],
-    city: ['', Validators.required],
-    locality: ['', Validators.required],
-    property_detail: ['', Validators.required],
-    nearest_landmark: ['', Validators.required],
-    map_latitude: ['', Validators.required],
-    map_longitude: ['', Validators.required],
-    display_address: ['', Validators.required],
-    area: ['', Validators.required],
-    area_unit: ['', Validators.required],
-    carpet_area: ['', Validators.required],
-    bedroom: ['', Validators.required],
-    bathroom: ['', Validators.required],
-    balconies: ['', Validators.required],
-    additional_rooms: ['', Validators.required],
-    furnishing_status: ['', Validators.required],
-    furnishings: ['', Validators.required],
-    total_floors: ['', Validators.required],
-    property_on_floor: ['', Validators.required],
-    rera_registration_status: ['', Validators.required],
-    additional_parking_status: ['', Validators.required],
-    parking_covered_count: ['', Validators.required],
-    expected_pricing: ['', Validators.required],
-    possession_by: ['', Validators.required],
-    tax_govt_charge: ['', Validators.required],
-    price_negotiable: ['', Validators.required],
-    facing_towards: ['', Validators.required],
-    availability_condition: ['', Validators.required],
-    buildyear: ['', Validators.required],
-    age_of_property: ['', Validators.required],
-    expected_rent: ['', Validators.required],
-    description: ['', Validators.required],
-    inc_electricity_and_water_bill: ['', Validators.required],
-    month_of_notice: ['', Validators.required],
-    duration_of_rent_aggreement: ['', Validators.required],
-    security_deposit: ['', Validators.required],
-    rent_cond: ['', Validators.required],
-    ownership: ['', Validators.required],
-    available_for: ['', Validators.required],
-    nearby_places: ['', Validators.required],
-    equipment: ['', Validators.required],
-    features: ['', Validators.required],
-    maintenance_charge: ['', Validators.required],
-    maintenance_charge_status: ['', Validators.required],
-    parking_open_count: ['', Validators.required]
+    agreement_type:  ['', Validators.required],
+    address:  ['', Validators.required],
+    city:  ['', Validators.required],
+    locality:  ['', Validators.required],
+    property_detail:  ['', Validators.required],
+    nearest_landmark:  ['', Validators.required],
+    map_latitude:  ['', Validators.required],
+    map_longitude:  ['', Validators.required],
+    display_address:  ['', Validators.required],
+    area:  ['', Validators.required],
+    area_unit:  ['', Validators.required],
+    carpet_area:  ['', Validators.required],
+    bedroom:  ['', Validators.required],
+    bathroom:  ['', Validators.required],
+    balconies:  ['', Validators.required],
+    additional_rooms:  ['', Validators.required],
+    furnishing_status:  ['', Validators.required],
+    furnishings:  ['', Validators.required],
+    total_floors:  ['', Validators.required],
+    property_on_floor:  ['', Validators.required],
+    rera_registration_status:  ['', Validators.required],
+    additional_parking_status:  ['', Validators.required],
+    parking_covered_count:  ['', Validators.required],
+    expected_pricing:  ['', Validators.required],
+    possession_by:  ['', Validators.required],
+    tax_govt_charge:  ['', Validators.required],
+    price_negotiable:  ['', Validators.required],
+    facing_towards:  ['', Validators.required],
+    availability_condition:  ['', Validators.required],
+    buildyear:  ['', Validators.required],
+    age_of_property:  ['', Validators.required],
+    expected_rent:  ['', Validators.required],
+    description:  ['', Validators.required],
+    inc_electricity_and_water_bill:  ['', Validators.required],
+    month_of_notice:  ['', Validators.required],
+    duration_of_rent_aggreement:  ['', Validators.required],
+    security_deposit:  ['', Validators.required],
+    rent_cond:  ['', Validators.required],
+    ownership:  ['', Validators.required],
+    available_for:  ['', Validators.required],
+    nearby_places:  ['', Validators.required],
+    equipment:  ['', Validators.required],
+    features:  ['', Validators.required],
+    maintenance_charge:  ['', Validators.required],
+    maintenance_charge_status:  ['', Validators.required],
+    parking_open_count:  ['', Validators.required],
+    video_link:  ['', Validators.required]
   });
   imagePre1: any;
   imagePre2: any;
@@ -182,12 +184,12 @@ export class UpdateSalesPropertyComponent implements OnInit {
   parking_open_count: any;
   Amenties_id: any;
   Amenties_length: number;
-  product_amenties_length: number = null;
+  product_amenties_length:number=null;
   showLoadingIndicator: boolean;
-  product_img: any = {};
-  product_img_length: number = 0;
-  p_images: number = 5;
-  geoCoder: any;
+  product_img:any={};
+  product_img_length:number=0;
+  p_images:number=5;
+  geoCoder:any;
   // searchElementRef:any;
   public latCus: any;
   public longCus: any;
@@ -390,61 +392,62 @@ export class UpdateSalesPropertyComponent implements OnInit {
         this.parking_open_count = data.data.parking_open_count;
 
         this.update_property_sales.patchValue({
-          id: this.id,
-          build_name: this.build_name,
-          type: this.type,
-          willing_to_rent_out_to: this.willing_to_rent_out_to,
-          agreement_type: this.agreement_type,
-          address: this.address,
-          city: this.city,
-          locality: this.locality,
-          property_detail: this.property_detail,
-          nearest_landmark: this.nearest_landmark,
-          map_latitude: this.map_latitude,
-          map_longitude: this.map_longitude,
-          display_address: this.display_address,
-          area: this.area,
-          area_unit: this.area_unit,
-          carpet_area: this.carpet_area,
-          bedroom: this.bedroom,
-          bathroom: this.bathroom,
-          balconies: this.balconies,
-          additional_rooms: this.additional_rooms,
-          furnishing_status: this.furnishing_status,
-          furnishings: this.furnishings,
-          total_floors: this.total_floors,
-          property_on_floor: this.property_on_floor,
-          rera_registration_status: this.rera_registration_status,
-          additional_parking_status: this.additional_parking_status,
-          parking_covered_count: this.parking_covered_count,
-          parking_open_count: this.parking_open_count,
-          expected_pricing: this.expected_pricing,
-          possession_by: this.possession_by,
-          tax_govt_charge: this.tax_govt_charge,
-          price_negotiable: this.price_negotiable,
-          facing_towards: this.facing_towards,
-          availability_condition: this.availability_condition,
-          buildyear: this.buildyear,
-          age_of_property: this.age_of_property,
-          expected_rent: this.expected_rent,
-          description: this.description,
-          inc_electricity_and_water_bill: this.inc_electricity_and_water_bill,
-          month_of_notice: this.month_of_notice,
-          duration_of_rent_aggreement: this.duration_of_rent_aggreement,
-          security_deposit: this.security_deposit,
-          rent_cond: this.rent_cond,
-          ownership: this.ownership,
-          available_for: this.available_for,
-          nearby_places: this.nearby_places,
-          equipment: this.equipment,
-          features: this.features,
-          maintenance_charge: this.maintenance_charge,
-          maintenance_charge_status: this.maintenance_charge_status,
-        });
-        this.showLoadingIndicator = false;
-      }
-    );
-
+         id:this.id,
+         build_name: this.build_name,
+         type:this.type,
+         willing_to_rent_out_to: this.willing_to_rent_out_to ,
+         agreement_type: this.agreement_type,
+         address:this.address,
+         city:this.city,
+         locality:this.locality,
+         property_detail:this.property_detail,
+         nearest_landmark:this.nearest_landmark,
+         map_latitude:this.map_latitude,
+         map_longitude:this.map_longitude,
+         display_address:this.display_address,
+         area:this.area,
+         area_unit:this.area_unit,
+         carpet_area:this.carpet_area,
+         bedroom:this.bedroom,
+         bathroom:this.bathroom,
+         balconies:this.balconies,
+         additional_rooms:this.additional_rooms,
+         furnishing_status:this.furnishing_status,
+         furnishings:this.furnishings,
+         total_floors:this.total_floors,
+         property_on_floor:this.property_on_floor,
+         rera_registration_status:this.rera_registration_status,
+         additional_parking_status:this.additional_parking_status,
+         parking_covered_count:this.parking_covered_count,
+         parking_open_count:this.parking_open_count,
+         expected_pricing:this.expected_pricing,
+         possession_by:this.possession_by,
+         tax_govt_charge:this.tax_govt_charge,
+         price_negotiable:this.price_negotiable,
+         facing_towards:this.facing_towards,
+         availability_condition:this.availability_condition,
+         buildyear:this.buildyear,
+         age_of_property:this.age_of_property,
+         expected_rent:this.expected_rent,
+         description:this.description,
+         inc_electricity_and_water_bill:this.inc_electricity_and_water_bill,
+         month_of_notice:this.month_of_notice,
+         duration_of_rent_aggreement:this.duration_of_rent_aggreement,
+         security_deposit:this.security_deposit,
+         rent_cond:this.rent_cond,
+         ownership:this.ownership,
+         available_for:this.available_for,
+         nearby_places:this.nearby_places,
+         equipment:this.equipment,
+         features:this.features,
+         maintenance_charge:this.maintenance_charge,
+         maintenance_charge_status:this.maintenance_charge_status,
+         video_link:"https://www.youtube.com/watch?v="+this.video_link,
+       });
+       this.showLoadingIndicator = false; 
+      } 
+      );
+    
   }
   amenities(): void {
     this.userService.getamenitiesdata().pipe().subscribe(
@@ -730,56 +733,52 @@ export class UpdateSalesPropertyComponent implements OnInit {
     } else {
       this.Expected_PriceEroor = false;
     }
+}
+rangeInput_Price(event: number){
+  this.expected_pricing=event;
+  if(event<500000 || event>50000000){
+    this.Expected_PriceEroor=true;
+  }else{
+    this.Expected_PriceEroor=false;
   }
-  rangeInput_Price(event: number) {
-    this.expected_pricing = event;
-    if (event <= 500000 || event >= 50000000) {
-      this.Expected_PriceEroor = true;
-    } else {
-      this.Expected_PriceEroor = false;
-    }
+}
+Expected_Price(event: number){
+  if(event>=500000 && event<=50000000){
+  }else{
+    this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
+      timeOut: 1500,
+    });
   }
-  Expected_Price(event: number) {
-    if (event >= 500000 && event <= 50000000) {
-    } else {
-      this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
-        timeOut: 1500,
+}
+onSubmitsales(): void { 
+  if(this.update_property_sales.value.expected_pricing>=500000 && this.update_property_sales.value.expected_pricing<=50000000){
+    this.authService.product_sales_update(this.update_property_sales.value, this.id, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
+    data => {
+      this.toastr.success('Successfuly Updated', 'Property Sales');
+      window.location.href=GlobalConstants.siteURL+"myproperties"
+    },
+    err => {
+      this.err_caused = true;
+      this.errorMessage = err.error.errors;
+      this.Message = err.error.message;
+      this.toastr.error(this.Message, 'Something Error', {
+        timeOut: 3000,
       });
     }
+  );}
+  else{
+    this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
+      timeOut: 2000,
+    });
   }
-  onSubmitRent(): void {
-
-    if (this.update_property_sales.value.expected_pricing >= 500000 && this.update_property_sales.value.expected_pricing <= 50000000) {
-      this.authService.product_sales_update(this.update_property_sales.value, this.id, this.amenityArray, this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
-        data => {
-          //console.log("successful Updated" + data)
-          this.toastr.success('Successfuly Updated', 'Property Sales');
-          window.location.href = GlobalConstants.siteURL + "myproperties"
-        },
-        err => {
-          this.err_caused = true;
-          this.errorMessage = err.error.errors;
-          this.Message = err.error.message;
-          //console.log(this.errorMessage);
-          this.toastr.error(this.Message, 'Something Error', {
-            timeOut: 3000,
-          });
-        }
-      );
-    }
-    else {
-      this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
-        timeOut: 2000,
-      });
-    }
-
-  }
+  
+}
 
   redirect_to_myproperties(): void {
-    window.location.href = GlobalConstants.siteURL = "myproperties"
+    window.location.href=GlobalConstants.siteURL="myproperties"
   }
   redirect_to_home(): void {
-    window.location.href = GlobalConstants.siteURL = "login"
-  }
+    window.location.href=GlobalConstants.siteURL="login"
+    }
 
 }

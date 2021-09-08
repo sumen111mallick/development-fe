@@ -168,8 +168,8 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  product_insert_sale(details, id, amenityArray, furnishingArray,  product_img): Observable<any> {
-    console.log(details.Property_Details.build_name);
+  product_insert_sale(details, id, additional_room_array, amenityArray,  product_img): Observable<any> {
+    // console.log(details.Property_Details.build_name);
     return this.http.post(AUTH_API + 'product/insert_product_sale', JSON.stringify ({
       user_id: id,
       build_name: details.Property_Details.build_name,
@@ -182,6 +182,7 @@ mobile_verify(data): Observable<any> {
       nearest_landmark: details.Property_Location.nearest_landmark,
       map_latitude: details.Property_Location.map_latitude,
       map_longitude: details.Property_Location.map_longitude,
+      pincode: details.Property_Location.pincode,
       product_image: product_img,
       area: details.Property_Details.area,
       area_unit: details.Property_Details.area_unit,
@@ -189,9 +190,8 @@ mobile_verify(data): Observable<any> {
       bedroom: details.Property_additional_details.bedroom,
       bathroom: details.Property_additional_details.bathroom,
       balconies: details.Property_additional_details.balconies,
-      additional_rooms: details.Property_additional_details.additional_rooms,
       furnishing_status: details.Property_additional_details.furnishing_status,
-      furnishings: furnishingArray,
+      // furnishings: furnishingArray,
       total_floors: details.Property_additional_details.total_floors,
       property_on_floor: details.Property_additional_details.property_on_floor,
       rera_registration_status: details.Property_additional_details.rera_registration_status,
@@ -204,8 +204,8 @@ mobile_verify(data): Observable<any> {
       availability_condition: details.Property_additional_details.availability_condition,
       buildyear: details.Property_additional_details.buildyear,
       age_of_property: details.Property_additional_details.age_of_property,
-      parking_covered_count: details.Property_amenities.parking_covered_count,
-      parking_open_count: details.Property_amenities.parking_open_count,
+      parking_covered_count: details.Property_additional_details.parking_covered_count,
+      parking_open_count: details.Property_additional_details.parking_open_count,
       sale_availability: 1,
       ownership: details.Property_price_images.ownership,
       expected_pricing: details.Property_price_images.expected_pricing,
@@ -218,11 +218,13 @@ mobile_verify(data): Observable<any> {
       deposit: details.Property_price_images.security_deposit,
       brokerage_charges: details.Property_price_images.brokerage_charges,
       inc_electricity_and_water_bill:details.Property_price_images.inc_electricity_and_water_bill,
-      amenities: amenityArray
+      video_link: details.Property_price_images.video_link,
+      amenities: amenityArray,
+      additional_rooms: additional_room_array
     }), httpOptions);
   }
 
-  product_insert_rent(details, id, amenityArray, furnishingArray,  product_img,): Observable<any> {
+  product_insert_rent(details, id,  additional_room_array, amenityArray,  product_img,): Observable<any> {
     return this.http.post(AUTH_API + 'product/insert_product_rent', JSON.stringify ({
       user_id: id,
       build_name: details.Property_Details.build_name,
@@ -238,15 +240,13 @@ mobile_verify(data): Observable<any> {
       address: details.Property_address.address,
       city: details.Property_address.city,
       locality: details.Property_address.locality,
+      pincode: details.Property_address.pincode,
       nearest_landmark: details.Property_address.nearest_landmark,
       map_latitude: details.Property_address.map_latitude,
       map_longitude: details.Property_address.map_longitude,
       nearby_places: details.Property_address.nearby_places,
       product_image: product_img,
-      
-      additional_rooms: details.Property_additional_details.additional_rooms,
       furnishing_status: details.Property_additional_details.furnishing_status,
-      furnishings: furnishingArray,
       total_floors: details.Property_additional_details.total_floors,
       property_on_floor: details.Property_additional_details.property_on_floor,
       rera_registration_status: details.Property_additional_details.rera_registration_status,
@@ -258,27 +258,29 @@ mobile_verify(data): Observable<any> {
       availability_condition: details.Property_additional_details.availability_condition,
       buildyear: details.Property_additional_details.buildyear,
       age_of_property: details.Property_additional_details.age_of_property,
-      parking_covered_count: details.Property_amenities_rent.parking_covered_count,
-      parking_open_count: details.Property_amenities_rent.parking_open_count,
+      parking_covered_count: details.Property_additional_details.parking_covered_count,
+      parking_open_count: details.Property_additional_details.parking_open_count,
       rent_availability: 1,
-      ownership: details.Property_amenities_rent.ownership,
-      agreement_type: details.Property_amenities_rent.agreement_type,
-      available_for: details.Property_amenities_rent.available_for,
-      duration_of_rent_aggreement: details.Property_amenities_rent.duration_of_rent_aggreement,
-      month_of_notice: details.Property_amenities_rent.month_of_notice,
-      rent_cond: details.Property_amenities_rent.rent_cond,
-      willing_to_rent_out_to: details.Property_amenities_rent.willing_to_rent_out_to,
+      ownership: details.Property_additional_details.ownership,
+      agreement_type: details.Property_additional_details.agreement_type,
+      available_for: details.Property_additional_details.available_for,
+      duration_of_rent_aggreement: details.Property_additional_details.duration_of_rent_aggreement,
+      month_of_notice: details.Property_additional_details.month_of_notice,
+      rent_cond: details.Property_additional_details.rent_cond,
+      willing_to_rent_out_to: details.Property_additional_details.willing_to_rent_out_to,
       expected_rent: details.Property_price_images.expected_rent,
       //inclusive_pricing_details: details.Property_Pricing.inclusive_pricing_details,
       tax_govt_charge: details.Property_price_images.tax_govt_charge,
       price_negotiable: details.Property_price_images.price_negotiable,
       maintenance_charge_status: details.Property_price_images.maintenance_charge_status,
-      //maintenance_charge: details.Property_Pricing.maintenance_charge,
+      maintenance_charge: details.Property_price_images.maintenance_charge,
       //maintenance_charge_condition: details.Property_Pricing.maintenance_charge_condition,
       security_deposit: details.Property_price_images.security_deposit,
       brokerage_charges: details.Property_price_images.brokerage_charges,
       inc_electricity_and_water_bill:details.Property_price_images.inc_electricity_and_water_bill,
-      amenities: amenityArray
+      video_link: details.Property_price_images.video_link,
+      amenities: amenityArray,
+      additional_rooms: additional_room_array
     }), httpOptions);
   }
 
@@ -653,7 +655,7 @@ mobile_verify(data): Observable<any> {
       brokerage_charges: details.brokerage_charges,
       maintenance_charge: details.maintenance_charge,
       maintenance_charge_condition: details.maintenance_charge_condition,
-      description: details.description,
+      // description: details.description,
       rent_cond: details.rent_cond,
       rent_availability: details.rent_availability,
       sale_availability: details.sale_availability,
@@ -725,7 +727,7 @@ mobile_verify(data): Observable<any> {
       brokerage_charges: details.brokerage_charges,
       maintenance_charge: details.maintenance_charge,
       maintenance_charge_condition: details.maintenance_charge_condition,
-      description: details.description,
+      // description: details.description,
       rent_cond: details.rent_cond,
       rent_availability: details.rent_availability,
       sale_availability: details.sale_availability,
@@ -738,7 +740,8 @@ mobile_verify(data): Observable<any> {
       willing_to_rent_out_to: details.willing_to_rent_out_to,
       agreement_type: details.agreement_type,
       delete_flag: details.delete_flag,
-      view_counter: details.view_counter
+      view_counter: details.view_counter,
+      video_link: details.video_link
     }), httpOptions);
   }
   product_sales_update(details, id, amenityArray, amenity_Uncheck, furnishingArray, product_img): Observable<any> {
@@ -790,7 +793,7 @@ mobile_verify(data): Observable<any> {
       brokerage_charges: details.brokerage_charges,
       maintenance_charge: details.maintenance_charge,
       maintenance_charge_condition: details.maintenance_charge_condition,
-      description: details.description,
+      // description: details.description,
       rent_cond: details.rent_cond,
       rent_availability: details.rent_availability,
       sale_availability: details.sale_availability,
@@ -804,7 +807,8 @@ mobile_verify(data): Observable<any> {
       willing_to_rent_out_to: details.willing_to_rent_out_to,
       agreement_type: details.agreement_type,
       delete_flag: details.delete_flag,
-      view_counter: details.view_counter
+      view_counter: details.view_counter,
+      video_link: details.video_link
     }), httpOptions);
   }
   delete_pro_img(id): Observable<any> {
@@ -813,17 +817,18 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-
-
-
-
-
   // adminEndpoints
 
   admin_login(credentials): Observable<any> {
     return this.http.post(AUTH_API + 'admin/admin_login', JSON.stringify({
       email: credentials.email,
       password: credentials.password,
+    }), httpOptions);
+  }
+  
+  get_pincodebyid(id): Observable<any> {
+    return this.http.post(AUTH_API + 'auth/get_pincodebyid', JSON.stringify({
+      id: id,
     }), httpOptions);
   }
 

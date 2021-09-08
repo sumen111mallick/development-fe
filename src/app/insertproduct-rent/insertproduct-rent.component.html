@@ -46,8 +46,8 @@
                                     <p class="text-center">Fill in the form to list your property</p>
                                     <div class="f1-steps">
                                         <div class="f1-progress">
-                                            <div class="f1-progress-line" data-now-value="10" data-number-of-steps="5"
-                                                style="width: 10%;"></div>
+                                            <div class="f1-progress-line" data-now-value="12.5" data-number-of-steps="4"
+                                                style="width: 12.5%;"></div>
                                         </div>
                                         <div class="f1-step active">
                                             <!--<div class="f1-step-icon"><i class="fa fa-user"></i></div>-->
@@ -67,21 +67,17 @@
                                         </div>
                                         <div class="f1-step">
                                             <div class="f1-step-icon"><span>4</span></div>
-                                            <p class="full-text">Amenities & Rent Information</p>
+                                            <p class="full-text">Pricing & Images</p>
                                             <p class="short-text">Step 4</p>
                                         </div>
-                                        <div class="f1-step">
-                                            <div class="f1-step-icon"><span>5</span></div>
-                                            <p class="full-text">Pricing & Images</p>
-                                            <p class="short-text">Step 5</p>
-                                        </div>
+                                        
                                     </div>
 
                                     <fieldset formGroupName="Property_Details">
                                         <h4 class="short-text">Property Details</h4>
                                         <div class="jumbotron">
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="build_name">Property name</label>
                                                         <input type="text" name="build_name"
@@ -89,52 +85,45 @@
                                                             id="build_name" formControlName="build_name">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="type">Property Type</label>
                                                         <select class="form-control" formControlName="type">
-                                                            <option value="" disabled selected>Select Property Type
+                                                            <!-- <option value="" disabled selected>Select Property Type
                                                             </option>
                                                             <option *ngFor="let property_type of property_type_result"
                                                                 [value]="property_type.id">{{property_type.name}}
-                                                            </option>
+                                                            </option> -->
+                                                            <option value="" disabled >Select Property Type</option>
+                                                            <option value="" disabled ><h3>ALL RESIDENTIAL</h3></option>
+                                                            <option value="1">Flat/ Apartment</option>
+                                                            <option value="2">Residential House</option>
+                                                            <option value="3">Villa</option>
+                                                            <option value="4">Builder Floor Apartment</option>
+                                                            <option value="5">Residential Land/ Plot</option>
+                                                            <option value="6">Penthouse</option>
+                                                            <option value="7">Studio Apartment</option>
+                                                            <option value="" disabled ><h3>ALL COMMERCIAL</h3></option>
+                                                            <option value="8">Commercial Office Space</option>
+                                                            <option value="9">Office in IT Park/ SEZ</option>
+                                                            <option value="10">Commercial Shop</option>
+                                                            <option value="11">Commercial Showroom</option>
+                                                            <option value="12">Commercial Land</option>
+                                                            <option value="13">Warehouse/ Godown</option>
+                                                            <option value="14">Industrial Land</option>
+                                                            <option value="15">Industrial Building</option>
+                                                            <option value="16 ">Industrial Shed</option>
+                                                            <option value="" disabled ><h3>ALL AGRICULTURAL</h3></option>
+                                                            <option value="17">Agricultural Land</option>
+                                                            <option value="18">Farm House</option>
                                                         </select>
                                                         <!--<input type="text" name="f1-last-name" placeholder="Last name..."
                                                         class="f1-last-name form-control" id="f1-last-name">-->
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="display_address">Display Address?</label>
-                                                        <select class="form-control" formControlName="display_address">
-                                                            <option value="" disabled selected>Select Option</option>
-                                                            <option value="1">Yes</option>
-                                                            <option value="0">No</option>
-                                                        </select>
-                                                        <!--<textarea name="f1-about-yourself" placeholder="About yourself..."
-                                                        class="f1-about-yourself form-control"
-                                                        id="f1-about-yourself"></textarea>-->
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="area"> Area</label>
-                                                        <input type="text" class="form-control" name="area"
-                                                            formControlName="area" id="area"
-                                                            placeholder="Please Enter the Area...">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="carpet_area">Carpet Area</label>
-                                                        <input type="text" class="form-control" name="carpet_area"
-                                                            formControlName="carpet_area" id="carpet_area"
-                                                            placeholder="Please Enter the Carpet Area...">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label>Area Unit</label>
                                                         <select class="form-control" formControlName="area_unit">
@@ -158,6 +147,14 @@
                                                             <option value="chataks">chataks</option>
                                                             <option value="perch">perch</option>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="area">Property Area</label>
+                                                        <input type="number" class="form-control" name="area"
+                                                            formControlName="area" id="area"
+                                                            placeholder="Please Enter the Area..." (keypress)="keyPressNumbers($event)">
                                                     </div>
                                                 </div>
                                             </div>
@@ -277,24 +274,33 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="col-lg-3 col-md-3 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="city">City</label>
-                                                        <input type="text" class="form-control" formControlName="city"
-                                                            id="city" name="city" placeholder="Enter City Name...">
+                                                            <select class="form-control" formControlName="city">
+                                                                <option value="Delhi">Delhi</option>
+                                                            </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="col-lg-3 col-md-3 col-sm-12">
                                                     <div class="form-group">
-                                                        <label for="locality">Locality</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="locality" id="locality" name="locality"
-                                                            placeholder="Please Enter Locality...">
+                                                        <label for="area_name">Locality</label>
+                                                            <select class="form-control" formControlName="locality"  (ngModelChange)="onchange_locality($event)">
+                                                                <option value="" disabled>Select Option</option>
+                                                                <option *ngFor="let locality of dropdownList" value="{{locality.item_id}}">{{locality.item_text}}</option>
+                                                            </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="col-lg-3 col-md-3 col-sm-12">
                                                     <div class="form-group">
-                                                        <label for="nearest_landmark">Nearest Landmark</label>
+                                                        <label for="area_name">Pin Code</label>
+                                                        <input type="text" class="form-control" formControlName="pincode" id="pincode"  name="Pincode" placeholder="Please Enter Pin code"
+                                                        readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="nearest_landmark">Nearest Place</label>
                                                         <input type="text" class="form-control"
                                                             formControlName="nearest_landmark" id="nearest_landmark"
                                                             name="nearest_landmark"
@@ -303,22 +309,11 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="nearby_places">Nearby Places</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="nearby_places" id="nearby_places"
-                                                            name="nearby_places"
-                                                            placeholder="Please Enter Nearby Place...">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <button type="button"
                                                         class="btn btn-previous ml25">Previous</button>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="f1-buttons">
                                                         <button type="button" class="btn btn-next ml25">Next</button>
                                                     </div>
@@ -335,72 +330,9 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label> Additional Rooms</label>
-                                                        <select class="form-control" formControlName="additional_rooms">
-                                                            <option value="" disabled>Please select Additional Rooms
-                                                            </option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label> Equipment</label>
-                                                        <select class="form-control" formControlName="equipment">
-                                                            <option value="" disabled>Please Select Equipment</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="features">Features</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="features" id="features" name="features"
-                                                            placeholder="Please Enter Features...">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="jumbotron">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="age_of_property">Age of Property</label>
-                                                        <input type="number" class="form-control"
-                                                            formControlName="age_of_property" id="age_of_property"
-                                                            name="nearby_places"
-                                                            placeholder="Please Enter Age of Property...">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Furnishings</label>
-                                                        <select class="form-control "
-                                                            (change)="furnishStatus($event.target.value)"
-                                                            formControlName="furnishing_status">
-                                                            <option value="" disabled>Select Furnishing Status</option>
-                                                            <option value="FFR">Furnished</option>
-                                                            <option value="SFR">SemiFurnished</option>
-                                                            <option value="NFR">Not furnished</option>
+                                                        <select class="form-control" formControlName="additional_rooms" (ngModelChange)="onchange_add_room($event)">
+                                                            <option value="1">Yes</option>
+                                                            <option value="0">No</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -420,14 +352,12 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
-                                                        <label>Rera Registration Status</label>
+                                                        <label>RERA Registration Status</label>
                                                         <select class="form-control "
                                                             formControlName="rera_registration_status">
-                                                            <option value="" disabled>Select Rera Registration Status.
+                                                            <option value="" disabled>Select RERA Registration Status.
                                                             </option>
                                                             <option value="Registered">Registered</option>
                                                             <option value="Applied For">Applied For</option>
@@ -435,35 +365,245 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label>Reserved Parking?</label>
-                                                        <select class="form-control"
-                                                            formControlName="additional_parking_status"
-                                                            (change)="parkingStatus($event.target.value)">
-                                                            <option value="" disabled>Select Parking Status</option>
-                                                            <option value="1">Yes</option>
-                                                            <option value="0">No</option>
-                                                        </select>
-                                                    </div>
+                                            </div>
+                                            
+                                            <div class="row additional_row" *ngIf="Add_room_tab == true"> 
+                                                <div class="col-xxs-6 col-sm col-lg-3">
+                                                    <ul class="ui_kit_checkbox selectable-list">
+                                                        <li>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <div class="form-group">
+                                                                <input type="checkbox" class="custom-control-input  form-control"
+                                                                    id="pooja_room" value="Pooja Room"   (change)="onchange_rooms($event,'Pooja Room')">
+                                                                    <label class="custom-control-label"
+                                                                    for="pooja_room">Pooja Room</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
+                                                <div class="col-xxs-6 col-sm col-lg-3">
+                                                    <ul class="ui_kit_checkbox selectable-list">
+                                                        <li>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="study_room" value="Study Room"  (change)="onchange_rooms($event,'Study Room')">
+                                                                <label class="custom-control-label"
+                                                                    for="study_room">Study Room</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xxs-6 col-sm col-lg-3">
+                                                    <ul class="ui_kit_checkbox selectable-list">
+                                                        <li>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="servant_room" value="Servant Room" (change)="onchange_rooms($event,'Servant Room')">
+                                                                <label class="custom-control-label"
+                                                                    for="servant_room">Servant Room</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xxs-6 col-sm col-lg-3">
+                                                    <ul class="ui_kit_checkbox selectable-list">
+                                                        <li>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="other_room" value="Other Room" (change)="onchange_rooms($event,'Other Room')">
+                                                                <label class="custom-control-label"
+                                                                    for="other_room">Other Room</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label>Year Built</label>
                                                         <select class="form-control" formControlName="buildyear">
                                                             <option value="" disabled>Select Year Built </option>
-                                                            <option value="2015">2015</option>
-                                                            <option value="2016">2016</option>
-                                                            <option value="2017">2017</option>
-                                                            <option value="2018">2018</option>
-                                                            <option value="2019">2019</option>
-                                                            <option value="2020">2020</option>
                                                             <option value="2021">2021</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2015">2015</option>
+                                                            <option value="2014">2014</option>
+                                                            <option value="2013">2013</option>
+                                                            <option value="2012">2012</option>
+                                                            <option value="2011">2011</option>
+                                                            <option value="2010">2010</option>
+                                                            <option value="2009">2009</option>
+                                                            <option value="2008">2008</option>
+                                                            <option value="2007">2007</option>
+                                                            <option value="2006">2006</option>
+                                                            <option value="2005">2005</option>
+                                                            <option value="2004">2004</option>
+                                                            <option value="2003">2003</option>
+                                                            <option value="2002">2002</option>
+                                                            <option value="2001">2001</option>
+                                                            <option value="2000">2000</option>
+                                                            <option value="1999">1999</option>
+                                                            <option value="1998">1998</option>
+                                                            <option value="1997">1997</option>
+                                                            <option value="1996">1996</option>
+                                                            <option value="1995">1995</option>
+                                                            <option value="1994">1994</option>
+                                                            <option value="1993">1993</option>
+                                                            <option value="1992">1992</option>
+                                                            <option value="1991">1991</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Furnishings</label>
+                                                        <select class="form-control " (ngModelChange)="furnishStatus($event)"  formControlName="furnishing_status">
+                                                            <option value="FFR">Furnished</option>
+                                                            <option value="NFR">Not furnished</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Reserved Parking?</label>
+                                                        <select class="form-control"  formControlName="additional_parking_status"
+                                                        (ngModelChange)="parkingStatus($event)">
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">No</option>
+                                                    </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row additional_row" *ngIf="parking_row == true">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Covered Parking</label>
+                                                        <select class="form-control"
+                                                            formControlName="parking_covered_count"
+                                                            id="parking_covered_count" name="parking_covered_count"
+                                                            placeholder="Please Enter Covered Parking...">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="parking_open_count">Open Parking</label>
+                                                        <select class="form-control"
+                                                            formControlName="parking_open_count" id="parking_open_count"
+                                                            name="parking_open_count">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                            <div class="row additional_row" *ngIf="furnish_row == true">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <h3> Amenties </h3>
+                                                    <div class="row">
+                                                        <div class="col-xxs-6 col-sm col-lg-3"
+                                                            *ngFor="let menuData of amenitiesresult">
+                                                            <!-- {{product_amenties.id}} -->
+                                                            <ul class="ui_kit_checkbox selectable-list">
+                                                                <li>
+                                                                    <div class="custom-control custom-checkbox ">
+                                                                        <input type="checkbox"
+                                                                            class="custom-control-input"
+                                                                            id="{{menuData.id}}" value="{{menuData.id}}"
+                                                                            (change)="onchangeAmenties($event,menuData.id)">
+                                                                        <label class="custom-control-label"
+                                                                            for="{{menuData.id}}">{{menuData.name}}</label>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="jumbotron">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Willing To Rent Out To</label>
+                                                    <select class="form-control "
+                                                        formControlName="willing_to_rent_out_to">
+                                                        <option value="" disabled>Select Preferred </option>
+                                                        <option value="Family">Family</option>
+                                                        <option value="Single Men">Single Men</option>
+                                                        <option value="Single Women">Single Women</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Agreement Type</label>
+                                                    <select class="form-control " formControlName="agreement_type">
+                                                        <option value="" disabled>Select Preferred </option>
+                                                        <option value="Company Lease Agreement">Company Lease
+                                                            Agreement</option>
+                                                        <option value="Any">Any</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="available_for">Available On</label>
+                                                    <input type="date" class="form-control"
+                                                        formControlName="available_for" id="available_for"
+                                                        name="available_for">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="locality">Month Of Notice</label>
+                                                    <select class="form-control" formControlName="month_of_notice">
+                                                        <option value="" disabled>Select Option</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Duration Of Rent Agreement</label>
+                                                    <select class="form-control"
+                                                        formControlName="duration_of_rent_aggreement">
+                                                        <option value="" disabled>Select the Duration</option>
+                                                        <option value="One Year">One Year</option>
+                                                        <option value="Three Years">Three Years</option>
+                                                        <option value="Custom">Custom</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                         <div class="jumbotron">
                                             <div class="row">
@@ -508,6 +648,7 @@
                                                         <select class="form-control"
                                                             formControlName="property_on_floor">
                                                             <option value="" disabled>Select Present Floors </option>
+                                                            <option value="Ground Floor">Ground Floor</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -541,11 +682,11 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <button type="button"
                                                         class="btn btn-previous ml25">Previous</button>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="f1-buttons">
                                                         <button type="button" class="btn btn-next ml25">Next</button>
                                                     </div>
@@ -554,33 +695,8 @@
                                         </div>
                                     </fieldset>
 
-                                    <fieldset formGroupName="Property_amenities_rent">
-                                        <h4 class="short-text">Amenities & Rent Information</h4>
+                                    <!-- <fieldset formGroupName="Property_amenities_rent">
                                         <div class="jumbotron">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <h3> Amenities</h3>
-                                                    <div class="row">
-                                                        <div class="col-xxs-6 col-sm col-lg-3"
-                                                            *ngFor="let menuData of amenitiesresult">
-                                                            <!-- {{product_amenties.id}} -->
-                                                            <ul class="ui_kit_checkbox selectable-list">
-                                                                <li>
-                                                                    <div class="custom-control custom-checkbox ">
-                                                                        <input type="checkbox"
-                                                                            class="custom-control-input"
-                                                                            id="{{menuData.id}}" value="{{menuData.id}}"
-                                                                            (change)="onchangeAmenties($event,menuData.id)">
-                                                                        <label class="custom-control-label"
-                                                                            for="{{menuData.id}}">{{menuData.name}}</label>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr>
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
@@ -608,7 +724,7 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="available_for">Available On</label>
-                                                        <input type="number" class="form-control"
+                                                        <input type="date" class="form-control"
                                                             formControlName="available_for" id="available_for"
                                                             name="available_for">
                                                     </div>
@@ -616,14 +732,6 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="rent_cond">Rent Condition</label>
-                                                        <input type="number" class="form-control"
-                                                            formControlName="rent_cond" id="rent_cond" name="rent_cond"
-                                                            placeholder="Please Enter Rent Condition...">
-                                                    </div>
-                                                </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="locality">Month Of Notice</label>
@@ -650,8 +758,8 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
+                                            </div> -->
+                                            <!-- <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label>Ownership</label>
@@ -699,25 +807,39 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                            </div> -->
+                                            <!-- <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <button type="button"
                                                         class="btn btn-previous ml25">Previous</button>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="f1-buttons">
                                                         <button type="button" class="btn btn-next ml25">Next</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </fieldset>
+                                    </fieldset> -->
 
                                     <fieldset formGroupName="Property_price_images">
                                         <h4 class="short-text">Pricing & Images</h4>
                                         <div class="jumbotron">
                                             <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="security_deposit">Security Deposit</label>
+                                                            <select class="form-control" formControlName="security_deposit">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="1 Month Rent">1 Month Rent</option>
+                                                            <option value="2 Month Rent">2 Month Rent</option>
+                                                            <option value="3 Month Rent">3 Month Rent</option>
+                                                            <option value="4 Month Rent">4 Month Rent</option>
+                                                            <option value="5 Month Rent">5 Month Rent</option>
+                                                            <option value="6 Month Rent">6 Month Rent</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="expected_rent">Expected Rent</label>
@@ -740,14 +862,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="security_deposit">Security Deposit</label>
-                                                        <input type="number" class="form-control"
-                                                            formControlName="security_deposit" id="security_deposit"
-                                                            name="security_deposit">
-                                                    </div>
-                                                </div>
                                             </div>
 
                                             <div class="row">
@@ -765,25 +879,34 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label>Is Tax and Govt. Charges Included?</label>
-                                                        <select class="form-control" formControlName="tax_govt_charge">
-                                                            <option value="" disabled>Select Option</option>
-                                                            <option selected value="1">Yes</option>
+                                                        <label>Is Price Negotiable?</label>
+                                                        <select class="form-control" formControlName="negotiable_status" 
+                                                        (ngModelChange)="price_negotiable_status($event)">
+                                                            <option value="1">Yes</option>
                                                             <option value="0">No</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="jumbotron">
+                                            <div class="row" *ngIf="price_negotiable_row == true">
+                                                <div class="col-lg-10 col-md-10 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="locality">Price Negotiable</label>
+                                                        <input type="number" class="form-control"
+                                                            formControlName="price_negotiable" placeholder="Enter the Price Negotiable" (keypress)="keyPressNumbers($event)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-sm-12" id="Negotiable_info_btn">
+                                                    <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="This Price will not shown visiable to cumtomers. this for us to negotiate with customer on your behalf"></i>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label>Is Price Negotiable?</label>
-                                                        <select class="form-control" formControlName="price_negotiable">
+                                                        <label>Is Tax and Govt. Charges Included?</label>
+                                                        <select class="form-control" formControlName="tax_govt_charge">
                                                             <option value="" disabled>Select Option</option>
-                                                            <option value="1">Yes</option>
+                                                            <option selected value="1">Yes</option>
                                                             <option value="0">No</option>
                                                         </select>
                                                     </div>
@@ -793,21 +916,23 @@
                                                         <label>Is Maintenance Charge Included?</label>
                                                         <select class="form-control"
                                                             formControlName="maintenance_charge_status"
-                                                            (change)="maintenanceStatus($event.target.value)">
-                                                            <option value="" disabled>Select options</option>
+                                                            (ngModelChange)="maintenanceStatus($event)">
                                                             <option value="0">No</option>
                                                             <option value="1">Yes</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <div class="row" *ngIf="maintenance_row == true"> 
+                                                <div class="col-lg-6 col-12 offset-lg-6">
                                                     <div class="form-group">
-                                                        <label for="locality">Brokerage Charge</label>
-                                                        <input type="text" class="form-control"
-                                                            formControlName="brokerage_charges">
+                                                        <label>Maintenance Charge Condition</label>
+                                                        <select class="form-control " formControlName="maintenance_charge">
+                                                          <option value="" disabled>Select Option</option>
+                                                          <option value="Monthly">Monthly</option>+
+                                                          <option value="Annually">Annually</option>
+                                                          <option value="One Time">One Time</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -903,6 +1028,13 @@
                                                                 <p>Click To Upload Multiple Image</p>
                                                             </label>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="locality">Property Video Link (YouTube)</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="video_link">
                                                     </div>
                                                 </div>
                                             </div>
