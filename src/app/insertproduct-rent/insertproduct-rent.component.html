@@ -21,9 +21,9 @@
 
 <body>
     <div class="wrapper">
-        <div *ngIf="showLoadingIndicator">
+        <!-- <div *ngIf="showLoadingIndicator"> -->
             <div class="preloader"></div>
-        </div>
+        <!-- </div> -->
 
         <!--<app-dashboard-topbar></app-dashboard-topbar>-->
         <section class="our-dashbord dashbord bgc-f7 pb50">
@@ -40,6 +40,9 @@
                                 <app-dashboard-nav></app-dashboard-nav>
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 form-box">
+                                <div *ngIf="showLoadingIndicator">
+                                    <div class="preloader1"></div>
+                                </div>
                                 <form role="form" action="" method="post" class="f1" [formGroup]="insert_property_rent">
 
                                     <h3>List Property for Rent</h3>
@@ -87,6 +90,8 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
+                                                        <input type="hidden" name="draft_form_id" class="form-control"
+                                                            id="draft_form_id" formControlName="draft_form_id">
                                                         <label for="type">Property Type</label>
                                                         <select class="form-control" formControlName="type">
                                                             <!-- <option value="" disabled selected>Select Property Type
@@ -226,9 +231,18 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                                    <div class="f1-buttons">
-                                                        <button type="button" class="btn btn-next">Next</button>
+                                                <div class="col-lg-5  offset-lg-7 col-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-7">
+                                                            <div class="f1-buttons">
+                                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <div class="f1-buttons">
+                                                                <button type="button" class="btn btn-next">Next</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -313,9 +327,18 @@
                                                     <button type="button"
                                                         class="btn btn-previous ml25">Previous</button>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="f1-buttons">
-                                                        <button type="button" class="btn btn-next ml25">Next</button>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                                    <div class="row">
+                                                        <div class="col-lg-7">
+                                                            <div class="f1-buttons">
+                                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <div class="f1-buttons">
+                                                                <button type="button" class="btn btn-next">Next</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -330,7 +353,7 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label> Additional Rooms</label>
-                                                        <select class="form-control" formControlName="additional_rooms" (ngModelChange)="onchange_add_room($event)">
+                                                        <select class="form-control" formControlName="additional_rooms_status" (ngModelChange)="onchange_add_room($event)">
                                                             <option value="1">Yes</option>
                                                             <option value="0">No</option>
                                                         </select>
@@ -686,9 +709,18 @@
                                                     <button type="button"
                                                         class="btn btn-previous ml25">Previous</button>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="f1-buttons">
-                                                        <button type="button" class="btn btn-next ml25">Next</button>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                                    <div class="row">
+                                                        <div class="col-lg-7">
+                                                            <div class="f1-buttons">
+                                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <div class="f1-buttons">
+                                                                <button type="button" class="btn btn-next">Next</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1044,9 +1076,18 @@
                                                         class="btn btn-previous ml25">Previous</button>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                                    <div class="f1-buttons">
-                                                        <button type="submit" (click)="onSubmitRent()"
-                                                            class="btn btn-submit">Submit</button>
+                                                    <div class="row">
+                                                        <div class="col-lg-7">
+                                                            <div class="f1-buttons">
+                                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-5">
+                                                            <div class="f1-buttons">
+                                                                <button type="submit" (click)="onSubmitRent()"
+                                                                class="btn btn-submit">Submit</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

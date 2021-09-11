@@ -79,7 +79,7 @@
 												</div>
 											</div>
 										<li class="list_data">
-											<a href=""><p><span>{{ item.productdetails.property__type.name | titlecase}}</span></p></a>
+											<a href="" *ngIf="item.productdetails.property__type != null"><p><span>{{ item.productdetails.property__type.name | titlecase}}</span></p></a>
 										</li>
 										<li class="list_data"><a href="#">{{ item.productdetails.city | titlecase}}</a></li>
 										<li class="list_data"><a href="#">{{ item.productdetails.bedroom }}</a></li>

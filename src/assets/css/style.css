@@ -4618,7 +4618,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
 }
 .feat_property.list.favorite_page.style2{
   border-bottom: none;
-  margin: 10px 0;
+  margin: 0px!important;
   margin-bottom: 0;
   padding-bottom: 0;
 }
@@ -7494,7 +7494,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   text-transform: capitalize;
 }
 .breadcrumb_content.style2{
-  margin-bottom: 55px;
+  margin-bottom: 20px;
 }
 .breadcrumb_content.style2 ol.breadcrumb{
   background-color: transparent;
@@ -11032,7 +11032,11 @@ a.btn.btn_error{
   font-family: "Nunito";
   color: #ffffff;
   font-weight: bold;
-  line-height: 2.2;
+  line-height: 20px;
+}
+.draft_property{
+  color: #f35b3f;
+  font-weight: 800;
 }
 .packages_table .table td,
 .packages_table .table th,
@@ -11045,7 +11049,7 @@ a.btn.btn_error{
   color: #484848;
   font-weight: 600;
   line-height: 3;
-  padding-left: 30px;
+  padding-left: 15px;
 }
 .property_table .table td,
 .property_table .table th{
@@ -16610,6 +16614,9 @@ button.gm-ui-hover-effect:focus {
 }
 
 @media(min-width: 768px) {
+  .btn-next{
+    float: right!important;
+  }
   .additional_row{
     background: #fff;
     align-items: center;

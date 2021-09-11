@@ -16,11 +16,13 @@ export class MypropertiesComponent implements OnInit {
 
   showLoadingIndicator :boolean= false;
   content: [];
+  public draft_pro_data:any=[];
   ftpstring: string = GlobalConstants.ftpURL;
   usertype:any;
   page: number = 1;
  public p: number;
   public contentLenght:number=0;
+  public draft_Lenght:number=0;
   e: any;
 
   constructor(
@@ -40,6 +42,7 @@ export class MypropertiesComponent implements OnInit {
   
     this.showLoadingIndicator = true;
     this.Myproperty();
+    this.Draft_property();
    
 
   }
@@ -50,6 +53,22 @@ export class MypropertiesComponent implements OnInit {
         this.contentLenght=data.data.length;
         //console.log(this.contentLenght);
         this.content = data.data;
+        this.showLoadingIndicator = false;
+        //console.log(data.data);
+
+      },
+      err => {
+        //console.log(err)
+      }
+    )
+  }
+  
+  Draft_property(){
+    this.showLoadingIndicator = true;
+    this.userService.Draft_properties().pipe().subscribe(
+      (data: any) => {
+        this.draft_Lenght=data.data.length;
+        this.draft_pro_data= data.data;
         this.showLoadingIndicator = false;
         //console.log(data.data);
 

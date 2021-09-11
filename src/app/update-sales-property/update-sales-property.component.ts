@@ -14,6 +14,7 @@ import { MapsAPILoader, AgmMap } from '@agm/core';
 // import { MouseEvent } from '@agm/core';
 // import { google } from "google-maps";
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { InternalUserService } from './../_services/internal-user.service';
 
 @Component({
   selector: 'app-update-sales-property',
@@ -21,6 +22,13 @@ import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angula
   styleUrls: ['./update-sales-property.component.css']
 })
 export class UpdateSalesPropertyComponent implements OnInit {
+  addition_room: addition_room = [
+    { id: 1, name: "Other Room"},
+    { id: 2, name: "Pooja Room"},
+    { id: 3, name: "Study Room"},
+    { id: 4, name: "Servant Room"}
+  ];
+  [x: string]: any;
 
   selectedId: number;
 
@@ -91,6 +99,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
   isLoggedIn = false;
   isFormSubmitted = false;
   roles: string[] = [];
+  additional_room_array=[];
 
   saleValue: boolean = true;
   rentValue: boolean = false;
@@ -113,66 +122,75 @@ export class UpdateSalesPropertyComponent implements OnInit {
   err_caused: boolean = false;
   selectedItems: string[];
   Uncheck_Items: string[];
+  dropdownList = [];
 
   content: any = {};
   product_amenties: any;
   Expected_PriceEroor: boolean = false;
   update_product_img: string[];
+  public price_negotiable_row:boolean=false;
+  public parking_row:boolean=false;
+  public maintenance_row:boolean=false;
+  public furnish_row:boolean=false;
+  public Add_room_tab:boolean=false;
 
   public property_type: any;
   public property_type_result: any;
 
   update_property_sales = this.fb.group({
-    build_name: ['', Validators.required],
-    type: ['', Validators.required],
-    willing_to_rent_out_to: ['', Validators.required],
-    agreement_type:  ['', Validators.required],
-    address:  ['', Validators.required],
-    city:  ['', Validators.required],
-    locality:  ['', Validators.required],
-    property_detail:  ['', Validators.required],
-    nearest_landmark:  ['', Validators.required],
-    map_latitude:  ['', Validators.required],
-    map_longitude:  ['', Validators.required],
-    display_address:  ['', Validators.required],
-    area:  ['', Validators.required],
-    area_unit:  ['', Validators.required],
-    carpet_area:  ['', Validators.required],
-    bedroom:  ['', Validators.required],
-    bathroom:  ['', Validators.required],
-    balconies:  ['', Validators.required],
-    additional_rooms:  ['', Validators.required],
-    furnishing_status:  ['', Validators.required],
-    furnishings:  ['', Validators.required],
-    total_floors:  ['', Validators.required],
-    property_on_floor:  ['', Validators.required],
-    rera_registration_status:  ['', Validators.required],
-    additional_parking_status:  ['', Validators.required],
-    parking_covered_count:  ['', Validators.required],
-    expected_pricing:  ['', Validators.required],
-    possession_by:  ['', Validators.required],
-    tax_govt_charge:  ['', Validators.required],
-    price_negotiable:  ['', Validators.required],
-    facing_towards:  ['', Validators.required],
-    availability_condition:  ['', Validators.required],
-    buildyear:  ['', Validators.required],
-    age_of_property:  ['', Validators.required],
-    expected_rent:  ['', Validators.required],
-    description:  ['', Validators.required],
-    inc_electricity_and_water_bill:  ['', Validators.required],
-    month_of_notice:  ['', Validators.required],
-    duration_of_rent_aggreement:  ['', Validators.required],
-    security_deposit:  ['', Validators.required],
-    rent_cond:  ['', Validators.required],
-    ownership:  ['', Validators.required],
-    available_for:  ['', Validators.required],
-    nearby_places:  ['', Validators.required],
-    equipment:  ['', Validators.required],
-    features:  ['', Validators.required],
-    maintenance_charge:  ['', Validators.required],
-    maintenance_charge_status:  ['', Validators.required],
-    parking_open_count:  ['', Validators.required],
-    video_link:  ['', Validators.required]
+    Property_Details: new FormGroup({
+      build_name: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required),
+      area: new FormControl('', Validators.required),
+      area_unit: new FormControl('', Validators.required),
+      property_detail: new FormControl('', Validators.required),
+    }),
+
+    Property_Location: new FormGroup({
+      address: new FormControl('', Validators.required),
+      map_latitude: new FormControl('', Validators.required),
+      map_longitude: new FormControl('', Validators.required),
+      city: new FormControl('Delhi', Validators.required),
+      locality: new FormControl(''),
+      nearest_landmark: new FormControl('', Validators.required),
+      pincode: new FormControl('')
+    }),
+
+    Property_additional_details: new FormGroup({
+      bedroom: new FormControl('', Validators.required),
+      bathroom: new FormControl('', Validators.required),
+      balconies: new FormControl('', Validators.required),
+      additional_rooms_status: new FormControl('0', Validators.required),
+      additional_rooms: new FormControl(''),
+      furnishings: new FormControl(''),
+      furnishing_status: new FormControl('NFR'),
+      facing_towards: new FormControl(''),
+      rera_registration_status: new FormControl('', Validators.required),
+      additional_parking_status: new FormControl('0', Validators.required),
+      buildyear: new FormControl('', Validators.required),
+      availability_condition: new FormControl(''),
+      possession_by: new FormControl(''),
+      property_on_floor: new FormControl(''),
+      total_floors: new FormControl(''),
+      parking_covered_count: new FormControl(''),
+      parking_open_count: new FormControl('')
+    }),
+
+    Property_price_images: new FormGroup({
+      ownership: new FormControl('', Validators.required),
+      expected_pricing: new FormControl('', Validators.required),
+      // security_deposit: new FormControl('', Validators.required),
+      inc_electricity_and_water_bill: new FormControl(''),
+      tax_govt_charge: new FormControl(''),
+      price_negotiable: new FormControl(''),
+      negotiable_status: new FormControl('0'),
+      maintenance_charge_status: new FormControl('0'),
+      month_of_notice: new FormControl(''),
+      maintenance_charge: new FormControl(''),
+      // inclusive_pricing_details: new FormControl(''),
+      // brokerage_charges: new FormControl(''),
+      video_link: new FormControl('')
+    }),
   });
   imagePre1: any;
   imagePre2: any;
@@ -185,6 +203,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
   Amenties_id: any;
   Amenties_length: number;
   product_amenties_length:number=null;
+  public show_draft_btn:boolean=false;
   showLoadingIndicator: boolean;
   product_img:any={};
   product_img_length:number=0;
@@ -197,6 +216,9 @@ export class UpdateSalesPropertyComponent implements OnInit {
   @ViewChild(AgmMap, { static: true }) public agmMap: AgmMap;
   zoom: number;
   location: string;
+  public add_room_array:any=[];
+  update_room_array:any=[];
+  add_room_string:any=[];
 
   // value: number = 30000000;
   options: Options = {
@@ -219,7 +241,8 @@ export class UpdateSalesPropertyComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private internalUserService: InternalUserService
   ) {
     this.route.params.subscribe((params) => {
       this.id = params["id"];
@@ -237,6 +260,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
       this.property_details(this.id);
       this.amenities();
       this.Property_type_data();
+      this.get_area();
     }
     else {
       this.redirect_to_home();
@@ -265,7 +289,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
           this.zoom = 15;
           //console.log(this.latCus);
           //console.log(this.location);
-          this.update_property_sales.patchValue({
+          this.update_property_sales.controls.Property_Location.patchValue({
             address: this.location,
             map_latitude: this.latCus,
             map_longitude: this.longCus,
@@ -288,8 +312,10 @@ export class UpdateSalesPropertyComponent implements OnInit {
       //console.log(resp); 
       this.longCus = resp.lng;
       this.latCus = resp.lat;
-      this.form.map_latitude = this.latCus;
-      this.form.map_longitude = this.longCus;
+      this.update_property_sales.controls.Property_Location.patchValue({
+        map_latitude: this.latCus,
+        map_longitude: this.longCus,
+      });
     })
   }
   markerDragEnd($event: google.maps.MouseEvent) {
@@ -301,7 +327,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
         if (results[0]) {
           this.zoom = 12;
           //console.log(results[0].formatted_address);
-          this.update_property_sales.patchValue({
+          this.update_property_sales.controls.Property_Location.patchValue({
             address: results[0].formatted_address,
             map_latitude: this.latCus,
             map_longitude: this.longCus,
@@ -323,20 +349,24 @@ export class UpdateSalesPropertyComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.authService.Propery_get_id(this.id).subscribe(
       (data: any) => {
-        this.product_img = data.data.product_img;
-        //console.log(data);
+        console.log(data);
         this.data_id = data.data.id;
         if (this.data_id == 0) {
           this.redirect_to_myproperties();
         }
         this.product_img = data.data.product_img;
+        this.add_room_string=data.data.additional_rooms;
+        this.add_room_array = this.add_room_string.split(',');
+        if(data.data.additional_rooms.length){
+          this.update_room_array=this.add_room_array;
+        }
+          if (data.data.draft == 1) {
+            this.show_draft_btn=true;
+          }
+        this.product_img = data.data.product_img;
         this.product_img_length = this.product_img.length;
-        //console.log(this.product_img);
-        //console.log(this.product_img_length);
         this.product_amenties = data.data.amenities;
-        //console.log(this.product_amenties);
         this.product_amenties_length = data.data.amenities.length;
-        //console.log(this.product_amenties_length);
         this.url = this.ftpstring;
         this.id = data.data.id;
         this.build_name = data.data.build_name;
@@ -358,6 +388,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
         this.bathroom = data.data.bathroom;
         this.balconies = data.data.balconies;
         this.additional_rooms = data.data.additional_rooms;
+        this.additional_rooms_status = data.data.additional_rooms_status;
         this.furnishing_status = data.data.furnishing_status;
         this.furnishings = data.data.furnishings;
         this.total_floors = data.data.total_floors;
@@ -369,11 +400,11 @@ export class UpdateSalesPropertyComponent implements OnInit {
 
         this.tax_govt_charge = data.data.tax_govt_charge;
         this.price_negotiable = data.data.price_negotiable;
+        this.negotiable_status= data.data.negotiable_status,
         this.facing_towards = data.data.facing_towards;
         this.availability_condition = data.data.availability_condition;
         this.buildyear = data.data.buildyear;
         this.age_of_property = data.data.age_of_property;
-        this.expected_rent = data.data.expected_rent;
         this.expected_pricing = data.data.expected_pricing;
         this.description = data.data.description;
         this.inc_electricity_and_water_bill = data.data.inc_electricity_and_water_bill;
@@ -390,60 +421,174 @@ export class UpdateSalesPropertyComponent implements OnInit {
         this.maintenance_charge = data.data.maintenance_charge,
           this.maintenance_charge_status = data.data.maintenance_charge_status;
         this.parking_open_count = data.data.parking_open_count;
+        this.video_link=data.data.video_link;
 
-        this.update_property_sales.patchValue({
-         id:this.id,
-         build_name: this.build_name,
-         type:this.type,
-         willing_to_rent_out_to: this.willing_to_rent_out_to ,
-         agreement_type: this.agreement_type,
-         address:this.address,
-         city:this.city,
-         locality:this.locality,
-         property_detail:this.property_detail,
-         nearest_landmark:this.nearest_landmark,
-         map_latitude:this.map_latitude,
-         map_longitude:this.map_longitude,
-         display_address:this.display_address,
-         area:this.area,
-         area_unit:this.area_unit,
-         carpet_area:this.carpet_area,
-         bedroom:this.bedroom,
-         bathroom:this.bathroom,
-         balconies:this.balconies,
-         additional_rooms:this.additional_rooms,
-         furnishing_status:this.furnishing_status,
-         furnishings:this.furnishings,
-         total_floors:this.total_floors,
-         property_on_floor:this.property_on_floor,
-         rera_registration_status:this.rera_registration_status,
-         additional_parking_status:this.additional_parking_status,
-         parking_covered_count:this.parking_covered_count,
-         parking_open_count:this.parking_open_count,
-         expected_pricing:this.expected_pricing,
-         possession_by:this.possession_by,
-         tax_govt_charge:this.tax_govt_charge,
-         price_negotiable:this.price_negotiable,
-         facing_towards:this.facing_towards,
-         availability_condition:this.availability_condition,
-         buildyear:this.buildyear,
-         age_of_property:this.age_of_property,
-         expected_rent:this.expected_rent,
-         description:this.description,
-         inc_electricity_and_water_bill:this.inc_electricity_and_water_bill,
-         month_of_notice:this.month_of_notice,
-         duration_of_rent_aggreement:this.duration_of_rent_aggreement,
-         security_deposit:this.security_deposit,
-         rent_cond:this.rent_cond,
-         ownership:this.ownership,
-         available_for:this.available_for,
-         nearby_places:this.nearby_places,
-         equipment:this.equipment,
-         features:this.features,
-         maintenance_charge:this.maintenance_charge,
-         maintenance_charge_status:this.maintenance_charge_status,
-         video_link:"https://www.youtube.com/watch?v="+this.video_link,
-       });
+        // property details form control 
+        this.update_property_sales.controls.Property_Details.patchValue({
+          build_name: this.build_name,
+          area: this.area,
+          property_detail: this.property_detail,
+        });
+        if(this.type){
+          this.update_property_sales.controls.Property_Details.patchValue({
+            type:this.type,
+          }); 
+        }
+        if(this.area_unit){
+          this.update_property_sales.controls.Property_Details.patchValue({
+            area_unit:this.area_unit,
+          });   
+        }
+        // property location form controls
+        this.update_property_sales.controls.Property_Location.patchValue({
+            address:this.address,
+            map_latitude:this.map_latitude,
+            map_longitude:this.map_longitude,
+            city: this.city,
+            pincode:this.pincode,
+            nearest_landmark:this.nearest_landmark,
+        });
+        if(this.city){
+          this.update_property_sales.controls.Property_Location.patchValue({
+            city:this.city,
+          });   
+        }
+        if(this.locality){
+          this.update_property_sales.controls.Property_Location.patchValue({
+            locality:this.locality.id,
+          });   
+        }
+        // property addtional details form control
+        
+        if(this.bedroom){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            bedroom:this.bedroom,
+          });   
+        }
+        if(this.bathroom){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            bathroom:this.bathroom,
+          });   
+        }
+        if(this.balconies){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            balconies:this.balconies,
+          });   
+        }
+        if(this.additional_rooms_status){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            additional_rooms_status:this.additional_rooms_status,
+          });   
+        }
+        if(this.facing_towards){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            facing_towards:this.facing_towards,
+          });   
+        }
+        if(this.rera_registration_status){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            rera_registration_status:this.rera_registration_status,
+          });   
+        }
+        
+        if(this.furnishing_status){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            furnishing_status:this.furnishing_status,
+          });   
+        }
+        if(this.additional_parking_status){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            additional_parking_status:this.additional_parking_status,
+          });   
+        }
+        if(this.buildyear){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            buildyear:this.buildyear,
+          });   
+        }
+        if(this.availability_condition){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            availability_condition:this.availability_condition,
+          });   
+        }
+        if(this.possession_by){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            possession_by:this.possession_by,
+          });   
+        }
+        if(this.property_on_floor){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            property_on_floor:this.property_on_floor,
+          });   
+        }
+        if(this.total_floors){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            total_floors:this.total_floors,
+          });   
+        }
+        if(this.parking_covered_count){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            parking_covered_count:this.parking_covered_count,
+          });   
+        }
+        if(this.parking_open_count){
+          this.update_property_sales.controls.Property_additional_details.patchValue({
+            parking_open_count:this.parking_open_count,
+          });   
+        }
+        // property pricing & images form control
+
+        if(this.video_link){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            video_link:"https://www.youtube.com/watch?v="+this.video_link,
+          });   
+        }else{
+          this.update_property_sales.patchValue({
+            video_link:this.video_link,
+          });
+        }
+        
+        if(this.ownership){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            ownership:this.ownership,
+          });   
+        }
+        if(this.expected_pricing){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            expected_pricing:this.expected_pricing,
+          });   
+        }
+        if(this.inc_electricity_and_water_bill){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            inc_electricity_and_water_bill:this.inc_electricity_and_water_bill,
+          });   
+        }
+        if(this.tax_govt_charge){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            tax_govt_charge:this.tax_govt_charge,
+          });   
+        }
+        if(this.price_negotiable){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            price_negotiable:this.price_negotiable,
+          });   
+        }
+        if(this.negotiable_status){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            negotiable_status:this.negotiable_status,
+          });   
+        }
+        if(this.maintenance_charge_status){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            maintenance_charge_status:this.maintenance_charge_status,
+          });   
+        }
+        if(this.maintenance_charge){
+          this.update_property_sales.controls.Property_price_images.patchValue({
+            maintenance_charge:this.maintenance_charge,
+          });   
+        }        
+
        this.showLoadingIndicator = false; 
       } 
       );
@@ -482,16 +627,6 @@ export class UpdateSalesPropertyComponent implements OnInit {
   rentButton(): void {
     this.saleValue = false;
     this.rentValue = true;
-  }
-
-  furnishStatus(event: string): void {
-    //console.log(event);
-    if (event == 'SFR' || event == 'FFR') {
-      this.furnish = true;
-    }
-    else {
-      this.furnish = false;
-    }
   }
   price_nego_Change(event: any) {
     //console.log(event);
@@ -674,8 +809,91 @@ export class UpdateSalesPropertyComponent implements OnInit {
     myReader.readAsDataURL(file);
   }
 
+  add_room_check(room:any){
+    // var len= this.product_amenties.length; 
+    if(this.add_room_array.length !=null){
+      for (let i = 0; i < this.add_room_array.length; i++) {
+        if(room==this.add_room_array[i]){
+          return  true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  onchange_rooms(e: any, room: string) {
+    console.log(this.update_room_array);
+    if (e.target.checked) {
+      this.update_room_array.push(room);
+      const expected = new Set();
+        const unique = this.update_room_array.filter(item => !expected.has(JSON.stringify(item)) ? expected.add(JSON.stringify(item)) : false);
+        this.unique_room_array=unique;
+        this.additional_room_array=this.unique_room_array;
+    } else {
+      
+      // arr.pop();
+      const index: number = this.update_room_array.indexOf(room);
+      if (index !== -1) {
+        this.update_room_array.splice(index, 1);
+        this.additional_room_array=this.update_room_array;
+      }
+    }
+    console.log(this.additional_room_array);
+  }
+  onchange_locality(id:any){
+    this.authService.get_pincodebyid(id).subscribe(
+      data => {;
+        this.update_property_sales.controls.Property_Location.patchValue({
+          pincode: data.data.pincode,
+        });
+      },
+      err => {
+        console.log(err);
 
+      }
+    );
+  }
 
+  onchange_add_room(event:any){
+    if(event==1){
+      this.Add_room_tab=true;
+    }else{
+      this.Add_room_tab=false;
+    }
+  }
+  furnishStatus(event): void {
+    if (event == 'FFR') {
+      this.furnish_row=true;
+    }
+    else {
+      this.furnish_row=false;
+    }
+  }
+  parkingStatus(event): void {
+    if (event == 1) {
+      this.parking_row = true;
+    }
+    else {
+      this.parking_row = false;
+    }
+   }
+  price_negotiable_status(event): void {
+    if (event == 1) {
+      this.price_negotiable_row = true;
+    }
+    else {
+      this.price_negotiable_row = false;
+    }
+  }
+  
+  maintenanceStatus(event): void {
+    if (event == 1) {
+      this.maintenance_row = true;
+    }
+    else {
+      this.maintenance_row = false;
+    }
+  }
 
   delete_pic1() {
     this.imagePre1 = null;
@@ -692,24 +910,8 @@ export class UpdateSalesPropertyComponent implements OnInit {
   delete_pic5() {
     this.imagePre5 = null;
   }
-  maintenanceStatus(event: number): void {
-    if (event == 0) {
-      this.maintenance = true;
-    }
-    else {
-      this.maintenance = false
-    }
-  }
+  
 
-  parkingStatus(event: number): void {
-    //console.log(event)
-    if (event == 0) {
-      this.parking = true;
-    }
-    else {
-      this.parking = false
-    }
-  }
   reloadPage(): void {
     window.location.reload();
   }
@@ -724,11 +926,11 @@ export class UpdateSalesPropertyComponent implements OnInit {
     }
   }
   RangeSlider_Price(event: number) {
-    this.expected_pricing = event;
-    this.update_property_sales.patchValue({
-      expected_pricing: this.expected_pricing,
+    this.expected_pricing = event;    
+    this.update_property_sales.controls.Property_price_images.patchValue({
+      expected_pricing:this.expected_pricing,
     });
-    if (event <= 500000 || event >= 50000000) {
+    if (event <500000 || event >50000000) {
       this.Expected_PriceEroor = true;
     } else {
       this.Expected_PriceEroor = false;
@@ -743,7 +945,7 @@ rangeInput_Price(event: number){
   }
 }
 Expected_Price(event: number){
-  if(event>=500000 && event<=50000000){
+  if(event>500000 && event<50000000){
   }else{
     this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
       timeOut: 1500,
@@ -751,8 +953,9 @@ Expected_Price(event: number){
   }
 }
 onSubmitsales(): void { 
-  if(this.update_property_sales.value.expected_pricing>=500000 && this.update_property_sales.value.expected_pricing<=50000000){
-    this.authService.product_sales_update(this.update_property_sales.value, this.id, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
+  console.log(this.update_property_sales.value);
+  if(this.update_property_sales.value.Property_price_images.expected_pricing>=500000 && this.update_property_sales.value.Property_price_images.expected_pricing<=50000000){
+    this.authService.product_sales_update(this.update_property_sales.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
     data => {
       this.toastr.success('Successfuly Updated', 'Property Sales');
       window.location.href=GlobalConstants.siteURL+"myproperties"
@@ -773,6 +976,45 @@ onSubmitsales(): void {
   }
   
 }
+saveDraft_form(): void { 
+  console.log(this.update_property_sales.value);
+  if(this.update_property_sales.value.Property_price_images.expected_pricing>=500000 && this.update_property_sales.value.Property_price_images.expected_pricing<=50000000){
+    this.authService.draft_sales_update(this.update_property_sales.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
+    data => {
+      this.toastr.info('Successfuly Updated', 'Draft Property Sales');
+      // window.location.href=GlobalConstants.siteURL+"myproperties"
+    },
+    err => {
+      this.err_caused = true;
+      this.errorMessage = err.error.errors;
+      this.Message = err.error.message;
+      this.toastr.error(this.Message, 'Something Error', {
+        timeOut: 3000,
+      });
+    }
+  );}
+  else{
+    this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
+      timeOut: 2000,
+    });
+  }
+  
+}
+
+get_area():void{
+  this.internalUserService.get_areas().subscribe(
+    data => {
+      // this.dropdownList = data;
+      for (let i = 1; i < data.length; i++) {
+        this.dropdownList = this.dropdownList.concat({item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode});
+      }
+    },
+    err => {
+      console.log(err);
+
+    }
+  );
+}
 
   redirect_to_myproperties(): void {
     window.location.href=GlobalConstants.siteURL="myproperties"
@@ -782,3 +1024,5 @@ onSubmitsales(): void {
     }
 
 }
+
+type addition_room = Array<{ id: number; name: string }>;

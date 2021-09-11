@@ -45,6 +45,7 @@ export class InsertproductSaleComponent implements OnInit {
 
   content: any = {};
   user_id: any = {};
+  public draft_form_id:any;
 
   err_caused: boolean = false;
   selectedItems: string[];
@@ -105,18 +106,17 @@ export class InsertproductSaleComponent implements OnInit {
 
   insert_property_sales = new FormGroup({
     Property_Details: new FormGroup({
-      build_name: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required),
+      build_name: new FormControl(''),
+      type: new FormControl(''),
       // display_address: new FormControl('', Validators.required),
-      area: new FormControl('', Validators.required),
-      // carpet_area: new FormControl('', Validators.required),
-      area_unit: new FormControl('', Validators.required),
-      property_detail: new FormControl('', Validators.required),
-      selectedItems: new FormControl('', Validators.required)
+      area: new FormControl(''),
+      draft_form_id: new FormControl(''),
+      area_unit: new FormControl(''),
+      property_detail: new FormControl(''),
     }),
 
     Property_Location: new FormGroup({
-      address: new FormControl('', Validators.required),
+      address: new FormControl(''),
       map_latitude: new FormControl('', Validators.required),
       map_longitude: new FormControl('', Validators.required),
       city: new FormControl('Delhi', Validators.required),
@@ -360,7 +360,6 @@ export class InsertproductSaleComponent implements OnInit {
       this.selected_room = this.selected_room.filter(m => m != id);
     }
     this.additional_room_array = this.selected_room;
-
   }
   onchangeAmenties(e: any, id: string) {
     if (e.target.checked) {
@@ -615,15 +614,48 @@ export class InsertproductSaleComponent implements OnInit {
     if (this.insert_property_sales.value.Property_price_images.expected_pricing >= 500000 && this.insert_property_sales.value.Property_price_images.expected_pricing <= 50000000) {
       this.authService.product_insert_sale(this.insert_property_sales.value, this.user_id, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
         data => {
-         // console.log(data);
-          this.toastr.success('Successfuly Saved', 'Property');
-          // window.location.href = GlobalConstants.siteURL + "myproperties"
+         this.Message =data.message;
+         this.toastr.success('Successfuly Saved', 'Property Sales');
+          window.location.href = GlobalConstants.siteURL + "myproperties"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.errorMessage1 = err.error.message;
           console.log(this.errorMessage);
+          this.toastr.error(this.errorMessage1, 'Something Error', {
+            timeOut: 3000,
+          });
+        }
+      );
+    } else {
+      this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
+        timeOut: 2000,
+      });
+    }
+
+  }
+  saveDraft_form(): void {
+    this.showLoadingIndicator = true;
+    if (this.insert_property_sales.value.Property_price_images.expected_pricing >= 500000 && this.insert_property_sales.value.Property_price_images.expected_pricing <= 50000000) {
+      this.authService.draft_insert_sale(this.insert_property_sales.value, this.user_id, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
+        data => {
+        //  console.log(data.last_id);
+         this.draft_form_id=data.last_id;
+         this.insert_property_sales.controls.Property_Details.patchValue({
+          draft_form_id: data.last_id,
+        });          
+          this.Message =data.message;
+          this.toastr.info(this.Message, 'Property Error', {
+            timeOut: 3000,
+          });
+          this.showLoadingIndicator = false;
+          // window.location.href = GlobalConstants.siteURL + "myproperties"
+        },
+        err => {
+          this.err_caused = true;
+          this.errorMessage = err.error.errors;
+          this.errorMessage1 = err.error.message;
           this.toastr.error(this.errorMessage1, 'Something Error', {
             timeOut: 3000,
           });
@@ -653,7 +685,7 @@ export class InsertproductSaleComponent implements OnInit {
     this.insert_property_sales.controls.Property_price_images.patchValue({
       expected_pricing: event,
     });
-    if (event <= 500000 || event >= 50000000) {
+    if (event <500000 || event >50000000) {
       this.Expected_PriceEroor = true;
     } else {
       this.Expected_PriceEroor = false;
@@ -665,7 +697,7 @@ export class InsertproductSaleComponent implements OnInit {
     this.insert_property_sales.controls.Property_price_images.patchValue({
       expected_pricing: event,
     });
-    if (event <= 500000 || event >= 50000000) {
+    if (event <500000 || event >50000000) {
       this.Expected_PriceEroor = true;
     } else {
       this.Expected_PriceEroor = false;
@@ -673,7 +705,7 @@ export class InsertproductSaleComponent implements OnInit {
   }
 
   Expected_Price(event: number) {
-    if (event >= 500000 && event <= 50000000) {
+    if (event >500000 && event <50000000) {
     } else {
       this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
         timeOut: 1500,

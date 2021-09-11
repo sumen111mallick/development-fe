@@ -52,11 +52,11 @@ jQuery(document).ready(function() {
     	
     	// fields validation
     	parent_fieldset.find('input[type="text"], input[type="password"], input[type="search"], input[type="number"], textarea, select, ng-multiselect-dropdown').each(function() {
-			console.log($(this));
-			console.log($(this).val());
+			// console.log($(this));
+			// console.log($(this).val());
     		if( $(this).val() == "" || $(this).val() == null ) {
     			$(this).addClass('input-error');
-    			//next_step = false;
+    			next_step = false;
     		}
     		else {
     			$(this).removeClass('input-error');

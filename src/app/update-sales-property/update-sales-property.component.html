@@ -64,930 +64,969 @@
                 <a href="/myproperties"><button type="button" class="btn btn-thm2 ">Back To Properties</button></a>
 							</div>
             </div> -->
-              <form class="col-lg-12" action="#" [formGroup]="update_property_sales">
-                <div class="my_dashboard_review">
-                  <div class="row update_header_row">
-                    <div class="col-lg-9 col-6">
-                      <h2 class="mb30">Update Sales Property</h2>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                      <a href="/myproperties"><button type="button" class="btn btn-thm2 ">Back To
-                          Properties</button></a>
-                    </div>
-                    <div class="col-lg-12">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="build_name">Property Name</label>
-                        <input type="text" class="form-control" formControlName="build_name" id="build_name"
-                          name="build_name" placeholder="Please Enter the Property Name...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.build_name">{{errorMessage.build_name}}</p>
+            <form role="form" action="" method="post" class="f1 col-lg-12"
+                                    [formGroup]="update_property_sales">
+                     <div class="row">
+                         <div class="col-lg-9 col-12">
+                            <h3>
+                                <span class="draft_property" *ngIf="show_draft_btn == true">Draft</span>
+                                <span *ngIf="show_draft_btn == false">Update</span> Property for Sale
+                            </h3>
+                            <p class="text-center">Fill in the form to list your property</p>
                         </div>
-                      </div>
+                        <div class="col-lg-3 col-12">
+                            <a href="myproperties"><button type="button" class="btn btn-next hidden-xs hidden-sm">Back To Properties</button></a>
+                        </div>
+                    </div>
+                    <div class="f1-steps">
+                        <div class="f1-progress">
+                            <div class="f1-progress-line" data-now-value="12.5" data-number-of-steps="4"
+                                style="width: 12.5%;"></div>
+                        </div>
+                        <div class="f1-step active">
+                            <!--<div class="f1-step-icon"><i class="fa fa-user"></i></div>-->
+                            <div class="f1-step-icon"><span>1</span></div>
+                            <p class="full-text">Property Details</p>
+                            <p class="short-text">Step 1</p>
+                        </div>
+                        <div class="f1-step">
+                            <div class="f1-step-icon"><span>2</span></div>
+                            <p class="full-text">Property Address</p>
+                            <p class="short-text">Step 2</p>
+                        </div>
+                        <div class="f1-step">
+                            <div class="f1-step-icon"><span>3</span></div>
+                            <p class="full-text">Additional Details</p>
+                            <p class="short-text">Step 3</p>
+                        </div>
+                        <div class="f1-step">
+                            <div class="f1-step-icon"><span>4</span></div>
+                            <p class="full-text">Pricing & Images</p>
+                            <p class="short-text">Step 4</p>
+                        </div>
                     </div>
 
-                    <div class="col-lg-12">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Type</label>
-                        <select class="form-control" formControlName="type">
-                          <option value="" disabled>Select Property Type</option>
-                          <option *ngFor="let property_type of property_type_result" [value]="property_type.id">
-                            {{property_type.name}}</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.type">{{errorMessage.type}}</p>
+                    <fieldset formGroupName="Property_Details">
+                        <h4 class="short-text">Property Details</h4>
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="build_name">Property name</label>
+                                        <input type="text" name="build_name"
+                                            placeholder="Property Name..." class="form-control"
+                                            id="build_name" formControlName="build_name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="type">Property Type</label>
+                                        <select class="form-control" formControlName="type">
+                                            <!-- <option *ngFor="let property_type of property_type_result"
+                                                [value]="property_type.id">{{property_type.name}}
+                                            </option> -->
+                                            <option value="" disabled >Select Property Type</option>
+                                            <option value="" disabled ><h3>ALL RESIDENTIAL</h3></option>
+                                            <option value="1">Flat/ Apartment</option>
+                                            <option value="2">Residential House</option>
+                                            <option value="3">Villa</option>
+                                            <option value="4">Builder Floor Apartment</option>
+                                            <option value="5">Residential Land/ Plot</option>
+                                            <option value="6">Penthouse</option>
+                                            <option value="7">Studio Apartment</option>
+                                            <option value="" disabled ><h3>ALL COMMERCIAL</h3></option>
+                                            <option value="8">Commercial Office Space</option>
+                                            <option value="9">Office in IT Park/ SEZ</option>
+                                            <option value="10">Commercial Shop</option>
+                                            <option value="11">Commercial Showroom</option>
+                                            <option value="12">Commercial Land</option>
+                                            <option value="13">Warehouse/ Godown</option>
+                                            <option value="14">Industrial Land</option>
+                                            <option value="15">Industrial Building</option>
+                                            <option value="16 ">Industrial Shed</option>
+                                            <option value="" disabled ><h3>ALL AGRICULTURAL</h3></option>
+                                            <option value="17">Agricultural Land</option>
+                                            <option value="18">Farm House</option>
+                                        </select>
+                                        <!--<input type="text" name="f1-last-name" placeholder="Last name..."
+                                        class="f1-last-name form-control" id="f1-last-name">-->
+                                    </div>
+                                </div>
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="display_address">Display Address?</label>
+                                        <select class="form-control" formControlName="display_address">
+                                            <option value="" disabled selected>Select Option</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <textarea name="f1-about-yourself" placeholder="About yourself..."
+                                        class="f1-about-yourself form-control"
+                                        id="f1-about-yourself"></textarea>-->
+                                    </div>
+                                <!-- </div> -->
+                            <!-- </div> -->
+                            <div class="row">
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="carpet_area">Carpet Area</label>
+                                        <input type="text" class="form-control" name="carpet_area"
+                                            formControlName="carpet_area" id="carpet_area"
+                                            placeholder="Please Enter the Carpet Area...">
+                                    </div>
+                                </div> -->
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Area Unit</label>
+                                        <select class="form-control" formControlName="area_unit">
+                                            <option value="" disabled>Select Area Units</option>
+                                            <option value="sq.ft.">sq.ft.</option>
+                                            <option value="sq.yards">sq.yards</option>
+                                            <option value="sq.m.">sq.m.</option>
+                                            <option value="acres">acres</option>
+                                            <option value="marla">marla</option>
+                                            <option value="cents">cents</option>
+                                            <option value="bigha">bigha</option>
+                                            <option value="kottah">kottah</option>
+                                            <option value="kanal">kanal</option>
+                                            <option value="grounds">grounds</option>
+                                            <option value="ares">ares</option>
+                                            <option value="biswa">biswa</option>
+                                            <option value="guntha">guntha</option>
+                                            <option value="aankadam">aankadam</option>
+                                            <option value="hectares">hectares</option>
+                                            <option value="rood">rood</option>
+                                            <option value="chataks">chataks</option>
+                                            <option value="perch">perch</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="area">Property Area</label>
+                                        <input type="number" class="form-control" name="area"
+                                            formControlName="area" (keypress)="keyPressNumbers($event)" id="area"
+                                            placeholder="Please Enter the Area...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="property_detail">Property Description</label>
+                                        <textarea class="form-control" formControlName="property_detail"
+                                            id="property_detail" name="property_detail"
+                                            placeholder="Enter Property Description..."
+                                            rows="8"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5  offset-lg-7 col-12">
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                            <div class="f1-buttons" *ngIf="show_draft_btn == true">
+                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="f1-buttons">
+                                                <button type="button" class="btn btn-next">Next</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                    <!-- 
-      <div class="col-lg-12" >
-        <h3 class="mb30">Location</h3>
-        <div class="my_profile_setting_input form-group">
-            <label for="address">Address</label>
-            <input type="text" class="form-control" formControlName="address" id="address" name="address"
-            placeholder="Please Enter the Address...">
-            <div class="text-center" id="errorId" *ngIf="errorMessage.address"><p class="alert alert-danger" >{{errorMessage.address}}</p></div>
-        </div>
-      </div> -->
-                    <div class="col-lg-12">
-                      <h3 class="mb30">Location</h3>
-                      <div class="my_profile_setting_input form-group" style="position: relative;">
-                        <label for="propertyAddress">Address</label>
+                    </fieldset>
 
-                        <input type="hidden" class="form-control" formControlName="address" id="address" name="address"
-                          placeholder="Please Enter the Address...">
-
-                        <input #search autocorrect="off" autocapitalize="off" spellcheck="off" formControlName="address"
-                          type="search" class="form-control input-text" placeholder="Enter Address" />
-
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.address">{{errorMessage.address}}</p>
-                        </div>
-                        <span class="flaticon-maps-and-flags" style="position: absolute;top: 45px; right: 31px"></span>
-                        <agm-map style="height: 300px;" [latitude]="latCus" [longitude]="longCus" [zoom]="15"
-                          class="main-card-agm-map">
-                          <agm-marker [latitude]="latCus" [longitude]="longCus" [markerDraggable]="true"
-                            (dragEnd)="markerDragEnd($event)">
-                            <agm-info-window> </agm-info-window>
-                          </agm-marker>
-                        </agm-map>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <!-- <label for="map_latitude">Map Latitude</label> -->
-                        <input type="hidden" class="form-control" formControlName="map_latitude" id="map_latitude"
-                          name="map_latitude" placeholder="Please Enter Map Latitude" readonly>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <!-- <label for="map_longitude">Map Longitude</label> -->
-                        <input type="hidden" class="form-control" formControlName="map_longitude" id="map_longitude"
-                          name="map_longitude" placeholder="Plese Enter Map longitude" readonly>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="city">City</label>
-                        <input type="text" class="form-control" formControlName="city" id="city" name="city"
-                          placeholder="Please Enter City...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.city">{{errorMessage.city}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="locality">Locality</label>
-                        <input type="text" class="form-control" formControlName="locality" id="locality" name="locality"
-                          placeholder="Please Enter Locality...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.locality">{{errorMessage.locality}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                      <div class="my_profile_setting_input form-group">
-                        <label class="">Display Address on Property page.</label>
-                        <select class="form-control" formControlName="display_address">
-                          <option value="" disabled>Select options</option>
-                          <option value="1">Yes</option>
-                          <option value="0">No</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.display_address">
-                            {{errorMessage.display_address}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-12 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="nearest_landmark">Nearest Landmark</label>
-                        <input type="text" class="form-control" formControlName="nearest_landmark" id="nearest_landmark"
-                          name="nearest_landmark" placeholder="Please Enter Nearest Landmark...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.nearest_landmark">
-                            {{errorMessage.nearest_landmark}}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                      <div class="my_profile_setting_textarea form-group">
-                        <label for="property_detail">Property Details</label>
-                        <textarea class="form-control" formControlName="property_detail" id="property_detail"
-                          name="property_detail" placeholder="Please Enter Property Details..." rows="7"></textarea>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.property_detail">
-                            {{errorMessage.property_detail}}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="my_dashboard_review mt30">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <h4 class="mb30">Detailed Information</h4>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label for="area"> Area</label>
-                        <input type="text" class="form-control" name="area" formControlName="area" id="area"
-                          placeholder="Please Enter the Area...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.area">{{errorMessage.area}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label for="carpet_area">Carpet Area</label>
-                        <input type="text" class="form-control" name="carpet_area" formControlName="carpet_area"
-                          id="carpet_area" placeholder="Please Enter the Carpet Area...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.carpet_area">{{errorMessage.carpet_area}}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Area Unit</label>
-                        <select class="form-control" formControlName="area_unit">
-                          <option value="" disabled>Select Area Units</option>
-                          <option value="sq.ft.">sq.ft.</option>
-                          <option value="sq.yards">sq.yards</option>
-                          <option value="sq.m.">sq.m.</option>
-                          <option value="acres">acres</option>
-                          <option value="marla">marla</option>
-                          <option value="cents">cents</option>
-                          <option value="bigha">bigha</option>
-                          <option value="kottah">kottah</option>
-                          <option value="kanal">kanal</option>
-                          <option value="grounds">grounds</option>
-                          <option value="ares">ares</option>
-                          <option value="biswa">biswa</option>
-                          <option value="guntha">guntha</option>
-                          <option value="aankadam">aankadam</option>
-                          <option value="hectares">hectares</option>
-                          <option value="rood">rood</option>
-                          <option value="chataks">chataks</option>
-                          <option value="perch">perch</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.area_unit">{{errorMessage.area_unit}}</p>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label> Bedrooms</label>
-                        <select class="form-control" formControlName="bedroom">
-                          <option value="" disabled>Select bedroom</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.bedroom">{{errorMessage.bedroom}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label> Bathrooms</label>
-                        <select class="form-control" formControlName="bathroom">
-                          <option value="" disabled>Select Bathrooms</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.bathroom">{{errorMessage.bathroom}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label> Balconies</label>
-                        <select class="form-control" formControlName="balconies">
-                          <option value="" disabled>Select Balconies</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.balconies">{{errorMessage.balconies}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label> Additional Rooms</label>
-                        <select class="form-control" formControlName="additional_rooms">
-                          <option value="" disabled>Additional Rooms</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.additional_rooms">
-                            {{errorMessage.additional_rooms}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label> Equipment</label>
-                        <select class="form-control" formControlName="equipment">
-                          <option value="" disabled>Equipment</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.equipment">{{errorMessage.equipment}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-4">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="features">Features</label>
-                        <input type="text" class="form-control" formControlName="features" id="features"
-                          name="map_longitude" placeholder="Please Enter Features...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.features">{{errorMessage.features}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-4">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="nearby_places">Nearby Places</label>
-                        <input type="text" class="form-control" formControlName="nearby_places" id="nearby_places"
-                          name="nearby_places" placeholder="Please Enter Nearby Place...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.nearby_places">
-                            {{errorMessage.nearby_places}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-4">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="age_of_property">Age of Property</label>
-                        <input type="number" class="form-control" formControlName="age_of_property" id="age_of_property"
-                          name="nearby_places" placeholder="Please Enter Age of Property...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.age_of_property">
-                            {{errorMessage.age_of_property}}</p>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Furnishings</label>
-                        <select class="form-control " (change)="furnishStatus($event.target.value)"
-                          formControlName="furnishing_status">
-                          <option value="" disabled>Select Furnishing Status</option>
-                          <option value="FFR">Furnished</option>
-                          <option value="SFR">SemiFurnished</option>
-                          <option value="NFR">Not furnished</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Property is present on which Floor? (Type no for none.)</label>
-                        <select class="form-control" formControlName="property_on_floor">
-                          <option value="" disabled>Select Present Floors </option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.property_on_floor">
-                            {{errorMessage.property_on_floor}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Number of Floors in a property? (Type no if not applicable.)</label>
-                        <select class="form-control" formControlName="total_floors">
-                          <option value="" disabled>Select Number of Floors </option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.total_floors">{{errorMessage.total_floors}}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Facing Towards</label>
-                        <select class="form-control " formControlName="facing_towards">
-                          <option value="" disabled>Select the directions.</option>
-                          <option value="East">East</option>
-                          <option value="North East">North East</option>
-                          <option value="North">North</option>
-                          <option value="West">West</option>
-                          <option value="South">South</option>
-                          <option value="South East">South-East</option>
-                          <option value="North West">North West</option>
-                          <option value="South West">South West</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.facing_towards">
-                            {{errorMessage.facing_towards}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Rera Registration Status</label>
-                        <select class="form-control " formControlName="rera_registration_status">
-                          <option value="" disabled>Select the directions.</option>
-                          <option value="Registered">Registered</option>
-                          <option value="Applied For">Applied For</option>
-                          <option value="Not Applicable">Not Applicable</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.rera_registration_status">
-                            {{errorMessage.rera_registration_status}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Do you have Reserved Parking</label>
-                        <select class="form-control" formControlName="additional_parking_status"
-                          (change)="parkingStatus($event.target.value)">
-                          <option value="" disabled>Select Parking Status</option>
-                          <option value="1">Yes</option>
-                          <option value="0">No</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.additional_parking_status">
-                            {{errorMessage.additional_parking_status}}</p>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Year Built</label>
-                        <select class="form-control" formControlName="buildyear">
-                          <option value="" disabled>Select Year Built </option>
-                          <option value="2015">2015</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
-                          <option value="2021">2021</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.buildyear">{{errorMessage.buildyear}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Availability</label>
-                        <select class="form-control" formControlName="availability_condition">
-                          <option value="" disabled>Select Availability</option>
-                          <option value="Under Construction">Under Construction</option>
-                          <option value="Ready To Move">Ready To Move</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.availability_condition">
-                            {{errorMessage.availability_condition}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-4">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Possession By</label>
-                        <select class="form-control" formControlName="possession_by">
-                          <option value="" disabled>Select Possession Date</option>
-                          <option value="Now">Now</option>
-                          <option value="Within 3 months">Within 3 months</option>
-                          <option value="Within 6 months">Within 6 months</option>
-                          <option value="Within 9 months">Within 6 months</option>
-                          <option value="Within 1 year">Within 1 year</option>
-                          <option value="Within 2 year">Within 2 years</option>
-                          <option value="Within 3 year">Within 3 years</option>
-                          <option value="Within 4 year">Within 4 years</option>
-                          <option value="Within 5 year">Within 5 years</option>
-                          <option value="Within 6 year">Within 6 years</option>
-                          <option value="Within 7 year">Within 7 years</option>
-                          <option value="Within 8 year">Within 8 years</option>
-                          <option value="Within 9 year">Within 9 years</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.possession_by">
-                            {{errorMessage.possession_by}}</p>
+                    <fieldset formGroupName="Property_Location">
+                        <h4 class="short-text">Property Address</h4>
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control"
+                                            formControlName="address" id="address" name="address"
+                                            placeholder="Enter the address...">
+                                        <input #search autocorrect="off" autocapitalize="off"
+                                            spellcheck="off" formControlName="address" type="search"
+                                            class="form-control input-text"
+                                            placeholder="Enter Address" />
+                                        <span class="flaticon-maps-and-flags"
+                                            style="position: absolute;top: 240px; right: 55px"></span>
+                                        <agm-map style="height: 300px;" [latitude]="latCus"
+                                            [longitude]="longCus" [zoom]="15" class="main-card-agm-map">
+                                            <agm-marker [latitude]="latCus" [longitude]="longCus"
+                                                [markerDraggable]="true"
+                                                (dragEnd)="markerDragEnd($event)">
+                                                <agm-info-window> </agm-info-window>
+                                            </agm-marker>
+                                        </agm-map>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control"
+                                            formControlName="map_latitude" id="map_latitude"
+                                            name="map_latitude" placeholder="Please Enter Map Latitude"
+                                            readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control"
+                                            formControlName="map_longitude" id="map_longitude"
+                                            name="map_longitude" placeholder="Plese Enter Map longitude"
+                                            readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                            <select class="form-control" formControlName="city">
+                                                <option value="Delhi">Delhi</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="area_name">Locality</label>
+                                            <select class="form-control" formControlName="locality"  (ngModelChange)="onchange_locality($event)">
+                                                <option value="" disabled>Select Option</option>
+                                                <option *ngFor="let locality of dropdownList" value="{{locality.item_id}}">{{locality.item_text}}</option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="area_name">Pin Code</label>
+                                        <input type="text" class="form-control" formControlName="pincode" id="pincode"  name="Pincode" placeholder="Please Enter Pin code"
+                                        readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="nearest_landmark">Nearest Place</label>
+                                        <input type="text" class="form-control"
+                                            formControlName="nearest_landmark" id="nearest_landmark"
+                                            name="nearest_landmark"
+                                            placeholder="Please Enter Nearest Landmark...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <button type="button"
+                                        class="btn btn-previous ml25">Previous</button>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                            <div class="f1-buttons" *ngIf="show_draft_btn == true">
+                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="f1-buttons">
+                                                <button type="button" class="btn btn-next">Next</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                      </div>
-                    </div>
+                    </fieldset>
 
-                    <div class="col-lg-12 col-xl-12">
-                      <h3> Amenities</h3>
-                      <div class="row">
-                        <div class="col-xxs-6 col-sm col-lg-3" *ngFor="let menuData of amenitiesresult">
-                          <!-- {{product_amenties.id}} -->
-                          <ul class="ui_kit_checkbox selectable-list">
-                            <li *ngIf="Amenties_funtion(menuData.id)==true,else OtherAmenties">
-                              <div class="custom-control custom-checkbox ">
-                                <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
-                                  value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)" checked>
-                                <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
-                              </div>
-                            </li>
+                    <fieldset formGroupName="Property_additional_details">
+                        <h4 class="short-text">Additional Details</h4>
+                        <div class="jumbotron">
 
-                            <ng-template #OtherAmenties>
-                              <li>
-                                <div class="custom-control custom-checkbox ">
-                                  <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
-                                    value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)">
-                                  <label class="custom-control-label"
-                                    for="{{menuData.id}}">{{menuData.name}}</label>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label> Bedrooms</label>
+                                        <select class="form-control" formControlName="bedroom">
+                                            <option value="" disabled>Select bedroom</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label> Bathrooms</label>
+                                        <select class="form-control" formControlName="bathroom">
+                                            <option value="" disabled>Select Bathrooms</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label> Balconies</label>
+                                        <select class="form-control" formControlName="balconies">
+                                            <option value="" disabled>Select Balconies</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label> Additional Rooms</label>
+                                        <select class="form-control" formControlName="additional_rooms_status" (ngModelChange)="onchange_add_room($event)">
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Facing Towards</label>
+                                        <select class="form-control " formControlName="facing_towards">
+                                            <option value="" disabled>Select the directions.</option>
+                                            <option value="East">East</option>
+                                            <option value="North East">North East</option>
+                                            <option value="North">North</option>
+                                            <option value="West">West</option>
+                                            <option value="South">South</option>
+                                            <option value="South East">South-East</option>
+                                            <option value="North West">North West</option>
+                                            <option value="South West">South West</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>RERA Registration Status</label>
+                                        <select class="form-control "
+                                            formControlName="rera_registration_status">
+                                            <option value="" disabled>Select Rera Registration Status.
+                                            </option>
+                                            <option value="Registered">Registered</option>
+                                            <option value="Applied For">Applied For</option>
+                                            <option value="Not Applicable">Not Applicable</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label> Equipment</label>
+                                        <select class="form-control" formControlName="equipment">
+                                            <option value="" disabled>Please Select Equipment</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="features">Features</label>
+                                        <input type="text" class="form-control"
+                                            formControlName="features" id="features" name="features"
+                                            placeholder="Please Enter Features...">
+                                    </div>
+                                </div> -->
+                            
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="nearby_places">Nearby Places</label>
+                                        <input type="text" class="form-control"
+                                            formControlName="nearby_places" id="nearby_places"
+                                            name="nearby_places"
+                                            placeholder="Please Enter Nearby Place...">
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="age_of_property">Age of Property</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="age_of_property" id="age_of_property"
+                                            name="nearby_places"
+                                            placeholder="Please Enter Age of Property...">
+                                    </div>
+                                </div> -->
+                                </div>
+                                <div class="row additional_row" *ngIf="Add_room_tab == true">
+                                    <div class="col-xxs-6 col-sm col-lg-3" 
+                                    *ngFor="let add_room of addition_room">
+                                        <ul class="ui_kit_checkbox selectable-list">
+                                            <li *ngIf="add_room_check(add_room.name)==true,else Other_room">
+                                                <div class="custom-control custom-checkbox ">
+                                                    <div class="form-group">
+                                                    <input type="checkbox" class="custom-control-input  form-control"
+                                                        id="{{add_room.name}}"    (change)="onchange_rooms($event,add_room.name)" checked>
+                                                        <label class="custom-control-label"  for="{{add_room.name}}">{{add_room.name}}</label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <ng-template #Other_room>
+                                                <li>
+                                                    <div class="custom-control custom-checkbox ">
+                                                        <div class="form-group">
+                                                        <input type="checkbox" class="custom-control-input  form-control"
+                                                            id="{{add_room.name}}"   (change)="onchange_rooms($event,add_room.name)">
+                                                            <label class="custom-control-label"
+                                                            for="{{add_room.name}}">{{add_room.name}}</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ng-template>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Furnishings</label>
+                                        <select class="form-control " (ngModelChange)="furnishStatus($event)"  formControlName="furnishing_status">
+                                            <option value="FFR">Furnished</option>
+                                            <option value="NFR">Not furnished</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Reserved Parking?</label>
+                                        <select class="form-control"  formControlName="additional_parking_status"
+                                            (ngModelChange)="parkingStatus($event)">
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row additional_row" *ngIf="furnish_row == true">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h3> Amenities</h3>
+                                    <div class="row">
+                                        <div class="col-xxs-6 col-sm col-lg-3"
+                                            *ngFor="let menuData of amenitiesresult">
+                                            <!-- {{product_amenties.id}} -->
+                                            <ul class="ui_kit_checkbox selectable-list">
+                                              <li *ngIf="Amenties_funtion(menuData.id)==true,else OtherAmenties">
+                                                <div class="custom-control custom-checkbox ">
+                                                  <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
+                                                    value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)" checked>
+                                                  <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
+                                                </div>
+                                              </li>
+                  
+                                              <ng-template #OtherAmenties>
+                                                <li>
+                                                  <div class="custom-control custom-checkbox ">
+                                                    <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
+                                                      value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)">
+                                                    <label class="custom-control-label"
+                                                      for="{{menuData.id}}">{{menuData.name}}</label>
+                                                  </div>
+                                                </li>
+                                              </ng-template>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row additional_row" *ngIf="parking_row == true">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Covered Parking</label>
+                                        <select class="form-control"
+                                            formControlName="parking_covered_count"
+                                            id="parking_covered_count" name="parking_covered_count"
+                                            placeholder="Please Enter Covered Parking...">
+                                            <option value="" disabled>Select Option</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="parking_open_count">Open Parking</label>
+                                        <select class="form-control"
+                                            formControlName="parking_open_count" id="parking_open_count"
+                                            name="parking_open_count">
+                                            <option value="" disabled>Select Option</option>
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Year Built</label>
+                                        <select class="form-control" formControlName="buildyear">
+                                            <option value="" disabled>Select Year Built </option>
+                                            <option value="2021">2021</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2016">2016</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2014">2014</option>
+                                            <option value="2013">2013</option>
+                                            <option value="2012">2012</option>
+                                            <option value="2011">2011</option>
+                                            <option value="2010">2010</option>
+                                            <option value="2009">2009</option>
+                                            <option value="2008">2008</option>
+                                            <option value="2007">2007</option>
+                                            <option value="2006">2006</option>
+                                            <option value="2005">2005</option>
+                                            <option value="2004">2004</option>
+                                            <option value="2003">2003</option>
+                                            <option value="2002">2002</option>
+                                            <option value="2001">2001</option>
+                                            <option value="2000">2000</option>
+                                            <option value="1999">1999</option>
+                                            <option value="1998">1998</option>
+                                            <option value="1997">1997</option>
+                                            <option value="1996">1996</option>
+                                            <option value="1995">1995</option>
+                                            <option value="1994">1994</option>
+                                            <option value="1993">1993</option>
+                                            <option value="1992">1992</option>
+                                            <option value="1991">1991</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Availability</label>
+                                        <select class="form-control"
+                                            formControlName="availability_condition">
+                                            <option value="" disabled>Select Availability</option>
+                                            <option value="Under Construction">Under Construction
+                                            </option>
+                                            <option value="Ready To Move">Ready To Move</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Possession By</label>
+                                        <select class="form-control" formControlName="possession_by">
+                                            <option value="" disabled>Select Possession Date</option>
+                                            <option value="Now">Now</option>
+                                            <option value="Within 3 months">Within 3 months</option>
+                                            <option value="Within 6 months">Within 6 months</option>
+                                            <option value="Within 9 months">Within 6 months</option>
+                                            <option value="Within 1 year">Within 1 year</option>
+                                            <option value="Within 2 year">Within 2 years</option>
+                                            <option value="Within 3 year">Within 3 years</option>
+                                            <option value="Within 4 year">Within 4 years</option>
+                                            <option value="Within 5 year">Within 5 years</option>
+                                            <option value="Within 6 year">Within 6 years</option>
+                                            <option value="Within 7 year">Within 7 years</option>
+                                            <option value="Within 8 year">Within 8 years</option>
+                                            <option value="Within 9 year">Within 9 years</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Property is present on which Floor?</label>
+                                        <select class="form-control"
+                                            formControlName="property_on_floor">
+                                            <option value="" disabled>Select Present Floors </option>
+                                            <option value="Ground Floor">Ground Floor</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Number of Floors in the property?</label>
+                                        <select class="form-control" formControlName="total_floors">
+                                            <option value="" disabled>Select Number of Floors </option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <button type="button"
+                                        class="btn btn-previous ml25">Previous</button>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                            <div class="f1-buttons" *ngIf="show_draft_btn == true">
+                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="f1-buttons" >
+                                                <button type="button" class="btn btn-next">Next</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset formGroupName="Property_price_images">
+                        <h4 class="short-text">Pricing & Images</h4>
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Ownership</label>
+                                        <select class="form-control " formControlName="ownership">
+                                            <option value="" disabled>Select Ownership Type</option>
+                                            <option value="Freehold">Freehold</option>
+                                            <option value="Leasehold">Leasehold</option>
+                                            <option value="Co-operative Society">Co-operative Society
+                                            </option>
+                                            <option value="Power of Attorney">Power of Attorney</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="expected_rent">Expected Pricing</label>
+                                        <div class="row">
+                                            <div class="col-lg-8 col-xl-8">
+                                                <ng5-slider [(value)]="expected_pricing"
+                                                    [options]="options"
+                                                    (valueChange)="RangeSlider_Price($event)">
+                                                </ng5-slider>
+                                            </div>
+                                            <div class="col-lg-4 col-xl-4">
+                                                <!-- (ngModelChange)="Expected_Price($event)" -->
+                                                <input type="number" class="form-control"
+                                                    formControlName="expected_pricing"
+                                                    id="expected_pricing" name="expected_pricing"
+                                                    placeholder="Please Enter Expected Price..."
+                                                    maxlength="10" (keypress)="keyPressNumbers($event)"
+                                                    (ngModelChange)="rangeInput_Price($event)">
+                                            </div>
+                                            <span class="alert-danger" *ngIf="Expected_PriceEroor == true">Expected Price Between 5Lakhs to 5 Crore</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="security_deposit">Security Deposit</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="security_deposit" id="security_deposit"
+                                            name="security_deposit"
+                                            placeholder="Please Enter Security Deposit...">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="locality">Inclusive Electricity and Water
+                                            Bill</label>
+                                        <select class="form-control"
+                                            formControlName="inc_electricity_and_water_bill">
+                                            <option value="" disabled>Select Option</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Is Tax and Govt. Charges Included?</label>
+                                        <select class="form-control" formControlName="tax_govt_charge">
+                                            <option value="" disabled>Select Option</option>
+                                            <option selected value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Is Price Negotiable?</label>
+                                        <select class="form-control" formControlName="negotiable_status" 
+                                        (ngModelChange)="price_negotiable_status($event)">
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="price_negotiable_row == true">
+                                <div class="col-lg-10 col-md-10 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="locality">Price Negotiable</label>
+                                        <input type="number" class="form-control"
+                                            formControlName="price_negotiable" placeholder="Enter the Price Negotiable"  minlength="10" maxlength="10" (keypress)="keyPressNumbers($event)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-12" id="Negotiable_info_btn">
+                                    <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="This Price will not shown visiable to cumtomers. this for us to negotiate with customer on your behalf"></i>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Is Maintenance Charge Included?</label>
+                                        <select class="form-control"
+                                            formControlName="maintenance_charge_status"
+                                            (ngModelChange)="maintenanceStatus($event)">
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12"  *ngIf="maintenance_row == true">
+                                    <div class="form-group">
+                                        <label>Maintenance Charge Condition</label>
+                                        <select class="form-control " formControlName="maintenance_charge">
+                                          <option value="" disabled>Select Option</option>
+                                          <option value="Monthly">Monthly</option>+
+                                          <option value="Annually">Annually</option>
+                                          <option value="One Time">One Time</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <ul class="mb0">
+                                        <li class="list-inline-item" *ngIf="image1">
+                                            <span>Property Image1</span>
+                                            <div class="portfolio_item">
+                                                <img class="img-fluid" src="{{ image1 }}"
+                                                    alt="First Image">
+                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete"
+                                                    data-original-title="Delete"><button type="button"
+                                                        class="btn btn-thm2 float-right"
+                                                        (click)="delete_pic1()"><span
+                                                            class="flaticon-garbage"></span></button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-inline-item" *ngIf="image2">
+                                            <span>Property Image2</span>
+                                            <div class="portfolio_item">
+                                                <img class="img-fluid" src="{{ image2 }}"
+                                                    alt="Second Image">
+                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete"
+                                                    data-original-title="Delete"><button type="button"
+                                                        class="btn btn-thm2 float-right"
+                                                        (click)="delete_pic2()"><span
+                                                            class="flaticon-garbage"></span></button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-inline-item" *ngIf="image3">
+                                            <span>Property Image3</span>
+                                            <div class="portfolio_item">
+                                                <img class="img-fluid" src="{{ image3 }}"
+                                                    alt="Third Image">
+                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete"
+                                                    data-original-title="Delete"><button type="button"
+                                                        class="btn btn-thm2 float-right"
+                                                        (click)="delete_pic3()"><span
+                                                            class="flaticon-garbage"></span></button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-inline-item" *ngIf="image4">
+                                            <span>Property Image4</span>
+                                            <div class="portfolio_item">
+                                                <img class="img-fluid" src="{{ image4 }}"
+                                                    alt="Fourth Image">
+                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete"
+                                                    data-original-title="Delete"><button type="button"
+                                                        class="btn btn-thm2 float-right"
+                                                        (click)="delete_pic4()"><span
+                                                            class="flaticon-garbage"></span></button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-inline-item" *ngIf="image5">
+                                            <span>Property Image5</span>
+                                            <div class="portfolio_item">
+                                                <img class="img-fluid" src="{{ image5 }}"
+                                                    alt="Fifth Image">
+                                                <div class="edu_stats_list" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete"
+                                                    data-original-title="Delete">
+                                                    <button type="button"
+                                                        class="btn btn-thm2 float-right"
+                                                        (click)="delete_pic5()"><span
+                                                            class="flaticon-garbage"></span>
+                                                          </button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+                                    <div class="col-lg-4">
+                                        <div class="portfolio_upload">
+                                            <input type="file" class="form-control"
+                                                accept=".jpg,.png,.jpeg" name="profile_pic"
+                                                (change)="insert_image1($event)" id="image1" multiple>
+                                            <div class="icon"><label for="image1"
+                                                    class="flaticon-download"></label></div>
+                                            <label for="image1">
+                                                <p>Click To Upload Multiple Image</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="locality">Property Video Link (YouTube)</label>
+                                        <input type="text" class="form-control"
+                                            formControlName="video_link">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <button type="button"
+                                    class="btn btn-previous ml25">Previous</button>
+                            </div>
+                            
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <div class="f1-buttons" *ngIf="show_draft_btn == true">
+                                                    <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="f1-buttons">
+                                                    <button type="submit" (click)="onSubmitsales()"
+                                                    class="btn btn-submit">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 UpdateProperty_select_img" *ngIf="product_img_length>0">
+                            <h4>Selected Images</h4>
+                            <ul class="mb0">
+                              <li class="list-inline-item" *ngFor="let p_images of product_img let i = index">
+                                <div class="portfolio_item">
+                                  <img class="img-fluid" src="{{ftpstring }}{{p_images.image}}" alt="Product Image">
+                                  <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
+                                    data-original-title="Delete">
+                                    <button type="button" class="btn btn-thm2 float-right"
+                                      (click)=" delete_Pro_img(p_images.id)"><span class="flaticon-garbage"></span></button>
+                                  </div>
+                                  <div class="overlay">
+                                    <h4>Sales Property Selected Image({{i+1}})</h4>
+                                  </div>
                                 </div>
                               </li>
-                            </ng-template>
-                          </ul>
-                        </div>
-                      </div>
+                            </ul>
+                          </div>
+                    </fieldset>
+                  </form>
+              </div>
 
-                    </div>
-
-
+              <div class="row mt100">
+                <div class="col-lg-12">
+                  <div class="copyright-widget text-center">
+                    <p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
                   </div>
-                </div>
-
-
-                <!-- rent conditions -->
-                <!-- 
-  <div class="my_dashboard_review mt30">
-    <div class="row">
-      <div class="col-lg-12">
-        <h4 class="mb30">Rent Conditions</h4>
-      </div>
-      <div class="col-lg-6 col-xl-6">
-        <div class="my_profile_setting_input ui_kit_select_search form-group">
-            <label>Willing To Rent Out To</label>
-              <select class="form-control " formControlName="willing_to_rent_out_to" >
-                <option value="" disabled >Select Preferred </option>
-                <option value="Family">Family</option>
-                <option value="Single Men">Single Men</option>
-                <option value="Single Women">Single Women</option>
-              </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.willing_to_rent_out_to"><p class="alert alert-danger" >{{errorMessage.willing_to_rent_out_to}}</p></div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-xl-6">
-        <div class="my_profile_setting_input ui_kit_select_search form-group">
-          <label>Agreement Type</label>
-              <select class="form-control " formControlName="agreement_type" >
-                <option value="" disabled >Select Preferred </option>
-                <option value="Company Lease Agreement">Company Lease Agreement</option>
-                <option value="Any">Any</option>
-              </select>
-          <div class="text-center" id="errorId" *ngIf="errorMessage.agreement_type"><p class="alert alert-danger" >{{errorMessage.agreement_type}}</p></div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-xl-6">
-        <div class="my_profile_setting_input form-group">
-            <label for="available_for">Available On</label>
-            <input type="date" class="form-control"  formControlName="available_for" id="available_for" name="available_for"
-            placeholder="Please Enter Available For...">
-            <div class="text-center" id="errorId" *ngIf="errorMessage.available_for"><p class="alert alert-danger" >{{errorMessage.available_for}}</p></div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-xl-6">
-        <div class="my_profile_setting_input form-group">
-          <label for="rent_cond">Rent Condition</label>
-          <input type="text" class="form-control" formControlName="rent_cond" id="rent_cond" name="rent_cond"
-          placeholder="Please Enter Rent Condition...">
-          <div class="text-center" id="errorId" *ngIf="errorMessage.rent_cond"><p class="alert alert-danger" >{{errorMessage.rent_cond}}</p></div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-xl-6">
-        <div class="my_profile_setting_input form-group">
-          <label for="month_of_notice">Month Of Notice</label>
-          <input type="text" class="form-control" formControlName="month_of_notice" id="month_of_notice" name="month_of_notice"
-          placeholder="Please Enter Month Of Notice...">
-          <div class="text-center" id="errorId" *ngIf="errorMessage.month_of_notice"><p class="alert alert-danger" >{{errorMessage.month_of_notice}}</p></div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-xl-6">
-        <div class="my_profile_setting_input ui_kit_select_search form-group">
-            <label>Duration Of Rent Agreement</label>
-              <select class="form-control" formControlName="duration_of_rent_aggreement" >
-                <option value="" disabled >Select the Duration</option>
-                <option value="One Year">One Year</option>
-                <option value="Three Years">Three Years</option>
-                <option value="Custom">Custom</option>
-              </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.duration_of_rent_aggreement"><p class="alert alert-danger" >{{errorMessage.duration_of_rent_aggreement}}</p></div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
-
-
-                <div class="my_dashboard_review mt30">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <h4 class="mb30">Parking</h4>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label>Covered Parking</label>
-                        <input type="number" class="form-control" formControlName="parking_covered_count"
-                          id="parking_covered_count" name="parking_covered_count"
-                          placeholder="Please Enter Covered Parking...">
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="parking_open_count">Open Parking</label>
-                        <input type="number" class="form-control" formControlName="parking_open_count"
-                          id="parking_open_count" name="parking_open_count" placeholder="Please Enter Open Parking...">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- <div class="my_dashboard_review mt30">
-    <div class="row">
-      <div class="col-lg-12">
-        <h4 class="mb30">Furnishings</h4>
-      </div>
-
-      <div class="col-lg-6 col-xl-12">
-        <div class="col-sm-10 float-left"><input type="text" class="form-control" (change)="furnishing($event.target.value)" id="amenities"></div>
-        <div class="col-lg-2 float-right"><button type="button" class="btn btn-thm2 float-right" >Add</button></div>
-      </div>
-      <br>
-      <br>
-      <br>
-      <div class="col-xl-6 col-lg-6">
-        <ul class="order_list list-inline-item" >
-          <li *ngFor="let items of furnishingArray"><a href="#"><span class="flaticon-tick"></span>{{ items }}</a></li>
-        </ul>
-      </div>
-
-    </div>
-  </div> -->
-
-
-                <div class="my_dashboard_review mt30">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <h4 class="mb30">Property Pricing</h4>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Ownership</label>
-                        <select class="form-control " formControlName="ownership">
-                          <option value="" disabled>Select Ownership Type</option>
-                          <option value="Freehold">Freehold</option>
-                          <option value="Leasehold">Leasehold</option>
-                          <option value="Co-operative Society">Co-operative Society</option>
-                          <option value="Power of Attorney">Power of Attorney</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.ownership">{{errorMessage.ownership}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="expected_rent">Expected Pricing</label>
-                        <div class="row">
-                          <div class="col-lg-4 col-xl-4">
-                            <!-- (ngModelChange)="Expected_Price($event)" -->
-                            <input type="number" class="form-control" formControlName="expected_pricing"
-                              id="expected_pricing" name="expected_pricing" placeholder="Please Enter Expected Price..."
-                              maxlength="10" (keypress)="keyPressNumbers($event)"
-                              (ngModelChange)="rangeInput_Price($event)">
-                          </div>
-                          <div class="col-lg-8 col-xl-8">
-                            <ng5-slider [(value)]="expected_pricing" [options]="options"
-                              (valueChange)="RangeSlider_Price($event)"></ng5-slider>
-                          </div>
-                        </div>
-                        <div class="text-center" id="errorId" *ngIf="Expected_PriceEroor">
-                          <p class="alert alert-danger">Expected Price Between 5Lakhs to 5 Crore</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="security_deposit">Security Deposit</label>
-                        <input type="number" class="form-control" formControlName="security_deposit"
-                          id="security_deposit" name="security_deposit" placeholder="Please Enter Expected Rent...">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.security_deposit">
-                            {{errorMessage.security_deposit}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="locality">Inclusive Electricity and Water Bill</label>
-                        <select class="form-control" formControlName="inc_electricity_and_water_bill">
-                          <option value="" disabled>Select Option</option>
-                          <option value="1">Yes</option>
-                          <option value="0">No</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.inc_electricity_and_water_bill">
-                            {{errorMessage.inc_electricity_and_water_bill}}</p>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Is Tax and Govt. Charges Included?</label>
-                        <select class="form-control" formControlName="tax_govt_charge">
-                          <option value="" disabled>Select Option</option>
-                          <option selected value="1">Yes</option>
-                          <option value="0">No</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.tax_govt_charge">
-                            {{errorMessage.tax_govt_charge}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Is Price Negotiable?</label>
-                        <select class="form-control" formControlName="price_negotiable">
-                          <option value="" disabled>Select Option</option>
-                          <option value="1">Yes</option>
-                          <option value="0">No</option>
-                        </select>
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.price_negotiable">
-                            {{errorMessage.price_negotiable}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label>Is Maintenance Charge Included?</label>
-                        <select class="form-control" formControlName="maintenance_charge_status"
-                          (change)="maintenanceStatus($event.target.value)">
-                          <option value="0">No</option>
-                          <option value="1">Yes</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                      <div class="my_profile_setting_input form-group">
-                        <label for="locality">Brokerage Charge. (Leave Blank for none.)</label>
-                        <input type="text" class="form-control">
-                        <div class="text-center" id="errorId" *ngIf="errorMessage">
-                          <p class="alert alert-danger" *ngIf="errorMessage.maintenance_charge">
-                            {{errorMessage.maintenance_charge}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div class="col-lg-6 col-12">
-                      <div class="my_profile_setting_input ui_kit_select_search form-group">
-                        <label for="locality">Property Video Link (YouTube)</label>
-                        <input type="text" class="form-control"
-                            formControlName="video_link">
-                      </div>
-                  </div>
-                  </div>
-                </div>
-
-
-                <!-- <div class="my_dashboard_review mt30">
-    <div class="row">
-      <div class="col-lg-12">
-        <h4 class="mb30">Maintenance</h4>
-      </div>
-      <div class="col-lg-12 col-xl-12" >
-        <div class="my_profile_setting_input form-group">
-          <label for="maintenance_charge">Maintenance Charge (in Rs.)</label>
-          <input type="number" class="form-control" formControlName="maintenance_charge" id="maintenance_charge" name="maintenance_charge"
-          placeholder="Please Enter Maintenance Charge...">
-        </div>
-      </div>
-      <div class="col-lg-12 col-xl-12">
-        <div class="my_profile_setting_input ui_kit_select_search form-group">
-            <label>Maintenance Charge Condition</label>
-              <select class="form-control "  formControlName="month_of_notice" >
-                <option value="" disabled >Select Option</option>
-                <option value="Monthly">Monthly</option>
-                <option value="Annually">Annually</option>
-                <option value="One Time">One Time</option>
-              </select>
-            <div class="text-center" id="errorId" *ngIf="errorMessage.maintenance_charge_condition"><p class="alert alert-danger" >{{errorMessage.maintenance_charge_condition}}</p></div>
-           </div>
-  </div>
-  </div>
-  </div> -->
-
-
-                <div class="my_dashboard_review mt30">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <h4 class="mb30">Property Images</h4>
-                    </div>
-                    <div class="col-lg-12">
-                      <ul class="mb0">
-                        <li class="list-inline-item" *ngIf="imagePre1">
-                          <span>Property Image1</span>
-                          <div class="portfolio_item">
-                            <img class="img-fluid" src="{{imagePre1}}" alt="First Image">
-                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
-                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
-                                (click)="delete_pic1()"><span class="flaticon-garbage"></span></button></div>
-                          </div>
-                        </li>
-                        <li class="list-inline-item" *ngIf="imagePre2">
-                          <span>Property Image2</span>
-                          <div class="portfolio_item">
-                            <img class="img-fluid" src="{{imagePre2}}" alt="Second Image">
-                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
-                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
-                                (click)="delete_pic2()"><span class="flaticon-garbage"></span></button></div>
-                          </div>
-                        </li>
-                        <li class="list-inline-item" *ngIf="imagePre3">
-                          <span>Property Image3</span>
-                          <div class="portfolio_item">
-                            <img class="img-fluid" src="{{imagePre3}}" alt="Third Image">
-                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
-                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
-                                (click)="delete_pic3()"><span class="flaticon-garbage"></span></button></div>
-                          </div>
-                        </li>
-                        <li class="list-inline-item" *ngIf="imagePre4">
-                          <span>Property Image4</span>
-                          <div class="portfolio_item">
-                            <img class="img-fluid" src="{{imagePre4}}" alt="Fourth Image">
-                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
-                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
-                                (click)="delete_pic4()"><span class="flaticon-garbage"></span></button></div>
-                          </div>
-                        </li>
-                        <li class="list-inline-item" *ngIf="imagePre5">
-                          <span>Property Image5 </span>
-                          <div class="portfolio_item">
-                            <img class="img-fluid" src="{{imagePre5}}" alt="Fifth Image">
-                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
-                              data-original-title="Delete"><button type="button" class="btn btn-thm2 float-right"
-                                (click)="delete_pic5()"><span class="flaticon-garbage"></span></button></div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="col-lg-12 d-flex justify-content-center">
-                      <div class="col-lg-4">
-                        <div class="portfolio_upload">
-                          <input type="file" class="form-control" accept=".jpg,.png,.jpeg" name="profile_pic"
-                            (change)="insert_image1($event)" id="image1" multiple>
-                          <div class="icon"><label for="image1" class="flaticon-download"></label></div>
-                          <label for="image1">
-                            <p>Click To Upload Multiple Image</p>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- <div class="text-center" *ngIf="err_caused"><p class="alert alert-danger">{{errorMessage | json}}</p></div> -->
-
-                    <div class="col-xl-12">
-                      <div class="my_profile_setting_input ProductSubmitBTN">
-                        <button type="button" (click)="onSubmitsales()" class="btn btn2 float-right">Submit</button>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-12 UpdateProperty_select_img" *ngIf="product_img_length>0">
-                      <h2>Selected Images</h2>
-                      <ul class="mb0">
-                        <li class="list-inline-item" *ngFor="let p_images of product_img let i = index">
-                          <div class="portfolio_item">
-                            <img class="img-fluid" src="{{ftpstring }}{{p_images.image}}" alt="Product Image">
-                            <div class="edu_stats_list" data-toggle="tooltip" data-placement="top" title="Delete"
-                              data-original-title="Delete">
-                              <button type="button" class="btn btn-thm2 float-right"
-                                (click)=" delete_Pro_img(p_images.id)"><span class="flaticon-garbage"></span></button>
-                            </div>
-                            <div class="overlay">
-                              <h4>Sales Property Selected Image({{i+1}})</h4>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-
-            <div class="row mt100">
-              <div class="col-lg-12">
-                <div class="copyright-widget text-center">
-                  <p>All Rights Reserved. © Copyright 2021 Housingstreet Marketing & Consulting Private Limited.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      
     <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
   </div>
   <!-- Wrapper End -->

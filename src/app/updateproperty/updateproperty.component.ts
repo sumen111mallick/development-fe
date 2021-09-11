@@ -14,12 +14,19 @@ import { FormBuilder } from '@angular/forms';
 import { MapsAPILoader,AgmMap } from '@agm/core';
 // import { google } from "google-maps";
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { InternalUserService } from './../_services/internal-user.service';
 @Component({
   selector: 'app-updateproperty',
   templateUrl: './updateproperty.component.html',
   styleUrls: ['./updateproperty.component.css']
 })
 export class UpdatepropertyComponent implements OnInit {
+  addition_room: addition_room = [
+    { id: 1, name: "Other Room"},
+    { id: 2, name: "Pooja Room"},
+    { id: 3, name: "Study Room"},
+    { id: 4, name: "Servant Room"}
+  ];
 
   selectedId:number;
  
@@ -103,6 +110,9 @@ export class UpdatepropertyComponent implements OnInit {
    furnish: boolean = false;
    maintenance: boolean = true;
    parking: boolean = false;
+   negotiable_status:any;
+   pincode:any;
+   additional_rooms_status:any;
    product_img:any={};
    amenityArray = [];
    amenity_Uncheck=[];
@@ -113,64 +123,83 @@ export class UpdatepropertyComponent implements OnInit {
    err_caused: boolean = false;
    selectedItems:string[];
    Uncheck_Items:string[];
+   additional_room_array=[];
+   add_room_array:any=[];
+   update_room_array:any=[];
+   unique_room_array:any=[];
+   add_room_string:any=[];
+   dropdownList = [];
    content: any = {};
   product_amenties: any;
   public property_type:any;
   public property_type_result:any;
+  public price_negotiable_row:boolean=false;
+  public parking_row:boolean=false;
+  public maintenance_row:boolean=false;
+  public furnish_row:boolean=false;
+  public Add_room_tab:boolean=false;
+  public show_draft_btn:boolean=false;
   
+  update_property_rent = this.fb.group({
+    Property_Details: new FormGroup({
+      build_name: new FormControl(''),
+      type: new FormControl(''),
+      display_address: new FormControl(''),
+      area: new FormControl(''),
+      carpet_area: new FormControl(''),
+      area_unit: new FormControl(''),
+      bedroom: new FormControl(''),
+      bathroom: new FormControl(''),
+      balconies: new FormControl(''),
+      property_detail: new FormControl('')
+    }),
 
+    Property_address: new FormGroup({
+      address: new FormControl(''),
+      map_latitude: new FormControl(''),
+      map_longitude: new FormControl(''),
+      city: new FormControl('Delhi', Validators.required),
+      locality: new FormControl(''),
+      pincode:new FormControl(''),
+      nearest_landmark: new FormControl(''),
+      nearby_places: new FormControl('')
+    }),
 
-  PropertyUpdate = this.fb.group({
-    build_name: ['', Validators.required],
-    type: ['', Validators.required],
-    willing_to_rent_out_to: ['', Validators.required],
-    agreement_type:  ['', Validators.required],
-    address:  ['', Validators.required],
-    city:  ['', Validators.required],
-    locality:  ['', Validators.required],
-    property_detail:  ['', Validators.required],
-    nearest_landmark:  ['', Validators.required],
-    map_latitude:  ['', Validators.required],
-    map_longitude:  ['', Validators.required],
-    display_address:  ['', Validators.required],
-    area:  ['', Validators.required],
-    area_unit:  ['', Validators.required],
-    carpet_area:  ['', Validators.required],
-    bedroom:  ['', Validators.required],
-    bathroom:  ['', Validators.required],
-    balconies:  ['', Validators.required],
-    additional_rooms:  ['', Validators.required],
-    furnishing_status:  ['', Validators.required],
-    furnishings:  ['', Validators.required],
-    total_floors:  ['', Validators.required],
-    property_on_floor:  ['', Validators.required],
-    rera_registration_status:  ['', Validators.required],
-    additional_parking_status:  ['', Validators.required],
-    parking_covered_count:  ['', Validators.required],
-    expected_pricing:  ['', Validators.required],
-    possession_by:  ['', Validators.required],
-    tax_govt_charge:  ['', Validators.required],
-    price_negotiable:  ['', Validators.required],
-    facing_towards:  ['', Validators.required],
-    availability_condition:  ['', Validators.required],
-    buildyear:  ['', Validators.required],
-    age_of_property:  ['', Validators.required],
-    expected_rent:  ['', Validators.required],
-    description:  ['', Validators.required],
-    inc_electricity_and_water_bill:  ['', Validators.required],
-    month_of_notice:  ['', Validators.required],
-    duration_of_rent_aggreement:  ['', Validators.required],
-    security_deposit:  ['', Validators.required],
-    rent_cond:  ['', Validators.required],
-    ownership:  ['', Validators.required],
-    available_for:  ['', Validators.required],
-    nearby_places:  ['', Validators.required],
-    equipment:  ['', Validators.required],
-    features:  ['', Validators.required],
-    maintenance_charge:  ['', Validators.required],
-    maintenance_charge_status:  ['', Validators.required],
-    parking_open_count:  ['', Validators.required],
-    video_link:  ['', Validators.required]
+    Property_additional_details: new FormGroup({
+      additional_rooms_status: new FormControl('0', Validators.required),
+      additional_rooms: new FormControl(''),
+      furnishings: new FormControl(''),
+      furnishing_status: new FormControl('NFR'),
+      facing_towards: new FormControl(''),
+      rera_registration_status: new FormControl(''),
+      additional_parking_status: new FormControl('0'),
+      buildyear: new FormControl(''),
+      availability_condition: new FormControl(''),
+      possession_by: new FormControl(''),
+      property_on_floor: new FormControl(''),
+      total_floors: new FormControl(''),
+      willing_to_rent_out_to: new FormControl(''),
+      agreement_type: new FormControl(''),
+      available_for: new FormControl(''),
+      rent_cond: new FormControl(''),
+      duration_of_rent_aggreement: new FormControl(''),
+      ownership: new FormControl(''),
+      month_of_notice: new FormControl(''),
+      parking_covered_count: new FormControl(''),
+      parking_open_count: new FormControl('')
+    }),
+
+    Property_price_images: new FormGroup({
+      expected_rent: new FormControl('5001', Validators.required),
+      security_deposit: new FormControl(''),
+      inc_electricity_and_water_bill: new FormControl(''),
+      tax_govt_charge: new FormControl(''),
+      price_negotiable: new FormControl(''),
+      negotiable_status: new FormControl('0'),
+      maintenance_charge_status: new FormControl('0'),
+      maintenance_charge: new FormControl(''),
+      video_link: new FormControl('')
+    })
   });
 
   imagePre1: any;
@@ -218,7 +247,8 @@ export class UpdatepropertyComponent implements OnInit {
      private userService: UserService,
      private toastr: ToastrService,
      private mapsAPILoader: MapsAPILoader,
-     private ngZone:NgZone
+     private ngZone:NgZone,
+     private internalUserService: InternalUserService
      ) { 
       this.route.params.subscribe((params) => {
         this.id = params["id"];
@@ -227,7 +257,7 @@ export class UpdatepropertyComponent implements OnInit {
      }
 
      get f() {
-      return this.PropertyUpdate.controls;
+      return this.update_property_rent.controls;
     }
 
 
@@ -236,6 +266,7 @@ export class UpdatepropertyComponent implements OnInit {
        this.property_details(this.id);
        this.amenities();   
        this.Property_type_data();    
+       this.get_area();
      }
      else{
        this.redirect_to_home();
@@ -258,13 +289,11 @@ export class UpdatepropertyComponent implements OnInit {
           this.zoom = 15;
          //console.log(this.latCus);
           //console.log(this.location);
-          this.PropertyUpdate.patchValue({
+          this.update_property_rent.controls.Property_address.patchValue({
             address:this.location,
             map_latitude:this.latCus,
             map_longitude:this.longCus,
             });
-          this.form.map_latitude=this.latCus;
-          this.form.map_longitude=this.longCus;
         
         });
       });
@@ -282,8 +311,11 @@ export class UpdatepropertyComponent implements OnInit {
      //console.log(resp); 
      this.longCus=resp.lng;
      this.latCus=resp.lat; 
-     this.form.map_latitude=this.latCus;
-     this.form.map_longitude=this.longCus;
+     this.update_property_rent.controls.Property_address.patchValue({
+      address:this.location,
+      map_latitude:this.latCus,
+      map_longitude:this.longCus,
+      });
      })
   }  
 
@@ -296,7 +328,7 @@ export class UpdatepropertyComponent implements OnInit {
         if (results[0]) {
           this.zoom = 12;
           //console.log(results[0].formatted_address);
-          this.PropertyUpdate.patchValue({
+          this.update_property_rent.controls.Property_address.patchValue({
             address:results[0].formatted_address,
             map_latitude:this.latCus,
             map_longitude:this.longCus,
@@ -318,11 +350,20 @@ export class UpdatepropertyComponent implements OnInit {
      this.showLoadingIndicator = true;
      this.authService.Propery_get_id(this.id).subscribe(
        (data: any) => {
-        //console.log(data);
+        console.log(data);
         this.data_id=data.data.id;
-         if( this.data_id == 0){
-          this.redirect_to_myproperties();
-         } 
+        if( this.data_id == 0){
+         this.redirect_to_myproperties();
+        } 
+        this.add_room_string=data.data.additional_rooms;
+        this.add_room_array = this.add_room_string.split(',');
+        if(data.data.additional_rooms.length){
+          this.update_room_array=this.add_room_array;
+          console.log(this.update_room_array);
+        }
+         if (data.data.draft == 1) {
+           this.show_draft_btn=true;
+         }
         this.product_img=data.data.product_img;
         this.product_img_length=this.product_img.length;
         //console.log(this.product_img);
@@ -362,7 +403,9 @@ export class UpdatepropertyComponent implements OnInit {
          this.additional_parking_status = data.data.additional_parking_status;
          this.parking_covered_count = data.data.parking_covered_count;
          this.possession_by = data.data.possession_by;
-         
+         this.negotiable_status = data.data.negotiable_status;
+         this.pincode= data.data.pincode;
+         this.additional_rooms_status= data.data.additional_rooms_status;
          this.tax_govt_charge = data.data.tax_govt_charge;
          this.price_negotiable = data.data.price_negotiable;
          this.facing_towards = data.data.facing_towards;
@@ -386,75 +429,205 @@ export class UpdatepropertyComponent implements OnInit {
          this.maintenance_charge=data.data.maintenance_charge,
          this.maintenance_charge_status=data.data.maintenance_charge_status;
          this.parking_open_count=data.data.parking_open_count;
+         this.video_link= data.data.video_link;
  
-         this.PropertyUpdate.patchValue({
-          id:this.id,
+       
+        // property details form control 
+        this.update_property_rent.controls.Property_Details.patchValue({
           build_name: this.build_name,
-          type:this.type,
-          willing_to_rent_out_to: this.willing_to_rent_out_to ,
-          agreement_type: this.agreement_type,
-          address:this.address,
-          city:this.city,
-          locality:this.locality,
-          property_detail:this.property_detail,
-          nearest_landmark:this.nearest_landmark,
-          map_latitude:this.map_latitude,
-          map_longitude:this.map_longitude,
-          display_address:this.display_address,
-          area:this.area,
-          area_unit:this.area_unit,
-          carpet_area:this.carpet_area,
-          bedroom:this.bedroom,
-          bathroom:this.bathroom,
-          balconies:this.balconies,
-          additional_rooms:this.additional_rooms,
-          furnishing_status:this.furnishing_status,
-          furnishings:this.furnishings,
-          total_floors:this.total_floors,
-          property_on_floor:this.property_on_floor,
-          rera_registration_status:this.rera_registration_status,
-          additional_parking_status:this.additional_parking_status,
-          parking_covered_count:this.parking_covered_count,
-          parking_open_count:this.parking_open_count,
-          expected_pricing:this.expected_pricing,
-          possession_by:this.possession_by,
-          tax_govt_charge:this.tax_govt_charge,
-          price_negotiable:this.price_negotiable,
-          facing_towards:this.facing_towards,
-          availability_condition:this.availability_condition,
-          buildyear:this.buildyear,
-          age_of_property:this.age_of_property,
-          expected_rent:this.expected_rent,
-          description:this.description,
-          inc_electricity_and_water_bill:this.inc_electricity_and_water_bill,
-          month_of_notice:this.month_of_notice,
-          duration_of_rent_aggreement:this.duration_of_rent_aggreement,
-          security_deposit:this.security_deposit,
-          rent_cond:this.rent_cond,
-          ownership:this.ownership,
-          available_for:this.available_for,
-          nearby_places:this.nearby_places,
-          equipment:this.equipment,
-          features:this.features,
-          maintenance_charge:this.maintenance_charge,
-          maintenance_charge_status:this.maintenance_charge_status,
+          area: this.area,
+          property_detail: this.property_detail,
         });
+        if(this.type){
+          this.update_property_rent.controls.Property_Details.patchValue({
+            type:this.type,
+          }); 
+        }
+        if(this.area_unit){
+          this.update_property_rent.controls.Property_Details.patchValue({
+            area_unit:this.area_unit,
+          });   
+        }
+        if(this.bedroom){
+          this.update_property_rent.controls.Property_Details.patchValue({
+            bedroom:this.bedroom,
+          });   
+        }
+        if(this.bathroom){
+          this.update_property_rent.controls.Property_Details.patchValue({
+            bathroom:this.bathroom,
+          });   
+        }
+        if(this.balconies){
+          this.update_property_rent.controls.Property_Details.patchValue({
+            balconies:this.balconies,
+          });   
+        }
+        // property location form controls
+        this.update_property_rent.controls.Property_address.patchValue({
+            address:this.address,
+            map_latitude:this.map_latitude,
+            map_longitude:this.map_longitude,
+            city: this.city,
+            pincode:this.pincode,
+            nearest_landmark:this.nearest_landmark,
+        });
+        if(this.locality){
+          console.log(this.locality);
+          this.update_property_rent.controls.Property_address.patchValue({
+            locality:this.locality.id,
+          });   
+        }
+
+        // property addtional details form control
+        if(this.additional_rooms_status){
+          console.log(this.additional_rooms_status);
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            additional_rooms_status:this.additional_rooms_status,
+          });   
+        }
+        if(this.facing_towards){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            facing_towards:this.facing_towards,
+          });   
+        }
+        if(this.rera_registration_status){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            rera_registration_status:this.rera_registration_status,
+          });   
+        }
+        
+        if(this.furnishing_status){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            furnishing_status:this.furnishing_status,
+          });   
+        }
+        if(this.additional_parking_status){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            additional_parking_status:this.additional_parking_status,
+          });   
+        }
+        if(this.buildyear){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            buildyear:this.buildyear,
+          });   
+        }
+        if(this.availability_condition){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            availability_condition:this.availability_condition,
+          });   
+        }
+        if(this.willing_to_rent_out_to){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            willing_to_rent_out_to:this.willing_to_rent_out_to,
+          });   
+        }
+        if(this.agreement_type){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            agreement_type:this.agreement_type,
+          });   
+        }
+        if(this.available_for){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            available_for:this.available_for,
+          });   
+        }
+        if(this.month_of_notice){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            month_of_notice:this.month_of_notice,
+          });   
+        }
+        if(this.duration_of_rent_aggreement){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            duration_of_rent_aggreement:this.duration_of_rent_aggreement,
+          });   
+        }
+        if(this.possession_by){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            possession_by:this.possession_by,
+          });   
+        }
+        if(this.property_on_floor){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            property_on_floor:this.property_on_floor,
+          });   
+        }
+        if(this.total_floors){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            total_floors:this.total_floors,
+          });   
+        }
+        if(this.parking_covered_count){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            parking_covered_count:this.parking_covered_count,
+          });   
+        }
+        if(this.parking_open_count){
+          this.update_property_rent.controls.Property_additional_details.patchValue({
+            parking_open_count:this.parking_open_count,
+          });   
+        }
+        // property pricing & images form control
+
+        if(this.video_link){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            video_link:"https://www.youtube.com/watch?v="+this.video_link,
+          });   
+        }else{
+          this.update_property_rent.patchValue({
+            video_link:this.video_link,
+          });
+        }
+        if(this.security_deposit){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            security_deposit:this.security_deposit,
+          });   
+        }
+        
+        if(this.ownership){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            ownership:this.ownership,
+          });   
+        }
+        if(this.expected_pricing){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            expected_pricing:this.expected_pricing,
+          });   
+        }
+        if(this.inc_electricity_and_water_bill){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            inc_electricity_and_water_bill:this.inc_electricity_and_water_bill,
+          });   
+        }
+        if(this.tax_govt_charge){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            tax_govt_charge:this.tax_govt_charge,
+          });   
+        }
+        if(this.price_negotiable){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            price_negotiable:this.price_negotiable,
+          });   
+        }
+        if(this.negotiable_status){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            negotiable_status:this.negotiable_status,
+          });   
+        }
+        if(this.maintenance_charge_status){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            maintenance_charge_status:this.maintenance_charge_status,
+          });   
+        }
+        if(this.maintenance_charge){
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            maintenance_charge:this.maintenance_charge,
+          });   
+        }
         this.showLoadingIndicator = false; 
        } 
        );
      
-   }
-
-   furnishStatus(event): void{
-     //console.log(event);
-     if(event == 'SFR' || event == 'FFR')
-     {
-       this.furnish = true;
-     }
-     else
-     {
-       this.furnish = false;
-     }
    }
    price_nego_Change(event){
      //console.log(event);
@@ -485,11 +658,40 @@ export class UpdatepropertyComponent implements OnInit {
     }
     this.amenityArray=this.selectedItems; 
     this.amenity_Uncheck=this.Uncheck_Items;
-   //console.log(this.amenity_Uncheck); 
-   //console.log(this.amenityArray);
   
   }
   
+  onchange_rooms(e: any, room: string) {
+    console.log(this.update_room_array);
+    if (e.target.checked) {
+      this.update_room_array.push(room);
+      const expected = new Set();
+        const unique = this.update_room_array.filter(item => !expected.has(JSON.stringify(item)) ? expected.add(JSON.stringify(item)) : false);
+        this.unique_room_array=unique;
+        this.additional_room_array=this.unique_room_array;
+    } else {
+      
+      // arr.pop();
+      const index: number = this.update_room_array.indexOf(room);
+      if (index !== -1) {
+        this.update_room_array.splice(index, 1);
+        this.additional_room_array=this.update_room_array;
+      }
+    }
+    // console.log(this.additional_room_array);
+  }
+  
+  add_room_check(room:any){
+    // var len= this.product_amenties.length; 
+  if(this.add_room_array.length !=null){
+    for (let i = 0; i < this.add_room_array.length; i++) {
+      if(room==this.add_room_array[i]){
+        return  true;
+      }
+    }
+  }
+  return false;
+}
  
    furnishing(event): void{
      //console.log(event)
@@ -629,25 +831,62 @@ export class UpdatepropertyComponent implements OnInit {
    delete_pic5(){
      this.imagePre5=null;
    }   
-  
-   maintenanceStatus(event): void {
-     if (event == 0){
-       this.maintenance = true;
-     }
-     else{
-       this.maintenance = false
-     }
-   }
  
-   parkingStatus(event): void {
-     //console.log(event)
-     if (event == 0){
-       this.parking = true;
-     }
-     else{
-       this.parking = false
-     }
+   
+  onchange_locality(id:any){
+    this.authService.get_pincodebyid(id).subscribe(
+      data => {;
+        this.update_property_rent.controls.Property_address.patchValue({
+          pincode: data.data.pincode,
+        });
+      },
+      err => {
+        console.log(err);
+
+      }
+    );
+  }
+
+  onchange_add_room(event:any){
+    if(event==1){
+      this.Add_room_tab=true;
+    }else{
+      this.Add_room_tab=false;
+    }
+  }
+  furnishStatus(event): void {
+    if (event == 'FFR') {
+      this.furnish_row=true;
+    }
+    else {
+      this.furnish_row=false;
+    }
+  }
+  parkingStatus(event): void {
+    if (event == 1) {
+      this.parking_row = true;
+    }
+    else {
+      this.parking_row = false;
+    }
    }
+  price_negotiable_status(event): void {
+    if (event == 1) {
+      this.price_negotiable_row = true;
+    }
+    else {
+      this.price_negotiable_row = false;
+    }
+  }
+  
+  maintenanceStatus(event): void {
+    if (event == 1) {
+      this.maintenance_row = true;
+    }
+    else {
+      this.maintenance_row = false;
+    }
+  }
  
    Property_type_data(): void{
     this.userService.get_property_type().pipe().subscribe(
@@ -692,7 +931,6 @@ export class UpdatepropertyComponent implements OnInit {
     return false;
   }
  
- 
    saleButton(): void{
      this.saleValue = true;
      this.rentValue = false;
@@ -708,7 +946,7 @@ export class UpdatepropertyComponent implements OnInit {
    }
    RangeSlider_Price(event){
     this.expected_pricing=event;
-      this.PropertyUpdate.patchValue({
+      this.update_property_rent.controls.Property_price_images.patchValue({
         expected_rent:this.expected_rent,
       });
       if(event<5000 || event>500000){
@@ -745,6 +983,21 @@ export class UpdatepropertyComponent implements OnInit {
     }
   }
   
+get_area():void{
+  this.internalUserService.get_areas().subscribe(
+    data => {
+      // this.dropdownList = data;
+      for (let i = 1; i < data.length; i++) {
+        this.dropdownList = this.dropdownList.concat({item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode});
+      }
+    },
+    err => {
+      console.log(err);
+
+    }
+  );
+}
+  
 delete_Pro_img(id: any){
   this.authService.delete_pro_img(id).subscribe(
        data => {
@@ -757,13 +1010,40 @@ delete_Pro_img(id: any){
      );
  }
 
-   onSubmitRent(): void {    
-    if(this.PropertyUpdate.value.expected_rent>=5000 && this.PropertyUpdate.value.expected_rent<=500000){
-      this.authService.product_rent_update(this.PropertyUpdate.value, this.id, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
+   onSubmitRent(): void { 
+    console.log(this.additional_room_array); 
+    if(this.update_property_rent.value.Property_price_images.expected_rent>=5000 && this.update_property_rent.value.Property_price_images.expected_rent<=500000){
+      this.authService.product_rent_update(this.update_property_rent.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
         data => {
           //console.log("successful Updated" + data)
           this.toastr.success('Successfuly Updated', 'Property Rent');
           window.location.href=GlobalConstants.siteURL+"myproperties"
+        },
+        err => {
+          this.err_caused = true;
+          this.errorMessage = err.error.errors;
+          this.Message = err.error.message;
+          //console.log(this.errorMessage);
+          this.toastr.error(this.Message, 'Something Error', {
+            timeOut: 3000,
+          });
+        }
+      );
+    }else{
+      this.toastr.error("Expected Price Between  5k to 5 Lakhs", 'Price Invalid..!!', {
+        timeOut: 2000,
+      });
+    }
+     
+   }
+   saveDraft_form(): void { 
+    console.log(this.additional_room_array); 
+    if(this.update_property_rent.value.Property_price_images.expected_rent>=5000 && this.update_property_rent.value.Property_price_images.expected_rent<=500000){
+      this.authService.draft_rent_update(this.update_property_rent.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
+        data => {
+          //console.log("successful Updated" + data)
+          this.toastr.success('Successfuly Updated', 'Dreaft Property Rent');
+          // window.location.href=GlobalConstants.siteURL+"myproperties"
         },
         err => {
           this.err_caused = true;
@@ -792,3 +1072,5 @@ delete_Pro_img(id: any){
   
 
 }
+
+type addition_room = Array<{ id: number; name: string }>;

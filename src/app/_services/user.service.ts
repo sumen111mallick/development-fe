@@ -111,6 +111,9 @@ pro_comp_on<T>(): Observable<T>{
   getproperties(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/agent_properties', { responseType: 'json' });
   }
+  Draft_properties(): Observable<any> {
+    return this.http.get(GlobalConstants.apiURL + 'product/Draft_properties', { responseType: 'json' });
+  }
 
   getSearch(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/get_search', { responseType: 'json' });

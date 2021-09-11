@@ -59,6 +59,7 @@ export class InsertproductRentComponent implements OnInit {
   amenitiesresult: () => void;
   Message: any = {};
   build_name: any;
+  public draft_form_id:any;
   type: any;
   willing_to_rent_out_to: any;
   agreement_type: any;
@@ -125,6 +126,7 @@ export class InsertproductRentComponent implements OnInit {
   insert_property_rent = new FormGroup({
     Property_Details: new FormGroup({
       build_name: new FormControl(''),
+      draft_form_id: new FormControl(''),
       type: new FormControl(''),
       display_address: new FormControl(''),
       area: new FormControl(''),
@@ -148,7 +150,7 @@ export class InsertproductRentComponent implements OnInit {
     }),
 
     Property_additional_details: new FormGroup({
-      additional_rooms: new FormControl('0', Validators.required),
+      additional_rooms_status: new FormControl('0', Validators.required),
       furnishings: new FormControl(''),
       furnishing_status: new FormControl('NFR'),
       facing_towards: new FormControl(''),
@@ -607,15 +609,47 @@ export class InsertproductRentComponent implements OnInit {
       this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
         data => {
           //console.log("successful" + data)
-          this.toastr.success('Successfuly Saved', 'Property');
+          this.toastr.success('Successfuly Saved', 'Property Rental');
+          window.location.href = GlobalConstants.siteURL + "myproperties"
+        },
+        err => {
+          this.err_caused = true;
+          this.errorMessage = err.error.errors;
+          this.Message = err.error.message;
+          this.toastr.error(this.Message, 'Something Error', {
+            timeOut: 3000,
+          });
+        }
+      );
+    } else {
+      this.toastr.error("Expected Price Between 5k to 5 5Lakhs", 'Price Invalid..!!', {
+        timeOut: 2000,
+      }
+      );
+    }
+  }
+  
+  saveDraft_form(): void {
+    console.log(this.insert_property_rent.value);
+    if (this.insert_property_rent.value.Property_price_images.expected_rent >=5000 && this.insert_property_rent.value.Property_price_images.expected_rent <=500000) {
+      this.authService.draft_insert_rent(this.insert_property_rent.value, this.content, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
+        data => {
+        //  console.log(data.last_id);
+         this.draft_form_id=data.last_id;
+         this.insert_property_rent.controls.Property_Details.patchValue({
+          draft_form_id: data.last_id,
+        });          
+          this.Message =data.message;
+          this.toastr.info(this.Message, 'Draft Property', {
+            timeOut: 3000,
+          });
+          this.showLoadingIndicator = false;
           // window.location.href = GlobalConstants.siteURL + "myproperties"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.Message = err.error.message;
-          //console.log(this.errorMessage);
-          //console.log(this.Message);
           this.toastr.error(this.Message, 'Something Error', {
             timeOut: 3000,
           });
@@ -645,7 +679,7 @@ export class InsertproductRentComponent implements OnInit {
     this.insert_property_rent.controls.Property_price_images.patchValue({
       expected_rent: event,
     });
-    if (event <= 5000 || event >= 500000) {
+    if (event <5000 || event >500000) {
       this.Expected_PriceEroor = true;
     } else {
       this.Expected_PriceEroor = false;
@@ -657,7 +691,7 @@ export class InsertproductRentComponent implements OnInit {
     this.insert_property_rent.controls.Property_price_images.patchValue({
       expected_rent: event,
     });
-    if (event <= 5000 || event >= 500000) {
+    if (event <5000 || event >500000) {
       this.Expected_PriceEroor = true;
     } else {
       this.Expected_PriceEroor = false;
