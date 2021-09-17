@@ -111,6 +111,12 @@ pro_comp_on<T>(): Observable<T>{
   getproperties(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/agent_properties', { responseType: 'json' });
   }
+  getproperties_solid(): Observable<any> {
+    return this.http.get(GlobalConstants.apiURL + 'product/solid_properties', { responseType: 'json' });
+  }
+  getproperties_pursched(): Observable<any> {
+    return this.http.get(GlobalConstants.apiURL + 'product/purchased_properties', { responseType: 'json' });
+  }
   Draft_properties(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/Draft_properties', { responseType: 'json' });
   }
@@ -185,6 +191,5 @@ pro_comp_on<T>(): Observable<T>{
  // property  comparision 
  get_pro_comp():Observable<any> {
   return this.http.get(GlobalConstants.apiURL + 'product/Product_comp', { responseType: 'json' });
-}
-
+ }
 }

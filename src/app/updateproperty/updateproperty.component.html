@@ -185,9 +185,9 @@
                           <div class="col-lg-6 col-md-6 col-sm-12">
                               <div class="form-group">
                                   <label for="area">Property Area</label>
-                                  <input type="number" class="form-control" name="area"
+                                  <input type="text" class="form-control" name="area"
                                       formControlName="area" id="area"
-                                      placeholder="Please Enter the Area..." (keypress)="keyPressNumbers($event)">
+                                      placeholder="Please Enter the Area..." maxlength="8" (keypress)="keyPressNumbers($event)">
                               </div>
                           </div>
                       </div>
@@ -888,20 +888,14 @@
                               <div class="form-group">
                                   <label for="expected_rent">Expected Rent</label>
                                   <div class="row">
-                                      <div class="col-lg-8 col-xl-8">
+                                      <div class="col-lg-4 col-xl-4">
+                                        <input type="number" class="form-control"  formControlName="expected_rent" id="expected_rent" name="expected_rent" placeholder="Please Enter Expected Rent..." maxlength="8" (keypress)="keyPressNumbers($event)" (ngModelChange)="rangeInput_Price($event)">
+                                      </div>
+                                      <div class="col-lg-8 col-xl-8">                                          
                                           <ng5-slider [(value)]="expected_rent"
                                               [options]="options"
                                               (valueChange)="RangeSlider_Price($event)">
                                           </ng5-slider>
-                                      </div>
-                                      <div class="col-lg-4 col-xl-4">
-                                          <!-- (ngModelChange)="Expected_Price($event)" -->
-                                          <input type="number" class="form-control"
-                                              formControlName="expected_rent" id="expected_rent"
-                                              name="expected_rent"
-                                              placeholder="Please Enter Expected Rent..."
-                                              maxlength="10" (keypress)="keyPressNumbers($event)"
-                                              (ngModelChange)="rangeInput_Price($event)">
                                       </div>
                                       <span class="alert-danger" *ngIf="Expected_PriceEroor == true">Expected Price Between 5k to 5 lakhs</span>
                                   </div>
@@ -937,8 +931,8 @@
                           <div class="col-lg-10 col-md-10 col-sm-12">
                               <div class="form-group">
                                   <label for="locality">Price Negotiable</label>
-                                  <input type="number" class="form-control"
-                                      formControlName="price_negotiable" placeholder="Enter the Price Negotiable" (keypress)="keyPressNumbers($event)">
+                                  <input type="text" class="form-control"
+                                      formControlName="price_negotiable" maxlength="8" placeholder="Enter the Price Negotiable" (keypress)="keyPressNumbers($event)">
                               </div>
                           </div>
                           <div class="col-lg-2 col-md-2 col-sm-12" id="Negotiable_info_btn">

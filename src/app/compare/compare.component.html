@@ -51,7 +51,6 @@
 										<li class="list_heading">Bathroom</li>
 										<li class="list_heading">Area</li>
 										<li class="list_heading">Year of build</li>
-										<li class="list_heading">Carpet Area</li>
 										<li class="list_heading" *ngFor="let amenties of amenitiesresult">{{amenties.name}}</li>
 									</ul>
 								</li>
@@ -86,7 +85,6 @@
 										<li class="list_data"><a href="#">{{ item.productdetails.bathroom }}</a></li>
 										<li class="list_data"><a href="#">{{ item.productdetails.area }}/{{ item.productdetails.area_unit }}</a></li>
 										<li class="list_data"><a href="#">{{ item.productdetails.buildyear }}</a></li>
-										<li class="list_data"><a href="#">{{ item.productdetails.carpet_area }}</a></li>
 										<li class="amenties-check-comparision" *ngFor="let Amenties of amenitiesresult let i=index">
 											<div *ngIf="Amenties_funtion(Amenties.id,item.product_id)==true,else OtherAmenties">
 												<span  class="checkmark">&#10004;</span>											

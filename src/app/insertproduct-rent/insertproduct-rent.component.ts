@@ -173,7 +173,7 @@ export class InsertproductRentComponent implements OnInit {
     }),
 
     Property_price_images: new FormGroup({
-      expected_rent: new FormControl('5001', Validators.required),
+      expected_rent: new FormControl('5000'),
       security_deposit: new FormControl(''),
       inc_electricity_and_water_bill: new FormControl(''),
       tax_govt_charge: new FormControl(''),
@@ -222,7 +222,7 @@ export class InsertproductRentComponent implements OnInit {
 
   ngOnInit(): void {
     this.showLoadingIndicator = true;
-    this.expected_rent = 5001;
+    this.expected_rent = 5000;
 
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder();
@@ -293,7 +293,7 @@ export class InsertproductRentComponent implements OnInit {
       });
     })
   }
-
+  
   markerDragEnd($event: google.maps.MouseEvent) {
     this.latCus = $event.latLng.lat();
     this.longCus = $event.latLng.lng();
@@ -534,7 +534,7 @@ export class InsertproductRentComponent implements OnInit {
         }
       },
       err => {
-        console.log(err);
+        // console.log(err);
 
       }
     );
@@ -548,7 +548,7 @@ export class InsertproductRentComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
+        // console.log(err);
 
       }
     );
@@ -630,7 +630,7 @@ export class InsertproductRentComponent implements OnInit {
   }
   
   saveDraft_form(): void {
-    console.log(this.insert_property_rent.value);
+    // console.log(this.insert_property_rent.value);
     if (this.insert_property_rent.value.Property_price_images.expected_rent >=5000 && this.insert_property_rent.value.Property_price_images.expected_rent <=500000) {
       this.authService.draft_insert_rent(this.insert_property_rent.value, this.content, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
         data => {
@@ -687,6 +687,7 @@ export class InsertproductRentComponent implements OnInit {
   }
 
   rangeInput_Price(event: number) {
+    console.log(event);
     // this.expected_pricing=500001;
     this.insert_property_rent.controls.Property_price_images.patchValue({
       expected_rent: event,

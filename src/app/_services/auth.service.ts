@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 const AUTH_API = GlobalConstants.apiURL;
 
@@ -21,7 +22,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(credentials): Observable<any> {
+  login(credentials: { email: any; password: any; }): Observable<any> {
     return this.http.post(AUTH_API + 'auth/login', JSON.stringify({
       email: credentials.email,
       password: credentials.password,
@@ -29,7 +30,7 @@ export class AuthService {
     }), httpOptions);
   }
 
-  register(user, profile_pic): Observable<any> {
+  register(user: { username: any; email: any; other_mobile_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
     return this.http.post(AUTH_API + 'auth/user_signup', ({
       name: user.username,
       email: user.email,
@@ -40,7 +41,7 @@ export class AuthService {
     }), httpOptions);
   }
 
-mobile_verify(data): Observable<any> {
+mobile_verify(data: { form_phone: any; }): Observable<any> {
     console.log("Mobile Verification");
     console.log(data.form_phone);
     return this.http.post(AUTH_API + 'auth/verify_mobile', ({
@@ -49,7 +50,7 @@ mobile_verify(data): Observable<any> {
   }
 /* Code added by Radhika Start */
 
-  register_new(user): Observable<any> {
+  register_new(user: { firstName: any; lastName: any; email: any; other_mobile_number: any; password: any; cpassword: any; select_type: any; tnc_check: any; }): Observable<any> {
     console.log(user);
     return this.http.post(AUTH_API + 'auth/user_signup_new', ({
       first_name: user.firstName,
@@ -63,7 +64,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
- register_internal_user(internal_user): Observable<any> {
+ register_internal_user(internal_user: FormGroup): Observable<any> {
     console.log(internal_user);
     return this.http.post(AUTH_API + 'auth/internal_user_signup', ({
       user_name: internal_user.value.username,
@@ -78,7 +79,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  create_role(role_details): Observable<any> {
+  create_role(role_details: FormGroup): Observable<any> {
     console.log(role_details);
     return this.http.post(AUTH_API + 'auth/create_role', ({
       role: role_details.value.rolename,
@@ -96,12 +97,12 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  update_role(updateRoleData, $id) {
+  update_role(updateRoleData: any, $id: string) {
     return this.http.post(AUTH_API + 'auth/roles/update/' + $id, updateRoleData);
   }
 															  
   /* Code added by Radhika End */
-  register_owner(user, profile_pic): Observable<any> {
+  register_owner(user: { username: any; email: any; other_mobile_number: any; address: any; city: any; pan_number: any; aadhar_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
     return this.http.post(AUTH_API + 'auth/owner_signup', ({
       name: user.username,
       email: user.email,
@@ -116,7 +117,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  register_dealer(user, profile_pic): Observable<any> {
+  register_dealer(user: { username: any; email: any; other_mobile_number: any; company_name: any; company_url: any; address: any; city: any; landline_number: any; company_profile: any; pan_number: any; aadhar_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
     return this.http.post(AUTH_API + 'auth/dealer_signup', ({
       name: user.username,
       email: user.email,
@@ -135,7 +136,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  register_company(user, profile_pic): Observable<any> {
+  register_company(user: { username: any; email: any; usertype: any; other_mobile_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
     return this.http.post(AUTH_API + 'admin/company_signup', ({
       name: user.username,
       email: user.email,
@@ -147,7 +148,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  register_lawyer(user, profile_pic): Observable<any> {
+  register_lawyer(user: { username: any; email: any; other_mobile_number: any; address: any; city: any; pan_number: any; aadhar_number: any; provided_service: any; price_for_service: any; law_firm_number: any; practice_number: any; place_of_practice: any; landline_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
     return this.http.post(AUTH_API + 'auth/lawyer_signup', ({
       name: user.username,
       email: user.email,
@@ -168,7 +169,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  product_insert_sale(details, id, additional_room_array, amenityArray,  product_img): Observable<any> {
+  product_insert_sale(details: { Property_Details: { draft_form_id: any; build_name: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; }; Property_Location: { address: any; city: any; locality: any; nearest_landmark: any; map_latitude: any; map_longitude: any; pincode: any; }; Property_additional_details: { bedroom: any; bathroom: any; balconies: any; furnishing_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; nearby_places: any; additional_rooms_status: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; }; Property_price_images: { ownership: any; expected_pricing: any; inclusive_pricing_details: any; tax_govt_charge: any; price_negotiable: any; maintenance_charge_status: any; maintenance_charge: any; maintenance_charge_condition: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any, additional_room_array: any[], amenityArray: any[],  product_img: any): Observable<any> {
     // console.log(details.Property_Details.build_name);
     return this.http.post(AUTH_API + 'product/insert_product_sale', JSON.stringify ({
       user_id: id,
@@ -226,7 +227,7 @@ mobile_verify(data): Observable<any> {
       additional_rooms: additional_room_array
     }), httpOptions);
   }
-  draft_insert_sale(details, id, additional_room_array, amenityArray,  product_img): Observable<any> {
+  draft_insert_sale(details: { Property_Details: { draft_form_id: any; build_name: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; }; Property_Location: { address: any; city: any; locality: any; nearest_landmark: any; map_latitude: any; map_longitude: any; pincode: any; }; Property_additional_details: { bedroom: any; bathroom: any; balconies: any; furnishing_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; nearby_places: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; additional_rooms_status: any; }; Property_price_images: { ownership: any; expected_pricing: any; inclusive_pricing_details: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; maintenance_charge_condition: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any, additional_room_array: any[], amenityArray: any[],  product_img: any): Observable<any> {
     // console.log(details.Property_Details.build_name);
     return this.http.post(AUTH_API + 'product/insert_product_sale', JSON.stringify ({
       user_id: id,
@@ -286,7 +287,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  product_insert_rent(details, id,  additional_room_array, amenityArray,  product_img,): Observable<any> {
+  product_insert_rent(details: { Property_Details: { build_name: any; draft_form_id: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; bedroom: any; bathroom: any; balconies: any; }; Property_address: { address: any; city: any; locality: any; pincode: any; nearest_landmark: any; map_latitude: any; map_longitude: any; nearby_places: any; }; Property_additional_details: { furnishing_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; ownership: any; agreement_type: any; available_for: any; duration_of_rent_aggreement: any; month_of_notice: any; rent_cond: any; willing_to_rent_out_to: any; additional_rooms_status: any; }; Property_price_images: { expected_rent: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any,  additional_room_array: any[], amenityArray: any[],  product_img: any,): Observable<any> {
     return this.http.post(AUTH_API + 'product/insert_product_rent', JSON.stringify ({
       user_id: id,
       build_name: details.Property_Details.build_name,
@@ -349,8 +350,8 @@ mobile_verify(data): Observable<any> {
       additional_rooms_status:details.Property_additional_details.additional_rooms_status
     }), httpOptions);
   }
-  draft_insert_rent(details, id,  additional_room_array, amenityArray,  product_img,): Observable<any> {
-    console.log(details.Property_Details.build_name);
+  draft_insert_rent(details: { Property_Details: { build_name: any; draft_form_id: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; bedroom: any; bathroom: any; balconies: any; }; Property_address: { address: any; city: any; locality: any; pincode: any; nearest_landmark: any; map_latitude: any; map_longitude: any; nearby_places: any; }; Property_additional_details: { furnishing_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; ownership: any; agreement_type: any; available_for: any; duration_of_rent_aggreement: any; month_of_notice: any; rent_cond: any; willing_to_rent_out_to: any; additional_rooms_status: any; }; Property_price_images: { expected_rent: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any,  additional_room_array: any[], amenityArray: any[],  product_img: any,): Observable<any> {
+    // console.log(details.Property_Details.build_name);
     return this.http.post(AUTH_API + 'product/insert_product_rent', JSON.stringify ({
       user_id: id,
       build_name: details.Property_Details.build_name,
@@ -414,17 +415,17 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  product_see(prodid_no): Observable<any> {
+  product_see(prodid_no: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/see', JSON.stringify ({
       prod_id: prodid_no,
     }), httpOptions);
   }
-  product_login_see(prodid_no): Observable<any> {
+  product_login_see(prodid_no: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/product_login_see', JSON.stringify ({
       prod_id: prodid_no,
     }), httpOptions);
   }
-  User_productCount(prodid_no): Observable<any> {
+  User_productCount(prodid_no: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/User_productCount', JSON.stringify ({
       prod_id: prodid_no,
     }), httpOptions);
@@ -436,18 +437,24 @@ mobile_verify(data): Observable<any> {
   recently_view(): Observable<any> {
     return this.http.get(AUTH_API + 'product/User_Recently_pro', { responseType: 'json' });
   }
-  product_similarproperty(cityValue): Observable<any> {
+  product_similarproperty(cityValue: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/similarproperty', JSON.stringify ({
       cityValue: cityValue,
     }), httpOptions);
   }
-  login_similarproperty(cityValue): Observable<any> {
+  login_similarproperty(cityValue: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/loginSimilarproperty', JSON.stringify ({
       cityValue: cityValue,
     }), httpOptions);
   }
+  
+  check_order_product(id: any): Observable<any> {
+    return this.http.post(AUTH_API + 'product/check_order_product', JSON.stringify ({
+      product_id: id,
+    }), httpOptions);
+  }
 
-  Login_search_home(data,amenityArray): Observable<any> {
+  Login_search_home(data: { build_name: any; type: any; Location: any; area_unit: any; Bathrooms: any; Bedrooms: any; availability_condition: any; Years: any; Minimum: any; Maximum: any; property_status: any; },amenityArray: any[]): Observable<any> {
     return this.http.post(AUTH_API + 'product/Login_search_home', JSON.stringify({
       build_name: data.build_name,
       type: data.type,
@@ -463,7 +470,7 @@ mobile_verify(data): Observable<any> {
       amenities: amenityArray,
     }), httpOptions);
   }
-  search(data,amenityArray): Observable<any> {
+  search(data: { build_name: any; type: any; city: any; area_unit: any; Bathrooms: any; Bedrooms: any; availability_condition: any; Years: any; Minimum: any; Maximum: any; property_status: any; },amenityArray: any[]): Observable<any> {
     return this.http.post(AUTH_API + 'product/search', JSON.stringify({
       build_name: data.build_name,
       type: data.type,
@@ -479,7 +486,7 @@ mobile_verify(data): Observable<any> {
       amenities: amenityArray,
     }), httpOptions);
   }
-  product_Searching(data,amenityArray): Observable<any> {
+  product_Searching(data: { build_name: any; Location: any; area_unit: any; type: any; Bathrooms: any; Bedrooms: any; availability_condition: any; Years: any; Minimum: any; Maximum: any; property_status: any; },amenityArray: any[]): Observable<any> {
     return this.http.post(GlobalConstants.apiURL + 'product/product_Searching', JSON.stringify({
       build_name: data.build_name,
       Location:data.Location,
@@ -495,7 +502,7 @@ mobile_verify(data): Observable<any> {
       amenities: amenityArray,
     }),httpOptions);
   }
-  product_SearchingLogin(data,amenityArray): Observable<any> {
+  product_SearchingLogin(data: { build_name: any; Location: any; area_unit: any; type: any; Bathrooms: any; Bedrooms: any; availability_condition: any; Years: any; Minimum: any; Maximum: any; property_status: any; },amenityArray: any[]): Observable<any> {
     return this.http.post(AUTH_API+ 'product/product_Searching_login', JSON.stringify({
       build_name: data.build_name,
       Location:data.Location,
@@ -511,18 +518,18 @@ mobile_verify(data): Observable<any> {
       amenities: amenityArray,
     }),httpOptions);
   }
-  search_pro_type(id): Observable<any> {
+  search_pro_type(id: number): Observable<any> {
     console.log(id);
     return this.http.post(GlobalConstants.apiURL + 'product/search_pro_type', JSON.stringify({
       id: id,
     }), httpOptions);
   }  
-  search_pro_type_login(id): Observable<any> {
+  search_pro_type_login(id: number): Observable<any> {
     return this.http.post(AUTH_API + 'product/search_pro_type_login', JSON.stringify({
       id: id,
     }), httpOptions);
   }
-  admin_loans(data): Observable<any> {
+  admin_loans(data: { bank: any; address: any; interest_rate: any; type: any; }): Observable<any> {
     return this.http.post(AUTH_API + 'admin/admin_loans', JSON.stringify({
       bank: data.bank,
       address: data.address,
@@ -531,19 +538,19 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  city_search(data): Observable<any> {
+  city_search(data: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/city_search', JSON.stringify({
       city: data,
     }), httpOptions);
   }
 
-  admin_loan_delete(data): Observable<any> {
+  admin_loan_delete(data: any): Observable<any> {
     return this.http.post(AUTH_API + 'admin/loan_delete', JSON.stringify({
       id: data,
     }), httpOptions);
   }
 
-  requirement_index(id): Observable<any> {
+  requirement_index(id: string): Observable<any> {
     return this.http.post(AUTH_API + 'product/req_index', JSON.stringify({
       user_id: id,
     }), httpOptions);
@@ -561,36 +568,36 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  saveSearch(id, prod_id): Observable<any> {
+  saveSearch(id: any, prod_id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/save_search', JSON.stringify({
       user_id: id,
       product_id: prod_id
     }), httpOptions);
   }
 
-  review_delete($id) {
+  review_delete($id: string) {
     return this.http.delete(AUTH_API + 'admin/reviews/delete/' + $id);
   }
 
-  property_delete(id): Observable<any> {
+  property_delete(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/delete_product', JSON.stringify({
       product_id: id,
     }), httpOptions);
   }
 
-  property_delete_admin(id): Observable<any> {
+  property_delete_admin(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'admin/delete_product_admin', JSON.stringify({
       product_id: id,
     }), httpOptions);
   }
 
-  lawyer_service_delete(id): Observable<any> {
+  lawyer_service_delete(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/lawyer_service_delete', JSON.stringify({
       id: id,
     }), httpOptions);
   }
 
-  requirement_delete(id): Observable<any> {
+  requirement_delete(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/requirement_delete', JSON.stringify({
       id: id,
     }), httpOptions);
@@ -607,17 +614,17 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  Wishlist(id): Observable<any> {
+  Wishlist(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/wishlist', JSON.stringify({
       product_id: id,
     }), httpOptions);
   }
-  WishlistRemove(id): Observable<any> {
+  WishlistRemove(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/wishlistDelete', JSON.stringify({
       product_id: id,
     }), httpOptions);
   }
-  create_review(form, id): Observable<any> {
+  create_review(form: { stars: any; rev_subject: any; rev_content: any; }, id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/post_review', JSON.stringify({
       product_id: id,
       stars: form.stars,
@@ -627,12 +634,12 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  uploadProfile_Image(formdata): Observable<any> {
+  uploadProfile_Image(formdata: { profile_image: any; }): Observable<any> {
     console.log(formdata.profile_image);
     return this.http.post(AUTH_API + 'auth/upload_profile_pic', formdata);
   }
 
-  password_update(form): Observable<any> {
+  password_update(form: { old_password: any; new_password: any; confirm_password: any; }): Observable<any> {
     console.log(form)
     return this.http.post(AUTH_API + 'auth/change_password', JSON.stringify({
       old_password: form.old_password,
@@ -642,7 +649,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  product_review(id): Observable<any> {
+  product_review(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/product_review', JSON.stringify({
       id: id,
     }), httpOptions);
@@ -655,7 +662,7 @@ mobile_verify(data): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/product_listing_wishlist', { responseType: 'json' });
   }
 
-  lawyer_create_service(data): Observable<any> {
+  lawyer_create_service(data: { service_name: any; service_details: any; price: any; }): Observable<any> {
     return this.http.post(AUTH_API + 'product/lawyer_create_service', JSON.stringify({
       service_name: data.service_name,
       service_details: data.service_details,
@@ -663,23 +670,23 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  lawyer_get(data): Observable<any> {
+  lawyer_get(data: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/lawyer_page', JSON.stringify({
       id: data
     }), httpOptions);
   }
 
-  user_get(data): Observable<any> {
+  user_get(data: any): Observable<any> {
     return this.http.post(AUTH_API + 'admin/user_page', JSON.stringify({
       id: data
     }), httpOptions);
   }
-  Propery_get_id(data): Observable<any> {
+  Propery_get_id(data: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/Propery_get_id', JSON.stringify({
       id: data
     }), httpOptions);
   }
-  verify(number, otp:string): Observable<any> {
+  verify(number: string, otp:string): Observable<any> {
     let name = ""+number
     console.log(typeof(name), typeof(otp))
     return this.http.post(AUTH_API + 'auth/verify', JSON.stringify({
@@ -689,7 +696,7 @@ mobile_verify(data): Observable<any> {
   }
 
 /* Code added by Radhika Start */
-  verify_mobile(number, otp:string, id:number): Observable<any> {
+  verify_mobile(number: string, otp:string, id:number): Observable<any> {
     let name = ""+number
     console.log(typeof(name), typeof(otp), typeof(id));
     return this.http.post(AUTH_API + 'auth/verify_mob', JSON.stringify({
@@ -699,7 +706,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
   /* Code added by Radhika End */								   							 
-  reverify(otp): Observable<any> {
+  reverify(otp: any): Observable<any> {
     return this.http.post(AUTH_API + 'auth/reverify', JSON.stringify({
       verification_code: otp
     }), httpOptions);
@@ -711,7 +718,7 @@ mobile_verify(data): Observable<any> {
 
 
 
-  user_update(user, id): Observable<any> {
+  user_update(user: { email: any; username: any; profile_pic: any; company_name: any; company_url: any; address: any; city: any; other_mobile_number: any; landline_number: any; company_profile: any; pan_number: any; aadhar_number: any; provided_service: any; place_of_practice: any; price_for_service: any; law_firm_number: any; practice_number: any; blocked: any; phone_number_verification_status: any; }, id: any): Observable<any> {
     return this.http.post(AUTH_API + 'admin/user_update', ({
       id: id,
       email: user.email,
@@ -736,7 +743,7 @@ mobile_verify(data): Observable<any> {
     }), httpOptions);
   }
 
-  product_sale_update(id, details, furnishingArray, amenityArray): Observable<any> {
+  product_sale_update(id: any, details: { build_name: any; type: any; address: any; display_address: any; city: any; locality: any; property_detail: any; nearest_landmark: any; map_latitude: any; map_longitude: any; area: any; carpet_area: any; area_unit: any; bedroom: any; bathroom: any; balconies: any; additional_rooms: any; equipment: any; features: any; nearby_places: any; age_of_property: any; furnishing_status: any; property_on_floor: any; total_floors: any; facing_towards: any; rera_registration_status: any; additional_parking_status: any; buildyear: any; availability_condition: any; possession_by: any; parking_covered_count: any; parking_open_count: any; ownership: any; expected_pricing: any; deposit: any; inclusive_pricing_details: any; tax_govt_charge: any; price_negotiable: any; maintenance_charge_status: any; brokerage_charges: any; maintenance_charge: any; maintenance_charge_condition: any; rent_cond: any; available_for: any; product_image1: any; product_image2: any; product_image3: any; product_image4: any; product_image5: any; expected_rent: any; inc_electricity_and_water_bill: any; security_deposit: any; duration_of_rent_aggreement: any; month_of_notice: any; willing_to_rent_out_to: any; agreement_type: any; delete_flag: any; view_counter: any; }, furnishingArray: any, amenityArray: any): Observable<any> {
     console.log(details);
     return this.http.post(AUTH_API + 'admin/product_sale_update', JSON.stringify ({
       id: id,
@@ -805,7 +812,7 @@ mobile_verify(data): Observable<any> {
   }
 
   
-  product_rent_update(details, id, additional_room_array, amenityArray, amenity_Uncheck, furnishingArray,  product_img): Observable<any> {
+  product_rent_update(details: { Property_Details: { build_name: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; bedroom: any; bathroom: any; balconies: any; }; Property_address: { address: any; city: any; locality: any; pincode: any; nearest_landmark: any; map_latitude: any; map_longitude: any; nearby_places: any; }; Property_additional_details: { furnishing_status: any; additional_rooms_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; ownership: any; agreement_type: any; available_for: any; duration_of_rent_aggreement: any; month_of_notice: any; rent_cond: any; willing_to_rent_out_to: any; }; Property_price_images: { expected_rent: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any, additional_room_array: any[], amenityArray: any[], amenity_Uncheck: any[], furnishingArray: any[],  product_img: string[]): Observable<any> {
     return this.http.post(AUTH_API + 'product/product_Rent_update', JSON.stringify ({
       user_id: id,
       id: id,
@@ -869,7 +876,7 @@ mobile_verify(data): Observable<any> {
       additional_rooms: additional_room_array
     }), httpOptions);
   }
-  draft_rent_update(details, id, additional_room_array, amenityArray, amenity_Uncheck, furnishingArray,  product_img): Observable<any> {
+  draft_rent_update(details: { Property_Details: { build_name: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; bedroom: any; bathroom: any; balconies: any; }; Property_address: { address: any; city: any; locality: any; pincode: any; nearest_landmark: any; map_latitude: any; map_longitude: any; nearby_places: any; }; Property_additional_details: { furnishing_status: any; additional_rooms_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; ownership: any; agreement_type: any; available_for: any; duration_of_rent_aggreement: any; month_of_notice: any; rent_cond: any; willing_to_rent_out_to: any; }; Property_price_images: { expected_rent: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any, additional_room_array: any[], amenityArray: any[], amenity_Uncheck: any[], furnishingArray: any[],  product_img: string[]): Observable<any> {
     return this.http.post(AUTH_API + 'product/product_Rent_update', JSON.stringify ({
       user_id: id,
       id: id,
@@ -933,7 +940,7 @@ mobile_verify(data): Observable<any> {
       additional_rooms: additional_room_array
     }), httpOptions);
   }
-  product_sales_update(details, id, additional_room_array, amenityArray, amenity_Uncheck, furnishingArray, product_img): Observable<any> {
+  product_sales_update(details: { Property_Details: { build_name: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; }; Property_Location: { address: any; city: any; locality: any; nearest_landmark: any; map_latitude: any; map_longitude: any; pincode: any; }; Property_additional_details: { bedroom: any; bathroom: any; balconies: any; furnishing_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; nearby_places: any; additional_rooms_status: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; }; Property_price_images: { ownership: any; expected_pricing: any; inclusive_pricing_details: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; maintenance_charge_condition: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any, additional_room_array: any[], amenityArray: any[], amenity_Uncheck: any[], furnishingArray: any[], product_img: string[]): Observable<any> {
     return this.http.post(AUTH_API + 'product/product_sales_update', JSON.stringify ({
       user_id: id,
       id: id,
@@ -992,7 +999,7 @@ mobile_verify(data): Observable<any> {
       additional_rooms: additional_room_array,
     }), httpOptions);
   }
-  draft_sales_update(details, id, additional_room_array, amenityArray, amenity_Uncheck, furnishingArray, product_img): Observable<any> {
+  draft_sales_update(details: { Property_Details: { build_name: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; }; Property_Location: { address: any; city: any; locality: any; nearest_landmark: any; map_latitude: any; map_longitude: any; pincode: any; }; Property_additional_details: { bedroom: any; bathroom: any; balconies: any; furnishing_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; nearby_places: any; additional_rooms_status: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; }; Property_price_images: { ownership: any; expected_pricing: any; inclusive_pricing_details: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; maintenance_charge_condition: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any, additional_room_array: any[], amenityArray: any[], amenity_Uncheck: any[], furnishingArray: any[], product_img: string[]): Observable<any> {
     return this.http.post(AUTH_API + 'product/product_sales_update', JSON.stringify ({
       user_id: id,
       id: id,
@@ -1051,7 +1058,7 @@ mobile_verify(data): Observable<any> {
       additional_rooms: additional_room_array,
     }), httpOptions);
   }
-  delete_pro_img(id): Observable<any> {
+  delete_pro_img(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/delete_pro_img', JSON.stringify({
       product_id: id,
     }), httpOptions);
@@ -1059,19 +1066,26 @@ mobile_verify(data): Observable<any> {
 
   // adminEndpoints
 
-  admin_login(credentials): Observable<any> {
+  admin_login(credentials: { email: any; password: any; }): Observable<any> {
     return this.http.post(AUTH_API + 'admin/admin_login', JSON.stringify({
       email: credentials.email,
       password: credentials.password,
     }), httpOptions);
   }
   
-  get_pincodebyid(id): Observable<any> {
+  get_pincodebyid(id: any): Observable<any> {
     return this.http.post(AUTH_API + 'auth/get_pincodebyid', JSON.stringify({
       id: id,
     }), httpOptions);
   }
 
+  proceedToPayment(id: any, plans_type: any):Observable<any> {
+    return this.http.post(AUTH_API + 'auth/payment', JSON.stringify({
+      id: id,
+      plans_type: plans_type,
+    }), httpOptions);
+    }
+    
 
 
 

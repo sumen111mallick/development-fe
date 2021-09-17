@@ -204,8 +204,8 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="area">Property Area</label>
-                                        <input type="number" class="form-control" name="area"
-                                            formControlName="area" (keypress)="keyPressNumbers($event)" id="area"
+                                        <input type="text" class="form-control" name="area"
+                                            formControlName="area" maxlength="8" (keypress)="keyPressNumbers($event)" id="area"
                                             placeholder="Please Enter the Area...">
                                     </div>
                                 </div>
@@ -771,7 +771,7 @@
                                                     formControlName="expected_pricing"
                                                     id="expected_pricing" name="expected_pricing"
                                                     placeholder="Please Enter Expected Price..."
-                                                    maxlength="10" (keypress)="keyPressNumbers($event)"
+                                                    maxlength="8" (keypress)="keyPressNumbers($event)"
                                                     (ngModelChange)="rangeInput_Price($event)">
                                             </div>
                                             <span class="alert-danger" *ngIf="Expected_PriceEroor == true">Expected Price Between 5Lakhs to 5 Crore</span>
@@ -829,8 +829,8 @@
                                 <div class="col-lg-10 col-md-10 col-sm-12">
                                     <div class="form-group">
                                         <label for="locality">Price Negotiable</label>
-                                        <input type="number" class="form-control"
-                                            formControlName="price_negotiable" placeholder="Enter the Price Negotiable"  minlength="10" maxlength="10" (keypress)="keyPressNumbers($event)">
+                                        <input type="text" class="form-control"
+                                            formControlName="price_negotiable" maxlength="8" placeholder="Enter the Price Negotiable"  minlength="10" maxlength="10" (keypress)="keyPressNumbers($event)">
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-12" id="Negotiable_info_btn">

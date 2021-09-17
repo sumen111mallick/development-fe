@@ -349,7 +349,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.authService.Propery_get_id(this.id).subscribe(
       (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.data_id = data.data.id;
         if (this.data_id == 0) {
           this.redirect_to_myproperties();
@@ -822,7 +822,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
   }
   
   onchange_rooms(e: any, room: string) {
-    console.log(this.update_room_array);
+    // console.log(this.update_room_array);
     if (e.target.checked) {
       this.update_room_array.push(room);
       const expected = new Set();
@@ -830,7 +830,6 @@ export class UpdateSalesPropertyComponent implements OnInit {
         this.unique_room_array=unique;
         this.additional_room_array=this.unique_room_array;
     } else {
-      
       // arr.pop();
       const index: number = this.update_room_array.indexOf(room);
       if (index !== -1) {
@@ -838,7 +837,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
         this.additional_room_array=this.update_room_array;
       }
     }
-    console.log(this.additional_room_array);
+    // console.log(this.additional_room_array);
   }
   onchange_locality(id:any){
     this.authService.get_pincodebyid(id).subscribe(
@@ -848,7 +847,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
+        // console.log(err);
 
       }
     );
@@ -953,7 +952,7 @@ Expected_Price(event: number){
   }
 }
 onSubmitsales(): void { 
-  console.log(this.update_property_sales.value);
+  // console.log(this.update_property_sales.value);
   if(this.update_property_sales.value.Property_price_images.expected_pricing>=500000 && this.update_property_sales.value.Property_price_images.expected_pricing<=50000000){
     this.authService.product_sales_update(this.update_property_sales.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
     data => {
@@ -977,7 +976,7 @@ onSubmitsales(): void {
   
 }
 saveDraft_form(): void { 
-  console.log(this.update_property_sales.value);
+  // console.log(this.update_property_sales.value);
   if(this.update_property_sales.value.Property_price_images.expected_pricing>=500000 && this.update_property_sales.value.Property_price_images.expected_pricing<=50000000){
     this.authService.draft_sales_update(this.update_property_sales.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
     data => {
@@ -1010,7 +1009,7 @@ get_area():void{
       }
     },
     err => {
-      console.log(err);
+      // console.log(err);
 
     }
   );

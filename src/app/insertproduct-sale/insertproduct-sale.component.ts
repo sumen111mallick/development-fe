@@ -216,6 +216,7 @@ export class InsertproductSaleComponent implements OnInit {
 
         this.searchElementRef.nativeElement
       );
+      console.log(this.searchElementRef);
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
 
@@ -316,7 +317,7 @@ export class InsertproductSaleComponent implements OnInit {
         }
       },
       err => {
-        console.log(err);
+        // console.log(err);
 
       }
     );
@@ -330,7 +331,7 @@ export class InsertproductSaleComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
+        // console.log(err);
 
       }
     );
@@ -616,13 +617,13 @@ export class InsertproductSaleComponent implements OnInit {
         data => {
          this.Message =data.message;
          this.toastr.success('Successfuly Saved', 'Property Sales');
-          window.location.href = GlobalConstants.siteURL + "myproperties"
+          // window.location.href = GlobalConstants.siteURL + "myproperties"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.errorMessage1 = err.error.message;
-          console.log(this.errorMessage);
+          // console.log(this.errorMessage);
           this.toastr.error(this.errorMessage1, 'Something Error', {
             timeOut: 3000,
           });

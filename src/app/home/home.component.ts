@@ -280,7 +280,7 @@ product_comp(id:number){
           this.content = product.data;
           this.number = this.content;
           this.product_length=this.content.length;
-          //console.log(this.number);
+          // console.log(this.number);
           //console.log(this.number.length);
           this.showLoadingIndicator = false;
           this.wishlist_info();
@@ -298,7 +298,6 @@ product_comp(id:number){
           this.content = data.data;
           this.number = this.content;
           this.product_length=this.content.length;
-          
           this.showLoadingIndicator = false;
           //console.log(this.number);        
         },
@@ -512,10 +511,10 @@ customOptions: OwlOptions = {
       items: 1
     },
     400: {
-      items: 2
+      items: 1
     },
     740: {
-      items: 3
+      items: 1
     },
     940: {
       items: 3

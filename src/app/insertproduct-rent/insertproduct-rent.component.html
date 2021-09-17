@@ -157,10 +157,12 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="area">Property Area</label>
-                                                        <input type="number" class="form-control" name="area"
+                                                        <input type="text" class="form-control" name="area"
                                                             formControlName="area" id="area"
-                                                            placeholder="Please Enter the Area..." (keypress)="keyPressNumbers($event)">
-                                                    </div>
+                                                            placeholder="Please Enter the Area..." (keypress)="keyPressNumbers($event)" 
+                                                            maxlength="8">
+                                                    </div>    
+                                                    <!-- <span class="alert-danger" *ngIf="insert_property_rent.controls.Property_Details.get('area').hasError(minlength) && insert_property_rent.controls.Property_Details.get('area').touched">Maximum Length 10</span> -->
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -883,14 +885,14 @@
                                                                 </ng5-slider>
                                                             </div>
                                                             <div class="col-lg-4 col-xl-4">
-                                                                <!-- (ngModelChange)="Expected_Price($event)" -->
-                                                                <input type="number" class="form-control"
+                                                                <input type="text" class="form-control" 
+                                                                
                                                                     formControlName="expected_rent" id="expected_rent"
                                                                     name="expected_rent"
                                                                     placeholder="Please Enter Expected Rent..."
-                                                                    maxlength="10" (keypress)="keyPressNumbers($event)"
-                                                                    (ngModelChange)="rangeInput_Price($event)">
+                                                                    maxlength="8" (keypress)="keyPressNumbers($event)">
                                                             </div>
+                                                            <span class="alert-danger" *ngIf="Expected_PriceEroor == true">Expected Price Between 5k to 5 lakhs</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -924,8 +926,8 @@
                                                 <div class="col-lg-10 col-md-10 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="locality">Price Negotiable</label>
-                                                        <input type="number" class="form-control"
-                                                            formControlName="price_negotiable" placeholder="Enter the Price Negotiable" (keypress)="keyPressNumbers($event)">
+                                                        <input type="text" class="form-control"
+                                                            formControlName="price_negotiable" placeholder="Enter the Price Negotiable" maxlength="8" (keypress)="keyPressNumbers($event)">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-12" id="Negotiable_info_btn">
@@ -956,7 +958,7 @@
                                                 </div>
                                             </div>
                                             <div class="row" *ngIf="maintenance_row == true"> 
-                                                <div class="col-lg-6 col-12 offset-lg-6">
+                                                <div class="col-lg-12 col-12">
                                                     <div class="form-group">
                                                         <label>Maintenance Charge Condition</label>
                                                         <select class="form-control " formControlName="maintenance_charge">

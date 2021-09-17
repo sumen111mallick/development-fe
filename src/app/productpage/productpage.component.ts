@@ -26,10 +26,12 @@ export class ProductpageComponent implements OnInit {
   prod_id: any ;
   public user_data:any={};
   public login_userID:number= null;
+  public login_useremail:number= null;
   public login_usertype:number = null;
   public productdata:any={};
   public ftpstring: string = GlobalConstants.ftpURL;
   public sitestring: string = GlobalConstants.siteURL;
+  public paytm_form_url: string = GlobalConstants.Paytm_formURL;
   public p_img1:string=null;
   public p_img2:string=null;
   public p_img3:string=null;
@@ -38,7 +40,7 @@ export class ProductpageComponent implements OnInit {
   public Product_id:number=0;
   e: any={};
   // p_img2= null;
-  // p_img3= null;
+  // p_img3= null;  
   // p_img4= null;
   // p_img5= null;
   
@@ -48,7 +50,12 @@ export class ProductpageComponent implements OnInit {
   Review: any;
   youtube_url: string;
   cityValue: any;
-  
+  plans_type:any;
+  resp_status:any;  
+  order_data:any;
+  public order_data_length:number=0;
+  public user_transaction_status:boolean=false;
+
   
   
   youtube: string= "https://www.youtube.com/embed/";
@@ -77,6 +84,7 @@ export class ProductpageComponent implements OnInit {
   public Recent_user_length:number=0;
   public recently_length:number=null;
   public isReadMore :boolean=true;
+  public product_uid:any;
 
   constructor(
     private _sanitizer: DomSanitizer,
@@ -96,7 +104,12 @@ export class ProductpageComponent implements OnInit {
         this.route.queryParams.subscribe((params) => {
           // console.log(params.id);
         this.id = params.id;
+        this.resp_status = params.status;
+        if(this.resp_status != null){
+          this.payment_status(this.resp_status);
+        }
         this.Product_id=this.id;
+        this.check_order_product(this.id);
         this.single_property_data(this.id);
         }); 
     }
@@ -108,6 +121,7 @@ export class ProductpageComponent implements OnInit {
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.login_userID = this.idService.getUser().id;
+      this.login_useremail =this.idService.getUser().misc.email;
       this.login_usertype = this.idService.getUser().usertype; 
     }
     
@@ -136,13 +150,13 @@ export class ProductpageComponent implements OnInit {
     }
   }
   single_property_data(id: any){
-    //console.log(id);
     this.showLoadingIndicator = true;
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
       //console.log(this.isLoggedIn);
       this.authService.product_login_see(id).subscribe(
         data => {
+          console.log(data);
           if(data.product.length== 0){
           this.redirect_to_home_page();
           } 
@@ -157,9 +171,7 @@ export class ProductpageComponent implements OnInit {
          
           this.cityValue=data["product"]["0"]["city"];
           this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
-          
           this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
-          //console.log(this.longCus);
           this.similarproperty(this.cityValue);
           this.showLoadingIndicator = false;
   
@@ -171,6 +183,7 @@ export class ProductpageComponent implements OnInit {
     }else{
       this.authService.product_see(id).subscribe(
       data => {
+        // console.log(data);
         if(data.product.length== 0){
           this.redirect_to_home_page();
          } 
@@ -182,13 +195,9 @@ export class ProductpageComponent implements OnInit {
           
         this.product_amenties= data["product"]["0"].amenities;
         this.product_amenties_length= data["product"]["0"].amenities.length;
-        //console.log(this.product_amenties_length);
-        //console.log(this.product_amenties);
         this.cityValue=data["product"]["0"]["city"];
         this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
-        //console.log(this.latCus);
         this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
-        //console.log(this.longCus);
         this.similarproperty(this.cityValue);
         this.showLoadingIndicator = false;
 
@@ -199,7 +208,23 @@ export class ProductpageComponent implements OnInit {
       );
     }
   }
-  
+  payment_status(resp_status){
+    if(resp_status=='01'){
+      this.toastr.success('Payment Succesfull', 'Property', {
+        timeOut: 8000,
+      }); 
+    }
+    if(resp_status=='227'){
+      this.toastr.error('Payment Failed', 'Property', {
+        timeOut: 8000,
+      }); 
+    }
+    if(resp_status=='141'){
+      this.toastr.info('Payment Canceled', 'Property', {
+        timeOut: 8000,
+      }); 
+    }
+  }
    amenities(): void{
     this.showLoadingIndicator = true;
      this.userService.getamenitiesdata().pipe().subscribe(
@@ -312,10 +337,53 @@ Price_convert(num: number) {
     }
     else{
       this.redirect_to_home();
-    }
-        
+    }       
   }
   
+proceedToPayment(planid){  
+  this.plans_type="single_rental_property"; 
+  this.authService.proceedToPayment(planid,this.plans_type).pipe().subscribe(
+    (response: any) => {
+      console.log(response);
+      if(response.status == 201){
+        this.paytm =response.data;
+        // console.log(this.paytm);
+        this.createPaytmForm();
+        // console.log("success");
+      }else{
+        this.toastr.error("Invalid Arrgument", 'Something Error!!!...', {
+          timeOut: 1500,
+        });
+      }
+    },
+    err => {
+      //this.content = JSON.parse(err.error).message;
+      this.content = err.error.message;
+    }
+  );
+}
+createPaytmForm() {
+   const my_form: any = document.createElement('form');
+    my_form.name = 'paytm_form';
+    my_form.method = 'post';
+    my_form.action = this.paytm_form_url;
+ 
+    const myParams = Object.keys(this.paytm);
+    for (let i = 0; i < myParams.length; i++) {
+      const key = myParams[i];
+      let my_tb: any = document.createElement('input');
+      my_tb.type = 'hidden';
+      my_tb.id = key;
+      my_tb.name = key;
+      my_tb.value = this.paytm[key];
+      my_form.appendChild(my_tb);
+    };
+    // console.log(my_form);
+    document.body.appendChild(my_form);
+    my_form.submit();
+  // after click will fire you will redirect to paytm payment page.
+  // after complete or fail transaction you will redirect to your CALLBACK URL
+  }  
   Wishlist_remove(data: any){
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
@@ -368,10 +436,49 @@ Property_type_data(): void{
   );
 }
 
+check_order_product(id:any){
+  this.showLoadingIndicator = true;
+  this.authService.check_order_product(this.id).subscribe(
+    data => {
+      this.showLoadingIndicator = false;
+      this.order_data=data["0"];
+      this.order_data_length=data.length;
+      // console.log(this.order_data_length);
+      if(this.order_data_length>0){
+        if(this.order_data.transaction_status == 'TXN_SUCCESS'){
+          console.log(this.order_data.transaction_status);
+          this.user_transaction_status=true;
+        }
+      }
+      // console.log(this.order_data);
+
+      // if(this.order_data){
+      //   if(this.order_data.product_id == this.product_uid){
+      //     if(this.order_data.user_email == this.login_useremail && this.order_data.transaction_status== "TXN_SUCCESS" ){
+      //       this.pro_purchased=true;
+      //       console.log("puchaged");
+      //     }else{
+      //       this.property_sold=true;
+      //       console.log("checkout");
+      //     }
+      //   }else{
+      //     console.log("checkout");
+      //   }
+      // }else{
+      //   console.log("checkout");
+      // }
+    },
+      err => {
+       // console.log(err);
+      }
+    );
+  
+}
+
   similarproperty(cityValue: any){
     if(this.tokenStorage.getToken()){
       this.showLoadingIndicator = true;
-    this.authService.login_similarproperty(this.cityValue).subscribe(
+      this.authService.login_similarproperty(this.cityValue).subscribe(
       data => {
         this.similar_property = data["product"];
         //console.log(this.similar_property);

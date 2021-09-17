@@ -14,6 +14,7 @@ import { MapsAPILoader,AgmMap } from '@agm/core';
 // import { google } from "google-maps";
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { HostListener } from "@angular/core";
 @Component({
   selector: 'app-product-listing',
   templateUrl: './product-listing.component.html',
@@ -21,15 +22,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductListingComponent implements OnInit {
   options: Options = {
-    step:10000,
-    floor: 1,
+    step:1000,
+    floor: 5000,
     ceil: 50000000,
     translate: (value: number, label: LabelType): string => {
       return '₹' + value.toLocaleString('en');
     }
   };
   options_sales: Options = {
-    step:500,
+    step:1000,
     floor: 500000,
     ceil: 50000000,
     translate: (value: number, label: LabelType): string => {
@@ -37,8 +38,8 @@ export class ProductListingComponent implements OnInit {
     }
   };
   options_rent: Options = {
-    step:100,
-    floor: 1,
+    step:500,
+    floor: 5000,
     ceil: 500000,
     translate: (value: number, label: LabelType): string => {
       return '₹' + value.toLocaleString('en');
@@ -62,6 +63,7 @@ export class ProductListingComponent implements OnInit {
   public range_slider:boolean= true;
   public rent_range_slider:boolean= false;
   public buyyer_range_slider:boolean= false;
+  public showLoadingIndicator:boolean=false;
   amenityArray = [];
   selectedItems:string[];
   
@@ -79,6 +81,9 @@ export class ProductListingComponent implements OnInit {
    Search_data_length:number=0;
    public secach_amenties_length:number=null;
    public product_type:string=" ";
+   screenWidth: number;
+   public deshtop_view:boolean=true;
+   public mobile_view:boolean=true;
 
     // map google
   geoCoder:any;
@@ -117,6 +122,7 @@ export class ProductListingComponent implements OnInit {
     
   ) {
     this.form.property_status='all';
+    this.getScreenSize();
    }
 
   sanitizeImageUrl(imageUrl: string): SafeUrl {
@@ -124,7 +130,7 @@ export class ProductListingComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    this.form.Minimum= '1';
+    this.form.Minimum= '5000';
     this.form.Maximum='50000000';
     this.form.property_status='all';        
     this.mapsAPILoader.load().then(() => {
@@ -136,10 +142,9 @@ export class ProductListingComponent implements OnInit {
       );
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
-          
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          this.latCus = place.geometry.location.lat();
-          this.longCus = place.geometry.location.lng();
+          // this.latCus = place.geometry.location.lat();
+          // this.longCus = place.geometry.location.lng();
           this.location = place.formatted_address;
           this.zoom = 15;
           this.form.Location=this.location;
@@ -167,6 +172,18 @@ export class ProductListingComponent implements OnInit {
     }
     
   }
+  
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth <768){
+      this.deshtop_view=false;
+      this.mobile_view=true;  
+    }else{
+      this.deshtop_view=true;
+      this.mobile_view=false; 
+    }
+ }
 
   loginuser_coutData(){
     this.authService.recently_view().subscribe(
@@ -463,67 +480,6 @@ product_comp(id:number){
     // this.myservice.setData(data);
     // this.router.navigate(["/productpage"])
   }
-
-  onComp(data: any){
-
-
-    // Old code
-
-    // console.log(this.idservice.getCdata());
-    // console.log(this.idservice.getProdId());
-
-
-    // if(this.idservice.getCdata() != null){
-    //   this.idservice.saveProdId(data);
-    //   console.log(this.idservice.getCdata());
-    //   console.log(this.idservice.getProdId());
-    //   console.log("1rd");
-    // }
-
-    // if(this.idservice.getCdata()){
-
-    //   this.prod_if = this.idservice.getCdata;
-    //   this.idservice.saveProdId(this.prod_if);
-    //   this.idservice.saveCdata(data);
-    //   console.log(this.idservice.getCdata());
-    //   console.log(this.idservice.getProdId());
-    //   console.log("3rd");
-    // }
-
-
-    if(this.first_prod == null){
-      this.first_prod = data
-    }
-    else if(this.first_prod != null){
-      if (this.second_prod != null){
-        this.third_prod = this.second_prod
-        this.second_prod = this.first_prod
-        this.first_prod = data
-      }
-      else{
-      this.second_prod = data
-      }
-    }
-
-    //console.log(this.first_prod+"|"+this.second_prod+"|"+this.third_prod)
-
-    if (this.first_prod != null && this.second_prod != null && this.third_prod != null){
-
-      // alert("Added two property to compare list. (Only two properties can be compared at a time)")
-
-      this.idservice.saveProdId(this.first_prod);
-      this.idservice.saveCdata(this.second_prod)
-      this.idservice.saveProd2Id(this.third_prod);
-      window.location.href=GlobalConstants.siteURL+"compare"
-    }
-
-    //console.log(this.idservice.getProdId());
-    //console.log(this.idservice.getProd2Id());
-    //console.log(this.idservice.getCdata());
-
-
-
-  }
   redirect_to_home(): void {
     window.location.href=GlobalConstants.siteURL="login"
     }
@@ -566,7 +522,7 @@ product_comp(id:number){
     }
 
     onSearch(): void{
-     //console.log(this.form);
+    //  console.log(this.form);
       //console.log(this.amenityArray);
         if(this.tokenStorage.getToken()){
           this.isLoggedIn = true;  
@@ -574,7 +530,7 @@ product_comp(id:number){
           this.authService.product_SearchingLogin(this.form,this.amenityArray).subscribe(
             searchData => {
               //console.log("login");
-              //console.log(searchData);
+              console.log(searchData);
               this.Searchcontent = searchData.data;
               if(this.Searchcontent){
                  this.number = this.Searchcontent;
@@ -596,12 +552,12 @@ product_comp(id:number){
           this.showLoadingIndicator = true;
           this.authService.product_Searching(this.form,this.amenityArray).subscribe(
             searchData => {
-              //console.log("without_login");
+              console.log(searchData);
               this.Searchcontent = searchData.data;
               if(this.Searchcontent){
-                this.showLoadingIndicator = false;
                 this.Search_data_length=this.Searchcontent.length;
                 this.number = this.Searchcontent;
+                this.showLoadingIndicator = false;
               //console.log(this.number);
               }
               
@@ -613,6 +569,7 @@ product_comp(id:number){
             }
             );
         }
+        this. closePopup();
   
     }
     reset_Search():void{
@@ -621,6 +578,7 @@ product_comp(id:number){
       this.tokenService.Remove_pro_type();
       window.location.href=GlobalConstants.siteURL+"productlisting";
       this.getpropertyData();
+      // this.openPopup();
 
     }
 

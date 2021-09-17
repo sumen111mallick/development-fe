@@ -339,10 +339,8 @@ export class UpdatepropertyComponent implements OnInit {
       } else {
         //console.log('Geocoder failed due to: ' + status);
       }
-  
     });
     }
-    
 
    property_details(p_id): void {
      //console.log(p_id);
@@ -350,7 +348,7 @@ export class UpdatepropertyComponent implements OnInit {
      this.showLoadingIndicator = true;
      this.authService.Propery_get_id(this.id).subscribe(
        (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.data_id=data.data.id;
         if( this.data_id == 0){
          this.redirect_to_myproperties();
@@ -359,7 +357,7 @@ export class UpdatepropertyComponent implements OnInit {
         this.add_room_array = this.add_room_string.split(',');
         if(data.data.additional_rooms.length){
           this.update_room_array=this.add_room_array;
-          console.log(this.update_room_array);
+          // console.log(this.update_room_array);
         }
          if (data.data.draft == 1) {
            this.show_draft_btn=true;
@@ -473,7 +471,7 @@ export class UpdatepropertyComponent implements OnInit {
             nearest_landmark:this.nearest_landmark,
         });
         if(this.locality){
-          console.log(this.locality);
+          // console.log(this.locality);
           this.update_property_rent.controls.Property_address.patchValue({
             locality:this.locality.id,
           });   
@@ -481,7 +479,6 @@ export class UpdatepropertyComponent implements OnInit {
 
         // property addtional details form control
         if(this.additional_rooms_status){
-          console.log(this.additional_rooms_status);
           this.update_property_rent.controls.Property_additional_details.patchValue({
             additional_rooms_status:this.additional_rooms_status,
           });   
@@ -662,7 +659,6 @@ export class UpdatepropertyComponent implements OnInit {
   }
   
   onchange_rooms(e: any, room: string) {
-    console.log(this.update_room_array);
     if (e.target.checked) {
       this.update_room_array.push(room);
       const expected = new Set();
@@ -670,7 +666,6 @@ export class UpdatepropertyComponent implements OnInit {
         this.unique_room_array=unique;
         this.additional_room_array=this.unique_room_array;
     } else {
-      
       // arr.pop();
       const index: number = this.update_room_array.indexOf(room);
       if (index !== -1) {
@@ -841,8 +836,7 @@ export class UpdatepropertyComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
-
+        // console.log(err);
       }
     );
   }
@@ -945,7 +939,7 @@ export class UpdatepropertyComponent implements OnInit {
      window.location.reload();
    }
    RangeSlider_Price(event){
-    this.expected_pricing=event;
+    this.expected_rent=event;
       this.update_property_rent.controls.Property_price_images.patchValue({
         expected_rent:this.expected_rent,
       });
@@ -954,16 +948,8 @@ export class UpdatepropertyComponent implements OnInit {
       }else{
         this.Expected_PriceEroor=false;
       }
-  }
-  rangeInput_Price(event){
-    this.expected_rent=event;
-    if(event<5000 || event>500000){
-      this.Expected_PriceEroor=true;
-    }else{
-      this.Expected_PriceEroor=false;
     }
-  }
-   
+    
   Expected_RentPrice(event: number){
     if(event>=5000 && event<=500000){
     }else{
@@ -982,6 +968,17 @@ export class UpdatepropertyComponent implements OnInit {
       return true;
     }
   }
+  rangeInput_Price(event){
+    this.expected_rent=event;
+    this.update_property_rent.controls.Property_price_images.patchValue({
+      expected_rent:this.expected_rent,
+    });
+    if(event<5000 || event>500000){
+      this.Expected_PriceEroor=true;
+    }else{
+      this.Expected_PriceEroor=false;
+    }
+    }
   
 get_area():void{
   this.internalUserService.get_areas().subscribe(
@@ -992,8 +989,7 @@ get_area():void{
       }
     },
     err => {
-      console.log(err);
-
+      // console.log(err);
     }
   );
 }
@@ -1011,7 +1007,6 @@ delete_Pro_img(id: any){
  }
 
    onSubmitRent(): void { 
-    console.log(this.additional_room_array); 
     if(this.update_property_rent.value.Property_price_images.expected_rent>=5000 && this.update_property_rent.value.Property_price_images.expected_rent<=500000){
       this.authService.product_rent_update(this.update_property_rent.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
         data => {
@@ -1036,8 +1031,7 @@ delete_Pro_img(id: any){
     }
      
    }
-   saveDraft_form(): void { 
-    console.log(this.additional_room_array); 
+   saveDraft_form(): void {  
     if(this.update_property_rent.value.Property_price_images.expected_rent>=5000 && this.update_property_rent.value.Property_price_images.expected_rent<=500000){
       this.authService.draft_rent_update(this.update_property_rent.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
         data => {

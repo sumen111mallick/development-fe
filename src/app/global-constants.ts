@@ -5,6 +5,7 @@
    //public static googleURL = 'https://admin.housingstreet.com/api/auth/redirect/';
    public static googleURL = 'http://localhost:8000/api/auth/redirect/';
    public static fbURL = 'http://localhost:8000/api/auth/fbredirect/';
+   public static Paytm_formURL = 'https://securegw-stage.paytm.in/order/process';
  }
 
 /*export class GlobalConstants {

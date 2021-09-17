@@ -74,7 +74,7 @@
        </div>
      </div>
      <div class="row wrapper_row_listing_page">
-       <div class="col-lg-4 col-xl-4">
+       <div class="col-lg-4 col-xl-4" *ngIf="deshtop_view == true">
         
         <div class="sidebar_listing_grid1">
           <div class="sidebar_listing_list hidden-xs hidden-sm">
@@ -398,8 +398,8 @@
            <div class="grid_list_search_result">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
               <div class="left_area tac-xsd searching-bar">
-                <p (click)="openPopup()">{{Search_data_length}} Properties Searching </p>
-                <p class=".hidden-md hidden-lg" (click)="openPopup()">
+                <p>{{Search_data_length}} Properties Searching </p>
+                <p class="hidden-md hidden-lg" (click)="openPopup()">
                   <i class="fas fa-filter"></i>
                 </p>
               </div>
@@ -504,9 +504,9 @@
                     <h4>{{number.build_name | titlecase}}</h4>
                     <p><span class="flaticon-placeholder"></span> {{ number.address | titlecase }}</p>
                     <ul class="prop_details mb0">
-                    <li class="list-inline-item"><a >Beds: {{ number.bedroom }}</a></li>
-                    <li class="list-inline-item"><a >Baths: {{ number.bathroom }}</a></li>
-                    <li class="list-inline-item"><a >Sq Ft: {{ number.area }}</a></li>
+                    <li class="list-inline-item"><a>Beds: {{ number.bedroom }}</a></li>
+                    <li class="list-inline-item"><a>Baths: {{ number.bathroom }}</a></li>
+                    <li class="list-inline-item"><a>Area unit: {{ number.area_unit }}</a></li>
                     </ul>
                   </div>
                   </a>
@@ -554,7 +554,7 @@
 
 <!-- modal popup searching form mobile view -->
 
-<div  class="modal search-form"  tabindex="-1"  role="dialog"  [ngStyle]="{'display':displayStyle}">
+<div  class="modal search-form"  tabindex="-1"  role="dialog"  [ngStyle]="{'display':displayStyle}" *ngIf="mobile_view == true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -574,12 +574,12 @@
                       </div>
                   </li>
                   <li class="search_area">
-                      <div class="form-group">
-                        <input type="hidden" class="form-control" name="Location" [(ngModel)]="form.Location" #Location="ngModel" id="Location" placeholder="Location">
-                        <input  #search  autocorrect="off" autocapitalize="off"  spellcheck="off" [(ngModel)]="form.Location" type="search"  class="form-control input-text"
-                        placeholder="Enter Address"  [ngModelOptions]="{ standalone: true }" />
-                        <label for="Location"></label>
-                      </div>
+                    <div class="form-group">
+                      <input type="hidden" class="form-control" name="Location" [(ngModel)]="form.Location" #Location="ngModel" id="Location" placeholder="Location">
+                      <input  #search  autocorrect="off" autocapitalize="off"  spellcheck="off" [(ngModel)]="form.Location" type="search"  class="form-control input-text"
+                      placeholder="Enter Address"  [ngModelOptions]="{ standalone: true }" />
+                      <label for="Location"></label>
+                    </div>
                   </li>
                   <li>
                     <div class="search_option_two">

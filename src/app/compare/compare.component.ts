@@ -82,11 +82,11 @@ export class CompareComponent implements OnInit {
               }
             }
           }
-          console.log(this.product_amenties);
+          // console.log(this.product_amenties);
         const expected = new Set();
         const unique = this.product_amenties.filter(item => !expected.has(JSON.stringify(item)) ? expected.add(JSON.stringify(item)) : false);
         this.unique_ameties=unique;
-        console.log(this.unique_ameties);
+        // console.log(this.unique_ameties);
         this.amenities();
         this.pro_comp_refresh();
          if(this.property_comp_length <2){
