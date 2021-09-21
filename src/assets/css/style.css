@@ -18203,3 +18203,7 @@ border-radius: 0px!important;
 #video_link{
   border: 1px solid #ddd!important;
 }
+
+.mat-menu-item {
+	text-align:center !important;
+}
