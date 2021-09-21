@@ -49,6 +49,7 @@ export class AdminUsercreatorComponent implements OnInit {
   dropdownSettings: IDropdownSettings;
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.userForm = this.fb.group({
       username: [''],
       email: [''],
@@ -79,7 +80,7 @@ export class AdminUsercreatorComponent implements OnInit {
       data => {
         this.response = data;
         //console.log(data);
-        this.showLoadingIndicator = false;
+        //this.showLoadingIndicator = false;
       },
       err => {
         //console.log(err);
@@ -96,10 +97,12 @@ export class AdminUsercreatorComponent implements OnInit {
           //this.dropdownList[i] = "{item_id: " + i + "," + "item_text: " + "'" + data[i].area + "'}";
           //console.log(this.dropdownList[i]);
           this.dropdownList = this.dropdownList.concat({item_id: i, item_text: data[i].area});
+          this.showLoadingIndicator = false;
         }
         //console.log(this.dropdownList);
       },
       err => {
+        this.showLoadingIndicator = false;
         //console.log(err);
 
       }

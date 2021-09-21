@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   city: any;
   selectedItems:string[];
   amenityArray = [];
-  showLoadingIndicator = false;
+  public showLoadingIndicator: boolean =false;
   public testimonial_length:number=0;
   public product_length:number=0;
   public rent_range_slider:boolean= true;
@@ -145,6 +145,7 @@ export class HomeComponent implements OnInit {
 product_comp(id:number){
   //console.log(id);
   // Login check
+  this.showLoadingIndicator = true;
   if(this.tokenStorage.getUser() != null){
     this.isLoggedIn = true
     //console.log(this.isLoggedIn);
@@ -153,6 +154,7 @@ product_comp(id:number){
       this.authService.Crete_product_comp(id).pipe().subscribe(
         (data: any) =>{
           //console.log(data);
+          this.showLoadingIndicator = false;
           this.home_call();
           //console.log(data.data.length);
           if(data.data.length>4){
@@ -167,6 +169,7 @@ product_comp(id:number){
         },
         err => {
           //console.log(err.error);
+          this.showLoadingIndicator = false;
         }
       );
   }
@@ -280,8 +283,8 @@ product_comp(id:number){
           this.content = product.data;
           this.number = this.content;
           this.product_length=this.content.length;
-          // console.log(this.number);
-          //console.log(this.number.length);
+          console.log(this.number);
+          console.log(this.number.length);
           this.showLoadingIndicator = false;
           this.wishlist_info();
           this.pro_comp_refresh();
@@ -289,6 +292,7 @@ product_comp(id:number){
         err => {
           //this.content = JSON.parse(err.error).message;
           this.content = err.error.message;
+          this.showLoadingIndicator = false;
         }
       );   
     }else{
@@ -304,37 +308,44 @@ product_comp(id:number){
         err => {
           //this.content = JSON.parse(err.error).message;
           this.content = err.error.message;
+          this.showLoadingIndicator = false;
         }
       );
     }
   }
  
   amenities(): void{
+    this.showLoadingIndicator = true;
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
         //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
         this.amenitiesresult = this.amenities;
+        this.showLoadingIndicator = false;
         //console.log(this.amenitiesresult);
         //console.log(this.content);
       },
       err => {
         //this.content = JSON.parse(err.error).message;
         this.content = err.error.message;
+        this.showLoadingIndicator = false;
       }
     );
   }
   gettestimonialdata(): void{
+    this.showLoadingIndicator = true;
     this.userService.gettestimonialdata().pipe().subscribe(
       (Reviewdata: any) => {
         this.contenttestimonial = Reviewdata.data;
         this.testimonial = this.contenttestimonial;
         this.testimonial_length= this.testimonial.length;
+        this.showLoadingIndicator = false;
         //console.log(this.testimonial);
         //console.log(this.content);
       },
       err => {
         this.content = err.error.message;
+        this.showLoadingIndicator = false;
       }
     );
   }
@@ -358,6 +369,7 @@ product_comp(id:number){
 
   }
   onSearch(): void{
+    this.showLoadingIndicator = true;
     //console.log(this.form,this.amenityArray);
     if(this.tokenStorage.getToken()){
       //console.log("login");
@@ -370,11 +382,13 @@ product_comp(id:number){
           this.data_session=[this.form,this.amenityArray];
           this.tokenService.search_formData(this.data_session);
           //console.log(this.tokenService.get_formData());
+          this.showLoadingIndicator = false;
           window.location.href=GlobalConstants.siteURL+"productlisting"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
+          this.showLoadingIndicator = false;
           //console.log(this.errorMessage);
         }
       );
@@ -389,11 +403,13 @@ product_comp(id:number){
           this.data_session=[this.form,this.amenityArray];
           this.tokenService.search_formData(this.data_session);
           //console.log(this.tokenService.get_formData());
+          this.showLoadingIndicator = false;
           window.location.href=GlobalConstants.siteURL+"productlisting"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
+          this.showLoadingIndicator = false;
           //console.log(this.errorMessage);
         }
       );
@@ -500,9 +516,9 @@ wishlist_info(){
   }
 // carosule image
 customOptions: OwlOptions = {
-  loop:true,
+  loop:false,
   dots:true,
-  autoplay:true,
+  autoplay:false,
   autoplayTimeout:4000,
   // items:3,
   autoplayHoverPause:true,

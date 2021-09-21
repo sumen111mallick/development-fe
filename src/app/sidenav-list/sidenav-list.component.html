@@ -11,8 +11,8 @@
     <a mat-list-item routerLink="/plans" (click)="onSidenavClose()">
         <mat-icon>collections</mat-icon><span class="nav-caption">Plans</span>
     </a>
-    <a mat-list-item routerLink="/blog" (click)="onSidenavClose()">
-        <mat-icon>forum</mat-icon><span class="nav-caption">Blog</span>
+    <a mat-list-item routerLink="/about-us" (click)="onSidenavClose()">
+        <mat-icon>description</mat-icon><span class="nav-caption">About Us</span>
     </a>
     <a *ngIf="isLoggedIn" mat-list-item routerLink="/Wishlist" (click)="onSidenavClose()">
         <span matBadge={{wishlist_length}} matBadgeOverlap="false" matBadgeColor="warn"><mat-icon>favorite</mat-icon></span>

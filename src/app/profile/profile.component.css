@@ -68,9 +68,10 @@
 }
 
 .img-whp {
-  height: 200px;
+  /*height: 200px;*/
+  height: auto;
   width: 200px !important;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
 }
 
 @media only screen and (max-width: 1200px) {

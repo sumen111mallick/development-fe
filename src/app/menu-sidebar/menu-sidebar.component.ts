@@ -39,8 +39,9 @@ export class MenuSidebarComponent implements OnInit {
     //console.log(this.tokenStorage.getUser());
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
-
+      
       if (this.tokenStorage.getUser().misc) {
+        console.log(this.tokenStorage.getUser());
         this.roles = this.tokenStorage.getUser().username;
         this.userEmail = this.tokenStorage.getUser().misc.email;
         this.userProfile = this.tokenStorage.getUser().misc.profile_pic;
@@ -49,8 +50,9 @@ export class MenuSidebarComponent implements OnInit {
         //console.log(this.userProfile);
       }
       else {
+        console.log(this.tokenStorage.getUser());
         this.userDetails = JSON.parse(this.tokenStorage.getUser());
-        //console.log(this.userDetails);
+        console.log(this.userDetails);
         this.roles = this.userDetails.name;
         this.userEmail = this.userDetails.email;
         this.userProfile = this.userDetails.profile_pic;

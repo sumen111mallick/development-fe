@@ -17706,10 +17706,10 @@ border-radius: 0px!important;
     margin-top: 0px;
   }
   .home_adv_srch_opt{
-    margin-top: 180px !important;
+    margin-top: 140px !important;
   }
   .home-one .home-text {
-    margin-top: 50px !important;
+    margin-top: 20px !important;
   }
   .property_video .thumb .pro_img {
     min-height: 280px!important;
@@ -17742,7 +17742,8 @@ border-radius: 0px!important;
     overflow: hidden;
     position: relative;
     transition: all 0.3s ease;
-    height: 510px;
+    /*height: 510px;*/
+    height: auto;
     margin: 0px 4px
     !important;
   }
@@ -18199,3 +18200,6 @@ border-radius: 0px!important;
   cursor: pointer;
 }
 
+#video_link{
+  border: 1px solid #ddd!important;
+}

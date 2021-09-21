@@ -28,6 +28,9 @@
 
 <body>
   <div class="wrapper">
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
     <!-- <div class="preloader"></div> -->
 
     <!-- Main Header Nav -->
@@ -37,7 +40,7 @@
     <!-- <app-topbardark-loader></app-topbardark-loader> -->
 
     <section class="our-listing bgc-f7 pb30-991 SavedSeacch">
-      <div class="container mt65">
+      <div class="container mt100">
         <div class="row">
           <div class="col-lg-3 col-xl-3">
             <app-menu-sidebar></app-menu-sidebar>

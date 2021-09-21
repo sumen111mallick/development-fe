@@ -17,6 +17,7 @@ export class AdmingetreviewsComponent implements OnInit {
   content: [];
   ftpstring: string = GlobalConstants.ftpURL;
   usertype;
+  public showLoadingIndicator: boolean =false;
 
   constructor(
     private titleService: Title,
@@ -28,6 +29,7 @@ export class AdmingetreviewsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleService.setTitle('My Properties');
     this.usertype = this.tokenStorage.getUser().usertype;
 
@@ -35,11 +37,13 @@ export class AdmingetreviewsComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
+        this.showLoadingIndicator = false;
         //console.log(data);
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
 
@@ -51,12 +55,15 @@ export class AdmingetreviewsComponent implements OnInit {
       .then((confirmed) => {
         //console.log('User confirmed:', confirmed);
         if (confirmed == true) {
+          this.showLoadingIndicator = true;
           this.authService.review_delete(id).subscribe(
             data => {
               //console.log(data);
+              this.showLoadingIndicator = false;
               window.location.reload();
             },
             err => {
+              this.showLoadingIndicator = false;
               //console.log(err)
             }
           );

@@ -18,6 +18,7 @@ import { InternalUserService } from './../_services/internal-user.service';
 })
 export class InsertproductRentComponent implements OnInit {
 
+  [x: string]: any;
   showLoadingIndicator: boolean = false;
   form: any = {};
   ared: any = {};
@@ -123,40 +124,42 @@ export class InsertproductRentComponent implements OnInit {
   public maintenance_row:boolean=false;
   parking_row: boolean = false;
 
+  public response: any;
+  public user_id: any = {};
+  public controls: any;
+  public userDetails: any;
+
   insert_property_rent = new FormGroup({
     Property_Details: new FormGroup({
-      build_name: new FormControl(''),
+      build_name: new FormControl('', Validators.required),
       draft_form_id: new FormControl(''),
-      type: new FormControl(''),
-      display_address: new FormControl(''),
-      area: new FormControl(''),
-      carpet_area: new FormControl(''),
-      area_unit: new FormControl(''),
-      bedroom: new FormControl(''),
-      bathroom: new FormControl(''),
-      balconies: new FormControl(''),
-      property_detail: new FormControl('')
+      type: new FormControl('', Validators.required),
+      area: new FormControl('', Validators.required),
+      area_unit: new FormControl('', Validators.required),
+      bedroom: new FormControl('', Validators.required),
+      bathroom: new FormControl('', Validators.required),
+      balconies: new FormControl('', Validators.required),
+      property_detail: new FormControl('', Validators.required)
     }),
 
     Property_address: new FormGroup({
-      address: new FormControl(''),
-      map_latitude: new FormControl(''),
-      map_longitude: new FormControl(''),
+      address: new FormControl('', Validators.required),
+      map_latitude: new FormControl('', Validators.required),
+      map_longitude: new FormControl('', Validators.required),
       city: new FormControl('Delhi', Validators.required),
-      locality: new FormControl(''),
-      pincode:new FormControl(''),
-      nearest_landmark: new FormControl(''),
-      nearby_places: new FormControl('')
+      locality: new FormControl('', Validators.required),
+      pincode:new FormControl('', Validators.required),
+      nearest_landmark: new FormControl('', Validators.required)
     }),
 
     Property_additional_details: new FormGroup({
-      additional_rooms_status: new FormControl('0', Validators.required),
+      additional_rooms_status: new FormControl('0'),
       furnishings: new FormControl(''),
       furnishing_status: new FormControl('NFR'),
-      facing_towards: new FormControl(''),
-      rera_registration_status: new FormControl(''),
+      facing_towards: new FormControl('', Validators.required),
+      rera_registration_status: new FormControl('', Validators.required),
       additional_parking_status: new FormControl('0'),
-      buildyear: new FormControl(''),
+      buildyear: new FormControl('', Validators.required),
       availability_condition: new FormControl(''),
       possession_by: new FormControl(''),
       property_on_floor: new FormControl(''),
@@ -174,9 +177,9 @@ export class InsertproductRentComponent implements OnInit {
 
     Property_price_images: new FormGroup({
       expected_rent: new FormControl('5000'),
-      security_deposit: new FormControl(''),
-      inc_electricity_and_water_bill: new FormControl(''),
-      tax_govt_charge: new FormControl(''),
+      security_deposit: new FormControl('', Validators.required),
+      inc_electricity_and_water_bill: new FormControl('', Validators.required),
+      tax_govt_charge: new FormControl('', Validators.required),
       price_negotiable: new FormControl(''),
       negotiable_status: new FormControl('0'),
       maintenance_charge_status: new FormControl('0'),
@@ -264,24 +267,35 @@ export class InsertproductRentComponent implements OnInit {
       this.redirect_to_home();
     } */
 
-    this.content = this.tokenStorage.getUser().id;
-    //console.log(this.content);
-    this.maintenance = true;
-    this.parking = false;
-
-   /*if (this.tokenStorage.getToken()) {
+    if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
+      if (this.tokenStorage.getUser().misc) {
+        console.log(this.tokenStorage.getUser());
+        this.user_id = this.tokenStorage.getUser().id;
+      }
+      else {
+        console.log(this.tokenStorage.getUser());
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        this.user_id = this.userDetails.id;
+      }
+
+      //this.user_id = this.tokenStorage.getUser().id;
+      //console.log(this.user_id);
+      //this.maintenance = true;
+      //this.parking = false;
       this.roles = this.tokenStorage.getUser().username;
+      console.log(this.roles);
     }
     else {
       this.isLoggedIn = false;
-    } */
+    } 
     this.selectedItems = new Array<string>();
     this.product_img = new Array<string>();
     this.selected_room = new Array<string>();
   }
 
   getLocation() {
+    this.showLoadingIndicator = true;
     this.userService.getLocationService().then(resp => {
       //console.log(resp.lng);
       //console.log(resp);
@@ -291,6 +305,7 @@ export class InsertproductRentComponent implements OnInit {
         map_latitude: this.latCus,
         map_longitude: this.longCus,
       });
+      this.showLoadingIndicator = false;
     })
   }
   
@@ -542,7 +557,7 @@ export class InsertproductRentComponent implements OnInit {
   
   onchange_locality(id:any){
     this.authService.get_pincodebyid(id).subscribe(
-      data => {;
+      data => {
         this.insert_property_rent.controls.Property_address.patchValue({
           pincode: data.data.pincode,
         });
@@ -555,6 +570,7 @@ export class InsertproductRentComponent implements OnInit {
   }
 
   amenities(): void {
+    this.showLoadingIndicator = true;
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
         //  console.log(amenitiesdata);
@@ -572,14 +588,17 @@ export class InsertproductRentComponent implements OnInit {
   }
 
   Property_type_data(): void {
+    this.showLoadingIndicator = true;
     this.userService.get_property_type().pipe().subscribe(
       (data: any) => {
         this.property_type = data.data;
         this.property_type_result = this.property_type;
+        this.showLoadingIndicator = false;
         //console.log(this.property_type_result);
       },
       err => {
         this.content = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
       }
     );
   }
@@ -605,14 +624,21 @@ export class InsertproductRentComponent implements OnInit {
   }
 
   onSubmitRent(): void {
+    if (this.insert_property_rent.invalid) {
+      return;
+    }
+    console.log(this.insert_property_rent.value);
+    this.showLoadingIndicator = true;
     if (this.insert_property_rent.value.Property_price_images.expected_rent >= 5000 && this.insert_property_rent.value.Property_price_images.expected_rent <= 500000) {
       this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
         data => {
           //console.log("successful" + data)
+          this.showLoadingIndicator = false;
           this.toastr.success('Successfuly Saved', 'Property Rental');
           window.location.href = GlobalConstants.siteURL + "myproperties"
         },
         err => {
+          this.showLoadingIndicator = false;
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.Message = err.error.message;
@@ -622,6 +648,7 @@ export class InsertproductRentComponent implements OnInit {
         }
       );
     } else {
+      this.showLoadingIndicator = false;
       this.toastr.error("Expected Price Between 5k to 5 5Lakhs", 'Price Invalid..!!', {
         timeOut: 2000,
       }
@@ -673,29 +700,25 @@ export class InsertproductRentComponent implements OnInit {
       return true;
     }
   }
-
-  RangeSlider_Price(event: number) {
+RangeSlider_Price(event: number) {
     // this.expected_pricing=500001;
-    this.insert_property_rent.controls.Property_price_images.patchValue({
-      expected_rent: event,
-    });
     if (event <5000 || event >500000) {
       this.Expected_PriceEroor = true;
     } else {
       this.Expected_PriceEroor = false;
+      this.insert_property_rent.controls.Property_price_images.patchValue({
+        expected_rent: event,
+      });
     }
   }
 
   rangeInput_Price(event: number) {
-    console.log(event);
-    // this.expected_pricing=500001;
-    this.insert_property_rent.controls.Property_price_images.patchValue({
-      expected_rent: event,
-    });
-    if (event <5000 || event >500000) {
-      this.Expected_PriceEroor = true;
-    } else {
-      this.Expected_PriceEroor = false;
+    // console.log(event);
+    this.expected_rent=event;
+    if(event<5000 || event>500000){
+      this.Expected_PriceEroor=true;
+    }else{
+      this.Expected_PriceEroor=false;
     }
   }
 
@@ -713,5 +736,24 @@ export class InsertproductRentComponent implements OnInit {
     window.location.reload();
   }
 
+  crm_api_call() {
+    this.controls = this.insert_property_rent.get('Property_Details');
+    if (this.controls.valid) {
+      console.log("Valid");
+      console.log(this.controls);
+      this.authService.crm_call(this.user_id).subscribe(
+        data => {
+          this.response = data;
+        },
+        err => {
+          this.response = err;
+        }
+      );
+    }
+    else {
+      console.log("Invalid");
+    }
+
+  }
 
 }

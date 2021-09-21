@@ -28,6 +28,9 @@
 
 <body>
   <div class="wrapper">
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
     <!-- <div class="preloader"></div> -->
 
     <!-- Main Header Nav -->
@@ -286,7 +289,7 @@
                             </td>
                             <td class="hidden-xs hidden-sm" style="width: 35%;">{{Purchased.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
                             <td>
-                              <button class="btn btn-success">Sussces</button>
+                              <button class="btn btn-success">Success</button>
                             </td>
                           </tr>
                         </tbody>

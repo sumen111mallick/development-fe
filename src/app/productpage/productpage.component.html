@@ -40,7 +40,7 @@
 		
 
 		<!-- Main Header Nav For Mobile -->
-		<div class="single_page_listing_tab">
+		<div class="single_page_listing_tab mt150">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -457,7 +457,7 @@
 					<div class="col-lg-7 col-xl-7 single_page_column_share">
 						<div class="single_property_social_share">
 							<div class="price float-left fn-400" >
-							   <h2 *ngIf="product_data.expected_rent != null">₹ {{Price_convert(product_data.expected_rent) }}<small>/{{product_data.duration_of_rent_aggreement}}</small>
+							   <h2 *ngIf="product_data.expected_rent != null">₹ {{Price_convert(product_data.expected_rent) }}<small>/month</small>
 								</h2>
 								<h2 *ngIf="product_data.expected_pricing != null">₹ {{Price_convert(product_data.expected_pricing)}}</h2>
 							</div>
@@ -525,9 +525,9 @@
 										</div>
 										<div class="col-md-6 col-lg-6 col-xl-6">
 											<ul class="list-inline-item">
-												<li>
+												<!--<li>
 													<p>Property ID :</p>
-												</li>
+												</li>-->
 												<li>
 													<p>Property Price :</p>
 												</li>
@@ -539,9 +539,9 @@
 												</li>
 											</ul>
 											<ul class="list-inline-item">
-												<li>
+												<!--<li>
 													<p><span>{{product_data.id}}</span></p>
-												</li>
+												</li>-->
 												<li>
 													<p  *ngIf="product_data.expected_pricing != null"><span>₹ {{product_data.expected_pricing}}</span></p>
 													<p  *ngIf="product_data.expected_rent != null"><span>₹ {{product_data.expected_rent}}</span></p>
@@ -595,25 +595,25 @@
 										</div>
 										<div class="col-md-6 col-lg-6">
 											<ul class="list-inline-item">
-												<li>
-													<p>Deposit :</p>
+												<li *ngIf="product_data.rera_registration_status != null">
+													<p>Status :</p>
 												</li>
 												<li>
 													<p>Landmark :</p>
 												</li>
-												<li>
+												<li *ngIf="product_data.ownership != null">
 													<p>Ownership :</p>
 												</li>
 											</ul>
 											<ul class="list-inline-item">
-												<li>
-													<p><span>{{product_data.deposit}}</span></p>
+												<li *ngIf="product_data.rera_registration_status != null">
+													<p><span>{{product_data.rera_registration_status}}</span></p>
 												</li>
 												<li>
 													<p><span>{{product_data.nearest_landmark}}</span></p>
 												</li>
-												<li>
-													<p><span>{{product_data.equipment}}</span></p>
+												<li *ngIf="product_data.ownership != null">
+													<p><span>{{product_data.ownership}}</span></p>
 												</li>
 											</ul>
 										</div>
@@ -622,24 +622,24 @@
 												<li>
 													<p>Remodel year :</p>
 												</li>
-												<li>
+												<li *ngIf="product_data.maintenance_charge_condition != null">
 													<p>Maintenance :</p>
 												</li>
 												<li>
-													<p>Equipment :</p>
+													<p>Area Unit :</p>
 												</li>
 											</ul>
 											<ul class="list-inline-item">
 												<li>
 													<p><span>{{product_data.buildyear}}</span></p>
 												</li>
-												<li>
+												<li *ngIf="product_data.maintenance_charge_condition != null">
 													<p>
-													   <span>{{product_data.maintenance_charge}}/{{product_data.maintenance_charge_condition}}</span>
+													   <span >{{product_data.maintenance_charge}}/{{product_data.maintenance_charge_condition}}</span>
 													</p>
 												</li>
 												<li>
-													<p><span>{{product_data.equipment}}/{{product_data.area_unit}}</span></p>
+													<p><span>{{product_data.area_unit}}</span></p>
 												</li>
 											</ul>
 										</div>
@@ -1290,19 +1290,20 @@
 									<img style="width: 100px;"  class="align-self-start mr-3"  src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
 								</ng-template>
 								<ul class="tag mb0 Single-page-recently-view" >
-									<li class="list-inline-item" *ngIf=" Recently_view.productdetails.rent_availability != null">For Rent</li>
-									<li class="list-inline-item"  *ngIf=" Recently_view.productdetails.sale_availability != null">For Sale</li>
+									<li class="list-inline-item" *ngIf=" Recently_view.productdetails?.rent_availability != null">For Rent</li>
+									<li class="list-inline-item"  *ngIf=" Recently_view.productdetails?.sale_availability != null">For Sale</li>
 								</ul>
 								<div class="media-body">
-									<h5 class="mt-0 post_title">{{Recently_view.productdetails.build_name | titlecase}}</h5>
-									<a *ngIf="Recently_view.productdetails.expected_pricing != null" class="fp_price" >₹ {{Price_convert(Recently_view.productdetails.expected_pricing) }}<small></small></a>
-									<a *ngIf="Recently_view.productdetails.expected_rent != null" class="fp_price"  >₹ {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
+									<h5 class="mt-0 post_title">{{Recently_view.productdetails?.build_name | titlecase}}</h5>
+									<a *ngIf="Recently_view.productdetails?.expected_pricing != null" class="fp_price" >₹ {{Price_convert(Recently_view.productdetails.expected_pricing) }}<small></small></a>
+									<a *ngIf="Recently_view.productdetails?.expected_rent != null" class="fp_price"  >₹ {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
 									<ul class="mb0">
-										<li class="list-inline-item">Beds: {{Recently_view.productdetails.bedroom}}</li>
-										<li class="list-inline-item">Baths: {{Recently_view.productdetails.bathroom}}</li>
-										<li class="list-inline-item">Sq Ft: {{Recently_view.productdetails.equipment}}</li>
+										<li class="list-inline-item" *ngIf="Recently_view.productdetails?.bedroom">Beds: {{Recently_view.productdetails.bedroom}}</li>
+										<li class="list-inline-item" *ngIf="Recently_view.productdetails?.bathroom">Baths: {{Recently_view.productdetails.bathroom}}</li>
+										<li class="list-inline-item" *ngIf="Recently_view.productdetails?.equipment">Sq Ft: {{Recently_view.productdetails.equipment}}</li>
 									</ul>
 								</div>
+								<hr class="product-hr">
 							</div>
 						</div>
 					</div>

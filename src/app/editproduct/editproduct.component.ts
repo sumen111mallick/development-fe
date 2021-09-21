@@ -120,7 +120,7 @@ export class EditproductComponent implements OnInit {
   agreement_type
   delete_flag
 
-
+  public showLoadingIndicator: boolean =false;
 
 
 
@@ -137,6 +137,7 @@ export class EditproductComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleService.setTitle('Create Listing');
     // Login check
     if(this.tokenStorage.getUser() != null){
@@ -253,10 +254,11 @@ export class EditproductComponent implements OnInit {
           }
 
 
-
+          this.showLoadingIndicator = false;
         },
         err => {
           this.content = JSON.parse(err.error).message;
+          this.showLoadingIndicator = false;
         }
       )
 
@@ -422,14 +424,17 @@ z
   onSubmitSale(): void {
 
     //console.log(this.form)
+    this.showLoadingIndicator = true;
     this.authService.product_sale_update(this.id, this.form, this.content.furnishings,  this.content.amenities).subscribe(
       data => {
         //console.log(data)
+        this.showLoadingIndicator = false;
         window.location.reload();
       },
       err => {
         this.err_caused = true;
         this.errorMessage = err.error.errors;
+        this.showLoadingIndicator = false;
         //console.log(this.errorMessage);
       }
     );

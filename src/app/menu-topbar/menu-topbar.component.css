@@ -56,3 +56,7 @@ html, body {
   .wishlist_icon {
     color: orangered;
   }
+
+  .wishlist_icon:hover {
+    transform: scale(1.5);
+  }

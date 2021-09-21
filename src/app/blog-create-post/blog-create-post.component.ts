@@ -29,7 +29,7 @@ export class BlogCreatePostComponent implements OnInit {
   isAddMode: boolean;
   slug: string;
   response;
-  showLoadingIndicator;
+  public showLoadingIndicator: boolean =false;
   public imagePath: any;
   public imgURL: any;
   public files: any;
@@ -72,7 +72,6 @@ export class BlogCreatePostComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.showLoadingIndicator = true;
     this.UserToken = this.tokenStorage.getUser();
     //console.log(this.UserToken);
 
@@ -80,7 +79,7 @@ export class BlogCreatePostComponent implements OnInit {
       const slugPost = params.get('slug');
       this.isAddMode = !slugPost;
       //console.log(this.isAddMode);
-      this.showLoadingIndicator = false;
+      
       if (slugPost) {
         this.getSelectedPost(slugPost);
       }

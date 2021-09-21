@@ -20,7 +20,7 @@ export class BlogComponent implements OnInit {
   paginated_posts: PaginatedPosts;
   total_pages;
   returnedPosts;
-  showLoadingIndicator;
+  public showLoadingIndicator: boolean =false;
 
 
   constructor(private blogService: BlogService, private _router: Router) { }

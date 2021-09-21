@@ -81,6 +81,7 @@ export class AdmingetproductComponent implements OnInit {
   delete_flag
 
   prod_id
+  public showLoadingIndicator: boolean =false;
 
   constructor(
     private titleservice: Title,
@@ -90,28 +91,33 @@ export class AdmingetproductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleservice.setTitle('All Properties')
     this.userService.getAdmin_product().pipe().subscribe(
       data => {
         this.content = data.data
         //console.log(data.data)
-
+        this.showLoadingIndicator = false;
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
 
   }
 
   del_func(id){
+    this.showLoadingIndicator = true;
     {this.authService.property_delete_admin(id).subscribe(
 
         data => {
           //console.log(data)
+          this.showLoadingIndicator = false;
           window.location.reload();
         },
         err => {
+          this.showLoadingIndicator = false;
           //console.log(err)
         }
       );
@@ -119,30 +125,35 @@ export class AdmingetproductComponent implements OnInit {
   }
 
   onSubmitUpdate(): void {
-
+    this.showLoadingIndicator = true;
     //console.log(this.form)
     this.authService.user_update(this.form, this.id).subscribe(
       data => {
         //console.log(data);
+        this.showLoadingIndicator = false;
         window.location.reload();
       },
       err => {
+        this.showLoadingIndicator = false;
         //console.log(err);
       }
     );
   }
 
   product_details(data): void {
+    this.showLoadingIndicator = true;
     this.authService.product_see(data).subscribe(
       (data: any) => {
         this.content = data["product"]["0"]["id"]
         this.tokenStorage.setProduct(this.content)
+        this.showLoadingIndicator = false;
         //console.log(this.tokenStorage.getProduct())
 
         this.redirect_to_edit();
 
       },
       err => {
+        this.showLoadingIndicator = false;
         this.content = JSON.parse(err.error).message;
       }
     )
@@ -150,7 +161,7 @@ export class AdmingetproductComponent implements OnInit {
 
   onShare(event){
     //window.location.href=GlobalConstants.siteURL+"productpage" + "?id=" + event
-    window.location.href=GlobalConstants.siteURL+"productpage" + "/" + event
+    window.location.href=GlobalConstants.siteURL+"productpage?id=" + event
     // alert("Your Shareable Link is \n" + this.sitestring + this.router.url + "?id=" + this.prod_id);
   }
 

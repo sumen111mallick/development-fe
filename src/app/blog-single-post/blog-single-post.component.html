@@ -57,8 +57,7 @@
                                             src="{{ images_folder }}/profile_image_file/{{ post_detail[0].profile_pic }}"
                                             alt="profile_pic"></li>
                                     <li class="list-inline-item" *ngIf="post_detail[0].profile_pic == null"><img
-                                            src="../../assets/images/default_avatar.png"
-                                            alt="profile_pic"></li>
+                                            src="../../assets/images/default_avatar.png" alt="profile_pic"></li>
                                     <li class="list-inline-item">{{ post_detail[0].name }}</li>
                                     <li class="list-inline-item"><span class="flaticon-calendar"></span></li>
                                     <li class="list-inline-item">{{ post_detail[0].updated_at |
@@ -118,6 +117,7 @@
                 </div>
             </div>
         </section>
+        <app-footer></app-footer>
     </div>
 </body>
 

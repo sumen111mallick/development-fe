@@ -19,7 +19,7 @@ export class AdminpanelComponent implements OnInit {
   user
   product
   events
-  showLoadingIndicator;
+  public showLoadingIndicator: boolean =false;
   public agent_length: any;
   public builder_length: any;
   public individual_length: any;
@@ -48,58 +48,67 @@ export class AdminpanelComponent implements OnInit {
         this.individual_length = data.data_individual.length;
         this.internal_user_length = data.data_internal_user.length;
         this.total_user_length = this.agent_length + this.builder_length + this.individual_length + this.internal_user_length;
+        this.showLoadingIndicator = false;
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
-
+    this.showLoadingIndicator = true;
     this.userService.getAdmin_product().pipe().subscribe(
       data => {
         this.product = data.data
+        this.showLoadingIndicator = false;
         //console.log(data.data)
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
-
+    this.showLoadingIndicator = true;
     this.userService.getAdmin_productviews().pipe().subscribe(
       data => {
         this.view_count = data.data
+        this.showLoadingIndicator = false;
         //console.log(data.data)
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
-
+    this.showLoadingIndicator = true;
     this.userService.getAdmin_reviewcount().pipe().subscribe(
       data => {
         this.review_count = data.data
+        this.showLoadingIndicator = false;
         //console.log(data.data)
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
-
+    this.showLoadingIndicator = true;
     this.userService.getadminevents().pipe().subscribe(
       (data: any) => {
 
         this.events = data.data.data;
+        this.showLoadingIndicator = false;
         //console.log(this.events);
         //console.log(this.content);
       },
       err => {
         this.events = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
         //console.log(err);
       }
     );
-    this.showLoadingIndicator = false;
   }
 
   panel_check(){

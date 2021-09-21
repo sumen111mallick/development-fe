@@ -1,0 +1,19 @@
+.card-img-top {
+    height: 200px;
+}
+
+.img-whp {
+    height: 200px;
+}
+
+.price {
+    border: 1px solid #ff5a5f;
+}
+
+.card {
+    margin-bottom: 15px;
+}
+
+.vertical {
+    border-right: 2px solid grey;
+}

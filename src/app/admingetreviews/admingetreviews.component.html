@@ -29,7 +29,9 @@
 <body>
   <div class="wrapper">
     <!-- <div class="preloader"></div> -->
-
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
     <!-- Main Header Nav -->
     <!-- <app-topbardark></app-topbardark> -->
     <!-- Listing Grid View -->
@@ -100,7 +102,8 @@
                                 <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="view"><a
                                     (click)="onShare(number.product_id)"><span class="flaticon-view"></span></a></li>
                                 <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                  <a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a></li>
+                                  <a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a>
+                                </li>
                               </ul>
                             </td>
                           </tr>

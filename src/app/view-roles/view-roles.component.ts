@@ -20,6 +20,7 @@ export class ViewRolesComponent implements OnInit {
   private user_creatorControl_value: boolean;
   private roleControl_value: boolean;
   private listPropertyControl_value: boolean;
+  public showLoadingIndicator: boolean = false;
 
   viewDetailsForm = this.fb.group({
     rolename: [{ value: '', disabled: true }],
@@ -44,6 +45,7 @@ export class ViewRolesComponent implements OnInit {
     private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.activatedRouteSnapshot = this._ActivatedRoute.snapshot.params.id;
 
     this.internalUserService.get_role(this.activatedRouteSnapshot).subscribe(
@@ -168,7 +170,7 @@ export class ViewRolesComponent implements OnInit {
           all_usersControl: this.all_usersControl_value,
           propertiesControl: this.propertiesControl_value,
           blogControl: this.blogControl_value,
-         // requirementsControl: this.requirementsControl_value,
+          // requirementsControl: this.requirementsControl_value,
           reviewsControl: this.reviewsControl_value,
           lawyerControl: this.lawyerControl_value,
           loanControl: this.loanControl_value,
@@ -176,9 +178,11 @@ export class ViewRolesComponent implements OnInit {
           roleControl: this.roleControl_value,
           listPropertyControl: this.listPropertyControl_value
         });
+        this.showLoadingIndicator = false;
       },
       err => {
         //console.log(err);
+        this.showLoadingIndicator = false;
       }
     );
   }

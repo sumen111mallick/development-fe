@@ -133,7 +133,7 @@ export class BoardAgentComponent implements OnInit {
     this.lawyerVisible = true;
   }
 
-  onSubmitotp(): void {
+  /*onSubmitotp(): void {
     {this.authService.verify(this.number, this.otp.password ).subscribe(
 
       data => {
@@ -150,7 +150,7 @@ export class BoardAgentComponent implements OnInit {
         }
       );
     }
-  }
+  }*/
 
 
 

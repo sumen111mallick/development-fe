@@ -39,6 +39,7 @@ export class LawyerprofileComponent implements OnInit {
   content: {};
   ftpstring: string = GlobalConstants.ftpURL;
   id
+  public showLoadingIndicator: boolean =false;
 
   constructor(
     private tokenStorage: TokenStorageService,
@@ -48,6 +49,7 @@ export class LawyerprofileComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleService.setTitle('Profile Page');
     this.id = this.tokenStorage.getLawyer();
     this.authService.lawyer_get(this.id).subscribe(
@@ -89,9 +91,11 @@ export class LawyerprofileComponent implements OnInit {
           this.email_verify = true;
         }
         this.id_created_at = data.data.created_at;
+        this.showLoadingIndicator = false;
       },
       err => {
         this.content = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
       }
     )
   }

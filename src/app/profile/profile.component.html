@@ -36,10 +36,10 @@
 		<section class="our-dashbord dashbord bgc-f7 pb50">
 			<div class="container-fluid">
 				<div class="row">
-					<div class="col-lg-3 col-xl-2 dn-992 pl0">
+					<div class="col-lg-2 col-xl-2 dn-992 pl0">
 						<app-menu-sidebar></app-menu-sidebar>
 					</div>
-					<div class="col-lg-9 col-xl-10 maxw100flex-992">
+					<div class="col-lg-10 col-xl-10 maxw100flex-992">
 						<div class="row">
 							<div class="col-lg-12">
 								<!-- Dashboard navigation goes here -->
@@ -52,7 +52,7 @@
 									<div class="alert alert-danger text-center" *ngIf="!email_verify && usertype != 8">
 										<h5>Please Verify your Phone
 											Number</h5>
-										<a class="btn btn-thm2" href="verify-details">Verify</a>	
+										<a class="btn btn-thm2" href="verify-details">Verify</a>
 									</div>
 								</div>
 							</div>
@@ -75,8 +75,12 @@
 																	<div
 																		class="d-flex flex-column align-items-center text-center">
 
-																		<img *ngIf="profile_pic !== null"
-																			class="img-whp" src="{{ ftpstring }}images/{{ profile_pic }}"
+																		<img *ngIf="profile_pic !== null && profile_pic.indexOf('https') == -1"
+																			class="img-whp"
+																			src="{{ ftpstring }}images/{{ profile_pic }}"
+																			alt="Profile Pic">
+																		<img *ngIf="profile_pic !== null && profile_pic.indexOf('https') != -1"
+																			class="img-whp" src="{{ profile_pic }}"
 																			alt="Profile Pic">
 																		<img *ngIf="profile_pic == null" class="img-whp"
 																			src="./../../assets/images/no_image_available.jpg"
@@ -285,7 +289,8 @@
 																	</div>
 																	<hr *ngIf="practice_number">
 																	<div class="row">
-																		<div class="col-sm-6 offset-sm-3 text-center" *ngIf="usertype != 8">
+																		<div class="col-sm-6 offset-sm-3 text-center"
+																			*ngIf="usertype != 8">
 																			<a data-toggle="modal"
 																				data-target=".bd-example-modal-lg"
 																				(click)="user_details(id)"><button
@@ -419,8 +424,7 @@
 																		<label for="formGroupExampleInput1">City:
 																			{{city}}</label>
 																	</div>
-																	<div class="my_profile_setting_input form-group margin-bes"
-																		*ngIf="phn_no">
+																	<div class="my_profile_setting_input form-group margin-bes">
 																		<label for="formGroupExampleInput1">Phone
 																			Number: +91{{phn_no}}</label>
 																	</div>
@@ -485,17 +489,14 @@
 														</div>
 														<div class="col-lg-6 col-xl-6">
 															<div class="sign_up_form">
-																<div class="heading">
-																	<h4>Edit.</h4>
-																</div>
-																<form action="#" name="form"
+																<form action="#" name="form" *ngIf="!otp_visible"
 																	(ngSubmit)="f.form.valid && onSubmitUpdate()"
-																	#f="ngForm">
+																	#g="ngForm" novalidate>
 
 																	<div class="form-group input-group"
 																		*ngIf="currentUser">
 																		<input type="text" class="form-control"
-																			id="exampleInputName" name="name"
+																			id="exampleInputName" name="username"
 																			#name="ngModel" [(ngModel)]="form.username"
 																			placeholder="User Name">
 																		<div class="input-group-prepend">
@@ -549,7 +550,7 @@
 																					class="fa fa-envelope-o"></i></div>
 																		</div>
 																	</div>
-																	<div class="form-group input-group" *ngIf="phn_no">
+																	<div class="form-group input-group">
 																		<input type="email" class="form-control"
 																			id="other_mobile_number"
 																			name="other_mobile_number"
@@ -561,6 +562,25 @@
 																					class="fa fa-envelope-o"></i></div>
 																		</div>
 																	</div>
+																	<div class="alert alert-warning" *ngIf="g.submitted && alert">
+																		<div>
+																			<p><strong>You cannot enter the same mobile number.</strong></p>
+																		</div>
+																	</div>
+																	<div class="alert alert-warning"
+																		*ngIf="g.submitted && updateFailed">
+																		<div
+																			*ngIf="errorMessage.errors && errorMessage.errors.other_mobile_number">
+																			<p><strong>The Mobile Number has already
+																					been
+																					taken.</strong></p>
+																		</div>
+																		<div
+																			*ngIf="errorMessage && errorMessage.message">
+																			<p><strong>{{ errorMessage.message }}</strong></p>
+																		</div>
+																	</div>
+
 																	<div class="form-group input-group"
 																		*ngIf="landline_number">
 																		<input type="email" class="form-control"
@@ -675,7 +695,42 @@
 
 																	<button type="submit"
 																		class="btn btn-log btn-block btn-thm">Update</button>
+
 																	<!-- <p class="text-center">Already have an account? <a class="text-thm" href="#">Log In</a></p> -->
+																</form>
+
+																<form action="#" *ngIf="otp_visible" name="form"
+																	(ngSubmit)="f.form.valid && onSubmitotp()"
+																	#m="ngForm" novalidate>
+																	<div class="heading">
+																		<h3 class="text-center">Enter OTP</h3>
+																	</div>
+																	<div class="form-group">
+																		<input type="text" name="mobile_otp"
+																			[(ngModel)]="otp.password" required
+																			minlength="6" #password="ngModel"
+																			class="form-control"
+																			id="mobile_otp"
+																			placeholder="One Time Password">
+																		<div class="alert alert-danger" role="alert"
+																			*ngIf="m.submitted && password.invalid">
+																			<div *ngIf="password.errors.required">OTP is
+																				required</div>
+																			<div *ngIf="password.errors.minlength">
+																				OTP must be at least 6 characters
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<button
+																			class="btn btn-log btn-block btn-thm2">Verify</button>
+																	</div>
+																	<div class="form-group">
+																		<div class="alert alert-danger" role="alert"
+																			*ngIf="m.submitted && isFailedVerify">
+																			Verification Failed, Wrong OTP
+																		</div>
+																	</div>
 																</form>
 															</div>
 														</div>
@@ -701,7 +756,7 @@
 											<div class="modal-body text-center">
 												<img [src]="imgURL ? imgURL : '../../../assets/images/noImageSelected.jpg'"
 													class="img-whp">
-													<hr>
+												<hr>
 												<input type="file" (change)="onFileChange($event)" id="upload_pic"
 													hidden />
 												<label id="label_upload" for="upload_pic">Change
@@ -710,7 +765,8 @@
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary" (click)="upload_image()">Upload Image</button>
+												<button type="button" class="btn btn-primary"
+													(click)="upload_image()">Upload Image</button>
 											</div>
 										</div>
 									</div>

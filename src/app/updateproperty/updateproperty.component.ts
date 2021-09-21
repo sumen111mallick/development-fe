@@ -142,38 +142,36 @@ export class UpdatepropertyComponent implements OnInit {
   
   update_property_rent = this.fb.group({
     Property_Details: new FormGroup({
-      build_name: new FormControl(''),
-      type: new FormControl(''),
-      display_address: new FormControl(''),
+      build_name: new FormControl('', Validators.required),
+      draft_form_id: new FormControl(''),
+      type: new FormControl('', Validators.required),
+
       area: new FormControl(''),
-      carpet_area: new FormControl(''),
-      area_unit: new FormControl(''),
-      bedroom: new FormControl(''),
-      bathroom: new FormControl(''),
-      balconies: new FormControl(''),
-      property_detail: new FormControl('')
+      area_unit: new FormControl('', Validators.required),
+      bedroom: new FormControl('', Validators.required),
+      bathroom: new FormControl('', Validators.required),
+      balconies: new FormControl('', Validators.required),
+      property_detail: new FormControl('', Validators.required)
     }),
 
     Property_address: new FormGroup({
-      address: new FormControl(''),
-      map_latitude: new FormControl(''),
-      map_longitude: new FormControl(''),
+      address: new FormControl('', Validators.required),
+      map_latitude: new FormControl('', Validators.required),
+      map_longitude: new FormControl('', Validators.required),
       city: new FormControl('Delhi', Validators.required),
       locality: new FormControl(''),
       pincode:new FormControl(''),
-      nearest_landmark: new FormControl(''),
-      nearby_places: new FormControl('')
+      nearest_landmark: new FormControl('')
     }),
 
     Property_additional_details: new FormGroup({
-      additional_rooms_status: new FormControl('0', Validators.required),
-      additional_rooms: new FormControl(''),
+      additional_rooms_status: new FormControl('0'),
       furnishings: new FormControl(''),
       furnishing_status: new FormControl('NFR'),
       facing_towards: new FormControl(''),
       rera_registration_status: new FormControl(''),
       additional_parking_status: new FormControl('0'),
-      buildyear: new FormControl(''),
+      buildyear: new FormControl('', Validators.required),
       availability_condition: new FormControl(''),
       possession_by: new FormControl(''),
       property_on_floor: new FormControl(''),
@@ -190,10 +188,10 @@ export class UpdatepropertyComponent implements OnInit {
     }),
 
     Property_price_images: new FormGroup({
-      expected_rent: new FormControl('5001', Validators.required),
-      security_deposit: new FormControl(''),
+      expected_rent: new FormControl('5000'),
+      security_deposit: new FormControl('', Validators.required),
       inc_electricity_and_water_bill: new FormControl(''),
-      tax_govt_charge: new FormControl(''),
+      tax_govt_charge: new FormControl('', Validators.required),
       price_negotiable: new FormControl(''),
       negotiable_status: new FormControl('0'),
       maintenance_charge_status: new FormControl('0'),
@@ -215,7 +213,7 @@ export class UpdatepropertyComponent implements OnInit {
   Amenties_length: number;
   product_amenties_length:number=null;
   p_images:number=5;
-  showLoadingIndicator: boolean;
+  public showLoadingIndicator: boolean =false;
   Expected_PriceEroor:boolean= false;
   update_product_img:string[];
   geoCoder:any;
@@ -348,7 +346,7 @@ export class UpdatepropertyComponent implements OnInit {
      this.showLoadingIndicator = true;
      this.authService.Propery_get_id(this.id).subscribe(
        (data: any) => {
-        // console.log(data);
+         console.log(data);
         this.data_id=data.data.id;
         if( this.data_id == 0){
          this.redirect_to_myproperties();
@@ -509,42 +507,42 @@ export class UpdatepropertyComponent implements OnInit {
             buildyear:this.buildyear,
           });   
         }
-        if(this.availability_condition){
+        if(this.availability_condition  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             availability_condition:this.availability_condition,
           });   
         }
-        if(this.willing_to_rent_out_to){
+        if(this.willing_to_rent_out_to  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             willing_to_rent_out_to:this.willing_to_rent_out_to,
           });   
         }
-        if(this.agreement_type){
+        if(this.agreement_type  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             agreement_type:this.agreement_type,
           });   
         }
-        if(this.available_for){
+        if(this.available_for  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             available_for:this.available_for,
           });   
         }
-        if(this.month_of_notice){
+        if(this.month_of_notice !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             month_of_notice:this.month_of_notice,
           });   
         }
-        if(this.duration_of_rent_aggreement){
+        if(this.duration_of_rent_aggreement  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             duration_of_rent_aggreement:this.duration_of_rent_aggreement,
           });   
         }
-        if(this.possession_by){
+        if(this.possession_by  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             possession_by:this.possession_by,
           });   
         }
-        if(this.property_on_floor){
+        if(this.property_on_floor  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             property_on_floor:this.property_on_floor,
           });   
@@ -591,12 +589,14 @@ export class UpdatepropertyComponent implements OnInit {
             expected_pricing:this.expected_pricing,
           });   
         }
-        if(this.inc_electricity_and_water_bill){
+        if(this.inc_electricity_and_water_bill != null){
           this.update_property_rent.controls.Property_price_images.patchValue({
             inc_electricity_and_water_bill:this.inc_electricity_and_water_bill,
           });   
         }
-        if(this.tax_govt_charge){
+        console.log(this.tax_govt_charge);
+        if(this.tax_govt_charge != null){
+          console.log(this.tax_govt_charge);
           this.update_property_rent.controls.Property_price_images.patchValue({
             tax_govt_charge:this.tax_govt_charge,
           });   
@@ -970,10 +970,7 @@ export class UpdatepropertyComponent implements OnInit {
   }
   rangeInput_Price(event){
     this.expected_rent=event;
-    this.update_property_rent.controls.Property_price_images.patchValue({
-      expected_rent:this.expected_rent,
-    });
-    if(event<5000 || event>500000){
+    if(event<500000 || event>50000000){
       this.Expected_PriceEroor=true;
     }else{
       this.Expected_PriceEroor=false;
@@ -1007,10 +1004,16 @@ delete_Pro_img(id: any){
  }
 
    onSubmitRent(): void { 
+    console.log(this.additional_room_array); 
+    if (this.update_property_rent.invalid) {
+      return;
+    }
+    this.showLoadingIndicator = true;
     if(this.update_property_rent.value.Property_price_images.expected_rent>=5000 && this.update_property_rent.value.Property_price_images.expected_rent<=500000){
       this.authService.product_rent_update(this.update_property_rent.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
         data => {
           //console.log("successful Updated" + data)
+          this.showLoadingIndicator = false;
           this.toastr.success('Successfuly Updated', 'Property Rent');
           window.location.href=GlobalConstants.siteURL+"myproperties"
         },
@@ -1018,6 +1021,7 @@ delete_Pro_img(id: any){
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.Message = err.error.message;
+          this.showLoadingIndicator = false;
           //console.log(this.errorMessage);
           this.toastr.error(this.Message, 'Something Error', {
             timeOut: 3000,
@@ -1025,17 +1029,21 @@ delete_Pro_img(id: any){
         }
       );
     }else{
+      this.showLoadingIndicator = false;
       this.toastr.error("Expected Price Between  5k to 5 Lakhs", 'Price Invalid..!!', {
         timeOut: 2000,
       });
     }
      
    }
-   saveDraft_form(): void {  
+   saveDraft_form(): void { 
+    this.showLoadingIndicator = true;
+    console.log(this.additional_room_array); 
     if(this.update_property_rent.value.Property_price_images.expected_rent>=5000 && this.update_property_rent.value.Property_price_images.expected_rent<=500000){
       this.authService.draft_rent_update(this.update_property_rent.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
         data => {
           //console.log("successful Updated" + data)
+          this.showLoadingIndicator = false;
           this.toastr.success('Successfuly Updated', 'Dreaft Property Rent');
           // window.location.href=GlobalConstants.siteURL+"myproperties"
         },
@@ -1043,6 +1051,7 @@ delete_Pro_img(id: any){
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.Message = err.error.message;
+          this.showLoadingIndicator = false;
           //console.log(this.errorMessage);
           this.toastr.error(this.Message, 'Something Error', {
             timeOut: 3000,
@@ -1050,6 +1059,7 @@ delete_Pro_img(id: any){
         }
       );
     }else{
+      this.showLoadingIndicator = false;
       this.toastr.error("Expected Price Between  5k to 5 Lakhs", 'Price Invalid..!!', {
         timeOut: 2000,
       });

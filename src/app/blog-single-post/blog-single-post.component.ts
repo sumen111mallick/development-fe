@@ -15,7 +15,7 @@ export class BlogSinglePostComponent implements OnInit {
   errorMessage = '';
   post_detail: any = [];
   sharedMessage:string;
-  showLoadingIndicator;
+  public showLoadingIndicator: boolean =false;
   images_folder: string = GlobalConstants.ftpURL;
 
   constructor(private _ActivatedRoute:ActivatedRoute, private _router:Router, private blogService:BlogService) { }

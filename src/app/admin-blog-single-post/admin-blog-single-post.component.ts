@@ -15,13 +15,15 @@ export class AdminBlogSinglePostComponent implements OnInit {
   errorMessage = '';
   post_detail: any = [];
   sharedMessage:string;
+  public showLoadingIndicator: boolean =false;
 
   images_folder: string = GlobalConstants.ftpURL;
 
   constructor(private _ActivatedRoute:ActivatedRoute, private _router:Router, private blogService:BlogService) { }
 
   ngOnInit(): void {
-    
+
+    this.showLoadingIndicator = true;
     this.activatedRouteSnapshot = this._ActivatedRoute.snapshot.params.slug;
     //console.log(this.activatedRouteSnapshot);
 
@@ -30,12 +32,14 @@ export class AdminBlogSinglePostComponent implements OnInit {
         //console.log(res);
         this.post_detail = JSON.parse(res);
         //console.log(this.post_detail);
+        this.showLoadingIndicator = false;
         this._router.navigate(['/admin-blog-single-post', this.activatedRouteSnapshot ]);
         //this.gotoPostDetails(BLOG_API + '/blog-single-post', this.activatedRouteSnapshot);
         //this.gotoPostDetails('/blog-single-post', this.activatedRouteSnapshot);
       },
       err => {
         this.errorMessage = err.error.message;
+        this.showLoadingIndicator = false;
         //console.log(err);
       }
     );

@@ -8,6 +8,9 @@
 
 <section class="inner_page_breadcrumb">
 	<div class="container">
+		<div *ngIf="showLoadingIndicator">
+			<div class="preloader"></div>
+		</div>
 		<div class="row">
 			<div class="col-xl-6">
 				<div class="breadcrumb_content">

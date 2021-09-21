@@ -186,11 +186,13 @@ export class ProductListingComponent implements OnInit {
  }
 
   loginuser_coutData(){
+    this.showLoadingIndicator = true;
     this.authService.recently_view().subscribe(
       data => {
         //console.log(data.data);
         this.Recently_UserData = data.data;
         this.Recent_user_length=data.data.length;
+        this.showLoadingIndicator = false;
         //console.log("Recently Views Properties");
          //console.log(this.Recently_UserData);
       });
@@ -264,7 +266,9 @@ export class ProductListingComponent implements OnInit {
             this.showLoadingIndicator = false;
           },
           err => {
-            this.content = JSON.parse(err.error).message;
+            //this.content = JSON.parse(err.error).message;
+            this.content = err.error.message;
+            this.showLoadingIndicator = false;
           }
         );   
       }else{
@@ -279,6 +283,7 @@ export class ProductListingComponent implements OnInit {
           },
           err => {
             this.content = JSON.parse(err.error).message;
+            this.showLoadingIndicator = false;
           } 
         );
       }
@@ -315,33 +320,39 @@ export class ProductListingComponent implements OnInit {
     
 }
   amenities(): void{
+    this.showLoadingIndicator = true;
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
         //  console.log(amenitiesdata);
         this.amenities = amenitiesdata.data;
         this.amenitiesresult = this.amenities;
+        this.showLoadingIndicator = false;
         //console.log(this.amenitiesresult);
         //console.log(this.content);
       },
       err => {
         this.content = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
       }
     );
   }
 
   Property_type_data(): void{
+    this.showLoadingIndicator = true;
     this.userService.get_property_type().pipe().subscribe(
       (data: any) => {
          //console.log(data);
         this.property_type_data = data.data;
         this.property_type_result = this.property_type;
         this.property_type_count=data.count;
+        this.showLoadingIndicator = false;
         //console.log(this.property_type_count);
         //console.log(this.property_type_data);
         //console.log(this.content);
       },
       err => {
         this.content = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
       }
     );
   }
@@ -357,11 +368,13 @@ export class ProductListingComponent implements OnInit {
   return false;
 }  
 feature_property(){
+  this.showLoadingIndicator = true;
   this.userService.feature_property().subscribe(
     data => { 
       //console.log(data);
       this.feature_property_data = data.data; 
       this.feature_pro_length =  this.feature_property_data.length;  
+      this.showLoadingIndicator = false;
     }
   );
 }
@@ -374,7 +387,8 @@ product_comp(id:number){
     this.isLoggedIn = true;
     //console.log(this.isLoggedIn);
     this.maintenance = true;
-    this.parking = false;     
+    this.parking = false;   
+    this.showLoadingIndicator = true;
       this.authService.Crete_product_comp(id).pipe().subscribe(
         (data: any) =>{
           //console.log(data);
@@ -389,9 +403,11 @@ product_comp(id:number){
               timeOut: 3000,
             });
           }
+          this.showLoadingIndicator = false;
         },
         err => {
          // console.log(err.error);
+         this.showLoadingIndicator = false;
         }
       );
   }
@@ -406,13 +422,16 @@ product_comp(id:number){
       this.isLoggedIn = true;
       this.maintenance = true;
       this.parking = false;    
+      this.showLoadingIndicator = true;
         this.authService.Wishlist(data).pipe().subscribe(
           (result: any) =>{
             console.log(result);
+            this.showLoadingIndicator = false;
             this.getpropertyData();
           },
           err => {
             //console.log(err.error);
+            this.showLoadingIndicator = false;
           }
         );
     }
@@ -425,13 +444,16 @@ product_comp(id:number){
   Wishlist_remove(data: any){
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
+      this.showLoadingIndicator = true;
        this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) =>{
           //console.log(result);
+          this.showLoadingIndicator = false;
           this.getpropertyData();
         },
         err => {
           //console.log(err.error);
+          this.showLoadingIndicator = false;
         }
       );
     }
@@ -496,26 +518,32 @@ product_comp(id:number){
       //console.log(this.form.type);
       if(this.tokenStorage.getToken()){
         //console.log('logging');
+        this.showLoadingIndicator = true;
         this.authService.search_pro_type_login(id).subscribe(
           data => {
             //console.log(data);
             this.Searchcontent = data.data;
             this.Search_data_length=this.Searchcontent.length;
+            this.showLoadingIndicator = false;
           },
           err => {
             //console.log(err.error);
+            this.showLoadingIndicator = false;
           }
         );
       }
       else{
+        this.showLoadingIndicator = true;
         this.authService.search_pro_type(id).subscribe(
           data => {
             //console.log(data);
             this.Searchcontent = data.data;
             this.Search_data_length=this.Searchcontent.length;
+            this.showLoadingIndicator = false;
           },
           err => {
             //console.log(err.error);
+            this.showLoadingIndicator = false;
           }
         );
       }
@@ -545,6 +573,7 @@ product_comp(id:number){
             err => {
               this.err_caused = true;
               this.errorMessage = err.error.errors;
+              this.showLoadingIndicator = false;
               //console.log(this.errorMessage);
             } 
           );
@@ -555,9 +584,10 @@ product_comp(id:number){
               console.log(searchData);
               this.Searchcontent = searchData.data;
               if(this.Searchcontent){
+                this.showLoadingIndicator = false;
                 this.Search_data_length=this.Searchcontent.length;
                 this.number = this.Searchcontent;
-                this.showLoadingIndicator = false;
+
               //console.log(this.number);
               }
               
@@ -565,6 +595,7 @@ product_comp(id:number){
             err => {
               this.err_caused = true;
               this.errorMessage = err.error.errors;
+              this.showLoadingIndicator = false;
               //console.log(this.errorMessage);
             }
             );

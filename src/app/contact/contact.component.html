@@ -29,7 +29,9 @@
 <body>
 	<div class="wrapper">
 		<!--<div class="preloader"></div>-->
-
+		<div *ngIf="showLoadingIndicator">
+			<div class="preloader"></div>
+		</div>
 		<!--<app-topbardark></app-topbardark>-->
 		<!-- Inner Page Breadcrumb -->
 		<section class="inner_page_breadcrumb">
@@ -55,40 +57,45 @@
 					<div class="col-lg-7 col-xl-8">
 						<div class="form_grid">
 							<h4 class="mb5">Send Us An Email</h4>
-							<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact_form" id="contact_form" name="contact_form" action="#" method="post" novalidate>
+							<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact_form"
+								id="contact_form" name="contact_form" action="#" method="post" novalidate>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<input id="form_name" formControlName="form_name" name="form_name" class="form-control"
-												required="required" type="text" placeholder="Name">
+											<input id="form_name" formControlName="form_name" name="form_name"
+												class="form-control" required="required" type="text" placeholder="Name">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input id="form_email" formControlName="form_email" name="form_email" class="form-control required email"
-												required="required" type="email" placeholder="Email">
+											<input id="form_email" formControlName="form_email" name="form_email"
+												class="form-control required email" required="required" type="email"
+												placeholder="Email">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input id="form_phone" formControlName="form_phone" name="form_phone" class="form-control required phone"
-												required="required" type="phone" placeholder="Phone">
+											<input id="form_phone" formControlName="form_phone" name="form_phone"
+												class="form-control required phone" required="required" type="phone"
+												placeholder="Phone">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input id="form_subject" formControlName="form_subject" name="form_subject" class="form-control required"
-												required="required" type="text" placeholder="Subject">
+											<input id="form_subject" formControlName="form_subject" name="form_subject"
+												class="form-control required" required="required" type="text"
+												placeholder="Subject">
 										</div>
 									</div>
 									<div class="col-sm-12">
 										<div class="form-group">
-											<textarea id="form_message" formControlName="form_message" name="form_message"
-												class="form-control required" rows="8" required="required"
-												placeholder="Your Message"></textarea>
+											<textarea id="form_message" formControlName="form_message"
+												name="form_message" class="form-control required" rows="8"
+												required="required" placeholder="Your Message"></textarea>
 										</div>
 										<div class="form-group mb0">
-											<button type="submit" [disabled]="!contactForm.valid" class="btn btn-lg btn-thm">Send Message</button>
+											<button type="submit" [disabled]="!contactForm.valid"
+												class="btn btn-lg btn-thm">Send Message</button>
 										</div>
 									</div>
 								</div>

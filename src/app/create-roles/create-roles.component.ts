@@ -87,6 +87,7 @@ export class CreateRolesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleService.setTitle('Create Roles');
 
     this.route.paramMap.subscribe(params => {

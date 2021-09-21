@@ -26,8 +26,7 @@ export class VerifyDetailsGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return new Observable<boolean>(obs => {
+    state: RouterStateSnapshot) {
 
       let val = this.tokenStorage.getUser();
       //console.log(val);
@@ -69,7 +68,7 @@ export class VerifyDetailsGuard implements CanActivate {
                 console.log(err);
               }
             ); */
-            obs.next(true);
+            return true;
             break;
           }
           case 8: {
@@ -81,8 +80,8 @@ export class VerifyDetailsGuard implements CanActivate {
                 this.response = data;
                 //console.log(this.response);
                 if (data[0].access_list_property == 1) {
-                  //console.log("True");
-                  obs.next(true);
+                  console.log("Access allowed");
+                  return true;
                   /*this.userService.getUserPhoneDetails().subscribe(
                     data => {
                       console.log(data);
@@ -102,7 +101,7 @@ export class VerifyDetailsGuard implements CanActivate {
                 else {
                   //console.log("Access Denied");
                   this.router.navigateByUrl('access-denied');
-                  obs.next(false);
+                  return false;
                 }
               },
               err => {
@@ -117,10 +116,8 @@ export class VerifyDetailsGuard implements CanActivate {
         //console.log("false");
         //this.router.navigate(['/login'], { queryParams: { returnUrl: url }});
         this.router.navigate(['/login']);
-        obs.next(false);
+        return false;
       }
-
-    });
 
   }
 

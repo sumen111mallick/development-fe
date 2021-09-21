@@ -29,8 +29,10 @@
 
 <body>
   <div class="wrapper">
-    <div class="preloader"></div>
-
+    <!--<div class="preloader"></div>-->
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
     <!-- Main Header Nav -->
     <!--<app-admindashtopbar></app-admindashtopbar>-->
 

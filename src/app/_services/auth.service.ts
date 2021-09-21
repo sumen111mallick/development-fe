@@ -22,7 +22,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(credentials: { email: any; password: any; }): Observable<any> {
+  login(credentials): Observable<any> {
     return this.http.post(AUTH_API + 'auth/login', JSON.stringify({
       email: credentials.email,
       password: credentials.password,
@@ -30,7 +30,7 @@ export class AuthService {
     }), httpOptions);
   }
 
-  register(user: { username: any; email: any; other_mobile_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
+  register(user, profile_pic): Observable<any> {
     return this.http.post(AUTH_API + 'auth/user_signup', ({
       name: user.username,
       email: user.email,
@@ -41,16 +41,17 @@ export class AuthService {
     }), httpOptions);
   }
 
-mobile_verify(data: { form_phone: any; }): Observable<any> {
+mobile_verify(data, id): Observable<any> {
     console.log("Mobile Verification");
-    console.log(data.form_phone);
+    console.log(data, id);
     return this.http.post(AUTH_API + 'auth/verify_mobile', ({
-      other_mobile_number: data.form_phone
+      other_mobile_number: data,
+      user_id: id
     }), httpOptions);
   }
 /* Code added by Radhika Start */
 
-  register_new(user: { firstName: any; lastName: any; email: any; other_mobile_number: any; password: any; cpassword: any; select_type: any; tnc_check: any; }): Observable<any> {
+  register_new(user): Observable<any> {
     console.log(user);
     return this.http.post(AUTH_API + 'auth/user_signup_new', ({
       first_name: user.firstName,
@@ -64,7 +65,7 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
     }), httpOptions);
   }
 
- register_internal_user(internal_user: FormGroup): Observable<any> {
+ register_internal_user(internal_user): Observable<any> {
     console.log(internal_user);
     return this.http.post(AUTH_API + 'auth/internal_user_signup', ({
       user_name: internal_user.value.username,
@@ -79,7 +80,7 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
     }), httpOptions);
   }
 
-  create_role(role_details: FormGroup): Observable<any> {
+  create_role(role_details): Observable<any> {
     console.log(role_details);
     return this.http.post(AUTH_API + 'auth/create_role', ({
       role: role_details.value.rolename,
@@ -97,12 +98,12 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
     }), httpOptions);
   }
 
-  update_role(updateRoleData: any, $id: string) {
+  update_role(updateRoleData, $id) {
     return this.http.post(AUTH_API + 'auth/roles/update/' + $id, updateRoleData);
   }
 															  
   /* Code added by Radhika End */
-  register_owner(user: { username: any; email: any; other_mobile_number: any; address: any; city: any; pan_number: any; aadhar_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
+  register_owner(user, profile_pic): Observable<any> {
     return this.http.post(AUTH_API + 'auth/owner_signup', ({
       name: user.username,
       email: user.email,
@@ -117,7 +118,7 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
     }), httpOptions);
   }
 
-  register_dealer(user: { username: any; email: any; other_mobile_number: any; company_name: any; company_url: any; address: any; city: any; landline_number: any; company_profile: any; pan_number: any; aadhar_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
+  register_dealer(user, profile_pic): Observable<any> {
     return this.http.post(AUTH_API + 'auth/dealer_signup', ({
       name: user.username,
       email: user.email,
@@ -136,7 +137,7 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
     }), httpOptions);
   }
 
-  register_company(user: { username: any; email: any; usertype: any; other_mobile_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
+  register_company(user, profile_pic): Observable<any> {
     return this.http.post(AUTH_API + 'admin/company_signup', ({
       name: user.username,
       email: user.email,
@@ -148,7 +149,7 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
     }), httpOptions);
   }
 
-  register_lawyer(user: { username: any; email: any; other_mobile_number: any; address: any; city: any; pan_number: any; aadhar_number: any; provided_service: any; price_for_service: any; law_firm_number: any; practice_number: any; place_of_practice: any; landline_number: any; password: any; cpassword: any; }, profile_pic: any): Observable<any> {
+  register_lawyer(user, profile_pic): Observable<any> {
     return this.http.post(AUTH_API + 'auth/lawyer_signup', ({
       name: user.username,
       email: user.email,
@@ -287,7 +288,7 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
     }), httpOptions);
   }
 
-  product_insert_rent(details: { Property_Details: { build_name: any; draft_form_id: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; bedroom: any; bathroom: any; balconies: any; }; Property_address: { address: any; city: any; locality: any; pincode: any; nearest_landmark: any; map_latitude: any; map_longitude: any; nearby_places: any; }; Property_additional_details: { furnishing_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; ownership: any; agreement_type: any; available_for: any; duration_of_rent_aggreement: any; month_of_notice: any; rent_cond: any; willing_to_rent_out_to: any; additional_rooms_status: any; }; Property_price_images: { expected_rent: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any,  additional_room_array: any[], amenityArray: any[],  product_img: any,): Observable<any> {
+  product_insert_rent(details: { Property_Details: { build_name: any; draft_form_id: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; bedroom: any; bathroom: any; balconies: any; }; Property_address: { address: any; city: any; locality: any; pincode: any; nearest_landmark: any; map_latitude: any; map_longitude: any; nearby_places: any; }; Property_additional_details: { furnishing_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; ownership: any; agreement_type: any; available_for: any; duration_of_rent_aggreement: any; month_of_notice: any; rent_cond: any; willing_to_rent_out_to: any; additional_rooms_status: any; }; Property_price_images: { expected_rent: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any,  additional_room_array: any[], amenityArray: any[],  product_img: any): Observable<any> {
     return this.http.post(AUTH_API + 'product/insert_product_rent', JSON.stringify ({
       user_id: id,
       build_name: details.Property_Details.build_name,
@@ -634,7 +635,7 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
     }), httpOptions);
   }
 
-  uploadProfile_Image(formdata: { profile_image: any; }): Observable<any> {
+  uploadProfile_Image(formdata): Observable<any> {
     console.log(formdata.profile_image);
     return this.http.post(AUTH_API + 'auth/upload_profile_pic', formdata);
   }
@@ -686,20 +687,31 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
       id: data
     }), httpOptions);
   }
-  verify(number: string, otp:string): Observable<any> {
+  verify(number, otp:string, email_id, first_name): Observable<any> {
     let name = ""+number
     console.log(typeof(name), typeof(otp))
     return this.http.post(AUTH_API + 'auth/verify', JSON.stringify({
       phone_number: name,
-      verification_code: otp
+      verification_code: otp,
+      email_address: email_id,
+      name_first: first_name 
     }), httpOptions);
   }
 
 /* Code added by Radhika Start */
-  verify_mobile(number: string, otp:string, id:number): Observable<any> {
+  verify_mobile(number, otp:string, id:number): Observable<any> {
     let name = ""+number
     console.log(typeof(name), typeof(otp), typeof(id));
     return this.http.post(AUTH_API + 'auth/verify_mob', JSON.stringify({
+      other_mobile_number: name,
+      verification_code: otp,
+      user_id: id
+    }), httpOptions);
+  }
+verify_profile_mobile(number, otp:string, id:number): Observable<any> {
+    let name = ""+number
+    console.log(typeof(name), typeof(otp), typeof(id));
+    return this.http.post(AUTH_API + 'auth/verify_profile_mob', JSON.stringify({
       other_mobile_number: name,
       verification_code: otp,
       user_id: id
@@ -719,27 +731,11 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
 
 
   user_update(user: { email: any; username: any; profile_pic: any; company_name: any; company_url: any; address: any; city: any; other_mobile_number: any; landline_number: any; company_profile: any; pan_number: any; aadhar_number: any; provided_service: any; place_of_practice: any; price_for_service: any; law_firm_number: any; practice_number: any; blocked: any; phone_number_verification_status: any; }, id: any): Observable<any> {
-    return this.http.post(AUTH_API + 'admin/user_update', ({
+    return this.http.post(AUTH_API + 'admin/user_update_new', ({
       id: id,
       email: user.email,
       name: user.username,
-      profile_pic: user.profile_pic,
-      company_name: user.company_name,
-      company_url: user.company_url,
-      address: user.address,
-      city: user.city,
-      other_mobile_number: user.other_mobile_number,
-      landline_number: user.landline_number,
-      company_profile: user.company_profile,
-      pan_number: user.pan_number,
-      aadhar_number: user.aadhar_number,
-      provided_service: user.provided_service,
-      place_of_practice: user.place_of_practice,
-      price_for_service: user.price_for_service,
-      law_firm_number: user.law_firm_number,
-      practice_number: user.practice_number,
-      blocked: user.blocked,
-      phone_number_verification_status: user.phone_number_verification_status
+      other_mobile_number: user.other_mobile_number
     }), httpOptions);
   }
 
@@ -1078,6 +1074,14 @@ mobile_verify(data: { form_phone: any; }): Observable<any> {
       id: id,
     }), httpOptions);
   }
+crm_call(user_id): Observable<any> {
+  return this.http.post(AUTH_API + 'auth/crm_api_call', ({
+    id: user_id
+  }) , httpOptions);
+}
+
+
+
 
   proceedToPayment(id: any, plans_type: any):Observable<any> {
     return this.http.post(AUTH_API + 'auth/payment', JSON.stringify({

@@ -15,6 +15,7 @@ export class LawyerserviceComponent implements OnInit {
   usertype: number;
   content;
   form: any = {};
+  public showLoadingIndicator: boolean =false;
 
   constructor(
     private authService: AuthService,
@@ -24,6 +25,7 @@ export class LawyerserviceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.title.setTitle('Lawyer Services');
     this.usertype = this.tokenService.getUser().usertype;
 
@@ -31,11 +33,13 @@ export class LawyerserviceComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
+        this.showLoadingIndicator = false;
         //console.log(data.data);
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
 
@@ -55,13 +59,16 @@ export class LawyerserviceComponent implements OnInit {
 
   onSubmit(): void {
       //console.log(this.form)
+      this.showLoadingIndicator = true;
       this.authService.lawyer_create_service(this.form).subscribe(
         data => {
           //console.log(data)
+          this.showLoadingIndicator = false;
           window.location.href=GlobalConstants.siteURL+"lawyerservice"
         },
         err => {
           //console.log(err.error);
+          this.showLoadingIndicator = false;
         }
       );
   }

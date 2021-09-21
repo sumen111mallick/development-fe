@@ -51,7 +51,7 @@
                 <a routerLink="/plans">Plans</a>
             </li>
             <li>
-                <a routerLink="/blog">Blog</a>
+                <a routerLink="/about-us">About Us</a>
             </li>
             <li *ngIf="!isLoggedIn">
                 <a routerLink="/login">Login/Register</a>
@@ -67,13 +67,16 @@
                 </button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item>
-                        <span *ngIf="userProfile"><img class="profile_image" src="{{ftpstring}}images/{{userProfile}}"
-                                alt="login_user.png"></span>
+                        <span *ngIf="userProfile && userProfile.indexOf('https') != -1">
+                            <img class="profile_image" src="{{userProfile}}"
+                            alt="Profile Pic"></span>
+                        <span *ngIf="userProfile && userProfile.indexOf('https') == -1"><img class="profile_image" src="{{ftpstring}}images/{{userProfile}}"
+                                alt="Profile Pic"></span>
                         <span *ngIf="!userProfile"><img class="profile_image"
-                                src="./../../assets/css/images/team/e1.png" alt="login_user.png"></span>
+                                src="./../../assets/images/no-image-icon.png" alt="Profile Pic"></span>
                     </button>
                     <button mat-menu-item disabled>
-                        <span>{{ roles }}</span>
+                        <span><strong>{{ roles }}</strong></span>
                     </button>
                     <button mat-menu-item>
                         <span>

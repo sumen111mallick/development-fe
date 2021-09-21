@@ -31,7 +31,7 @@ export class CompareComponent implements OnInit {
   public property_comp_length:number=0;
   property_comp:any={};
   content:any={};
-  showLoadingIndicator = false;
+  public showLoadingIndicator: boolean =false;
   public amenitiesresult:any={};
   e: any={};
   public devicetype:number;
@@ -99,10 +99,12 @@ export class CompareComponent implements OnInit {
       },
       err => {
         this.content = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
       }
     );
   }
   amenities(): void{
+    this.showLoadingIndicator = true;
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
         this.amenities = amenitiesdata.data;
@@ -114,9 +116,11 @@ export class CompareComponent implements OnInit {
         }
         this.amenitiesresult = this.filter_amenties;
         console.log(this.amenitiesresult);
+        this.showLoadingIndicator = false;
       },
       err => {
         this.content = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
       }
     );
   }
@@ -152,10 +156,12 @@ export class CompareComponent implements OnInit {
         //console.log(data); 
         this.pro_comp();
         // this.showLoadingIndicator = false;
+        this.showLoadingIndicator = false;
         window.location.href=GlobalConstants.siteURL="compare"
         },
         err => {
           //console.log(err)
+          this.showLoadingIndicator = false;
         }
       );
   }

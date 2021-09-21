@@ -24,8 +24,11 @@
     <![endif]-->
 </head>
 <body>
-<div class="wrapper">
-  <!-- <div class="preloader"></div> -->
+  <div class="wrapper">
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
+    <!-- <div class="preloader"></div> -->
 
  <!-- Main Header Nav -->
 <!-- <app-topbardark></app-topbardark> -->
@@ -375,18 +378,18 @@
                 <img class="align-self-start mr-3" src="./../../assets/images/no_image_available.jpg" alt="No Product Image"  style="width: 100px;">
               </ng-template>
               <ul class="tag mb0 Single-page-recently-view" >
-								<li class="list-inline-item" *ngIf=" Recently_view.productdetails.rent_availability != null">For Rent</li>
-								<li class="list-inline-item"  *ngIf=" Recently_view.productdetails.sale_availability != null">For Sale</li>
+								<li class="list-inline-item" *ngIf=" Recently_view.productdetails?.rent_availability != null">For Rent</li>
+								<li class="list-inline-item"  *ngIf=" Recently_view.productdetails?.sale_availability != null">For Sale</li>
 							  </ul>
 						  <div class="media-body">
-							  <h5 class="mt-0 post_title">{{Recently_view.productdetails.build_name | titlecase}}</h5>
-							  <a *ngIf="Recently_view.productdetails.expected_pricing != null" class="fp_price" >₹ {{Price_convert(Recently_view.productdetails.expected_pricing) }}<small></small></a>
-							  <a *ngIf="Recently_view.productdetails.expected_rent != null" class="fp_price"  >₹ {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
+							  <h5 class="mt-0 post_title">{{Recently_view.productdetails?.build_name | titlecase}}</h5>
+							  <a *ngIf="Recently_view.productdetails?.expected_pricing != null" class="fp_price" >₹ {{Price_convert(Recently_view.productdetails.expected_pricing) }}<small></small></a>
+							  <a *ngIf="Recently_view.productdetails?.expected_rent != null" class="fp_price"  >₹ {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
 							
 							  <ul class="mb0">
-								<li class="list-inline-item">Beds: {{Recently_view.productdetails.bedroom}}</li>
-								<li class="list-inline-item">Baths: {{Recently_view.productdetails.bathroom}}</li>
-								<li class="list-inline-item">Sq Ft: {{Recently_view.productdetails.equipment}}</li>
+								<li class="list-inline-item">Beds: {{Recently_view.productdetails?.bedroom}}</li>
+								<li class="list-inline-item">Baths: {{Recently_view.productdetails?.bathroom}}</li>
+								<li class="list-inline-item">Sq Ft: {{Recently_view.productdetails?.equipment}}</li>
 							  </ul>
 						  </div>
 						</div>

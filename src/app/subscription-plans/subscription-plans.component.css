@@ -67,6 +67,10 @@
     display: block;
     font-size: 18px;
   }
+
+  .pricing .pay_type {
+    color: #B2A399;
+  }
   .pricing tr td {
     font-size: 18px;
     line-height:26px;
@@ -140,6 +144,11 @@
     text-align: -webkit-center;
   }
 
+  input[type="text"] {
+    font-weight: 400;
+    font-size: 18px;
+  }
+
   @media only screen and (max-width: 992px) {
     .pricing tr td .ptable-title {
       font-size: 18px;
@@ -175,7 +184,7 @@
 
     .pricing .table th {
       width: 33%;
-      font-size: 22px;
+      font-size: 20px;
     }
 
     .pricing tr td {

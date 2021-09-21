@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   data: [] ;
   view_count;
   property_count
+  public showLoadingIndicator: boolean =false;
 
   constructor(
     private titleService: Title,
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleService.setTitle('Dashboard');
     this.name = this.tokenStorage.getUser().username;
 
@@ -43,11 +45,13 @@ export class DashboardComponent implements OnInit {
         this.data = data;
         this.view_count = data['view_count'];
         this.property_count = data['property_count'];
+        this.showLoadingIndicator = false;
         //console.log(data);
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
 

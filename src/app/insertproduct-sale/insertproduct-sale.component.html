@@ -21,9 +21,9 @@
 
 <body>
     <div class="wrapper">
-        <!-- <div *ngIf="showLoadingIndicator"> -->
+        <div *ngIf="showLoadingIndicator">
             <div class="preloader"></div>
-        <!-- </div> -->
+        </div>
 
         <!--<app-dashboard-topbar></app-dashboard-topbar>-->
         <section class="our-dashbord dashbord bgc-f7 pb50">
@@ -97,8 +97,10 @@
                                                             <!-- <option *ngFor="let property_type of property_type_result"
                                                                 [value]="property_type.id">{{property_type.name}}
                                                             </option> -->
-                                                            <option value="" disabled >Select Property Type</option>
-                                                            <option value="" disabled ><h3>ALL RESIDENTIAL</h3></option>
+                                                            <option value="" disabled>Select Property Type</option>
+                                                            <option value="" disabled>
+                                                                <h3>ALL RESIDENTIAL</h3>
+                                                            </option>
                                                             <option value="1">Flat/ Apartment</option>
                                                             <option value="2">Residential House</option>
                                                             <option value="3">Villa</option>
@@ -106,7 +108,9 @@
                                                             <option value="5">Residential Land/ Plot</option>
                                                             <option value="6">Penthouse</option>
                                                             <option value="7">Studio Apartment</option>
-                                                            <option value="" disabled ><h3>ALL COMMERCIAL</h3></option>
+                                                            <option value="" disabled>
+                                                                <h3>ALL COMMERCIAL</h3>
+                                                            </option>
                                                             <option value="8">Commercial Office Space</option>
                                                             <option value="9">Office in IT Park/ SEZ</option>
                                                             <option value="10">Commercial Shop</option>
@@ -116,7 +120,9 @@
                                                             <option value="14">Industrial Land</option>
                                                             <option value="15">Industrial Building</option>
                                                             <option value="16 ">Industrial Shed</option>
-                                                            <option value="" disabled ><h3>ALL AGRICULTURAL</h3></option>
+                                                            <option value="" disabled>
+                                                                <h3>ALL AGRICULTURAL</h3>
+                                                            </option>
                                                             <option value="17">Agricultural Land</option>
                                                             <option value="18">Farm House</option>
                                                         </select>
@@ -135,8 +141,8 @@
                                                         <textarea name="f1-about-yourself" placeholder="About yourself..."
                                                         class="f1-about-yourself form-control"
                                                         id="f1-about-yourself"></textarea>-->
-                                                    </div>
-                                                <!-- </div> -->
+                                            </div>
+                                            <!-- </div> -->
                                             <!-- </div> -->
                                             <div class="row">
                                                 <!-- <div class="col-lg-4 col-md-4 col-sm-12">
@@ -177,7 +183,8 @@
                                                     <div class="form-group">
                                                         <label for="area">Property Area</label>
                                                         <input type="text" class="form-control" name="area"
-                                                            formControlName="area" maxlength="8" (keypress)="keyPressNumbers($event)" id="area"
+                                                            formControlName="area" maxlength="8"
+                                                            (keypress)="keyPressNumbers($event)" id="area"
                                                             placeholder="Please Enter the Area...">
                                                     </div>
                                                 </div>
@@ -194,18 +201,18 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-5  offset-lg-7 col-12">
-                                                    <div class="row">
-                                                        <div class="col-lg-7">
-                                                            <div class="f1-buttons">
-                                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-5">
-                                                            <div class="f1-buttons">
-                                                                <button type="button" class="btn btn-next">Next</button>
-                                                            </div>
-                                                        </div>
+                                                <div class="col-lg-6 offset-lg-6 mb15">
+                                                    <div class="f1-buttons">
+                                                        <button type="button" (click)="saveDraft_form()"
+                                                            class="btn btn-success">Save to Draft</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 offset-lg-6 col-12">
+                                                    <div class="f1-buttons">
+                                                        <button type="button" class="btn btn-next"
+                                                            (click)="crm_api_call()">Next</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -254,25 +261,29 @@
                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="city">City</label>
-                                                            <select class="form-control" formControlName="city">
-                                                                <option value="Delhi">Delhi</option>
-                                                            </select>
+                                                        <select class="form-control" formControlName="city">
+                                                            <option value="Delhi">Delhi</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="area_name">Locality</label>
-                                                            <select class="form-control" formControlName="locality"  (ngModelChange)="onchange_locality($event)">
-                                                                <option value="" disabled>Select Option</option>
-                                                                <option *ngFor="let locality of dropdownList" value="{{locality.item_id}}">{{locality.item_text}}</option>
-                                                            </select>
+                                                        <select class="form-control" formControlName="locality"
+                                                            (ngModelChange)="onchange_locality($event)">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option *ngFor="let locality of dropdownList"
+                                                                value="{{locality.item_id}}">{{locality.item_text}}
+                                                            </option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="area_name">Pin Code</label>
-                                                        <input type="text" class="form-control" formControlName="pincode" id="pincode"  name="Pincode" placeholder="Please Enter Pin code"
-                                                        readonly>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="pincode" id="pincode" name="Pincode"
+                                                            placeholder="Please Enter Pin code" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-12">
@@ -286,22 +297,21 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-lg-6 offset-lg-6 mb15">
+                                                    <div class="f1-buttons">
+                                                        <button type="button" (click)="saveDraft_form()"
+                                                            class="btn btn-success">Save to Draft</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                                     <button type="button"
                                                         class="btn btn-previous ml25">Previous</button>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                                    <div class="row">
-                                                        <div class="col-lg-7">
-                                                            <div class="f1-buttons">
-                                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-5">
-                                                            <div class="f1-buttons">
-                                                                <button type="button" class="btn btn-next">Next</button>
-                                                            </div>
-                                                        </div>
+                                                    <div class="f1-buttons">
+                                                        <button type="button" class="btn btn-next">Next</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -373,7 +383,9 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label> Additional Rooms</label>
-                                                        <select class="form-control" formControlName="additional_rooms_status" (ngModelChange)="onchange_add_room($event)">
+                                                        <select class="form-control"
+                                                            formControlName="additional_rooms_status"
+                                                            (ngModelChange)="onchange_add_room($event)">
                                                             <option value="1">Yes</option>
                                                             <option value="0">No</option>
                                                         </select>
@@ -434,7 +446,7 @@
                                                             placeholder="Please Enter Features...">
                                                     </div>
                                                 </div> -->
-                                            
+
                                                 <!-- <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="nearby_places">Nearby Places</label>
@@ -453,64 +465,71 @@
                                                             placeholder="Please Enter Age of Property...">
                                                     </div>
                                                 </div> -->
-                                                </div>
-                                                <div class="row additional_row" *ngIf="Add_room_tab == true"> 
-                                                    <div class="col-xxs-6 col-sm col-lg-3">
-                                                        <ul class="ui_kit_checkbox selectable-list">
-                                                            <li>
-                                                                <div class="custom-control custom-checkbox ">
-                                                                    <div class="form-group">
-                                                                    <input type="checkbox" class="custom-control-input  form-control"
-                                                                        id="pooja_room" value="Pooja Room"   (change)="onchange_rooms($event,'Pooja Room')">
-                                                                        <label class="custom-control-label"
+                                            </div>
+                                            <div class="row additional_row" *ngIf="Add_room_tab == true">
+                                                <div class="col-xxs-6 col-sm col-lg-3">
+                                                    <ul class="ui_kit_checkbox selectable-list">
+                                                        <li>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <div class="form-group">
+                                                                    <input type="checkbox"
+                                                                        class="custom-control-input  form-control"
+                                                                        id="pooja_room" value="Pooja Room"
+                                                                        (change)="onchange_rooms($event,'Pooja Room')">
+                                                                    <label class="custom-control-label"
                                                                         for="pooja_room">Pooja Room</label>
-                                                                    </div>
                                                                 </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-xxs-6 col-sm col-lg-3">
-                                                        <ul class="ui_kit_checkbox selectable-list">
-                                                            <li>
-                                                                <div class="custom-control custom-checkbox ">
-                                                                    <input type="checkbox" class="custom-control-input"
-                                                                        id="study_room" value="Study Room"  (change)="onchange_rooms($event,'Study Room')">
-                                                                    <label class="custom-control-label"
-                                                                        for="study_room">Study Room</label>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-xxs-6 col-sm col-lg-3">
-                                                        <ul class="ui_kit_checkbox selectable-list">
-                                                            <li>
-                                                                <div class="custom-control custom-checkbox ">
-                                                                    <input type="checkbox" class="custom-control-input"
-                                                                        id="servant_room" value="Servant Room" (change)="onchange_rooms($event,'Servant Room')">
-                                                                    <label class="custom-control-label"
-                                                                        for="servant_room">Servant Room</label>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-xxs-6 col-sm col-lg-3">
-                                                        <ul class="ui_kit_checkbox selectable-list">
-                                                            <li>
-                                                                <div class="custom-control custom-checkbox ">
-                                                                    <input type="checkbox" class="custom-control-input"
-                                                                        id="other_room" value="Other Room" (change)="onchange_rooms($event,'Other Room')">
-                                                                    <label class="custom-control-label"
-                                                                        for="other_room">Other Room</label>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <div class="row">
+                                                <div class="col-xxs-6 col-sm col-lg-3">
+                                                    <ul class="ui_kit_checkbox selectable-list">
+                                                        <li>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="study_room" value="Study Room"
+                                                                    (change)="onchange_rooms($event,'Study Room')">
+                                                                <label class="custom-control-label"
+                                                                    for="study_room">Study Room</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xxs-6 col-sm col-lg-3">
+                                                    <ul class="ui_kit_checkbox selectable-list">
+                                                        <li>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="servant_room" value="Servant Room"
+                                                                    (change)="onchange_rooms($event,'Servant Room')">
+                                                                <label class="custom-control-label"
+                                                                    for="servant_room">Servant Room</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-xxs-6 col-sm col-lg-3">
+                                                    <ul class="ui_kit_checkbox selectable-list">
+                                                        <li>
+                                                            <div class="custom-control custom-checkbox ">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="other_room" value="Other Room"
+                                                                    (change)="onchange_rooms($event,'Other Room')">
+                                                                <label class="custom-control-label"
+                                                                    for="other_room">Other Room</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label>Furnishings</label>
-                                                        <select class="form-control " (ngModelChange)="furnishStatus($event)"  formControlName="furnishing_status">
+                                                        <select class="form-control "
+                                                            (ngModelChange)="furnishStatus($event)"
+                                                            formControlName="furnishing_status">
                                                             <option value="FFR">Furnished</option>
                                                             <option value="NFR">Not furnished</option>
                                                         </select>
@@ -519,7 +538,8 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                                     <div class="form-group">
                                                         <label>Reserved Parking?</label>
-                                                        <select class="form-control"  formControlName="additional_parking_status"
+                                                        <select class="form-control"
+                                                            formControlName="additional_parking_status"
                                                             (ngModelChange)="parkingStatus($event)">
                                                             <option value="1">Yes</option>
                                                             <option value="0">No</option>
@@ -527,7 +547,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row additional_row" *ngIf="furnish_row == true">
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                                     <h3> Amenities</h3>
@@ -704,22 +724,21 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-lg-6 offset-lg-6 mb15">
+                                                    <div class="f1-buttons">
+                                                        <button type="button" (click)="saveDraft_form()"
+                                                            class="btn btn-success">Save to Draft</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                                     <button type="button"
                                                         class="btn btn-previous ml25">Previous</button>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                                    <div class="row">
-                                                        <div class="col-lg-7">
-                                                            <div class="f1-buttons">
-                                                                <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-5">
-                                                            <div class="f1-buttons">
-                                                                <button type="button" class="btn btn-next">Next</button>
-                                                            </div>
-                                                        </div>
+                                                    <div class="f1-buttons">
+                                                        <button type="button" class="btn btn-next">Next</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -759,10 +778,12 @@
                                                                     id="expected_pricing" name="expected_pricing"
                                                                     placeholder="Please Enter Expected Price..."
                                                                     maxlength="8" (keypress)="keyPressNumbers($event)"
-                                                                    (ngModelChange)="rangeInput_Price($event)">
+                                                                    (ngModelChange)="rangeInput_Price($event)" autocomplete="off">
                                                             </div>
-                                                            
-                                                            <span class="alert-danger" *ngIf="Expected_PriceEroor == true">Expected Price Between 5 lakhs To %5crore</span>
+
+                                                            <span class="alert-danger"
+                                                                *ngIf="Expected_PriceEroor == true">Expected Price
+                                                                Between 5 lakhs To %5crore</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -805,8 +826,8 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-group">
                                                         <label>Is Price Negotiable?</label>
-                                                        <select class="form-control" formControlName="negotiable_status" 
-                                                        (ngModelChange)="price_negotiable_status($event)">
+                                                        <select class="form-control" formControlName="negotiable_status"
+                                                            (ngModelChange)="price_negotiable_status($event)">
                                                             <option value="1">Yes</option>
                                                             <option value="0">No</option>
                                                         </select>
@@ -818,11 +839,15 @@
                                                     <div class="form-group">
                                                         <label for="locality">Price Negotiable</label>
                                                         <input type="text" class="form-control"
-                                                            formControlName="price_negotiable" maxlength="8" placeholder="Enter the Price Negotiable" (keypress)="keyPressNumbers($event)">
+                                                            formControlName="price_negotiable" maxlength="8"
+                                                            placeholder="Enter the Price Negotiable"
+                                                            (keypress)="keyPressNumbers($event)">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-12" id="Negotiable_info_btn">
-                                                    <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="This Price will not shown visiable to cumtomers. this for us to negotiate with customer on your behalf"></i>
+                                                    <i class="fa fa-info-circle" aria-hidden="true"
+                                                        data-toggle="tooltip" data-placement="bottom"
+                                                        title="This Price will not shown visiable to cumtomers. this for us to negotiate with customer on your behalf"></i>
                                                 </div>
                                             </div>
 
@@ -838,14 +863,16 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-12"  *ngIf="maintenance_row == true">
+                                                <div class="col-lg-6 col-md-6 col-sm-12"
+                                                    *ngIf="maintenance_row == true">
                                                     <div class="form-group">
                                                         <label>Maintenance Charge Condition</label>
-                                                        <select class="form-control " formControlName="maintenance_charge">
-                                                          <option value="" disabled>Select Option</option>
-                                                          <option value="Monthly">Monthly</option>+
-                                                          <option value="Annually">Annually</option>
-                                                          <option value="One Time">One Time</option>
+                                                        <select class="form-control "
+                                                            formControlName="maintenance_charge">
+                                                            <option value="" disabled>Select Option</option>
+                                                            <option value="Monthly">Monthly</option>+
+                                                            <option value="Annually">Annually</option>
+                                                            <option value="One Time">One Time</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -929,7 +956,8 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+                                                <div
+                                                    class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
                                                     <div class="col-lg-4">
                                                         <div class="portfolio_upload">
                                                             <input type="file" class="form-control"
@@ -947,30 +975,27 @@
                                                     <div class="form-group">
                                                         <label for="locality">Property Video Link (YouTube)</label>
                                                         <input type="text" class="form-control"
-                                                            formControlName="video_link">
+                                                            formControlName="video_link" id="video_link">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+                                        <div class="row">
+                                            <div class="col-lg-6 offset-lg-6 mb15">
+                                                <div class="f1-buttons">
+                                                    <button type="button" (click)="saveDraft_form()"
+                                                        class="btn btn-success">Save to Draft</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                                <button type="button"
-                                                    class="btn btn-previous ml25">Previous</button>
+                                                <button type="button" class="btn btn-previous ml25">Previous</button>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                                <div class="row">
-                                                    <div class="col-lg-7">
-                                                        <div class="f1-buttons">
-                                                            <button type="button" (click)="saveDraft_form()" class="btn btn-success">Save to Draft</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-5">
-                                                        <div class="f1-buttons">
-                                                            <button type="submit" (click)="onSubmitSale()"
-                                                            class="btn btn-submit">Submit</button>
-                                                        </div>
-                                                    </div>
+                                                <div class="f1-buttons">
+                                                    <button type="submit" (click)="onSubmitSale()"
+                                                        class="btn btn-submit">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -984,4 +1009,5 @@
         </section>
     </div>
 </body>
+
 </html>

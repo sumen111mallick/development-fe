@@ -25,3 +25,9 @@ body {
     overflow: auto !important;
     padding-right: 0 !important;
 }
+
+@media (max-width: 768px) {
+  .my_dashboard_review ul li {
+      width: auto !important;
+  }
+}

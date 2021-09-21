@@ -120,6 +120,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
 import { DashboardNavComponent } from './dashboard-nav/dashboard-nav.component';
+import { ModalComponent } from './modal/modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { SplitPipe } from './split.pipe';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 
@@ -212,7 +217,9 @@ import { DashboardNavComponent } from './dashboard-nav/dashboard-nav.component';
     MenuTopbarComponent,
     MenuSidebarComponent,
     SidenavListComponent,
-    DashboardNavComponent,							
+    DashboardNavComponent,
+    ModalComponent,
+    SplitPipe,							
   ],
   imports: [
     Ng5SliderModule,
@@ -227,6 +234,9 @@ import { DashboardNavComponent } from './dashboard-nav/dashboard-nav.component';
     MatExpansionModule,
     MatBadgeModule,
     FlexLayoutModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
     NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({  
     apiKey: 'AIzaSyC2S5kHeGYkW9cL4d7_uxfauTBfQEtN4HA', libraries: ['places']
@@ -255,6 +265,7 @@ import { DashboardNavComponent } from './dashboard-nav/dashboard-nav.component';
     UrlService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent]
 })
 export class AppModule {}

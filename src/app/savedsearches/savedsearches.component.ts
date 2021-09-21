@@ -15,6 +15,8 @@ export class SavedsearchesComponent implements OnInit {
 
   content: [];
   ftpstring: string = GlobalConstants.ftpURL;
+  public showLoadingIndicator: boolean =false;
+
 
   constructor(
     private titleService: Title,
@@ -26,6 +28,7 @@ export class SavedsearchesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleService.setTitle('SavedSearch');
     if(this.tokenService.getUser() != null)
     {
@@ -33,9 +36,11 @@ export class SavedsearchesComponent implements OnInit {
           data => {
               //console.log(data.data)
               this.content = data.data;
+              this.showLoadingIndicator = false;
             },
           err => {
               //console.log(err)
+              this.showLoadingIndicator = false;
             }
         )
       }

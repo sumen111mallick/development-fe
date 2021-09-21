@@ -48,6 +48,7 @@ export class AdmingetusersComponent implements OnInit {
   email_verify
   id_created_at
   phone_number_verification_status
+  public showLoadingIndicator: boolean =false;
 
   userForm = this.fb.group({
     username: [''],
@@ -79,6 +80,7 @@ export class AdmingetusersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleservice.setTitle('All Properties')
     this.userService.getAdmin_users().pipe().subscribe(
       data => {
@@ -87,11 +89,13 @@ export class AdmingetusersComponent implements OnInit {
         this.content_individual = data.data_individual;
         this.content_internal_user = data.data_internal_user;
         this.content_admin = data.data_admin;
+        this.showLoadingIndicator = false;
         //console.log(data)
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
 
@@ -99,6 +103,7 @@ export class AdmingetusersComponent implements OnInit {
 
   user_details(data): void {
     //console.log(data);
+    this.showLoadingIndicator = true;
     this.authService.user_get(data).subscribe(
       (data: any) => {
         //console.log(data);
@@ -164,23 +169,27 @@ export class AdmingetusersComponent implements OnInit {
           this.email_verify = true;
         }
         this.id_created_at = data.data.created_at;
+        this.showLoadingIndicator = false;
       },
       err => {
         this.content = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
       }
     )
   }
 
   onSubmitUpdate(): void {
-
+    this.showLoadingIndicator = true;
     //console.log(this.form)
     this.authService.user_update(this.form, this.id).subscribe(
       data => {
         //console.log(data);
+        this.showLoadingIndicator = false;
         window.location.reload();
       },
       err => {
         //console.log(err);
+        this.showLoadingIndicator = false;
       }
     );
   }

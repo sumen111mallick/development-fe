@@ -114,7 +114,7 @@
                             </div>
                         </div>
                         <div class="details">
-                            <a href="/productpage?id={{data.id}}">
+                            <a href="/productpage?id={{data.productdetails.id}}">
                             <div class="tc_content">
                                 <p class="text-thm" *ngIf="data.property__type != null">{{ data.productdetails.property__type.name | titlecase  }}</p>
                                 <h4>{{ data.productdetails.build_name | titlecase  }}</h4>

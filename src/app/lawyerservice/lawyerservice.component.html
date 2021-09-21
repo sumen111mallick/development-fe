@@ -29,7 +29,9 @@
 <body>
   <div class="wrapper">
     <!-- <div class="preloader"></div> -->
-
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
     <!-- Main Header Nav -->
     <!-- <app-topbardark></app-topbardark> -->
     <!-- Listing Grid View -->
@@ -53,7 +55,7 @@
                   <p>We are glad to see you again!</p>
                 </div>
               </div>
-              
+
               <div class="col-lg-12">
                 <div class="my_dashboard_review mb40">
                   <div class="property_table">
@@ -87,7 +89,8 @@
                             <td>
                               <ul class="view_edit_delete_list mb0">
                                 <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                  <a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a></li>
+                                  <a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a>
+                                </li>
                               </ul>
                             </td>
                           </tr>

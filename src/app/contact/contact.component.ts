@@ -16,6 +16,7 @@ export class ContactComponent implements OnInit {
 
   response;
   errorMessage = '';
+  public showLoadingIndicator: boolean =false;
 
   contactForm = this.fb.group({
     form_name: ['', Validators.required],
@@ -32,6 +33,7 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     //console.log(this.contactForm.value);
+    this.showLoadingIndicator = true;
     var formData: any = new FormData();
     formData.append('name', this.contactForm.value.form_name);
     formData.append('email', this.contactForm.value.form_email);
@@ -42,10 +44,12 @@ export class ContactComponent implements OnInit {
       res => {
         //console.log(res);
         this.response = res;
+        this.showLoadingIndicator = false;
         this.contactForm.reset({});
       },
       err => {
         this.errorMessage = err.error.message;
+        this.showLoadingIndicator = false;
         //console.log(err);
       }
     );

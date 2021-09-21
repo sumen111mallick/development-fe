@@ -6,3 +6,11 @@ header {
     width: 100%;
     left: 0px;
 }
+
+/*.owl-item {
+    height: 0;
+}
+
+.owl-item.active {
+    height: auto;
+} */

@@ -3,6 +3,9 @@
 
 <section class="our-dashbord dashbord bgc-f7 pb50">
   <div class="container-fluid">
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
     <div class="row">
       <div class="col-lg-3 col-xl-2 dn-992 pl0">
         <app-menu-sidebar></app-menu-sidebar>

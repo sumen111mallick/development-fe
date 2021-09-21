@@ -5,6 +5,8 @@ import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GlobalConstants } from './../global-constants';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CommonService } from '../_services/common.service';
 
 @Component({
   selector: 'app-menu-topbar',
@@ -29,12 +31,20 @@ export class MenuTopbarComponent implements OnInit {
   ftpstring: string = GlobalConstants.ftpURL;
   public wishlist_length: number = 0;
   public property_comp_length: number = 0;
+  public messageReceived: boolean;
+  private logged_in: Subscription;
 
   constructor(private titleService: Title,
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private commonService: CommonService) { 
+      this.logged_in = this.commonService.getUpdate().subscribe(
+        message => {
+          this.isLoggedIn = message;
+        });
+    }
 
   ngOnInit(): void {
     //console.log(this.isLoggedIn);
@@ -58,9 +68,10 @@ export class MenuTopbarComponent implements OnInit {
     // console.log(this.tokenStorage.getToken());
     //console.log(this.tokenStorage.getUser());
     //console.log(this.tokenStorage.getToken());
+    console.log(this.isLoggedIn);
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
-
+      console.log(this.isLoggedIn);
       if (this.tokenStorage.getUser().misc) {
         this.roles = this.tokenStorage.getUser().username;
         this.userEmail = this.tokenStorage.getUser().misc.email;

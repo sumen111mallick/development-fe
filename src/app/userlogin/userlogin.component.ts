@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { TokenStorageService } from './../_services/token-storage.service';
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../_services/common.service';
 import { filter, pairwise } from 'rxjs/operators';
 /*0import { UrlService } from './../_services/url.service';*/
 import { RoutesRecognized } from '@angular/router';
@@ -64,6 +65,7 @@ export class UserloginComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private router: Router,
     private route: ActivatedRoute,
+    private commonService: CommonService
     //private urlService: UrlService
   ) { }
 
@@ -100,31 +102,37 @@ export class UserloginComponent implements OnInit {
          this.previousUrl = event.url;
        }); */
 
-    {
-      this.route.queryParams.subscribe(params => {
-        let token = params['token'];
-        let data = params['data'];
-        //console.log(token);
-        //console.log(data);
-        if (token != null) {
-          this.tokenStorage.saveToken(token);
-          //console.log(this.tokenStorage.getToken());
-          this.tokenStorage.saveUser(data);
-          this.roles = this.tokenStorage.getUser().name;
-        }
-      })
-    }
+    this.route.queryParams.subscribe(params => {
+      let token = params['token'];
+      let data = params['data'];
+      console.log(token);
+      console.log(data);
+      if (token != null) {
+        
+        this.tokenStorage.saveToken(token);
+        //console.log(this.tokenStorage.getToken());
+        this.tokenStorage.saveUser(data);
+        this.roles = this.tokenStorage.getUser().name;
+      }
+    });
+
 
     //console.log(this.tokenStorage.getUser())
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
+      this.isLoginFailed = false;
+      console.log(this.isLoggedIn);
       this.roles = this.tokenStorage.getUser().username;
       if (this.tokenStorage.getUser().usertype == 1) {
         this.usertype = true;
         //console.log(this.usertype);
       }
       this.showLoadingIndicator = false;
-      this.router.navigate([""]);
+      this.commonService.sendUpdate(this.isLoggedIn);
+      this.router.navigate([""])
+      .then(() => {
+        window.location.reload();
+      });
     }
     else {
       this.isLoggedIn = false;
@@ -154,9 +162,9 @@ export class UserloginComponent implements OnInit {
         // window.location.href=GlobalConstants.siteURL+"";
         this.showLoadingIndicator = false;
         this.router.navigateByUrl("")
-        .then(() => {
-          window.location.reload();
-        });
+          .then(() => {
+            window.location.reload();
+          });
         //this.router.navigateByUrl(this.returnUrl);
         //this.redirect_to_profile();
         //this.router.navigateByUrl(this.previousUrl);

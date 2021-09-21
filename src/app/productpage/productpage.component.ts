@@ -204,6 +204,7 @@ export class ProductpageComponent implements OnInit {
       },
         err => {
           //console.log(err);
+          this.showLoadingIndicator = false;
         }
       );
     }
@@ -282,9 +283,11 @@ product_comp(id:number){
               timeOut: 3000,
             });
           }
+          this.showLoadingIndicator = false;
         },
         err => {
           //console.log(err.error);
+          this.showLoadingIndicator = false;
         }
       );
   }
@@ -325,9 +328,11 @@ Price_convert(num: number) {
             //console.log(result);
             this.similarproperty(this.cityValue);
             this.single_property_data(this.id);
+            this.showLoadingIndicator = false;
           },
           err => {
             //console.log(err.error);
+            this.showLoadingIndicator = false;
           }
         );
       }
@@ -392,9 +397,11 @@ createPaytmForm() {
          // console.log(result);
           this.similarproperty(this.cityValue);
           this.single_property_data(this.id);
+          this.showLoadingIndicator = false;
         },
         err => {
           //console.log(err.error);
+          this.showLoadingIndicator = false;
         }
       );
     }
@@ -500,6 +507,7 @@ check_order_product(id:any){
       },
         err => {
           //console.log(err);
+          this.showLoadingIndicator = false;
         }
       );
 

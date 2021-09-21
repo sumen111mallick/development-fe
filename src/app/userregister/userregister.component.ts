@@ -61,7 +61,7 @@ export class UserregisterComponent implements OnInit {
     }
   }
 
-  onSubmitotp(): void {
+  /*onSubmitotp(): void {
     {this.authService.verify(this.number, this.otp.password ).subscribe(
 
       data => {
@@ -77,7 +77,7 @@ export class UserregisterComponent implements OnInit {
         }
       );
     }
-  }
+  }*/
 
 
   onFileChanged(event){

@@ -26,7 +26,10 @@
 
 <body>
 	<div class="wrapper">
-		<div class="preloader"></div>
+		<!--<div class="preloader"></div>-->
+		<div *ngIf="showLoadingIndicator">
+			<div class="preloader"></div>
+		</div>
 
 		<!--<app-dashboard-topbar></app-dashboard-topbar>-->
 

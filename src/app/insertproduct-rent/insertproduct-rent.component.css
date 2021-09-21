@@ -100,7 +100,7 @@ ul.navbar-nav {
 	padding: 25px; background: #fff;
 	-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
 }
-.f1 h3 { margin-top: 0; margin-bottom: 5px; text-transform: uppercase; text-align: center; }
+.f1 h3 { margin-top: 0; margin-bottom: 5px; text-align: center; }
 
 .f1-steps { overflow: hidden; position: relative; margin-top: 20px; }
 

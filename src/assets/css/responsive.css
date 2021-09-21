@@ -620,7 +620,7 @@
 	.properti_city .overlay{height: 100%;}
 	.footer_mailchimp_form .col-auto input.form-control{width: 170px;}
 	.mouse_scroll{display: none;}
-	.home_content{padding: 150px 0 400px !important; margin-top: 100px !important;}
+	.home_content{padding: 150px 0 400px !important; margin-top: 10px !important;}
 	.home_adv_srch_opt{margin-top: 100px !important;}
 	.error_page.footer_apps_widget .mailchimp_form .form-control{width: 500px;}
 	.checkout_form .checkout_coupon form button.btn3{position: relative;}
@@ -819,8 +819,8 @@
 	.home_content{padding: 60px 0 400px !important;}
 	.home1-advnc-search ul.h1ads_1st_list li.custome_fields_520{border: 1px solid #ebebeb;border-radius: 8px;cursor: pointer;height: 50px;line-height: 50px;margin: 10px 0;padding: 0 15px;}
 	.home1-advnc-search ul.apeartment_area_list li{margin-right: 20px;}
-	.home-one .home-text{padding: 0 15px; margin-top: 100px !important;}
-	.home_adv_srch_opt{margin-top: 240px !important;}
+	.home-one .home-text{padding: 0 15px; margin-top: 20px !important;}
+	.home_adv_srch_opt{margin-top: 180px !important;}
 	.dropdown-content{bottom: 0;left: 0;max-height: -webkit-fill-available;overflow: auto;position: fixed;right: 0;top: 0;visibility: visible !important;}
 	.dropdown-content.home2{top: 0;}
 	.featured_row{margin-top: 0;}
@@ -1099,7 +1099,7 @@
 @media only screen and (max-width:360px){
 
 	.home-one .home-text {
-		margin-top: 120px !important;
+		margin-top: 60px !important;
 	}
 	.home1_adsrchfrm{padding: 30px 10px;}
 	.home1-advnc-search ul.apeartment_area_list li .dropdown.bootstrap-select>.dropdown-toggle{width: 320px;}

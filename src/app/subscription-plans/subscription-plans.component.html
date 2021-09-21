@@ -27,6 +27,9 @@
 
 <body>
     <div class="wrapper">
+        <div *ngIf="showLoadingIndicator">
+            <div class="preloader"></div>
+        </div>
         <!--<div class="preloader"></div>-->
 
         <!-- Main Header Nav -->
@@ -97,11 +100,39 @@
                                 </div>
                             </div>
                         </div> -->
+
+                        <form [formGroup]="budgetForm">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <label>Select Budget</label>
+                                        <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <label for="budget_amount">Enter Budget</label>
+                                        <input type="text" [(ngModel)]="value" (keypress)="keyPressNumbers($event)"
+                                            class="form-control h50 pl20" autocomplete="off" maxlength="5"
+                                            formControlName="budget_amount" name="budget_amount">
+
+                                        <div *ngIf="f.budget_amount.touched && f.budget_amount.invalid"
+                                            class="alert alert-danger">
+
+                                            <div *ngIf="f.budget_amount.errors.required">Budget amount is required.
+                                            </div>
+                                            <div *ngIf="f.budget_amount.errors.max">Maximum amount is 50000</div>
+                                            <div *ngIf="f.budget_amount.errors.min">Minimum amount is 5000</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
                         <div class="pricing">
                             <div class="container">
                                 <div class="pricing-table">
                                     <table class="table table-hover table-bordered">
-                                        <thead>
+                                        <!-- <thead>
                                             <tr>
                                                 <th>&nbsp;</th>
                                                 <th>
@@ -123,120 +154,67 @@
                                                     <span class="ptable-price">15 Days Rent</span>
                                                 </th>
                                             </tr>
+                                        </thead>-->
+                                        <thead>
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th *ngFor="let plan of response">
+                                                    {{ plan.plan_name }}
+                                                    <span class="ptable-price pay_type">{{ plan.payment_type }} Payment</span>
+                                                    <hr>
+                                                    <span class="ptable-price">{{ plan.plan_price }} Days Rent</span>
+                                                    <span class="ptable-price" *ngIf="value">Rs. {{ value /
+                                                        (30 / plan.plan_price)}}</span>
+                                                    <!--<span class="ptable-price" *ngIf="selected && plan.plan_price == 15">Rs. {{ selected.value / 2 }}</span>-->
+                                                </th>
+                                            </tr>
                                         </thead>
+                                        <tbody *ngFor="let rent_feature of rent_feat_res">
+                                            <tr class="visible-xs" aria-hidden="true">
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">{{rent_feature.feature_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="ptable-title">{{rent_feature.feature_name}}</span>
+                                                </td>
+                                                <!--<td><span class="checkmark">{{rent_feature.feature_details | split: ","
+                                                        : 0}}</span></td>
+                                                    <td><span class="checkmark">{{rent_feature.feature_details | split: ","
+                                                        : 1}}</span></td>
+                                                <td><span class="checkmark">{{rent_feature.feature_details | split: ","
+                                                        : 2}}</span></td>-->
+                                                <td *ngIf="rent_feature.feature_details[0] === 'yes'"><span
+                                                        class="checkmark">&#10004;</span></td>
+                                                <td *ngIf="rent_feature.feature_details[0] === 'no'">&#10006;</td>
+                                                <td
+                                                    *ngIf="rent_feature.feature_details[0] != 'no' && rent_feature.feature_details[0] != 'yes'">
+                                                    <span>{{rent_feature.feature_details[0]}}</span>
+                                                </td>
+
+                                                <td *ngIf="rent_feature.feature_details[1] === 'yes'"><span
+                                                        class="checkmark">&#10004;</span></td>
+                                                <td *ngIf="rent_feature.feature_details[1] === 'no'">
+                                                    <span>&#10006;</span>
+                                                </td>
+                                                <td
+                                                    *ngIf="rent_feature.feature_details[1] != 'no' && rent_feature.feature_details[1] != 'yes'">
+                                                    <span>{{rent_feature.feature_details[1]}}</span>
+                                                </td>
+
+                                                <td *ngIf="rent_feature.feature_details[2] === 'yes'"><span
+                                                        class="checkmark">&#10004;</span></td>
+                                                <td *ngIf="rent_feature.feature_details[2] === 'no'">
+                                                    <span>&#10006;</span>
+                                                </td>
+                                                <td
+                                                    *ngIf="rent_feature.feature_details[2] != 'no' && rent_feature.feature_details[2] != 'yes'">
+                                                    <span>{{rent_feature.feature_details[2]}}</span>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
                                         <tbody>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Multiple Property visit until you are
-                                                    100% satisfied</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Multiple Property visit until you are
-                                                        100% satisfied</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Ready to move</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Ready to move</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">100% Money back Guarantee</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">100% Money back Guarantee</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Same day property Handover
-                                                    Guarantee</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Same day property Handover
-                                                        Guarantee</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Priority visit slot</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Priority visit slot</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Priority booking of flat</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Priority booking of flat</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Virtual Live property Visit</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Virtual Live property Visit</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Rent Agreement</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Rent Agreement</span>
-                                                </td>
-                                                <td>Free</td>
-                                                <td>Free</td>
-                                                <td>Rs.300 Extra</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">After Sales services</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">After Sales services</span>
-                                                </td>
-                                                <td>4 Months vacancy guarantee</td>
-                                                <td>2 Months vacancy guarantee</td>
-                                                <td>&#10006;</td>
-                                            </tr>
                                             <!-- Buttons -->
                                             <tr>
                                                 <td>&nbsp;</td>
@@ -254,11 +232,42 @@
 
                     <div class="row mt25 tab-pane fade" id="tabContent3" role="tabpanel" aria-labelledby="plansTab3">
 
+                        <form [formGroup]="expectedRentForm">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <label>Select Expected Rent</label>
+                                        <ngx-slider [(value)]="expected_rent_value" [options]="exp_rent_options">
+                                        </ngx-slider>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <label for="expected_rent_amount">Enter Expected Rent</label>
+                                        <input type="text" [(ngModel)]="expected_rent_value"
+                                            (keypress)="keyPressNumbers($event)" class="form-control h50 pl20"
+                                            autocomplete="off" maxlength="5" formControlName="expected_rent_amount"
+                                            name="expected_rent_amount">
+
+                                        <div *ngIf="g.expected_rent_amount.touched && g.expected_rent_amount.invalid"
+                                            class="alert alert-danger">
+
+                                            <div *ngIf="g.expected_rent_amount.errors.required">Budget amount is
+                                                required.
+                                            </div>
+                                            <div *ngIf="g.expected_rent_amount.errors.max">Maximum amount is 50000</div>
+                                            <div *ngIf="g.expected_rent_amount.errors.min">Minimum amount is 5000</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
                         <div class="pricing">
                             <div class="container">
                                 <div class="pricing-table">
                                     <table class="table">
-                                        <thead>
+                                        <!-- <thead>
                                             <tr>
                                                 <th>&nbsp;</th>
                                                 <th>
@@ -280,154 +289,69 @@
                                                     <span class="ptable-price">15 Days Rent</span>
                                                 </th>
                                             </tr>
+                                        </thead>-->
+                                        <thead>
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th *ngFor="let letout_plan of letout_response">
+                                                    {{ letout_plan.plan_name }}
+                                                    <span class="ptable-price pay_type">{{ letout_plan.payment_type }}
+                                                        Payment</span>
+                                                    <hr>
+                                                    <span class="ptable-price">{{ letout_plan.plan_price }} Days
+                                                        Rent</span>
+                                                    <span class="ptable-price" *ngIf="expected_rent_value">Rs. {{
+                                                        expected_rent_value /
+                                                        (30 / letout_plan.plan_price)}}</span>
+                                                    <!--<span class="ptable-price" *ngIf="selected && plan.plan_price == 15">Rs. {{ selected.value / 2 }}</span>-->
+                                                </th>
+                                            </tr>
                                         </thead>
+                                        <tbody *ngFor="let letout_feature of letout_feat_res">
+                                            <tr class="visible-xs" aria-hidden="true">
+                                                <td>&nbsp;</td>
+                                                <td colspan="3">{{letout_feature.feature_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="ptable-title">{{letout_feature.feature_name}}</span>
+                                                </td>
+                                                <!-- <td><span class="checkmark">{{letout_feature.feature_details | split:
+                                                        "," : 0}}</span></td>
+                                                <td><span class="checkmark">{{letout_feature.feature_details | split:
+                                                        "," : 1}}</span></td>
+                                                <td><span class="checkmark">{{letout_feature.feature_details | split:
+                                                        "," : 2}}</span></td>-->
+                                                <td *ngIf="letout_feature.feature_details[0] === 'yes'"><span
+                                                        class="checkmark">&#10004;</span></td>
+                                                <td *ngIf="letout_feature.feature_details[0] === 'no'">&#10006;</td>
+                                                <td
+                                                    *ngIf="letout_feature.feature_details[0] != 'no' && letout_feature.feature_details[0] != 'yes'">
+                                                    <span>{{letout_feature.feature_details[0]}}</span>
+                                                </td>
+
+                                                <td *ngIf="letout_feature.feature_details[1] === 'yes'"><span
+                                                        class="checkmark">&#10004;</span></td>
+                                                <td *ngIf="letout_feature.feature_details[1] === 'no'">
+                                                    <span>&#10006;</span>
+                                                </td>
+                                                <td
+                                                    *ngIf="letout_feature.feature_details[1] != 'no' && letout_feature.feature_details[1] != 'yes'">
+                                                    <span>{{letout_feature.feature_details[1]}}</span>
+                                                </td>
+
+                                                <td *ngIf="letout_feature.feature_details[2] === 'yes'"><span
+                                                        class="checkmark">&#10004;</span></td>
+                                                <td *ngIf="letout_feature.feature_details[2] === 'no'">
+                                                    <span>&#10006;</span>
+                                                </td>
+                                                <td
+                                                    *ngIf="letout_feature.feature_details[2] != 'no' && letout_feature.feature_details[2] != 'yes'">
+                                                    <span>{{letout_feature.feature_details[2]}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
                                         <tbody>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Rent Agreement</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Rent Agreement</span>
-                                                </td>
-                                                <td>Free</td>
-                                                <td>Free</td>
-                                                <td>Free</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Photo Clicks</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Photo Clicks</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Video Shoot</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Video Shoot</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Property Measurement</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Property Measurement</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Refund Gurantee</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Refund Gurantee</span>
-                                                </td>
-                                                <td>110% if not let out in 30 days</td>
-                                                <td>100% if not let out in 45 days</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">No Questions asked money back
-                                                    Guarantee</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">No Questions asked money back
-                                                        Guarantee</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Vacancy Zero Cost</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Vacancy Zero Cost</span>
-                                                </td>
-                                                <td>4 Months</td>
-                                                <td>2 Months</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">End to End Support</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">End to End Support</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Verified Property Tag</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Verified Property Tag</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Display Property on Top</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Display Property on Top</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Personal Relationship Officer</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Personal Relationship Officer</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                                <td>&#10006;</td>
-                                            </tr>
-                                            <tr class="visible-xs" aria-hidden="true">
-                                                <td>&nbsp;</td>
-                                                <td colspan="3">Priority Client Visit</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="ptable-title">Priority Client Visit</span>
-                                                </td>
-                                                <td><span class="checkmark">&#10004;</span></td>
-                                                <td>&#10006;</td>
-                                                <td>&#10006;</td>
-                                            </tr>
                                             <!-- Buttons -->
                                             <tr>
                                                 <td>&nbsp;</td>
@@ -480,7 +404,8 @@
         <!-- Our Footer -->
         <app-footer></app-footer>
 
-        <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
+        <!--<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>-->
+        <a class="scrollToHome" href="#"><i class="fa fa-angle-double-up"></i></a>
     </div>
     <!-- Wrapper End -->
 

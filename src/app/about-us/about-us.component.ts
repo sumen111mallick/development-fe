@@ -9,10 +9,12 @@ import { UserService } from './../_services/user.service';
 export class AboutUsComponent implements OnInit {
 
   [x: string]: any;
+ public showLoadingIndicator: boolean =false;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.gettestimonialdata();
   }
 
@@ -21,11 +23,13 @@ export class AboutUsComponent implements OnInit {
       (Reviewdata: any) => {
         this.contenttestimonial = Reviewdata.data;
         this.testimonial = this.contenttestimonial;
+        this.showLoadingIndicator = false;
         //console.log(this.testimonial);
         //console.log(this.content);
       },
       err => {
         this.content = err.error.message;
+        this.showLoadingIndicator = false;
       }
     );
   }

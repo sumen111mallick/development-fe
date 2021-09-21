@@ -13,14 +13,14 @@ import { Router } from '@angular/router';
 export class VerifyDetailsComponent implements OnInit {
 
   currentUser: any;
-  currentUserId: any;
+  public currentUserId: any;
   verify: boolean = false;
   errorMessage: string;
   number: string;
   isVerified: boolean = false;
   isFailedVerify: boolean = false;
   isFailedVerify_otp: boolean = false;
-  showLoadingIndicator: boolean =false;
+  public showLoadingIndicator: boolean =false;
   submitted: boolean = false;
   otp_submitted: boolean = false;
 
@@ -49,6 +49,7 @@ export class VerifyDetailsComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.userService.getUserBoard().pipe().subscribe(
       (data: any) => {
+        console.log(data);
         this.currentUser = data.name;
         this.currentUserId = data.id;
         this.showLoadingIndicator = false;
@@ -72,7 +73,7 @@ export class VerifyDetailsComponent implements OnInit {
       return;
     }
 
-    this.authService.mobile_verify(this.verifyForm.value).subscribe(
+    this.authService.mobile_verify(this.verifyForm.value.form_phone, this.currentUserId).subscribe(
       data => {
         //console.log(data);
         this.verify = true;

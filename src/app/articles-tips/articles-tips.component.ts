@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BlogService } from './../_services/blog.service';
 import { PaginatedPosts } from './../paginated-posts.model';
 import { GlobalConstants } from './../global-constants';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-articles-tips',
@@ -11,7 +12,7 @@ import { GlobalConstants } from './../global-constants';
 export class ArticlesTipsComponent implements OnInit {
 
   paginated_posts: PaginatedPosts;
-  showLoadingIndicator;
+  public showLoadingIndicator: boolean =false;
   errorMessage = '';
   response;
   public response_length:number=0;
@@ -25,9 +26,9 @@ export class ArticlesTipsComponent implements OnInit {
     this.blogService.getLatestPosts().subscribe (
       res => {
         //console.log(res);
-        this.showLoadingIndicator = false;
         this.response = res;
         this.response_length=this.response.length;
+        this.showLoadingIndicator = false;
       },
       err => {
         this.errorMessage = err.error.message;
@@ -35,6 +36,32 @@ export class ArticlesTipsComponent implements OnInit {
         this.showLoadingIndicator = false;
       }
     )
+  }
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    autoplay: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['&#8249', '&#8250;'],
+    responsive: {
+      0: {
+        items: 1 
+      },
+      480: {
+        items: 1
+      },
+      667: {
+        items: 2
+      },
+      1024: {
+        items: 3
+      }
+    },
+    nav: true
   }
 
 }

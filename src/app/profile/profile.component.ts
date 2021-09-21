@@ -45,11 +45,21 @@ export class ProfileComponent implements OnInit {
   public imagePath: any;
   public imgURL: any;
   public files: any;
-  public message: any={};
+  public message: any = {};
+  public errorMessage: any;
+  public otp_visible: boolean = false;
+  public phone_number: any;
+  public isVerified: boolean = false;
+  public verify: boolean = false;
+  public isFailedVerify: boolean = false;
+  public otp: any = {};
+  public response: any;
+  public updateFailed: boolean = false;
+  public alert: boolean = false;
 
   ftpstring: string = GlobalConstants.ftpURL;
 
-  showLoadingIndicator: boolean = false;
+  public showLoadingIndicator: boolean =false;
   isLoggedIn: boolean;
 
   constructor(
@@ -109,26 +119,12 @@ export class ProfileComponent implements OnInit {
         }
         this.id_created_at = data.created_at;
         //console.log(this.content);
-        this.showLoadingIndicator = false;
+        
         /*if (this.profile_pic.indexOf('googleusercontent.com') == -1) {
           this.profile_pic = this.ftpstring + this.profile_pic
         } */
-        /*if (this.usertype == 3) {
-									
-		 
-								 
-								 
-		 
-								 
-          this.usercat = "Agent";
-        }
-        if (this.usertype == 4) {
-          this.usercat = "Builder";
-        }
-        if (this.usertype == 5) {
-          this.usercat = "Individual";
-        } */
-      switch(this.usertype) {
+        
+        switch (this.usertype) {
           case 3: {
             this.usercat = "Agent";
             break;
@@ -153,6 +149,7 @@ export class ProfileComponent implements OnInit {
             break;
           }
         }
+        this.showLoadingIndicator = false;
 
         /*if (this.email_verifyd != 0) {
           this.email_verify = true;
@@ -168,6 +165,9 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  showSuccess($text) {
+    this.toastr.success($text);
+  }
 
   user_details(data): void {
     this.showLoadingIndicator = true;
@@ -227,7 +227,7 @@ export class ProfileComponent implements OnInit {
         if (this.usertype == 5) {
           this.usercat = "Individual";
         }
-      
+
         this.email_verifyd = data.data.phone_number_verification_status;
         if (this.email_verifyd != 0) {
           this.email_verify = true;
@@ -238,7 +238,7 @@ export class ProfileComponent implements OnInit {
         this.id_created_at = data.data.created_at;
       },
       err => {
-        this.content = JSON.parse(err.error).message;
+        this.content = err.error.message;
       }
     )
     this.showLoadingIndicator = false;
@@ -250,42 +250,98 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmitUpdate(): void {
-
-    //console.log(this.form)
-    this.authService.user_update(this.form, this.id).subscribe(
-      data => {
-        //console.log(data);
-        window.location.reload();
-      },
-      err => {
-        //console.log(err);
+    console.log(this.phn_no);
+    if (this.form.other_mobile_number && this.form.other_mobile_number == this.phn_no) {
+      this.alert = true;
+    }
+    else {
+      this.alert = false;
+      if (this.form.username || this.form.other_mobile_number) {
+        this.showLoadingIndicator = true;
+        console.log(this.form.username);
+        console.log(this.form.other_mobile_number);
+        this.authService.user_update(this.form, this.id).subscribe(
+          data => {
+            console.log(data);
+            this.response = data;
+            if (this.form.other_mobile_number) {
+              this.otp_visible = true;
+              this.phone_number = this.form.other_mobile_number;
+            }
+            else {
+              this.showSuccess(this.response.message);
+              window.location.reload();
+            }
+            this.showLoadingIndicator = false;
+          },
+          err => {
+            this.updateFailed = true;
+            console.log(err);
+            this.errorMessage = err.error;
+            this.showLoadingIndicator = false;
+          }
+        );
       }
-    );
+      else{
+        this.toastr.error("Please enter any one value");
+      }
+
+    }
+  }
+
+
+  onSubmitotp(): void {
+    {
+      console.log(this.otp.password);
+      this.showLoadingIndicator = true;
+      this.authService.verify_profile_mobile(this.phone_number, this.otp.password, this.id).subscribe(
+
+        data => {
+          this.response = data;
+          console.log(data);
+          this.isVerified = true;
+          this.verify = false;
+          this.showLoadingIndicator = false;
+          this.showSuccess(this.response.message);
+          window.location.reload();
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.verify = true;
+          this.isFailedVerify = true;
+          this.showLoadingIndicator = false;
+          //console.log(err);
+        }
+      );
+    }
   }
 
   onSubmitChange(): void {
     //console.log(this.form)
+    this.showLoadingIndicator = true;
     this.authService.password_update(this.form).subscribe(
       data => {
         //console.log(data);
         // window.location.reload();
         this.message = data.message;
-        if(data.status==200){
-          this.form.old_password="";
-          this.form.new_password="";
-          this.form.confirm_password="";
+        if (data.status == 200) {
+          this.form.old_password = "";
+          this.form.new_password = "";
+          this.form.confirm_password = "";
           this.toastr.success(this.message, 'Password', {
             timeOut: 3000,
           });
-        }else{
+        } else {
           this.toastr.error(this.message, 'Error', {
             timeOut: 3000,
-          }); 
+          });
         }
+        this.showLoadingIndicator = false;
       },
       err => {
         //console.log(err);
         this.message = err.message;
+        this.showLoadingIndicator = false;
         this.toastr.error(this.message, 'Error', {
           timeOut: 3000,
         });
@@ -295,7 +351,7 @@ export class ProfileComponent implements OnInit {
 
   onFileChange(event) {
     //console.log(event);
-     this.files = event.target.files;
+    this.files = event.target.files;
     if (this.files.length === 0)
       return;
 
@@ -321,14 +377,17 @@ export class ProfileComponent implements OnInit {
     formData.append('profile_image', this.files[0], this.files[0].name);
     formData.append('id', this.id);
     //console.log(formData);
+    this.showLoadingIndicator = true;
     this.authService.uploadProfile_Image(formData).subscribe(
       data => {
         //console.log(data);
+        this.showLoadingIndicator = false;
         this.toastr.success(data.message);
         setTimeout('window.location.reload()', 2000);
-        
+
       },
       err => {
+        this.showLoadingIndicator = false;
         //console.log(err);
       }
     );

@@ -160,14 +160,14 @@ export class UpdateSalesPropertyComponent implements OnInit {
       bedroom: new FormControl('', Validators.required),
       bathroom: new FormControl('', Validators.required),
       balconies: new FormControl('', Validators.required),
-      additional_rooms_status: new FormControl('0', Validators.required),
+      additional_rooms_status: new FormControl('0'),
       additional_rooms: new FormControl(''),
       furnishings: new FormControl(''),
       furnishing_status: new FormControl('NFR'),
-      facing_towards: new FormControl(''),
+      facing_towards: new FormControl('', Validators.required),
       rera_registration_status: new FormControl('', Validators.required),
-      additional_parking_status: new FormControl('0', Validators.required),
-      buildyear: new FormControl('', Validators.required),
+      additional_parking_status: new FormControl('0'),
+      buildyear: new FormControl(''),
       availability_condition: new FormControl(''),
       possession_by: new FormControl(''),
       property_on_floor: new FormControl(''),
@@ -178,14 +178,14 @@ export class UpdateSalesPropertyComponent implements OnInit {
 
     Property_price_images: new FormGroup({
       ownership: new FormControl('', Validators.required),
-      expected_pricing: new FormControl('', Validators.required),
+      expected_pricing: new FormControl('500001', Validators.required),
       // security_deposit: new FormControl('', Validators.required),
       inc_electricity_and_water_bill: new FormControl(''),
-      tax_govt_charge: new FormControl(''),
+      tax_govt_charge: new FormControl('', Validators.required),
       price_negotiable: new FormControl(''),
       negotiable_status: new FormControl('0'),
       maintenance_charge_status: new FormControl('0'),
-      month_of_notice: new FormControl(''),
+      // month_of_notice: new FormControl(''),
       maintenance_charge: new FormControl(''),
       // inclusive_pricing_details: new FormControl(''),
       // brokerage_charges: new FormControl(''),
@@ -952,6 +952,9 @@ Expected_Price(event: number){
   }
 }
 onSubmitsales(): void { 
+  if (this.update_property_sales.invalid) {
+    return;
+  }
   // console.log(this.update_property_sales.value);
   if(this.update_property_sales.value.Property_price_images.expected_pricing>=500000 && this.update_property_sales.value.Property_price_images.expected_pricing<=50000000){
     this.authService.product_sales_update(this.update_property_sales.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(

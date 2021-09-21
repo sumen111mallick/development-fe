@@ -24,8 +24,10 @@ export class RegisterComponent implements OnInit {
   imgData: any
   image;
   number: string;
-  showLoadingIndicator: boolean = false;
-  select_type: string;					  
+  public showLoadingIndicator: boolean =false;
+  select_type: string;	
+  public email_id: any;	
+  public first_name: any;			  
 
   constructor(private titleService: Title,
     private authService: AuthService) { }
@@ -45,6 +47,8 @@ export class RegisterComponent implements OnInit {
           this.isSuccessful = true;
           this.isSignUpFailed = false;
           this.number = this.form.other_mobile_number;
+          this.email_id = this.form.email;
+          this.first_name = this.form.firstName;
           this.verify = true;
           //console.log(this.number);
           this.showLoadingIndicator = false;
@@ -63,17 +67,20 @@ export class RegisterComponent implements OnInit {
 
   onSubmitotp(): void {
     {
-      this.authService.verify(this.number, this.otp.password).subscribe(
+      this.showLoadingIndicator = true;
+      this.authService.verify(this.number, this.otp.password, this.email_id, this.first_name).subscribe(
 
         data => {
           //console.log(data);
           this.isVerified = true;
           this.verify = false;
+          this.showLoadingIndicator = false;
         },
         err => {
           this.errorMessage = err.error.message;
           this.verify = true;
           this.isFailedVerify = true;
+          this.showLoadingIndicator = false;
           //console.log(err);
         }
       );

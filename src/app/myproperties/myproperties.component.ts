@@ -14,7 +14,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class MypropertiesComponent implements OnInit {
 
-  showLoadingIndicator :boolean= false;
+  public showLoadingIndicator: boolean =false;
   content: [];
   public draft_pro_data:any=[];
   public solid_pro_data:any=[];
@@ -65,6 +65,7 @@ export class MypropertiesComponent implements OnInit {
       },
       err => {
         //console.log(err)
+       this.showLoadingIndicator = false;
       }
     )
   }
@@ -113,6 +114,7 @@ export class MypropertiesComponent implements OnInit {
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
   }
@@ -122,9 +124,11 @@ export class MypropertiesComponent implements OnInit {
         data => {
           //console.log(data);
           this.Myproperty();
+          this.showLoadingIndicator = false;
         },
         err => {
           //console.log(err)
+          this.showLoadingIndicator = false;
         }
       );
   }

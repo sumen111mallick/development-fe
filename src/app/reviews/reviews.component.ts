@@ -16,6 +16,7 @@ export class ReviewsComponent implements OnInit {
   content: [];
   ftpstring: string = GlobalConstants.ftpURL;
   usertype;
+  public showLoadingIndicator: boolean =false;
 
   constructor(
     private titleService: Title,
@@ -26,6 +27,7 @@ export class ReviewsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.titleService.setTitle('My Properties');
     this.usertype = this.tokenStorage.getUser().usertype;
 
@@ -33,25 +35,31 @@ export class ReviewsComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
+        this.showLoadingIndicator = false;
+        
         //console.log(data);
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
 
   }
 
   del_func(id){
+    this.showLoadingIndicator = true;
     {this.authService.property_delete(id).subscribe(
 
         data => {
           //console.log(data)
+          this.showLoadingIndicator = false;
           window.location.reload();
         },
         err => {
           //console.log(err)
+          this.showLoadingIndicator = false;
         }
       );
     }

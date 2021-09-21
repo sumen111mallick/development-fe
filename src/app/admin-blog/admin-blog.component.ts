@@ -23,7 +23,7 @@ export class AdminBlogComponent implements OnInit {
   total_pages;
   returnedPosts;
   response;
-  showLoadingIndicator;
+  public showLoadingIndicator: boolean =false;
   closeResult: string;
   isLoggedIn = false;
 

@@ -194,7 +194,7 @@ export class UsercreatorComponent implements OnInit {
     this.companyVisible = true;
   }
 
-  onSubmitotp(): void {
+  /*onSubmitotp(): void {
     {this.authService.verify(this.number, this.otp.password ).subscribe(
 
       data => {
@@ -210,7 +210,7 @@ export class UsercreatorComponent implements OnInit {
         }
       );
     }
-  }
+  }*/
 
 
 

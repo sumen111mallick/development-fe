@@ -15,6 +15,7 @@ export class AdminloanComponent implements OnInit {
   usertype: number;
   content;
   form: any = {};
+  public showLoadingIndicator: boolean =false;
 
   constructor(
     private authService: AuthService,
@@ -24,6 +25,7 @@ export class AdminloanComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.title.setTitle('Loan Control');
     this.usertype = this.tokenService.getUser().usertype;
 
@@ -31,24 +33,29 @@ export class AdminloanComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data;
+        this.showLoadingIndicator = false;
         //console.log(data.data);
 
       },
       err => {
         //console.log(err)
+        this.showLoadingIndicator = false;
       }
     )
 
   }
 
   del_func(id): void{
+    this.showLoadingIndicator = true;
     {this.authService.admin_loan_delete(id).subscribe(
         data => {
           //console.log(data)
+          this.showLoadingIndicator = false;
           window.location.href=GlobalConstants.siteURL+"adminloan"
         },
         err => {
           //console.log(err)
+          this.showLoadingIndicator = false;
         }
       )
     }
@@ -56,13 +63,16 @@ export class AdminloanComponent implements OnInit {
 
   onSubmit(): void {
       //console.log(this.form)
+      this.showLoadingIndicator = true;
       this.authService.admin_loans(this.form).subscribe(
         data => {
           //console.log(data)
+          this.showLoadingIndicator = false;
           window.location.href=GlobalConstants.siteURL+"adminloan"
         },
         err => {
           //console.log(err.error);
+          this.showLoadingIndicator = false;
         }
       );
   }

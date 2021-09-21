@@ -14,6 +14,7 @@ export class AdmingetrequirementsComponent implements OnInit {
   usertype: number;
   content;
   form: any = {};
+  public showLoadingIndicator: boolean =false;
 
   constructor(
     private authService: AuthService,
@@ -23,6 +24,7 @@ export class AdmingetrequirementsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.showLoadingIndicator = true;
     this.title.setTitle('Lawyer Services');
     this.usertype = this.tokenService.getUser().usertype;
 
@@ -30,22 +32,27 @@ export class AdmingetrequirementsComponent implements OnInit {
       (data: any) => {
 
         this.content = data.data.data;
+        this.showLoadingIndicator = false;
         //console.log(data.data.data);
 
       },
       err => {
+        this.showLoadingIndicator = false;
        // console.log(err)
       }
     )
   }
 
   del_func(id): void{
+    this.showLoadingIndicator = true;
     {this.authService.requirement_delete(id).subscribe(
         data => {
           //console.log(data)
+          this.showLoadingIndicator = false;
           window.location.reload();
         },
         err => {
+          this.showLoadingIndicator = false;
           //console.log(err)
         }
       )
@@ -53,11 +60,14 @@ export class AdmingetrequirementsComponent implements OnInit {
   }
 
   user_func(id): void{
+    this.showLoadingIndicator = true;
     {this.authService.requirement_delete(id).subscribe(
         data => {
+          this.showLoadingIndicator = false;
           //console.log(data)
         },
         err => {
+          this.showLoadingIndicator = false;
           //console.log(err)
         }
       )

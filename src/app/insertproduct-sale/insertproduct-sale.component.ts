@@ -27,14 +27,14 @@ export class InsertproductSaleComponent implements OnInit {
   isFormSubmitted = false;
   public errorMessage: any = {};
   roles: string[] = [];
-  showLoadingIndicator: boolean = false;
+  public showLoadingIndicator: boolean = false;
   saleValue: boolean = true;
   rentValue: boolean = false;
   furnish: boolean = false;
   maintenance: boolean = true;
   parking_row: boolean = false;
   amenityArray = [];
-  additional_room_array=[];
+  additional_room_array = [];
   varAmenity: string;
   public step: any = 1;
 
@@ -45,7 +45,7 @@ export class InsertproductSaleComponent implements OnInit {
 
   content: any = {};
   user_id: any = {};
-  public draft_form_id:any;
+  public draft_form_id: any;
 
   err_caused: boolean = false;
   selectedItems: string[];
@@ -69,8 +69,8 @@ export class InsertproductSaleComponent implements OnInit {
   bedroom: any;
   bathroom: any;
   balconies: any;
-  additional_rooms:[];
-  additional_rooms_status:any;
+  additional_rooms: [];
+  additional_rooms_status: any;
   furnishing_status: any;
   furnishings: any;
   total_floors: any;
@@ -81,14 +81,14 @@ export class InsertproductSaleComponent implements OnInit {
   possession_by: any;
   tax_govt_charge: any;
   price_negotiable: any;
-  negotiable_status:any;
+  negotiable_status: any;
   facing_towards: any;
   availability_condition: any;
   buildyear: any;
   age_of_property: any;
   description: any;
   nearby_places: any;
-  addtional_room:any=[]
+  addtional_room: any = []
   features: any;
   i: any;
   public property_type: any;
@@ -96,27 +96,29 @@ export class InsertproductSaleComponent implements OnInit {
   product_img: any = [];
   public submitted: boolean = false;
   public Expected_PriceEroor: boolean = false;
-  public Add_room_tab:boolean=false;
-  public furnish_row:boolean=false;
-  public price_negotiable_row:boolean=false;
-  public maintenance_row:boolean=false;
+  public Add_room_tab: boolean = false;
+  public furnish_row: boolean = false;
+  public price_negotiable_row: boolean = false;
+  public maintenance_row: boolean = false;
 
   dropdownSettings: IDropdownSettings;
   dropdownList = [];
 
+  public response: any;
+
   insert_property_sales = new FormGroup({
     Property_Details: new FormGroup({
-      build_name: new FormControl(''),
-      type: new FormControl(''),
+      build_name: new FormControl('', Validators.required),
+      type: new FormControl('', Validators.required),
       // display_address: new FormControl('', Validators.required),
-      area: new FormControl(''),
+      area: new FormControl('', Validators.required),
       draft_form_id: new FormControl(''),
-      area_unit: new FormControl(''),
-      property_detail: new FormControl(''),
+      area_unit: new FormControl('', Validators.required),
+      property_detail: new FormControl('', Validators.required),
     }),
 
     Property_Location: new FormGroup({
-      address: new FormControl(''),
+      address: new FormControl('', Validators.required),
       map_latitude: new FormControl('', Validators.required),
       map_longitude: new FormControl('', Validators.required),
       city: new FormControl('Delhi', Validators.required),
@@ -129,16 +131,16 @@ export class InsertproductSaleComponent implements OnInit {
       bedroom: new FormControl('', Validators.required),
       bathroom: new FormControl('', Validators.required),
       balconies: new FormControl('', Validators.required),
-      additional_rooms_status: new FormControl('0', Validators.required),
+      additional_rooms_status: new FormControl('0'),
       additional_rooms: new FormControl(''),
       furnishings: new FormControl(''),
       furnishing_status: new FormControl('NFR'),
-      facing_towards: new FormControl(''),
+      facing_towards: new FormControl('', Validators.required),
       rera_registration_status: new FormControl('', Validators.required),
-      additional_parking_status: new FormControl('0', Validators.required),
-      buildyear: new FormControl('', Validators.required),
+      additional_parking_status: new FormControl('0'),
+      buildyear: new FormControl(''),
       availability_condition: new FormControl(''),
-      possession_by: new FormControl(''),
+      possession_by: new FormControl('' ),
       property_on_floor: new FormControl(''),
       total_floors: new FormControl(''),
       parking_covered_count: new FormControl(''),
@@ -150,11 +152,11 @@ export class InsertproductSaleComponent implements OnInit {
       expected_pricing: new FormControl('500001', Validators.required),
       // security_deposit: new FormControl('', Validators.required),
       inc_electricity_and_water_bill: new FormControl(''),
-      tax_govt_charge: new FormControl(''),
+      tax_govt_charge: new FormControl('', Validators.required),
       price_negotiable: new FormControl(''),
       negotiable_status: new FormControl('0'),
       maintenance_charge_status: new FormControl('0'),
-      month_of_notice: new FormControl(''),
+      // month_of_notice: new FormControl(''),
       maintenance_charge: new FormControl(''),
       // inclusive_pricing_details: new FormControl(''),
       // brokerage_charges: new FormControl(''),
@@ -253,7 +255,16 @@ export class InsertproductSaleComponent implements OnInit {
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.user_id = this.tokenStorage.getUser().id;
+      if (this.tokenStorage.getUser().misc) {
+        console.log(this.tokenStorage.getUser());
+        this.user_id = this.tokenStorage.getUser().id;
+      }
+      else {
+        console.log(this.tokenStorage.getUser());
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        this.user_id = this.userDetails.id;
+      }
+      //this.user_id = this.tokenStorage.getUser().id;
       this.maintenance = true;
       this.parking = false;
       this.roles = this.tokenStorage.getUser().username;
@@ -261,18 +272,19 @@ export class InsertproductSaleComponent implements OnInit {
     else {
       this.isLoggedIn = false;
       this.redirect_to_home();
-    } 
-    
+    }
+
     this.selectedItems = new Array<string>();
     this.product_img = new Array<string>();
     this.selected_room = new Array<string>();
-    
+
   }
 
   redirect_to_home(): void {
     window.location.href = GlobalConstants.siteURL = "login"
   }
   getLocation() {
+    this.showLoadingIndicator = true;
     this.userService.getLocationService().then(resp => {
       this.longCus = resp.lng;
       this.latCus = resp.lat;
@@ -280,13 +292,14 @@ export class InsertproductSaleComponent implements OnInit {
         map_latitude: this.latCus,
         map_longitude: this.longCus,
       });
+      this.showLoadingIndicator = false;
     })
   }
-  
+
   markerDragEnd($event: google.maps.MouseEvent) {
     this.latCus = $event.latLng.lat();
     this.longCus = $event.latLng.lng();
-	this.form.map_latitude = this.latCus;
+    this.form.map_latitude = this.latCus;
     this.form.map_longitude = this.longCus;
     this.geoCoder.geocode({ 'location': { lat: this.latCus, lng: this.longCus } }, (results, status) => {
       if (status === 'OK') {
@@ -308,37 +321,43 @@ export class InsertproductSaleComponent implements OnInit {
     });
   }
 
-  get_area():void{
+  get_area(): void {
+    this.showLoadingIndicator = true;
     this.internalUserService.get_areas().subscribe(
       data => {
         // this.dropdownList = data;
         for (let i = 1; i < data.length; i++) {
-          this.dropdownList = this.dropdownList.concat({item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode});
+          this.dropdownList = this.dropdownList.concat({ item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode });
         }
+        this.showLoadingIndicator = false;
       },
       err => {
-        // console.log(err);
-
+        console.log(err);
+        this.showLoadingIndicator = false;
       }
     );
   }
-  
-  onchange_locality(id:any){
+
+  onchange_locality(id: any) {
+    this.showLoadingIndicator = true;
+
     this.authService.get_pincodebyid(id).subscribe(
-      data => {;
+      data => {
         this.insert_property_sales.controls.Property_Location.patchValue({
           pincode: data.data.pincode,
         });
+        this.showLoadingIndicator = false;
       },
       err => {
-        // console.log(err);
-
+        console.log(err);
+        this.showLoadingIndicator = false;
       }
     );
   }
-  
+
 
   amenities(): void {
+    this.showLoadingIndicator = true;
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
         //  console.log(amenitiesdata);
@@ -364,7 +383,7 @@ export class InsertproductSaleComponent implements OnInit {
   }
   onchangeAmenties(e: any, id: string) {
     if (e.target.checked) {
-     // console.log(id + 'Checked');
+      // console.log(id + 'Checked');
       this.selectedItems.push(id);
     } else {
 
@@ -375,19 +394,19 @@ export class InsertproductSaleComponent implements OnInit {
     //console.log(this.amenityArray);
 
   }
-  onchange_add_room(event:any){
-    if(event==1){
-      this.Add_room_tab=true;
-    }else{
-      this.Add_room_tab=false;
+  onchange_add_room(event: any) {
+    if (event == 1) {
+      this.Add_room_tab = true;
+    } else {
+      this.Add_room_tab = false;
     }
   }
   furnishStatus(event): void {
     if (event == 'FFR') {
-      this.furnish_row=true;
+      this.furnish_row = true;
     }
     else {
-      this.furnish_row=false;
+      this.furnish_row = false;
     }
   }
   parkingStatus(event): void {
@@ -397,7 +416,7 @@ export class InsertproductSaleComponent implements OnInit {
     else {
       this.parking_row = false;
     }
-   }
+  }
   price_negotiable_status(event): void {
     if (event == 1) {
       this.price_negotiable_row = true;
@@ -406,7 +425,7 @@ export class InsertproductSaleComponent implements OnInit {
       this.price_negotiable_row = false;
     }
   }
-  
+
   maintenanceStatus(event): void {
     if (event == 1) {
       this.maintenance_row = true;
@@ -565,16 +584,19 @@ export class InsertproductSaleComponent implements OnInit {
   }
 
   Property_type_data(): void {
+    this.showLoadingIndicator = true;
     this.userService.get_property_type().pipe().subscribe(
       (data: any) => {
         //  console.log(amenitiesdata);
         this.property_type = data.data;
         this.property_type_result = this.property_type;
+        this.showLoadingIndicator = false;
         //console.log(this.property_type_result);
         //console.log(this.content);
       },
       err => {
         this.content = JSON.parse(err.error).message;
+        this.showLoadingIndicator = false;
       }
     );
   }
@@ -601,7 +623,7 @@ export class InsertproductSaleComponent implements OnInit {
     // console.log(this.insert_property_sales.controls['Property_area']['controls']);
     return this.insert_property_sales.controls['Property_additional_details']['controls'];
   }
-  
+
   get Property_Pricing() {
     // console.log(this.insert_property_sales.controls['Property_Pricing']['controls']);
     return this.insert_property_sales.controls['Property_price_images']['controls'];
@@ -612,14 +634,20 @@ export class InsertproductSaleComponent implements OnInit {
   }*/
 
   onSubmitSale(): void {
+    if (this.insert_property_sales.invalid) {
+      return;
+    }
+    this.showLoadingIndicator = true;
     if (this.insert_property_sales.value.Property_price_images.expected_pricing >= 500000 && this.insert_property_sales.value.Property_price_images.expected_pricing <= 50000000) {
       this.authService.product_insert_sale(this.insert_property_sales.value, this.user_id, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
         data => {
-         this.Message =data.message;
-         this.toastr.success('Successfuly Saved', 'Property Sales');
-          // window.location.href = GlobalConstants.siteURL + "myproperties"
+          this.Message = data.message;
+          this.showLoadingIndicator = false;
+          this.toastr.success('Successfuly Saved', 'Property Sales');
+          window.location.href = GlobalConstants.siteURL + "myproperties"
         },
         err => {
+          this.showLoadingIndicator = false;
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.errorMessage1 = err.error.message;
@@ -630,6 +658,7 @@ export class InsertproductSaleComponent implements OnInit {
         }
       );
     } else {
+      this.showLoadingIndicator = false;
       this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
         timeOut: 2000,
       });
@@ -641,12 +670,12 @@ export class InsertproductSaleComponent implements OnInit {
     if (this.insert_property_sales.value.Property_price_images.expected_pricing >= 500000 && this.insert_property_sales.value.Property_price_images.expected_pricing <= 50000000) {
       this.authService.draft_insert_sale(this.insert_property_sales.value, this.user_id, this.additional_room_array, this.amenityArray, this.product_img).subscribe(
         data => {
-        //  console.log(data.last_id);
-         this.draft_form_id=data.last_id;
-         this.insert_property_sales.controls.Property_Details.patchValue({
-          draft_form_id: data.last_id,
-        });          
-          this.Message =data.message;
+          //  console.log(data.last_id);
+          this.draft_form_id = data.last_id;
+          this.insert_property_sales.controls.Property_Details.patchValue({
+            draft_form_id: data.last_id,
+          });
+          this.Message = data.message;
           this.toastr.info(this.Message, 'Property Error', {
             timeOut: 3000,
           });
@@ -654,6 +683,7 @@ export class InsertproductSaleComponent implements OnInit {
           // window.location.href = GlobalConstants.siteURL + "myproperties"
         },
         err => {
+          this.showLoadingIndicator = false;
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.errorMessage1 = err.error.message;
@@ -663,6 +693,7 @@ export class InsertproductSaleComponent implements OnInit {
         }
       );
     } else {
+      this.showLoadingIndicator = false;
       this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
         timeOut: 2000,
       });
@@ -686,27 +717,25 @@ export class InsertproductSaleComponent implements OnInit {
     this.insert_property_sales.controls.Property_price_images.patchValue({
       expected_pricing: event,
     });
-    if (event <500000 || event >50000000) {
+    if (event < 500000 || event > 50000000) {
       this.Expected_PriceEroor = true;
     } else {
       this.Expected_PriceEroor = false;
+    }
+  }
+rangeInput_Price(event: number) {
+    this.expected_pricing=event;
+    if(event<500000 || event>50000000){
+      this.Expected_PriceEroor=true;
+    }else{
+      this.Expected_PriceEroor=false;
     }
   }
 
-  rangeInput_Price(event: number) {
-    // this.expected_pricing=500001;
-    this.insert_property_sales.controls.Property_price_images.patchValue({
-      expected_pricing: event,
-    });
-    if (event <500000 || event >50000000) {
-      this.Expected_PriceEroor = true;
-    } else {
-      this.Expected_PriceEroor = false;
-    }
-  }
+
 
   Expected_Price(event: number) {
-    if (event >500000 && event <50000000) {
+    if (event > 500000 && event < 50000000) {
     } else {
       this.toastr.error("Expected Price Between 5Lakhs to 5 Crore", 'Price Invalid..!!', {
         timeOut: 1500,
@@ -728,5 +757,24 @@ export class InsertproductSaleComponent implements OnInit {
     window.location.reload();
   }
 
+  crm_api_call() {
+    this.controls = this.insert_property_sales.get('Property_Details');
+    if (this.controls.valid) {
+      console.log("Valid");
+      console.log(this.controls);
+      this.authService.crm_call(this.user_id).subscribe(
+        data => {
+          this.response = data;
+        },
+        err => {
+          this.response = err;
+        }
+      );
+    }
+    else {
+      console.log("Invalid");
+    }
+
+  }
 
 }

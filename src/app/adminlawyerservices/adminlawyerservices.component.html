@@ -30,7 +30,9 @@
   <div class="wrapper">
 
     <!--<app-admindashtopbar></app-admindashtopbar>-->
-
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
     <section class="our-dashbord dashbord bgc-f7 pb50">
       <div class="container-fluid">
         <div class="row">
@@ -49,7 +51,7 @@
                   <p>We are glad to see you again!</p>
                 </div>
               </div>
-              
+
               <div class="col-lg-12">
                 <div class="my_dashboard_review mb40">
                   <div class="property_table">
@@ -85,9 +87,11 @@
                             <td>
                               <ul class="view_edit_delete_list mb0">
                                 <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                  <a (click)="view_func(number.user_id)"><span class="flaticon-user"></span></a></li>
+                                  <a (click)="view_func(number.user_id)"><span class="flaticon-user"></span></a>
+                                </li>
                                 <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                  <a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a></li>
+                                  <a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a>
+                                </li>
                               </ul>
                             </td>
                           </tr>
