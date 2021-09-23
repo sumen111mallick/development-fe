@@ -2634,7 +2634,8 @@ input.amount4:focus{
   border: 1px solid #ebebeb;
   height: 50px;
   line-height: 35px;
-  width: 180px;
+  /*width: 180px;*/
+  width: 100%;
 }
 .home1-advnc-search.home5 .search_option_two .dropdown.bootstrap-select>.dropdown-toggle{
   width: 100%;
@@ -11883,7 +11884,7 @@ a.btn.btn_error{
 .propertyListingPage .btn{
   padding: 0px 15px!important;
 }
-.propertyListingPage  .owl-nav{ 
+.propertyListingPage .owl-nav{ 
   position: absolute;
   width: 100%;
   top: 40%;
@@ -11915,6 +11916,73 @@ a.btn.btn_error{
   font-size: 20px!important;
   font-weight: 800;
 }
+#feature-property  .propertyListingPage .owl-nav{ 
+  position: absolute;
+  top: -65px;
+  height: 30px;
+  z-index: 9999!important;
+  padding: 0px 45px;
+  display: flex;
+  justify-content: flex-end!important;
+  align-items: center!important;
+  right: 5%!important;
+  margin: 0px!important;
+}
+#feature-property  .propertyListingPage .owl-theme .owl-nav .outer_slider{
+  background: #ff5a5f !important;
+  padding: 6px 15px!important;
+  border-radius: 8px!important;
+  color: #fff!important;
+}
+#feature-property  .propertyListingPage .owl-theme .owl-nav .outer_slider i{
+  font-size: 15px!important;
+  font-weight: 600;
+}
+.featured_property_heading{
+  margin-bottom: 25px!important;
+}
+
+#feature-property  .propertyListingPage .home_page_slider .owl-nav{ 
+  position: absolute!important;
+  width: 100%;
+  top: 40%!important;
+  height: 30px;
+  z-index: 9999!important;
+  padding: 0px 45px;
+  background-color: transparent!important;
+  display: flex;
+  justify-content: space-between!important;
+  align-items: center!important;
+  right: 0px!important;
+}
+#feature-property  .propertyListingPage .home_page_slider .owl-prev{
+  /* margin-left:-90px!important; */
+  transition:.2s all;
+  float: left;
+  background-color: transparent!important;
+  color: #fff!important;
+  font-size: 20px!important;
+  font-weight: 800;
+}
+#feature-property  .propertyListingPage .home_page_slider .owl-next{
+  /* margin-right:-90px!important; */
+  transition:.2s all;
+  float: right;
+  background-color: transparent!important;
+  color: #fff!important;
+  font-size: 20px!important;
+  font-weight: 800;
+}
+#feature-property .propertyListingPage .home_page_slider .thumb{
+  width: 100%!important;
+  height: 250px!important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0,0,0,0.5)!important;
+}
+
 
 .feat_property:hover .owl-prev{
   margin-left: 0px!important;
@@ -11934,6 +12002,7 @@ a.btn.btn_error{
   font-weight: 800;
   z-index: 10000000!important;
 }
+.propertyListingPage _ngcontent-fop-c131 
 .propertyListingPage .feat_property.home7.style4 .thumb{
   height: 250px!important;
   position: absolute!important;
@@ -12797,6 +12866,18 @@ a.btn.btn_error{
   top: 10px;
   width: 35px;
 }
+.portfolio_item .edu_stats_list:hover{
+  border-radius: 8px;
+  background-color: rgb(255, 90, 95);
+  cursor: pointer;
+  height: 35px;
+  line-height: 35px;
+  position: absolute;
+  right: 10px;
+  text-align: center;
+  top: 10px;
+  width: 35px;
+}
 .portfolio_item .edu_stats_list span{
   color: rgb(255, 255, 255);
 }
@@ -13567,7 +13648,7 @@ a.btn.btn_error{
 .btn-thm:focus{
   background-color: #ffffff;
   border-color: #ff5a5f;
-  color: #ff5a5f; }
+  color: #ff5a5f !important; }
 
 .btn-thm.white:hover,
 .btn-thm.white:active,
@@ -16643,8 +16724,14 @@ button.gm-ui-hover-effect:focus {
   .home1_adsrchfrm ul{
     width: 102%!important;
   }
-  .feature-property_home .owl-carousel.owl-drag .owl-item{
-    width:380px!important;
+  .feature-property_home .owl-carousel .owl-item .home_page_slider{
+    width:375px!important;
+  }
+  /* .feature-property_home .owl-carousel .owl-item{
+    width:375px!important;
+  }   */
+  .feature-property_home .home_page_slider .owl-responsive{
+    height: 250px!important;
   }
   .feature-property_home .feat_property{
     height: 520px!important;
@@ -16775,9 +16862,28 @@ button.gm-ui-hover-effect:focus {
   .feature-property_home  .feat_property .details .tc_content{
     padding: 10px 15px!important;
   }
-  .feature-property_home .owl-carousel .owl-stage-outer{
-    height: 540px!important;
+  .feature-property_home .owl-carousel .owl-item .home_page_slider{
+    width:360px!important;
   }
+  #feature-property  .propertyListingPage .owl-nav{ 
+    position: relative;
+    height: 30px;
+    z-index: 9999!important;
+    padding: 0px 45px;
+    display: flex;
+    top: 0px!important;
+    right: 0px!important;
+    justify-content: center!important;
+    align-items: center!important;
+    margin: 20px 0px 25px 0px!important;
+  }
+  /* .feature-property_home .owl-carousel .owl-stage-outer{
+    height: 540px!important;
+  } */
+  
+  /* .feature-property_home .propertyListingPage .owl-carousel .owl-stage-outer{
+    height: 240px!important;
+  } */
   .feature-property_home  .feat_property .details .fp_footer{
     padding: 12px 15px!important;
   }
@@ -16792,8 +16898,11 @@ button.gm-ui-hover-effect:focus {
     line-height: 35px;
     width: 100%!important;
   }
-  .my_dashboard_review h2,h3,h4{
+  .my_dashboard_review h2,h3{
     text-align: center!important;
+  }
+  .my_dashboard_review h4{
+    text-align: left!important;
   }
   .my_dashboard_review .flr-520{
     float: none!important;
@@ -16965,7 +17074,11 @@ button.gm-ui-hover-effect:focus {
 }
 .our-agent-single .feat_property .thumb{
   height: 250px!important;
-  overflow: hidden;
+  position: absolute!important;
+  width: 100%;
+  top: 0px;
+  background: rgba(29,41,62,.4)!important;
+  margin: 0px!important;
 }
 
 .our-agent-single .feat_property .thumb img{
@@ -17086,7 +17199,7 @@ button.gm-ui-hover-effect:focus {
   overflow: hidden;
 }
 .our-agent-single .feat_property .thumb{
-  height: 210px!important;
+  height: 250px!important;
   overflow: hidden;
 }
 
@@ -17128,6 +17241,11 @@ button.gm-ui-hover-effect:focus {
 .portfolio_item .edu_stats_list{
   z-index: 1000;
 }
+.portfolio_item .edu_stats_list button{
+  z-index: 100000!important;
+  min-width: 55px!important;
+  background-color: rgb(255, 90, 95)!important;
+}
 .userProfilePage .profile-img_user img{
   width: 250px;
 }
@@ -17156,6 +17274,7 @@ button.gm-ui-hover-effect:focus {
   align-items: center;
   justify-content: center;
   padding: 25px;
+  z-index: 100!important;
 }
 .menu_style_home_one.style2.menu-fixed{
   /*z-index: 1000000;*/
@@ -17224,6 +17343,7 @@ display: flex;
 #user_details ul li img{
   width: 80%;
   border-radius: 25px!important;
+  height: 40px!important;
 }
 .single_page_address h6{
   float: right;
@@ -17706,10 +17826,10 @@ border-radius: 0px!important;
     margin-top: 0px;
   }
   .home_adv_srch_opt{
-    margin-top: 140px !important;
+    margin-top: 180px !important;
   }
   .home-one .home-text {
-    margin-top: 20px !important;
+    margin-top: 50px !important;
   }
   .property_video .thumb .pro_img {
     min-height: 280px!important;
@@ -17742,8 +17862,7 @@ border-radius: 0px!important;
     overflow: hidden;
     position: relative;
     transition: all 0.3s ease;
-    /*height: 510px;*/
-    height: auto;
+    height: 510px;
     margin: 0px 4px
     !important;
   }
@@ -18192,6 +18311,13 @@ border-radius: 0px!important;
   }
   
 }
+.similar_property .propertyListingPage .feat_property.home7.style4 .thumb {
+  height: 250px!important;
+  position: absolute!important;
+  width: 100%;
+  top: 0px;
+  background: rgba(29,41,62,.4)!important;
+}
 .single_page_address h6 a span{
   background: #ff5a5f;
   color: #fff;
@@ -18202,6 +18328,9 @@ border-radius: 0px!important;
 
 #video_link{
   border: 1px solid #ddd!important;
+}
+#user_details .fp_meta{
+  width: 100%;
 }
 
 .mat-menu-item {

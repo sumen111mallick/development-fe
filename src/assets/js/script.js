@@ -1067,5 +1067,4 @@
         // add your functions
     });
 
-
 })(window.jQuery);

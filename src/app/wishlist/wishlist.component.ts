@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
 
 @Component({
   selector: 'app-wishlist',
@@ -67,6 +69,9 @@ export class WishlistComponent implements OnInit {
       this.isLoggedIn = false;
       this.redirect_to_home();
     }
+     this.property_data = new Array<string>();
+
+
   }
 
   // product comaprision functinalty 
@@ -129,6 +134,7 @@ export class WishlistComponent implements OnInit {
       this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) => {
           //console.log(result);
+          this.property_data=[];
           this.showLoadingIndicator = false;
           this.getwishlist();
         },
@@ -186,7 +192,36 @@ export class WishlistComponent implements OnInit {
 
   // property comparision redirect comapre page 
   redirect_to_compare(): void {
-    window.location.href = GlobalConstants.siteURL = "compare"
+    window.location.href=GlobalConstants.siteURL="compare"
+  }
+  
+   // carosule image
+   customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      },
+      1050: {
+        items: 1
+      }
+    },
+    nav: true
   }
 
 }

@@ -219,7 +219,7 @@ import { SplitPipe } from './split.pipe';
     SidenavListComponent,
     DashboardNavComponent,
     ModalComponent,
-    SplitPipe,							
+    SplitPipe,			
   ],
   imports: [
     Ng5SliderModule,

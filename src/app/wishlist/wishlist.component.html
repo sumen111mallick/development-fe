@@ -2,90 +2,93 @@
 <html dir="ltr" lang="en">
 
 <!-- Mirrored from grandetest.com/theme/findhouse-html/page-listing-grid-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:20 GMT -->
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
-<meta name="description" content="FindHouse - Real Estate HTML Template">
-<meta name="CreativeLayers" content="ATFN">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+    content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+  <meta name="description" content="FindHouse - Real Estate HTML Template">
+  <meta name="CreativeLayers" content="ATFN">
 
-<!-- Title -->
-<title>FindHouse - Real Estate HTML Template</title>
-<!-- Favicon -->
-<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
-<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+  <!-- Title -->
+  <title>FindHouse - Real Estate HTML Template</title>
+  <!-- Favicon -->
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
-<div class="wrapper">
-  <div *ngIf="showLoadingIndicator">
-     <div class="preloader"></div>
-  </div>
+  <div class="wrapper">
+    <div *ngIf="showLoadingIndicator">
+      <div class="preloader"></div>
+    </div>
 
- <!-- Main Header Nav -->
-<!-- <app-topbardark></app-topbardark> -->
- <!-- Listing Grid View -->
- <!--<app-topbardark-loader></app-topbardark-loader>-->
- <section class="our-listing bgc-f7 pb30-991">
-   <div class="container mt65">
-     <div class="row">
-       <div class="col-lg-12">
-         <div class="listing_sidebar dn db-991">
-           <div class="sidebar_content_details style3">
+    <!-- Main Header Nav -->
+    <!-- <app-topbardark></app-topbardark> -->
+    <!-- Listing Grid View -->
+    <!--<app-topbardark-loader></app-topbardark-loader>-->
+    <section class="our-listing bgc-f7 pb30-991">
+      <div class="container mt65">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="listing_sidebar dn db-991">
+              <div class="sidebar_content_details style3">
 
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="row">
-       <div class="col-lg-6">
-         <div class="breadcrumb_content style2 mb0-991">
-           <ol class="breadcrumb">
-               <li class="breadcrumb-item"><a >Home</a></li>
-               <li class="breadcrumb-item active text-thm" aria-current="page">Wishlist Results</li>
-           </ol>
-           <h2 class="breadcrumb_title">Wishlist Results</h2>
-         </div>
-       </div>
-       <div class="col-lg-6">
-         <div class="listing_list_style mb20-xsd tal-991">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="breadcrumb_content style2 mb0-991">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a>Home</a></li>
+                <li class="breadcrumb-item active text-thm" aria-current="page">Wishlist Results</li>
+              </ol>
+              <h2 class="breadcrumb_title">Wishlist Results</h2>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="listing_list_style mb20-xsd tal-991">
 
-         </div>
+            </div>
 
-       </div>
-     </div>
-     <!-- <div class="row" *ngIf="showLoadingIndicator">
+          </div>
+        </div>
+        <!-- <div class="row" *ngIf="showLoadingIndicator">
       <div class="col-md-12 col-lg-12"  class="loaderClass">
         <div class="preloader1"></div>
       </div>
     </div>  -->
-     <div class="row  wishlist_search_row">
-        <div class="grid_list_search_result wishlist_search_result">
-          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
-            <div class="left_area tac-xsd">
-              <p >{{wishlist_length}} Wishlist  results
+        <div class="row  wishlist_search_row">
+          <div class="grid_list_search_result wishlist_search_result">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="left_area tac-xsd">
+                <p>{{wishlist_length}} Wishlist results
 
-              </p>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-       <div class="col-md-12 col-lg-12">
-         <div class="row">
-<!-- left sidebar code end iqbal -->
+          <div class="col-md-12 col-lg-12 our-agent-single">
+            <div class="row propertyListingPage">
+              <!-- left sidebar code end iqbal -->
 
-<!-- right sidebar code iqbal -->
-          <div class="col-md-12 col-lg-12">
-            <div class="row">
-                <div class="col-md-6 col-lg-4" *ngFor = "let data of wishlistresult">
-                    <div class="feat_property home7 style4">
-                        <div class="thumb">
+              <!-- right sidebar code iqbal -->
+              <div class="col-md-12 col-lg-12">
+                <div class="row">
+                  <div class="col-md-6 col-lg-4" *ngFor="let data of wishlistresult">
+                    <div class="feat_property ">
+                      <!-- <div class="thumb">
                             <div class="fp_single_item_slider owl-carousel owl-theme owl-loaded">
                                 
                               
@@ -106,13 +109,55 @@
                             </div>
                             <div class="thmb_cntnt style3">
                                 <ul class="icon mb0">
-                                    <!-- <li class="list-inline-item" *ngIf="data.productdetails.expected_pricing != null" class="fp_price"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
                                     <li class="list-inline-item"  class="fp_price"><a (click)="wishlist_remove(data.product_id)"><span class="flaticon-fa-heart"></span></a></li>
                                 </ul>
                                 <a *ngIf="data.productdetails.expected_pricing != null" class="fp_price" >Rs.{{Price_convert(data.productdetails.expected_pricing) }}<small></small></a>
                                 <a *ngIf="data.productdetails.expected_rent != null" class="fp_price"  >Rs.{{Price_convert(data.productdetails.expected_rent)}}<small></small></a>
                             </div>
-                        </div>
+                        </div> -->
+                        <owl-carousel-o [options]="customOptions" *ngIf="data.product_img.length>0;else OtherImage">
+                          <ng-template carouselSlide  *ngFor = "let img of data.product_img">
+                            <img class="img-whp"  src="{{ftpstring}}{{img.image}}" alt="img1.jpg">
+                            <div class="thumb">
+                               <div class="thmb_cntnt style2">
+                                <ul class="tag mb0">
+                                  <li class="list-inline-item" *ngIf=" data.productdetails.rent_availability != null"><a >For Rent</a></li>
+                                  <li class="list-inline-item" *ngIf=" data.productdetails.sale_availability != null"><a >For Sale</a></li>
+                                </ul>
+                              </div>
+                              <div class="thmb_cntnt style3">
+                                <ul class="icon mb0">
+                                  <!-- <li class="list-inline-item" *ngIf="data.productdetails.expected_pricing != null" class="fp_price"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
+                                  <li class="list-inline-item"  class="fp_price"><a (click)="wishlist_remove(data.product_id)"><span class="flaticon-fa-heart"></span></a></li>
+                              </ul>
+                                <a *ngIf="data.productdetails.expected_pricing != null" class="fp_price" >₹  {{Price_convert(data.productdetails.expected_pricing)}}<small></small></a>
+                                <a *ngIf="data.productdetails.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(data.productdetails.expected_rent)}}<small></small></a>
+                            </div>
+                            </div>
+                          </ng-template>  
+                        </owl-carousel-o>
+          
+                        <ng-template #OtherImage>
+                          <!-- <div class="thumb"> -->
+                             <img class="img-whp" src="./../../assets/images/no_image_available.jpg" alt="No Product Image" style="height: 250px;">
+                           <!-- </div> -->
+                           <div class="thumb">
+                            <div class="thmb_cntnt style2">
+                             <ul class="tag mb0">
+                               <li class="list-inline-item" *ngIf=" data.productdetails.rent_availability != null"><a >For Rent</a></li>
+                               <li class="list-inline-item" *ngIf=" data.productdetails.sale_availability != null"><a >For Sale</a></li>
+                             </ul>
+                           </div>
+                           <div class="thmb_cntnt style3">
+                            <ul class="icon mb0">
+                              <!-- <li class="list-inline-item" *ngIf="data.productdetails.expected_pricing != null" class="fp_price"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
+                              <li class="list-inline-item"  class="fp_price"><a (click)="wishlist_remove(data.product_id)"><span class="flaticon-fa-heart"></span></a></li>
+                            </ul>
+                             <a *ngIf="data.productdetails.expected_pricing != null" class="fp_price" >₹  {{Price_convert(data.productdetails.expected_pricing)}}<small></small></a>
+                             <a *ngIf="data.productdetails.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(data.productdetails.expected_rent)}}<small></small></a>
+                         </div>
+                         </div>
+                        </ng-template>
                         <div class="details">
                             <a href="/productpage?id={{data.productdetails.id}}">
                             <div class="tc_content">
@@ -140,6 +185,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
           </div>
@@ -161,4 +207,5 @@
 
 <router-outlet></router-outlet>
 <!-- Mirrored from grandetest.com/theme/findhouse-html/page-listing-grid-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:30 GMT -->
+
 </html>

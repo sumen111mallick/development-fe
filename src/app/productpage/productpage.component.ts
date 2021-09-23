@@ -14,6 +14,7 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-productpage',
@@ -652,6 +653,35 @@ feature_property(){
   // property comparision redirect comapre page 
   redirect_to_compare(): void {
     window.location.href=GlobalConstants.siteURL="compare"
+  }
+  
+   // carosule image
+   customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      },
+      1050: {
+        items: 1
+      }
+    },
+    nav: true
   }
 
 }

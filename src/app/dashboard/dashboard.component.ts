@@ -16,8 +16,10 @@ export class DashboardComponent implements OnInit {
   id: number;
   content: [] ;
   data: [] ;
-  view_count;
-  property_count
+  public view_count:number=0;
+  public property_count:number=0;
+  public wishlist_count:number=0;
+  public solid_Lenght:number=0;
   public showLoadingIndicator: boolean =false;
 
   constructor(
@@ -31,6 +33,7 @@ export class DashboardComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.titleService.setTitle('Dashboard');
     this.name = this.tokenStorage.getUser().username;
+    this.property_solid();
 
     if(this.tokenStorage.getUser().usertype == 11) {
       window.location.href=GlobalConstants.siteURL + "adminpanel";
@@ -45,6 +48,7 @@ export class DashboardComponent implements OnInit {
         this.data = data;
         this.view_count = data['view_count'];
         this.property_count = data['property_count'];
+        this.wishlist_count =data['wishlist_count'];
         this.showLoadingIndicator = false;
         //console.log(data);
 
@@ -56,5 +60,19 @@ export class DashboardComponent implements OnInit {
     )
 
   }
+  property_solid(){
+    this.userService.getproperties_solid().pipe().subscribe(
+      (data: any) => {
+        this.solid_Lenght=data.data.length;
+        console.log(this.solid_Lenght);
+
+      },
+      err => {
+        //console.log(err)
+      });
+
+  }
 
 }
+
+

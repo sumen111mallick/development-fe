@@ -20,6 +20,7 @@ import { stringify } from '@angular/compiler/src/util';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   [x: string]: any;
   currentUser: any;
   currentUserid: any;
@@ -41,15 +42,15 @@ export class HomeComponent implements OnInit {
   e: any={};
 
   options: Options = {
-    step:100,
-    floor: 1,
+    step:1000,
+    floor: 5000,
     ceil: 500000,
     translate: (value: number, label: LabelType): string => {
       return '₹' + value.toLocaleString('en');
     },
   };
   options_sales: Options = {
-    step:500,
+    step:5000,
     floor: 500000,
     ceil: 50000000,
     translate: (value: number, label: LabelType): string => {
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit {
   Bathrooms:any;
   Bedrooms:any;
   availability_condition:any;
-  area_unit:any;
+  area_unit:any = 'sq.ft.';
   Years:number;
   Minimum:number=0;
   Maximum:number=500000;
@@ -516,12 +517,14 @@ wishlist_info(){
   }
 // carosule image
 customOptions: OwlOptions = {
-  loop:false,
+  loop:true,
   dots:true,
-  autoplay:false,
-  autoplayTimeout:4000,
+  // autoplay:false,
+  // autoplayTimeout:8000,
   // items:3,
-  autoplayHoverPause:true,
+  // autoplayHoverPause:true,
+  navSpeed: 700,
+  navText: ['<span class="outer_slider"><i class="fas fa-arrow-left"></i></span>', '<span class="outer_slider"><i class="fas fa-arrow-right"></i></span>'],
   responsive: {
     0: {
       items: 1
@@ -542,7 +545,37 @@ customOptions: OwlOptions = {
       items: 3
     }
   },
-  nav: false
+  nav:true
 }  
+ // carosule image
+ customOptions_inner: OwlOptions = {
+  loop: true,
+  mouseDrag: false,
+  touchDrag: false,
+  pullDrag: false,
+  autoplay:false,
+  dots: false,
+  navSpeed: 700,
+  navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
+  responsive: {
+    0: {
+      items: 1
+    },
+    400: {
+      items: 1
+    },
+    740: {
+      items: 1
+    },
+    940: {
+      items: 1
+    },
+    1050: {
+      items: 1
+    }
+  },
+  nav: true
+}
+
 
 }
