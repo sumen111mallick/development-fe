@@ -87,7 +87,7 @@ export class CompareComponent implements OnInit {
         const unique = this.product_amenties.filter(item => !expected.has(JSON.stringify(item)) ? expected.add(JSON.stringify(item)) : false);
         this.unique_ameties=unique;
         // console.log(this.unique_ameties);
-        this.amenities();
+        this.product_amenities();
         this.pro_comp_refresh();
          if(this.property_comp_length <2){
             this.toastr.warning('Comparision Minimun Two','Property', {
@@ -103,7 +103,7 @@ export class CompareComponent implements OnInit {
       }
     );
   }
-  amenities(): void{
+  product_amenities(): void{
     this.showLoadingIndicator = true;
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
@@ -154,10 +154,13 @@ export class CompareComponent implements OnInit {
     this.authService.pro_comp_delete(id).subscribe(
         data => {
         //console.log(data); 
+        this.toastr.error('Remove Compare Property','Property', {
+          timeOut: 4000,
+        });
         this.pro_comp();
         // this.showLoadingIndicator = false;
         this.showLoadingIndicator = false;
-        window.location.href=GlobalConstants.siteURL="compare"
+        //window.location.href=GlobalConstants.siteURL="compare"
         },
         err => {
           //console.log(err)

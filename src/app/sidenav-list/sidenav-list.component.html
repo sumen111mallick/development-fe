@@ -17,7 +17,10 @@
     <a *ngIf="isLoggedIn" mat-list-item routerLink="/Wishlist" (click)="onSidenavClose()">
         <span matBadge={{wishlist_length}} matBadgeOverlap="false" matBadgeColor="warn"><mat-icon>favorite</mat-icon></span>
     </a>
-    <a *ngIf="isLoggedIn" mat-list-item routerLink="/compare" (click)="onSidenavClose()">
+    <a *ngIf="isLoggedIn && property_comp_length > 1" mat-list-item routerLink="/compare" (click)="onSidenavClose()">
+        <span matBadge={{property_comp_length}} matBadgeOverlap="false" matBadgeColor="warn"><mat-icon>compare_arrows</mat-icon></span>
+    </a>
+    <a *ngIf="isLoggedIn && property_comp_length < 2" mat-list-item (click)="compare_notification()">
         <span matBadge={{property_comp_length}} matBadgeOverlap="false" matBadgeColor="warn"><mat-icon>compare_arrows</mat-icon></span>
     </a>
     <a mat-list-item routerLink="/insertproduct" (click)="onSidenavClose()">

@@ -77,10 +77,10 @@
        </div>
      </div>
      <div class="row wrapper_row_listing_page">
-       <div class="col-lg-4 col-xl-4" *ngIf="deshtop_view == true">
+       <div class="col-lg-4 col-xl-4">
         
         <div class="sidebar_listing_grid1">
-          <div class="sidebar_listing_list hidden-xs hidden-sm">
+          <div class="sidebar_listing_list hidden-xs hidden-sm"  *ngIf="deshtop_view == true">
             <div class="sidebar_advanced_search_widget">
               <ul class="sasw_list mb0">
                 <form  action="#" name="searchForm"  id="searchForm" #searchForm="ngForm">
@@ -123,7 +123,7 @@
                       <div class="dropdown bootstrap-select w100 show-tick">
 									    	<label>Area Unit</label>
                           <select class="selectpicker show-tick form-control" name="area_unit"  [(ngModel)]="form.area_unit" #type="ngModel" id="area_unit">
-                          <option selected="selected" value="">Selcetc Area Unit</option>
+                          <option selected="selected" value="">Select Area Unit</option>
                           <option value="sq.ft.">sq.ft.</option>
                           <option value="sq.yards">sq.yards</option>
                           <option value="sq.m.">sq.m.</option>
@@ -401,7 +401,7 @@
            <div class="grid_list_search_result">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
               <div class="left_area tac-xsd searching-bar">
-                <p>{{Search_data_length}} Properties Searching </p>
+                <p>{{Search_data_length}} Properties <span id="searching-heading">({{property_heading}})</span></p>
                 <p class="hidden-md hidden-lg" (click)="openPopup()">
                   <i class="fas fa-filter"></i>
                 </p>
@@ -590,7 +590,7 @@
                         <div class="dropdown bootstrap-select w100 show-tick">
                           <label>Area Unit</label>
                             <select class="selectpicker show-tick form-control" name="area_unit"  [(ngModel)]="form.area_unit" #type="ngModel" id="area_unit">
-                            <option selected="selected" value="">Selcetc Area Unit</option>
+                            <option selected="selected" value="">Select Area Unit</option>
                             <option value="sq.ft.">sq.ft.</option>
                             <option value="sq.yards">sq.yards</option>
                             <option value="sq.m.">sq.m.</option>

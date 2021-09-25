@@ -62,25 +62,23 @@
 									id="pills-tabContent">
 									<div class="tab-pane fade show active" id="pills-home" role="tabpanel"
 										aria-labelledby="pills-home-tab">
-										<form class="home1-advnc-search" action="#" name="searchHome" id="searchhome"
-											#searchhome="ngForm">
+										<form [formGroup]="searchForm" class="home1-advnc-search" action="#"
+											name="searchHome" id="searchhome" #searchhome="ngForm">
 											<div class="row">
 												<div class="col-lg-2 col-md-4 col-sm-12">
 													<div class="form-group">
 														<input type="hidden" class="form-control" id="search_type"
-															name="search_type" [(ngModel)]="form.search_type"
-															#search_type="ngModel">
-														<input type="text" class="form-control" name="build_name"
-															[(ngModel)]="form.build_name" #build_name="ngModel"
-															id="build_name" placeholder="Enter keywords...">
+															name="search_type" formControlName="search_type">
+														<input type="text" class="form-control input-text" name="build_name"
+															formControlName="build_name" id="build_name"
+															placeholder="Enter keywords...">
 													</div>
 												</div>
 												<div class="col-lg-2 col-md-4 col-sm-12">
 													<div class="search_option_two">
 														<div class="form-group candidate_revew_select">
 															<select class="selectpicker w100 show-tick form-control"
-																name="type" [(ngModel)]="form.type" #type="ngModel"
-																id="type">
+																name="type" formControlName="type" id="type">
 																<!-- <option  value="" >Select Property Type</option> -->
 																<!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
 																<option value="" disabled>Select Property Type
@@ -125,10 +123,10 @@
 												<div class="col-lg-2 col-md-4 col-sm-12">
 													<div class="form-group">
 														<input type="hidden" class="form-control" name="Location"
-															[(ngModel)]="form.Location" #Location="ngModel"
-															id="Location" placeholder="Location">
+															formControlName="Location" id="Location"
+															placeholder="Location">
 														<input #search autocorrect="off" autocapitalize="off"
-															spellcheck="off" [(ngModel)]="form.Location" type="search"
+															spellcheck="off" formControlName="Location" type="search"
 															class="form-control input-text" placeholder="Enter Address"
 															[ngModelOptions]="{ standalone: true }" />
 														<!--<label class="address_span" for="Location"><span
@@ -145,10 +143,10 @@
 																</ng5-slider>
 																<input type="hidden" class="form-control" id="Minimum"
 																	placeholder="Min Price" name="Minimum"
-																	[(ngModel)]="form.Minimum" #Minimum="ngModel">
+																	formControlName="Minimum">
 																<input type="hidden" class="form-control" id="Maximum"
 																	placeholder="Max Price" name="Maximum"
-																	[(ngModel)]="form.Maximum" #Maximum="ngModel">
+																	formControlName="Maximum">
 
 															</div>
 														</div>
@@ -165,10 +163,10 @@
 																	[options]="options_sales"></ng5-slider>
 																<input type="hidden" class="form-control" id="Minimum"
 																	placeholder="Min Price" name="Minimum"
-																	[(ngModel)]="form.Minimum" #Minimum="ngModel">
+																	formControlName="Minimum">
 																<input type="hidden" class="form-control" id="Maximum"
 																	placeholder="Max Price" name="Maximum"
-																	[(ngModel)]="form.Maximum" #Maximum="ngModel">
+																	formControlName="Maximum">
 																<!-- <option value="Others">Others</option> -->
 															</div>
 														</div>
@@ -223,11 +221,9 @@
 																	<div class="col-lg-12"><label>Bathrooms</label>
 																	</div>
 																	<div class="col-lg-12">
-																		<select class="btn btn-secondary"
-																			name="Bathrooms"
-																			[(ngModel)]="form.Bathrooms"
-																			#Bathrooms="ngModel" id="Bathrooms">
-																			<option value="" selected disabled>Select
+																		<select class="btn btn-thm" name="Bathrooms"
+																			formControlName="Bathrooms" id="Bathrooms">
+																			<option value="" disabled>Select
 																				Bathrooms</option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>
@@ -245,10 +241,10 @@
 																<div class="col-lg-3 col-md-6 col-sm-5">
 																	<div class="col-lg-12"><label>Bedrooms</label></div>
 																	<div class="col-lg-12">
-																		<select class="btn btn-secondary"
-																			name="Bedrooms" [(ngModel)]="form.Bedrooms"
-																			#Bedrooms="ngModel" id="Bedrooms">
-																			<option value="" selected disabled>Select Bedrooms
+																		<select class="btn btn-thm" name="Bedrooms"
+																			formControlName="Bedrooms" id="Bedrooms">
+																			<option value="" selected disabled>Select
+																				Bedrooms
 																			</option>
 																			<option value="1">1</option>
 																			<option value="2">2</option>
@@ -267,10 +263,10 @@
 																	<div class="col-lg-12"><label>Year built</label>
 																	</div>
 																	<div class="col-lg-12">
-																		<select class="btn btn-secondary" name="Years"
-																			[(ngModel)]="form.Years" #Years="ngModel"
-																			id="Years">
-																			<option value="" selected disabled>Select Bulid
+																		<select class="btn btn-thm" name="Years"
+																			formControlName="Years" id="Years">
+																			<option value="" selected disabled>Select
+																				Bulid
 																				Years</option>
 																			<option value="2013">2013
 																			</option>
@@ -297,11 +293,9 @@
 																	<div class="col-lg-12"><label>Area Unit</label>
 																	</div>
 																	<div class="col-lg-12">
-																		<select class="btn btn-secondary"
-																			name="area_unit"
-																			[(ngModel)]="form.area_unit"
-																			#area_unit="ngModel" id="area_unit">
-																			<option disabled value="0" [selected]>
+																		<select class="btn btn-thm" name="area_unit"
+																			formControlName="area_unit" id="area_unit">
+																			<option disabled value="" selected>
 																				Select Area Unit
 																			</option>
 																			<option value="sq.ft.">sq.ft.
@@ -510,15 +504,6 @@
 															class="btn btn-log btn-block btn-thm bg-white text-black-50">Add
 															to compare</button>
 
-
-
-
-
-
-
-
-
-
 													</div>
 													<div class="fp_pdate float-right"
 														*ngIf="number.product_comparision !=null">
@@ -530,115 +515,9 @@
 
 											</div>
 
-
-
-
-
-
-
-
-
 										</div>
 									</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 								</ng-template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 								<!-- </div> -->
 							</ng-container>

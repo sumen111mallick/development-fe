@@ -38,6 +38,12 @@ header {
     background-color: #888 !important;
 }
 
+#build_name {
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem !important;
+    height: 50px !important;
+}
+
 @media (max-width:768px) {
     #accord-div {
         border: none;

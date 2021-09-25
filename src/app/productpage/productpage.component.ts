@@ -164,6 +164,7 @@ export class ProductpageComponent implements OnInit {
           this.product_images=data["product"]["0"].product_img;
           this.product_img_length=this.product_images;
           this.productdata = data["product"];
+          console.log(this.productdata);
           this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";          
           this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.youtube_url);
           
@@ -191,6 +192,7 @@ export class ProductpageComponent implements OnInit {
         this.product_images=data["product"]["0"].product_img;
         this.product_img_length=this.product_images;
         this.productdata = data["product"];
+        console.log(this.productdata);
         this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";            
         this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.youtube_url);
           
@@ -276,11 +278,11 @@ product_comp(id:number){
           this.single_property_data(this.id);
           //console.log(data.data.length);
           if(data.data.length>4){
-            this.toastr.info('Bucket are the Full...!!!', 'Property', {
+            this.toastr.info('Compare Bucket is Full...!!!', 'Property', {
               timeOut: 3000,
             });
           }else{
-            this.toastr.success('Succesfully Added in Bucket...', 'Property', {
+            this.toastr.success('Added To compare Successfully', 'Property', {
               timeOut: 3000,
             });
           }

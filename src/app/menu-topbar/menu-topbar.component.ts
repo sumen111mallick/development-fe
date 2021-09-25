@@ -7,6 +7,7 @@ import { GlobalConstants } from './../global-constants';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommonService } from '../_services/common.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-menu-topbar',
@@ -39,6 +40,7 @@ export class MenuTopbarComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private userService: UserService,
     private router: Router,
+    private toastr: ToastrService,
     private commonService: CommonService) { 
       this.logged_in = this.commonService.getUpdate().subscribe(
         message => {
@@ -123,6 +125,12 @@ export class MenuTopbarComponent implements OnInit {
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
+  }
+  compare_notification():void{
+    this.toastr.info('Minimun Two Property required','Comparison', {
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+    });
   }
 
   log_out() {

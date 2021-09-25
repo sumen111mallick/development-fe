@@ -14,6 +14,8 @@ import { Options,LabelType } from 'ng5-slider';
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { stringify } from '@angular/compiler/src/util';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -67,7 +69,7 @@ export class HomeComponent implements OnInit {
   Bathrooms:any;
   Bedrooms:any;
   availability_condition:any;
-  area_unit:any = 'sq.ft.';
+  area_unit:any;
   Years:number;
   Minimum:number=0;
   Maximum:number=500000;
@@ -89,9 +91,23 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private mapsAPILoader: MapsAPILoader,
     private ngZone:NgZone,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder
   ){
   }
+
+  searchForm = this.formBuilder.group({
+    Bathrooms: [''],
+    Bedrooms: [''],
+    Years: [''],
+    area_unit: [''],
+    search_type: [''],
+    build_name: [''],
+    type: [''],
+    Location: [''],
+    Minimum: [''],
+    Maximum: [''],
+  });
 
 // iqbal define funtion
   prod_func(data: string){
@@ -102,7 +118,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.form.Minimum=1;
     this.form.Maximum=500000;
-    this.form.search_type='rent';
+    this.searchForm.controls['search_type'].setValue('rent');
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder();
     });
@@ -121,6 +137,7 @@ export class HomeComponent implements OnInit {
           // console.log(this.latCus);
           // console.log(this.location);
           this.form.Location=this.location;
+          this.searchForm.controls['Location'].setValue(this.location);
           // this.form.map_latitude=this.latCus;
           // this.form.map_longitude=this.longCus;
         
@@ -159,11 +176,11 @@ product_comp(id:number){
           this.home_call();
           //console.log(data.data.length);
           if(data.data.length>4){
-            this.toastr.info('Bucket are the Full...!!!', 'Property', {
+            this.toastr.info('Compare are the Full...!!!', 'Property', {
               timeOut: 3000,
             });
           }else{
-            this.toastr.success('Succesfully Added in Bucket...', 'Property', {
+            this.toastr.success('Added To compare Successfully', 'Property', {
               timeOut: 3000,
             });
           }
@@ -371,16 +388,17 @@ product_comp(id:number){
   }
   onSearch(): void{
     this.showLoadingIndicator = true;
-    //console.log(this.form,this.amenityArray);
+    console.log(this.searchForm,this.amenityArray);
+    console.log(this.form);
     if(this.tokenStorage.getToken()){
       //console.log("login");
       this.isLoggedIn = true; 
-      this.authService.Login_search_home(this.form,this.amenityArray).subscribe(
+      this.authService.Login_search_home(this.searchForm,this.amenityArray).subscribe(
         data => {
           //console.log(data);
           this.tokenService.searchData(data);
           //console.log(this.tokenService.returnSearch());
-          this.data_session=[this.form,this.amenityArray];
+          this.data_session=[this.searchForm.value,this.amenityArray];
           this.tokenService.search_formData(this.data_session);
           //console.log(this.tokenService.get_formData());
           this.showLoadingIndicator = false;
@@ -396,12 +414,12 @@ product_comp(id:number){
     }
     else{
        //console.log("withoutlogin");
-      this.authService.search(this.form,this.amenityArray).subscribe(
+      this.authService.search(this.searchForm,this.amenityArray).subscribe(
         data => {
           //console.log(data);
           this.tokenService.searchData(data);
           //console.log(this.tokenService.returnSearch());
-          this.data_session=[this.form,this.amenityArray];
+          this.data_session=[this.searchForm.value,this.amenityArray];
           this.tokenService.search_formData(this.data_session);
           //console.log(this.tokenService.get_formData());
           this.showLoadingIndicator = false;
@@ -474,14 +492,14 @@ product_comp(id:number){
   rent_price_fun(){
     this.form.Minimum=1;
     this.form.Maximum=500000;
-    this.form.search_type='rent';
+    this.searchForm.controls['search_type'].setValue('rent');
     this.rent_range_slider=true;
     this.buyyer_range_slider=false;
   }
   buyyer_price_fun(){
     this.form.Minimum=500000;
     this.form.Maximum=50000000;
-    this.form.search_type='sales';
+    this.searchForm.controls['search_type'].setValue('sales');
     this.rent_range_slider=false;
     this.buyyer_range_slider=true;
   }

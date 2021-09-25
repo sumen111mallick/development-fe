@@ -105,6 +105,7 @@ export class ProductListingComponent implements OnInit {
   first_prod = null;
   second_prod = null;
   third_prod = null;
+  public property_heading:string;
 
   constructor(
     private titleService: Title,
@@ -201,9 +202,11 @@ export class ProductListingComponent implements OnInit {
 
   getpropertyData(): void{
     this.showLoadingIndicator = true;
+    this.property_heading='No Filters Applied';
     if(this.idservice.returnSearch() != null ){
       //console.log("session");
       this.content_session = this.idservice.returnSearch();
+      console.log(this.content_session);
       this.Searchcontent =this.idservice.returnSearch()['data'];
       //console.log(this.content_session['data']);
       this.Search_data_length=this.Searchcontent.length;
@@ -215,7 +218,7 @@ export class ProductListingComponent implements OnInit {
           }
       //console.log( this.Searchcontent);  
       this.homepage_data=this.idservice.get_formData();
-      //console.log(this.homepage_data);
+      console.log(this.homepage_data);
         if(this.homepage_data != null){
           this.form.build_name=this.homepage_data['0']['build_name'];
           this.form.Location=this.homepage_data['0']['Location'];
@@ -395,11 +398,11 @@ product_comp(id:number){
           this.getpropertyData();
           //console.log(data.data.length);
           if(data.data.length>4){
-            this.toastr.info('Bucket are the Full...!!!', 'Property', {
+            this.toastr.info('Compare Bucket is Full...!!!', 'Property', {
               timeOut: 3000,
             });
           }else{
-            this.toastr.success('Succesfully Added in Bucket...', 'Property', {
+            this.toastr.success('Added To compare Successfully', 'Property', {
               timeOut: 3000,
             });
           }
@@ -552,6 +555,7 @@ product_comp(id:number){
     onSearch(): void{
     //  console.log(this.form);
       //console.log(this.amenityArray);
+    this.property_heading='Searching';
         if(this.tokenStorage.getToken()){
           this.isLoggedIn = true;  
           this.showLoadingIndicator = true;

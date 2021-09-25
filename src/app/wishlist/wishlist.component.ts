@@ -39,63 +39,59 @@ export class WishlistComponent implements OnInit {
     private idservice: TokenStorageService,
     private userService: UserService,
     private toastr: ToastrService
-  ) {
-    if (this.tokenStorage.getToken() == null) {
+    ) {
+        if (this.tokenStorage.getToken() == null){
+      
+          this.redirect_to_home();    
+        }
+     }
 
-      this.redirect_to_home();
+  
+    ngOnInit(): void {
+      this.titleService.setTitle('Create Listing');
+      //this.url_info  = this.userlogs.geturl();      
+      //this.device_info  = this.userlogs.getDeviceInfo();
+      //this.browser_info = this.userlogs.getbrowserInfo();
+      //this.ip_address   = this.userlogs.getIpAddress();
+      // Login check
+      if (this.tokenStorage.getToken() != null){
+        this.content = this.tokenStorage.getUser().id;
+        this.maintenance = true;
+        this.parking = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().username;
+        this.getwishlist();
+      }
+      else{
+        this.isLoggedIn = false ;
+        this.redirect_to_home();
+      }
+      
+    this.property_data = new Array<string>();
     }
-  }
+      
+// product comaprision functinalty 
 
-
-  ngOnInit(): void {
-    this.titleService.setTitle('Create Listing');
-    // Login check
-    if (this.tokenStorage.getUser() != null) {
-      this.isLoggedIn = true
-      //console.log(this.isLoggedIn)
-    }
-    else {
-      this.redirect_to_home();
-    }
-    this.content = this.tokenStorage.getUser().id;
+  
+// product comaprision functinalty 
+product_comp(id:number){
+  //console.log(id);
+  // Login check
+  if(this.tokenStorage.getUser() != null){
+    this.isLoggedIn = true;
+    //console.log(this.isLoggedIn);
     this.maintenance = true;
-    this.parking = false;
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().username;
-      this.getwishlist();
-    }
-    else {
-      this.isLoggedIn = false;
-      this.redirect_to_home();
-    }
-     this.property_data = new Array<string>();
-
-
-  }
-
-  // product comaprision functinalty 
-
-
-  // product comaprision functinalty 
-  product_comp(id: number) {
-    //console.log(id);
-    // Login check
-    if (this.tokenStorage.getUser() != null) {
-      this.isLoggedIn = true;
-      //console.log(this.isLoggedIn);
-      this.maintenance = true;
-      this.parking = false;
+    this.parking = false;     
       this.authService.Crete_product_comp(id).pipe().subscribe(
         (data: any) => {
           //console.log(data);
           this.getwishlist();
-          if (data.data.length > 4) {
-            this.toastr.info('Bucket are the Full...!!!', 'Property', {
+          if(data.data.length>4){
+            this.toastr.info('Compare Bucket is Full...!!!', 'Property', {
               timeOut: 3000,
             });
-          } else {
-            this.toastr.success('Succesfully Added in Bucket...', 'Property', {
+          }else{
+            this.toastr.success('Added To compare Successfully', 'Property', {
               timeOut: 3000,
             });
           }
@@ -134,6 +130,9 @@ export class WishlistComponent implements OnInit {
       this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) => {
           //console.log(result);
+          this.toastr.error('Remove Wishlist Property','Property', {
+            timeOut: 2000,
+          });
           this.property_data=[];
           this.showLoadingIndicator = false;
           this.getwishlist();

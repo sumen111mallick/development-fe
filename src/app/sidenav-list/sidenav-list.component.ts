@@ -5,6 +5,7 @@ import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { GlobalConstants } from './../global-constants';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -36,7 +37,8 @@ export class SidenavListComponent implements OnInit {
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -108,6 +110,14 @@ export class SidenavListComponent implements OnInit {
 
   public onSidenavClose = () => {
     this.sidenavClose.emit();
+  }
+
+  compare_notification():void{
+    this.sidenavClose.emit();
+    this.toastr.info('Minimun Two Property required','Comparison', {
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+    });
   }
 
 }

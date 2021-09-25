@@ -154,9 +154,9 @@ export class InsertproductRentComponent implements OnInit {
 
     Property_additional_details: new FormGroup({
       additional_rooms_status: new FormControl('0'),
+      facing_towards: new FormControl('', Validators.required),
       furnishings: new FormControl(''),
       furnishing_status: new FormControl('NFR'),
-      facing_towards: new FormControl('', Validators.required),
       rera_registration_status: new FormControl('', Validators.required),
       additional_parking_status: new FormControl('0'),
       buildyear: new FormControl('', Validators.required),

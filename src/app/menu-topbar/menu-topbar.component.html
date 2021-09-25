@@ -42,19 +42,19 @@
                 <a href="">Home</a>
             </li>
             <li>
-                <a routerLink="/productlisting">Listing</a>
+                <a href="/productlisting">Listing</a>
             </li>
             <li>
-                <a routerLink="/contact">Contact</a>
+                <a href="/contact">Contact</a>
             </li>
             <li>
-                <a routerLink="/plans">Plans</a>
+                <a href="/plans">Plans</a>
             </li>
             <li>
-                <a routerLink="/about-us">About Us</a>
+                <a href="/blog">Blog</a>
             </li>
             <li *ngIf="!isLoggedIn">
-                <a routerLink="/login">Login/Register</a>
+                <a href="/login">Login/Register</a>
             </li>
             <li *ngIf="isLoggedIn" class="user_acc">
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
@@ -96,12 +96,20 @@
                 </a>
             </li>
             <li *ngIf="isLoggedIn">
-                <a href="/compare">
+                <a href="/compare" *ngIf="property_comp_length>1;else otherPro_menu">
                     <span class="material-icons">
                         compare_arrows
                     </span>
                     <span class="wishlistValue">{{property_comp_length}}</span>
                 </a>
+                <ng-template #otherPro_menu>
+                    <a (click)="compare_notification()">
+                        <span class="material-icons">
+                            compare_arrows
+                        </span>
+                        <span class="wishlistValue">{{property_comp_length}}</span>
+                    </a>
+                </ng-template>
             </li>
             <li class="add_listing">
                 <a href="/insertproduct">

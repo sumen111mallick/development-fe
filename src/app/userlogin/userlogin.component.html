@@ -88,7 +88,7 @@
                   <a class="tdu btn-fpswd float-right" href="#">Forgot Password?</a>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-log btn-block btn-thm2">Login</button>
+                  <button class="btn btn-log btn-block btn-thm">Login</button>
                 </div>
                 <div class="form-group">
                   <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
@@ -110,12 +110,14 @@
               <div class="row mt40" *ngIf="isLoggedIn == false">
                 <div class="col-lg">
                   <button type="submit" (click)="redirect_login_facebook()"
-                    class="btn btn-block color-white bgc-fb mb0"><i class="fa fa-facebook float-left mt5"></i>
+                    class="btn btn-block color-white bgc-fb mb0">
+                    <i class="fa fa-facebook float-left mt12"></i>
                     Facebook</button>
                 </div>
                 <div class="col-lg">
                   <button type="button" (click)="redirect_login_google()"
-                    class="btn btn2 btn-block color-white bgc-gogle mb0"><i class="fa fa-google float-left mt5"></i>
+                    class="btn btn2 btn-block color-white bgc-gogle mb0">
+                    <i class="fa fa-google float-left mt12"></i>
                     Google</button>
                 </div>
               </div>
