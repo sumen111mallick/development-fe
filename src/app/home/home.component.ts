@@ -7,15 +7,14 @@ import { GlobalConstants } from './../global-constants';
 // import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 // import { EventEmitter } from 'stream';
-import { Output,EventEmitter } from '@angular/core';
+// import { Output,EventEmitter } from '@angular/core';
 import { MapsAPILoader,AgmMap } from '@agm/core';
 // import { google } from "google-maps";
 import { Options,LabelType } from 'ng5-slider';
-import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { stringify } from '@angular/compiler/src/util';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+// import { stringify } from '@angular/compiler/src/util';
+import { FormBuilder} from '@angular/forms';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -27,10 +26,10 @@ export class HomeComponent implements OnInit {
   currentUser: any;
   currentUserid: any;
   form: any = {};
-  data: any = {};
-  content: any = {};
-  number: any = {};
-  productId =[];
+  data: any;
+  content:any;
+  public number:any;
+  // productId =[];
   login: any;
   ftpstring = GlobalConstants.ftpURL;
   city: any;
@@ -92,7 +91,7 @@ export class HomeComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone:NgZone,
     private toastr: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ){
   }
 
@@ -130,14 +129,16 @@ export class HomeComponent implements OnInit {
         this.ngZone.run(() => {
           
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          this.latCus = place.geometry.location.lat();
-          this.longCus = place.geometry.location.lng();
+          // this.latCus = place.geometry.location.lat();
+          // this.longCus = place.geometry.location.lng();
           this.location = place.formatted_address;
           this.zoom = 15;
           // console.log(this.latCus);
           // console.log(this.location);
-          this.form.Location=this.location;
+          // this.form.Location=this.location;
           this.searchForm.controls['Location'].setValue(this.location);
+          // this.searchForm.controls['map_latitude'].setValue(this.latCus);
+          // this.searchForm.controls['map_longitude'].setValue(this.longCus);
           // this.form.map_latitude=this.latCus;
           // this.form.map_longitude=this.longCus;
         
@@ -148,7 +149,7 @@ export class HomeComponent implements OnInit {
     this.selectedItems = new Array<string>();
     this.home_call();
     this.amenities();
-    this.Property_type_data();
+    // this.Property_type_data();
     this.gettestimonialdata();
     
     if (this.tokenStorage.getToken() != null){
@@ -224,14 +225,6 @@ product_comp(id:number){
       this.isLoggedIn = false ;
     }
   }
-  
-  // encryptData(data) {
-  //   try {
-  //     return CryptoJS.AES.encrypt(JSON.stringify(data), this.encryptSecretKey).toString();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
   Wishlist_remove(data: any){
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
@@ -297,12 +290,12 @@ product_comp(id:number){
       this.isLoggedIn = true;  
       this.showLoadingIndicator = true;
       this.authService.getproductWishlist().pipe().subscribe(
-        (product: any) => {  
-          this.content = product.data;
-          this.number = this.content;
-          this.product_length=this.content.length;
-          console.log(this.number);
-          console.log(this.number.length);
+        (data: any) => {  
+          this.content = data.data;
+          this.number = data.data;
+          this.product_length = data.data.length;
+          // console.log(this.number);
+          // console.log(this.number.length);
           this.showLoadingIndicator = false;
           this.wishlist_info();
           this.pro_comp_refresh();
@@ -318,8 +311,8 @@ product_comp(id:number){
       this.userService.getproductlistingfeatured().pipe().subscribe(
         (data: any) => {
           this.content = data.data;
-          this.number = this.content;
-          this.product_length=this.content.length;
+          this.number = data.data;
+          this.product_length= data.data.length;
           this.showLoadingIndicator = false;
           //console.log(this.number);        
         },
@@ -355,8 +348,8 @@ product_comp(id:number){
     this.userService.gettestimonialdata().pipe().subscribe(
       (Reviewdata: any) => {
         this.contenttestimonial = Reviewdata.data;
-        this.testimonial = this.contenttestimonial;
-        this.testimonial_length= this.testimonial.length;
+        this.testimonial = Reviewdata.data;
+        this.testimonial_length= Reviewdata.data.length;
         this.showLoadingIndicator = false;
         //console.log(this.testimonial);
         //console.log(this.content);
@@ -387,9 +380,8 @@ product_comp(id:number){
 
   }
   onSearch(): void{
-    this.showLoadingIndicator = true;
-    console.log(this.searchForm,this.amenityArray);
-    console.log(this.form);
+    // this.showLoadingIndicator = true;
+    //console.log(this.form,this.amenityArray);
     if(this.tokenStorage.getToken()){
       //console.log("login");
       this.isLoggedIn = true; 
@@ -401,13 +393,13 @@ product_comp(id:number){
           this.data_session=[this.searchForm.value,this.amenityArray];
           this.tokenService.search_formData(this.data_session);
           //console.log(this.tokenService.get_formData());
-          this.showLoadingIndicator = false;
+          // this.showLoadingIndicator = false;
           window.location.href=GlobalConstants.siteURL+"productlisting"
         },
         err => {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
-          this.showLoadingIndicator = false;
+          // this.showLoadingIndicator = false;
           //console.log(this.errorMessage);
         }
       );
@@ -447,45 +439,8 @@ product_comp(id:number){
       }
     );
     //console.log(this.tokenService.returnSearch().product.data);
-      window.location.href=GlobalConstants.siteURL+"search"
+      window.location.href=GlobalConstants.siteURL+"productlisting"
       // this.router.navigate(["/search"])
-
-  }
-
-  // comparison funtion property
-  
-  onComp(data){
-    if(this.first_prod == null){
-      this.first_prod = data
-    }
-    else if(this.first_prod != null){
-      if (this.second_prod != null){
-        this.third_prod = this.second_prod
-        this.second_prod = this.first_prod
-        this.first_prod = data
-      }
-      else{
-      this.second_prod = data
-      }
-    }
-
-    //console.log(this.first_prod+"|"+this.second_prod)
-
-    if (this.first_prod != null && this.second_prod != null && this.third_prod != null){
-
-      // alert("Added two property to compare list. (Only two properties can be compared at a time)")
-
-      this.idservice.saveProdId(this.first_prod);
-      this.idservice.saveCdata(this.second_prod)
-      this.idservice.saveProd2Id(this.third_prod);
-      window.location.href=GlobalConstants.siteURL+"compare"
-    }
-
-    //console.log(this.idservice.getProdId());
-    //console.log(this.idservice.getProd2Id());
-    //console.log(this.idservice.getCdata());
-
-
 
   }
 

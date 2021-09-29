@@ -9,6 +9,7 @@ import { filter, pairwise } from 'rxjs/operators';
 /*0import { UrlService } from './../_services/url.service';*/
 import { RoutesRecognized } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserLogsService } from './../_services/user-logs.service';
 
 @Component({
   selector: 'app-userlogin',
@@ -57,6 +58,17 @@ export class UserloginComponent implements OnInit {
   data;
   public returnUrl: any;
   public previous: any;
+  pro_id:any=null;
+  type:any;
+  device_info:any;
+  browser_info:any;
+  url_info:string;
+  url: any;
+  input_info:any=null;
+  user_cart:any=null;
+  ip_address:any; 
+  ipAddress:string;		
+  userEmail:any;
 
 
   constructor(
@@ -65,6 +77,7 @@ export class UserloginComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private router: Router,
     private route: ActivatedRoute,
+    private userlogs: UserLogsService,
     private commonService: CommonService
     //private urlService: UrlService
   ) { }
@@ -72,6 +85,12 @@ export class UserloginComponent implements OnInit {
   ngOnInit(): void {
     this.showLoadingIndicator = true;
     this.titleService.setTitle('Login');
+    this.url_info  = this.userlogs.geturl();      
+    this.device_info  = this.userlogs.getDeviceInfo();
+    this.browser_info = this.userlogs.getbrowserInfo();
+    this.ip_address   = this.userlogs.getIpAddress();
+    console.log(this.ip_address);
+
     /*console.log(this.urlService.getPreviousUrl());*/
     //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     //console.log(this.returnUrl);
@@ -105,8 +124,8 @@ export class UserloginComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       let token = params['token'];
       let data = params['data'];
-      console.log(token);
-      console.log(data);
+      // console.log(token);
+      // console.log(data);
       if (token != null) {
         
         this.tokenStorage.saveToken(token);
@@ -151,6 +170,25 @@ export class UserloginComponent implements OnInit {
         this.tokenStorage.saveToken(data.access_token);
         //console.log(this.tokenStorage.getToken());
         this.tokenStorage.saveUser(data);
+
+        // user logs funtionalty
+        if(data.user_data){
+          this.userEmail= data.email;
+          this.type    = "login_page";
+          this.input_info= data.user_data;
+          this.authService.user_logs(this.ip_address,this.device_info,this.browser_info,this.url_info,this.pro_id,this.type,this.userEmail,this.input_info,this.user_cart).subscribe(
+            data => {
+              this.showLoadingIndicator = false;
+              // console.log(data);
+              this.router.navigateByUrl("")
+              .then(() => {
+                window.location.reload();
+              });
+            }
+            );
+        
+        }
+        // user logs funtionalty
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;

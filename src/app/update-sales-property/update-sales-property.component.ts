@@ -223,7 +223,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
   // value: number = 30000000;
   options: Options = {
     // step:500,
-    floor: 0,
+    floor: 500000,
     ceil: 50000000,
     translate: (value: number, label: LabelType): string => {
       return '₹' + value.toLocaleString('en');

@@ -15,6 +15,8 @@ import { MapsAPILoader,AgmMap } from '@agm/core';
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { HostListener } from "@angular/core";
+import { UserLogsService } from './../_services/user-logs.service';
+
 @Component({
   selector: 'app-product-listing',
   templateUrl: './product-listing.component.html',
@@ -100,6 +102,18 @@ export class ProductListingComponent implements OnInit {
   public property_type:any;
   public property_type_result:any;
   public property_type_count:any;
+  public property_type_count_length:number=0;
+  pro_id:any=null;
+  page_type:any;
+  device_info:any;
+  browser_info:any;
+  url_info:string;
+  url: any;
+  input_info:any=null;
+  user_cart:any=null;
+  ip_address:any; 
+  ipAddress:string;		
+  userEmail:any;	
 
   displayStyle = "none";
   first_prod = null;
@@ -119,7 +133,8 @@ export class ProductListingComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone:NgZone,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userlogs: UserLogsService
     
   ) {
     this.form.property_status='all';
@@ -133,7 +148,14 @@ export class ProductListingComponent implements OnInit {
   ngOnInit(): void {
     this.form.Minimum= '5000';
     this.form.Maximum='50000000';
-    this.form.property_status='all';        
+    this.form.property_status='all';
+    
+    this.url_info     = this.url;       
+    this.device_info  = this.userlogs.getDeviceInfo();
+    this.browser_info = this.userlogs.getbrowserInfo();
+    this.ip_address   = this.userlogs.getIpAddress();
+    this.url_info  = this.userlogs.geturl();
+
     this.mapsAPILoader.load().then(() => {
       this.geoCoder = new google.maps.Geocoder();
     });
@@ -185,21 +207,19 @@ export class ProductListingComponent implements OnInit {
       this.mobile_view=false; 
     }
  }
+loginuser_coutData(){
+  this.showLoadingIndicator = true;
+  this.authService.recently_view().subscribe(
+    data => {
+      //console.log(data.data);
+      this.Recently_UserData = data.data;
+      this.Recent_user_length=data.data.length;
+      this.showLoadingIndicator = false;
+      //console.log("Recently Views Properties");
+        //console.log(this.Recently_UserData);
+    });
 
-  loginuser_coutData(){
-    this.showLoadingIndicator = true;
-    this.authService.recently_view().subscribe(
-      data => {
-        //console.log(data.data);
-        this.Recently_UserData = data.data;
-        this.Recent_user_length=data.data.length;
-        this.showLoadingIndicator = false;
-        //console.log("Recently Views Properties");
-         //console.log(this.Recently_UserData);
-      });
-  
-  }
-
+}
   getpropertyData(): void{
     this.showLoadingIndicator = true;
     this.property_heading='No Filters Applied';
@@ -218,7 +238,7 @@ export class ProductListingComponent implements OnInit {
           }
       //console.log( this.Searchcontent);  
       this.homepage_data=this.idservice.get_formData();
-      console.log(this.homepage_data);
+      //console.log(this.homepage_data);
         if(this.homepage_data != null){
           this.form.build_name=this.homepage_data['0']['build_name'];
           this.form.Location=this.homepage_data['0']['Location'];
@@ -289,28 +309,27 @@ export class ProductListingComponent implements OnInit {
             this.showLoadingIndicator = false;
           } 
         );
-      }
-     
-      }
+      }     
+    }
   }
 
-  OnPropertyCheck():void{
+OnPropertyCheck():void{
     //console.log(this.form.availability_condition);
-    if(this.form.availability_condition=='rent'){ 
-      this.form.Minimum=1;
-      this.form.Maximum=500000; 
-      this.rent_range_slider=true;
-      this.buyyer_range_slider=false;
-      this.range_slider=false;
-      //console.log('rent');
-   }
-   if(this.form.availability_condition=='sales'){ 
-    this.form.Minimum=500000;
-    this.form.Maximum=50000000; 
-     this.rent_range_slider=false;
-     this.buyyer_range_slider=true;
-     this.range_slider=false;
-     //console.log('sales');
+  if(this.form.availability_condition=='rent'){ 
+    this.form.Minimum=1;
+    this.form.Maximum=500000; 
+    this.rent_range_slider=true;
+    this.buyyer_range_slider=false;
+    this.range_slider=false;
+    //console.log('rent');
+  }
+  if(this.form.availability_condition=='sales'){ 
+  this.form.Minimum=500000;
+  this.form.Maximum=50000000; 
+    this.rent_range_slider=false;
+    this.buyyer_range_slider=true;
+    this.range_slider=false;
+    //console.log('sales');
   }
   if(this.form.availability_condition=='Select Availability'){ 
    this.form.Minimum=1;
@@ -319,47 +338,46 @@ export class ProductListingComponent implements OnInit {
     this.buyyer_range_slider=false;
     this.range_slider=true;
     //console.log('Nothing');
- }
-    
+  }   
 }
-  amenities(): void{
-    this.showLoadingIndicator = true;
-    this.userService.getamenitiesdata().pipe().subscribe(
-      (amenitiesdata: any) => {
-        //  console.log(amenitiesdata);
-        this.amenities = amenitiesdata.data;
-        this.amenitiesresult = this.amenities;
-        this.showLoadingIndicator = false;
-        //console.log(this.amenitiesresult);
-        //console.log(this.content);
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-        this.showLoadingIndicator = false;
-      }
-    );
-  }
-
-  Property_type_data(): void{
-    this.showLoadingIndicator = true;
-    this.userService.get_property_type().pipe().subscribe(
-      (data: any) => {
-         //console.log(data);
-        this.property_type_data = data.data;
-        this.property_type_result = this.property_type;
-        this.property_type_count=data.count;
-        this.showLoadingIndicator = false;
-        //console.log(this.property_type_count);
-        //console.log(this.property_type_data);
-        //console.log(this.content);
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-        this.showLoadingIndicator = false;
-      }
-    );
-  }
-  Amenties_funtion(Amenties_id:any){
+amenities(): void{
+  this.showLoadingIndicator = true;
+  this.userService.getamenitiesdata().pipe().subscribe(
+    (amenitiesdata: any) => {
+      //  console.log(amenitiesdata);
+      this.amenities = amenitiesdata.data;
+      this.amenitiesresult = this.amenities;
+      this.showLoadingIndicator = false;
+      //console.log(this.amenitiesresult);
+      //console.log(this.content);
+    },
+    err => {
+      this.content = JSON.parse(err.error).message;
+      this.showLoadingIndicator = false;
+    }
+  );
+}
+Property_type_data(): void{
+  this.showLoadingIndicator = true;
+  this.userService.get_property_type().pipe().subscribe(
+    (data: any) => {
+        //console.log(data);
+      this.property_type_data = data.data;
+      this.property_type_result = this.property_type;
+      this.property_type_count=data.count;
+      // this.property_type_count_length=data.count.length;
+      this.showLoadingIndicator = false;
+      //console.log(this.property_type_count);
+      //console.log(this.property_type_data);
+      //console.log(this.content);
+    },
+    err => {
+      this.content = JSON.parse(err.error).message;
+      this.showLoadingIndicator = false;
+    }
+  );
+}
+Amenties_funtion(Amenties_id:any){
     // var len= this.product_amenties.length; 
   if(this.secach_amenties_length !=null){
     for (let i = 0; i < this.secach_amenties_length; i++) {
@@ -376,12 +394,11 @@ feature_property(){
     data => { 
       //console.log(data);
       this.feature_property_data = data.data; 
-      this.feature_pro_length =  this.feature_property_data.length;  
+      this.feature_pro_length =   data.data.length;  
       this.showLoadingIndicator = false;
     }
   );
 }
-
 // product comaprision functinalty 
 product_comp(id:number){
   //console.log(id);
@@ -499,18 +516,11 @@ product_comp(id:number){
    //console.log(this.amenityArray);
 
   }
-
-  prod_func(data: string){
-    this.idservice.saveProdId(data);
-    // this.myservice.setData(data);
-    // this.router.navigate(["/productpage"])
-  }
   redirect_to_home(): void {
     window.location.href=GlobalConstants.siteURL="login"
     }
 
     onchangeSearch():void{
-      //console.log(this.form.property_status);
       this.onSearch();
     }
     Property_type_search(id: number,pro_type: string):void{
@@ -572,6 +582,17 @@ product_comp(id:number){
                  this.pro_comp_refresh();
                  this.wishlist_info();
               }
+                // user logss functionalty
+                if(this.Searchcontent){
+                  this.userEmail= this.tokenStorage.getUser().misc.email;
+                  this.page_type   = "registration_page";
+                  this.input_info= this.form;
+                  this.authService.user_logs(this.ip_address,this.device_info,this.browser_info,this.url_info,this.pro_id,this.page_type,this.userEmail,this.input_info,this.user_cart).subscribe(
+                    data => {
+                      console.log(data.status);
+                    });
+                }
+                // user logss functionalty
               
             },
             err => {
@@ -607,21 +628,19 @@ product_comp(id:number){
         this. closePopup();
   
     }
-    reset_Search():void{
-      this.tokenService.RemoveSearch();
-      this.tokenService.Remove_form_data();
-      this.tokenService.Remove_pro_type();
-      window.location.href=GlobalConstants.siteURL+"productlisting";
-      this.getpropertyData();
-      // this.openPopup();
+  reset_Search():void{
+    this.tokenService.RemoveSearch();
+    this.tokenService.Remove_form_data();
+    this.tokenService.Remove_pro_type();
+    window.location.href=GlobalConstants.siteURL+"productlisting";
+    this.getpropertyData();
+    // this.openPopup();
 
-    }
-
+  }
   // topbar searching functionalty
   wishlist_info(){
-      this.userService.emit<string>('true');
+    this.userService.emit<string>('true');
   } 
-
    // topbar proeprty comparion functionalty
   pro_comp_refresh(){
     this.userService.pro_comp_emit<string>('true');

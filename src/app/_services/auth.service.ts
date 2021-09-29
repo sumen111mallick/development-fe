@@ -21,7 +21,10 @@ const httpOptions = {
 export class AuthService {
 
   constructor(private http: HttpClient) { }
-
+ getIPAddress()  
+  {  
+    return this.http.get("http://api.ipify.org/?format=json");  
+  } 
   login(credentials): Observable<any> {
     return this.http.post(AUTH_API + 'auth/login', JSON.stringify({
       email: credentials.email,
@@ -1087,7 +1090,21 @@ crm_call(user_id): Observable<any> {
       id: id,
       plans_type: plans_type,
     }), httpOptions);
-    }
+  }
+
+  user_logs(ip_address,device_info,browser_info,url_info,pro_id,type,userEmail,input_info,user_cart):Observable<any> {
+    return this.http.post(AUTH_API + 'user_logs', JSON.stringify({
+      ip_address: ip_address,
+      device_info: device_info,
+      browser_info: browser_info,
+      url_info: url_info,
+      pro_id: pro_id,
+      type: type,
+      userEmail: userEmail,
+      input_info:input_info,
+      user_cart:user_cart,
+    }), httpOptions);
+  }
     
 
 

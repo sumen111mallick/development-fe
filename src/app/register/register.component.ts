@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { AuthService } from './../_services/auth.service';
+import { UserLogsService } from './../_services/user-logs.service';
 
 @Component({
   selector: 'app-register',
@@ -24,17 +25,34 @@ export class RegisterComponent implements OnInit {
   imgData: any
   image;
   number: string;
-  public showLoadingIndicator: boolean =false;
+  showLoadingIndicator: boolean = false;
   select_type: string;	
-  public email_id: any;	
-  public first_name: any;			  
+  pro_id:any=null;
+  type:any;
+  device_info:any;
+  browser_info:any;
+  url_info:string;
+  url: any;
+  input_info:any=null;
+  user_cart:any=null;
+  ip_address:any; 
+  ipAddress:string;		
+  userEmail:any;
+  email_id:any;
+  first_name:any;		  
 
   constructor(private titleService: Title,
-    private authService: AuthService) { }
+              private userlogs: UserLogsService,
+              private authService: AuthService) 
+           {  }
 
   ngOnInit(): void {
     //this.form.select_type = 2;
-    this.titleService.setTitle('Register');
+    this.titleService.setTitle('Register');      
+    this.device_info  = this.userlogs.getDeviceInfo();
+    this.browser_info = this.userlogs.getbrowserInfo();
+    this.ip_address   = this.userlogs.getIpAddress();
+    this.url_info  = this.userlogs.geturl();
   }
 
   onSubmit(): void {
@@ -45,6 +63,25 @@ export class RegisterComponent implements OnInit {
         data => {
           //console.log(data);
           this.isSuccessful = true;
+
+          // user logss register timing
+          if(data.status == 200){
+            this.userEmail= data.data.email;
+            this.type    = "registration_page";
+            this.input_info= this.form;
+            // console.log(this.ip_address);
+            // console.log(this.device_info);
+            // console.log(this.browser_info);
+            // console.log(this.url_info);
+            // console.log(this.type);
+            // console.log(this.input_info);
+            // console.log(this.userEmail);
+
+            this.authService.user_logs(this.ip_address,this.device_info,this.browser_info,this.url_info,this.pro_id,this.type,this.userEmail,this.input_info,this.user_cart).subscribe(
+              data => {
+                console.log(data.status);
+              });
+          }
           this.isSignUpFailed = false;
           this.number = this.form.other_mobile_number;
           this.email_id = this.form.email;

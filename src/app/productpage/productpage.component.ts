@@ -1,16 +1,16 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from './../_services/token-storage.service';
 import { GlobalConstants } from './../global-constants';
-import { ProductService } from './../_services/product.service';
+// import { ProductService } from './../_services/product.service';
 import { AuthService } from './../_services/auth.service';
 import { Title } from '@angular/platform-browser';
 // import { Component, OnInit } from '@angular/core';
 import { UserService } from './../_services/user.service';
-import { MapsAPILoader,AgmMap } from '@agm/core';
+// import { MapsAPILoader} from '@agm/core';
 // import { google } from "google-maps";
-import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component,  OnInit} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { NgxStarRatingModule } from 'ngx-star-rating';
+// import { NgxStarRatingModule } from 'ngx-star-rating';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -25,11 +25,11 @@ export class ProductpageComponent implements OnInit {
   [x: string]: any;
 
   prod_id: any ;
-  public user_data:any={};
+  public user_data:any;
   public login_userID:number= null;
   public login_useremail:number= null;
   public login_usertype:number = null;
-  public productdata:any={};
+  public productdata:any;
   public ftpstring: string = GlobalConstants.ftpURL;
   public sitestring: string = GlobalConstants.siteURL;
   public paytm_form_url: string = GlobalConstants.Paytm_formURL;
@@ -39,15 +39,16 @@ export class ProductpageComponent implements OnInit {
   public p_img4:string=null;
   public p_img5:string=null;
   public Product_id:number=0;
+  public amenties_length:number=0;
   e: any={};
   // p_img2= null;
   // p_img3= null;  
   // p_img4= null;
   // p_img5= null;
   
-  public errorMessage:any ={};
-  Message: any={};
-  form: any = {};
+  public errorMessage:any;
+  Message: any;
+  form: any;
   Review: any;
   youtube_url: string;
   cityValue: any;
@@ -55,11 +56,8 @@ export class ProductpageComponent implements OnInit {
   resp_status:any;  
   order_data:any;
   public order_data_length:number=0;
-  public user_transaction_status:boolean=false;
-
-  
-  
-  youtube: string= "https://www.youtube.com/embed/";
+  public user_transaction_status:boolean=false;  
+  // youtube: string= "https://www.youtube.com/embed/";
 
   review_form = new FormGroup({
     stars: new FormControl('', Validators.required),
@@ -73,32 +71,33 @@ export class ProductpageComponent implements OnInit {
   first_prod = null;
   second_prod = null;
   third_prod = null;
-  product_amenties_length=null;
-  product_amenties:any={};
-  public product_images:any={};
+  product_amenties_length:number=0;
+  product_amenties:any;
+  public product_images:any;
   public product_img_length:number=null;
   public latCus:number;
   public longCus:number;
-  public feature_property_data:any={};
+  public feature_property_data:any;
   public feature_pro_length:number=0;
-  public Recently_User_Data:any={};
+  public Recently_User_Data:any;
   public Recent_user_length:number=0;
   public recently_length:number=null;
   public isReadMore :boolean=true;
   public product_uid:any;
+  public property_type_result:any;
+  public property_type:any;
+  public property_type_count:any;
+  public property_type_count_length:number=0;
 
   constructor(
     private _sanitizer: DomSanitizer,
     private titleService: Title,
     private authService: AuthService,
     private idService: TokenStorageService,
-    private prodservice: ProductService,
     private router: Router,
     private route:ActivatedRoute,
     private userService: UserService,
     private tokenStorage: TokenStorageService,
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone:NgZone,
     private toastr: ToastrService,
     private tokenService: TokenStorageService
   ) { 
@@ -110,15 +109,17 @@ export class ProductpageComponent implements OnInit {
           this.payment_status(this.resp_status);
         }
         this.Product_id=this.id;
-        this.check_order_product(this.id);
         this.single_property_data(this.id);
+          if (this.tokenStorage.getToken() != null){
+            this.check_order_product(this.id);
+          }
         }); 
     }
 
   ngOnInit(): void {
     //console.log(this.id);
     this.titleService.setTitle('Property Page');
-    this.prod_id = this.idService.getProdId();
+    // this.prod_id = this.idService.getProdId();
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.login_userID = this.idService.getUser().id;
@@ -127,23 +128,23 @@ export class ProductpageComponent implements OnInit {
     }
     
   
-    if( this.idService.getUser() != null)
-    {
-      this.authService.saveSearch(this.idService.getUser().id, this.id).subscribe(
-        data => {
-          //console.log(data)
-        },
-        err => {
-          //console.log(err)
-        }
-      )
-    }
-    this.get_review();
+    // if( this.idService.getUser() != null)
+    // {
+    //   this.authService.saveSearch(this.idService.getUser().id, this.id).subscribe(
+    //     data => {
+    //       //console.log(data)
+    //     },
+    //     err => {
+    //       //console.log(err)
+    //     }
+    //   )
+    // }
+    // this.get_review();
     this.Property_type_data();
     this.amenities();
     this.feature_property();
-    this.idService.saveCdata(null);
-    this.idService.saveProdId(null);
+    // this.idService.saveCdata(null);
+    // this.idService.saveProdId(null);
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.loginuser_countProduct(this.id);
@@ -157,19 +158,21 @@ export class ProductpageComponent implements OnInit {
       //console.log(this.isLoggedIn);
       this.authService.product_login_see(id).subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
           if(data.product.length== 0){
           this.redirect_to_home_page();
           } 
-          this.product_images=data["product"]["0"].product_img;
-          this.product_img_length=this.product_images;
+          this.product_images = data["product"]["0"].product_img;
+          this.product_img_length = data["product"]["0"].product_img.length;
+          // console.log(this.product_img_length);
           this.productdata = data["product"];
-          console.log(this.productdata);
+          // console.log(this.productdata);
           this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";          
           this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.youtube_url);
           
           this.product_amenties= data["product"]["0"].amenities;
           this.product_amenties_length= data["product"]["0"].amenities.length;
+          // console.log(this.product_amenties_length);
          
           this.cityValue=data["product"]["0"]["city"];
           this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
@@ -190,20 +193,17 @@ export class ProductpageComponent implements OnInit {
           this.redirect_to_home_page();
          } 
         this.product_images=data["product"]["0"].product_img;
-        this.product_img_length=this.product_images;
+        this.product_img_length = data["product"]["0"].product_img.length;
         this.productdata = data["product"];
-        console.log(this.productdata);
+        // console.log(this.productdata);
         this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";            
         this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.youtube_url);
           
         this.product_amenties= data["product"]["0"].amenities;
         this.product_amenties_length= data["product"]["0"].amenities.length;
         this.cityValue=data["product"]["0"]["city"];
-        this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
-        this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
         this.similarproperty(this.cityValue);
         this.showLoadingIndicator = false;
-
       },
         err => {
           //console.log(err);
@@ -212,6 +212,7 @@ export class ProductpageComponent implements OnInit {
       );
     }
   }
+  // payment status
   payment_status(resp_status){
     if(resp_status=='01'){
       this.toastr.success('Payment Succesfull', 'Property', {
@@ -235,7 +236,7 @@ export class ProductpageComponent implements OnInit {
        (amenitiesdata: any) => {
          this.amenities = amenitiesdata.data;
          this.amenitiesresult = this.amenities;
-         this.Amenties_length=this.amenitiesresult.length;
+         this.amenties_length=this.amenitiesresult.length;
          this.showLoadingIndicator = false;
        },
        err => {
@@ -352,7 +353,7 @@ proceedToPayment(planid){
   this.plans_type="single_rental_property"; 
   this.authService.proceedToPayment(planid,this.plans_type).pipe().subscribe(
     (response: any) => {
-      console.log(response);
+      // console.log(response);
       if(response.status == 201){
         this.paytm =response.data;
         // console.log(this.paytm);
@@ -435,6 +436,7 @@ Property_type_data(): void{
       //  console.log(amenitiesdata);
       this.property_type = data.count;
       this.property_type_count=data.count;
+      this.property_type_count_length=data.count.length;
       //console.log(this.property_type_count);
       this.property_type_result = this.property_type;
       //console.log(this.property_type_result);
@@ -456,27 +458,10 @@ check_order_product(id:any){
       // console.log(this.order_data_length);
       if(this.order_data_length>0){
         if(this.order_data.transaction_status == 'TXN_SUCCESS'){
-          console.log(this.order_data.transaction_status);
+          // console.log(this.order_data.transaction_status);
           this.user_transaction_status=true;
         }
       }
-      // console.log(this.order_data);
-
-      // if(this.order_data){
-      //   if(this.order_data.product_id == this.product_uid){
-      //     if(this.order_data.user_email == this.login_useremail && this.order_data.transaction_status== "TXN_SUCCESS" ){
-      //       this.pro_purchased=true;
-      //       console.log("puchaged");
-      //     }else{
-      //       this.property_sold=true;
-      //       console.log("checkout");
-      //     }
-      //   }else{
-      //     console.log("checkout");
-      //   }
-      // }else{
-      //   console.log("checkout");
-      // }
     },
       err => {
        // console.log(err);
@@ -544,18 +529,18 @@ check_order_product(id:any){
   }
 }
 
-  get_review(): void {
-    //console.log(this.form)
-    this.authService.product_review(this.id).subscribe(
-      data => {
-        //console.log(data);
-        this.Review = data.data;
-      },
-      err => {
-        //console.log(err.error);
-      }
-    );
-}
+//   get_review(): void {
+//     //console.log(this.form)
+//     this.authService.product_review(this.id).subscribe(
+//       data => {
+//         //console.log(data);
+//         this.Review = data.data;
+//       },
+//       err => {
+//         //console.log(err.error);
+//       }
+//     );
+// }
 Property_type_search(id: number,pro_type: string):void{
   //console.log(id);
   if(this.tokenStorage.getToken()){
@@ -602,40 +587,6 @@ feature_property(){
   onShare(){
     alert("Your Shareable Link is \n" + this.sitestring + this.router.url );
   }
-  onComp(data: any){
-
-    if(this.first_prod == null){
-      this.first_prod = data
-    }
-    else if(this.first_prod != null){
-      if (this.second_prod != null){
-        this.third_prod = this.second_prod
-        this.second_prod = this.first_prod
-        this.first_prod = data
-      }
-      else{
-      this.second_prod = data
-      }
-    }
-
-    //console.log(this.first_prod+"|"+this.second_prod+"|"+this.third_prod)
-
-    if (this.first_prod != null && this.second_prod != null && this.third_prod != null){
-
-      // alert("Added two property to compare list. (Only two properties can be compared at a time)")
-
-      this.idService.saveProdId(this.first_prod);
-      this.idService.saveCdata(this.second_prod)
-      this.idService.saveProd2Id(this.third_prod);
-      window.location.href=GlobalConstants.siteURL+"compare"
-    }
-
-    //console.log(this.idService.getProdId());
-    //console.log(this.idService.getProd2Id());
-    //console.log(this.idService.getCdata());
-  }
-
-  
   redirect_to_home(): void {
     window.location.href=GlobalConstants.siteURL="login"
   }

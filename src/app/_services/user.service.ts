@@ -114,6 +114,9 @@ pro_comp_on<T>(): Observable<T>{
   getproperties_solid(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/solid_properties', { responseType: 'json' });
   }
+  user_order_product(): Observable<any> {
+    return this.http.get(GlobalConstants.apiURL + 'product/user_order_product', { responseType: 'json' });
+  }
   getproperties_pursched(): Observable<any> {
     return this.http.get(GlobalConstants.apiURL + 'product/purchased_properties', { responseType: 'json' });
   }

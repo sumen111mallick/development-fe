@@ -27,14 +27,15 @@ export class InsertproductSaleComponent implements OnInit {
   isFormSubmitted = false;
   public errorMessage: any = {};
   roles: string[] = [];
-  public showLoadingIndicator: boolean = false;
+  showLoadingIndicator: boolean = false;
   saleValue: boolean = true;
   rentValue: boolean = false;
   furnish: boolean = false;
   maintenance: boolean = true;
   parking_row: boolean = false;
   amenityArray = [];
-  additional_room_array = [];
+  amenityArray_length:number=0;
+  additional_room_array=[];
   varAmenity: string;
   public step: any = 1;
 
@@ -45,7 +46,7 @@ export class InsertproductSaleComponent implements OnInit {
 
   content: any = {};
   user_id: any = {};
-  public draft_form_id: any;
+  public draft_form_id:any;
 
   err_caused: boolean = false;
   selectedItems: string[];
@@ -108,8 +109,8 @@ export class InsertproductSaleComponent implements OnInit {
 
   insert_property_sales = new FormGroup({
     Property_Details: new FormGroup({
-      build_name: new FormControl('', Validators.required),
-      type: new FormControl('', Validators.required),
+      build_name: new FormControl(''),
+      type: new FormControl(''),
       // display_address: new FormControl('', Validators.required),
       area: new FormControl('', Validators.required),
       draft_form_id: new FormControl(''),
@@ -182,9 +183,9 @@ export class InsertproductSaleComponent implements OnInit {
 
   // value: number = 30000000;
   options: Options = {
-    floor: 0,
+    floor: 500000,
     ceil: 50000000,
-    step: 10000,
+    // step: 10000,
     translate: (value: number, label: LabelType): string => {
       return '₹' + value.toLocaleString('en');
     }
@@ -218,7 +219,7 @@ export class InsertproductSaleComponent implements OnInit {
 
         this.searchElementRef.nativeElement
       );
-      console.log(this.searchElementRef);
+      // console.log(this.searchElementRef);
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
 
@@ -255,16 +256,7 @@ export class InsertproductSaleComponent implements OnInit {
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      if (this.tokenStorage.getUser().misc) {
-        console.log(this.tokenStorage.getUser());
-        this.user_id = this.tokenStorage.getUser().id;
-      }
-      else {
-        console.log(this.tokenStorage.getUser());
-        this.userDetails = JSON.parse(this.tokenStorage.getUser());
-        this.user_id = this.userDetails.id;
-      }
-      //this.user_id = this.tokenStorage.getUser().id;
+      this.user_id = this.tokenStorage.getUser().id;
       this.maintenance = true;
       this.parking = false;
       this.roles = this.tokenStorage.getUser().username;
@@ -332,25 +324,22 @@ export class InsertproductSaleComponent implements OnInit {
         this.showLoadingIndicator = false;
       },
       err => {
-        console.log(err);
-        this.showLoadingIndicator = false;
+        // console.log(err);
+
       }
     );
   }
 
   onchange_locality(id: any) {
-    this.showLoadingIndicator = true;
-
     this.authService.get_pincodebyid(id).subscribe(
       data => {
         this.insert_property_sales.controls.Property_Location.patchValue({
           pincode: data.data.pincode,
         });
-        this.showLoadingIndicator = false;
       },
       err => {
-        console.log(err);
-        this.showLoadingIndicator = false;
+        // console.log(err);
+
       }
     );
   }
@@ -391,14 +380,28 @@ export class InsertproductSaleComponent implements OnInit {
       this.selectedItems = this.selectedItems.filter(m => m != id);
     }
     this.amenityArray = this.selectedItems;
-    //console.log(this.amenityArray);
+    this.amenityArray_length= this.amenityArray.length;
+    console.log(this.amenityArray);
+    console.log(this.amenityArray_length);
 
   }
-  onchange_add_room(event: any) {
-    if (event == 1) {
-      this.Add_room_tab = true;
-    } else {
-      this.Add_room_tab = false;
+  demo():void{
+    console.log(this.insert_property_sales.value.Property_additional_details.furnishing_status);
+    if(this.insert_property_sales.value.Property_additional_details.furnishing_status =='FFR'){
+      console.log(this.amenityArray_length);
+      if (this.amenityArray_length == 0){
+        if (this.insert_property_sales.invalid) {
+          // console.log(this.insert_property_sales.value);
+          return;
+        }
+      }
+    }
+  }
+  onchange_add_room(event:any){
+    if(event==1){
+      this.Add_room_tab=true;
+    }else{
+      this.Add_room_tab=false;
     }
   }
   furnishStatus(event): void {
@@ -635,6 +638,7 @@ export class InsertproductSaleComponent implements OnInit {
 
   onSubmitSale(): void {
     if (this.insert_property_sales.invalid) {
+      // console.log(this.insert_property_sales.value);
       return;
     }
     this.showLoadingIndicator = true;

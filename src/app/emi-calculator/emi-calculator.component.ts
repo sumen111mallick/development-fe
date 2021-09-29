@@ -214,7 +214,6 @@ export class EmiCalculatorComponent implements OnInit {
       return true;
     }
   }
-
   // Only Numbers with Decimals
   keyPressNumbersDecimal(event) {
     var charCode = (event.which) ? event.which : event.keyCode;

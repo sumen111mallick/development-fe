@@ -47,10 +47,7 @@ export class MypropertiesComponent implements OnInit {
     this.showLoadingIndicator = true;
     this.Myproperty();
     this.Draft_property();
-    this.property_solid();
-    this.property_pursched();
-   
-
+    this.user_order_product();
   }
   Myproperty(){
     this.showLoadingIndicator = true;
@@ -70,12 +67,17 @@ export class MypropertiesComponent implements OnInit {
     )
   }
   
-  property_solid(){
+  user_order_product(){
     this.showLoadingIndicator = true;
-    this.userService.getproperties_solid().pipe().subscribe(
+    this.userService.user_order_product().pipe().subscribe(
       (data: any) => {
-        this.solid_Lenght=data.data.length;
-        this.solid_pro_data= data.data;
+        console.log(data);
+        this.solid_Lenght=data.sold.length;
+        this.solid_pro_data= data.sold;
+
+        // purchased property 
+        this.purchased_Lenght=data.purchased.length;
+        this.purchased_pro_data= data.purchased;
         this.showLoadingIndicator = false;
 
       },
@@ -85,21 +87,21 @@ export class MypropertiesComponent implements OnInit {
     )
   }
   
-  property_pursched(){
-    this.showLoadingIndicator = true;
-    this.userService.getproperties_pursched().pipe().subscribe(
-      (data: any) => {
+  // property_pursched(){
+  //   this.showLoadingIndicator = true;
+  //   this.userService.getproperties_pursched().pipe().subscribe(
+  //     (data: any) => {
         
-        this.purchased_Lenght=data.data.length;
-        this.purchased_pro_data= data.data;
-        this.showLoadingIndicator = false;
+  //       this.purchased_Lenght=data.data.length;
+  //       this.purchased_pro_data= data.data;
+  //       this.showLoadingIndicator = false;
 
-      },
-      err => {
-        //console.log(err)
-      }
-    )
-  }
+  //     },
+  //     err => {
+  //       //console.log(err)
+  //     }
+  //   )
+  // }
   
   Draft_property(){
     this.showLoadingIndicator = true;

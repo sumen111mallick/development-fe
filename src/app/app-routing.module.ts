@@ -65,22 +65,39 @@ import { ManageRolesComponent } from './manage-roles/manage-roles.component';
 import { ViewRolesComponent } from './view-roles/view-roles.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { CheckLoginGuard } from './check-login.guard';
+import { UserLoggsGuard } from './user-loggs.guard';
 import { InsertproductSaleComponent } from './insertproduct-sale/insertproduct-sale.component';
 import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-rent.component';
 import { MobileVerifyGuard } from './mobile-verify.guard';
 
 const routes: Routes = [
 
-  {path: '', component: HomeComponent},
-  {path: 'home', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate:  [UserLoggsGuard],
+    data: {
+      type: 'home_page'
+    }
+  },
+  {path: 'home', component: HomeComponent, canActivate:  [UserLoggsGuard],
+    data: {
+      type: 'home_page'
+    }
+  },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [CheckLoginGuard],
     data: {
       permission: ['dashboard']
     }
   },
-  {path: 'productlisting', component: ProductListingComponent},
-  {path: 'productpage', component: ProductpageComponent},
+  {path: 'productlisting', component: ProductListingComponent, canActivate:  [UserLoggsGuard],
+    data: {
+      type: 'product_listing'
+    }
+  },
+  {path: 'productpage', component: ProductpageComponent, canActivate:  [UserLoggsGuard],
+    data: {
+      type: 'single_property_page'
+    }
+  },
   //{path: 'register', component: UserregisterComponent},
   {path: 'register', component: RegisterComponent},
   {
@@ -90,7 +107,10 @@ const routes: Routes = [
     }
   },
   {path: 'logout', component: UserlogoutComponent},
-  {path: 'contact', component: ContactComponent},
+  {path: 'contact', component: ContactComponent, canActivate:  [UserLoggsGuard],
+  data: {
+    type: 'contact_page'
+  }},
   //{path: 'insertproductsale', component: PostproductComponent, canActivate: [VerifyDetailsGuard]},
   //{path: 'insertproductrent', component: PostproductrentComponent, canActivate: [VerifyDetailsGuard]},
   {path: 'search', component: SearchComponent},
@@ -181,7 +201,11 @@ const routes: Routes = [
   },
   {path: 'verify-details', component:  VerifyDetailsComponent, canActivate: [VerifyGuardGuard]},
   {path: 'emi-calculator', component: EmiCalculatorComponent},
-  {path: 'plans', component: SubscriptionPlansComponent},
+  {path: 'plans', component: SubscriptionPlansComponent, canActivate:  [UserLoggsGuard],
+    data: {
+      type: 'plans_page'
+    } 
+  },
   {path: 'intellectual-property-disclaimer', component: IpDisclaimerComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'terms-conditions', component: TermsConditionsComponent},

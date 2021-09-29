@@ -39,7 +39,7 @@ export class ArticlesTipsComponent implements OnInit {
   }
 
   customOptions: OwlOptions = {
-    loop: true,
+    loop: false,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,

@@ -6,24 +6,7 @@
 		content="advanced custom search, agency, agent, business, clean, corporate, directory, google maps, homes, idx agent, listing properties, membership packages, property, real broker, real estate, real estate agent, real estate agency, realtor">
 	<meta name="description" content="FindHouse - Real Estate HTML Template">
 	<meta name="CreativeLayers" content="ATFN">
-	<!-- css file -->
-	<!-- <link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css"> -->
-	<!-- Responsive stylesheet -->
-	<!-- <link rel="stylesheet" href="css/responsive.css"> -->
-	<!-- Title -->
-
-	<!-- Favicon -->
-	<!-- <link href="./assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
-	<link href="./assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" /> -->
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-</head>
+	</head>
 
 <body>
 	<div class="wrapper">
@@ -50,12 +33,14 @@
 									<li class="nav-item" (click)="rent_price_fun()">
 										<a class="nav-link active" id="pills-home-tab" data-toggle="pill"
 											href="/productpagepills-home" role="tab" aria-controls="pills-home"
-											aria-selected="true">Rent</a>
+											aria-selected="true">Rent
+										</a>
 									</li>
 									<li class="nav-item" (click)="buyyer_price_fun()">
 										<a class="nav-link" id="pills-profile-tab" data-toggle="pill"
 											href="/productpagepills-profile" role="tab" aria-controls="pills-profile"
-											aria-selected="false">Buy</a>
+											aria-selected="false">Buy
+										</a>
 									</li>
 								</ul>
 								<div class="tab-content home1_adsrchfrm mx-auto" style="width: 80%;"
@@ -127,8 +112,7 @@
 															placeholder="Location">
 														<input #search autocorrect="off" autocapitalize="off"
 															spellcheck="off" formControlName="Location" type="search"
-															class="form-control input-text" placeholder="Enter Address"
-															[ngModelOptions]="{ standalone: true }" />
+															class="form-control input-text" placeholder="Enter Address"/>
 														<!--<label class="address_span" for="Location"><span
 																		class="flaticon-maps-and-flags"></span></label>-->
 													</div>
@@ -147,12 +131,10 @@
 																<input type="hidden" class="form-control" id="Maximum"
 																	placeholder="Max Price" name="Maximum"
 																	formControlName="Maximum">
-
 															</div>
 														</div>
 													</div>
 												</div>
-
 												<div *ngIf="buyyer_range_slider== true"
 													class="range-slider-homa-page col-lg-3 col-md-4 col-sm-12">
 													<div class="search_option_two">
@@ -172,16 +154,15 @@
 														</div>
 													</div>
 												</div>
-
 												<div class="col-lg-3 col-md-4 col-sm-12">
 													<div class="search_option_button text-center form-group h100">
 														<button type="button"
 															(click)="searchhome.form.valid && onSearch()"
-															class="btn btn-thm w100 h50">Search</button>
+															class="btn btn-thm w100 h50">Search
+														</button>
 													</div>
 												</div>
-											</div>
-
+											</div><!--row -->
 											<div class="row mt25">
 												<div class="col-lg-12 col-md-12 col-sm-12" id="accord-div">
 													<a class="btn" data-toggle="collapse" href="#collapseExample"
@@ -198,7 +179,6 @@
 																	</h4>
 																</div>
 															</div>
-
 															<div class="row">
 																<ul class="ui_kit_checkbox selectable-list">
 																	<li *ngFor="let menuData of amenitiesresult"
@@ -215,7 +195,6 @@
 																	</li>
 																</ul>
 															</div>
-
 															<div class="row mb20">
 																<div class="col-lg-3 col-md-6 col-sm-5">
 																	<div class="col-lg-12"><label>Bathrooms</label>
@@ -335,26 +314,24 @@
 																		</select>
 																	</div>
 																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
+															</div><!--row -->
+														</div><!-- card -->
+													</div><!-- collasb -->
+												</div><!-- accord div -->
+											</div><!-- row -->
 										</form>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+									</div><!-- tab plan--> 
+								</div><!-- tab content -->
+							</div><!-- home adv -->
+						</div><!--home -->
+					</div><!--column -->
+				</div><!--row -->
+			</div><!--container -->
 		</section>
 		<!-- iqbal working seacrhing bar end -->
 		<!-- iqbal working feature property  -->
 		<!-- Feature Properties -->
-		<section id="feature-property" class="feature-property bgc-f7">
+		<section id="feature-property" class="feature-property bgc-f7" *ngIf="product_length > 0">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
@@ -365,7 +342,7 @@
 									<p>to discover more</p>
 								</div>
 								<div class="thumb">
-									<img src="./assets/css/images/resource/mouse.png" alt="mouse.png">
+									<img  class="lazy" data-src="./assets/css/images/resource/mouse.png" alt="mouse.png">
 								</div>
 							</div>
 						</a>
@@ -396,16 +373,18 @@
 											*ngIf="number.product_img.length>0;else OtherImage">
 											<ng-template carouselSlide *ngFor="let img of number.product_img"
 												class="inner_carosule">
-												<img class="img-whp" src="{{ftpstring}}{{img.image}}" alt="img1.jpg">
+												<img class="img-whp lazy" data-src="{{ftpstring}}{{img.image}}" alt="img1.jpg">
 												<div class="thumb">
 													<div class="thmb_cntnt style2">
 														<ul class="tag mb0">
 															<li class="list-inline-item"
 																*ngIf=" number.rent_availability != null"><a>For
-																	Rent</a></li>
+																	Rent</a>
+															</li>
 															<li class="list-inline-item"
 																*ngIf=" number.sale_availability != null"><a>For
-																	Sale</a></li>
+																	Sale</a>
+															</li>
 														</ul>
 													</div>
 													<div class="thmb_cntnt style3">
@@ -425,17 +404,16 @@
 															</ng-template>
 														</ul>
 														<a *ngIf="number.expected_pricing != null" class="fp_price">₹
-															{{Price_convert(number.expected_pricing)}}<small></small></a>
+															{{Price_convert(number.expected_pricing)}}</a>
 														<a *ngIf="number.expected_rent != null" class="fp_price">₹ {{
-															Price_convert(number.expected_rent)}}<small></small></a>
+															Price_convert(number.expected_rent)}}</a>
 													</div>
 												</div>
 											</ng-template>
 										</owl-carousel-o>
-
 										<ng-template #OtherImage>
 											<!-- <div class="thumb"> -->
-											<img class="img-whp" src="./../../assets/images/no_image_available.jpg"
+											<img class="img-whp" loading="lazy" src="./../../assets/images/no_image_available.jpg"
 												alt="No Product Image" style="height: 250px;">
 											<!-- </div> -->
 											<div class="thumb">
@@ -477,26 +455,26 @@
 											<a href="/productpage?id={{number.id}}">
 												<div class="tc_content">
 													<p class="text-thm" *ngIf="number.property__type != null">{{
-														number.property__type.name | titlecase }}</p>
-													<h4>{{number.build_name | titlecase}}</h4>
-													<p><span class="flaticon-placeholder"></span> {{ number.address |
+														number?.property__type.name | titlecase }}</p>
+													<h4>{{number?.build_name | titlecase}}</h4>
+													<p><span class="flaticon-placeholder"></span> {{ number?.address |
 														titlecase }}</p>
 													<ul class="prop_details mb0">
-														<li class="list-inline-item"><a>Beds: {{ number.bedroom }}</a>
+														<li class="list-inline-item"><a>Beds: {{ number?.bedroom }}</a>
 														</li>
-														<li class="list-inline-item"><a>Baths: {{ number.bathroom }}</a>
+														<li class="list-inline-item"><a>Baths: {{ number?.bathroom }}</a>
 														</li>
-														<li class="list-inline-item"><a>Area unit: {{ number.area_unit
+														<li class="list-inline-item"><a>Area unit: {{ number?.area_unit
 																}}</a></li>
 													</ul>
 												</div>
 											</a>
 											<div class="fp_footer" id="user_details">
 												<ul class="fp_meta float-left mb0">
-													<li class="list-inline-item"><a href="#"><img
+													<li class="list-inline-item"><a href="#"><img loading="lazy"
 																src="./../../assets/css/images/team/e1.png"
 																alt="pposter1.png"></a></li>
-													<li class="list-inline-item"><a href="#">{{number.user_detail.name |
+													<li class="list-inline-item"><a href="#">{{number?.user_detail?.name |
 															titlecase}}</a></li>
 													<div class="fp_pdate float-right"
 														*ngIf="number.product_comparision==null">
@@ -512,39 +490,16 @@
 															Compare</button>
 													</div>
 												</ul>
-
 											</div>
-
 										</div>
 									</div>
 								</ng-template>
-
-								<!-- </div> -->
 							</ng-container>
 						</owl-carousel-o>
-						<!-- <div class="col-lg-12 mt20">
-				<div class="mbp_pagination">
-				  <ul class="page_navigation">
-					  <li class="page-item disabled">
-						<a class="page-link"  tabindex="-1" aria-disabled="true"> <span class="flaticon-left-arrow"></span> Prev</a>
-					  </li>
-					  <li class="page-item"><a class="page-link" >1</a></li>
-					  <li class="page-item active" aria-current="page">
-						<a class="page-link" >2 <span class="sr-only">(current)</span></a>
-					  </li>
-					  <li class="page-item"><a class="page-link" >3</a></li>
-					  <li class="page-item"><a class="page-link" >...</a></li>
-					  <li class="page-item"><a class="page-link" >29</a></li>
-					  <li class="page-item">
-						<a class="page-link" href="#"><span class="flaticon-right-arrow"></span></a>
-					  </li>
-				  </ul>
-				</div>
-			  </div> -->
-						<div *ngIf="product_length == 0">
+						<!-- <div *ngIf="product_length == 0">
 							<h2 class="breadcrumb_title">Product Listing Not Found!!!...</h2>
 
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -565,7 +520,7 @@
 					<div class="col-lg-4 col-xl-4" (click)="property_search('qwerwqer')">
 						<div class="properti_city">
 							<div class="thumb">
-								<img class="img-fluid w100" src="./assets/css/images/property/pc1.jpg" alt="pc1.jpg">
+								<img class="img-fluid w100 lazy" data-src="./assets/css/images/property/pc1.jpg" alt="pc1.jpg">
 							</div>
 							<div class="overlay">
 								<div class="details">
@@ -577,7 +532,7 @@
 					</div>
 					<div class="col-lg-8 col-xl-8" (click)="property_search('delhi')">
 						<div class="properti_city">
-							<div class="thumb"><img class="img-fluid w100" src="./assets/css/images/property/pc2.jpg"
+							<div class="thumb"><img class="img-fluid w100 lazy" data-src="./assets/css/images/property/pc2.jpg"
 									alt="pc2.jpg"></div>
 							<div class="overlay">
 								<div class="details">
@@ -589,7 +544,7 @@
 					</div>
 					<div class="col-lg-8 col-xl-8" (click)="property_search('chennai')">
 						<div class="properti_city">
-							<div class="thumb"><img class="img-fluid w100" src="./assets/css/images/property/pc3.jpg"
+							<div class="thumb"><img class="img-fluid w100 lazy" data-src="./assets/css/images/property/pc3.jpg"
 									alt="pc3.jpg"></div>
 							<div class="overlay">
 								<div class="details">
@@ -601,7 +556,7 @@
 					</div>
 					<div class="col-lg-4 col-xl-4" (click)="property_search('kolkata')">
 						<div class="properti_city">
-							<div class="thumb"><img class="img-fluid w100" src="./assets/css/images/property/pc4.jpg"
+							<div class="thumb"><img class="img-fluid w100 lazy" data-src="./assets/css/images/property/pc4.jpg"
 									alt="pc4.jpg"></div>
 							<div class="overlay">
 								<div class="details">
@@ -684,12 +639,12 @@
 								<div class="item">
 									<div class="testimonial_grid">
 										<div class="thumb">
-											<img src="./../../assets/css/images/property/pposter1.png"
+											<img loading="lazy" src="./../../assets/css/images/property/pposter1.png"
 												alt="user Testimonial image">
 										</div>
 										<div class="details">
-											<h4>{{testimoData.user_name}}</h4>
-											<p>{{testimoData.rev_subject}}</p>
+											<h4>{{testimoData?.user_name}}</h4>
+											<p>{{testimoData?.rev_subject}}</p>
 											<p class="mt10 mb10" *ngIf="testimoData.stars == 0">
 												<i class="fa fa-star-o" aria-hidden="true"></i>
 												<i class="fa fa-star-o" aria-hidden="true"></i>
@@ -738,96 +693,22 @@
 												<i class="fa fa-star" aria-hidden="true"></i>
 											</p>
 											<p class="mt10 mb25">
-												{{testimoData.rev_content}}
+												{{testimoData?.rev_content}}
 											</p>
 										</div>
 									</div>
 								</div>
 							</ng-template>
 						</ngb-carousel>
-
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- iqbal wroking testimonail section -->
-		<!-- Slide 3 of 3 -->
-
-
-		<!-- Our Testimonials -->
-		<!-- <section id="our-testimonials" class="our-testimonial">
-		  <div class="container">
-			  <div class="row">
-				  <div class="col-lg-6 offset-lg-3">
-					  <div class="main-title text-center">
-						  <h2 class="color-white">Testimonials</h2>
-						  <p class="color-white">Here could be a nice sub title</p>
-					  </div>
-				  </div>
-			  </div>
-			  <div class="row">
-				  <div class="col-lg-6 offset-lg-3">
-					  <div class="testimonial_grid_slider">
-						  <div class="item active">
-							  <div class="testimonial_grid">
-								  <div class="thumb">
-									  <img src="./assets/css/images/testimonial/1.jpg" alt="1.jpg">
-								  </div>
-								  <div class="details">
-									  <h4>Augusta Silva</h4>
-									  <p>Sales Manager</p>
-									  <p class="mt25">Aliquam dictum elit vitae mauris facilisis at dictum urna dignissim donec vel lectus vel felis.</p>
-								  </div>
-							  </div>
-						  </div>
-						  <div class="item">
-							  <div class="testimonial_grid">
-								  <div class="thumb">
-									  <img src="./assets/css/images/testimonial/1.jpg" alt="1.jpg">
-								  </div>
-								  <div class="details">
-									  <h4>Augusta Silva</h4>
-									  <p>Sales Manager</p>
-									  <p class="mt25">Aliquam dictum elit vitae mauris facilisis at dictum urna dignissim donec vel lectus vel felis.</p>
-								  </div>
-							  </div>
-						  </div>
-						  <div class="item">
-							  <div class="testimonial_grid">
-								  <div class="thumb">
-									  <img src="./assets/css/images/testimonial/1.jpg" alt="1.jpg">
-								  </div>
-								  <div class="details">
-									  <h4>Augusta Silva</h4>
-									  <p>Sales Manager</p>
-									  <p class="mt25">Aliquam dictum elit vitae mauris facilisis at dictum urna dignissim donec vel lectus vel felis.</p>
-								  </div>
-							  </div>
-						  </div>
-						  <div class="item">
-							  <div class="testimonial_grid">
-								  <div class="thumb">
-									  <img src="./assets/css/images/testimonial/1.jpg" alt="1.jpg">
-								  </div>
-								  <div class="details">
-									  <h4>Augusta Silva</h4>
-									  <p>Sales Manager</p>
-									  <p class="mt25">Aliquam dictum elit vitae mauris facilisis at dictum urna dignissim donec vel lectus vel felis.</p>
-								  </div>
-							  </div>
-						  </div>
-					  </div>
-				  </div>
-			  </div>
-		  </div>
-	  </section> -->
-
-		<!-- Articles and Tips Section -->
 		<!-- Added by Radhika Start -->
 		<app-articles-tips></app-articles-tips>
 		<!-- Added by Radhika End -->
-
 		<!-- Our Partners -->
 		<section id="our-partners" class="our-partners">
 			<div class="container">
@@ -842,27 +723,27 @@
 				<div class="row">
 					<div class="col-4 col-sm-6 col-md-4 col-lg">
 						<div class="our_partner">
-							<img class="img-fluid" src="./assets/css/images/partners/1.png" alt="1.png">
+							<img class="img-fluid lazy" data-src="./assets/css/images/partners/1.png" alt="1.png">
 						</div>
 					</div>
 					<div class="col-4  col-sm-6 col-md-4 col-lg">
 						<div class="our_partner">
-							<img class="img-fluid" src="./assets/css/images/partners/2.png" alt="2.png">
+							<img class="img-fluid lazy" data-src="./assets/css/images/partners/2.png" alt="2.png">
 						</div>
 					</div>
 					<div class="col-4  col-sm-6 col-md-4 col-lg">
 						<div class="our_partner">
-							<img class="img-fluid" src="./assets/css/images/partners/3.png" alt="3.png">
+							<img class="img-fluid lazy" data-src="./assets/css/images/partners/3.png" alt="3.png">
 						</div>
 					</div>
 					<div class="col-4  col-sm-6 col-md-4 col-lg">
 						<div class="our_partner">
-							<img class="img-fluid" src="./assets/css/images/partners/4.png" alt="4.png">
+							<img class="img-fluid lazy" data-src="./assets/css/images/partners/4.png" alt="4.png">
 						</div>
 					</div>
 					<div class="col-4  col-sm-6 col-md-4 col-lg">
 						<div class="our_partner">
-							<img class="img-fluid" src="./assets/css/images/partners/5.png" alt="5.png">
+							<img class="img-fluid lazy" data-src="./assets/css/images/partners/5.png" alt="5.png">
 						</div>
 					</div>
 				</div>
@@ -887,19 +768,10 @@
 				</div>
 			</div>
 		</section>
-
-		<!-- Our Footer -->
+        <!-- Our Footer -->
 		<app-footer></app-footer>
 		<a class="scrollToHome" href="#"><i class="fa fa-angle-double-up"></i></a>
 	</div>
 	<!-- Wrapper End -->
-
-
-	<!-- Custom script for all pages -->
-
-	<!-- -->
-
 </body>
-
-
 <router-outlet></router-outlet>

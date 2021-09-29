@@ -190,7 +190,7 @@ export class UpdatepropertyComponent implements OnInit {
     Property_price_images: new FormGroup({
       expected_rent: new FormControl('5000'),
       security_deposit: new FormControl('', Validators.required),
-      inc_electricity_and_water_bill: new FormControl(''),
+      inc_electricity_and_water_bill: new FormControl('', Validators.required),
       tax_govt_charge: new FormControl('', Validators.required),
       price_negotiable: new FormControl(''),
       negotiable_status: new FormControl('0'),
@@ -227,7 +227,7 @@ export class UpdatepropertyComponent implements OnInit {
 
   options: Options = {
     // step:500,
-    floor: 0,
+    floor: 5000,
     ceil: 500000,
     translate: (value: number, label: LabelType): string => {
       return '₹' + value.toLocaleString('en');
@@ -346,7 +346,7 @@ export class UpdatepropertyComponent implements OnInit {
      this.showLoadingIndicator = true;
      this.authService.Propery_get_id(this.id).subscribe(
        (data: any) => {
-         console.log(data);
+        // console.log(data);
         this.data_id=data.data.id;
         if( this.data_id == 0){
          this.redirect_to_myproperties();
@@ -1004,11 +1004,9 @@ delete_Pro_img(id: any){
  }
 
    onSubmitRent(): void { 
-    console.log(this.additional_room_array); 
-    if (this.update_property_rent.invalid) {
-      return;
-    }
-    this.showLoadingIndicator = true;
+  if (this.update_property_rent.invalid) {
+    return;
+  }
     if(this.update_property_rent.value.Property_price_images.expected_rent>=5000 && this.update_property_rent.value.Property_price_images.expected_rent<=500000){
       this.authService.product_rent_update(this.update_property_rent.value, this.id, this.additional_room_array, this.amenityArray,this.amenity_Uncheck, this.furnishingArray, this.update_product_img).subscribe(
         data => {

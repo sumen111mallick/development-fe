@@ -41,7 +41,7 @@ export class MenuSidebarComponent implements OnInit {
       this.isLoggedIn = true;
       
       if (this.tokenStorage.getUser().misc) {
-        console.log(this.tokenStorage.getUser());
+        // console.log(this.tokenStorage.getUser());
         this.roles = this.tokenStorage.getUser().username;
         this.userEmail = this.tokenStorage.getUser().misc.email;
         this.userProfile = this.tokenStorage.getUser().misc.profile_pic;

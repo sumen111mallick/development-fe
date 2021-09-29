@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './../_services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { HostListener } from "@angular/core";
+import { UserLogsService } from './../_services/user-logs.service';
 
 @Component({
   selector: 'app-compare',
@@ -29,16 +30,28 @@ export class CompareComponent implements OnInit {
   user_data3: [];
   ftpstring: string = GlobalConstants.ftpURL;
   public property_comp_length:number=0;
-  property_comp:any={};
+  property_comp:any;
   content:any={};
   public showLoadingIndicator: boolean =false;
-  public amenitiesresult:any={};
+  public amenitiesresult:any;
   e: any={};
   public devicetype:number;
   public  amenties_uncheck: any = [];
   product_amenties:any=[];
   public unique_ameties:any=[];
   filter_amenties:any=[];
+  property_data: any = [];
+  pro_id:any=null;
+  type:any;
+  device_info:any;
+  browser_info:any;
+  url_info:string;
+  url: any;
+  input_info:any=null;
+  ip_address:any; 
+  ipAddress:string;		
+  userEmail:any;
+  user_cart:any;
 
 
   constructor(
@@ -48,6 +61,7 @@ export class CompareComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private tokenStorage: TokenStorageService,
+    private userlogs: UserLogsService
   ) { 
       this.getScreenSize();
       if (this.tokenStorage.getToken() == null){
@@ -58,6 +72,12 @@ export class CompareComponent implements OnInit {
 
   ngOnInit(): void {
     this.pro_comp();
+    this.url_info     = this.userlogs.geturl();      
+    this.device_info  = this.userlogs.getDeviceInfo();
+    this.browser_info = this.userlogs.getbrowserInfo();
+    this.ip_address   = this.userlogs.getIpAddress();
+    
+    this.property_data = new Array<string>();
 
   }
   @HostListener('window:resize', ['$event'])
@@ -89,6 +109,41 @@ export class CompareComponent implements OnInit {
         // console.log(this.unique_ameties);
         this.product_amenities();
         this.pro_comp_refresh();
+        
+        // user logs funtionalty
+        if(this.property_comp_length>0){
+          // loop start
+          for(let i=0; i<this.property_comp_length; i++){
+            if(this.property_comp[i].productdetails != null){
+              // inner condition  check 
+              if(this.property_comp[i].productdetails.expected_pricing != null){
+                this.property_name=this.property_comp[i].productdetails.build_name;
+                this.property_price=this.property_comp[i].productdetails.expected_pricing;
+                this.property_type="property_sales";
+                this.property_uid=this.property_comp[i].productdetails.product_uid;
+                this.property_data.push({'name':this.property_name,'property_id':this.property_uid,'type':this.property_type,'price':this.property_price});
+                }
+                if(this.property_comp[i].productdetails.expected_rent != null){
+                  this.property_name=this.property_comp[i].productdetails.build_name;
+                  this.property_price=this.property_comp[i].productdetails.expected_rent;
+                  this.property_type="property_rent";
+                  this.property_uid=this.property_comp[i].productdetails.product_uid;
+                  this.property_data.push({'name':this.property_name,'property_id':this.property_uid,'type':this.property_type,'price':this.property_price});
+               }
+            }
+           
+          } 
+          //  loop closed 
+            this.userEmail = this.tokenStorage.getUser().email;
+            this.type      = "compare_page";
+            this.user_cart = this.property_data;
+            this.authService.user_logs(this.ip_address,this.device_info,this.browser_info,this.url_info,this.pro_id,this.type,this.userEmail,this.input_info,this.user_cart).subscribe(
+              data => {
+                this.showLoadingIndicator = false;
+              });
+          }
+        // user logs funtionalty
+
          if(this.property_comp_length <2){
             this.toastr.warning('Comparision Minimun Two','Property', {
               timeOut: 4000,
@@ -108,15 +163,14 @@ export class CompareComponent implements OnInit {
     this.userService.getamenitiesdata().pipe().subscribe(
       (amenitiesdata: any) => {
         this.amenities = amenitiesdata.data;
-        console.log(this.amenities.length);
+        // console.log(this.amenities.length);
         for(let i=0; i<this.amenities.length;i++){
           if (this.filter_amenties_fun(this.amenities[i].id)) {
             this.filter_amenties.push(this.amenities[i]);
           }
         }
         this.amenitiesresult = this.filter_amenties;
-        console.log(this.amenitiesresult);
-        this.showLoadingIndicator = false;
+        // console.log(this.amenitiesresult);
       },
       err => {
         this.content = JSON.parse(err.error).message;
@@ -128,7 +182,7 @@ export class CompareComponent implements OnInit {
     if(this.unique_ameties.length !=null){
       for (let i=0; i<this.unique_ameties.length; i++) {
         if(this.unique_ameties[i]==amenties_id){
-          console.log(amenties_id);
+          // console.log(amenties_id);
            return true;
           }
         }

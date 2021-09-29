@@ -126,7 +126,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { SplitPipe } from './split.pipe';
 
+
 //import { FileUploadModule } from 'ng2-file-upload';
+// import { DeviceDetectorModule } from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -257,6 +259,7 @@ import { SplitPipe } from './split.pipe';
     CarouselModule,
     NgbModule,
     NgxStarRatingModule
+    // DeviceDetectorModule.forRoot()
   ],
   providers: [
     Title,

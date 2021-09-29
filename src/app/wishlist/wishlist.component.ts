@@ -6,7 +6,7 @@ import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
+import { UserLogsService } from './../_services/user-logs.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 
@@ -17,8 +17,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class WishlistComponent implements OnInit {
   [x: string]: any;
-  wishlist_length = 0;
-
+  wishlist_length=0;
+  
   form: any = {};
   ared: any = {};
   isLoggedIn = false;
@@ -29,8 +29,24 @@ export class WishlistComponent implements OnInit {
   maintenance: boolean = true;
   parking: boolean = false;
   ftpstring = GlobalConstants.ftpURL;
-  e: any = {};
-  public showLoadingIndicator: boolean = false;
+  e: any={};  
+  showLoadingIndicator = false;
+  public property_name:any;
+  public property_type:any;
+  public property_price:any;
+  public property_uid:any;
+  property_data: any = [];
+  pro_id:any=null;
+  type:any;
+  device_info:any;
+  browser_info:any;
+  url_info:string;
+  url: any;
+  input_info:any=null;
+  ip_address:any; 
+  ipAddress:string;		
+  userEmail:any;
+  user_cart:any;
 
   constructor(
     private titleService: Title,
@@ -38,7 +54,8 @@ export class WishlistComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private idservice: TokenStorageService,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userlogs: UserLogsService
     ) {
         if (this.tokenStorage.getToken() == null){
       
@@ -49,10 +66,10 @@ export class WishlistComponent implements OnInit {
   
     ngOnInit(): void {
       this.titleService.setTitle('Create Listing');
-      //this.url_info  = this.userlogs.geturl();      
-      //this.device_info  = this.userlogs.getDeviceInfo();
-      //this.browser_info = this.userlogs.getbrowserInfo();
-      //this.ip_address   = this.userlogs.getIpAddress();
+      this.url_info  = this.userlogs.geturl();      
+      this.device_info  = this.userlogs.getDeviceInfo();
+      this.browser_info = this.userlogs.getbrowserInfo();
+      this.ip_address   = this.userlogs.getIpAddress();
       // Login check
       if (this.tokenStorage.getToken() != null){
         this.content = this.tokenStorage.getUser().id;
@@ -112,7 +129,61 @@ product_comp(id:number){
         this.wishlistcontent = wishlistdata.data;
         this.wishlistresult = this.wishlistcontent;
         this.wishlist_length = this.wishlistcontent.length;
-        console.log(this.wishlistresult);
+        // console.log(this.wishlistresult);
+        // console.log(this.wishlist_length);
+
+        
+        // user logs funtionalty
+        if(this.wishlist_length>0){
+          // loop start
+          for(let i=0; i<this.wishlist_length; i++){
+            if(this.wishlistresult[i].productdetails != null){
+              // inner condition  check 
+              if(this.wishlistresult[i].productdetails.expected_pricing != null){
+                this.property_name=this.wishlistresult[i].productdetails.build_name;
+                this.property_price=this.wishlistresult[i].productdetails.expected_pricing;
+                this.property_type="property_sales";
+                this.property_uid=this.wishlistresult[i].productdetails.product_uid;
+                this.property_data.push({'name':this.property_name,'property_id':this.property_uid,'type':this.property_type,'price':this.property_price});
+                }
+                if(this.wishlistresult[i].productdetails.expected_rent != null){
+                  this.property_name=this.wishlistresult[i].productdetails.build_name;
+                  this.property_price=this.wishlistresult[i].productdetails.expected_rent;
+                  this.property_type="property_rent";
+                  this.property_uid=this.wishlistresult[i].productdetails.product_uid;
+                  this.property_data.push({'name':this.property_name,'property_id':this.property_uid,'type':this.property_type,'price':this.property_price});
+               }
+            }
+           
+          } 
+          //  loop closed 
+            this.userEmail = this.tokenStorage.getUser().email;
+            this.type      = "wishlist_page";
+            this.user_cart = this.property_data;
+            // console.log(this.user_cart);
+            // console.log(this.userEmail);
+            // console.log(this.pro_id);
+            // console.log(this.type);
+
+            
+            // console.log(this.device_info);
+            // console.log(this.browser_info);
+            // console.log(this.url_info);
+            // console.log(this.ip_address);
+            // console.log(this.input_info);
+            this.authService.user_logs(this.ip_address,this.device_info,this.browser_info,this.url_info,this.pro_id,this.type,this.userEmail,this.input_info,this.user_cart).subscribe(
+              data => {
+                this.showLoadingIndicator = false;
+                // this.router.navigateByUrl("")
+                // .then(() => {
+                //   window.location.reload();
+                // });
+              });
+          
+        }
+        // user logs funtionalty
+
+
         this.showLoadingIndicator = false;
         this.wishlist_info();
         this.pro_comp_refresh();

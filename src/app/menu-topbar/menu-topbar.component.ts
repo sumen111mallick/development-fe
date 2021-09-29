@@ -24,9 +24,9 @@ export class MenuTopbarComponent implements OnInit {
   ared: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  errorMessage :any='';
   roles: string[] = null;
-  data;
+  data:any;
   userEmail: string[] = null;
   userProfile: string[] = null;
   ftpstring: string = GlobalConstants.ftpURL;
@@ -70,10 +70,10 @@ export class MenuTopbarComponent implements OnInit {
     // console.log(this.tokenStorage.getToken());
     //console.log(this.tokenStorage.getUser());
     //console.log(this.tokenStorage.getToken());
-    console.log(this.isLoggedIn);
+    // console.log(this.isLoggedIn);
     if (this.tokenStorage.getToken() != null) {
       this.isLoggedIn = true;
-      console.log(this.isLoggedIn);
+      // console.log(this.isLoggedIn);
       if (this.tokenStorage.getUser().misc) {
         this.roles = this.tokenStorage.getUser().username;
         this.userEmail = this.tokenStorage.getUser().misc.email;
