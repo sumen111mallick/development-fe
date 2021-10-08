@@ -16704,10 +16704,22 @@ button.gm-ui-hover-effect:focus {
   background-color: #fff;
   font-weight: 500;
 }
+#table-column{
+  margin-top: 20px!important;
+}
+#table-column .my_dashboard_review{
+  padding: 0px!important;
+}
+#table-column .my_dashboard_review .table{
+  margin-bottom: 0px!important;
+}
 
 @media(min-width: 768px) {
   .btn-next{
     float: right!important;
+  }  
+  .local-service_dashboard .my_dashboard_review{
+    padding: 20px 30px 0px 30px!important ;
   }
   .sidebar_listing_list .ng-star-inserted h4{
     text-align: center!important;
@@ -16869,6 +16881,18 @@ button.gm-ui-hover-effect:focus {
 
 
 @media(max-width: 768px) {  
+  .single_page_listing_tab #myTabContent .home10-mainslider{
+    height: 250px!important;
+  }
+  .ng-image-slider .ng-image-slider-container .main .next, .ng-image-slider .ng-image-slider-container .main .prev {
+     top:35%!important;
+  }
+  .ng-image-slider .ng-image-slider-container .main .main-inner .img-div img, .ng-image-slider .ng-image-slider-container .main .main-inner .img-div video{
+    /* top: 20px!important; */
+    bottom: auto!important;
+    height: auto!important;
+    width: 100%!important;
+  }
   .feature-property_home  .feat_property .details .tc_content{
     padding: 10px 15px!important;
   }
@@ -17171,7 +17195,6 @@ button.gm-ui-hover-effect:focus {
   .plans_tab li.nav-item .nav-link {
     font-size: 16px;
   }
-
   .our-dashbord.dashbord {
     margin-left: 120px;
   }
@@ -17757,6 +17780,13 @@ border-radius: 0px!important;
   .feat_property .details .fp_footer .fp_pdate{
     margin-left: 0px!important;
     width: 50%!important;
+  }
+  
+  .local-service_dashboard .my_dashboard_review{
+    padding: 30px!important ;
+  }
+  .local-service_dashboard .my_profile_setting_input.form-group {
+    margin-bottom: 20px!important;
   }
   /* .feature-property_home .owl-carousel.owl-drag .owl-item{
     width: 365px!important;
@@ -18358,7 +18388,25 @@ border-radius: 0px!important;
 #user_details .fp_meta{
   width: 100%;
 }
-
 .mat-menu-item {
 	text-align:center !important;
+}
+.ng-image-slider .custom-image-main img{
+  width: auto!important;
+}
+.ng-image-slider .ng-image-slider-container .main .caption{
+  display: none!important;
+}
+.ng-image-slider .ng-image-slider-container .main .next.disable, .ng-image-slider .ng-image-slider-container .main .prev.disable{
+  color: #fff!important;
+  background-color: #ff5a5f!important;
+  opacity: 1!important;
+}
+.ng-image-slider .ng-image-slider-container .main .next, .ng-image-slider .ng-image-slider-container .main .prev{
+  color: #fff!important;
+  background-color: #ff5a5f!important;
+  opacity: 1!important;
+}
+.our-dashbord .button{
+  cursor: pointer!important;
 }

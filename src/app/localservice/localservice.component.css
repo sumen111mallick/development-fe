@@ -1,0 +1,54 @@
+.search-column{
+    display: flex;
+    align-items: center;
+}
+.search-column button{
+    width: 100%;
+    background-color: #f35b3f!important;
+    opacity: 1!important;
+}
+.search-column button:hover{
+  background-color: #f35b3f!important;
+  color: #fff!important;
+  opacity: 1!important;
+}
+.property_table .table .thead-light th{
+    border: 1px solid rgb(36, 50, 74)!important;
+}
+.pagination{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 20px 0px;
+}
+.sign_up_modal .modal-dialog{
+    top: 18%!important;
+}
+.sign_up_modal .my_profile_setting_input.form-group {
+    margin-bottom: 0px!important;
+}
+.sign_up_modal .model_header_column h3{
+    font-size: 20px;
+    color: #ff5a5f;
+    margin: 0px;
+    font-weight: 600;
+}
+#user_details_btn a{
+    color: #ff5a5f;    
+    cursor: pointer;
+}
+.testimonial_data{
+    border: 1px solid #ff5a5f;
+    border-radius: 10px;
+    padding: 10px 5px!important;
+    margin: 5px 0px!important;
+}
+.testimonial_data .description p,h6{
+    margin: 0px;
+}
+.testimonial_data .description .fa-star{
+    color: #fd4!important;
+}
+#review_row .fa-star{
+    color: #fd4!important;
+}

@@ -11,3 +11,6 @@
 /*.table-borderless th {
     text-align: right !important;
 }*/
+button {
+    margin-right: 1em;
+  }

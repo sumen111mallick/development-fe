@@ -83,16 +83,16 @@ export class InsertproductRentComponent implements OnInit {
   furnishings: any;
   total_floors: any;
   property_on_floor: any;
-  rera_registration_status: any;
+  // rera_registration_status: any;
   additional_parking_status: any;
   parking_covered_count: any;
   expected_pricing: any;
-  possession_by: any;
+  // possession_by: any;
   tax_govt_charge: any;
   price_negotiable: any;
   negotiable_status:any;
   facing_towards: any;
-  availability_condition: any;
+  // availability_condition: any;
   buildyear: any;
   age_of_property: any;
   expected_rent: any;
@@ -109,8 +109,9 @@ export class InsertproductRentComponent implements OnInit {
   equipment: any;
   features: any;
   pincode:any;
-  maintenance_charge:any;
-  maintenance_charge_status:any;
+  maintenance_charge:number;
+  maintenance_charge_status:boolean;
+  maintenance_charge_condition:any;
 
   public property_type: any;
   public property_type_result: any;
@@ -157,11 +158,11 @@ export class InsertproductRentComponent implements OnInit {
       facing_towards: new FormControl('', Validators.required),
       furnishings: new FormControl(''),
       furnishing_status: new FormControl('NFR'),
-      rera_registration_status: new FormControl('', Validators.required),
+      // rera_registration_status: new FormControl('', Validators.required),
       additional_parking_status: new FormControl('0'),
       buildyear: new FormControl('', Validators.required),
-      availability_condition: new FormControl(''),
-      possession_by: new FormControl(''),
+      // availability_condition: new FormControl(''),
+      // possession_by: new FormControl(''),
       property_on_floor: new FormControl(''),
       total_floors: new FormControl(''),
       willing_to_rent_out_to: new FormControl(''),
@@ -172,7 +173,7 @@ export class InsertproductRentComponent implements OnInit {
       ownership: new FormControl(''),
       month_of_notice: new FormControl(''),
       parking_covered_count: new FormControl(''),
-      parking_open_count: new FormControl('')
+      parking_open_count: new FormControl(''),
     }),
 
     Property_price_images: new FormGroup({
@@ -184,6 +185,7 @@ export class InsertproductRentComponent implements OnInit {
       negotiable_status: new FormControl('0'),
       maintenance_charge_status: new FormControl('0'),
       maintenance_charge: new FormControl(''),
+      maintenance_charge_condition:new FormControl(''),
       video_link: new FormControl('')
     })
 
@@ -627,7 +629,7 @@ export class InsertproductRentComponent implements OnInit {
     if (this.insert_property_rent.invalid) {
       return;
     }
-    console.log(this.insert_property_rent.value);
+    // console.log(this.insert_property_rent.value);
     this.showLoadingIndicator = true;
     if (this.insert_property_rent.value.Property_price_images.expected_rent >= 5000 && this.insert_property_rent.value.Property_price_images.expected_rent <= 500000) {
       this.authService.product_insert_rent(this.insert_property_rent.value, this.content, this.additional_room_array, this.amenityArray, this.product_img).subscribe(

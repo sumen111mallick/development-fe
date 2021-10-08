@@ -228,7 +228,7 @@ loginuser_coutData(){
       this.content_session = this.idservice.returnSearch();
       console.log(this.content_session);
       this.Searchcontent =this.idservice.returnSearch()['data'];
-      //console.log(this.content_session['data']);
+      console.log(this.content_session['data']);
       this.Search_data_length=this.Searchcontent.length;
           if(this.idservice.get_pro_type() != null){
             //console.log(this.idservice.get_pro_type());
@@ -238,7 +238,7 @@ loginuser_coutData(){
           }
       //console.log( this.Searchcontent);  
       this.homepage_data=this.idservice.get_formData();
-      //console.log(this.homepage_data);
+      console.log(this.homepage_data);
         if(this.homepage_data != null){
           this.form.build_name=this.homepage_data['0']['build_name'];
           this.form.Location=this.homepage_data['0']['Location'];
@@ -247,8 +247,8 @@ loginuser_coutData(){
           this.form.Bathrooms=this.homepage_data['0']['Bathrooms'];
           this.form.Bedrooms=this.homepage_data['0']['Bedrooms'];
           this.form.Years=this.homepage_data['0']['Years'];
-          this.form.Minimum=this.homepage_data['0']['Minimum'];
-          this.form.Maximum=this.homepage_data['0']['Maximum'];
+          this.form.Minimum = this.homepage_data['0']['sliderControl'][0];
+          this.form.Maximum = this.homepage_data['0']['sliderControl'][1];
           this.form.area_unit=this.homepage_data['0']['area_unit'];
           this.form.availability_condition=this.homepage_data['0']['search_type'];
           this.form.search_type=this.homepage_data['0']['search_type'];
@@ -365,7 +365,7 @@ Property_type_data(): void{
       this.property_type_data = data.data;
       this.property_type_result = this.property_type;
       this.property_type_count=data.count;
-      // this.property_type_count_length=data.count.length;
+      this.property_type_count_length=data.count.length;
       this.showLoadingIndicator = false;
       //console.log(this.property_type_count);
       //console.log(this.property_type_data);

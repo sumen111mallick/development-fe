@@ -118,36 +118,36 @@ export class HomeComponent implements OnInit {
     this.form.Minimum=1;
     this.form.Maximum=500000;
     this.searchForm.controls['search_type'].setValue('rent');
-    this.mapsAPILoader.load().then(() => {
-      this.geoCoder = new google.maps.Geocoder();
-    });
-    this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(
-        this.searchElementRef.nativeElement
-      );
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
+    // this.mapsAPILoader.load().then(() => {
+    //   this.geoCoder = new google.maps.Geocoder();
+    // });
+    // this.mapsAPILoader.load().then(() => {
+    //   let autocomplete = new google.maps.places.Autocomplete(
+    //     this.searchElementRef.nativeElement
+    //   );
+    //   autocomplete.addListener("place_changed", () => {
+    //     this.ngZone.run(() => {
           
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          // this.latCus = place.geometry.location.lat();
-          // this.longCus = place.geometry.location.lng();
-          this.location = place.formatted_address;
-          this.zoom = 15;
-          // console.log(this.latCus);
-          // console.log(this.location);
-          // this.form.Location=this.location;
-          this.searchForm.controls['Location'].setValue(this.location);
-          // this.searchForm.controls['map_latitude'].setValue(this.latCus);
-          // this.searchForm.controls['map_longitude'].setValue(this.longCus);
-          // this.form.map_latitude=this.latCus;
-          // this.form.map_longitude=this.longCus;
+    //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+    //       // this.latCus = place.geometry.location.lat();
+    //       // this.longCus = place.geometry.location.lng();
+    //       this.location = place.formatted_address;
+    //       this.zoom = 15;
+    //       // console.log(this.latCus);
+    //       // console.log(this.location);
+    //       // this.form.Location=this.location;
+    //       this.searchForm.controls['Location'].setValue(this.location);
+    //       // this.searchForm.controls['map_latitude'].setValue(this.latCus);
+    //       // this.searchForm.controls['map_longitude'].setValue(this.longCus);
+    //       // this.form.map_latitude=this.latCus;
+    //       // this.form.map_longitude=this.longCus;
         
-        });
-      });
-    });
+    //     });
+    //   });
+    // });
 
     this.selectedItems = new Array<string>();
-    this.home_call();
+    // this.home_call();
     this.amenities();
     // this.Property_type_data();
     this.gettestimonialdata();
@@ -161,88 +161,82 @@ export class HomeComponent implements OnInit {
   }
 
 // product comaprision functinalty 
-product_comp(id:number){
-  //console.log(id);
-  // Login check
-  this.showLoadingIndicator = true;
-  if(this.tokenStorage.getUser() != null){
-    this.isLoggedIn = true
-    //console.log(this.isLoggedIn);
-    this.maintenance = true;
-    this.parking = false;     
-      this.authService.Crete_product_comp(id).pipe().subscribe(
-        (data: any) =>{
-          //console.log(data);
-          this.showLoadingIndicator = false;
-          this.home_call();
-          //console.log(data.data.length);
-          if(data.data.length>4){
-            this.toastr.info('Compare are the Full...!!!', 'Property', {
-              timeOut: 3000,
-            });
-          }else{
-            this.toastr.success('Added To compare Successfully', 'Property', {
-              timeOut: 3000,
-            });
-          }
-        },
-        err => {
-          //console.log(err.error);
-          this.showLoadingIndicator = false;
-        }
-      );
-  }
-  else{
-    this.redirect_to_home();
-  }
-}
+// product_comp(id:number){
+//   this.showLoadingIndicator = true;
+//   if(this.tokenStorage.getUser() != null){
+//     this.isLoggedIn = true;
+//     this.maintenance = true;
+//     this.parking = false;     
+//       this.authService.Crete_product_comp(id).pipe().subscribe(
+//         (data: any) =>{
+//           this.showLoadingIndicator = false;
+//           this.home_call();
+//           if(data.data.length>4){
+//             this.toastr.info('Compare are the Full...!!!', 'Property', {
+//               timeOut: 3000,
+//             });
+//           }else{
+//             this.toastr.success('Added To compare Successfully', 'Property', {
+//               timeOut: 3000,
+//             });
+//           }
+//         },
+//         err => {
+//           this.showLoadingIndicator = false;
+//         }
+//       );
+//   }
+//   else{
+//     this.redirect_to_home();
+//   }
+// }
 
-  wishlist_added(data: any){
-    // Login check
-    if(this.tokenStorage.getUser() != null){
-      this.isLoggedIn = true
-      //console.log(this.isLoggedIn);
-    }
-    else{
-      this.redirect_to_home();
-    }
-    this.maintenance = true;
-    this.parking = false;
-    if (this.tokenStorage.getToken()){
-      this.isLoggedIn = true;      
-      this.authService.Wishlist(data).pipe().subscribe(
-        (result: any) =>{
-          //console.log(result);
-          this.home_call();
-        },
-        err => {
-          //console.log(err.error);
-        }
-      );
+  // wishlist_added(data: any){
+  //   // Login check
+  //   if(this.tokenStorage.getUser() != null){
+  //     this.isLoggedIn = true
+  //     //console.log(this.isLoggedIn);
+  //   }
+  //   else{
+  //     this.redirect_to_home();
+  //   }
+  //   this.maintenance = true;
+  //   this.parking = false;
+  //   if (this.tokenStorage.getToken()){
+  //     this.isLoggedIn = true;      
+  //     this.authService.Wishlist(data).pipe().subscribe(
+  //       (result: any) =>{
+  //         //console.log(result);
+  //         this.home_call();
+  //       },
+  //       err => {
+  //         //console.log(err.error);
+  //       }
+  //     );
 
-    }
-    else{
-      this.isLoggedIn = false ;
-    }
-  }
-  Wishlist_remove(data: any){
-    if(this.tokenStorage.getUser() != null){
-      this.isLoggedIn = true;
-       this.authService.WishlistRemove(data).pipe().subscribe(
-        (result: any) =>{
-          //console.log(result);
-          this.home_call();
-        },
-        err => {
-          //console.log(err.error);
-        }
-      );
-    }
-    else{
-      this.redirect_to_home();
-    }
+  //   }
+  //   else{
+  //     this.isLoggedIn = false ;
+  //   }
+  // }
+  // Wishlist_remove(data: any){
+  //   if(this.tokenStorage.getUser() != null){
+  //     this.isLoggedIn = true;
+  //      this.authService.WishlistRemove(data).pipe().subscribe(
+  //       (result: any) =>{
+  //         //console.log(result);
+  //         this.home_call();
+  //       },
+  //       err => {
+  //         //console.log(err.error);
+  //       }
+  //     );
+  //   }
+  //   else{
+  //     this.redirect_to_home();
+  //   }
     
-  }
+  // }
   
   redirect_to_home(): void {
     window.location.href=GlobalConstants.siteURL="login"
@@ -265,65 +259,65 @@ product_comp(id:number){
     }
     
   // pricre convert functionalty
-  Price_convert(num: number) {
-    if (num >= 1000000000) {
-       return (num / 1000000000).toFixed(2).replace(/\.0$/, '') + 'G';
-    }
-    if (num >= 10000000) {
-      return (num / 10000000).toFixed(2).replace(/\.0$/, '') + 'Crore';
-    }
-    if (num >= 100000) {
-      return (num / 100000).toFixed(2).replace(/\.0$/, '') + 'Lac';
-    }
-    if (num >= 1000) {
-      this.e=num;
-      var t = (this.e = this.e ? this.e.toString() : "").substring(this.e.length - 3)
-      , n = this.e.substring(0, this.e.length - 3);
-    return "" !== n && (t = "," + t),
-      n.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + t
-    }
-    return num;
-  }
+  // Price_convert(num: number) {
+  //   if (num >= 1000000000) {
+  //      return (num / 1000000000).toFixed(2).replace(/\.0$/, '') + 'G';
+  //   }
+  //   if (num >= 10000000) {
+  //     return (num / 10000000).toFixed(2).replace(/\.0$/, '') + 'Crore';
+  //   }
+  //   if (num >= 100000) {
+  //     return (num / 100000).toFixed(2).replace(/\.0$/, '') + 'Lac';
+  //   }
+  //   if (num >= 1000) {
+  //     this.e=num;
+  //     var t = (this.e = this.e ? this.e.toString() : "").substring(this.e.length - 3)
+  //     , n = this.e.substring(0, this.e.length - 3);
+  //   return "" !== n && (t = "," + t),
+  //     n.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + t
+  //   }
+  //   return num;
+  // }
   
-  home_call(): void{
-    if(this.tokenStorage.getToken()){
-      this.isLoggedIn = true;  
-      this.showLoadingIndicator = true;
-      this.authService.getproductWishlist().pipe().subscribe(
-        (data: any) => {  
-          this.content = data.data;
-          this.number = data.data;
-          this.product_length = data.data.length;
-          // console.log(this.number);
-          // console.log(this.number.length);
-          this.showLoadingIndicator = false;
-          this.wishlist_info();
-          this.pro_comp_refresh();
-        },
-        err => {
-          //this.content = JSON.parse(err.error).message;
-          this.content = err.error.message;
-          this.showLoadingIndicator = false;
-        }
-      );   
-    }else{
-      this.showLoadingIndicator = true;
-      this.userService.getproductlistingfeatured().pipe().subscribe(
-        (data: any) => {
-          this.content = data.data;
-          this.number = data.data;
-          this.product_length= data.data.length;
-          this.showLoadingIndicator = false;
-          //console.log(this.number);        
-        },
-        err => {
-          //this.content = JSON.parse(err.error).message;
-          this.content = err.error.message;
-          this.showLoadingIndicator = false;
-        }
-      );
-    }
-  }
+  // home_call(): void{
+  //   if(this.tokenStorage.getToken()){
+  //     this.isLoggedIn = true;  
+  //     this.showLoadingIndicator = true;
+  //     this.authService.getproductWishlist().pipe().subscribe(
+  //       (data: any) => {  
+  //         this.content = data.data;
+  //         this.number = data.data;
+  //         this.product_length = data.data.length;
+  //         // console.log(this.number);
+  //         // console.log(this.number.length);
+  //         this.showLoadingIndicator = false;
+  //         this.wishlist_info();
+  //         this.pro_comp_refresh();
+  //       },
+  //       err => {
+  //         //this.content = JSON.parse(err.error).message;
+  //         this.content = err.error.message;
+  //         this.showLoadingIndicator = false;
+  //       }
+  //     );   
+  //   }else{
+  //     this.showLoadingIndicator = true;
+  //     this.userService.getproductlistingfeatured().pipe().subscribe(
+  //       (data: any) => {
+  //         this.content = data.data;
+  //         this.number = data.data;
+  //         this.product_length= data.data.length;
+  //         this.showLoadingIndicator = false;
+  //         //console.log(this.number);        
+  //       },
+  //       err => {
+  //         //this.content = JSON.parse(err.error).message;
+  //         this.content = err.error.message;
+  //         this.showLoadingIndicator = false;
+  //       }
+  //     );
+  //   }
+  // }
  
   amenities(): void{
     this.showLoadingIndicator = true;
@@ -489,66 +483,62 @@ wishlist_info(){
     window.location.href=GlobalConstants.siteURL="compare"
   }
 // carosule image
-customOptions: OwlOptions = {
-  loop:true,
-  dots:true,
-  // autoplay:false,
-  // autoplayTimeout:8000,
-  // items:3,
-  // autoplayHoverPause:true,
-  navSpeed: 700,
-  navText: ['<span class="outer_slider"><i class="fas fa-arrow-left"></i></span>', '<span class="outer_slider"><i class="fas fa-arrow-right"></i></span>'],
-  responsive: {
-    0: {
-      items: 1
-    },
-    400: {
-      items: 1
-    },
-    740: {
-      items: 1
-    },
-    940: {
-      items: 3
-    },
-    1050: {
-      items: 3
-    },
-    1250: {
-      items: 3
-    }
-  },
-  nav:true
-}  
- // carosule image
- customOptions_inner: OwlOptions = {
-  loop: true,
-  mouseDrag: false,
-  touchDrag: false,
-  pullDrag: false,
-  autoplay:false,
-  dots: false,
-  navSpeed: 700,
-  navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
-  responsive: {
-    0: {
-      items: 1
-    },
-    400: {
-      items: 1
-    },
-    740: {
-      items: 1
-    },
-    940: {
-      items: 1
-    },
-    1050: {
-      items: 1
-    }
-  },
-  nav: true
-}
+// customOptions: OwlOptions = {
+//   loop:true,
+//   dots:true,
+//   navSpeed: 700,
+//   navText: ['<span class="outer_slider"><i class="fas fa-arrow-left"></i></span>', '<span class="outer_slider"><i class="fas fa-arrow-right"></i></span>'],
+//   responsive: {
+//     0: {
+//       items: 1
+//     },
+//     400: {
+//       items: 1
+//     },
+//     740: {
+//       items: 1
+//     },
+//     940: {
+//       items: 3
+//     },
+//     1050: {
+//       items: 3
+//     },
+//     1250: {
+//       items: 3
+//     }
+//   },
+//   nav:true
+// }  
+//  // carosule image
+//  customOptions_inner: OwlOptions = {
+//   loop: true,
+//   mouseDrag: false,
+//   touchDrag: false,
+//   pullDrag: false,
+//   autoplay:false,
+//   dots: false,
+//   navSpeed: 700,
+//   navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
+//   responsive: {
+//     0: {
+//       items: 1
+//     },
+//     400: {
+//       items: 1
+//     },
+//     740: {
+//       items: 1
+//     },
+//     940: {
+//       items: 1
+//     },
+//     1050: {
+//       items: 1
+//     }
+//   },
+//   nav: true
+// }
 
 
 }

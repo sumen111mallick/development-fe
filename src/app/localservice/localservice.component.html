@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-listing-grid-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:20 GMT -->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+    content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+  <meta name="description" content="FindHouse - Real Estate HTML Template">
+  <meta name="CreativeLayers" content="ATFN">
+
+  <!-- Title -->
+  <title>FindHouse - Real Estate HTML Template</title>
+  <!-- Favicon -->
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    
+  <div class="wrapper">
+    <!-- <div *ngIf="showLoadingIndicator"> -->
+      <div class="preloader"></div>
+    <!-- </div> -->
+    
+    <section class="our-dashbord dashbord bgc-f7 pb50 local-service_dashboard">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3 col-xl-2 dn-992 pl0">
+              <app-menu-sidebar></app-menu-sidebar>
+            </div>
+            <div class="col-sm-12 col-lg-8 col-xl-10 maxw100flex-992">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <!-- Dashboard navigation goes here -->
+                      <app-dashboard-nav></app-dashboard-nav>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="my_dashboard_review">
+                            <form role="form" action="" method="post" class="f1"  [formGroup]="Service_form">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                  <h2 class="mb10"> Filter Area Service Provider</h2>
+                                  </div>
+                                  <div class="col-lg-3">
+                                    <div class="my_profile_setting_input form-group">
+                                        <label for="Area" class="">Please Select Area</label>
+                                        <select class="form-control" name="Area" id="Area" formControlName="Area" (ngModelChange)="onchange_area($event)">
+                                            <option value="" disabled>Select Area</option>
+                                            <option value="470">Chartartpur</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                  <div class="my_profile_setting_input form-group">
+                                      <label for="LocalArea" class="">Please Select Local Area</label>
+                                      <select class="form-control" name="LocalArea" id="LocalArea" formControlName="LocalArea" (ngModelChange)="onchange_local_area($event)">
+                                        <option value="">Select Local Area</option>
+                                        <option *ngFor="let loc_Area of local_area_data"
+                                              [value]="loc_Area.loc_area_id">{{loc_Area.local_area}}
+                                        </option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-lg-3">
+                                <div class="my_profile_setting_input form-group">
+                                    <label id="service" class="">Please Select Service</label>
+                                    <select class="form-control" name="service" id="service" formControlName="service">
+                                      <option value="">Select Services</option>
+                                      <option *ngFor="let sevices of area_service_data"
+                                            [value]="sevices.service_id">{{sevices.service_name}}
+                                      </option>
+                                    </select>
+                                </div>
+                              </div>
+                              <div class="col-lg-3 col-12 search-column">
+                                  <!-- <div class="f1-buttons m-auto"> -->
+                                      <button type="submit" (click)="On_Search()"
+                                          class="btn btn-submit">Searching</button>
+                                  <!-- </div> -->
+                              </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" id="table-column">
+                      <div class="my_dashboard_review mb40">
+                        <div class="property_table">
+                          <div class="table-responsive mt0">
+                            <span _ngcontent-bcc-c292="" class="status_tag badge">Service Provider({{search_data?.length}})</span>
+                            <table class="table">
+                              <thead class="thead-light">
+                                <tr>
+                                  <!-- <th scope="col">No</th> -->
+                                  <th scope="col">Service</th>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Mobile No</th>
+                                  <th scope="col">Stars rating</th>
+                                </tr>
+                              </thead>
+                              <div class="row" *ngIf="showLoadingIndicator ==true" >
+                                <div class="col-md-12 col-lg-12" class="loaderClass">
+                                  <div class="preloader1"></div>
+                                </div>
+                              </div>
+                              <tbody  *ngIf="search_data?.length > 0; else Otherdiv"> 
+                                <tr  *ngFor="let data of search_data | paginate:{itemsPerPage:5, currentPage:p} ">
+                                  <!-- <td scope="row">{{data?.service?.service_id}}</td> -->
+                                  <td width="25%">{{data?.service?.service_name}}</td>
+                                  <td width="25%" id="user_details_btn">
+                                    <a data-toggle="modal"
+																				data-target=".bd-example-modal-lg" (click)="user_details(data.user_id)">{{data?.user_name}}</a>
+                                  </td>
+                                  <td width="25%">{{data.contact}}</td>
+                                  <td width="25%" id="review_row">
+                                    <div *ngIf="data.user_review.length>0; else Otherreview">
+                                      <span *ngIf="(data.user_review | getAverage) as result">
+                                        <span *ngIf="result<=5 && result>4">
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                        </span>
+                                        <span *ngIf="result<=4 && result>3">
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </span>
+                                        <span *ngIf="result<=3 && result>2">
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </span>
+                                        <span *ngIf="result<=2 && result>1">
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </span>
+                                        <span *ngIf="result<=1 && result>0">
+                                          <i class="fa fa-star" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                          <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        </span>
+                                      </span>
+                                    </div>
+                                    <ng-template #Otherreview>
+                                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    </ng-template>
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <ng-template #Otherdiv>
+                                <h3 style="font-size: 20px;margin:20px;">Local Service Are not Available</h3>
+                              </ng-template>
+                            </table> 
+                            <div class="col-lg-12 pagination" *ngIf="search_data?.length > 5" >
+                              <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                           </div>                           
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+          </section>
+    </div>
+</body>
+<!-- Mirrored from grandetest.com/theme/findhouse-html/page-listing-grid-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:30 GMT -->
+
+</html>
+
+
+<div class="sign_up_modal modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"
+        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body container pb20">
+      <div class="row" id="model_header">
+        <div class="col-lg-12 model_header_column"><h3>{{UserDeatils?.user_name}}<span>({{UserDeatils?.service?.service_name}})</span></h3></div>
+      </div>
+      <div class="tab-content container" id="myTabContent">
+        <div class="row mt25 tab-pane fade show active" id="profile"
+          role="tabpanel" aria-labelledby="profile-tab">
+          <div class="col-lg-5 col-xl-5">
+            <form action="#" name="form" [formGroup]="review_form">
+              <div class="col-lg-6 col-xl-12">
+                <div class="my_profile_setting_input form-group">
+                  <label for="stars">Stars</label>
+                  <ngx-star-rating name="stars" id="stars" formControlName="stars"
+                    [id]="'rating'"></ngx-star-rating>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="my_profile_setting_textarea form-group">
+                  <label for="content">Review Content</label>
+                  <textarea type="text" name="content" formControlName="content"
+                    class="form-control" id="content" rows="5" cols="100"></textarea>	
+                    <input type="hidden" class="form-control" name="user_id" id="user_id"
+                    formControlName="user_id" placeholder="">
+                    <input type="hidden" class="form-control" name="user_id" id="user_id"
+                    formControlName="s_user_id" placeholder="">
+                </div>
+              </div>
+              <div class="col-xl-12 form-group">
+                <div class="my_profile_setting_input">
+                  <button type="submit" (click)="submit_review()" class="btn btn2 ">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-7 col-xl-7" *ngIf="review_data?.length>0;else other_section">
+            <div class="row testimonial_data" *ngFor = "let review of review_data | paginate:{itemsPerPage:3, currentPage:d, id: 'd'}">
+              <div class="col-lg-12 col-12">
+                <div class="row description">
+                  <!-- <div class="col-lg-1 col-1"><p>{{i+1}}.</p></div> -->
+                  <div class="col-12 col-lg-6">
+                    <h6>User:<span style="color:#ff5a5f;">{{review?.user_detail?.email}}</span></h6>
+                  </div>
+                  <div class="col-12 col-lg-6">
+                    <p class="mt10 mb10" *ngIf="review?.stars == 0">
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </p>
+                    <p class="mt10 mb10" *ngIf="review?.stars == 1">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </p>
+    
+                    <p class="mt10 mb10" *ngIf="review?.stars == 2">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </p>
+    
+                    <p class="mt10 mb10" *ngIf="review?.stars == 3">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </p>
+    
+                    <p class="mt10 mb10" *ngIf="review?.stars == 4">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </p>
+    
+                    <p class="mt10 mb10" *ngIf="review?.stars == 5">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                    </p>
+                  </div>
+                </div>
+                <p>{{review?.content}}</p>
+                
+              </div>
+              <!-- <div class="col-lg-4 col-6"><h5>Name: {{review?.user_detail?.name}}</h5></div> -->
+              <!-- <div class="col-lg-12 col-12"></div> -->
+            </div>
+            <div class="col-lg-12 Agent_property " *ngIf="review_data?.length>3">
+              <pagination-controls (pageChange)="d = $event" id="d"></pagination-controls>
+            </div> 
+          </div>
+          
+          <ng-template #other_section>
+            <h3 style="font-size: 20px;margin:20px;">This Service Reviews Are not Available</h3>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -35,7 +35,7 @@ html, body {
   }
   
   ::ng-deep .mat-toolbar{
-    z-index: 998;
+    z-index: 10000000!important;
     position: fixed;
     height: 100px;
     width: 100% !important;

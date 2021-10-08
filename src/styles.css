@@ -177,12 +177,13 @@ mat-dialog-container#modal-component {
 }
 
 .ngx-slider .ngx-slider-pointer {
-  background-color: #cd5700 !important;
+  background-color: #ff5a5f !important;
 }
 
 .ngx-slider .ngx-slider-selection {
-  background: #ffa500 !important;
+  background: #d4686a !important;
 }
+
 
 /*button.btn:focus, button.btn:active:focus, button.btn.active:focus {
   color: #fff !important;

@@ -125,7 +125,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { SplitPipe } from './split.pipe';
-
+import { LocalserviceComponent } from './localservice/localservice.component';
+import { FeaturePropertyComponent } from './feature-property/feature-property.component';
+import { CityPropertyComponent } from './city-property/city-property.component';
+import { WhyChooseUsComponent } from './why-choose-us/why-choose-us.component';
+import { OurPartnersComponent } from './our-partners/our-partners.component';
+import { TestimonialComponent } from './testimonial/testimonial.component';
+import { RealEstateAgentComponent } from './real-estate-agent/real-estate-agent.component';
+import { HomeSearchFormComponent } from './home-search-form/home-search-form.component';
+import { GetAveragePipe } from './get-average.pipe';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 // import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -198,7 +206,7 @@ import { SplitPipe } from './split.pipe';
     ArticlesTipsComponent,
     RegisterComponent,
     EmiCalculatorComponent,
-	SubscriptionPlansComponent,
+	  SubscriptionPlansComponent,
     IpDisclaimerComponent,
     PrivacyPolicyComponent,
     TermsConditionsComponent,
@@ -207,7 +215,7 @@ import { SplitPipe } from './split.pipe';
     UpdatepropertyComponent,
     UpdateSalesPropertyComponent,
     AdminUsercreatorComponent,
-	InternalUsersPanelComponent,
+	  InternalUsersPanelComponent,
     CreateRolesComponent,
     ManageRolesComponent,
     ViewRolesComponent,
@@ -221,7 +229,16 @@ import { SplitPipe } from './split.pipe';
     SidenavListComponent,
     DashboardNavComponent,
     ModalComponent,
-    SplitPipe,			
+    SplitPipe,
+    LocalserviceComponent,
+    FeaturePropertyComponent,
+    CityPropertyComponent,
+    WhyChooseUsComponent,
+    OurPartnersComponent,
+    TestimonialComponent,
+    RealEstateAgentComponent,
+    HomeSearchFormComponent,
+    GetAveragePipe,			
   ],
   imports: [
     Ng5SliderModule,

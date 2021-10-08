@@ -68,7 +68,8 @@ import { CheckLoginGuard } from './check-login.guard';
 import { UserLoggsGuard } from './user-loggs.guard';
 import { InsertproductSaleComponent } from './insertproduct-sale/insertproduct-sale.component';
 import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-rent.component';
-import { MobileVerifyGuard } from './mobile-verify.guard';
+// import { MobileVerifyGuard } from './mobile-verify.guard';
+import{ LocalserviceComponent } from './localservice/localservice.component';
 
 const routes: Routes = [
 
@@ -185,7 +186,6 @@ const routes: Routes = [
       permission: ['access_manage_blog']
     }
   },
-  //{path:'blog-edit-post/:slug', component: BlogEditPostComponent},
   //{path: 'blog-single-post', component: BlogSinglePostComponent},
   {
     path: 'admin-blog', component: AdminBlogComponent, canActivate: [AuthGuardGuard],
@@ -249,9 +249,10 @@ const routes: Routes = [
       permission: ['access_manage_roles']
     }
   },
-  { path: 'access-denied', component: AccessDeniedComponent },
+  {path: 'access-denied', component: AccessDeniedComponent },
   {path: 'insertproduct-sale', component: InsertproductSaleComponent, canActivate: [VerifyDetailsGuard]},
   {path: 'insertproduct-rent', component: InsertproductRentComponent, canActivate: [VerifyDetailsGuard]},
+  {path:'local-service', component: LocalserviceComponent},
   {path: '**', component: NotfoundComponent},
 
 ];

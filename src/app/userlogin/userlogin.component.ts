@@ -89,7 +89,10 @@ export class UserloginComponent implements OnInit {
     this.device_info  = this.userlogs.getDeviceInfo();
     this.browser_info = this.userlogs.getbrowserInfo();
     this.ip_address   = this.userlogs.getIpAddress();
-    console.log(this.ip_address);
+    // console.log(this.device_info);
+    // console.log(this.browser_info);
+    // console.log(this.url_info);
+    // console.log(this.ip_address);
 
     /*console.log(this.urlService.getPreviousUrl());*/
     //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -170,7 +173,8 @@ export class UserloginComponent implements OnInit {
         this.tokenStorage.saveToken(data.access_token);
         //console.log(this.tokenStorage.getToken());
         this.tokenStorage.saveUser(data);
-
+        console.log(this.ip_address);
+        console.log(data.user_data);
         // user logs funtionalty
         if(data.user_data){
           this.userEmail= data.email;
@@ -179,7 +183,7 @@ export class UserloginComponent implements OnInit {
           this.authService.user_logs(this.ip_address,this.device_info,this.browser_info,this.url_info,this.pro_id,this.type,this.userEmail,this.input_info,this.user_cart).subscribe(
             data => {
               this.showLoadingIndicator = false;
-              // console.log(data);
+              console.log(data);
               this.router.navigateByUrl("")
               .then(() => {
                 window.location.reload();
@@ -198,11 +202,11 @@ export class UserloginComponent implements OnInit {
         // this.router.navigate(["/profile"])
         // this.reloadPage();
         // window.location.href=GlobalConstants.siteURL+"";
-        this.showLoadingIndicator = false;
-        this.router.navigateByUrl("")
-          .then(() => {
-            window.location.reload();
-          });
+        // this.showLoadingIndicator = false;
+        // this.router.navigateByUrl("")
+        //   .then(() => {
+        //     window.location.reload();
+        //   });
         //this.router.navigateByUrl(this.returnUrl);
         //this.redirect_to_profile();
         //this.router.navigateByUrl(this.previousUrl);
@@ -263,18 +267,5 @@ export class UserloginComponent implements OnInit {
     this.tokenStorage.signout();
     window.location.reload();
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

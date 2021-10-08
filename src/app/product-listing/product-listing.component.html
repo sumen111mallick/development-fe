@@ -430,8 +430,8 @@
           <div class="col-md-6 col-lg-6" *ngFor = "let number of Searchcontent | paginate:{itemsPerPage:10, currentPage:p}">
             <div class="feat_property home7 style4">
               <owl-carousel-o [options]="customOptions" *ngIf="number.product_img.length>0;else OtherImage">
-                <ng-template carouselSlide  *ngFor = "let img of number.product_img">
-                  <img class="img-whp lazy"  data-src="{{ftpstring}}{{img.image}}" alt="img1.jpg">
+                <ng-template carouselSlide  *ngFor = "let img of number?.product_img">
+                  <img class="img-whp"  src="{{ftpstring}}{{img?.image}}" alt="img1.jpg">
                   <div class="thumb">
                      <div class="thmb_cntnt style2">
                       <ul class="tag mb0">

@@ -69,15 +69,15 @@ export class UpdatepropertyComponent implements OnInit {
   furnishings: any;
   total_floors: any;
   property_on_floor: any;
-  rera_registration_status: any;
+  // rera_registration_status: any;
   additional_parking_status: any;
   parking_covered_count:any;
   expected_pricing: any;
-  possession_by: any;
+  // possession_by: any;
   tax_govt_charge: any;
   price_negotiable: any;
   facing_towards: any;
-  availability_condition: any;
+  // availability_condition: any;
   buildyear: any;
   age_of_property: any;
   expected_rent:any;
@@ -169,11 +169,11 @@ export class UpdatepropertyComponent implements OnInit {
       furnishings: new FormControl(''),
       furnishing_status: new FormControl('NFR'),
       facing_towards: new FormControl(''),
-      rera_registration_status: new FormControl(''),
+      // rera_registration_status: new FormControl(''),
       additional_parking_status: new FormControl('0'),
       buildyear: new FormControl('', Validators.required),
-      availability_condition: new FormControl(''),
-      possession_by: new FormControl(''),
+      // availability_condition: new FormControl(''),
+      // possession_by: new FormControl(''),
       property_on_floor: new FormControl(''),
       total_floors: new FormControl(''),
       willing_to_rent_out_to: new FormControl(''),
@@ -196,6 +196,7 @@ export class UpdatepropertyComponent implements OnInit {
       negotiable_status: new FormControl('0'),
       maintenance_charge_status: new FormControl('0'),
       maintenance_charge: new FormControl(''),
+      maintenance_charge_condition:new FormControl(''),
       video_link: new FormControl('')
     })
   });
@@ -208,6 +209,7 @@ export class UpdatepropertyComponent implements OnInit {
  
   maintenance_charge: any;
   maintenance_charge_status: any;
+  maintenance_charge_condition:any;
   parking_open_count: any;
   Amenties_id: any;
   Amenties_length: number;
@@ -395,17 +397,17 @@ export class UpdatepropertyComponent implements OnInit {
          this.furnishings = data.data.furnishings;
          this.total_floors = data.data.total_floors;
          this.property_on_floor = data.data.property_on_floor;
-         this.rera_registration_status = data.data.rera_registration_status;
+        //  this.rera_registration_status = data.data.rera_registration_status;
          this.additional_parking_status = data.data.additional_parking_status;
          this.parking_covered_count = data.data.parking_covered_count;
-         this.possession_by = data.data.possession_by;
+        //  this.possession_by = data.data.possession_by;
          this.negotiable_status = data.data.negotiable_status;
          this.pincode= data.data.pincode;
          this.additional_rooms_status= data.data.additional_rooms_status;
          this.tax_govt_charge = data.data.tax_govt_charge;
          this.price_negotiable = data.data.price_negotiable;
          this.facing_towards = data.data.facing_towards;
-         this.availability_condition = data.data.availability_condition;
+        //  this.availability_condition = data.data.availability_condition;
          this.buildyear = data.data.buildyear;
          this.age_of_property = data.data.age_of_property;
          this.expected_rent = data.data.expected_rent;
@@ -424,6 +426,7 @@ export class UpdatepropertyComponent implements OnInit {
          this.features = data.data.features;
          this.maintenance_charge=data.data.maintenance_charge,
          this.maintenance_charge_status=data.data.maintenance_charge_status;
+         this.maintenance_charge_condition=data.data.maintenance_charge_condition;
          this.parking_open_count=data.data.parking_open_count;
          this.video_link= data.data.video_link;
  
@@ -486,11 +489,11 @@ export class UpdatepropertyComponent implements OnInit {
             facing_towards:this.facing_towards,
           });   
         }
-        if(this.rera_registration_status){
-          this.update_property_rent.controls.Property_additional_details.patchValue({
-            rera_registration_status:this.rera_registration_status,
-          });   
-        }
+        // if(this.rera_registration_status){
+        //   this.update_property_rent.controls.Property_additional_details.patchValue({
+        //     rera_registration_status:this.rera_registration_status,
+        //   });   
+        // }
         
         if(this.furnishing_status){
           this.update_property_rent.controls.Property_additional_details.patchValue({
@@ -507,11 +510,11 @@ export class UpdatepropertyComponent implements OnInit {
             buildyear:this.buildyear,
           });   
         }
-        if(this.availability_condition  !=null){
-          this.update_property_rent.controls.Property_additional_details.patchValue({
-            availability_condition:this.availability_condition,
-          });   
-        }
+        // if(this.availability_condition  !=null){
+        //   this.update_property_rent.controls.Property_additional_details.patchValue({
+        //     availability_condition:this.availability_condition,
+        //   });   
+        // }
         if(this.willing_to_rent_out_to  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             willing_to_rent_out_to:this.willing_to_rent_out_to,
@@ -537,11 +540,11 @@ export class UpdatepropertyComponent implements OnInit {
             duration_of_rent_aggreement:this.duration_of_rent_aggreement,
           });   
         }
-        if(this.possession_by  !=null){
-          this.update_property_rent.controls.Property_additional_details.patchValue({
-            possession_by:this.possession_by,
-          });   
-        }
+        // if(this.possession_by  !=null){
+        //   this.update_property_rent.controls.Property_additional_details.patchValue({
+        //     possession_by:this.possession_by,
+        //   });   
+        // }
         if(this.property_on_floor  !=null){
           this.update_property_rent.controls.Property_additional_details.patchValue({
             property_on_floor:this.property_on_floor,
@@ -594,9 +597,9 @@ export class UpdatepropertyComponent implements OnInit {
             inc_electricity_and_water_bill:this.inc_electricity_and_water_bill,
           });   
         }
-        console.log(this.tax_govt_charge);
+        // console.log(this.tax_govt_charge);
         if(this.tax_govt_charge != null){
-          console.log(this.tax_govt_charge);
+          // console.log(this.tax_govt_charge);
           this.update_property_rent.controls.Property_price_images.patchValue({
             tax_govt_charge:this.tax_govt_charge,
           });   
@@ -619,6 +622,13 @@ export class UpdatepropertyComponent implements OnInit {
         if(this.maintenance_charge){
           this.update_property_rent.controls.Property_price_images.patchValue({
             maintenance_charge:this.maintenance_charge,
+          });   
+        }
+        // console.log(this.maintenance_charge_condition);
+        if(this.maintenance_charge_condition){
+          // console.log(this.maintenance_charge_condition);
+          this.update_property_rent.controls.Property_price_images.patchValue({
+            maintenance_charge_condition:this.maintenance_charge_condition,
           });   
         }
         this.showLoadingIndicator = false; 

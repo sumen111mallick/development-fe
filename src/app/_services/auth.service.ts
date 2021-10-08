@@ -317,13 +317,13 @@ mobile_verify(data, id): Observable<any> {
       furnishing_status: details.Property_additional_details.furnishing_status,
       total_floors: details.Property_additional_details.total_floors,
       property_on_floor: details.Property_additional_details.property_on_floor,
-      rera_registration_status: details.Property_additional_details.rera_registration_status,
+      // rera_registration_status: details.Property_additional_details.rera_registration_status,
       additional_parking_status: details.Property_additional_details.additional_parking_status,
       equipment: details.Property_additional_details.equipment,
       features: details.Property_additional_details.features,
-      possession_by: details.Property_additional_details.possession_by,
+      // possession_by: details.Property_additional_details.possession_by,
       facing_towards: details.Property_additional_details.facing_towards,
-      availability_condition: details.Property_additional_details.availability_condition,
+      // availability_condition: details.Property_additional_details.availability_condition,
       buildyear: details.Property_additional_details.buildyear,
       age_of_property: details.Property_additional_details.age_of_property,
       parking_covered_count: details.Property_additional_details.parking_covered_count,
@@ -344,7 +344,7 @@ mobile_verify(data, id): Observable<any> {
       negotiable_status:details.Property_price_images.negotiable_status,
       maintenance_charge_status: details.Property_price_images.maintenance_charge_status,
       maintenance_charge: details.Property_price_images.maintenance_charge,
-      //maintenance_charge_condition: details.Property_Pricing.maintenance_charge_condition,
+      maintenance_charge_condition: details.Property_price_images.maintenance_charge_condition,
       security_deposit: details.Property_price_images.security_deposit,
       brokerage_charges: details.Property_price_images.brokerage_charges,
       inc_electricity_and_water_bill:details.Property_price_images.inc_electricity_and_water_bill,
@@ -381,13 +381,13 @@ mobile_verify(data, id): Observable<any> {
       furnishing_status: details.Property_additional_details.furnishing_status,
       total_floors: details.Property_additional_details.total_floors,
       property_on_floor: details.Property_additional_details.property_on_floor,
-      rera_registration_status: details.Property_additional_details.rera_registration_status,
+      // rera_registration_status: details.Property_additional_details.rera_registration_status,
       additional_parking_status: details.Property_additional_details.additional_parking_status,
       equipment: details.Property_additional_details.equipment,
       features: details.Property_additional_details.features,
-      possession_by: details.Property_additional_details.possession_by,
+      // possession_by: details.Property_additional_details.possession_by,
       facing_towards: details.Property_additional_details.facing_towards,
-      availability_condition: details.Property_additional_details.availability_condition,
+      // availability_condition: details.Property_additional_details.availability_condition,
       buildyear: details.Property_additional_details.buildyear,
       age_of_property: details.Property_additional_details.age_of_property,
       parking_covered_count: details.Property_additional_details.parking_covered_count,
@@ -408,7 +408,7 @@ mobile_verify(data, id): Observable<any> {
       negotiable_status:details.Property_price_images.negotiable_status,
       maintenance_charge_status: details.Property_price_images.maintenance_charge_status,
       maintenance_charge: details.Property_price_images.maintenance_charge,
-      //maintenance_charge_condition: details.Property_Pricing.maintenance_charge_condition,
+      maintenance_charge_condition: details.Property_price_images.maintenance_charge_condition,
       security_deposit: details.Property_price_images.security_deposit,
       brokerage_charges: details.Property_price_images.brokerage_charges,
       inc_electricity_and_water_bill:details.Property_price_images.inc_electricity_and_water_bill,
@@ -843,9 +843,9 @@ verify_profile_mobile(number, otp:string, id:number): Observable<any> {
       additional_parking_status: details.Property_additional_details.additional_parking_status,
       equipment: details.Property_additional_details.equipment,
       features: details.Property_additional_details.features,
-      possession_by: details.Property_additional_details.possession_by,
+      // possession_by: details.Property_additional_details.possession_by,
       facing_towards: details.Property_additional_details.facing_towards,
-      availability_condition: details.Property_additional_details.availability_condition,
+      // availability_condition: details.Property_additional_details.availability_condition,
       buildyear: details.Property_additional_details.buildyear,
       age_of_property: details.Property_additional_details.age_of_property,
       parking_covered_count: details.Property_additional_details.parking_covered_count,
@@ -866,7 +866,7 @@ verify_profile_mobile(number, otp:string, id:number): Observable<any> {
       negotiable_status:details.Property_price_images.negotiable_status,
       maintenance_charge_status: details.Property_price_images.maintenance_charge_status,
       maintenance_charge: details.Property_price_images.maintenance_charge,
-      //maintenance_charge_condition: details.Property_Pricing.maintenance_charge_condition,
+      maintenance_charge_condition: details.Property_price_images.maintenance_charge_condition,
       security_deposit: details.Property_price_images.security_deposit,
       brokerage_charges: details.Property_price_images.brokerage_charges,
       inc_electricity_and_water_bill:details.Property_price_images.inc_electricity_and_water_bill,
@@ -876,7 +876,7 @@ verify_profile_mobile(number, otp:string, id:number): Observable<any> {
       additional_rooms: additional_room_array
     }), httpOptions);
   }
-  draft_rent_update(details: { Property_Details: { build_name: any; type: any; property_detail: any; display_address: any; area: any; area_unit: any; carpet_area: any; bedroom: any; bathroom: any; balconies: any; }; Property_address: { address: any; city: any; locality: any; pincode: any; nearest_landmark: any; map_latitude: any; map_longitude: any; nearby_places: any; }; Property_additional_details: { furnishing_status: any; additional_rooms_status: any; total_floors: any; property_on_floor: any; rera_registration_status: any; additional_parking_status: any; equipment: any; features: any; possession_by: any; facing_towards: any; availability_condition: any; buildyear: any; age_of_property: any; parking_covered_count: any; parking_open_count: any; ownership: any; agreement_type: any; available_for: any; duration_of_rent_aggreement: any; month_of_notice: any; rent_cond: any; willing_to_rent_out_to: any; }; Property_price_images: { expected_rent: any; tax_govt_charge: any; price_negotiable: any; negotiable_status: any; maintenance_charge_status: any; maintenance_charge: any; security_deposit: any; brokerage_charges: any; inc_electricity_and_water_bill: any; video_link: any; }; }, id: any, additional_room_array: any[], amenityArray: any[], amenity_Uncheck: any[], furnishingArray: any[],  product_img: string[]): Observable<any> {
+  draft_rent_update(details, id: any, additional_room_array: any[], amenityArray: any[], amenity_Uncheck: any[], furnishingArray: any[],  product_img: string[]): Observable<any> {
     return this.http.post(AUTH_API + 'product/product_Rent_update', JSON.stringify ({
       user_id: id,
       id: id,
@@ -907,9 +907,9 @@ verify_profile_mobile(number, otp:string, id:number): Observable<any> {
       additional_parking_status: details.Property_additional_details.additional_parking_status,
       equipment: details.Property_additional_details.equipment,
       features: details.Property_additional_details.features,
-      possession_by: details.Property_additional_details.possession_by,
+      // possession_by: details.Property_additional_details.possession_by,
       facing_towards: details.Property_additional_details.facing_towards,
-      availability_condition: details.Property_additional_details.availability_condition,
+      // availability_condition: details.Property_additional_details.availability_condition,
       buildyear: details.Property_additional_details.buildyear,
       age_of_property: details.Property_additional_details.age_of_property,
       parking_covered_count: details.Property_additional_details.parking_covered_count,
@@ -930,7 +930,7 @@ verify_profile_mobile(number, otp:string, id:number): Observable<any> {
       negotiable_status:details.Property_price_images.negotiable_status,
       maintenance_charge_status: details.Property_price_images.maintenance_charge_status,
       maintenance_charge: details.Property_price_images.maintenance_charge,
-      //maintenance_charge_condition: details.Property_Pricing.maintenance_charge_condition,
+      maintenance_charge_condition: details.Property_price_images.maintenance_charge_condition,
       security_deposit: details.Property_price_images.security_deposit,
       brokerage_charges: details.Property_price_images.brokerage_charges,
       inc_electricity_and_water_bill:details.Property_price_images.inc_electricity_and_water_bill,
@@ -1105,7 +1105,37 @@ crm_call(user_id): Observable<any> {
       user_cart:user_cart,
     }), httpOptions);
   }
-    
+  
+  searching_area(data): Observable<any> {
+    return this.http.post(GlobalConstants.apiURL + 'product/local_service', JSON.stringify({
+      Area: data.Area,
+      LocalArea:data.LocalArea,
+      service:data.service,
+    }),httpOptions);
+  }
+  get_localareaby_id(id): Observable<any> {
+    return this.http.post(GlobalConstants.apiURL + 'product/get_localareaby_id', JSON.stringify({
+      id: id,
+    }), httpOptions);
+  }
+  get_service_id(id): Observable<any> {
+    return this.http.post(GlobalConstants.apiURL + 'product/get_service_id', JSON.stringify({
+      id: id,
+    }), httpOptions);
+  }
+  getarea_user_details(user_id): Observable<any> {
+    return this.http.post(GlobalConstants.apiURL + 'product/getarea_user_details', JSON.stringify({
+      user_id:user_id,
+    }),httpOptions);
+  }
+  service_user_reviews(data): Observable<any> {
+    return this.http.post(GlobalConstants.apiURL + 'product/service_user_reviews', JSON.stringify({
+      user_id: data.user_id,
+      s_user_id:data.s_user_id,
+      stars:data.stars,
+      content:data.content,
+    }),httpOptions);
+  }
 
 
 

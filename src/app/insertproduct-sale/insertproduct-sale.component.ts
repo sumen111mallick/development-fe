@@ -331,6 +331,7 @@ export class InsertproductSaleComponent implements OnInit {
   }
 
   onchange_locality(id: any) {
+
     this.authService.get_pincodebyid(id).subscribe(
       data => {
         this.insert_property_sales.controls.Property_Location.patchValue({

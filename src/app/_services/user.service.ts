@@ -195,4 +195,12 @@ pro_comp_on<T>(): Observable<T>{
  get_pro_comp():Observable<any> {
   return this.http.get(GlobalConstants.apiURL + 'product/Product_comp', { responseType: 'json' });
  }
+
+ getlocalArea(): Observable<any> {
+  return this.http.get(GlobalConstants.apiURL + 'product/getlocalArea', { responseType: 'json' });
+}
+getarea_service(): Observable<any> {
+  return this.http.get(GlobalConstants.apiURL + 'product/getarea_service', { responseType: 'json' });
+}
+
 }

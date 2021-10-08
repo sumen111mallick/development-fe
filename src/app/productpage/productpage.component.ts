@@ -15,15 +15,21 @@ import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+// import { Component, OnInit } from '@angular/core';
+// import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+// import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize,LoadingStrategy, ThumbnailsMode, GalleryAction } from '@ngx-gallery/core';
+// import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-productpage',
   templateUrl: './productpage.component.html',
   styleUrls: ['./productpage.component.css']
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductpageComponent implements OnInit {
-  [x: string]: any;
-
+  [x: string]: any; 
+  // items: GalleryItem[];
+ 
   prod_id: any ;
   public user_data:any;
   public login_userID:number= null;
@@ -88,6 +94,7 @@ export class ProductpageComponent implements OnInit {
   public property_type:any;
   public property_type_count:any;
   public property_type_count_length:number=0;
+  public imageObject:any=[];
 
   constructor(
     private _sanitizer: DomSanitizer,
@@ -100,6 +107,7 @@ export class ProductpageComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private toastr: ToastrService,
     private tokenService: TokenStorageService
+    // public gallery: Gallery
   ) { 
         this.route.queryParams.subscribe((params) => {
           // console.log(params.id);
@@ -117,7 +125,7 @@ export class ProductpageComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    //console.log(this.id);
+    
     this.titleService.setTitle('Property Page');
     // this.prod_id = this.idService.getProdId();
     if (this.tokenStorage.getToken() != null){
@@ -128,23 +136,9 @@ export class ProductpageComponent implements OnInit {
     }
     
   
-    // if( this.idService.getUser() != null)
-    // {
-    //   this.authService.saveSearch(this.idService.getUser().id, this.id).subscribe(
-    //     data => {
-    //       //console.log(data)
-    //     },
-    //     err => {
-    //       //console.log(err)
-    //     }
-    //   )
-    // }
-    // this.get_review();
     this.Property_type_data();
     this.amenities();
     this.feature_property();
-    // this.idService.saveCdata(null);
-    // this.idService.saveProdId(null);
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.loginuser_countProduct(this.id);
@@ -165,6 +159,17 @@ export class ProductpageComponent implements OnInit {
           this.product_images = data["product"]["0"].product_img;
           this.product_img_length = data["product"]["0"].product_img.length;
           // console.log(this.product_img_length);
+          if(this.product_img_length>0){
+          console.log(this.product_img_length);
+            for(let i=0;i<this.product_img_length; i++){
+              this.imageObject.push({
+                image:this.ftpstring+this.product_images[i]["image"],
+                thumbImage:this.ftpstring+this.product_images[i]["image"],
+                title: data["product"]["0"].build_name
+            });
+            }            
+          }
+          // console.log(this.product_img_length);
           this.productdata = data["product"];
           // console.log(this.productdata);
           this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";          
@@ -180,6 +185,7 @@ export class ProductpageComponent implements OnInit {
           this.similarproperty(this.cityValue);
           this.showLoadingIndicator = false;
   
+          
         },
           err => {
             //console.log(err);
@@ -192,8 +198,19 @@ export class ProductpageComponent implements OnInit {
         if(data.product.length== 0){
           this.redirect_to_home_page();
          } 
-        this.product_images=data["product"]["0"].product_img;
-        this.product_img_length = data["product"]["0"].product_img.length;
+         this.product_images = data["product"]["0"].product_img;
+          this.product_img_length = data["product"]["0"].product_img.length;
+          // console.log(this.product_img_length);
+          if(this.product_img_length>0){
+          console.log(this.product_img_length);
+            for(let i=0;i<this.product_img_length; i++){
+              this.imageObject.push({
+                image:this.ftpstring+this.product_images[i]["image"],
+                thumbImage:this.ftpstring+this.product_images[i]["image"],
+                title: data["product"]["0"].build_name
+            });
+            }            
+          }
         this.productdata = data["product"];
         // console.log(this.productdata);
         this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";            
@@ -638,3 +655,22 @@ feature_property(){
   }
 
 }
+
+// const data = [
+//   {
+//     srcUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg',
+//     previewUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg'
+//   },
+//   {
+//     srcUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
+//     previewUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg'
+//   },
+//   {
+//     srcUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg',
+//     previewUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg'
+//   },
+//   {
+//     srcUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg',
+//     previewUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg'
+//   }
+// ];
