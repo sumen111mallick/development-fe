@@ -1,0 +1,12 @@
+<div class="terms_condition_widget Categories_Property" *ngIf="property_type_count_length>0">
+    <h4 class="title">Categories Property</h4>
+    <div class="widget_list">
+        <ul class="list_details">
+            <li class="Categories-list" *ngFor="let property_type of property_type_count">
+                <a (click)="Property_type_search(property_type.id,property_type.pro_type)"><i
+                        class="fa fa-caret-right mr10"></i>{{property_type.pro_type}} <span
+                        class="float-right">{{property_type.pro_count}} properties</span></a>
+            </li>
+        </ul>
+    </div>
+</div>

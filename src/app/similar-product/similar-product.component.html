@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="row pt20">
+    <div class="col-lg-12 mb20 mt20 single-page_inner_column similar_property_heading">
+        <h4 class="">Similar Properties</h4>
+    </div>
+    <div class="col-lg-6 similar_property propertyListingPage" *ngFor="let pro_similar of similar_property">
+        <!-- <div *ngIf="property.id != Product_id"> -->
+        <div class="feat_property">
+            <owl-carousel-o [options]="customOptions" *ngIf="pro_similar.product_img.length>0;else OtherImage">
+                <ng-template carouselSlide  *ngFor = "let img of pro_similar.product_img">
+                    <img class="img-whp lazy"  data-src="{{ftpstring}}{{img.image}}" alt="img1.jpg">
+                    <div class="thumb">
+                        <div class="thmb_cntnt style2">
+                        <ul class="tag mb0">
+                        <li class="list-inline-item" *ngIf=" pro_similar.rent_availability != null"><a >For Rent</a></li>
+                        <li class="list-inline-item" *ngIf=" pro_similar.sale_availability != null"><a >For Sale</a></li>
+                        </ul>
+                    </div>
+                    <div class="thmb_cntnt style3">
+                        <ul class="icon mb0">
+                        <!-- <li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
+                        <li class="list-inline-item"  *ngIf="pro_similar[0] != null;else wishlistcontent">
+                            <a (click)="Wishlist_remove(pro_similar.id)">
+                                <span class="flaticon-fa-heart"></span>
+                            </a>
+                        </li>
+                            <ng-template #wishlistcontent>
+                            <li class="list-inline-item">
+                                <a  (click)="wishlist_added(pro_similar.id)"><span class="flaticon-heart"></span></a>
+                            </li>
+                            </ng-template>
+                        </ul>
+                        <a *ngIf="pro_similar.expected_pricing != null" class="fp_price" >₹  {{Price_convert(pro_similar.expected_pricing)}}<small></small></a>
+                        <a *ngIf="pro_similar.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(pro_similar.expected_rent)}}<small></small></a>
+                    </div>
+                    </div>
+                </ng-template>  
+                </owl-carousel-o>
+
+                <ng-template #OtherImage>
+                <!-- <div class="thumb"> -->
+                    <img class="img-whp" loading="lazy" src="./../../assets/images/no_image_available.jpg" alt="No Product Image" style="height: 250px;">
+                    <!-- </div> -->
+                    <div class="thumb">
+                    <div class="thmb_cntnt style2">
+                    <ul class="tag mb0">
+                        <li class="list-inline-item" *ngIf=" pro_similar.rent_availability != null"><a >For Rent</a></li>
+                        <li class="list-inline-item" *ngIf=" pro_similar.sale_availability != null"><a >For Sale</a></li>
+                    </ul>
+                    </div>
+                    <div class="thmb_cntnt style3">
+                    <ul class="icon mb0">
+                        <!-- <li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
+                        <li class="list-inline-item"  *ngIf="pro_similar[0] != null;else wishlistcontent">
+                        <a (click)="Wishlist_remove(pro_similar.id)">
+                            <span class="flaticon-fa-heart"></span>
+                        </a>
+                        </li>
+                        <ng-template #wishlistcontent>
+                            <li class="list-inline-item">
+                            <a  (click)="wishlist_added(pro_similar.id)"><span class="flaticon-heart"></span></a>
+                            </li>
+                        </ng-template>
+                    </ul>
+                    <a *ngIf="pro_similar.expected_pricing != null" class="fp_price" >₹  {{Price_convert(pro_similar.expected_pricing)}}<small></small></a>
+                    <a *ngIf="pro_similar.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(pro_similar.expected_rent)}}<small></small></a>
+                </div>
+                </div>
+                </ng-template>
+            <div class="details">
+                <a href="/productpage?id={{pro_similar.id}}">
+                <div class="tc_content">
+                    <p class="text-thm">{{ pro_similar.property__type.name | titlecase}}</p>
+                    <h4>{{pro_similar.build_name | titlecase}}</h4>
+                    <p><span class="flaticon-placeholder"></span> {{ pro_similar.city }}</p>
+                    <ul class="prop_details mb0">
+                        <li class="list-inline-item"><a>Beds: {{ pro_similar.bedroom }}</a></li>
+                        <li class="list-inline-item"><a>Baths: {{ pro_similar.bathroom }}</a></li>
+                        <li class="list-inline-item"><a>Sq Ft: {{ pro_similar.area }}</a></li>
+                    </ul>
+
+                </div>
+                </a>
+                <div class="fp_footer" id="user_details">
+                    <ul class="fp_meta float-left mb0">
+                        <li class="list-inline-item"><a href="#"><img src="./../../assets/css/images/team/e1.png" alt="pposter1.png"></a></li>
+                        <li class="list-inline-item"><a href="#">{{pro_similar.user_detail.name}}</a></li>
+                        <div class="fp_pdate float-right" *ngIf="pro_similar.product_comparision==null">
+                            <button type="button" (click)="product_comp(pro_similar.id)"  class="btn btn-log btn-block btn-thm bg-white text-black-50">Add to compare</button>
+                            </div>
+                            <div class="fp_pdate float-right" *ngIf="pro_similar.product_comparision !=null">
+                            <button type="button"  class="btn  text-black-50 bucket-btn">Added To Compare</button>
+                            </div>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+  </div>
+</div>

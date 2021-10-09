@@ -18410,3 +18410,6 @@ border-radius: 0px!important;
 .our-dashbord .button{
   cursor: pointer!important;
 }
+ .ng-image-fullscreen-view{
+      z-index: 10000000000000!important;
+  }

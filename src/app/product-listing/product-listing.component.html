@@ -324,67 +324,17 @@
               </ul>
             </div>
           </div>
-          <div class="terms_condition_widget Categories_property" *ngIf="property_type_count_length>0">
-            <h4 class="title">Categories Property</h4>
-            <div class="widget_list">
-              <ul class="list_details">
-                <li class="Categories-list" *ngFor = "let pro_type_data of property_type_count;let i = index" [ngClass]="{'active': clickedIndex == i}" (click)="clickedIndex == i? clickedIndex = null : clickedIndex = i">
-                  <a  (click)="Property_type_search(pro_type_data.id,pro_type_data.pro_type)"><i class="fa fa-caret-right mr10"></i>{{pro_type_data.pro_type}} <span class="float-right" [ngClass]="{'active': clickedIndex == i}" (click)="clickedIndex == i? clickedIndex = null : clickedIndex = i">{{pro_type_data.pro_count}} properties</span></a>
-                </li>
-                 </ul>
-            </div>
-          </div>
-          <div class="terms_condition_widget Featured_row" *ngIf="feature_pro_length>0"> 
-						<div class="col-12 col-lg-12"><h4 class="title">Featured Properties</h4></div>
-						<div class="sidebar_feature_property_slider  col-6 col-lg-12" *ngFor = "let feature_pro of feature_property_data">
-							<div class="item">
-               <a href="/productpage?id={{feature_pro.id}}"> 
-								<div class="feat_property home7 agent">
-									<div class="thumb">
-										<img class="img-whp" *ngIf="feature_pro.product_img.length>0;else OtherImage" src="{{ftpstring}}{{feature_pro.product_img[0].image}}" alt="fp5.jpg">
-                    <ng-template #OtherImage>
-                      <img class="img-whp" src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
-                    </ng-template>
-										<div class="thmb_cntnt">
-											<ul class="tag mb0">
-												<li class="list-inline-item" *ngIf=" feature_pro.rent_availability != null"><a href="#">For Rent</a></li>
-												<li class="list-inline-item"  *ngIf=" feature_pro.sale_availability != null"><a href="#">For Sales</a></li>
-											</ul>
-											<a class="fp_price" *ngIf="feature_pro.expected_pricing != null">₹ {{ Price_convert(feature_pro.expected_pricing)}}<small></small></a>
-											<a class="fp_price" *ngIf="feature_pro.expected_rent != null">₹ {{ Price_convert(feature_pro.expected_rent)}}<small></small></a>
-											<h4 class="posr color-white">{{feature_pro.build_name | titlecase}}</h4>
-										</div>
-									</div>
-								</div>
-                </a>
-							</div>
-						</div>
-					</div>
-          
-          <div class="sidebar_feature_listing rentlyView_singlepage "   *ngIf="Recent_user_length>0">
-						<h4 class="title">Recently Viewed</h4>
-						<div class="media" *ngFor="let Recently_view of Recently_UserData">
-						  <img  *ngIf="Recently_view.product_img.length>0;else OtherImage" class="align-self-start mr-3 lazy" data-src="{{ftpstring}}{{Recently_view.product_img[0].image}}" alt="fls1.jpg">
-              <ng-template #OtherImage>
-                <img class="align-self-start mr-3 lazy" loading="lazy" src="./../../assets/images/no_image_available.jpg" alt="No Product Image"  style="width: 100px;">
-              </ng-template>
-              <ul class="tag mb0 Single-page-recently-view" >
-								<li class="list-inline-item" *ngIf=" Recently_view.productdetails?.rent_availability != null">For Rent</li>
-								<li class="list-inline-item"  *ngIf=" Recently_view.productdetails?.sale_availability != null">For Sale</li>
-							  </ul>
-						  <div class="media-body">
-							  <h5 class="mt-0 post_title">{{Recently_view.productdetails?.build_name | titlecase}}</h5>
-							  <a *ngIf="Recently_view.productdetails?.expected_pricing != null" class="fp_price" >₹ {{Price_convert(Recently_view.productdetails.expected_pricing) }}<small></small></a>
-							  <a *ngIf="Recently_view.productdetails?.expected_rent != null" class="fp_price"  >₹ {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
-							
-							  <ul class="mb0">
-								<li class="list-inline-item">Beds: {{Recently_view.productdetails?.bedroom}}</li>
-								<li class="list-inline-item">Baths: {{Recently_view.productdetails?.bathroom}}</li>
-								<li class="list-inline-item">Sq Ft: {{Recently_view.productdetails?.equipment}}</li>
-							  </ul>
-						  </div>
-						</div>
-					</div>
+          <!-- product category section  -->
+             <app-product-category></app-product-category>
+             <!-- product category section  -->
+
+             <!-- feature property section  -->
+            <app-innerfeature-property></app-innerfeature-property>
+            <!-- feature property section  -->
+
+            <!-- Recently property section  -->
+						<app-recently-product></app-recently-product>
+            <!-- Recently property section  -->
         </div>
        </div>
        <div class="col-md-12 col-lg-8">

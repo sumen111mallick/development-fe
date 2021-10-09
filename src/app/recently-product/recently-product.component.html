@@ -1,0 +1,36 @@
+<div class="sidebar_feature_listing rentlyView_singlepage " *ngIf="Recent_user_length>0">
+    <h4 class="title">Recently Viewed</h4>
+    <div class="media" *ngFor="let Recently_view of Recently_UserData">
+        <img class="align-self-start mr-3"
+            *ngIf="Recently_view.product_img.length>0;else OtherImage"
+            src="{{ftpstring}}{{Recently_view.product_img[0].image}}" alt="fls1.jpg">
+        <ng-template #OtherImage>
+            <img style="width: 100px;" class="align-self-start mr-3"
+                src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
+        </ng-template>
+        <ul class="tag mb0 Single-page-recently-view">
+            <li class="list-inline-item"
+                *ngIf=" Recently_view.productdetails?.rent_availability != null">For Rent</li>
+            <li class="list-inline-item"
+                *ngIf=" Recently_view.productdetails?.sale_availability != null">For Sale</li>
+        </ul>
+        <div class="media-body">
+            <h5 class="mt-0 post_title">{{Recently_view.productdetails?.build_name | titlecase}}
+            </h5>
+            <a *ngIf="Recently_view.productdetails?.expected_pricing != null" class="fp_price">₹
+                {{Price_convert(Recently_view.productdetails.expected_pricing)
+                }}<small></small></a>
+            <a *ngIf="Recently_view.productdetails?.expected_rent != null" class="fp_price">₹
+                {{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
+            <ul class="mb0">
+                <li class="list-inline-item" *ngIf="Recently_view.productdetails?.bedroom">Beds:
+                    {{Recently_view.productdetails.bedroom}}</li>
+                <li class="list-inline-item" *ngIf="Recently_view.productdetails?.bathroom">
+                    Baths: {{Recently_view.productdetails.bathroom}}</li>
+                <li class="list-inline-item" *ngIf="Recently_view.productdetails?.equipment">Sq
+                    Ft: {{Recently_view.productdetails.equipment}}</li>
+            </ul>
+        </div>
+        <hr class="product-hr">
+    </div>
+</div>

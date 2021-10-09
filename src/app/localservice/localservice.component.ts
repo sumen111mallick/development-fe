@@ -194,10 +194,10 @@ export class LocalserviceComponent implements OnInit {
           }
         );
       }else{
-        this.toastr.error("Please Enter Details");
+        this.toastr.error("Please Enter Review description.");
       }
     }else{
-      this.toastr.error("Please Select Stars rating");
+      this.toastr.error("Please Select Stars Rating.");
     }
 
   }

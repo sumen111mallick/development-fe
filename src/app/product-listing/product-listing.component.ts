@@ -238,7 +238,6 @@ loginuser_coutData(){
           }
       //console.log( this.Searchcontent);  
       this.homepage_data=this.idservice.get_formData();
-      console.log(this.homepage_data);
         if(this.homepage_data != null){
           this.form.build_name=this.homepage_data['0']['build_name'];
           this.form.Location=this.homepage_data['0']['Location'];

@@ -1,0 +1,45 @@
+
+<div class="sidebar_listing_list">
+        <div class="sidebar_advanced_search_widget">
+            <div class="sl_creator">
+                <h4 class="mb25">Post Review</h4>
+                <!-- <div class="media userProfile"  *ngFor = "let user of user_data">
+                    <span  *ngIf="user.profile_pic !=null"><img src="{{ftpstring}}{{user.profile_pic}}" alt="login_user.png"></span>
+                    <span  *ngIf="!user.profile_pic"><img class="float-left" src="./../../assets/css/images/team/e1.png" alt="login_user.png"></span>
+                    <div class="media-body">
+                        <h5 class="mt-0 mb0">{{user.name}}</h5>
+                        <p class="mb0">{{user.phone_number}}</p>
+                        <p class="mb0">{{user.email}}</p>
+                    </div>  
+                </div> -->
+            </div>
+            <form action="#" name="form" [formGroup]="review_form">
+                <div class="col-lg-6 col-xl-12">
+                    <div class="my_profile_setting_input form-group">
+                        <label for="stars">Stars</label>
+                        <ngx-star-rating name="stars" id="stars" formControlName="stars"
+                            [id]="'rating'"></ngx-star-rating>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-12">
+                    <div class="my_profile_setting_input form-group">
+                        <label for="rev_subject">Review Subject</label>
+                        <input type="text" class="form-control" name="rev_subject" id="rev_subject"
+                            formControlName="rev_subject" placeholder="">
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="my_profile_setting_textarea form-group">
+                        <label for="rev_content">Review Content</label>
+                        <textarea type="text" name="rev_content" formControlName="rev_content"
+                            class="form-control" id="rev_content" rows="5" cols="100"></textarea>
+                    </div>
+                </div>
+                <div class="col-xl-12 form-group">
+                    <div class="my_profile_setting_input">
+                        <button type="submit" (click)="onSubmit()" class="btn btn2 ">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>

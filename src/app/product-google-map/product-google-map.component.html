@@ -1,0 +1,21 @@
+<div class="application_statics mt30">
+    <div class="row">
+        <div class="col-lg-3">
+            <h4 class="Map_heading mb20">Location</h4>
+        </div>
+        <div class="col-lg-9 single_page_address">
+            <h6 class="mb20">{{address}}</h6>
+        </div>
+    </div>
+    <div class="property_video p0">
+        <div class="thumb">
+            <div class="overlay_icon">
+                <agm-map [latitude]="latCus" [longitude]="longCus" [zoom]="15"
+                    class="main-card-agm-map">
+                    <agm-marker [latitude]="latCus" [longitude]="longCus">
+                    </agm-marker>
+                </agm-map>
+            </div>
+        </div>
+    </div>
+</div>

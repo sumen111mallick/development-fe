@@ -105,7 +105,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { InsertproductSaleComponent } from './insertproduct-sale/insertproduct-sale.component';
 import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-rent.component';
 import { TopbarTestComponent } from './topbar-test/topbar-test.component';
-import { TestComponent } from './test/test.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { MenuTopbarComponent } from './menu-topbar/menu-topbar.component';
 import { MenuSidebarComponent } from './menu-sidebar/menu-sidebar.component';
@@ -134,6 +133,15 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
 import { RealEstateAgentComponent } from './real-estate-agent/real-estate-agent.component';
 import { HomeSearchFormComponent } from './home-search-form/home-search-form.component';
 import { GetAveragePipe } from './get-average.pipe';
+import { ProductCategoryComponent } from './product-category/product-category.component';
+import { SimilarProductComponent } from './similar-product/similar-product.component';
+import { RecentlyProductComponent } from './recently-product/recently-product.component';
+import { InnerfeaturePropertyComponent } from './innerfeature-property/innerfeature-property.component';
+import { TesimonialFormComponent } from './tesimonial-form/tesimonial-form.component';
+import { ProductSliderComponent } from './product-slider/product-slider.component';
+import { ProductVideoComponent } from './product-video/product-video.component';
+import { ProductGoogleMapComponent } from './product-google-map/product-google-map.component';
+import { ComtactPageFormComponent } from './comtact-page-form/comtact-page-form.component';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 // import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -223,7 +231,6 @@ import { GetAveragePipe } from './get-average.pipe';
     InsertproductSaleComponent,
     InsertproductRentComponent,
     TopbarTestComponent,
-    TestComponent,
     MenuTopbarComponent,
     MenuSidebarComponent,
     SidenavListComponent,
@@ -238,7 +245,16 @@ import { GetAveragePipe } from './get-average.pipe';
     TestimonialComponent,
     RealEstateAgentComponent,
     HomeSearchFormComponent,
-    GetAveragePipe,			
+    GetAveragePipe,
+    ProductCategoryComponent,
+    SimilarProductComponent,
+    RecentlyProductComponent,
+    InnerfeaturePropertyComponent,
+    TesimonialFormComponent,
+    ProductSliderComponent,
+    ProductVideoComponent,
+    ProductGoogleMapComponent,
+    ComtactPageFormComponent,		
   ],
   imports: [
     Ng5SliderModule,

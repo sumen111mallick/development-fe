@@ -23,383 +23,10 @@
 			<div class="preloader"></div>
 		</div>
 		<!-- Main Header Nav For Mobile -->
-		<div class="single_page_listing_tab mt100">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<ul class="nav nav-tabs" id="myTab" role="tablist">
-							<li class="nav-item">
-								<a class="nav-link active" id="slider-tab" data-toggle="tab" href="#slider_tabs"
-									role="tab" aria-controls="slider_tabs" aria-selected="true"><span
-										class="flaticon-photo-camera color-white"></span></a>
-							</li>
-							<li class="nav-item">
-								<a (click)="onShare()" class="nav-link" id="share-tab" data-toggle="tab"
-									href="#share_tab" role="tab" aria-controls="share_tab" aria-selected="false"><span
-										class="flaticon-share color-white"></span></a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade show active" id="slider_tabs" role="tabpanel" aria-labelledby="slider-tab">
-					<!-- 10th Home Slider -->
-					<div class="home10-mainslider">
-						<div class="container-fluid p0">
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="main-banner-wrapper home10"
-										*ngIf="product_img_length>0;else OtherImage">
-										<ng-image-slider #nav
-										[images]="imageObject"
-										[infinite]="true"
-										[autoSlide]="1"
-										[loop]="true"
-										[imageSize]="{width: '100%', height: 400}"
-										slideImage="1"></ng-image-slider>									
-									</div>
-									<ng-template #OtherImage>
-										<div class="d-flex justify-content-center" id="single_page_banner">
-											<div class="d-flex justify-content-center">
-												<img class="img-whp" src="./../../assets/images/no_image_available.jpg"
-													alt="No Product Image">
-											</div>
-										</div>
-									</ng-template>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="tab-pane fade" id="map_tabs" role="tabpanel" aria-labelledby="map-tab">
-					<div class="h600" id="map-canvas"></div>
-				</div>
-			</div>
-		</div>
+		<app-product-slider></app-product-slider>
 		<!-- Agent Single Grid View -->
 		<section class="our-agent-single bgc-f7 pb30-991">
 			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="listing_sidebar dn db-991">
-							<div class="sidebar_content_details style3">
-								<!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-								<div class="sidebar_listing_list style2 mobile_sytle_sidebar mb0">
-									<div class="sidebar_advanced_search_widget">
-										<h4 class="mb25">Advanced Search <a class="filter_closed_btn float-right"
-												href="#"><small>Hide Filter</small> <span
-													class="flaticon-close"></span></a></h4>
-										<ul class="sasw_list style2 mb0">
-											<li class="search_area">
-												<div class="form-group">
-													<input type="text" class="form-control" id="exampleInputName1"
-														placeholder="keyword">
-													<label for="exampleInputEmail"><span
-															class="flaticon-magnifying-glass"></span></label>
-												</div>
-											</li>
-											<li class="search_area">
-												<div class="form-group">
-													<input type="text" class="form-control" id="exampleInputEmail"
-														placeholder="Location">
-													<label for="exampleInputEmail"><span
-															class="flaticon-maps-and-flags"></span></label>
-												</div>
-											</li>
-											<li>
-												<div class="search_option_two">
-													<div class="candidate_revew_select">
-														<select class="selectpicker w100 show-tick">
-															<option>Status</option>
-															<option>Apartment</option>
-															<option>Bungalow</option>
-															<option>Condo</option>
-															<option>House</option>
-															<option>Land</option>
-															<option>Single Family</option>
-														</select>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="search_option_two">
-													<div class="candidate_revew_select">
-														<select class="selectpicker w100 show-tick">
-															<option>Property Type</option>
-															<option>Apartment</option>
-															<option>Bungalow</option>
-															<option>Condo</option>
-															<option>House</option>
-															<option>Land</option>
-															<option>Single Family</option>
-														</select>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="small_dropdown2">
-													<div id="prncgs" class="btn dd_btn">
-														<span>Price</span>
-														<label for="exampleInputEmail2"><span
-																class="fa fa-angle-down"></span></label>
-													</div>
-													<div class="dd_content2">
-														<div class="pricing_acontent">
-															<input type="text" class="amount" placeholder="$52,239">
-															<input type="text" class="amount2" placeholder="$985,14">
-															<div class="slider-range"></div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="search_option_two">
-													<div class="candidate_revew_select">
-														<select class="selectpicker w100 show-tick">
-															<option>Bathrooms</option>
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option>4</option>
-															<option>5</option>
-															<option>6</option>
-														</select>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="search_option_two">
-													<div class="candidate_revew_select">
-														<select class="selectpicker w100 show-tick">
-															<option>Bedrooms</option>
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option>4</option>
-															<option>5</option>
-															<option>6</option>
-														</select>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="search_option_two">
-													<div class="candidate_revew_select">
-														<select class="selectpicker w100 show-tick">
-															<option>Garages</option>
-															<option>Yes</option>
-															<option>No</option>
-															<option>Others</option>
-														</select>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="search_option_two">
-													<div class="candidate_revew_select">
-														<select class="selectpicker w100 show-tick">
-															<option>Year built</option>
-															<option>2013</option>
-															<option>2014</option>
-															<option>2015</option>
-															<option>2016</option>
-															<option>2017</option>
-															<option>2018</option>
-															<option>2019</option>
-															<option>2020</option>
-														</select>
-													</div>
-												</div>
-											</li>
-											<li class="min_area style2 list-inline-item">
-												<div class="form-group">
-													<input type="text" class="form-control" id="exampleInputName2"
-														placeholder="Min Area">
-												</div>
-											</li>
-											<li class="max_area list-inline-item">
-												<div class="form-group">
-													<input type="text" class="form-control" id="exampleInputName3"
-														placeholder="Max Area">
-												</div>
-											</li>
-											<li>
-												<div id="accordion" class="panel-group">
-													<div class="panel">
-														<div class="panel-heading">
-															<h4 class="panel-title">
-																<a href="#panelBodyRating" class="accordion-toggle link"
-																	data-toggle="collapse" data-parent="#accordion"><i
-																		class="flaticon-more"></i> Advanced features</a>
-															</h4>
-														</div>
-														<div id="panelBodyRating" class="panel-collapse collapse">
-															<div class="panel-body row">
-																<div class="col-lg-12">
-																	<ul
-																		class="ui_kit_checkbox selectable-list float-left fn-400">
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck1">
-																				<label class="custom-control-label"
-																					for="customCheck1">Air
-																					Conditioning</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck4">
-																				<label class="custom-control-label"
-																					for="customCheck4">Barbeque</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck10">
-																				<label class="custom-control-label"
-																					for="customCheck10">Gym</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck5">
-																				<label class="custom-control-label"
-																					for="customCheck5">Microwave</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck6">
-																				<label class="custom-control-label"
-																					for="customCheck6">TV Cable</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck2">
-																				<label class="custom-control-label"
-																					for="customCheck2">Lawn</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck11">
-																				<label class="custom-control-label"
-																					for="customCheck11">Refrigerator</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck3">
-																				<label class="custom-control-label"
-																					for="customCheck3">Swimming
-																					Pool</label>
-																			</div>
-																		</li>
-																	</ul>
-																	<ul
-																		class="ui_kit_checkbox selectable-list float-right fn-400">
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck12">
-																				<label class="custom-control-label"
-																					for="customCheck12">WiFi</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck14">
-																				<label class="custom-control-label"
-																					for="customCheck14">Sauna</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck7">
-																				<label class="custom-control-label"
-																					for="customCheck7">Dryer</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck9">
-																				<label class="custom-control-label"
-																					for="customCheck9">Washer</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck13">
-																				<label class="custom-control-label"
-																					for="customCheck13">Laundry</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck8">
-																				<label class="custom-control-label"
-																					for="customCheck8">Outdoor
-																					Shower</label>
-																			</div>
-																		</li>
-																		<li>
-																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox"
-																					class="custom-control-input"
-																					id="customCheck15">
-																				<label class="custom-control-label"
-																					for="customCheck15">Window
-																					Coverings</label>
-																			</div>
-																		</li>
-																	</ul>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="search_option_button">
-													<button type="submit" class="btn btn-block btn-thm">Search</button>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="row" *ngFor="let product_data of productdata">
 					<div class="col-lg-5 col-xl-5 single_page_column_address">
 						<h5>{{product_data.build_name | titlecase}}</h5>
@@ -447,6 +74,7 @@
 					</div>
 					<div class="col-md-12 col-lg-8 mt30">
 						<div class="row">
+							
 							<div class="col-lg-12 single-page_inner_column">
 								<div class="listing_single_description">
 									<div class="lsd_list">
@@ -454,7 +82,7 @@
 											<li class="list-inline-item"><a>Beds: {{product_data.bedroom}}</a></li>
 											<li class="list-inline-item"><a>Baths: {{product_data.bathroom}}</a></li>
 											<li class="list-inline-item"><a>Sq Ft: {{product_data.area}}</a></li>
-											<li class="list-inline-item">
+											<li class="list-inline-item" *ngIf="product_data.expected_rent == null">
 												<a>{{product_data.rera_registration_status}}</a>
 											</li>
 										</ul>
@@ -491,7 +119,6 @@
 															<span>₹ {{product_data.expected_rent}}</span>
 														</td>
 													</tr>
-													
 													<tr>
 														<th scope="row">Property Size</th>
 														<td> :</td>
@@ -499,7 +126,6 @@
 															<span>{{product_data.area}} {{product_data.area_unit}}</span>
 														</td>
 													</tr>
-													
 													<tr>
 														<th scope="row">Year Built</th>
 														<td> :</td>
@@ -507,7 +133,6 @@
 															<span>{{product_data.buildyear}}</span>
 														</td>
 													</tr>
-													
 													<tr>
 														<th scope="row">Bedrooms</th>
 														<td> :</td>
@@ -515,7 +140,6 @@
 															<span>{{product_data.bedroom}}</span>
 														</td>
 													</tr>
-													
 													<tr>
 														<th scope="row">Bathrooms</th>
 														<td> :</td>
@@ -524,14 +148,13 @@
 														</td>
 													</tr>
 													
-													<tr>
+													<tr *ngIf="product_data.rera_registration_status != null">
 														<th scope="row">Property Status</th>
 														<td> :</td>
 														<td>
 															<span>{{product_data.rera_registration_status}}</span>
 														</td>
 													</tr>
-													
 													<tr>
 														<th scope="row">Property Type</th>
 														<td> :</td>
@@ -643,160 +266,24 @@
 								</div>
 							</div>
 							<div class="col-lg-12" *ngIf="isLoggedIn == true">
-							<div class="col-lg-12 single-page_inner_column"
-								*ngIf="login_usertype==1 || product_data.user_id==login_userID">
-								<div class="application_statics mt30">
-									<div class="row">
-										<div class="col-lg-3">
-											<h4 class="Map_heading mb20">Location</h4>
-										</div>
-										<div class="col-lg-9 single_page_address">
-											<h6 class="mb20">{{product_data.address}}</h6>
-										</div>
-									</div>
-									<div class="property_video p0">
-										<div class="thumb">
-											<div class="overlay_icon">
-												<agm-map [latitude]="latCus" [longitude]="longCus" [zoom]="15"
-													class="main-card-agm-map">
-													<agm-marker [latitude]="latCus" [longitude]="longCus">
-													</agm-marker>
-												</agm-map>
-											</div>
-										</div>
-									</div>
+								<div class="col-lg-12 single-page_inner_column"
+									*ngIf="login_usertype==1 || product_data.user_id==login_userID">
+									<app-product-google-map></app-product-google-map>
 								</div>
 							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 single-page_inner_column" *ngIf="video_link>0">
+									<app-product-video></app-product-video>
 							</div>
-							<div class="col-lg-12 single-page_inner_column"
-								*ngIf="product_data.video_link_length != null">
-								<div class="shop_single_tab_content style2 mt30">
-									<ul class="nav nav-tabs" id="myTab" role="tablist">
-										<li class="nav-item">
-											<a class="nav-link active" id="description-tab" data-toggle="tab"
-												href="#description" role="tab" aria-controls="description"
-												aria-selected="true">Property video </a>
-										</li>
-									</ul>
-									<div class="tab-content" id="myTabContent2">
-										<div class="tab-pane fade show active" id="description" role="tabpanel"
-											aria-labelledby="description-tab">
-											<div class="property_video">
-												<div class="thumb">
-													<iframe width="560" height="315" [src]='safeURL'
-														frameborder="0"></iframe>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- Code added by Radhika for EMI Calculator Start -->
 
+							<!-- Code for EMI Calculator Start -->
 							<div class="col-lg-12 col-md-12 col-sm-12 single-page_inner_column">
 								<div class="application_statics mt30">
-
 									<app-emi-calculator></app-emi-calculator>
-
 								</div>
 							</div>
-							<div class="col-lg-12 mb20 mt20 single-page_inner_column similar_property_heading">
-								<h4 class="">Similar Properties</h4>
-							</div>
-							<div class="col-lg-6 similar_property propertyListingPage" *ngFor="let pro_similar of similar_property">
-                               <!-- <div *ngIf="property.id != Product_id"> -->
-								<div class="feat_property">
-									<owl-carousel-o [options]="customOptions" *ngIf="pro_similar.product_img.length>0;else OtherImage">
-										<ng-template carouselSlide  *ngFor = "let img of pro_similar.product_img">
-										  <img class="img-whp lazy"  data-src="{{ftpstring}}{{img.image}}" alt="img1.jpg">
-										  <div class="thumb">
-											 <div class="thmb_cntnt style2">
-											  <ul class="tag mb0">
-												<li class="list-inline-item" *ngIf=" pro_similar.rent_availability != null"><a >For Rent</a></li>
-												<li class="list-inline-item" *ngIf=" pro_similar.sale_availability != null"><a >For Sale</a></li>
-											  </ul>
-											</div>
-											<div class="thmb_cntnt style3">
-											  <ul class="icon mb0">
-												<!-- <li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
-												<li class="list-inline-item"  *ngIf="pro_similar[0] != null;else wishlistcontent">
-												  <a (click)="Wishlist_remove(pro_similar.id)">
-													  <span class="flaticon-fa-heart"></span>
-												  </a>
-												</li>
-												 <ng-template #wishlistcontent>
-													<li class="list-inline-item">
-													  <a  (click)="wishlist_added(pro_similar.id)"><span class="flaticon-heart"></span></a>
-													</li>
-												  </ng-template>
-											  </ul>
-											  <a *ngIf="pro_similar.expected_pricing != null" class="fp_price" >₹  {{Price_convert(pro_similar.expected_pricing)}}<small></small></a>
-											  <a *ngIf="pro_similar.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(pro_similar.expected_rent)}}<small></small></a>
-										  </div>
-										  </div>
-										</ng-template>  
-									  </owl-carousel-o>
-						
-									  <ng-template #OtherImage>
-										<!-- <div class="thumb"> -->
-										   <img class="img-whp" loading="lazy" src="./../../assets/images/no_image_available.jpg" alt="No Product Image" style="height: 250px;">
-										 <!-- </div> -->
-										 <div class="thumb">
-										  <div class="thmb_cntnt style2">
-										   <ul class="tag mb0">
-											 <li class="list-inline-item" *ngIf=" pro_similar.rent_availability != null"><a >For Rent</a></li>
-											 <li class="list-inline-item" *ngIf=" pro_similar.sale_availability != null"><a >For Sale</a></li>
-										   </ul>
-										 </div>
-										 <div class="thmb_cntnt style3">
-										   <ul class="icon mb0">
-											 <!-- <li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
-											 <li class="list-inline-item"  *ngIf="pro_similar[0] != null;else wishlistcontent">
-											   <a (click)="Wishlist_remove(pro_similar.id)">
-												   <span class="flaticon-fa-heart"></span>
-											   </a>
-											 </li>
-											  <ng-template #wishlistcontent>
-												 <li class="list-inline-item">
-												   <a  (click)="wishlist_added(pro_similar.id)"><span class="flaticon-heart"></span></a>
-												 </li>
-											   </ng-template>
-										   </ul>
-										   <a *ngIf="pro_similar.expected_pricing != null" class="fp_price" >₹  {{Price_convert(pro_similar.expected_pricing)}}<small></small></a>
-										   <a *ngIf="pro_similar.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(pro_similar.expected_rent)}}<small></small></a>
-									   </div>
-									   </div>
-									  </ng-template>
-									<div class="details">
-										<a href="/productpage?id={{pro_similar.id}}">
-										<div class="tc_content">
-											<p class="text-thm">{{ pro_similar.property__type.name | titlecase}}</p>
-											<h4>{{pro_similar.build_name | titlecase}}</h4>
-											<p><span class="flaticon-placeholder"></span> {{ pro_similar.city }}</p>
-											<ul class="prop_details mb0">
-												<li class="list-inline-item"><a>Beds: {{ pro_similar.bedroom }}</a></li>
-												<li class="list-inline-item"><a>Baths: {{ pro_similar.bathroom }}</a></li>
-												<li class="list-inline-item"><a>Sq Ft: {{ pro_similar.area }}</a></li>
-											</ul>
-
-										</div>
-									    </a>
-										<div class="fp_footer" id="user_details">
-											<ul class="fp_meta float-left mb0">
-												<li class="list-inline-item"><a href="#"><img src="./../../assets/css/images/team/e1.png" alt="pposter1.png"></a></li>
-												<li class="list-inline-item"><a href="#">{{pro_similar.user_detail.name}}</a></li>
-												<div class="fp_pdate float-right" *ngIf="pro_similar.product_comparision==null">
-													<button type="button" (click)="product_comp(pro_similar.id)"  class="btn btn-log btn-block btn-thm bg-white text-black-50">Add to compare</button>
-												  </div>
-												  <div class="fp_pdate float-right" *ngIf="pro_similar.product_comparision !=null">
-													<button type="button"  class="btn  text-black-50 bucket-btn">Added To Compare</button>
-												  </div>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-								<!-- </div> -->
+							<!-- Code for EMI Calculator Start -->
+							<div class="col-lg-12 col-md-12 col-sm-12 single-page_inner_column">
+									<app-similar-product></app-similar-product>
 							</div>
 						</div>
 					</div>
@@ -821,181 +308,29 @@
 								</button>
 							</ng-template>
 						</div>
-						<div class="sidebar_listing_list">
-							<div class="sidebar_advanced_search_widget">
-								<div class="sl_creator">
-									<h4 class="mb25">Post Review</h4>
-									<!-- <div class="media userProfile"  *ngFor = "let user of user_data">
-										<span  *ngIf="user.profile_pic !=null"><img src="{{ftpstring}}{{user.profile_pic}}" alt="login_user.png"></span>
-										<span  *ngIf="!user.profile_pic"><img class="float-left" src="./../../assets/css/images/team/e1.png" alt="login_user.png"></span>
-										<div class="media-body">
-											<h5 class="mt-0 mb0">{{user.name}}</h5>
-											<p class="mb0">{{user.phone_number}}</p>
-											<p class="mb0">{{user.email}}</p>
-										</div>  
-									</div> -->
-								</div>
-								<form action="#" name="form" [formGroup]="review_form">
-									<div class="col-lg-6 col-xl-12">
-										<div class="my_profile_setting_input form-group">
-											<label for="stars">Stars</label>
-											<ngx-star-rating name="stars" id="stars" formControlName="stars"
-												[id]="'rating'"></ngx-star-rating>
+						<!-- testimonial section  -->
+						<app-tesimonial-form></app-tesimonial-form>
+						<!-- testimonial section  -->
+						
+						<!-- feature property section  -->
+						<app-innerfeature-property></app-innerfeature-property>
+						<!-- feature property section  -->
 
-										</div>
-									</div>
+						<!-- product category section  -->
+						<app-product-category></app-product-category>
+						<!-- product category section  -->
 
-									<div class="col-lg-6 col-xl-12">
-										<div class="my_profile_setting_input form-group">
-											<label for="rev_subject">Review Subject</label>
-											<input type="text" class="form-control" name="rev_subject" id="rev_subject"
-												formControlName="rev_subject" placeholder="">
-										</div>
-									</div>
-									<div class="col-lg-12">
-										<div class="my_profile_setting_textarea form-group">
-											<label for="rev_content">Review Content</label>
-											<textarea type="text" name="rev_content" formControlName="rev_content"
-												class="form-control" id="rev_content" rows="5" cols="100"></textarea>
-										</div>
-									</div>
-									<div class="col-xl-12 form-group">
-										<div class="my_profile_setting_input">
-											<button type="submit" (click)="onSubmit()" class="btn btn2 ">Submit</button>
-										</div>
-									</div>
-								</form>
-								<!-- <ul class="sasw_list mb0">
-								<li class="search_area">
-								    <div class="form-group">
-								    	<input type="text" class="form-control" id="exampleInputName1" placeholder="Your Name">
-								    </div>
-								</li>
-								<li class="search_area">
-								    <div class="form-group">
-								    	<input type="number" class="form-control" id="exampleInputName2" placeholder="Phone">
-								    </div>
-								</li>
-								<li class="search_area">
-								    <div class="form-group">
-								    	<input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
-								    </div>
-								</li>
-								<li class="search_area">
-		                            <div class="form-group">
-		                                <textarea id="form_message" name="form_message" class="form-control required" rows="5" required="required" placeholder="I'm interest in [ Listing Single ]"></textarea>
-		                            </div>
-								</li>
-								<li>
-									<div class="search_option_button">
-									    <button type="submit" class="btn btn-block btn-thm">Search</button>
-									</div>
-								</li>
-							</ul> -->
-							</div>
-						</div>
-						<div class="terms_condition_widget Featured_row" *ngIf="feature_pro_length>0">
-							<div class="col-12 col-lg-12">
-								<h4 class="title">Featured Properties</h4>
-							</div>
-							<div class="sidebar_feature_property_slider  col-6 col-lg-12"
-								*ngFor="let feature_pro of feature_property_data">
-								<div class="item">
-									<div class="feat_property home7 agent">
-										<div class="thumb">
-											<img class="img-whp"
-												*ngIf="feature_pro.product_img.length>0;else OtherImage"
-												src="{{ftpstring}}{{feature_pro.product_img[0].image}}" alt="fp5.jpg">
-
-											<ng-template #OtherImage>
-												<img class="img-whp" src="./../../assets/images/no_image_available.jpg"
-													alt="No Product Image">
-											</ng-template>
-											<div class="thmb_cntnt">
-												<ul class="tag mb0">
-													<li class="list-inline-item"
-														*ngIf=" feature_pro.rent_availability != null"><a href="#">For
-															Rent</a></li>
-													<li class="list-inline-item"
-														*ngIf=" feature_pro.sale_availability != null"><a
-															href="#">Featured</a></li>
-												</ul>
-												<a class="fp_price" *ngIf="feature_pro.expected_pricing != null">₹ {{
-													Price_convert(feature_pro.expected_pricing)}}<small></small></a>
-												<a class="fp_price" *ngIf="feature_pro.expected_rent != null">₹ {{
-													Price_convert(feature_pro.expected_rent)}}<small></small></a>
-												<h4 class="posr color-white">{{feature_pro.build_name | titlecase}}</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="terms_condition_widget Categories_Property" *ngIf="property_type_count_length>0">
-							<h4 class="title">Categories Property</h4>
-							<div class="widget_list">
-								<ul class="list_details">
-									<li class="Categories-list" *ngFor="let property_type of property_type_count">
-										<a (click)="Property_type_search(property_type.id,property_type.pro_type)"><i
-												class="fa fa-caret-right mr10"></i>{{property_type.pro_type}} <span
-												class="float-right">{{property_type.pro_count}} properties</span></a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="sidebar_feature_listing rentlyView_singlepage " *ngIf="Recent_user_length>0">
-							<h4 class="title">Recently Viewed</h4>
-							<div class="media" *ngFor="let Recently_view of Recently_UserData">
-								<img class="align-self-start mr-3"
-									*ngIf="Recently_view.product_img.length>0;else OtherImage"
-									src="{{ftpstring}}{{Recently_view.product_img[0].image}}" alt="fls1.jpg">
-								<ng-template #OtherImage>
-									<img style="width: 100px;" class="align-self-start mr-3"
-										src="./../../assets/images/no_image_available.jpg" alt="No Product Image">
-								</ng-template>
-								<ul class="tag mb0 Single-page-recently-view">
-									<li class="list-inline-item"
-										*ngIf=" Recently_view.productdetails?.rent_availability != null">For Rent</li>
-									<li class="list-inline-item"
-										*ngIf=" Recently_view.productdetails?.sale_availability != null">For Sale</li>
-								</ul>
-								<div class="media-body">
-									<h5 class="mt-0 post_title">{{Recently_view.productdetails?.build_name | titlecase}}
-									</h5>
-									<a *ngIf="Recently_view.productdetails?.expected_pricing != null" class="fp_price">₹
-										{{Price_convert(Recently_view.productdetails.expected_pricing)
-										}}<small></small></a>
-									<a *ngIf="Recently_view.productdetails?.expected_rent != null" class="fp_price">₹
-										{{Price_convert(Recently_view.productdetails.expected_rent)}}<small></small></a>
-									<ul class="mb0">
-										<li class="list-inline-item" *ngIf="Recently_view.productdetails?.bedroom">Beds:
-											{{Recently_view.productdetails.bedroom}}</li>
-										<li class="list-inline-item" *ngIf="Recently_view.productdetails?.bathroom">
-											Baths: {{Recently_view.productdetails.bathroom}}</li>
-										<li class="list-inline-item" *ngIf="Recently_view.productdetails?.equipment">Sq
-											Ft: {{Recently_view.productdetails.equipment}}</li>
-									</ul>
-								</div>
-								<hr class="product-hr">
-							</div>
-						</div>
+						<!-- recent property section  -->
+						<app-recently-product></app-recently-product>
+						<!-- recent property section  -->
 					</div>
 				</div>
 			</div>
 		</section>
-
 		<!-- Our Footer -->
-
-
 		<app-footer></app-footer>
-
-
 		<a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
 	</div>
 	<!-- Wrapper End -->
-
 </body>
-
-<!-- Mirrored from grandetest.com/theme/findhouse-html/page-listing-single-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:27:23 GMT -->
-
 </html>

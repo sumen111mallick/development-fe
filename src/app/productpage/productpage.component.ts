@@ -13,7 +13,6 @@ import { ToastrService } from 'ngx-toastr';
 // import { NgxStarRatingModule } from 'ngx-star-rating';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 // import { Component, OnInit } from '@angular/core';
 // import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
@@ -56,7 +55,6 @@ export class ProductpageComponent implements OnInit {
   Message: any;
   form: any;
   Review: any;
-  youtube_url: string;
   cityValue: any;
   plans_type:any;
   resp_status:any;  
@@ -83,21 +81,15 @@ export class ProductpageComponent implements OnInit {
   public product_img_length:number=null;
   public latCus:number;
   public longCus:number;
-  public feature_property_data:any;
-  public feature_pro_length:number=0;
   public Recently_User_Data:any;
   public Recent_user_length:number=0;
   public recently_length:number=null;
   public isReadMore :boolean=true;
   public product_uid:any;
-  public property_type_result:any;
-  public property_type:any;
-  public property_type_count:any;
-  public property_type_count_length:number=0;
   public imageObject:any=[];
+  public video_link:number=0;
 
   constructor(
-    private _sanitizer: DomSanitizer,
     private titleService: Title,
     private authService: AuthService,
     private idService: TokenStorageService,
@@ -136,13 +128,10 @@ export class ProductpageComponent implements OnInit {
     }
     
   
-    this.Property_type_data();
     this.amenities();
-    this.feature_property();
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.loginuser_countProduct(this.id);
-      this.loginuser_coutData();
     }
   }
   single_property_data(id: any){
@@ -156,24 +145,9 @@ export class ProductpageComponent implements OnInit {
           if(data.product.length== 0){
           this.redirect_to_home_page();
           } 
-          this.product_images = data["product"]["0"].product_img;
-          this.product_img_length = data["product"]["0"].product_img.length;
-          // console.log(this.product_img_length);
-          if(this.product_img_length>0){
-          console.log(this.product_img_length);
-            for(let i=0;i<this.product_img_length; i++){
-              this.imageObject.push({
-                image:this.ftpstring+this.product_images[i]["image"],
-                thumbImage:this.ftpstring+this.product_images[i]["image"],
-                title: data["product"]["0"].build_name
-            });
-            }            
-          }
-          // console.log(this.product_img_length);
+         
           this.productdata = data["product"];
-          // console.log(this.productdata);
-          this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";          
-          this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.youtube_url);
+          this.video_link=data["product"]["0"].video_link.length;
           
           this.product_amenties= data["product"]["0"].amenities;
           this.product_amenties_length= data["product"]["0"].amenities.length;
@@ -182,7 +156,6 @@ export class ProductpageComponent implements OnInit {
           this.cityValue=data["product"]["0"]["city"];
           this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
           this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
-          this.similarproperty(this.cityValue);
           this.showLoadingIndicator = false;
   
           
@@ -198,28 +171,12 @@ export class ProductpageComponent implements OnInit {
         if(data.product.length== 0){
           this.redirect_to_home_page();
          } 
-         this.product_images = data["product"]["0"].product_img;
-          this.product_img_length = data["product"]["0"].product_img.length;
-          // console.log(this.product_img_length);
-          if(this.product_img_length>0){
-          console.log(this.product_img_length);
-            for(let i=0;i<this.product_img_length; i++){
-              this.imageObject.push({
-                image:this.ftpstring+this.product_images[i]["image"],
-                thumbImage:this.ftpstring+this.product_images[i]["image"],
-                title: data["product"]["0"].build_name
-            });
-            }            
-          }
         this.productdata = data["product"];
+        this.video_link=data["product"]["0"].video_link.length;
         // console.log(this.productdata);
-        this.youtube_url = "https://www.youtube-nocookie.com/embed/" + data["product"]["0"]["video_link"]+"?playlist="+data["product"]["0"]["video_link"]+"&loop=1&mute=1";            
-        this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.youtube_url);
-          
         this.product_amenties= data["product"]["0"].amenities;
         this.product_amenties_length= data["product"]["0"].amenities.length;
         this.cityValue=data["product"]["0"]["city"];
-        this.similarproperty(this.cityValue);
         this.showLoadingIndicator = false;
       },
         err => {
@@ -261,16 +218,6 @@ export class ProductpageComponent implements OnInit {
        }
      );
    }
-   loginuser_coutData(){
-    this.authService.recently_view().subscribe(
-      data => {
-        //console.log(data.data);
-        this.Recently_UserData = data.data;
-        this.Recent_user_length=data.data.length;
-        //console.log("Recently Views Properties");
-         //console.log(this.Recently_UserData);
-      });
-   }
   loginuser_countProduct(id: any){
     //console.log(this.id);
      this.authService.User_productCount(this.id).subscribe(
@@ -280,42 +227,7 @@ export class ProductpageComponent implements OnInit {
    
    }
    
-// product comaprision functinalty 
-product_comp(id:number){
-  //console.log(id);
-  // Login check
-  if(this.tokenStorage.getUser() != null){
-    this.isLoggedIn = true;
-    //console.log(this.isLoggedIn);
-    this.maintenance = true;
-    this.parking = false;     
-      this.authService.Crete_product_comp(id).pipe().subscribe(
-        (data: any) =>{
-          //console.log(data);
-          this.similarproperty(this.cityValue);
-          this.single_property_data(this.id);
-          //console.log(data.data.length);
-          if(data.data.length>4){
-            this.toastr.info('Compare Bucket is Full...!!!', 'Property', {
-              timeOut: 3000,
-            });
-          }else{
-            this.toastr.success('Added To compare Successfully', 'Property', {
-              timeOut: 3000,
-            });
-          }
-          this.showLoadingIndicator = false;
-        },
-        err => {
-          //console.log(err.error);
-          this.showLoadingIndicator = false;
-        }
-      );
-  }
-  else{
-    this.redirect_to_home();
-  }
-}
+
 showText() {
   this.isReadMore = !this.isReadMore
 }
@@ -339,32 +251,6 @@ Price_convert(num: number) {
   }
   return num;
 }
-   wishlist_added(data: any){
-    // Login check
-    if(this.tokenStorage.getUser() != null){
-      if (this.tokenStorage.getToken()){
-        // this.isLoggedIn = true;      
-        this.authService.Wishlist(data).pipe().subscribe(
-          (result: any) =>{
-            //console.log(result);
-            this.similarproperty(this.cityValue);
-            this.single_property_data(this.id);
-            this.showLoadingIndicator = false;
-          },
-          err => {
-            //console.log(err.error);
-            this.showLoadingIndicator = false;
-          }
-        );
-      }
-      else{
-        this.isLoggedIn = false ;
-      }
-    }
-    else{
-      this.redirect_to_home();
-    }       
-  }
   
 proceedToPayment(planid){  
   this.plans_type="single_rental_property"; 
@@ -410,13 +296,88 @@ createPaytmForm() {
   // after click will fire you will redirect to paytm payment page.
   // after complete or fail transaction you will redirect to your CALLBACK URL
   }  
+  
+  Amenties_funtion(Amenties_id:any){
+    // var len= this.product_amenties.length; 
+    // console.log(Amenties_id);
+    // console.log(this.product_amenties);
+  if(this.product_amenties_length !=null){
+    for (let i = 0; i < this.product_amenties_length; i++) {
+      if(Amenties_id==this.product_amenties[i].amenties){
+        return  true;
+      }
+    }
+  }
+  return false;
+}
+// product comaprision functinalty 
+product_comp(id:number){
+  //console.log(id);
+  // Login check
+  if(this.tokenStorage.getUser() != null){
+    this.isLoggedIn = true;
+    //console.log(this.isLoggedIn);
+    // this.maintenance = true;
+    // this.parking = false;     
+      this.authService.Crete_product_comp(id).pipe().subscribe(
+        (data: any) =>{
+          //console.log(data);
+          this.similarproperty(this.cityValue);
+          this.single_property_data(this.id);
+          //console.log(data.data.length);
+          if(data.data.length>4){
+            this.toastr.info('Compare Bucket is Full...!!!', 'Property', {
+              timeOut: 3000,
+            });
+          }else{
+            this.toastr.success('Added To compare Successfully', 'Property', {
+              timeOut: 3000,
+            });
+          }
+          this.showLoadingIndicator = false;
+        },
+        err => {
+          //console.log(err.error);
+          this.showLoadingIndicator = false;
+        }
+      );
+  }
+  else{
+    this.redirect_to_home();
+  }
+}
+   wishlist_added(data: any){
+    // Login check
+    if(this.tokenStorage.getUser() != null){
+      if (this.tokenStorage.getToken()){
+        // this.isLoggedIn = true;      
+        this.authService.Wishlist(data).pipe().subscribe(
+          (result: any) =>{
+            //console.log(result);
+            this.single_property_data(this.id);
+            this.showLoadingIndicator = false;
+          },
+          err => {
+            //console.log(err.error);
+            this.showLoadingIndicator = false;
+          }
+        );
+      }
+      else{
+        this.isLoggedIn = false ;
+      }
+    }
+    else{
+      this.redirect_to_home();
+    }       
+  }
+  
   Wishlist_remove(data: any){
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
        this.authService.WishlistRemove(data).pipe().subscribe(
         (result: any) =>{
          // console.log(result);
-          this.similarproperty(this.cityValue);
           this.single_property_data(this.id);
           this.showLoadingIndicator = false;
         },
@@ -431,40 +392,6 @@ createPaytmForm() {
     }
     
   }
-
-  Amenties_funtion(Amenties_id:any){
-    // var len= this.product_amenties.length; 
-    // console.log(Amenties_id);
-    // console.log(this.product_amenties);
-  if(this.product_amenties_length !=null){
-    for (let i = 0; i < this.product_amenties_length; i++) {
-      if(Amenties_id==this.product_amenties[i].amenties){
-        return  true;
-      }
-    }
-  }
-  return false;
-}
-
-
-Property_type_data(): void{
-  this.userService.get_property_type().pipe().subscribe(
-    (data: any) => {
-      //  console.log(amenitiesdata);
-      this.property_type = data.count;
-      this.property_type_count=data.count;
-      this.property_type_count_length=data.count.length;
-      //console.log(this.property_type_count);
-      this.property_type_result = this.property_type;
-      //console.log(this.property_type_result);
-      //console.log(this.content);
-    },
-    err => {
-      this.content = JSON.parse(err.error).message;
-    }
-  );
-}
-
 check_order_product(id:any){
   this.showLoadingIndicator = true;
   this.authService.check_order_product(this.id).subscribe(
@@ -486,121 +413,6 @@ check_order_product(id:any){
     );
   
 }
-
-  similarproperty(cityValue: any){
-    if(this.tokenStorage.getToken()){
-      this.showLoadingIndicator = true;
-      this.authService.login_similarproperty(this.cityValue).subscribe(
-      data => {
-        this.similar_property = data["product"];
-        //console.log(this.similar_property);
-        this.wishlist_info();
-        this.pro_comp_refresh();
-        this.showLoadingIndicator = false;
-      },
-        err => {
-         // console.log(err);
-        }
-      );
-    }else{
-      this.showLoadingIndicator = true;
-      this.authService.product_similarproperty(this.cityValue).subscribe(
-      data => {
-        this.similar_property = data["product"];
-        //console.log(this.similar_property);
-        this.showLoadingIndicator = false;
-      },
-        err => {
-          //console.log(err);
-          this.showLoadingIndicator = false;
-        }
-      );
-
-    }
-  }
-
-  onSubmit(): void {
-    // Login check
-    if(this.tokenStorage.getUser() != null){
-    this.authService.create_review(this.review_form.value, this.id).subscribe(
-      data => {
-        this.review_form.reset();
-        this.toastr.success('Reviews Succesfully', 'Property', {
-          timeOut: 3000,
-        });
-      },
-      err => {
-        //console.log(err.error);
-        this.errorMessage = err.error.errors;
-        //console.log(this.errorMessage.length);
-        this.Message = err.error.message;
-        //console.log(this.Message);
-        this.toastr.error(this.Message, 'Something Error', {
-          timeOut: 3000,
-        });
-      }
-    );
-  }
-  else{
-    this.redirect_to_home();
-  }
-}
-
-//   get_review(): void {
-//     //console.log(this.form)
-//     this.authService.product_review(this.id).subscribe(
-//       data => {
-//         //console.log(data);
-//         this.Review = data.data;
-//       },
-//       err => {
-//         //console.log(err.error);
-//       }
-//     );
-// }
-Property_type_search(id: number,pro_type: string):void{
-  //console.log(id);
-  if(this.tokenStorage.getToken()){
-    //console.log('logging');
-    this.authService.search_pro_type_login(id).subscribe(
-        
-      data => {
-        this.tokenService.searchData(data);
-          //console.log(this.tokenService.returnSearch());
-          this.data_session=[id,pro_type];
-          this.tokenService.search_pro_type(this.data_session);
-          window.location.href=GlobalConstants.siteURL+"productlisting";
-      },
-      err => {
-        //console.log(err.error);
-      }
-    );
-  }
-  else{
-    this.authService.search_pro_type(id).subscribe(
-      data => {
-        this.tokenService.searchData(data);
-        //console.log(this.tokenService.returnSearch());
-        this.data_session=[id,pro_type];
-        this.tokenService.search_pro_type(this.data_session);
-        window.location.href=GlobalConstants.siteURL+"productlisting";
-      },
-      err => {
-        //console.log(err.error);
-      }
-    );
-  }
-}
-feature_property(){
-  this.userService.feature_property().subscribe(
-    data => { 
-      //console.log(data);
-      this.feature_property_data = data.data; 
-      this.feature_pro_length =  this.feature_property_data.length;  
-    }
-  );
-}
-
   onShare(){
     alert("Your Shareable Link is \n" + this.sitestring + this.router.url );
   }
