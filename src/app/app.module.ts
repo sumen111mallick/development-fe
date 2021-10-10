@@ -104,7 +104,6 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { InsertproductSaleComponent } from './insertproduct-sale/insertproduct-sale.component';
 import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-rent.component';
-import { TopbarTestComponent } from './topbar-test/topbar-test.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { MenuTopbarComponent } from './menu-topbar/menu-topbar.component';
 import { MenuSidebarComponent } from './menu-sidebar/menu-sidebar.component';
@@ -230,7 +229,6 @@ import { ComtactPageFormComponent } from './comtact-page-form/comtact-page-form.
     AccessDeniedComponent,
     InsertproductSaleComponent,
     InsertproductRentComponent,
-    TopbarTestComponent,
     MenuTopbarComponent,
     MenuSidebarComponent,
     SidenavListComponent,

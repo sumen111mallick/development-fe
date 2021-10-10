@@ -16884,6 +16884,15 @@ button.gm-ui-hover-effect:focus {
   .single_page_listing_tab #myTabContent .home10-mainslider{
     height: 250px!important;
   }
+  .feature-property_home{
+    margin-bottom: 0px!important;
+  }
+  .feature-property_home .main-title{
+    margin-bottom: 15px!important;
+  }
+  .featured_property_heading{
+    margin-bottom: 0px!important;
+  }
   .ng-image-slider .ng-image-slider-container .main .next, .ng-image-slider .ng-image-slider-container .main .prev {
      top:35%!important;
   }
@@ -17986,7 +17995,7 @@ border-radius: 0px!important;
     margin: 0px!important;
   }
   .application_statics{
-    padding: 20px 15px!important;
+    padding: 15px 5px!important;
   }
   #single_page_banner{
     height:230px!important;

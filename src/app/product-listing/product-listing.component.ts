@@ -181,8 +181,6 @@ export class ProductListingComponent implements OnInit {
     this.idservice.saveProdId(null);
     this.titleService.setTitle('Listing');
     this. amenities();
-    this.Property_type_data();
-    this.feature_property();
     this.getpropertyData();
  
     // this.onSearch();
@@ -226,9 +224,7 @@ loginuser_coutData(){
     if(this.idservice.returnSearch() != null ){
       //console.log("session");
       this.content_session = this.idservice.returnSearch();
-      console.log(this.content_session);
       this.Searchcontent =this.idservice.returnSearch()['data'];
-      console.log(this.content_session['data']);
       this.Search_data_length=this.Searchcontent.length;
           if(this.idservice.get_pro_type() != null){
             //console.log(this.idservice.get_pro_type());
@@ -356,26 +352,6 @@ amenities(): void{
     }
   );
 }
-Property_type_data(): void{
-  this.showLoadingIndicator = true;
-  this.userService.get_property_type().pipe().subscribe(
-    (data: any) => {
-        //console.log(data);
-      this.property_type_data = data.data;
-      this.property_type_result = this.property_type;
-      this.property_type_count=data.count;
-      this.property_type_count_length=data.count.length;
-      this.showLoadingIndicator = false;
-      //console.log(this.property_type_count);
-      //console.log(this.property_type_data);
-      //console.log(this.content);
-    },
-    err => {
-      this.content = JSON.parse(err.error).message;
-      this.showLoadingIndicator = false;
-    }
-  );
-}
 Amenties_funtion(Amenties_id:any){
     // var len= this.product_amenties.length; 
   if(this.secach_amenties_length !=null){
@@ -387,17 +363,7 @@ Amenties_funtion(Amenties_id:any){
   }
   return false;
 }  
-feature_property(){
-  this.showLoadingIndicator = true;
-  this.userService.feature_property().subscribe(
-    data => { 
-      //console.log(data);
-      this.feature_property_data = data.data; 
-      this.feature_pro_length =   data.data.length;  
-      this.showLoadingIndicator = false;
-    }
-  );
-}
+
 // product comaprision functinalty 
 product_comp(id:number){
   //console.log(id);

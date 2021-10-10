@@ -89,8 +89,8 @@
                   <div class="col-md-6 col-lg-4" *ngFor="let data of wishlistresult">
                     <div class="feat_property ">
 
-                        <owl-carousel-o [options]="customOptions" *ngIf="data.product_img.length>0;else OtherImage">
-                          <ng-template carouselSlide  *ngFor = "let img of data.product_img">
+                        <owl-carousel-o [options]="customOptions" *ngIf="data?.productdetails?.product_img.length>0;else OtherImage">
+                          <ng-template carouselSlide  *ngFor = "let img of data?.productdetails?.product_img">
                             <img class="img-whp"  src="{{ftpstring}}{{img.image}}" alt="img1.jpg">
                             <div class="thumb">
                                <div class="thmb_cntnt style2">
@@ -148,11 +148,11 @@
                             <div class="fp_footer" id="user_details">
                               <ul class="fp_meta float-left mb0">
                                 <li class="list-inline-item"><a href="#"><img src="./../../assets/css/images/team/e1.png" alt="pposter1.png"></a></li>
-                                <li class="list-inline-item"><a href="#">{{data.user_detail.name | titlecase}}</a></li>
-                                <div class="fp_pdate float-right" *ngIf="data.product_comparision==null">
+                                <li class="list-inline-item"><a href="#">{{data?.productdetails?.user_detail?.name | titlecase}}</a></li>
+                                <div class="fp_pdate float-right" *ngIf="data?.productdetails?.product_comparision==null">
                                   <button type="button" (click)="product_comp(data.product_id)"  class="btn btn-log btn-block btn-thm bg-white text-black-50">Add to compare</button>
                                 </div>
-                                <div class="fp_pdate float-right" *ngIf="data.product_comparision !=null">
+                                <div class="fp_pdate float-right" *ngIf="data?.productdetails?.product_comparision !=null">
                                   <button type="button"  class="btn  text-black-50 bucket-btn">Added To Compare</button>
                                 </div>
                               </ul>

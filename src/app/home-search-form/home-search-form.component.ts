@@ -215,21 +215,5 @@ export class HomeSearchFormComponent implements OnInit {
     this.rent_range_slider=false;
     this.buyyer_range_slider=true;
   }
-  // Property_type_data(): void{
-  //   this.userService.get_property_type().pipe().subscribe(
-  //     (data: any) => {
-  //        //console.log(data);
-  //       this.property_type_data = data.data;
-  //       this.property_type_result = this.property_type;
-  //       this.property_type_count=data.count;
-  //       //console.log(this.property_type_count);
-  //       //console.log(this.property_type_data);
-  //       //console.log(this.content);
-  //     },
-  //     err => {
-  //       this.content = JSON.parse(err.error).message;
-  //     }
-  //   );
-  // }
 
 }

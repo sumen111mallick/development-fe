@@ -7,6 +7,7 @@ import { UserService } from './../_services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { HostListener } from "@angular/core";
 import { UserLogsService } from './../_services/user-logs.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-compare',
@@ -60,6 +61,7 @@ export class CompareComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private toastr: ToastrService,
+    private titleService: Title,
     private tokenStorage: TokenStorageService,
     private userlogs: UserLogsService
   ) { 
@@ -71,6 +73,7 @@ export class CompareComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.titleService.setTitle('Compare Property');
     this.pro_comp();
     this.url_info     = this.userlogs.geturl();      
     this.device_info  = this.userlogs.getDeviceInfo();

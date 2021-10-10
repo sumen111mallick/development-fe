@@ -548,6 +548,11 @@ mobile_verify(data, id): Observable<any> {
       city: data,
     }), httpOptions);
   }
+  city_search_login(data: any): Observable<any> {
+    return this.http.post(AUTH_API + 'product/city_search_login', JSON.stringify({
+      city: data,
+    }), httpOptions);
+  }
 
   admin_loan_delete(data: any): Observable<any> {
     return this.http.post(AUTH_API + 'admin/loan_delete', JSON.stringify({

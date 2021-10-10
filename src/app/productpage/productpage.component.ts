@@ -1,34 +1,22 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from './../_services/token-storage.service';
 import { GlobalConstants } from './../global-constants';
-// import { ProductService } from './../_services/product.service';
 import { AuthService } from './../_services/auth.service';
 import { Title } from '@angular/platform-browser';
-// import { Component, OnInit } from '@angular/core';
 import { UserService } from './../_services/user.service';
-// import { MapsAPILoader} from '@agm/core';
-// import { google } from "google-maps";
 import { Component,  OnInit} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-// import { NgxStarRatingModule } from 'ngx-star-rating';
 import { Validators } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-// import { Component, OnInit } from '@angular/core';
-// import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-// import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize,LoadingStrategy, ThumbnailsMode, GalleryAction } from '@ngx-gallery/core';
-// import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-productpage',
   templateUrl: './productpage.component.html',
   styleUrls: ['./productpage.component.css']
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductpageComponent implements OnInit {
   [x: string]: any; 
-  // items: GalleryItem[];
- 
   prod_id: any ;
   public user_data:any;
   public login_userID:number= null;
@@ -46,10 +34,6 @@ export class ProductpageComponent implements OnInit {
   public Product_id:number=0;
   public amenties_length:number=0;
   e: any={};
-  // p_img2= null;
-  // p_img3= null;  
-  // p_img4= null;
-  // p_img5= null;
   
   public errorMessage:any;
   Message: any;
@@ -61,13 +45,7 @@ export class ProductpageComponent implements OnInit {
   order_data:any;
   public order_data_length:number=0;
   public user_transaction_status:boolean=false;  
-  // youtube: string= "https://www.youtube.com/embed/";
 
-  review_form = new FormGroup({
-    stars: new FormControl('', Validators.required),
-    rev_subject: new FormControl('', Validators.required),
-    rev_content: new FormControl('', Validators.required)
-  });
 
   public showLoadingIndicator:boolean= false;
   content: any = {};
@@ -99,10 +77,8 @@ export class ProductpageComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private toastr: ToastrService,
     private tokenService: TokenStorageService
-    // public gallery: Gallery
   ) { 
         this.route.queryParams.subscribe((params) => {
-          // console.log(params.id);
         this.id = params.id;
         this.resp_status = params.status;
         if(this.resp_status != null){
@@ -126,8 +102,6 @@ export class ProductpageComponent implements OnInit {
       this.login_useremail =this.idService.getUser().misc.email;
       this.login_usertype = this.idService.getUser().usertype; 
     }
-    
-  
     this.amenities();
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
@@ -154,11 +128,8 @@ export class ProductpageComponent implements OnInit {
           // console.log(this.product_amenties_length);
          
           this.cityValue=data["product"]["0"]["city"];
-          this.latCus=parseFloat(data["product"]["0"]["map_latitude"]);
-          this.longCus=parseFloat(data["product"]["0"]["map_longitude"]);
           this.showLoadingIndicator = false;
-  
-          
+       
         },
           err => {
             //console.log(err);
@@ -180,7 +151,6 @@ export class ProductpageComponent implements OnInit {
         this.showLoadingIndicator = false;
       },
         err => {
-          //console.log(err);
           this.showLoadingIndicator = false;
         }
       );
@@ -251,17 +221,13 @@ Price_convert(num: number) {
   }
   return num;
 }
-  
 proceedToPayment(planid){  
   this.plans_type="single_rental_property"; 
   this.authService.proceedToPayment(planid,this.plans_type).pipe().subscribe(
     (response: any) => {
-      // console.log(response);
       if(response.status == 201){
         this.paytm =response.data;
-        // console.log(this.paytm);
         this.createPaytmForm();
-        // console.log("success");
       }else{
         this.toastr.error("Invalid Arrgument", 'Something Error!!!...', {
           timeOut: 1500,
@@ -293,23 +259,18 @@ createPaytmForm() {
     // console.log(my_form);
     document.body.appendChild(my_form);
     my_form.submit();
-  // after click will fire you will redirect to paytm payment page.
-  // after complete or fail transaction you will redirect to your CALLBACK URL
   }  
   
   Amenties_funtion(Amenties_id:any){
-    // var len= this.product_amenties.length; 
-    // console.log(Amenties_id);
-    // console.log(this.product_amenties);
-  if(this.product_amenties_length !=null){
-    for (let i = 0; i < this.product_amenties_length; i++) {
-      if(Amenties_id==this.product_amenties[i].amenties){
-        return  true;
+    if(this.product_amenties_length !=null){
+      for (let i = 0; i < this.product_amenties_length; i++) {
+        if(Amenties_id==this.product_amenties[i].amenties){
+          return  true;
+        }
       }
     }
+    return false;
   }
-  return false;
-}
 // product comaprision functinalty 
 product_comp(id:number){
   //console.log(id);
@@ -413,9 +374,6 @@ check_order_product(id:any){
     );
   
 }
-  onShare(){
-    alert("Your Shareable Link is \n" + this.sitestring + this.router.url );
-  }
   redirect_to_home(): void {
     window.location.href=GlobalConstants.siteURL="login"
   }
@@ -436,53 +394,5 @@ check_order_product(id:any){
   redirect_to_compare(): void {
     window.location.href=GlobalConstants.siteURL="compare"
   }
-  
-   // carosule image
-   customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 1
-      },
-      740: {
-        items: 1
-      },
-      940: {
-        items: 1
-      },
-      1050: {
-        items: 1
-      }
-    },
-    nav: true
-  }
-
-}
-
-// const data = [
-//   {
-//     srcUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg',
-//     previewUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg'
-//   },
-//   {
-//     srcUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
-//     previewUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg'
-//   },
-//   {
-//     srcUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg',
-//     previewUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg'
-//   },
-//   {
-//     srcUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg',
-//     previewUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg'
-//   }
-// ];
+} 
+ 

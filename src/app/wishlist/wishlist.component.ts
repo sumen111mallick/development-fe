@@ -65,7 +65,7 @@ export class WishlistComponent implements OnInit {
 
   
     ngOnInit(): void {
-      this.titleService.setTitle('Create Listing');
+      this.titleService.setTitle('Our Wishlist');
       this.url_info  = this.userlogs.geturl();      
       this.device_info  = this.userlogs.getDeviceInfo();
       this.browser_info = this.userlogs.getbrowserInfo();

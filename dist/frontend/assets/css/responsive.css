@@ -185,7 +185,7 @@
 	.home1-advnc-search ul li .search_option_button button{width: 140px;}
 	.dropdown-content{min-height: 300px;}
 	.feature_property_slider.owl-carousel.owl-theme.owl-loaded .owl-stage-outer{padding: 0;}
-	.feat_property .details .fp_footer .fp_pdate{float: left !important;margin-left: 55px;margin-top: -15px;}
+	.feat_property .details .fp_footer .fp_pdate{float: right !important;margin-left: 55px;margin-top: -15px;}
 	.feat_property.list .details .fp_footer .fp_pdate{float: right !important;margin-top: 10px;}
 	.feat_property .details .fp_footer .fp_meta li{vertical-align: text-top}
 	.footer_mailchimp_form .col-auto input.form-control{width: 150px;}
@@ -620,8 +620,8 @@
 	.properti_city .overlay{height: 100%;}
 	.footer_mailchimp_form .col-auto input.form-control{width: 170px;}
 	.mouse_scroll{display: none;}
-	.home_content{padding: 150px 0 400px !important;}
-	.home_adv_srch_opt{margin-top: 100px;}
+	.home_content{padding: 150px 0 400px !important; margin-top: 10px !important;}
+	.home_adv_srch_opt{margin-top: 100px !important;}
 	.error_page.footer_apps_widget .mailchimp_form .form-control{width: 500px;}
 	.checkout_form .checkout_coupon form button.btn3{position: relative;}
 	.home_content.home4{padding: 250px 0 30px !important;}
@@ -816,11 +816,11 @@
 	.home1-advnc-search ul.apeartment_area_list li .dropdown.bootstrap-select>.dropdown-toggle,
 	.home1-advnc-search ul li .search_option_button button{width: 100%;}
 	.home1-advnc-search.home9 ul li{width: 45%;}
-	.home_content{padding: 60px 0 400px !important;}
+	.home_content{padding: 60px 0 400px !important; margin-top: 100px !important;}
 	.home1-advnc-search ul.h1ads_1st_list li.custome_fields_520{border: 1px solid #ebebeb;border-radius: 8px;cursor: pointer;height: 50px;line-height: 50px;margin: 10px 0;padding: 0 15px;}
 	.home1-advnc-search ul.apeartment_area_list li{margin-right: 20px;}
-	.home-one .home-text{padding: 0 15px;}
-	.home_adv_srch_opt{margin-top: 120px;}
+	.home-one .home-text{padding: 0 15px; margin-top: 20px !important;}
+	.home_adv_srch_opt{margin-top: 180px !important;}
 	.dropdown-content{bottom: 0;left: 0;max-height: -webkit-fill-available;overflow: auto;position: fixed;right: 0;top: 0;visibility: visible !important;}
 	.dropdown-content.home2{top: 0;}
 	.featured_row{margin-top: 0;}
@@ -1037,6 +1037,7 @@
 
 }
 @media only screen and (max-width:400px){
+
 	/* ExTra Class Start*/
 	.fn-400{float: none !important;}
 	.tal-400{text-align: left !important;}
@@ -1096,10 +1097,14 @@
 }
 /* (min-width:321px) (max-width:360px) */
 @media only screen and (max-width:360px){
+
+	.home-one .home-text {
+		margin-top: 60px !important;
+	}
 	.home1_adsrchfrm{padding: 30px 10px;}
 	.home1-advnc-search ul.apeartment_area_list li .dropdown.bootstrap-select>.dropdown-toggle{width: 320px;}
 	.home_content{padding: 25px 0 400px !important;}
-	.home_adv_srch_opt{margin-top: 160px;}
+	.home_adv_srch_opt{margin-top: 220px !important;}
 	.single_product .single_item .thumb img{height: auto;}
 
 	.error_page.footer_apps_widget .mailchimp_form .form-control {width: 245px;}
@@ -1122,7 +1127,7 @@
 @media only screen and (max-width:340px){
 	.home3_home_content a.popup_video_btn{top: -40px;}
 	.mk-fullscreen-search-overlay .mk-fullscreen-close{right: 20px;}
-	.feat_property .details .fp_footer .fp_pdate{float: left !important;margin-left: 55px;}
+	.feat_property .details .fp_footer .fp_pdate{float: right !important;margin-left: 55px;}
 	.tes-nav .slick-list .slick-track li.slick-slide.slick-current.slick-active.slick-center{margin-top: 10px;width: 75px !important;}
 	.tes-nav img{width: 50px;height: 50px;}
 	.tes-nav .slick-slide.slick-current.slick-active.slick-center img{width: 70px;height: 70px;}

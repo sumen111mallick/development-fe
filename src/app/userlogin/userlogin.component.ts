@@ -6,9 +6,9 @@ import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../_services/common.service';
 import { filter, pairwise } from 'rxjs/operators';
-/*0import { UrlService } from './../_services/url.service';*/
-import { RoutesRecognized } from '@angular/router';
-import { Observable } from 'rxjs';
+/*import { UrlService } from './../_services/url.service';*/
+// import { RoutesRecognized } from '@angular/router';
+// import { Observable } from 'rxjs';
 import { UserLogsService } from './../_services/user-logs.service';
 
 @Component({

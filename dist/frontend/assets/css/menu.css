@@ -1,12 +1,12 @@
 /* iqbal css  */
-/*@media(min-width: 993px) {
+@media(min-width: 993px) {
 	.main-menu {
 		display: block;
 	}
 	.mobile-menu {
 		display: none;
 	}
-} */
+}
 .testimonial_grid .details p i{
   font-size: 20px!important;
     padding: 0px 5px;
@@ -68,7 +68,8 @@
   margin: 0px 8px;
 }
 .sidebar-menu {
-width:258px!important;
+/*width:258px!important;*/
+width: 275px !important;
 }
 .owl-carousel .owl-stage:after {
   content: ".";
@@ -94,9 +95,10 @@ width:258px!important;
   color:#000;
   box-shadow: 0 3px 10px rgb(0 0 0 / 30%);
   font-size: 14px;
-  top: 30px;
+  top: 20px;
   position: absolute;
   width: 20px;
+  height: 25px!important;
   border-radius: 50px;
   text-align: center;
   cursor: pointer;
@@ -138,6 +140,7 @@ width:258px!important;
   .footer{
     padding: 0 20px !important;
   }
+  
 }
 .header.stylehome1{
   background-color: #0a0a0a !important;
