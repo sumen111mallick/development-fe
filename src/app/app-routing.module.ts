@@ -69,6 +69,10 @@ import { UserLoggsGuard } from './user-loggs.guard';
 import { InsertproductSaleComponent } from './insertproduct-sale/insertproduct-sale.component';
 import { InsertproductRentComponent } from './insertproduct-rent/insertproduct-rent.component';
 // import { MobileVerifyGuard } from './mobile-verify.guard';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { PaymentSummaryComponent } from './payment-summary/payment-summary.component';
+import { MyCreditsComponent } from './my-credits/my-credits.component';
+import { PlanApplyComponent } from './plan-apply/plan-apply.component';
 import{ LocalserviceComponent } from './localservice/localservice.component';
 
 const routes: Routes = [
@@ -252,6 +256,11 @@ const routes: Routes = [
   {path: 'access-denied', component: AccessDeniedComponent },
   {path: 'insertproduct-sale', component: InsertproductSaleComponent, canActivate: [VerifyDetailsGuard]},
   {path: 'insertproduct-rent', component: InsertproductRentComponent, canActivate: [VerifyDetailsGuard]},
+  { path: 'invoice', component: InvoiceComponent },
+  {path: 'payment-summary', component: PaymentSummaryComponent},
+  {path: 'my-credits', component: MyCreditsComponent},
+  {path: 'plan-apply', component: PlanApplyComponent},
+
   {path:'local-service', component: LocalserviceComponent},
   {path: '**', component: NotfoundComponent},
 
@@ -259,7 +268,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-  scrollPositionRestoration: 'enabled'
+  scrollPositionRestoration: 'top'
   })],
   exports: [RouterModule]
 })

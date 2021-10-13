@@ -68,7 +68,7 @@ export class ProductListingComponent implements OnInit {
   public showLoadingIndicator:boolean=false;
   amenityArray = [];
   selectedItems:string[];
-  
+
     build_name:any;
     Location:any; 
     type:number;
@@ -139,7 +139,7 @@ export class ProductListingComponent implements OnInit {
   ) {
     this.form.property_status='all';
     this.getScreenSize();
-   }
+  }
 
   sanitizeImageUrl(imageUrl: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
@@ -171,7 +171,7 @@ export class ProductListingComponent implements OnInit {
           this.location = place.formatted_address;
           this.zoom = 15;
           this.form.Location=this.location;
-        
+
         });
       });
     });
@@ -180,9 +180,9 @@ export class ProductListingComponent implements OnInit {
     this.idservice.saveCdata(null);
     this.idservice.saveProdId(null);
     this.titleService.setTitle('Listing');
-    this. amenities();
+    this.amenities();
     this.getpropertyData();
- 
+
     // this.onSearch();
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
@@ -191,9 +191,9 @@ export class ProductListingComponent implements OnInit {
       this.login = this.tokenService.getToken();
       this.loginuser_coutData();
     }
-    
+
   }
-  
+
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
     this.screenWidth = window.innerWidth;
@@ -269,14 +269,15 @@ loginuser_coutData(){
     }else{
       //console.log("without session");
       if(this.tokenStorage.getToken()){
-        this.isLoggedIn = true;  
+        this.isLoggedIn = true;
         this.authService.product_listing_wishlist().pipe().subscribe(
-          (product: any) => {  
+          (product: any) => {
             this.content = product.data;
             this.Searchcontent = this.content;
             this.Search_data_length=this.Searchcontent.length;
+            console.log(product);
             // console.log(data.data[0]['0']);
-            //console.log(this.Searchcontent);
+            console.log(this.Searchcontent);
             // console.log(this.Searchcontent[0].product_img);
             //console.log(this.Search_data_length);
             this.wishlist_info();
@@ -288,23 +289,24 @@ loginuser_coutData(){
             this.content = err.error.message;
             this.showLoadingIndicator = false;
           }
-        );   
+        );
       }else{
         this.userService.product_list_featured().pipe().subscribe(
           (data: any) => {
             this.content = data.data;
             this.Searchcontent = this.content;
             this.Search_data_length=this.Searchcontent.length;
-            //console.log(this.Searchcontent); 
+            console.log(data);
+            console.log(this.Searchcontent); 
             //console.log(this.Search_data_length);  
-            this.showLoadingIndicator = false;       
+            this.showLoadingIndicator = false;
           },
           err => {
             this.content = JSON.parse(err.error).message;
             this.showLoadingIndicator = false;
-          } 
+          }
         );
-      }     
+      }
     }
   }
 
@@ -357,12 +359,12 @@ Amenties_funtion(Amenties_id:any){
   if(this.secach_amenties_length !=null){
     for (let i = 0; i < this.secach_amenties_length; i++) {
       if(Amenties_id==this.homepage_data['1'][i]){
-        return  true;
+        return true;
       }
     }
   }
   return false;
-}  
+}
 
 // product comaprision functinalty 
 product_comp(id:number){
@@ -372,7 +374,7 @@ product_comp(id:number){
     this.isLoggedIn = true;
     //console.log(this.isLoggedIn);
     this.maintenance = true;
-    this.parking = false;   
+    this.parking = false;
     this.showLoadingIndicator = true;
       this.authService.Crete_product_comp(id).pipe().subscribe(
         (data: any) =>{
@@ -406,7 +408,7 @@ product_comp(id:number){
     if(this.tokenStorage.getUser() != null){
       this.isLoggedIn = true;
       this.maintenance = true;
-      this.parking = false;    
+      this.parking = false;
       this.showLoadingIndicator = true;
         this.authService.Wishlist(data).pipe().subscribe(
           (result: any) =>{
@@ -423,7 +425,7 @@ product_comp(id:number){
     else{
       this.redirect_to_home();
     }
-    
+
   }
 
   Wishlist_remove(data: any){
@@ -445,7 +447,7 @@ product_comp(id:number){
     else{
       this.redirect_to_home();
     }
-    
+
   }
   // pricre convert functionalty
   Price_convert(num: number) {
@@ -473,7 +475,7 @@ product_comp(id:number){
       //console.log(id + 'Checked');
       this.selectedItems.push(id);
     }else{
-      
+
       //console.log(id + 'UNChecked');
       this.selectedItems= this.selectedItems.filter(m=>m!=id);
     }
@@ -499,8 +501,8 @@ product_comp(id:number){
         this.showLoadingIndicator = true;
         this.authService.search_pro_type_login(id).subscribe(
           data => {
-            //console.log(data);
             this.Searchcontent = data.data;
+            console.log(this.Searchcontent);
             this.Search_data_length=this.Searchcontent.length;
             this.showLoadingIndicator = false;
           },
@@ -514,7 +516,7 @@ product_comp(id:number){
         this.showLoadingIndicator = true;
         this.authService.search_pro_type(id).subscribe(
           data => {
-            //console.log(data);
+            console.log(data);
             this.Searchcontent = data.data;
             this.Search_data_length=this.Searchcontent.length;
             this.showLoadingIndicator = false;
@@ -591,7 +593,7 @@ product_comp(id:number){
             );
         }
         this. closePopup();
-  
+
     }
   reset_Search():void{
     this.tokenService.RemoveSearch();
@@ -605,11 +607,11 @@ product_comp(id:number){
   // topbar searching functionalty
   wishlist_info(){
     this.userService.emit<string>('true');
-  } 
+  }
    // topbar proeprty comparion functionalty
   pro_comp_refresh(){
     this.userService.pro_comp_emit<string>('true');
-  } 
+  }
 
   // property comparision redirect comapre page 
   redirect_to_compare(): void {

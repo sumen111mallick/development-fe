@@ -122,7 +122,15 @@ import { ModalComponent } from './modal/modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SplitPipe } from './split.pipe';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { PaymentSummaryComponent } from './payment-summary/payment-summary.component';
+import { LoginModalComponent } from './login-modal/login-modal.component';
+import { MyCreditsComponent } from './my-credits/my-credits.component';
+import { PropertyCreditModalComponent } from './property-credit-modal/property-credit-modal.component';
+import { PlanApplyComponent } from './plan-apply/plan-apply.component';
 import { LocalserviceComponent } from './localservice/localservice.component';
 import { FeaturePropertyComponent } from './feature-property/feature-property.component';
 import { CityPropertyComponent } from './city-property/city-property.component';
@@ -235,6 +243,12 @@ import { ComtactPageFormComponent } from './comtact-page-form/comtact-page-form.
     DashboardNavComponent,
     ModalComponent,
     SplitPipe,
+    InvoiceComponent,
+    PaymentSummaryComponent,
+    LoginModalComponent,
+    MyCreditsComponent,
+    PropertyCreditModalComponent,
+    PlanApplyComponent,
     LocalserviceComponent,
     FeaturePropertyComponent,
     CityPropertyComponent,
@@ -270,6 +284,8 @@ import { ComtactPageFormComponent } from './comtact-page-form/comtact-page-form.
     MatDialogModule,
     MatSelectModule,
     MatOptionModule,
+    MatRadioModule,
+    MatAutocompleteModule,
     NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({  
     apiKey: 'AIzaSyC2S5kHeGYkW9cL4d7_uxfauTBfQEtN4HA', libraries: ['places']

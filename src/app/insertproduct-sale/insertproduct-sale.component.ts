@@ -12,6 +12,9 @@ import { Validators } from '@angular/forms';
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { InternalUserService } from './../_services/internal-user.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-insertproduct-sale',
@@ -20,6 +23,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class InsertproductSaleComponent implements OnInit {
 
+  private subs = new Subscription();
   [x: string]: any;
   form: any = {};
   ared: any = {};
@@ -27,7 +31,7 @@ export class InsertproductSaleComponent implements OnInit {
   isFormSubmitted = false;
   public errorMessage: any = {};
   roles: string[] = [];
-  showLoadingIndicator: boolean = false;
+  public showLoadingIndicator: boolean = false;
   saleValue: boolean = true;
   rentValue: boolean = false;
   furnish: boolean = false;
@@ -106,6 +110,7 @@ export class InsertproductSaleComponent implements OnInit {
   dropdownList = [];
 
   public response: any;
+  filteredOptions: Observable<any[]>;
 
   insert_property_sales = new FormGroup({
     Property_Details: new FormGroup({
@@ -239,24 +244,31 @@ export class InsertproductSaleComponent implements OnInit {
         });
       });
     });
-    this.dropdownSettings = {
-      singleSelection: true,
-      idField: 'item_id',
-      textField: 'item_text',
-      itemsShowLimit: 1,
-      allowSearchFilter: true,
-      maxHeight: 250
-    };
+
 
     this.amenities();
     this.Property_type_data();
     this.get_area();
     this.titleService.setTitle('Create Listing');
+    this.filteredOptions = this.Property_Location.locality.valueChanges
+      .pipe(
+        startWith(''),
+        map((value) => this._filter(value))
+      );
     // Login check
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.user_id = this.tokenStorage.getUser().id;
+      if (this.tokenStorage.getUser().misc) {
+        console.log(this.tokenStorage.getUser());
+        this.user_id = this.tokenStorage.getUser().id;
+      }
+      else {
+        console.log(this.tokenStorage.getUser());
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        this.user_id = this.userDetails.id;
+      }
+      //this.user_id = this.tokenStorage.getUser().id;
       this.maintenance = true;
       this.parking = false;
       this.roles = this.tokenStorage.getUser().username;
@@ -269,6 +281,14 @@ export class InsertproductSaleComponent implements OnInit {
     this.selectedItems = new Array<string>();
     this.product_img = new Array<string>();
     this.selected_room = new Array<string>();
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'item_id',
+      textField: 'item_text',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      maxHeight: 250
+    };
 
   }
 
@@ -315,24 +335,75 @@ export class InsertproductSaleComponent implements OnInit {
 
   get_area(): void {
     this.showLoadingIndicator = true;
-    this.internalUserService.get_areas().subscribe(
+    this.subs.add(this.internalUserService.get_areas().subscribe(
       data => {
         // this.dropdownList = data;
         for (let i = 1; i < data.length; i++) {
           this.dropdownList = this.dropdownList.concat({ item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode });
         }
+        this.filteredOptions = this.Property_Location.locality.valueChanges
+        .pipe(
+          startWith(''),
+          map((value) => this._filter(value))
+        );
+      },
+      err => {
+        console.log(err);
+        this.showLoadingIndicator = false;
+      }
+    ));
+  }
+
+  /*get_area(): void {
+    this.showLoadingIndicator = true;
+    this.internalUserService.get_areas().pipe(map(
+      data => {
+        // this.dropdownList = data;
+        for (let i = 1; i < data.length; i++) {
+          this.dropdownList = this.dropdownList.concat({ item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode });
+        }
+        console.log(this.dropdownList);
         this.showLoadingIndicator = false;
       },
       err => {
-        // console.log(err);
-
-      }
+        console.log(err);
+        this.showLoadingIndicator = false;
+      })
     );
+  }*/
+
+  private _filter(value: any): string[] {
+    console.log(value);
+    if (value.item_text) {
+      const filterValue = value.item_text.toLowerCase();
+      console.log(filterValue);
+      return this.dropdownList.filter(option => option.item_text.toLowerCase().includes(filterValue));
+    }
+    else {
+      const filterValue = value.toLowerCase();
+      console.log(filterValue);
+      return this.dropdownList.filter(option => option.item_text.toLowerCase().includes(filterValue));
+    }
+
+
+  }
+  /*let newList = [];
+  
+  this.dropdownList.forEach(element => {
+    if (element.item_text.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
+      newList.push({'item_id': element.item_id, 'item_text': element.item_text });
+    }
+  })
+  return newList;*/
+
+  displayFn(value?) {
+    console.log(this.dropdownList);
+    return value ? this.dropdownList.find(option => option.item_id === value.item_id).item_text : undefined;
   }
 
   onchange_locality(id: any) {
-
-    this.authService.get_pincodebyid(id).subscribe(
+    console.log(id);
+    this.authService.get_pincodebyid(id.option.value.item_id).subscribe(
       data => {
         this.insert_property_sales.controls.Property_Location.patchValue({
           pincode: data.data.pincode,
@@ -657,7 +728,7 @@ export class InsertproductSaleComponent implements OnInit {
           this.errorMessage = err.error.errors;
           this.errorMessage1 = err.error.message;
           // console.log(this.errorMessage);
-          this.toastr.error(this.errorMessage1, 'Something Error', {
+          this.toastr.error(this.errorMessage1, 'Error', {
             timeOut: 3000,
           });
         }
@@ -681,7 +752,7 @@ export class InsertproductSaleComponent implements OnInit {
             draft_form_id: data.last_id,
           });
           this.Message = data.message;
-          this.toastr.info(this.Message, 'Property Error', {
+          this.toastr.info(this.Message, 'Property Info Saved', {
             timeOut: 3000,
           });
           this.showLoadingIndicator = false;
@@ -692,7 +763,7 @@ export class InsertproductSaleComponent implements OnInit {
           this.err_caused = true;
           this.errorMessage = err.error.errors;
           this.errorMessage1 = err.error.message;
-          this.toastr.error(this.errorMessage1, 'Something Error', {
+          this.toastr.error(this.errorMessage1, 'Error', {
             timeOut: 3000,
           });
         }

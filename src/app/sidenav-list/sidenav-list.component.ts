@@ -116,7 +116,7 @@ export class SidenavListComponent implements OnInit {
     this.sidenavClose.emit();
     this.toastr.info('Minimun Two Property required','Comparison', {
       timeOut: 2000,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
     });
   }
 

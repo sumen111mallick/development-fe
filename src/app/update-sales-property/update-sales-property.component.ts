@@ -15,6 +15,9 @@ import { MapsAPILoader, AgmMap } from '@agm/core';
 // import { google } from "google-maps";
 import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { InternalUserService } from './../_services/internal-user.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-update-sales-property',
@@ -22,6 +25,7 @@ import { InternalUserService } from './../_services/internal-user.service';
   styleUrls: ['./update-sales-property.component.css']
 })
 export class UpdateSalesPropertyComponent implements OnInit {
+  private subs = new Subscription();
   addition_room: addition_room = [
     { id: 1, name: "Other Room"},
     { id: 2, name: "Pooja Room"},
@@ -136,6 +140,8 @@ export class UpdateSalesPropertyComponent implements OnInit {
 
   public property_type: any;
   public property_type_result: any;
+
+  filteredOptions: Observable<any[]>;
 
   update_property_sales = this.fb.group({
     Property_Details: new FormGroup({
@@ -257,12 +263,23 @@ export class UpdateSalesPropertyComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.tokenStorage.getToken() != null) {
+      this.isLoggedIn = true;
+      if (this.tokenStorage.getUser().misc) {
+        console.log(this.tokenStorage.getUser());
+        this.user_id = this.tokenStorage.getUser().id;
+      }
+      else {
+        console.log(this.tokenStorage.getUser());
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        this.user_id = this.userDetails.id;
+      }
       this.property_details(this.id);
       this.amenities();
       this.Property_type_data();
       this.get_area();
     }
     else {
+      this.isLoggedIn = false;
       this.redirect_to_home();
     }
 
@@ -304,6 +321,11 @@ export class UpdateSalesPropertyComponent implements OnInit {
     this.selectedItems = new Array<string>();
     this.Uncheck_Items = new Array<string>();
     this.update_product_img = new Array<string>();
+    this.filteredOptions = this.update_property_sales.controls.Property_Location.get('locality').valueChanges
+      .pipe(
+        startWith(''),
+        map((value) => this._filter(value))
+      );
   }
 
   getLocation() {
@@ -432,167 +454,175 @@ export class UpdateSalesPropertyComponent implements OnInit {
         if(this.type){
           this.update_property_sales.controls.Property_Details.patchValue({
             type:this.type,
-          }); 
+          });
         }
         if(this.area_unit){
           this.update_property_sales.controls.Property_Details.patchValue({
             area_unit:this.area_unit,
-          });   
+          });
         }
         // property location form controls
         this.update_property_sales.controls.Property_Location.patchValue({
-            address:this.address,
-            map_latitude:this.map_latitude,
-            map_longitude:this.map_longitude,
-            city: this.city,
-            pincode:this.pincode,
-            nearest_landmark:this.nearest_landmark,
+          address: this.address,
+          map_latitude: this.map_latitude,
+          map_longitude: this.map_longitude,
+          city: this.city,
+          //pincode:this.pincode,
+          nearest_landmark: this.nearest_landmark,
         });
         if(this.city){
           this.update_property_sales.controls.Property_Location.patchValue({
             city:this.city,
-          });   
+          });
         }
-        if(this.locality){
+        if (this.locality) {
+          console.log(this.locality);
+          this.locality = JSON.parse(this.locality);
+
+          this.update_property_sales.controls.Property_Location.get('locality').patchValue(this.locality);
           this.update_property_sales.controls.Property_Location.patchValue({
-            locality:this.locality.id,
-          });   
+            pincode: this.locality.item_pincode
+          });
+          // this.update_property_sales.controls.Property_Location.get('locality').setValue(this.locality);
+          /*this.update_property_sales.controls.Property_Location.patchValue({
+            locality:this.locality
+          });  */
         }
         // property addtional details form control
-        
+
         if(this.bedroom){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             bedroom:this.bedroom,
-          });   
+          });
         }
         if(this.bathroom){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             bathroom:this.bathroom,
-          });   
+          });
         }
         if(this.balconies){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             balconies:this.balconies,
-          });   
+          });
         }
         if(this.additional_rooms_status){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             additional_rooms_status:this.additional_rooms_status,
-          });   
+          });
         }
         if(this.facing_towards){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             facing_towards:this.facing_towards,
-          });   
+          });
         }
         if(this.rera_registration_status){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             rera_registration_status:this.rera_registration_status,
-          });   
+          });
         }
-        
+
         if(this.furnishing_status){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             furnishing_status:this.furnishing_status,
-          });   
+          });
         }
         if(this.additional_parking_status){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             additional_parking_status:this.additional_parking_status,
-          });   
+          });
         }
         if(this.buildyear){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             buildyear:this.buildyear,
-          });   
+          });
         }
         if(this.availability_condition){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             availability_condition:this.availability_condition,
-          });   
+          });
         }
         if(this.possession_by){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             possession_by:this.possession_by,
-          });   
+          });
         }
         if(this.property_on_floor){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             property_on_floor:this.property_on_floor,
-          });   
+          });
         }
         if(this.total_floors){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             total_floors:this.total_floors,
-          });   
+          });
         }
         if(this.parking_covered_count){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             parking_covered_count:this.parking_covered_count,
-          });   
+          });
         }
         if(this.parking_open_count){
           this.update_property_sales.controls.Property_additional_details.patchValue({
             parking_open_count:this.parking_open_count,
-          });   
+          });
         }
         // property pricing & images form control
 
         if(this.video_link){
           this.update_property_sales.controls.Property_price_images.patchValue({
             video_link:"https://www.youtube.com/watch?v="+this.video_link,
-          });   
+          });
         }else{
           this.update_property_sales.patchValue({
             video_link:this.video_link,
           });
         }
-        
+
         if(this.ownership){
           this.update_property_sales.controls.Property_price_images.patchValue({
             ownership:this.ownership,
-          });   
+          });
         }
         if(this.expected_pricing){
           this.update_property_sales.controls.Property_price_images.patchValue({
             expected_pricing:this.expected_pricing,
-          });   
+          });
         }
         if(this.inc_electricity_and_water_bill){
           this.update_property_sales.controls.Property_price_images.patchValue({
             inc_electricity_and_water_bill:this.inc_electricity_and_water_bill,
-          });   
+          });
         }
         if(this.tax_govt_charge){
           this.update_property_sales.controls.Property_price_images.patchValue({
             tax_govt_charge:this.tax_govt_charge,
-          });   
+          });
         }
         if(this.price_negotiable){
           this.update_property_sales.controls.Property_price_images.patchValue({
             price_negotiable:this.price_negotiable,
-          });   
+          });
         }
         if(this.negotiable_status){
           this.update_property_sales.controls.Property_price_images.patchValue({
             negotiable_status:this.negotiable_status,
-          });   
+          });
         }
         if(this.maintenance_charge_status){
           this.update_property_sales.controls.Property_price_images.patchValue({
             maintenance_charge_status:this.maintenance_charge_status,
-          });   
+          });
         }
         if(this.maintenance_charge){
           this.update_property_sales.controls.Property_price_images.patchValue({
             maintenance_charge:this.maintenance_charge,
-          });   
-        }        
+          });
+        }
 
-       this.showLoadingIndicator = false; 
-      } 
-      );
-    
+       this.showLoadingIndicator = false;
+      }
+    );
+
   }
   amenities(): void {
     this.userService.getamenitiesdata().pipe().subscribe(
@@ -814,13 +844,13 @@ export class UpdateSalesPropertyComponent implements OnInit {
     if(this.add_room_array.length !=null){
       for (let i = 0; i < this.add_room_array.length; i++) {
         if(room==this.add_room_array[i]){
-          return  true;
+          return true;
         }
       }
     }
     return false;
   }
-  
+
   onchange_rooms(e: any, room: string) {
     // console.log(this.update_room_array);
     if (e.target.checked) {
@@ -839,9 +869,10 @@ export class UpdateSalesPropertyComponent implements OnInit {
     }
     // console.log(this.additional_room_array);
   }
-  onchange_locality(id:any){
-    this.authService.get_pincodebyid(id).subscribe(
-      data => {;
+  onchange_locality(id: any) {
+    this.authService.get_pincodebyid(id.option.value.item_id).subscribe(
+      data => {
+       
         this.update_property_sales.controls.Property_Location.patchValue({
           pincode: data.data.pincode,
         });
@@ -875,7 +906,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
     else {
       this.parking_row = false;
     }
-   }
+  }
   price_negotiable_status(event): void {
     if (event == 1) {
       this.price_negotiable_row = true;
@@ -884,7 +915,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
       this.price_negotiable_row = false;
     }
   }
-  
+
   maintenanceStatus(event): void {
     if (event == 1) {
       this.maintenance_row = true;
@@ -909,7 +940,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
   delete_pic5() {
     this.imagePre5 = null;
   }
-  
+
 
   reloadPage(): void {
     window.location.reload();
@@ -925,7 +956,7 @@ export class UpdateSalesPropertyComponent implements OnInit {
     }
   }
   RangeSlider_Price(event: number) {
-    this.expected_pricing = event;    
+    this.expected_pricing = event;
     this.update_property_sales.controls.Property_price_images.patchValue({
       expected_pricing:this.expected_pricing,
     });
@@ -1000,30 +1031,83 @@ saveDraft_form(): void {
       timeOut: 2000,
     });
   }
-  
+
 }
 
-get_area():void{
-  this.internalUserService.get_areas().subscribe(
-    data => {
-      // this.dropdownList = data;
-      for (let i = 1; i < data.length; i++) {
-        this.dropdownList = this.dropdownList.concat({item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode});
+  get_area(): void {
+    this.subs.add(this.internalUserService.get_areas().subscribe(
+      data => {
+        // this.dropdownList = data;
+        for (let i = 1; i < data.length; i++) {
+          this.dropdownList = this.dropdownList.concat({ item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode });
+        }
+        this.filteredOptions = this.update_property_sales.controls.Property_Location.get('locality').valueChanges
+          .pipe(
+            startWith(''),
+            map((value) => this._filter(value))
+          );
+        console.log(this.filteredOptions);
+        console.log(this.dropdownList);
+      },
+      err => {
+        // console.log(err);
+
       }
-    },
-    err => {
-      // console.log(err);
+    ));
+  }
 
+  private _filter(value: any): string[] {
+    console.log(value);
+    if (value.item_text) {
+      const filterValue = value.item_text.toLowerCase();
+      console.log(filterValue);
+      return this.dropdownList.filter(option => option.item_text.toLowerCase().includes(filterValue));
     }
-  );
-}
+    else {
+      const filterValue = value.toLowerCase();
+      console.log(filterValue);
+      return this.dropdownList.filter(option => option.item_text.toLowerCase().includes(filterValue));
+    }
+  }
+
+  displayFn(value?) {
+    console.log(value);
+    console.log(this.dropdownList);
+    console.log(value.item_id);
+    if (this.dropdownList.length > 0) {
+      return value ? this.dropdownList?.find(option => option.item_id === value.item_id).item_text : undefined;
+    }
+    else {
+      return value.item_text;
+    }
+  }
 
   redirect_to_myproperties(): void {
     window.location.href=GlobalConstants.siteURL="myproperties"
   }
   redirect_to_home(): void {
-    window.location.href=GlobalConstants.siteURL="login"
+    window.location.href = GlobalConstants.siteURL = "login"
+  }
+
+  crm_api_call() {
+    this.controls = this.update_property_sales.get('Property_Details');
+    if (this.controls.valid) {
+      console.log("Valid");
+      console.log(this.controls);
+      this.authService.crm_call(this.user_id).subscribe(
+        data => {
+          this.response = data;
+        },
+        err => {
+          this.response = err;
+        }
+      );
     }
+    else {
+      console.log("Invalid");
+    }
+
+  }
 
 }
 

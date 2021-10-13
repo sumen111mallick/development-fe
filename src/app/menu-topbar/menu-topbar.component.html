@@ -32,7 +32,7 @@
                 <span><a class="dropdown-item text-secondary" href="/logout">Log out</a></span>
             </button>
             <button mat-menu-item *ngIf="!isLoggedIn">
-                <span><a class="dropdown-item text-secondary" href="/login">Login</a></span>
+                <span><a class="dropdown-item text-secondary" href="/login" (click)="storeUrl()">Login</a></span>
             </button>
         </mat-menu>
     </div>
@@ -54,7 +54,7 @@
                 <a href="/blog">Blog</a>
             </li>
             <li *ngIf="!isLoggedIn">
-                <a href="/login">Login/Register</a>
+                <a href="/login" (click)="storeUrl()">Login/Register</a>
             </li>
             <li *ngIf="isLoggedIn" class="user_acc">
                 <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

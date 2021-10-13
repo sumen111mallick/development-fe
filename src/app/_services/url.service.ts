@@ -15,7 +15,9 @@ export class UrlService {
      router.events.subscribe(event => {
        if (event instanceof NavigationEnd) {        
          this.previousUrl = this.currentUrl;
+         console.log(this.previousUrl);
          this.currentUrl = event.url;
+         console.log(this.currentUrl);
        };
      });
    }

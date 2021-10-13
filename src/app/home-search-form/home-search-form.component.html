@@ -1,39 +1,34 @@
 <div class="home_adv_srch_opt">
     <ul class="nav nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item" (click)="rent_price_fun()">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill"
-                href="/productpagepills-home" role="tab" aria-controls="pills-home"
-                aria-selected="true">Rent
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="/productpagepills-home" role="tab"
+                aria-controls="pills-home" aria-selected="true">Rent
             </a>
         </li>
         <li class="nav-item" (click)="buyyer_price_fun()">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill"
-                href="/productpagepills-profile" role="tab" aria-controls="pills-profile"
-                aria-selected="false">Buy
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="/productpagepills-profile" role="tab"
+                aria-controls="pills-profile" aria-selected="false">Buy
             </a>
         </li>
     </ul>
-    <div class="tab-content home1_adsrchfrm mx-auto" style="width: 80%;"
-        id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-            aria-labelledby="pills-home-tab">
-            <form [formGroup]="searchForm" class="home1-advnc-search" action="#"
-                name="searchHome" id="searchhome" #searchhome="ngForm">
+    <div class="tab-content home1_adsrchfrm mx-auto" style="width: 80%;" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <form [formGroup]="searchForm" class="home1-advnc-search" action="#" name="searchHome" id="searchhome"
+                #searchhome="ngForm">
                 <div class="row">
                     <div class="col-lg-2 col-md-4 col-sm-12">
                         <div class="form-group">
-                            <input type="hidden" class="form-control" id="search_type"
-                                name="search_type" formControlName="search_type">
+                            <input type="hidden" class="form-control" id="search_type" name="search_type"
+                                formControlName="search_type">
                             <input type="text" class="form-control input-text" name="build_name"
-                                formControlName="build_name" id="build_name"
-                                placeholder="Enter keywords...">
+                                formControlName="build_name" id="build_name" placeholder="Enter keywords...">
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="col-lg-2 col-md-4 col-sm-12">
                         <div class="search_option_two">
                             <div class="form-group candidate_revew_select">
-                                <select class="selectpicker w100 show-tick form-control"
-                                    name="type" formControlName="type" id="type">
+                                <select class="selectpicker w100 show-tick form-control" name="type"
+                                    formControlName="type" id="type">
                                     <!-- <option  value="" >Select Property Type</option> -->
                                     <!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
                                     <option value="" disabled>Select Property Type
@@ -77,65 +72,55 @@
                     </div>
                     <div class="col-lg-2 col-md-4 col-sm-12">
                         <div class="form-group">
-                            <input type="hidden" class="form-control" name="Location"
-                                formControlName="Location" id="Location"
-                                placeholder="Location">
-                            <input #search autocorrect="off" autocapitalize="off"
-                                spellcheck="off" formControlName="Location" type="search"
-                                class="form-control input-text" placeholder="Enter Address"/>
+                            <input type="hidden" class="form-control" name="Location" formControlName="Location"
+                                id="Location" placeholder="Location">
+                            <input #search autocorrect="off" autocapitalize="off" spellcheck="off"
+                                formControlName="Location" type="search" class="form-control input-text"
+                                placeholder="Enter Address" />
                             <!--<label class="address_span" for="Location"><span
                                             class="flaticon-maps-and-flags"></span></label>-->
                         </div>
                     </div>
-                    <div *ngIf="rent_range_slider== true"
-                        class="range-slider-homa-page col-lg-3 col-md-4 col-sm-12">
+                    <div *ngIf="rent_range_slider== true" class="range-slider-homa-page col-lg-3 col-md-4 col-sm-12">
                         <div class="search_option_two">
                             <div class="candidate_revew_select">
                                 <div class="dropdown bootstrap-select w100 show-tick">
-                                    <ngx-slider [options]="options"
-									formControlName="sliderControl"></ngx-slider>
-                                    <input type="hidden" class="form-control" id="Minimum"
-                                        placeholder="Min Price" name="Minimum"
-                                        formControlName="Minimum">
-                                    <input type="hidden" class="form-control" id="Maximum"
-                                        placeholder="Max Price" name="Maximum"
-                                        formControlName="Maximum">
+                                    <ngx-slider [options]="options" formControlName="sliderControl"></ngx-slider>
+                                    <input type="hidden" class="form-control" id="Minimum" placeholder="Min Price"
+                                        name="Minimum" formControlName="Minimum">
+                                    <input type="hidden" class="form-control" id="Maximum" placeholder="Max Price"
+                                        name="Maximum" formControlName="Maximum">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="buyyer_range_slider== true"
-                        class="range-slider-homa-page col-lg-3 col-md-4 col-sm-12">
+                    <div *ngIf="buyyer_range_slider== true" class="range-slider-homa-page col-lg-3 col-md-4 col-sm-12">
                         <div class="search_option_two">
                             <div class="candidate_revew_select">
                                 <div class="dropdown bootstrap-select w100 show-tick">
-                                    <ngx-slider [options]="options_sales"
-									 formControlName="sliderControl"></ngx-slider>
-                                    <input type="hidden" class="form-control" id="Minimum"
-                                        placeholder="Min Price" name="Minimum"
-                                        formControlName="Minimum">
-                                    <input type="hidden" class="form-control" id="Maximum"
-                                        placeholder="Max Price" name="Maximum"
-                                        formControlName="Maximum">
+                                    <ngx-slider [options]="options_sales" formControlName="sliderControl"></ngx-slider>
+                                    <input type="hidden" class="form-control" id="Minimum" placeholder="Min Price"
+                                        name="Minimum" formControlName="Minimum">
+                                    <input type="hidden" class="form-control" id="Maximum" placeholder="Max Price"
+                                        name="Maximum" formControlName="Maximum">
                                     <!-- <option value="Others">Others</option> -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-4 col-sm-12">
+                    <div class="col-lg-3 col-md-4 col-sm-12">
                         <div class="search_option_button text-center form-group h100">
-                            <button type="button"
-                                (click)="searchhome.form.valid && onSearch()"
+                            <button type="button" (click)="searchhome.form.valid && onSearch()"
                                 class="btn btn-thm w100 h50">Search
                             </button>
                         </div>
                     </div>
-                </div><!--row -->
+                </div>
+                <!--row -->
                 <div class="row mt25">
                     <div class="col-lg-12 col-md-12 col-sm-12" id="accord-div">
-                        <a class="btn" data-toggle="collapse" href="#collapseExample"
-                            role="button" aria-expanded="false"
-                            aria-controls="collapseExample">
+                        <a class="btn" data-toggle="collapse" href="#collapseExample" role="button"
+                            aria-expanded="false" aria-controls="collapseExample">
                             Advanced <i class="fa fa-angle-down"></i>
                         </a>
 
@@ -150,11 +135,9 @@
                                 <div class="row">
                                     <ul class="ui_kit_checkbox selectable-list">
                                         <li *ngFor="let menuData of amenitiesresult"
-                                            class="col-lg-2 col-md-4 col-sm-5 col-5">
+                                            class="col-lg-2 col-md-4 col-sm-6 col-6">
                                             <div class="custom-control custom-checkbox ">
-                                                <input type="checkbox"
-                                                    class="custom-control-input"
-                                                    id="{{menuData.id}}"
+                                                <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
                                                     value="{{menuData.id}}"
                                                     (change)="onchangeAmenties($event,menuData.id)">
                                                 <label class="custom-control-label"
@@ -164,12 +147,12 @@
                                     </ul>
                                 </div>
                                 <div class="row mb20">
-                                    <div class="col-lg-3 col-md-6 col-sm-5">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
                                         <div class="col-lg-12"><label>Bathrooms</label>
                                         </div>
                                         <div class="col-lg-12">
-                                            <select class="btn btn-thm" name="Bathrooms"
-                                                formControlName="Bathrooms" id="Bathrooms">
+                                            <select class="btn btn-thm" name="Bathrooms" formControlName="Bathrooms"
+                                                id="Bathrooms">
                                                 <option value="" disabled>Select
                                                     Bathrooms</option>
                                                 <option value="1">1</option>
@@ -185,11 +168,11 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-5">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
                                         <div class="col-lg-12"><label>Bedrooms</label></div>
                                         <div class="col-lg-12">
-                                            <select class="btn btn-thm" name="Bedrooms"
-                                                formControlName="Bedrooms" id="Bedrooms">
+                                            <select class="btn btn-thm" name="Bedrooms" formControlName="Bedrooms"
+                                                id="Bedrooms">
                                                 <option value="" selected disabled>Select
                                                     Bedrooms
                                                 </option>
@@ -206,12 +189,11 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-5">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
                                         <div class="col-lg-12"><label>Year built</label>
                                         </div>
                                         <div class="col-lg-12">
-                                            <select class="btn btn-thm" name="Years"
-                                                formControlName="Years" id="Years">
+                                            <select class="btn btn-thm" name="Years" formControlName="Years" id="Years">
                                                 <option value="" selected disabled>Select
                                                     Bulid
                                                     Years</option>
@@ -236,12 +218,12 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-5">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
                                         <div class="col-lg-12"><label>Area Unit</label>
                                         </div>
                                         <div class="col-lg-12">
-                                            <select class="btn btn-thm" name="area_unit"
-                                                formControlName="area_unit" id="area_unit">
+                                            <select class="btn btn-thm" name="area_unit" formControlName="area_unit"
+                                                id="area_unit">
                                                 <option disabled value="" selected>
                                                     Select Area Unit
                                                 </option>
@@ -282,12 +264,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div><!--row -->
+                                </div>
+                                <!--row -->
                             </div><!-- card -->
                         </div><!-- collasb -->
                     </div><!-- accord div -->
                 </div><!-- row -->
             </form>
-        </div><!-- tab plan--> 
+        </div><!-- tab plan-->
     </div><!-- tab content -->
 </div><!-- home adv -->

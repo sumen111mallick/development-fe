@@ -138,5 +138,10 @@ export class MenuTopbarComponent implements OnInit {
     this.tokenStorage.removeToken();
     //console.log(this.isLoggedIn);
   }
+
+  storeUrl() {
+    console.log(this.router.url);
+    this.tokenStorage.saveReturnURL(this.router.url);
+  }
 }
 

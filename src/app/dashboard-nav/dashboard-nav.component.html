@@ -102,6 +102,16 @@
         </mat-list-item>
 
         <mat-list-item *ngIf="usertype < 6">
+            <a href="/my-credits">
+                <span class="material-icons">
+                    maps_home_work
+                </span>
+                <span> My Plans</span>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="usertype < 6">
             <a href="/savedsearches">
                 <span class="material-icons">
                     manage_search

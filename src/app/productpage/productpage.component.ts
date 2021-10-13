@@ -16,7 +16,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./productpage.component.css']
 })
 export class ProductpageComponent implements OnInit {
-  [x: string]: any; 
+  [x: string]: any;
   prod_id: any ;
   public user_data:any;
   public login_userID:number= null;
@@ -44,7 +44,7 @@ export class ProductpageComponent implements OnInit {
   resp_status:any;  
   order_data:any;
   public order_data_length:number=0;
-  public user_transaction_status:boolean=false;  
+  public user_transaction_status:boolean=false;
 
 
   public showLoadingIndicator:boolean= false;
@@ -99,7 +99,7 @@ export class ProductpageComponent implements OnInit {
     if (this.tokenStorage.getToken() != null){
       this.isLoggedIn = true;
       this.login_userID = this.idService.getUser().id;
-      this.login_useremail =this.idService.getUser().misc.email;
+      this.login_useremail =this.idService.getUser().misc?.email;
       this.login_usertype = this.idService.getUser().usertype; 
     }
     this.amenities();
@@ -129,7 +129,7 @@ export class ProductpageComponent implements OnInit {
          
           this.cityValue=data["product"]["0"]["city"];
           this.showLoadingIndicator = false;
-       
+  
         },
           err => {
             //console.log(err);
@@ -159,7 +159,7 @@ export class ProductpageComponent implements OnInit {
   // payment status
   payment_status(resp_status){
     if(resp_status=='01'){
-      this.toastr.success('Payment Succesfull', 'Property', {
+      this.toastr.success('Payment Successful', 'Property', {
         timeOut: 8000,
       }); 
     }
@@ -169,7 +169,7 @@ export class ProductpageComponent implements OnInit {
       }); 
     }
     if(resp_status=='141'){
-      this.toastr.info('Payment Canceled', 'Property', {
+      this.toastr.info('Payment Cancelled', 'Property', {
         timeOut: 8000,
       }); 
     }

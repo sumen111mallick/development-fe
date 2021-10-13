@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree,Router} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from './_services/token-storage.service';
 import { UserService } from './_services/user.service';
@@ -16,43 +16,42 @@ const AUTH_API = GlobalConstants.apiURL;
   providedIn: 'root'
 })
 export class UserLoggsGuard implements CanActivate {
-  
+
   public userEmail: string[] = null;
   private usertype: any;
   public userDetails: any;
-  ip_address:any; 
-  ipAddress:string;
+  ip_address: any;
+  ipAddress: string;
   systemInfo: DeviceInfo;
-  pro_id:any=null;
-  type:any;
-  device_info:any;
-  browser_info:any;
-  url_info:string;
+  pro_id: any = null;
+  type: any;
+  device_info: any;
+  browser_info: any;
+  url_info: string;
   url: any;
-  input_info:any=null;
-  user_cart:any=null;
-  
-  constructor( 
+  input_info: any = null;
+  user_cart: any = null;
+
+  constructor(
     private tokenStorage: TokenStorageService,
     private userlogs: UserLogsService,
     private router: Router,
     private authService: AuthService,
-    private Location:Location,
+    private Location: Location,
     private http: HttpClient,
     private deviceDetectorService: DeviceDetectorService,
-    private httpClient: HttpClient ) 
-    {}
+    private httpClient: HttpClient) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-       
-       if(route.queryParams.id != null){
-        this.pro_id=route.queryParams.id;
-       }
-        // console.log(this.pro_id);
-       this.type = route.data.type;  
-      //  this.loadScript('./assets/js/clientInfo.js');     
-       return this.checkLogin();
+
+    if (route.queryParams.id != null) {
+      this.pro_id = route.queryParams.id;
+    }
+    // console.log(this.pro_id);
+    this.type = route.data.type;
+    //  this.loadScript('./assets/js/clientInfo.js');     
+    return this.checkLogin();
   }
   loadScript(url: string) {
     const body = <HTMLDivElement>document.body;
@@ -64,22 +63,30 @@ export class UserLoggsGuard implements CanActivate {
     body.appendChild(script);
   }
   checkLogin() {
-    if(this.tokenStorage.getToken() != null) {
-      this.userEmail    = this.tokenStorage.getUser().misc.email;
-      this.usertype     = this.tokenStorage.getUser().usertype;
-      this.url_info  = this.userlogs.geturl();      
-      this.device_info  = this.userlogs.getDeviceInfo();
+    if (this.tokenStorage.getToken() != null) {
+      if (this.tokenStorage.getUser().misc) {
+        this.userEmail = this.tokenStorage.getUser().misc.email;
+        this.usertype = this.tokenStorage.getUser().usertype;
+      }
+      else {
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        this.userEmail = this.userDetails.email;
+        this.usertype = this.userDetails.usertype;
+      }
+
+      this.url_info = this.userlogs.geturl();
+      this.device_info = this.userlogs.getDeviceInfo();
       this.browser_info = this.userlogs.getbrowserInfo();
-      this.ip_address   = this.userlogs.getIpAddress();
-      this.authService.user_logs(this.ip_address,this.device_info,this.browser_info,this.url_info,this.pro_id,this.type,this.userEmail,this.input_info,this.user_cart).subscribe(
+      this.ip_address = this.userlogs.getIpAddress();
+      this.authService.user_logs(this.ip_address, this.device_info, this.browser_info, this.url_info, this.pro_id, this.type, this.userEmail, this.input_info, this.user_cart).subscribe(
         data => {
           // console.log(data.status);
         });
-        return true;
+      return true;
     }
     else {
       return true;
     }
   }
- 
+
 }

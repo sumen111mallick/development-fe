@@ -308,14 +308,24 @@
                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                     <div class="form-group">
                                                         <label for="area_name">Locality</label>
-                                                        <select class="form-control" formControlName="locality"
+                                                        <input class="w100" type="text" placeholder="Select Option" aria-label="Number"
+                                                            matInput formControlName="locality" [matAutocomplete]="auto">
+                                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)" (optionSelected)="onchange_locality($event)">
+                                                            <mat-option *ngFor="let area of filteredOptions | async"
+                                                                 [value]="area">
+                                                                {{area.item_text}}
+                                                            </mat-option>
+                                                        </mat-autocomplete>
+                                                        <!--<select class="form-control selectpicker" formControlName="locality" data-live-search="true"
                                                             (ngModelChange)="onchange_locality($event)">
                                                             <option value="" disabled>Select Option</option>
-                                                            <option *ngFor="let locality of dropdownList"
-                                                                value="{{locality.item_id}}">{{locality.item_text}}
+                                                            <option value="">Value 1</option>
+                                                            <option value="">Value 2</option>
+                                                           <option *ngFor="let locality of dropdownList" value="{{locality.item_id}}">{{locality.item_text}}
                                                             </option>
-                                                        </select>
+                                                        </select>-->
                                                     </div>
+                                                   
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                                     <div class="form-group">

@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { AuthService } from './../_services/auth.service';
 import { Router } from '@angular/router';
+import { UrlService } from './../_services/url.service';
+import { TokenStorageService } from '../_services/token-storage.service';
+import { PlansService } from '../_services/plans.service';
 
 @Component({
   selector: 'app-verify-details',
@@ -20,14 +23,22 @@ export class VerifyDetailsComponent implements OnInit {
   isVerified: boolean = false;
   isFailedVerify: boolean = false;
   isFailedVerify_otp: boolean = false;
-  public showLoadingIndicator: boolean =false;
+  public showLoadingIndicator: boolean = false;
   submitted: boolean = false;
   otp_submitted: boolean = false;
+  public previousUrl: string;
+  public plansData: any;
+  public user_id: any;
+  public userEmail: string[] = null;
+  public userDetails: any;
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router) { }
+    private tokenStorage: TokenStorageService,
+    private router: Router,
+    private urlService: UrlService,
+    private plansService: PlansService) { }
 
   verifyForm = this.fb.group({
     form_phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
@@ -47,6 +58,9 @@ export class VerifyDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.showLoadingIndicator = true;
+    //this.previousUrl = this.urlService.getPreviousUrl();
+    this.previousUrl = this.tokenStorage.getReturnURL();
+
     this.userService.getUserBoard().pipe().subscribe(
       (data: any) => {
         console.log(data);
@@ -58,8 +72,21 @@ export class VerifyDetailsComponent implements OnInit {
         //console.log(err);
         this.showLoadingIndicator = false;
       }
-      );
-    
+    );
+
+    if (this.tokenStorage.getToken()) {
+      if (this.tokenStorage.getUser().misc) {
+        this.userEmail = this.tokenStorage.getUser().misc.email;
+        this.user_id = this.tokenStorage.getUser().id;
+      }
+      else {
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        //console.log(this.userDetails);
+        this.userEmail = this.userDetails.email;
+        this.user_id = this.userDetails.id;
+      }
+    }
+
   }
 
   onSubmit() {
@@ -105,8 +132,31 @@ export class VerifyDetailsComponent implements OnInit {
           //console.log(data);
           this.isVerified = true;
           this.verify = false;
-          this.router.navigateByUrl('profile');
+          //this.router.navigateByUrl('profile');
+          // this.router.navigateByUrl(this.previousUrl);
           this.showLoadingIndicator = false;
+          console.log(this.previousUrl);
+          if (this.previousUrl == '/plans') {
+            this.plansData = JSON.parse(this.tokenStorage.getPlansData());
+            this.plansData['user_id'] = this.user_id;
+            this.plansData['user_email'] = this.userEmail;
+
+            this.plansService.postSelectedPlan(this.plansData).subscribe(
+              res => {
+                console.log(res);
+                this.router.navigate(['/payment-summary'], { queryParams: { 'orderID': res.data.order_id } });
+              },
+              err => {
+
+              }
+            );
+          }
+          else {
+            this.router.navigateByUrl(this.previousUrl)
+            .then(() => {
+              window.location.reload();
+            });
+          }
         },
         err => {
           this.errorMessage = err.error;

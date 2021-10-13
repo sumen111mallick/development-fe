@@ -1,0 +1,16 @@
+.disabled_text h4 {
+    color: red !important;
+}
+
+.enabled_text h4{
+    color: green !important;
+}
+
+.mat-raised-button.mat-primary {
+    background-color: #888;
+    border: 1px solid #ff5a5f;
+}
+
+.checkmark {
+    color: #00D100;
+  }

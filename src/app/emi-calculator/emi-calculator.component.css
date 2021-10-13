@@ -110,3 +110,7 @@ canvas {
   .ngx-slider .ngx-slider-pointer {
       background-color: #cd5700 !important;
   }
+
+  .ngx-slider {
+      margin-bottom: 35px;
+  }

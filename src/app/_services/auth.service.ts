@@ -469,8 +469,8 @@ mobile_verify(data, id): Observable<any> {
       Bedrooms: data.value.Bedrooms,
       availability_condition: data.value.availability_condition,
       Years: data.value.Years,
-      Minimum:Number(data.value.Minimum),
-      Maximum: Number(data.value.Maximum),
+      Minimum: data.value.sliderControl[0],
+      Maximum: data.value.sliderControl[1],
       property_status:data.value.property_status,
       amenities: amenityArray,
     }), httpOptions);
@@ -485,8 +485,8 @@ mobile_verify(data, id): Observable<any> {
       Bedrooms: data.value.Bedrooms,
       availability_condition: data.value.availability_condition,
       Years: data.value.Years,
-      Minimum:data.value.Minimum,
-      Maximum: data.value.Maximum,
+      Minimum:data.value.sliderControl[0],
+      Maximum: data.value.sliderControl[1],
       property_status:data.value.property_status,
       amenities: amenityArray,
     }), httpOptions);

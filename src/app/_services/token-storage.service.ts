@@ -10,6 +10,8 @@ const PROD_ID = 'data';
 const PROD2_ID = 'data';
 const form_Data ='form_data';
 const pro_type = 'pro_data';
+const RETURN_URL = 'return_url'
+const PLANS_DATA = 'plans_data'
 
 @Injectable({
   providedIn: 'root'
@@ -238,6 +240,24 @@ export class TokenStorageService {
 
   public getProduct(): any{
     return(localStorage.getItem(PROD_ID));
+  }
+
+  public saveReturnURL(url: string): void {
+    localStorage.removeItem(RETURN_URL);
+    localStorage.setItem(RETURN_URL, url);
+  }
+
+  public getReturnURL(): any {
+    return (localStorage.getItem(RETURN_URL));
+  }
+
+  public savePlansData(data: any): any {
+    localStorage.removeItem(PLANS_DATA);
+    localStorage.setItem(PLANS_DATA, data);
+  }
+
+  public getPlansData(): any {
+    return (localStorage.getItem(PLANS_DATA));
   }
 
 }

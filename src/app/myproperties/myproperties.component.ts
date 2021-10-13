@@ -6,6 +6,9 @@ import { TokenStorageService } from './../_services/token-storage.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PlansService } from './../_services/plans.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PropertyCreditModalComponent } from './../property-credit-modal/property-credit-modal.component';
 
 @Component({
   selector: 'app-myproperties',
@@ -28,6 +31,9 @@ export class MypropertiesComponent implements OnInit {
   public solid_Lenght:number=0;
   public purchased_Lenght:number=0;
   e: any;
+  public userEmail: string[] = null;
+  public userDetails: any;
+  public response: any;
 
   constructor(
     private titleService: Title,
@@ -35,15 +41,31 @@ export class MypropertiesComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
+    private planService: PlansService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken() == null){
-      this.redirect_to_home();      
+    let val = this.tokenStorage.getUser();
+    if (val != null) {
+      if (this.tokenStorage.getUser().misc) {
+        this.userEmail = this.tokenStorage.getUser().misc.email;
+        this.usertype = this.tokenStorage.getUser().usertype;
+      }
+      else {
+        this.userDetails = JSON.parse(this.tokenStorage.getUser());
+        //console.log(this.userDetails);
+        this.userEmail = this.userDetails.email;
+        this.usertype = this.userDetails.usertype;
+      }
+      console.log(this.userEmail);
+    }
+    else {
+      this.router.navigate(['/login']);
     }
     this.titleService.setTitle('My Properties');
     this.usertype = this.tokenStorage.getUser().usertype;
-  
+
     this.showLoadingIndicator = true;
     this.Myproperty();
     this.Draft_property();
@@ -66,7 +88,7 @@ export class MypropertiesComponent implements OnInit {
       }
     )
   }
-  
+
   user_order_product(){
     this.showLoadingIndicator = true;
     this.userService.user_order_product().pipe().subscribe(
@@ -137,7 +159,7 @@ export class MypropertiesComponent implements OnInit {
 
   redirect_to_home(): void {
     window.location.href=GlobalConstants.siteURL="login"
-    }
+  }
   prod_func(data){
     this.tokenStorage.saveProdId(data);
     // this.myservice.setData(data);
@@ -153,5 +175,48 @@ export class MypropertiesComponent implements OnInit {
     , n = this.e.substring(0, this.e.length - 3);
   return "" !== n && (t = "," + t),
     n.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + t
+  }
+  checkCredits(product_id, product_price) {
+    this.showLoadingIndicator = true;
+    this.planService.getUserInvoices(this.userEmail).subscribe(
+      res => {
+        this.response = res;
+        console.log(this.response);
+        const dialogRef = this.dialog.open(PropertyCreditModalComponent, {
+          data: {
+            response: this.response,
+            product_id: product_id,
+            product_price: product_price
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+        this.showLoadingIndicator = false;
+      },
+      err => {
+        console.log(err);
+        this.showLoadingIndicator = false;
+      }
+    );
+    /*this.planService.getCreditDetails(this.userEmail).subscribe(
+      res => {
+        this.response = res;
+        console.log(this.response);
+        const dialogRef = this.dialog.open(PropertyCreditModalComponent, {
+          data: {
+            response: this.response
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+      },
+      err => {
+        console.log(err);
+      }
+    );*/
   }
 }

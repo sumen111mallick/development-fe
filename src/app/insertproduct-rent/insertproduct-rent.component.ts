@@ -11,6 +11,9 @@ import { Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angula
 import { Options, LabelType } from 'ng5-slider';
 import { Validators } from '@angular/forms';
 import { InternalUserService } from './../_services/internal-user.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 @Component({
   selector: 'app-insertproduct-rent',
   templateUrl: './insertproduct-rent.component.html',
@@ -27,6 +30,8 @@ export class InsertproductRentComponent implements OnInit {
   public errorMessage: any = {};
   roles: string[] = [];
   public submitted: boolean = false;
+
+  selectedOption = [0];
 
   saleValue: boolean = true;
   rentValue: boolean = false;
@@ -129,6 +134,8 @@ export class InsertproductRentComponent implements OnInit {
   public user_id: any = {};
   public controls: any;
   public userDetails: any;
+
+  filteredOptions: Observable<any[]>;
 
   insert_property_rent = new FormGroup({
     Property_Details: new FormGroup({
@@ -260,6 +267,13 @@ export class InsertproductRentComponent implements OnInit {
     this.get_area();
     this.titleService.setTitle('Create Listing');
 
+    this.filteredOptions = this.Property_address.locality.valueChanges
+      .pipe(
+        startWith(''),
+        map((value) => this._filter(value))
+      );
+
+
     // Login check
    /* if (this.tokenStorage.getUser() != null) {
       this.isLoggedIn = true
@@ -290,7 +304,7 @@ export class InsertproductRentComponent implements OnInit {
     }
     else {
       this.isLoggedIn = false;
-    } 
+    }
     this.selectedItems = new Array<string>();
     this.product_img = new Array<string>();
     this.selected_room = new Array<string>();
@@ -310,7 +324,7 @@ export class InsertproductRentComponent implements OnInit {
       this.showLoadingIndicator = false;
     })
   }
-  
+
   markerDragEnd($event: google.maps.MouseEvent) {
     this.latCus = $event.latLng.lat();
     this.longCus = $event.latLng.lng();
@@ -533,7 +547,7 @@ export class InsertproductRentComponent implements OnInit {
       this.price_negotiable_row = false;
     }
   }
-  
+
   maintenanceStatus(event): void {
     if (event == 1) {
       this.maintenance_row = true;
@@ -542,13 +556,18 @@ export class InsertproductRentComponent implements OnInit {
       this.maintenance_row = false;
     }
   }
-  
+
   get_area():void{
     this.internalUserService.get_areas().subscribe(
       data => {
         for (let i = 1; i < data.length; i++) {
           this.dropdownList = this.dropdownList.concat({item_id: data[i].id, item_text: data[i].area, item_pincode: data[i].pincode});
         }
+        this.filteredOptions = this.Property_address.locality.valueChanges
+          .pipe(
+            startWith(''),
+            map((value) => this._filter(value))
+          );
       },
       err => {
         // console.log(err);
@@ -556,9 +575,26 @@ export class InsertproductRentComponent implements OnInit {
       }
     );
   }
-  
-  onchange_locality(id:any){
-    this.authService.get_pincodebyid(id).subscribe(
+  private _filter(value: any): string[] {
+    console.log(value);
+    if (value.item_text) {
+      const filterValue = value.item_text.toLowerCase();
+      console.log(filterValue);
+      return this.dropdownList.filter(option => option.item_text.toLowerCase().includes(filterValue));
+    }
+    else {
+      const filterValue = value.toLowerCase();
+      console.log(filterValue);
+      return this.dropdownList.filter(option => option.item_text.toLowerCase().includes(filterValue));
+    }
+  }
+
+  displayFn(value?) {
+    return value ? this.dropdownList.find(option => option.item_id === value.item_id).item_text : undefined;
+  }
+
+  onchange_locality(id: any) {
+    this.authService.get_pincodebyid(id.option.value.item_id).subscribe(
       data => {
         this.insert_property_rent.controls.Property_address.patchValue({
           pincode: data.data.pincode,
@@ -619,7 +655,7 @@ export class InsertproductRentComponent implements OnInit {
     return this.insert_property_rent.controls['Property_additional_details']['controls'];
   }
 
-  
+
   get Property_price_images() {
     // console.log(this.insert_property_sales.controls['Property_parking']['controls']);
     return this.insert_property_rent.controls['Property_price_images']['controls'];
@@ -657,7 +693,7 @@ export class InsertproductRentComponent implements OnInit {
       );
     }
   }
-  
+
   saveDraft_form(): void {
     // console.log(this.insert_property_rent.value);
     if (this.insert_property_rent.value.Property_price_images.expected_rent >=5000 && this.insert_property_rent.value.Property_price_images.expected_rent <=500000) {

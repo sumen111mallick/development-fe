@@ -55,7 +55,7 @@
                   <h3 class="breadcrumb_title">My Properties ({{contentLenght}})</h3>
                 </div>
               </div>
-             
+
               <div class="col-lg-12">
                 <div class="my_dashboard_review mb40">
                   <div class="property_table">
@@ -76,8 +76,8 @@
                             <div class="preloader1"></div>
                           </div>
                         </div>
-                        <tbody>
-                          <tr *ngFor="let number of content | paginate:{itemsPerPage:2, currentPage:p} ">
+                        <tbody *ngFor="let number of content | paginate:{itemsPerPage:2, currentPage:p} ">
+                          <tr>
                             <td scope="row" style="width: 50%;">
                               <div class="feat_property list favorite_page style2">
                                 <div class="thumb">
@@ -115,17 +115,34 @@
                             <td class="hidden-xs hidden-sm">{{ number.view_counter }} </td>
                             <td>
                               <ul class="view_edit_delete_list mb0">
-                                <li class="list-inline-item" data-toggle="tooltip"
-                                  data-placement="top" title="Edit" *ngIf=" number.sale_availability  != null">
+                                <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"
+                                  *ngIf=" number.sale_availability  != null">
                                   <a href="/update-Property-sales/{{number.id}}"><span class="flaticon-edit"></span></a>
                                 </li>
-                                <li class="list-inline-item" data-toggle="tooltip"
-                                  data-placement="top" title="Edit" *ngIf=" number.rent_availability  != null">
+                                <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"
+                                  *ngIf=" number.rent_availability  != null">
                                   <a href="/update-property-rent/{{number.id}}"><span class="flaticon-edit"></span></a>
                                 </li>
                                 <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                  <a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a></li>
+                                  <a (click)="del_func(number.id)"><span class="flaticon-garbage"></span></a>
+                                </li>
                               </ul>
+                            </td>
+                          </tr>
+                          <tr *ngIf="number?.enabled == 'no' && number.rent_availability == '1'">
+                            <td class="disabled_text" colspan="2">
+                              <h4>Your property is not live</h4>
+                            </td>
+                            <td colspan="2">
+                              <button mat-raised-button color="primary" (click)="checkCredits(number.product_uid, number.expected_rent)">
+                                Make your property Live
+                              </button>
+                            </td>
+                          </tr>
+                          <tr *ngIf="number?.enabled == 'yes'">
+                            <td class="enabled_text" colspan="4">
+                              <h4><span
+                                class="checkmark"><strong>&#10004;</strong></span> Your property is live</h4>
                             </td>
                           </tr>
                         </tbody>
@@ -186,8 +203,9 @@
                                 </div>
                                 <div class="details">
                                   <div class="tc_content">
-                                    <h4  *ngIf=" draft.build_name != null">{{ draft.build_name | titlecase}}</h4>
-                                    <p *ngIf=" draft.address != null"><span class="flaticon-placeholder"></span>{{ draft.address | titlecase }}</p>
+                                    <h4 *ngIf=" draft.build_name != null">{{ draft.build_name | titlecase}}</h4>
+                                    <p *ngIf=" draft.address != null"><span class="flaticon-placeholder"></span>{{
+                                      draft.address | titlecase }}</p>
                                     <a class="fp_price text-thm" *ngIf="draft.expected_pricing != null">₹
                                       {{price_comma(draft.expected_pricing) }}<small></small></a>
                                     <a class="fp_price text-thm" *ngIf="draft.expected_rent != null">₹
@@ -197,20 +215,21 @@
                               </div>
                             </td>
                             <td class="hidden-xs hidden-sm">{{ draft.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
-                            
+
                             <td class="hidden-xs hidden-sm">{{ draft.view_counter }} </td>
                             <td>
                               <ul class="view_edit_delete_list mb0">
-                                <li class="list-inline-item" data-toggle="tooltip"
-                                  data-placement="top" title="Edit" *ngIf=" draft.sale_availability  != null">
+                                <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"
+                                  *ngIf=" draft.sale_availability  != null">
                                   <a href="/update-Property-sales/{{draft.id}}"><span class="flaticon-edit"></span></a>
                                 </li>
-                                <li class="list-inline-item" data-toggle="tooltip"
-                                  data-placement="top" title="Edit" *ngIf=" draft.rent_availability  != null">
+                                <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Edit"
+                                  *ngIf=" draft.rent_availability  != null">
                                   <a href="/update-property-rent/{{draft.id}}"><span class="flaticon-edit"></span></a>
                                 </li>
                                 <li class="list-inline-item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                  <a (click)="del_func(draft.id)"><span class="flaticon-garbage"></span></a></li>
+                                  <a (click)="del_func(draft.id)"><span class="flaticon-garbage"></span></a>
+                                </li>
                               </ul>
                             </td>
                           </tr>
@@ -234,7 +253,8 @@
                 <div class="my_dashboard_review mb40">
                   <div class="property_table">
                     <div class="table-responsive mt0">
-                      <span _ngcontent-bcc-c292="" class="status_tag badge">Purchased Property({{purchased_Lenght}})</span>
+                      <span _ngcontent-bcc-c292="" class="status_tag badge">Purchased
+                        Property({{purchased_Lenght}})</span>
                       <table class="table">
                         <thead class="thead-light">
                           <tr>
@@ -250,7 +270,8 @@
                           </div>
                         </div>
                         <tbody>
-                          <tr *ngFor="let Purchased of purchased_pro_data | paginate:{itemsPerPage:2, currentPage:pur, id: 'pur'} ">
+                          <tr
+                            *ngFor="let Purchased of purchased_pro_data | paginate:{itemsPerPage:2, currentPage:pur, id: 'pur'} ">
                             <!-- {{Purchased | json}} -->
                             <td scope="row" style="width: 50%;">
                               <div class="feat_property list favorite_page style2">
@@ -264,20 +285,25 @@
                                   <div class="thmb_cntnt">
                                     <ul class="tag mb0">
                                       <li class="list-inline-item dn"></li>
-                                      <li class="list-inline-item" *ngIf="Purchased.pro_order.rent_availability  != null"><a>For
+                                      <li class="list-inline-item"
+                                        *ngIf="Purchased.pro_order.rent_availability  != null"><a>For
                                           Rent</a></li>
-                                      <li class="list-inline-item" *ngIf="Purchased.pro_order.sale_availability  != null"><a>For
+                                      <li class="list-inline-item"
+                                        *ngIf="Purchased.pro_order.sale_availability  != null"><a>For
                                           Sale</a></li>
                                     </ul>
                                   </div>
                                 </div>
                                 <div class="details">
                                   <div class="tc_content">
-                                    <h4  *ngIf="Purchased.pro_order.build_name != null">{{Purchased.pro_order.build_name | titlecase}}</h4>
-                                    <p *ngIf="Purchased.pro_order.address != null"><span class="flaticon-placeholder"></span>{{ Purchased.pro_order.address | titlecase }}</p>
-                                    <a class="fp_price text-thm" *ngIf="Purchased.pro_order.expected_pricing != null" >₹
+                                    <h4 *ngIf="Purchased.pro_order.build_name != null">{{Purchased.pro_order.build_name
+                                      | titlecase}}</h4>
+                                    <p *ngIf="Purchased.pro_order.address != null"><span
+                                        class="flaticon-placeholder"></span>{{ Purchased.pro_order.address | titlecase
+                                      }}</p>
+                                    <a class="fp_price text-thm" *ngIf="Purchased.pro_order.expected_pricing != null">₹
                                       {{price_comma(Purchased.pro_order.expected_pricing) }}<small></small></a>
-                                    <a class="fp_price text-thm" *ngIf="Purchased.pro_order.expected_rent != null" >₹
+                                    <a class="fp_price text-thm" *ngIf="Purchased.pro_order.expected_rent != null">₹
                                       {{price_comma(Purchased.pro_order.expected_rent) }}<small></small></a>
                                   </div>
                                 </div>
@@ -287,7 +313,8 @@
                               <!-- <h5><a class="fp_price text-thm">{{Purchased.user_email}}</a></h5> -->
                               <h5><a class="fp_price text-thm">{{Purchased.orderId}}</a></h5>
                             </td>
-                            <td class="hidden-xs hidden-sm" style="width: 35%;">{{Purchased.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+                            <td class="hidden-xs hidden-sm" style="width: 35%;">{{Purchased.updated_at | date: 'MMM d,
+                              y, h:mm:ss a' }}</td>
                             <td>
                               <button class="btn btn-success">Success</button>
                             </td>
@@ -306,7 +333,7 @@
               </div>
             </div>
             <!-- Purchased properties  -->
-            
+
             <!-- SoldOut properties  -->
             <div class="row" *ngIf="solid_Lenght>0">
               <div class="col-lg-12">
@@ -329,7 +356,8 @@
                           </div>
                         </div>
                         <tbody>
-                          <tr *ngFor="let sold_pro of solid_pro_data | paginate:{itemsPerPage:2, currentPage:s, id: 's'} ">
+                          <tr
+                            *ngFor="let sold_pro of solid_pro_data | paginate:{itemsPerPage:2, currentPage:s, id: 's'} ">
                             <!-- {{Purchased | json}} -->
                             <td scope="row" style="width: 50%;">
                               <div class="feat_property list favorite_page style2">
@@ -343,29 +371,36 @@
                                   <div class="thmb_cntnt">
                                     <ul class="tag mb0">
                                       <li class="list-inline-item dn"></li>
-                                      <li class="list-inline-item" *ngIf="sold_pro.pro_order.rent_availability  != null"><a>For
+                                      <li class="list-inline-item"
+                                        *ngIf="sold_pro.pro_order.rent_availability  != null"><a>For
                                           Rent</a></li>
-                                      <li class="list-inline-item" *ngIf="sold_pro.pro_order.sale_availability  != null"><a>For
+                                      <li class="list-inline-item"
+                                        *ngIf="sold_pro.pro_order.sale_availability  != null"><a>For
                                           Sale</a></li>
                                     </ul>
                                   </div>
                                 </div>
                                 <div class="details">
                                   <div class="tc_content">
-                                    <h4  *ngIf="sold_pro.pro_order.build_name != null">{{sold_pro.pro_order.build_name | titlecase}}</h4>
-                                    <p *ngIf="sold_pro.pro_order.address != null"><span class="flaticon-placeholder"></span>{{sold_pro.pro_order.address | titlecase }}</p>
+                                    <h4 *ngIf="sold_pro.pro_order.build_name != null">{{sold_pro.pro_order.build_name |
+                                      titlecase}}</h4>
+                                    <p *ngIf="sold_pro.pro_order.address != null"><span
+                                        class="flaticon-placeholder"></span>{{sold_pro.pro_order.address | titlecase }}
+                                    </p>
                                     <a class="fp_price text-thm" *ngIf="sold_pro.pro_order.expected_pricing != null">₹
                                       {{price_comma(sold_pro.pro_order.expected_pricing) }}</a>
                                     <a class="fp_price text-thm" *ngIf="sold_pro.pro_order.expected_rent != null">₹
                                       {{price_comma(sold_pro.pro_order.expected_rent)}}</a>
-                                      </div>
+                                  </div>
                                 </div>
                               </div>
-                            </td><td>
+                            </td>
+                            <td>
                               <h5><a class="fp_price text-thm">{{sold_pro.user_email}}</a></h5>
                               <h6><a class="fp_price text-thm">({{sold_pro.orderId}})</a></h6>
                             </td>
-                            <td class="hidden-xs hidden-sm" style="width: 35%;">{{sold_pro.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+                            <td class="hidden-xs hidden-sm" style="width: 35%;">{{sold_pro.updated_at | date: 'MMM d, y,
+                              h:mm:ss a' }}</td>
                             <td>
                               <button class="btn btn-danger">Sold Out</button>
                             </td>

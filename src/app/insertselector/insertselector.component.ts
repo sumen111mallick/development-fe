@@ -58,6 +58,12 @@ export class InsertselectorComponent implements OnInit {
   mob_verify_check(page: string) {
     this.showLoadingIndicator = true;
     console.log(page);
+    if(page == 'rent') {
+      this.tokenStorage.saveReturnURL('/insertproduct-rent');
+    }
+    else if (page == 'sale') {
+      this.tokenStorage.saveReturnURL('/insertproduct-sale');
+    }
     /* To check if Mobile Number has been verified */
 
     this.userService.getUserPhoneDetails().subscribe(

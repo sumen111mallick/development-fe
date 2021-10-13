@@ -2,79 +2,84 @@
 <html dir="ltr" lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
-<meta name="description" content="FindHouse - Real Estate HTML Template">
-<meta name="CreativeLayers" content="ATFN">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords"
+    content="advanced search custom, agency, agent, business, clean, corporate, directory, google maps, homes, listing, membership packages, property, real estate, real estate agent, realestate agency, realtor">
+  <meta name="description" content="FindHouse - Real Estate HTML Template">
+  <meta name="CreativeLayers" content="ATFN">
 
-<!-- Title -->
-<title>FindHouse - Real Estate HTML Template</title>
-<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
-<link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
+  <!-- Title -->
+  <title>FindHouse - Real Estate HTML Template</title>
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+  <link href="./../../assets/css/images/favicon.ico" sizes="128x128" rel="shortcut icon" />
 </head>
+
 <body>
   <div class="wrapper">
-    <!-- <div *ngIf="showLoadingIndicator"> -->
+    <div *ngIf="showLoadingIndicator">
       <div class="preloader"></div>
-    <!-- </div> -->
- <section class="our-listing bgc-f7 pb30-991">
-   <div class="container mt65">
-     <div class="row">
-       <div class="grid_list_search_result">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
-          <div class="left_area tac-xsd">
-            <div class="row">
-              <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6">
-                <p>Home / <span class="active">Property Listing</span> 
-                </p>
-              </div>
-              <div class="col-sm-12 col-md-4 col-lg-6 col-xl-6 listing_page_navbar">
-                <p>These <span class="active">{{product_type}}</span> Properties are Favorites!!!... 
-                </p>
+    </div>
+    <section class="our-listing bgc-f7 pb30-991">
+      <div class="container mt65">
+        <div class="row">
+          <div class="grid_list_search_result">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="left_area tac-xsd">
+                <div class="row">
+                  <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6">
+                    <p>Home / <span class="active">Property Listing</span>
+                    </p>
+                  </div>
+                  <div class="col-sm-12 col-md-4 col-lg-6 col-xl-6 listing_page_navbar">
+                    <p>These <span class="active">{{product_type}}</span> Properties are Favorites!!!...
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-       <div class="col-lg-6">
-         <div class="listing_list_style mb20-xsd tal-991">
-           <!-- <ul class="mb0">
+          <div class="col-lg-6">
+            <div class="listing_list_style mb20-xsd tal-991">
+              <!-- <ul class="mb0">
              <li class="list-inline-item"><a ><span class="fa fa-th-large"></span></a></li>
              <li class="list-inline-item"><a ><span class="fa fa-th-list"></span></a></li>
            </ul> -->
-         </div>
-         <!-- <div class="dn db-991 mt30 mb0">
+            </div>
+            <!-- <div class="dn db-991 mt30 mb0">
            <div id="main2">
              <span id="open2" class="flaticon-filter-results-button filter_open_btn style2"> Show Filter</span>
            </div>
          </div> -->
-       </div>
-     </div>
-     <div class="row wrapper_row_listing_page">
-       <div class="col-lg-4 col-xl-4">
-        
-        <div class="sidebar_listing_grid1">
-          <div class="sidebar_listing_list hidden-xs hidden-sm"  *ngIf="deshtop_view == true">
-            <div class="sidebar_advanced_search_widget">
-              <ul class="sasw_list mb0">
-                <form  action="#" name="searchForm"  id="searchForm" #searchForm="ngForm">
-                <li class="search_area">
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="build_name" [(ngModel)]="form.build_name" #build_name="ngModel" id="build_name" placeholder="Enter keywords...">
-                      <label for="build_name"><span class="flaticon-magnifying-glass"></span></label>
-                    </div>
-                </li>
-                <li class="search_area">
-                    <div class="form-group">
-                      <input type="hidden" class="form-control" name="Location" [(ngModel)]="form.Location" #Location="ngModel" id="Location" placeholder="Location">
-                      <input  #search  autocorrect="off" autocapitalize="off"  spellcheck="off" [(ngModel)]="form.Location" type="search"  class="form-control input-text"
-                      placeholder="Enter Address"  [ngModelOptions]="{ standalone: true }" />
-                      <label for="Location"></label>
-                    </div>
-                </li>
-                <!-- <li>
+          </div>
+        </div>
+        <div class="row wrapper_row_listing_page">
+          <div class="col-lg-4 col-xl-4">
+
+            <div class="sidebar_listing_grid1">
+              <div class="sidebar_listing_list hidden-xs hidden-sm" *ngIf="deshtop_view == true">
+                <div class="sidebar_advanced_search_widget">
+                  <ul class="sasw_list mb0">
+                    <form action="#" name="searchForm" id="searchForm" #searchForm="ngForm">
+                      <li class="search_area">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="build_name" [(ngModel)]="form.build_name"
+                            #build_name="ngModel" id="build_name" placeholder="Enter keywords...">
+                          <label for="build_name"><span class="flaticon-magnifying-glass"></span></label>
+                        </div>
+                      </li>
+                      <li class="search_area">
+                        <div class="form-group">
+                          <input type="hidden" class="form-control" name="Location" [(ngModel)]="form.Location"
+                            #Location="ngModel" id="Location" placeholder="Location">
+                          <input #search autocorrect="off" autocapitalize="off" spellcheck="off"
+                            [(ngModel)]="form.Location" type="search" class="form-control input-text"
+                            placeholder="Enter Address" [ngModelOptions]="{ standalone: true }" />
+                          <label for="Location"></label>
+                        </div>
+                      </li>
+                      <!-- <li>
                   <div class="small_dropdown2">
                       <div id="prncgs2" class="btn dd_btn">
                         <span>Price</span>
@@ -93,638 +98,698 @@
                       </div>
                   </div>
                 </li> -->
-                <li>
-                  <div class="search_option_two">
-                    <div class="candidate_revew_select">
-                      <div class="dropdown bootstrap-select w100 show-tick">
-									    	<label>Area Unit</label>
-                          <select class="selectpicker show-tick form-control" name="area_unit"  [(ngModel)]="form.area_unit" #type="ngModel" id="area_unit">
-                          <option selected="selected" value="">Select Area Unit</option>
-                          <option value="sq.ft.">sq.ft.</option>
-                          <option value="sq.yards">sq.yards</option>
-                          <option value="sq.m.">sq.m.</option>
-                          <option value="acres">acres</option>
-                          <option value="marla">marla</option>
-                          <option value="cents"> cents</option>
-                          <option value="bigha">bigha</option>
-                          <option value="kottah">kottah</option>
-                          <option value="kanal"> kanal</option>
-                          <option value="grounds">grounds</option>
-                          <option value="biswa">biswa</option>
-                          <option value="guntha"> guntha</option>
-                          <option value="aankadam">aankadam</option>
-                          <option value="hectares"> hectares</option>
-                          <option value="rood">rood</option>
-                          <option value="chataks">chataks</option>
-                          <option value="perch"> perch</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="search_option_two">
-                    <div class="candidate_revew_select">
-                      <div class="dropdown bootstrap-select w100 show-tick">
-									    	<label>Property Type</label>
-                        <!-- {{property_type_result | json}} -->
-                        <select  class="form-control  selectpicker show-tick"  name="type"  [(ngModel)]="form.type" #type="ngModel" id="type">
-                          <!-- <option  value="" >Select Property Type</option> -->
-                          <!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
-                          <option value="" disabled >Select Property Type</option>
-                          <option value="" disabled ><h3>ALL RESIDENTIAL</h3></option>
-                          <option value="1">Flat/ Apartment</option>
-                          <option value="2">Residential House</option>
-                          <option value="3">Villa</option>
-                          <option value="4">Builder Floor Apartment</option>
-                          <option value="5">Residential Land/ Plot</option>
-                          <option value="6">Penthouse</option>
-                          <option value="7">Studio Apartment</option>
-                          <option value="" disabled ><h3>ALL COMMERCIAL</h3></option>
-                          <option value="8">Commercial Office Space</option>
-                          <option value="9">Office in IT Park/ SEZ</option>
-                          <option value="10">Commercial Shop</option>
-                          <option value="11">Commercial Showroom</option>
-                          <option value="12">Commercial Land</option>
-                          <option value="13">Warehouse/ Godown</option>
-                          <option value="14">Industrial Land</option>
-                          <option value="15">Industrial Building</option>
-                          <option value="16 ">Industrial Shed</option>
-                          <option value="" disabled ><h3>ALL AGRICULTURAL</h3></option>
-                          <option value="17">Agricultural Land</option>
-                          <option value="18">Farm House</option>
-                        </select>
-                        </div>
-                        </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="search_option_two">
-                    <div class="candidate_revew_select">
-                      <div class="dropdown bootstrap-select w100 show-tick">
-									    	<label>Bathrooms</label>
-                          <select class="selectpicker show-tick form-control" name="Bathrooms"  [(ngModel)]="form.Bathrooms" #type="ngModel" id="Bathrooms">
-                          <option value="">Select Bathrooms</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6 </option>
-                          <option value="7">7</option>
-                          <option value="8">8 </option>
-                          <option value="9">9</option>
-                          <option value="10">10 </option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="search_option_two">
-                    <div class="candidate_revew_select">
-                      <div class="dropdown bootstrap-select w100 show-tick">
-									    	<label>Bedrooms</label>
-                          <select class="selectpicker show-tick form-control" name="Bedrooms"  [(ngModel)]="form.Bedrooms" #type="ngModel" id="Bedrooms">
-                          <option value="">Select Bedrooms</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6 </option>
-                          <option value="7">7</option>
-                          <option value="8">8 </option>
-                          <option value="9">9</option>
-                          <option value="10">10 </option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="search_option_two">
-                    <div class="candidate_revew_select">
-                      <div class="dropdown bootstrap-select w100 show-tick">
-									    	<label>Years</label>
-                          <select class="selectpicker show-tick form-control" name="Years"  [(ngModel)]="form.Years" #type="ngModel" id="Years">
-                          <option value="" >Select Bulid Years</option>
-                          <option value="2013">2013</option>
-                          <option value="2014">2014</option>
-                          <option value="2015">2015</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
-                          <option value="2021">2021</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="search_option_two">
-                    <div class="candidate_revew_select">
-                      <div class="dropdown bootstrap-select w100 show-tick">
-									    	<label>Availability</label>
-                          <select class="selectpicker show-tick form-control" name="availability_condition"  [(ngModel)]="form.availability_condition" #type="ngModel" id="availability_condition" (ngModelChange)="OnPropertyCheck()">
-                            <option value="Select Availability">Select Availability</option>
-                          <option value="rent">Rental Property</option>
-                          <option value="sales">Sales Property</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="min_area list-inline-item">
-                    <div class="form-group">
-                      <label for="Minimum">Min Price</label>
-                      <input type="hidden" class="form-control" id="Minimum" placeholder="Min Price" name="Minimum" [(ngModel)]="form.Minimum" #Minimum="ngModel">
-                    </div>
-                </li>
-                <li class="max_area  list-inline-item">
-                    <div class="form-group">
-                      <label for="Maximum">Max Price</label>
-                      <input type="hidden" class="form-control" id="Maximum" placeholder="Max Price" name="Maximum" [(ngModel)]="form.Maximum" #Maximum="ngModel" >
-                    </div>
-                </li>
-                <li  *ngIf="rent_range_slider== true">
-                  <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_rent"></ng5-slider>
-                </li>
-                <li  *ngIf="buyyer_range_slider== true">
-                  <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_sales" ></ng5-slider>
-                </li>
-                <li  *ngIf="range_slider== true">
-                  <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options" ></ng5-slider>
-                </li>
-               
-                <li>
-                    <div id="accordion" class="panel-group">
-                      <div class="panel">
-                          <div class="panel-heading">
-                            <h4 class="panel-title">
-                              <a href="#panelBodyRating" class="accordion-toggle link" data-toggle="collapse" data-parent="#accordion"><i class="flaticon-more"></i> Advanced features</a>
-                            </h4>
+                      <li>
+                        <div class="search_option_two">
+                          <div class="candidate_revew_select">
+                            <div class="dropdown bootstrap-select w100 show-tick">
+                              <label>Area Unit</label>
+                              <select class="selectpicker show-tick form-control" name="area_unit"
+                                [(ngModel)]="form.area_unit" #type="ngModel" id="area_unit">
+                                <option selected="selected" value="">Select Area Unit</option>
+                                <option value="sq.ft.">sq.ft.</option>
+                                <option value="sq.yards">sq.yards</option>
+                                <option value="sq.m.">sq.m.</option>
+                                <option value="acres">acres</option>
+                                <option value="marla">marla</option>
+                                <option value="cents"> cents</option>
+                                <option value="bigha">bigha</option>
+                                <option value="kottah">kottah</option>
+                                <option value="kanal"> kanal</option>
+                                <option value="grounds">grounds</option>
+                                <option value="biswa">biswa</option>
+                                <option value="guntha"> guntha</option>
+                                <option value="aankadam">aankadam</option>
+                                <option value="hectares"> hectares</option>
+                                <option value="rood">rood</option>
+                                <option value="chataks">chataks</option>
+                                <option value="perch"> perch</option>
+                              </select>
+                            </div>
                           </div>
-                        <div id="panelBodyRating" class="panel-collapse collapse">
-                            <div class="panel-body row">
-                              <div class="col-lg-12">
-                                    <ul class="ui_kit_checkbox selectable-list float-left fn-400">
-                                      <div class="row">
-                                        <div class="col-lg-6 col-6"  *ngFor = "let menuData of amenitiesresult">
-                                            <li *ngIf="Amenties_funtion(menuData.id)==true,else OtherAmenties">
-                                              <div class="custom-control custom-checkbox ">
-                                                <input type="checkbox" class="custom-control-input" id="{{menuData.id}}" value="{{menuData.id}}"  (change)="onchangeAmenties($event,menuData.id)" checked>
-                                                <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
-                                              </div>
-                                          </li>
-                                          
-                                          <ng-template #OtherAmenties>
-                                            <li>
-                                              <div class="custom-control custom-checkbox ">
-                                                <input type="checkbox" class="custom-control-input" id="{{menuData.id}}" value="{{menuData.id}}"  (change)="onchangeAmenties($event,menuData.id)" >
-                                                <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
-                                              </div>
-                                            </li>
-                                          </ng-template>               
+                        </div>
+                      </li>
+                      <li>
+                        <div class="search_option_two">
+                          <div class="candidate_revew_select">
+                            <div class="dropdown bootstrap-select w100 show-tick">
+                              <label>Property Type</label>
+                              <!-- {{property_type_result | json}} -->
+                              <select class="form-control  selectpicker show-tick" name="type" [(ngModel)]="form.type"
+                                #type="ngModel" id="type">
+                                <!-- <option  value="" >Select Property Type</option> -->
+                                <!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
+                                <option value="" disabled>Select Property Type</option>
+                                <option value="" disabled>
+                                  <h3>ALL RESIDENTIAL</h3>
+                                </option>
+                                <option value="1">Flat/ Apartment</option>
+                                <option value="2">Residential House</option>
+                                <option value="3">Villa</option>
+                                <option value="4">Builder Floor Apartment</option>
+                                <option value="5">Residential Land/ Plot</option>
+                                <option value="6">Penthouse</option>
+                                <option value="7">Studio Apartment</option>
+                                <option value="" disabled>
+                                  <h3>ALL COMMERCIAL</h3>
+                                </option>
+                                <option value="8">Commercial Office Space</option>
+                                <option value="9">Office in IT Park/ SEZ</option>
+                                <option value="10">Commercial Shop</option>
+                                <option value="11">Commercial Showroom</option>
+                                <option value="12">Commercial Land</option>
+                                <option value="13">Warehouse/ Godown</option>
+                                <option value="14">Industrial Land</option>
+                                <option value="15">Industrial Building</option>
+                                <option value="16 ">Industrial Shed</option>
+                                <option value="" disabled>
+                                  <h3>ALL AGRICULTURAL</h3>
+                                </option>
+                                <option value="17">Agricultural Land</option>
+                                <option value="18">Farm House</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="search_option_two">
+                          <div class="candidate_revew_select">
+                            <div class="dropdown bootstrap-select w100 show-tick">
+                              <label>Bathrooms</label>
+                              <select class="selectpicker show-tick form-control" name="Bathrooms"
+                                [(ngModel)]="form.Bathrooms" #type="ngModel" id="Bathrooms">
+                                <option value="">Select Bathrooms</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6 </option>
+                                <option value="7">7</option>
+                                <option value="8">8 </option>
+                                <option value="9">9</option>
+                                <option value="10">10 </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="search_option_two">
+                          <div class="candidate_revew_select">
+                            <div class="dropdown bootstrap-select w100 show-tick">
+                              <label>Bedrooms</label>
+                              <select class="selectpicker show-tick form-control" name="Bedrooms"
+                                [(ngModel)]="form.Bedrooms" #type="ngModel" id="Bedrooms">
+                                <option value="">Select Bedrooms</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6 </option>
+                                <option value="7">7</option>
+                                <option value="8">8 </option>
+                                <option value="9">9</option>
+                                <option value="10">10 </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="search_option_two">
+                          <div class="candidate_revew_select">
+                            <div class="dropdown bootstrap-select w100 show-tick">
+                              <label>Years</label>
+                              <select class="selectpicker show-tick form-control" name="Years" [(ngModel)]="form.Years"
+                                #type="ngModel" id="Years">
+                                <option value="">Select Bulid Years</option>
+                                <option value="2013">2013</option>
+                                <option value="2014">2014</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="search_option_two">
+                          <div class="candidate_revew_select">
+                            <div class="dropdown bootstrap-select w100 show-tick">
+                              <label>Availability</label>
+                              <select class="selectpicker show-tick form-control" name="availability_condition"
+                                [(ngModel)]="form.availability_condition" #type="ngModel" id="availability_condition"
+                                (ngModelChange)="OnPropertyCheck()">
+                                <option value="Select Availability">Select Availability</option>
+                                <option value="rent">Rental Property</option>
+                                <option value="sales">Sales Property</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="min_area list-inline-item">
+                        <div class="form-group">
+                          <label for="Minimum">Min Price</label>
+                          <input type="hidden" class="form-control" id="Minimum" placeholder="Min Price" name="Minimum"
+                            [(ngModel)]="form.Minimum" #Minimum="ngModel">
+                        </div>
+                      </li>
+                      <li class="max_area  list-inline-item">
+                        <div class="form-group">
+                          <label for="Maximum">Max Price</label>
+                          <input type="hidden" class="form-control" id="Maximum" placeholder="Max Price" name="Maximum"
+                            [(ngModel)]="form.Maximum" #Maximum="ngModel">
+                        </div>
+                      </li>
+                      <li *ngIf="rent_range_slider== true">
+                        <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_rent">
+                        </ng5-slider>
+                      </li>
+                      <li *ngIf="buyyer_range_slider== true">
+                        <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_sales">
+                        </ng5-slider>
+                      </li>
+                      <li *ngIf="range_slider== true">
+                        <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options">
+                        </ng5-slider>
+                      </li>
+
+                      <li>
+                        <div id="accordion" class="panel-group">
+                          <div class="panel">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a href="#panelBodyRating" class="accordion-toggle link" data-toggle="collapse"
+                                  data-parent="#accordion"><i class="flaticon-more"></i> Advanced features</a>
+                              </h4>
+                            </div>
+                            <div id="panelBodyRating" class="panel-collapse collapse">
+                              <div class="panel-body row">
+                                <div class="col-lg-12">
+                                  <ul class="ui_kit_checkbox selectable-list float-left fn-400">
+                                    <div class="row">
+                                      <div class="col-lg-6 col-6" *ngFor="let menuData of amenitiesresult">
+                                        <li *ngIf="Amenties_funtion(menuData.id)==true,else OtherAmenties">
+                                          <div class="custom-control custom-checkbox ">
+                                            <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
+                                              value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)"
+                                              checked>
+                                            <label class="custom-control-label"
+                                              for="{{menuData.id}}">{{menuData.name}}</label>
                                           </div>
-                                        </div>
-                                    </ul>
+                                        </li>
+
+                                        <ng-template #OtherAmenties>
+                                          <li>
+                                            <div class="custom-control custom-checkbox ">
+                                              <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
+                                                value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)">
+                                              <label class="custom-control-label"
+                                                for="{{menuData.id}}">{{menuData.name}}</label>
+                                            </div>
+                                          </li>
+                                        </ng-template>
+                                      </div>
+                                    </div>
+                                  </ul>
+                                </div>
                               </div>
                             </div>
+                          </div>
                         </div>
-                      </div>
-                  </div>
-                </li>
-                <li class="search_btn_form">
-                  <div class="search_button">
-                      <button type="button"  (click)="searchForm.form.valid && onSearch()" class="btn btn-block btn-thm">Search</button>
-                  </div>
-                  <div class="reset_button">
-                    <button type="button"  (click)="reset_Search()" class="btn btn-primary ">Reset </button>
+                      </li>
+                      <li class="search_btn_form">
+                        <div class="search_button">
+                          <button type="button" (click)="searchForm.form.valid && onSearch()"
+                            class="btn btn-block btn-thm">Search</button>
+                        </div>
+                        <div class="reset_button">
+                          <button type="button" (click)="reset_Search()" class="btn btn-primary ">Reset </button>
+                        </div>
+                      </li>
+                    </form>
+                  </ul>
                 </div>
-                </li>
-                </form>
-              </ul>
+              </div>
+              <!-- product category section  -->
+              <app-product-category></app-product-category>
+              <!-- product category section  -->
+
+              <!-- feature property section  -->
+              <app-innerfeature-property></app-innerfeature-property>
+              <!-- feature property section  -->
+
+              <!-- Recently property section  -->
+              <app-recently-product></app-recently-product>
+              <!-- Recently property section  -->
             </div>
           </div>
-          <!-- product category section  -->
-             <app-product-category></app-product-category>
-             <!-- product category section  -->
-
-             <!-- feature property section  -->
-            <app-innerfeature-property></app-innerfeature-property>
-            <!-- feature property section  -->
-
-            <!-- Recently property section  -->
-						<app-recently-product></app-recently-product>
-            <!-- Recently property section  -->
-        </div>
-       </div>
-       <div class="col-md-12 col-lg-8">
-        <div class="row">                    
-           <div class="grid_list_search_result">
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
-              <div class="left_area tac-xsd searching-bar">
-                <p>{{Search_data_length}} Properties <span id="searching-heading">({{property_heading}})</span></p>
-                <p class="hidden-md hidden-lg" (click)="openPopup()">
-                  <i class="fas fa-filter"></i>
-                </p>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
-              <div class="right_area text-right tac-xsd">
-                <ul>
-                  <li class="topBar">
-                    <div class="search_option_two">
-                      <div class="candidate_revew_select"> 
-                        <div class="dropdown bootstrap-select w100 show-tick">
-                          <label>Status</label>
-                          <select class="selectpicker show-tick  form-control" name="property_status"   [(ngModel)]="form.property_status" (ngModelChange)="onchangeSearch()" #property_status="ngModel" id="property_status">
-                          <!-- <option >Select Property</option> -->
-                          <option value="all">All Property</option>
-                          <option value="Viewed">Most Viewed</option>
-                          <option value="Recently">Recently Added </option>
-                        </select>
+          <div class="col-md-12 col-lg-8">
+            <div class="row">
+              <div class="grid_list_search_result">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-5">
+                  <div class="left_area tac-xsd searching-bar">
+                    <p>{{Search_data_length}} Properties <span id="searching-heading">({{property_heading}})</span></p>
+                    <p class="hidden-md hidden-lg" (click)="openPopup()">
+                      <i class="fas fa-filter"></i>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                  <div class="right_area text-right tac-xsd">
+                    <ul>
+                      <li class="topBar">
+                        <div class="search_option_two">
+                          <div class="candidate_revew_select">
+                            <div class="dropdown bootstrap-select w100 show-tick">
+                              <label>Status</label>
+                              <select class="selectpicker show-tick  form-control" name="property_status"
+                                [(ngModel)]="form.property_status" (ngModelChange)="onchangeSearch()"
+                                #property_status="ngModel" id="property_status">
+                                <!-- <option >Select Property</option> -->
+                                <option value="all">All Property</option>
+                                <option value="Viewed">Most Viewed</option>
+                                <option value="Recently">Recently Added </option>
+                              </select>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>  
-        <div class="row" *ngIf="showLoadingIndicator">
-          <div class="col-md-12 col-lg-12"  class="loaderClass">
-            <div class="preloader2"></div>
-          </div>
-        </div>       
-         <div class="row propertyListingPage">            
-          <div class="col-md-6 col-lg-6" *ngFor = "let number of Searchcontent | paginate:{itemsPerPage:10, currentPage:p}">
-            <div class="feat_property home7 style4">
-              <owl-carousel-o [options]="customOptions" *ngIf="number.product_img.length>0;else OtherImage">
-                <ng-template carouselSlide  *ngFor = "let img of number?.product_img">
-                  <img class="img-whp"  src="{{ftpstring}}{{img?.image}}" alt="img1.jpg">
-                  <div class="thumb">
-                     <div class="thmb_cntnt style2">
-                      <ul class="tag mb0">
-                        <li class="list-inline-item" *ngIf=" number.rent_availability != null"><a >For Rent</a></li>
-                        <li class="list-inline-item" *ngIf=" number.sale_availability != null"><a >For Sale</a></li>
-                      </ul>
-                    </div>
-                    <div class="thmb_cntnt style3">
-                      <ul class="icon mb0">
-                        <!-- <li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
-                        <li class="list-inline-item"  *ngIf="number[0] != null;else wishlistcontent">
-                          <a (click)="Wishlist_remove(number.id)">
-                              <span class="flaticon-fa-heart"></span>
-                          </a>
-                        </li>
-                         <ng-template #wishlistcontent>
-                            <li class="list-inline-item">
-                              <a  (click)="wishlist_added(number.id)"><span class="flaticon-heart"></span></a>
-                            </li>
-                          </ng-template>
-                      </ul>
-                      <a *ngIf="number.expected_pricing != null" class="fp_price" >₹  {{Price_convert(number.expected_pricing)}}<small></small></a>
-                      <a *ngIf="number.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(number.expected_rent)}}<small></small></a>
-                  </div>
-                  </div>
-                </ng-template>  
-              </owl-carousel-o>
-
-              <ng-template #OtherImage>
-                <!-- <div class="thumb"> -->
-                   <img class="img-whp lazy" alt="No Product Image" style="height: 250px;" src="./../../assets/images/no_image_available.jpg">
-                 <!-- </div> -->
-                 <div class="thumb">
-                  <div class="thmb_cntnt style2">
-                   <ul class="tag mb0">
-                     <li class="list-inline-item" *ngIf=" number.rent_availability != null"><a >For Rent</a></li>
-                     <li class="list-inline-item" *ngIf=" number.sale_availability != null"><a >For Sale</a></li>
-                   </ul>
-                 </div>
-                 <div class="thmb_cntnt style3">
-                   <ul class="icon mb0">
-                     <!-- <li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
-                     <li class="list-inline-item"  *ngIf="number[0] != null;else wishlistcontent">
-                       <a (click)="Wishlist_remove(number.id)">
-                           <span class="flaticon-fa-heart"></span>
-                       </a>
-                     </li>
-                      <ng-template #wishlistcontent>
-                         <li class="list-inline-item">
-                           <a  (click)="wishlist_added(number.id)"><span class="flaticon-heart"></span></a>
-                         </li>
-                       </ng-template>
-                   </ul>
-                   <a *ngIf="number.expected_pricing != null" class="fp_price" >₹  {{Price_convert(number.expected_pricing)}}<small></small></a>
-                   <a *ngIf="number.expected_rent != null" class="fp_price"  >₹ {{ Price_convert(number.expected_rent)}}<small></small></a>
-               </div>
-               </div>
-              </ng-template>
-              
-               <div class="details">
-                <a href="/productpage?id={{number.id}}">
-                  <div class="tc_content">
-                    <p class="text-thm" *ngIf="number.property__type != null">{{ number.property__type.name | titlecase }}</p>
-                    <h4>{{number.build_name | titlecase}}</h4>
-                    <p><span class="flaticon-placeholder"></span> {{ number.address | titlecase }}</p>
-                    <ul class="prop_details mb0">
-                    <li class="list-inline-item"><a>Beds: {{ number.bedroom }}</a></li>
-                    <li class="list-inline-item"><a>Baths: {{ number.bathroom }}</a></li>
-                    <li class="list-inline-item"><a>Area unit: {{ number.area_unit }}</a></li>
+                      </li>
                     </ul>
                   </div>
-                  </a>
-                <div class="fp_footer" id="user_details">
-                  <ul class="fp_meta float-left mb0">
-                      <li class="list-inline-item"><a href="#"><img src="./../../assets/css/images/team/e1.png" alt="pposter1.png"></a></li>
-                      <li class="list-inline-item"><a href="#">{{number.user_detail.name | titlecase}}</a></li>
-                      <div class="fp_pdate float-right" *ngIf="number.product_comparision==null">
-                        <button type="button" (click)="product_comp(number.id)"  class="btn btn-log btn-block btn-thm bg-white text-black-50">Add to compare</button>
-                      </div>
-                      <div class="fp_pdate float-right" *ngIf="number.product_comparision !=null">
-                        <button type="button"  class="btn  text-black-50 bucket-btn">Added To Compare</button>
-                      </div>
-                  </ul>
-                </div>                
+                </div>
               </div>
             </div>
-           </div>
-         </div>
-         <!-- <div class="col-lg-12  col-md-12 "  *ngIf="Search_data_length<1">
+            <div class="row" *ngIf="showLoadingIndicator">
+              <div class="col-md-12 col-lg-12" class="loaderClass">
+                <div class="preloader2"></div>
+              </div>
+            </div>
+            <div class="row propertyListingPage">
+              <div class="col-md-6 col-lg-6"
+                *ngFor="let number of Searchcontent | paginate:{itemsPerPage:10, currentPage:p}">
+                <div class="feat_property home7 style4">
+                  <owl-carousel-o [options]="customOptions" *ngIf="number.product_img.length>0;else OtherImage">
+                    <ng-template carouselSlide *ngFor="let img of number?.product_img">
+                      <img class="img-whp" src="{{ftpstring}}{{img?.image}}" alt="img1.jpg">
+                      <div class="thumb">
+                        <div class="thmb_cntnt style2">
+                          <ul class="tag mb0">
+                            <li class="list-inline-item" *ngIf=" number.rent_availability != null"><a>For Rent</a></li>
+                            <li class="list-inline-item" *ngIf=" number.sale_availability != null"><a>For Sale</a></li>
+                          </ul>
+                        </div>
+                        <div class="thmb_cntnt style3">
+                          <ul class="icon mb0">
+                            <!-- <li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
+                            <li class="list-inline-item" *ngIf="number[0] != null;else wishlistcontent">
+                              <a (click)="Wishlist_remove(number.id)">
+                                <span class="flaticon-fa-heart"></span>
+                              </a>
+                            </li>
+                            <ng-template #wishlistcontent>
+                              <li class="list-inline-item">
+                                <a (click)="wishlist_added(number.id)"><span class="flaticon-heart"></span></a>
+                              </li>
+                            </ng-template>
+                          </ul>
+                          <a *ngIf="number.expected_pricing != null" class="fp_price">₹
+                            {{Price_convert(number.expected_pricing)}}<small></small></a>
+                          <a *ngIf="number.expected_rent != null" class="fp_price">₹ {{
+                            Price_convert(number.expected_rent)}}<small></small></a>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </owl-carousel-o>
+
+                  <ng-template #OtherImage>
+                    <!-- <div class="thumb"> -->
+                    <img class="img-whp lazy" alt="No Product Image" style="height: 250px;"
+                      src="./../../assets/images/no_image_available.jpg">
+                    <!-- </div> -->
+                    <div class="thumb">
+                      <div class="thmb_cntnt style2">
+                        <ul class="tag mb0">
+                          <li class="list-inline-item" *ngIf=" number.rent_availability != null"><a>For Rent</a></li>
+                          <li class="list-inline-item" *ngIf=" number.sale_availability != null"><a>For Sale</a></li>
+                        </ul>
+                      </div>
+                      <div class="thmb_cntnt style3">
+                        <ul class="icon mb0">
+                          <!-- <li class="list-inline-item"><a href="#"><span class="flaticon-transfer-1"></span></a></li> -->
+                          <li class="list-inline-item" *ngIf="number[0] != null;else wishlistcontent">
+                            <a (click)="Wishlist_remove(number.id)">
+                              <span class="flaticon-fa-heart"></span>
+                            </a>
+                          </li>
+                          <ng-template #wishlistcontent>
+                            <li class="list-inline-item">
+                              <a (click)="wishlist_added(number.id)"><span class="flaticon-heart"></span></a>
+                            </li>
+                          </ng-template>
+                        </ul>
+                        <a *ngIf="number.expected_pricing != null" class="fp_price">₹
+                          {{Price_convert(number.expected_pricing)}}<small></small></a>
+                        <a *ngIf="number.expected_rent != null" class="fp_price">₹ {{
+                          Price_convert(number.expected_rent)}}<small></small></a>
+                      </div>
+                    </div>
+                  </ng-template>
+
+                  <div class="details">
+                    <a href="/productpage?id={{number.id}}">
+                      <div class="tc_content">
+                        <p class="text-thm" *ngIf="number.property__type != null">{{ number.property__type.name |
+                          titlecase }}</p>
+                        <h4>{{number.build_name | titlecase}}</h4>
+                        <p><span class="flaticon-placeholder"></span> {{ number.address | titlecase }}</p>
+                        <ul class="prop_details mb0">
+                          <li class="list-inline-item"><a>Beds: {{ number.bedroom }}</a></li>
+                          <li class="list-inline-item"><a>Baths: {{ number.bathroom }}</a></li>
+                          <li class="list-inline-item"><a>Area unit: {{ number.area_unit }}</a></li>
+                        </ul>
+                      </div>
+                    </a>
+                    <div class="fp_footer" id="user_details">
+                      <ul class="fp_meta float-left mb0">
+                        <li class="list-inline-item"><a href="#"><img src="./../../assets/css/images/team/e1.png"
+                              alt="pposter1.png"></a></li>
+                        <li class="list-inline-item"><a href="#">{{number.user_detail.name | titlecase}}</a></li>
+                        <div class="fp_pdate float-right" *ngIf="number.product_comparision==null">
+                          <button type="button" (click)="product_comp(number.id)"
+                            class="btn btn-log btn-block btn-thm bg-white text-black-50">Add to compare</button>
+                        </div>
+                        <div class="fp_pdate float-right" *ngIf="number.product_comparision !=null">
+                          <button type="button" class="btn  text-black-50 bucket-btn">Added To Compare</button>
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-lg-12  col-md-12 "  *ngIf="Search_data_length<1">
            <h2 class="breadcrumb_title">Product Listing Not Found!!!...</h2>
          </div> -->
-         <div class="row " *ngIf="Search_data_length>10">
-           <div class="col-lg-12  Agent_property">
-            <pagination-controls (pageChange)="p=$event"></pagination-controls>
-           </div>
-         </div>
-         </div>
+            <div class="row " *ngIf="Search_data_length>10">
+              <div class="col-lg-12  Agent_property">
+                <pagination-controls (pageChange)="p=$event"></pagination-controls>
+              </div>
+            </div>
+          </div>
 
-     </div>
-   </div>
- </section>
-   <!-- Our Footer -->
-   <app-footer></app-footer>
-   <a class="scrollToHome" href="#"><i class="fa fa-angle-double-up"></i></a>
-   </div>
-   <!-- Wrapper End -->
+        </div>
+      </div>
+    </section>
+    <!-- Our Footer -->
+    <app-footer></app-footer>
+    <a class="scrollToHome" href="#"><i class="fa fa-angle-double-up"></i></a>
+  </div>
+  <!-- Wrapper End -->
 </body>
 
 <!-- Mirrored from grandetest.com/theme/findhouse-html/page-listing-grid-v1.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 21 Oct 2020 08:26:30 GMT -->
+
 </html>
 
 <!-- modal popup searching form mobile view -->
 
-<div  class="modal search-form"  tabindex="-1"  role="dialog"  [ngStyle]="{'display':displayStyle}" *ngIf="mobile_view == true">
+<div class="modal search-form" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}"
+  *ngIf="mobile_view == true">
   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <a (click)="closePopup()"><span class="flaticon-close"></span></a>
-        </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <a (click)="closePopup()"><span class="flaticon-close"></span></a>
+      </div>
       <div class="modal-body">
         <div class="col-12 col-xl-12 mobile_searchBar">
           <div class="sidebar_listing_grid1">
             <div class="sidebar_listing_list">
               <div class="sidebar_advanced_search_widget">
                 <ul class="sasw_list mb0">
-                  <form  action="#" name="searchForm"  id="searchForm" #searchForm="ngForm">
-                  <li class="search_area">
+                  <form action="#" name="searchForm" id="searchForm" #searchForm="ngForm">
+                    <li class="search_area">
                       <div class="form-group">
-                        <input type="text" class="form-control" name="build_name" [(ngModel)]="form.build_name" #build_name="ngModel" id="build_name" placeholder="Enter keywords...">
+                        <input type="text" class="form-control" name="build_name" [(ngModel)]="form.build_name"
+                          #build_name="ngModel" id="build_name" placeholder="Enter keywords...">
                         <label for="build_name"><span class="flaticon-magnifying-glass"></span></label>
                       </div>
-                  </li>
-                  <li class="search_area">
-                    <div class="form-group">
-                      <input type="hidden" class="form-control" name="Location" [(ngModel)]="form.Location" #Location="ngModel" id="Location" placeholder="Location">
-                      <input  #search  autocorrect="off" autocapitalize="off"  spellcheck="off" [(ngModel)]="form.Location" type="search"  class="form-control input-text"
-                      placeholder="Enter Address"  [ngModelOptions]="{ standalone: true }" />
-                      <label for="Location"></label>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="search_option_two">
-                      <div class="candidate_revew_select">
-                        <div class="dropdown bootstrap-select w100 show-tick">
-                          <label>Area Unit</label>
-                            <select class="selectpicker show-tick form-control" name="area_unit"  [(ngModel)]="form.area_unit" #type="ngModel" id="area_unit">
-                            <option selected="selected" value="">Select Area Unit</option>
-                            <option value="sq.ft.">sq.ft.</option>
-                            <option value="sq.yards">sq.yards</option>
-                            <option value="sq.m.">sq.m.</option>
-                            <option value="acres">acres</option>
-                            <option value="marla">marla</option>
-                            <option value="cents"> cents</option>
-                            <option value="bigha">bigha</option>
-                            <option value="kottah">kottah</option>
-                            <option value="kanal"> kanal</option>
-                            <option value="grounds">grounds</option>
-                            <option value="biswa">biswa</option>
-                            <option value="guntha"> guntha</option>
-                            <option value="aankadam">aankadam</option>
-                            <option value="hectares"> hectares</option>
-                            <option value="rood">rood</option>
-                            <option value="chataks">chataks</option>
-                            <option value="perch"> perch</option>
-                          </select>
-                        </div>
+                    </li>
+                    <li class="search_area">
+                      <div class="form-group">
+                        <input type="hidden" class="form-control" name="Location" [(ngModel)]="form.Location"
+                          #Location="ngModel" id="Location" placeholder="Location">
+                        <input #search autocorrect="off" autocapitalize="off" spellcheck="off"
+                          [(ngModel)]="form.Location" type="search" class="form-control input-text"
+                          placeholder="Enter Address" [ngModelOptions]="{ standalone: true }" />
+                        <label for="Location"></label>
                       </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="search_option_two">
-                      <div class="candidate_revew_select">
-                        <div class="dropdown bootstrap-select w100 show-tick">
-                          <label>Property Type</label>
-                          <!-- {{property_type_result | json}} -->
-                          <select  class="form-control  selectpicker show-tick"  name="type"  [(ngModel)]="form.type" #type="ngModel" id="type">
-                            <!-- <option  value="" >Select Property Type</option> -->
-                            <!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
-                            <option value="" disbale>Property Type</option>
-                            <option value="1">Flat/ Apartment</option>
-                            <option value="2">Residential House</option>
-                            <option value="3">Villa</option>
-                            <option value="4">Builder Floor Apartment</option>
-                            <option value="5">Residential Land/ Plot</option>
-                            <option value="6">Penthouse</option>
-                            <option value="7">Studio Apartment</option>
-                            <option value="8">ALL COMMERCIAL</option>
-                            <option value="9">Commercial Office Space</option>
-                            <option value="10">Office in IT Park/ SEZ</option>
-                            <option value="11">Commercial Shop</option>
-                            <option value="12">Commercial Showroom</option>
-                            <option value="13">Commercial Land</option>
-                            <option value="14">Warehouse/ Godown</option>
-                            <option value="15">Industrial Land</option>
-                            <option value="16">Industrial Building</option>
-                            <option value="17">Industrial Shed</option>
-                            <option value="18">ALL AGRICULTURAL</option>
-                            <option value="19">Agricultural Land</option>
-                            <option value="20">Farm House</option>
-                            <option value="21">ALL RESIDENTIAL</option>
-                          </select>
+                    </li>
+                    <li>
+                      <div class="search_option_two">
+                        <div class="candidate_revew_select">
+                          <div class="dropdown bootstrap-select w100 show-tick">
+                            <label>Area Unit</label>
+                            <select class="selectpicker show-tick form-control" name="area_unit"
+                              [(ngModel)]="form.area_unit" #type="ngModel" id="area_unit">
+                              <option selected="selected" value="">Select Area Unit</option>
+                              <option value="sq.ft.">sq.ft.</option>
+                              <option value="sq.yards">sq.yards</option>
+                              <option value="sq.m.">sq.m.</option>
+                              <option value="acres">acres</option>
+                              <option value="marla">marla</option>
+                              <option value="cents"> cents</option>
+                              <option value="bigha">bigha</option>
+                              <option value="kottah">kottah</option>
+                              <option value="kanal"> kanal</option>
+                              <option value="grounds">grounds</option>
+                              <option value="biswa">biswa</option>
+                              <option value="guntha"> guntha</option>
+                              <option value="aankadam">aankadam</option>
+                              <option value="hectares"> hectares</option>
+                              <option value="rood">rood</option>
+                              <option value="chataks">chataks</option>
+                              <option value="perch"> perch</option>
+                            </select>
                           </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="search_option_two">
+                        <div class="candidate_revew_select">
+                          <div class="dropdown bootstrap-select w100 show-tick">
+                            <label>Property Type</label>
+                            <!-- {{property_type_result | json}} -->
+                            <select class="form-control  selectpicker show-tick" name="type" [(ngModel)]="form.type"
+                              #type="ngModel" id="type">
+                              <!-- <option  value="" >Select Property Type</option> -->
+                              <!-- <option  *ngFor="let property_type of property_type_data" [value]="property_type.id" >{{property_type.name}}</option> -->
+                              <option value="" disbale>Property Type</option>
+                              <option value="1">Flat/ Apartment</option>
+                              <option value="2">Residential House</option>
+                              <option value="3">Villa</option>
+                              <option value="4">Builder Floor Apartment</option>
+                              <option value="5">Residential Land/ Plot</option>
+                              <option value="6">Penthouse</option>
+                              <option value="7">Studio Apartment</option>
+                              <option value="8">ALL COMMERCIAL</option>
+                              <option value="9">Commercial Office Space</option>
+                              <option value="10">Office in IT Park/ SEZ</option>
+                              <option value="11">Commercial Shop</option>
+                              <option value="12">Commercial Showroom</option>
+                              <option value="13">Commercial Land</option>
+                              <option value="14">Warehouse/ Godown</option>
+                              <option value="15">Industrial Land</option>
+                              <option value="16">Industrial Building</option>
+                              <option value="17">Industrial Shed</option>
+                              <option value="18">ALL AGRICULTURAL</option>
+                              <option value="19">Agricultural Land</option>
+                              <option value="20">Farm House</option>
+                              <option value="21">ALL RESIDENTIAL</option>
+                            </select>
                           </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="search_option_two">
-                      <div class="candidate_revew_select">
-                        <div class="dropdown bootstrap-select w100 show-tick">
-                          <label>Bathrooms</label>
-                            <select class="selectpicker show-tick form-control" name="Bathrooms"  [(ngModel)]="form.Bathrooms" #type="ngModel" id="Bathrooms">
-                            <option value="">Select Bathrooms</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6 </option>
-                            <option value="7">7</option>
-                            <option value="8">8 </option>
-                            <option value="9">9</option>
-                            <option value="10">10 </option>
-                          </select>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="search_option_two">
-                      <div class="candidate_revew_select">
-                        <div class="dropdown bootstrap-select w100 show-tick">
-                          <label>Bedrooms</label>
-                            <select class="selectpicker show-tick form-control" name="Bedrooms"  [(ngModel)]="form.Bedrooms" #type="ngModel" id="Bedrooms">
-                            <option value="">Select Bedrooms</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6 </option>
-                            <option value="7">7</option>
-                            <option value="8">8 </option>
-                            <option value="9">9</option>
-                            <option value="10">10 </option>
-                          </select>
+                    </li>
+                    <li>
+                      <div class="search_option_two">
+                        <div class="candidate_revew_select">
+                          <div class="dropdown bootstrap-select w100 show-tick">
+                            <label>Bathrooms</label>
+                            <select class="selectpicker show-tick form-control" name="Bathrooms"
+                              [(ngModel)]="form.Bathrooms" #type="ngModel" id="Bathrooms">
+                              <option value="">Select Bathrooms</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6 </option>
+                              <option value="7">7</option>
+                              <option value="8">8 </option>
+                              <option value="9">9</option>
+                              <option value="10">10 </option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="search_option_two">
-                      <div class="candidate_revew_select">
-                        <div class="dropdown bootstrap-select w100 show-tick">
-                          <label>Years</label>
-                            <select class="selectpicker show-tick form-control" name="Years"  [(ngModel)]="form.Years" #type="ngModel" id="Years">
-                            <option value="" >Select Bulid Years</option>
-                            <option value="2013">2013</option>
-                            <option value="2014">2014</option>
-                            <option value="2015">2015</option>
-                            <option value="2016">2016</option>
-                            <option value="2017">2017</option>
-                            <option value="2018">2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                          </select>
+                    </li>
+                    <li>
+                      <div class="search_option_two">
+                        <div class="candidate_revew_select">
+                          <div class="dropdown bootstrap-select w100 show-tick">
+                            <label>Bedrooms</label>
+                            <select class="selectpicker show-tick form-control" name="Bedrooms"
+                              [(ngModel)]="form.Bedrooms" #type="ngModel" id="Bedrooms">
+                              <option value="">Select Bedrooms</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6 </option>
+                              <option value="7">7</option>
+                              <option value="8">8 </option>
+                              <option value="9">9</option>
+                              <option value="10">10 </option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="search_option_two">
-                      <div class="candidate_revew_select">
-                        <div class="dropdown bootstrap-select w100 show-tick">
-                          <label>Availability</label>
-                            <select class="selectpicker show-tick form-control" name="availability_condition"  [(ngModel)]="form.availability_condition" #type="ngModel" id="availability_condition" (ngModelChange)="OnPropertyCheck()">
+                    </li>
+                    <li>
+                      <div class="search_option_two">
+                        <div class="candidate_revew_select">
+                          <div class="dropdown bootstrap-select w100 show-tick">
+                            <label>Years</label>
+                            <select class="selectpicker show-tick form-control" name="Years" [(ngModel)]="form.Years"
+                              #type="ngModel" id="Years">
+                              <option value="">Select Bulid Years</option>
+                              <option value="2013">2013</option>
+                              <option value="2014">2014</option>
+                              <option value="2015">2015</option>
+                              <option value="2016">2016</option>
+                              <option value="2017">2017</option>
+                              <option value="2018">2018</option>
+                              <option value="2019">2019</option>
+                              <option value="2020">2020</option>
+                              <option value="2021">2021</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="search_option_two">
+                        <div class="candidate_revew_select">
+                          <div class="dropdown bootstrap-select w100 show-tick">
+                            <label>Availability</label>
+                            <select class="selectpicker show-tick form-control" name="availability_condition"
+                              [(ngModel)]="form.availability_condition" #type="ngModel" id="availability_condition"
+                              (ngModelChange)="OnPropertyCheck()">
                               <option value="Select Availability">Select Availability</option>
-                            <option value="rent">Rental Property</option>
-                            <option value="sales">Sales Property</option>
-                          </select>
+                              <option value="rent">Rental Property</option>
+                              <option value="sales">Sales Property</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                  <li class="min_area list-inline-item">
+                    </li>
+                    <li class="min_area list-inline-item">
                       <div class="form-group">
                         <label for="Minimum">Min Price</label>
-                        <input type="hidden" class="form-control" id="Minimum" placeholder="Min Price" name="Minimum" [(ngModel)]="form.Minimum" #Minimum="ngModel">
+                        <input type="hidden" class="form-control" id="Minimum" placeholder="Min Price" name="Minimum"
+                          [(ngModel)]="form.Minimum" #Minimum="ngModel">
                       </div>
-                  </li>
-                  <li class="max_area  list-inline-item">
+                    </li>
+                    <li class="max_area  list-inline-item">
                       <div class="form-group">
                         <label for="Maximum">Max Price</label>
-                        <input type="hidden" class="form-control" id="Maximum" placeholder="Max Price" name="Maximum" [(ngModel)]="form.Maximum" #Maximum="ngModel" >
+                        <input type="hidden" class="form-control" id="Maximum" placeholder="Max Price" name="Maximum"
+                          [(ngModel)]="form.Maximum" #Maximum="ngModel">
                       </div>
-                  </li>
-                  <li  *ngIf="rent_range_slider== true">
-                    <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_rent"></ng5-slider>
-                  </li>
-                  <li  *ngIf="buyyer_range_slider== true">
-                    <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_sales" ></ng5-slider>
-                  </li>
-                  <li  *ngIf="range_slider== true">
-                    <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options" ></ng5-slider>
-                  </li>
-                 
-                  <li>
+                    </li>
+                    <li *ngIf="rent_range_slider== true">
+                      <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_rent">
+                      </ng5-slider>
+                    </li>
+                    <li *ngIf="buyyer_range_slider== true">
+                      <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options_sales">
+                      </ng5-slider>
+                    </li>
+                    <li *ngIf="range_slider== true">
+                      <ng5-slider [(value)]="form.Minimum" [(highValue)]="form.Maximum" [options]="options">
+                      </ng5-slider>
+                    </li>
+
+                    <li>
                       <div id="accordion" class="panel-group">
                         <div class="panel">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a href="#panelBodyRating" class="accordion-toggle link" data-toggle="collapse" data-parent="#accordion"><i class="flaticon-more"></i> Advanced features</a>
-                              </h4>
-                            </div>
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a href="#panelBodyRating" class="accordion-toggle link" data-toggle="collapse"
+                                data-parent="#accordion"><i class="flaticon-more"></i> Advanced features</a>
+                            </h4>
+                          </div>
                           <div id="panelBodyRating" class="panel-collapse collapse">
-                              <div class="panel-body row">
-                                <div class="col-lg-12">
-                                      <ul class="ui_kit_checkbox selectable-list float-left fn-400">
-                                        <div class="row">
-                                          <div class="col-lg-6 col-6"  *ngFor = "let menuData of amenitiesresult">
-                                              <li *ngIf="Amenties_funtion(menuData.id)==true,else OtherAmenties">
-                                                <div class="custom-control custom-checkbox ">
-                                                  <input type="checkbox" class="custom-control-input" id="{{menuData.id}}" value="{{menuData.id}}"  (change)="onchangeAmenties($event,menuData.id)" checked>
-                                                  <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
-                                                </div>
-                                            </li>
-                                            
-                                            <ng-template #OtherAmenties>
-                                              <li>
-                                                <div class="custom-control custom-checkbox ">
-                                                  <input type="checkbox" class="custom-control-input" id="{{menuData.id}}" value="{{menuData.id}}"  (change)="onchangeAmenties($event,menuData.id)" >
-                                                  <label class="custom-control-label" for="{{menuData.id}}">{{menuData.name}}</label>
-                                                </div>
-                                              </li>
-                                            </ng-template>               
-                                            </div>
+                            <div class="panel-body row">
+                              <div class="col-lg-12">
+                                <ul class="ui_kit_checkbox selectable-list float-left fn-400">
+                                  <div class="row">
+                                    <div class="col-lg-6 col-6" *ngFor="let menuData of amenitiesresult">
+                                      <li *ngIf="Amenties_funtion(menuData.id)==true,else OtherAmenties">
+                                        <div class="custom-control custom-checkbox ">
+                                          <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
+                                            value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)"
+                                            checked>
+                                          <label class="custom-control-label"
+                                            for="{{menuData.id}}">{{menuData.name}}</label>
+                                        </div>
+                                      </li>
+
+                                      <ng-template #OtherAmenties>
+                                        <li>
+                                          <div class="custom-control custom-checkbox ">
+                                            <input type="checkbox" class="custom-control-input" id="{{menuData.id}}"
+                                              value="{{menuData.id}}" (change)="onchangeAmenties($event,menuData.id)">
+                                            <label class="custom-control-label"
+                                              for="{{menuData.id}}">{{menuData.name}}</label>
                                           </div>
-                                      </ul>
-                                </div>
+                                        </li>
+                                      </ng-template>
+                                    </div>
+                                  </div>
+                                </ul>
                               </div>
+                            </div>
                           </div>
                         </div>
-                    </div>
-                  </li>
-                  <li class="search_btn_form">
-                    <div class="search_button">
-                        <button type="button"  (click)="searchForm.form.valid && onSearch()" class="btn btn-block btn-thm">Search</button>
-                    </div>
-                    <div class="reset_button">
-                      <button type="button"  (click)="reset_Search()" class="btn btn-primary ">Reset </button>
-                  </div>
-                  </li>
+                      </div>
+                    </li>
+                    <li class="search_btn_form">
+                      <div class="search_button">
+                        <button type="button" (click)="searchForm.form.valid && onSearch()"
+                          class="btn btn-block btn-thm">Search</button>
+                      </div>
+                      <div class="reset_button">
+                        <button type="button" (click)="reset_Search()" class="btn btn-primary ">Reset </button>
+                      </div>
+                    </li>
                   </form>
                 </ul>
               </div>
             </div>
           </div>
-          </div>
+        </div>
 
       </div>
       <!-- <div class="modal-footer">
@@ -735,4 +800,4 @@
       </div> -->
     </div>
   </div>
-  </div>
+</div>

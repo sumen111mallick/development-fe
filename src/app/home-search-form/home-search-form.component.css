@@ -44,6 +44,10 @@ header {
     height: 50px !important;
 }
 
+#Bathrooms, #Bedrooms, #Years, #area_unit {
+    width: inherit;
+}
+
 @media (max-width:768px) {
     #accord-div {
         border: none;

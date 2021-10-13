@@ -22,6 +22,7 @@
 @import       './assets/css/style.css';
 @import       './assets/css/timecounter.css';
 @import       './assets/css/form-elements.css';
+@import       './assets/css/material.theme.css';
 
 /*@import       './assets/css/wizard-style.css';*/
 
@@ -113,6 +114,7 @@ input[type=number] {
 ng-multiselect-dropdown .dropdown-btn {
   height: 50px;
   border: 1px solid #ced4da !important;
+  background-color: #fff;
 }
 
 .multiselect-dropdown .dropdown-btn .selected-item span {
@@ -170,17 +172,19 @@ a.img_logo .logo1 {
   vertical-align: -webkit-baseline-middle;
 }
 
-mat-dialog-container#modal-component {
-  border: 3px solid #262626;
+mat-dialog-container#modal-component, mat-dialog-container#modal-login-component {
+  border: 3px solid #eee;
   border-radius: 11px;
-  background-color: #1a1a1a;
+  background-color: #626567;
 }
 
 .ngx-slider .ngx-slider-pointer {
+  /*background-color: #cd5700 !important;*/
   background-color: #ff5a5f !important;
 }
 
 .ngx-slider .ngx-slider-selection {
+  /*background: #ffa500 !important;*/
   background: #d4686a !important;
 }
 

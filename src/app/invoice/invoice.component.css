@@ -1,0 +1,9 @@
+.btn-custom1 {
+    color: #fff;
+    background-color: #ff5a5f;
+}
+
+.btn-custom1 :hover {
+    color: #ff5a5f;
+    background-color: #fff;
+}

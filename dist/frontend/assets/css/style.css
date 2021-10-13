@@ -2340,7 +2340,7 @@ header.header-nav.menu_style_home_seven .ace-responsive-menu > li.last{
 .home1-advnc-search ul li{
   display: inline-block;
   line-height: 3;
-  margin-right: 15px !important;
+  /*margin-right: 15px !important;*/
   vertical-align: text-top;
 }
 .home1-advnc-search.home2{
@@ -8891,7 +8891,7 @@ a.btn.btn_error{
 
 a.btn.btn_error:hover, a.btn.btn_error:active, .btn-thm2:focus:focus {
   border: 2px solid #ff5a5f !important;
-  color: #fff !important;
+  color: #ff5a5f !important;
 }
 /*== Service Pages Style Code ==*/
 .service_grid{
@@ -13652,7 +13652,7 @@ a.btn.btn_error:hover, a.btn.btn_error:active, .btn-thm2:focus:focus {
 .btn-thm:hover,
 .btn-thm:active,
 .btn-thm:focus{
-  background-color: #ffffff;
+  background-color: #ffffff !important;
   border-color: #ff5a5f;
   color: #ff5a5f !important;
   border: 2px solid #ff5a5f !important; }
@@ -17995,7 +17995,7 @@ border-radius: 0px!important;
     margin: 0px!important;
   }
   .application_statics{
-    padding: 15px 5px!important;
+    padding: 20px 15px!important;
   }
   #single_page_banner{
     height:230px!important;

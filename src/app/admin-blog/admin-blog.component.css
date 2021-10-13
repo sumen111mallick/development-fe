@@ -30,4 +30,8 @@ body {
   .my_dashboard_review ul li {
       width: auto !important;
   }
+
+  .feat_property {
+    height: auto !important;
+}
 }

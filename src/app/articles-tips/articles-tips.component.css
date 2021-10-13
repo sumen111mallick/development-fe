@@ -31,3 +31,13 @@
 .our-blog .thumb a{
   width: 100%!important;
 }
+
+.feat_property .details .tc_content {
+  height: 110px !important;
+}
+
+@media (max-width: 768px) {
+  .feat_property {
+    height: auto !important;
+ }
+}
