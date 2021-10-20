@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 text-right">
                 <span>
-                    <h4>{{ response.payment_status }}</h4>
+                    <h4>{{ response?.payment_status }}</h4>
                 </span>
             </div>
         </div>
@@ -46,6 +46,18 @@
                         <tr>
                             <th scope="row">GST@18%:</th>
                             <td>{{ gst_amount }}</td>
+                        </tr>
+                        <tr *ngIf="response?.plan_type == 'rent' && order_details?.expected_rent">
+                            <th scope="row">1 Month Rent:</th>
+                            <td>{{ order_details.expected_rent }}</td>
+                        </tr>
+                        <tr *ngIf="response?.plan_type == 'rent' && order_details?.security_deposit">
+                            <th scope="row">Security Deposit:</th>
+                            <td>{{ order_details.security_deposit }}</td>
+                        </tr>
+                        <tr *ngIf="response?.plan_type == 'rent' && order_details?.maintenance_charge">
+                            <th scope="row">Maintenance Charge:</th>
+                            <td>{{ order_details.maintenance_charge }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Total Amount:</th>

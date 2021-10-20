@@ -36,9 +36,18 @@ export class PlansService {
     return this.http.post(PLANS_API + 'auth/post_selected_plan', data);
   }
 
+  postSelectedRentPlan(data): Observable<any> {
+    return this.http.post(PLANS_API + 'auth/post_selected_rent_plan', data);
+  }
+
   getOrderDetails($orderID): Observable<any> {
     console.log($orderID);
     return this.http.get(PLANS_API + 'auth/get_order_details/' + $orderID);
+  }
+
+  getRentOrderDetails($orderID): Observable<any> {
+    console.log($orderID);
+    return this.http.get(PLANS_API + 'auth/get_rent_order_details/' + $orderID);
   }
 
   getInvoiceDetails($invoiceID): Observable<any> {
@@ -49,12 +58,24 @@ export class PlansService {
     return this.http.get(PLANS_API + 'auth/get_user_invoices/' + $emailID);
   }
 
+  getAllUserInvoices($emailID): Observable<any> {
+    return this.http.get(PLANS_API + 'auth/get_all_user_invoices/' + $emailID);
+  }
+
   proceedToPayment($data): Observable<any> {
     return this.http.get(PLANS_API + 'auth/plans_payment/' + $data);
   }
 
+  proceedToPaymentRent($data): Observable<any> {
+    return this.http.get(PLANS_API + 'auth/plans_rent_payment/' + $data);
+  }
+
   generateInvoice($order): Observable<any> {
     return this.http.post(PLANS_API + 'auth/generate_invoice', { orderID: $order }, httpOptions);
+  }
+
+  generateRentInvoice($order): Observable<any> {
+    return this.http.post(PLANS_API + 'auth/generate_rent_invoice', { orderID: $order }, httpOptions);
   }
 
   getCreditDetails($email): Observable<any> {
@@ -79,6 +100,10 @@ export class PlansService {
       .set('product_id', $productID)
       .set('product_price', $productPrice)
     return this.http.get(PLANS_API + 'auth/update_invoice_details/', {params});
+  }
+
+  get_rent_properties($userEmail) {
+    return this.http.get(PLANS_API + 'auth/get_rented_properties/' + $userEmail);
   }
 
 }

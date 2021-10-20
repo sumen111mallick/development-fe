@@ -149,6 +149,10 @@ import { ProductSliderComponent } from './product-slider/product-slider.componen
 import { ProductVideoComponent } from './product-video/product-video.component';
 import { ProductGoogleMapComponent } from './product-google-map/product-google-map.component';
 import { ComtactPageFormComponent } from './comtact-page-form/comtact-page-form.component';
+import { MessageModalComponent } from './message-modal/message-modal.component';
+import { ProPaymentSummaryComponent } from './pro-payment-summary/pro-payment-summary.component';
+import { ProductPaymentComponent } from './product-payment/product-payment.component';
+import { PropertyDetailsModalComponent } from './property-details-modal/property-details-modal.component';
 
 //import { FileUploadModule } from 'ng2-file-upload';
 // import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -266,7 +270,11 @@ import { ComtactPageFormComponent } from './comtact-page-form/comtact-page-form.
     ProductSliderComponent,
     ProductVideoComponent,
     ProductGoogleMapComponent,
-    ComtactPageFormComponent,		
+    ComtactPageFormComponent,
+    MessageModalComponent,
+    ProPaymentSummaryComponent,
+    ProductPaymentComponent,
+    PropertyDetailsModalComponent,		
   ],
   imports: [
     Ng5SliderModule,
@@ -313,6 +321,7 @@ import { ComtactPageFormComponent } from './comtact-page-form/comtact-page-form.
     ConfirmationDialogService,
     ProductService,
     UrlService,
+    SubscriptionPlansComponent,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

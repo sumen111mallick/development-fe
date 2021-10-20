@@ -42,6 +42,10 @@ export class ModalComponent implements OnInit {
       this.tokenStorage.saveReturnURL(this.returnUrl);
       this.tokenStorage.savePlansData(JSON.stringify(this.response));
     }
+    else if(this.returnUrl.includes('pro_payment_summary')) {
+      this.tokenStorage.saveReturnURL(this.returnUrl);
+      this.tokenStorage.savePlansData(JSON.stringify(this.response));
+    }
     this.router.navigate(['verify-details']);
     this.closeModal();
   }

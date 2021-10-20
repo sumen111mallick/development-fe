@@ -1,0 +1,150 @@
+<div class="container mt150">
+    <div *ngIf="showLoadingIndicator">
+        <div class="preloader"></div>
+    </div>
+    <mat-accordion class="example-headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Choose a Plan
+                </mat-panel-title>
+                <mat-panel-description>
+                    Choose from the plans available
+                    <mat-icon>list</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="pricing">
+                <div class="container">
+                    <div class="pricing-table">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th *ngFor="let plan of response">
+                                        {{ plan.plan_name }}
+                                        <span class="ptable-price pay_type">{{ plan.payment_type }}
+                                            Payment</span>
+                                        <hr>
+                                        <span class="ptable-price">{{ plan.plan_price }} Days Rent</span>
+                                        <span class="ptable-price">Rs. {{ expected_rent /
+                                            (30 / plan.plan_price)}}</span>
+                                            <button type="button" class="btn bg-green" (click)="plan_payment(plan.plan_name, plan.plan_ID, plan.payment_type, 'rent', expected_rent, plan.plan_price)">Select Plan</button>
+                                        <!--<span class="ptable-price" *ngIf="selected && plan.plan_price == 15">Rs. {{ selected.value / 2 }}</span>-->
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let rent_feature of rent_feat_res">
+                                <tr class="visible-xs" aria-hidden="true">
+                                    <td>&nbsp;</td>
+                                    <td colspan="3">{{rent_feature.feature_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="ptable-title">{{rent_feature.feature_name}}</span>
+                                    </td>
+
+                                    <td *ngIf="rent_feature.feature_details[0] === 'yes'"><span
+                                            class="checkmark">&#10004;</span></td>
+                                    <td *ngIf="rent_feature.feature_details[0] === 'no'">&#10006;</td>
+                                    <td
+                                        *ngIf="rent_feature.feature_details[0] != 'no' && rent_feature.feature_details[0] != 'yes'">
+                                        <span>{{rent_feature.feature_details[0]}}</span>
+                                    </td>
+
+                                    <td *ngIf="rent_feature.feature_details[1] === 'yes'"><span
+                                            class="checkmark">&#10004;</span></td>
+                                    <td *ngIf="rent_feature.feature_details[1] === 'no'">
+                                        <span>&#10006;</span>
+                                    </td>
+                                    <td
+                                        *ngIf="rent_feature.feature_details[1] != 'no' && rent_feature.feature_details[1] != 'yes'">
+                                        <span>{{rent_feature.feature_details[1]}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <!-- Buttons -->
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td *ngFor="let plan of response" class="bg-green"><a class="btn"
+                                            (click)="plan_payment(plan.plan_name, plan.plan_ID, plan.payment_type, 'rent', expected_rent, plan.plan_price)">Select
+                                            Plan</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Payment Summary
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <hr>
+                        <h5 class="card-title">Property Details</h5>
+                        <hr>
+                        <p class="card-text">Property Name: {{ product_data?.build_name }}</p>
+                        <p class="card-text">Property Size: {{ product_data?.area }} {{ product_data?.area_unit }}</p>
+                        <p class="card-text">Rent: {{ product_data?.expected_rent }}</p>
+
+                        <hr>
+                        <h5 class="card-title">Plan Details</h5>
+                        <hr>
+                        <p class="card-text">Plan Name: {{ plan_name }}</p>
+                        <p class="card-text">Plan Price: {{ plan_price }}</p>
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <hr>
+                        <h5 class="card-title">Payment Details</h5>
+                        <hr>
+                        <h5 class="text-center">Payable to Owner</h5>
+                        <p class="card-text">1 Month Rent: {{ expected_rent }}</p>
+                        <p class="card-text">Security Deposit ({{security_deposit}} Months): {{ security_dep_amount }}
+                        </p>
+                        <p class="card-text" *ngIf="product_data?.maintenance_charge_status == '1'">Maintenance Charge
+                            ({{
+                            product_data?.maintenance_charge_condition }}):
+                            {{product_data.maintenance_charge}}</p>
+                        <p class="card-text"><strong>Total Amount: {{ total_amount_owner }}</strong></p>
+
+                        <h5 class="text-center">Payable to HousingStreet</h5>
+                        <p class="card-text">Plan Price: {{ plan_price }}</p>
+                        <p class="card-text">GST@ 18%: {{ gst_amount }}</p>
+                        <p class="card-text"><strong>Total Amount: {{ total_amount_hs }}</strong></p>
+
+                        <hr>
+                        <h4><strong>Total Payable Amount: {{ total_amount_hs + total_amount_owner }}</strong></h4>
+                    </div>
+                </div>
+
+                <div class="row mt20">
+                    <div class="col-lg-3 col-md-3 col-sm-12">
+                        <label for="">Mode of Payment</label>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12">
+                        <mat-radio-group aria-label="Mode of Payment" [(ngModel)]="mode_payment" name="paymentMode">
+                            <mat-radio-button [value]="'Online'" color="primary" name="Online">Online Payment</mat-radio-button>
+                            <mat-radio-button [value]="'Cash'" color="primary" name="Cash">Payment by Cash</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-right">
+                        <button type="button" class="btn btn-success" *ngIf="mode_payment=='Online'"
+                            (click)="proceedToPayment(response.order_id)">Proceed
+                            to Payment</button>
+                        <button class="btn btn-info" *ngIf="mode_payment=='Cash'"
+                            (click)="generateInvoice(response.order_id)">Generate Invoice</button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { UrlService } from './../_services/url.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { PlansService } from '../_services/plans.service';
+import { SubscriptionPlansComponent } from '../subscription-plans/subscription-plans.component';
+import { GlobalConstants } from './../global-constants';
 
 @Component({
   selector: 'app-verify-details',
@@ -31,6 +33,10 @@ export class VerifyDetailsComponent implements OnInit {
   public user_id: any;
   public userEmail: string[] = null;
   public userDetails: any;
+  public property_data: any;
+
+  public paytm_data: any;
+  public paytm_form_url: string = GlobalConstants.Paytm_formURL;
 
   constructor(private userService: UserService,
     private fb: FormBuilder,
@@ -38,6 +44,7 @@ export class VerifyDetailsComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private router: Router,
     private urlService: UrlService,
+    private planscomp: SubscriptionPlansComponent,
     private plansService: PlansService) { }
 
   verifyForm = this.fb.group({
@@ -144,18 +151,73 @@ export class VerifyDetailsComponent implements OnInit {
             this.plansService.postSelectedPlan(this.plansData).subscribe(
               res => {
                 console.log(res);
-                this.router.navigate(['/payment-summary'], { queryParams: { 'orderID': res.data.order_id } });
+                if (res.data.plan_type == 'let_out') {
+                  this.router.navigate(['/payment-summary'], { queryParams: { 'orderID': res.data.order_id } });
+                }
+                else if (res.data.plan_type == 'rent') {
+                  this.router.navigate(['plans']);
+                  this.planscomp.openMessageModal();
+                }
+
               },
               err => {
 
               }
             );
           }
+          else if (this.previousUrl.includes('pro_payment_summary')) {
+            console.log(this.previousUrl);
+            this.property_data = JSON.parse(this.tokenStorage.getPlansData());
+            console.log(this.property_data);
+            this.property_data.user_id = this.user_id;
+            this.property_data.user_email = this.userEmail;
+            console.log(this.property_data);
+
+            this.plansService.postSelectedRentPlan(this.property_data).subscribe(
+              res => {
+                console.log(res);  
+                if(this.property_data.payment_mode == 'Online') {
+                  console.log(this.property_data.payment_mode);
+                  this.plansService.proceedToPaymentRent(res.data.order_id).subscribe(
+                    result => {
+                      console.log(result);
+                      if (result.status == 201) {
+                        this.paytm_data = result.data;
+                        this.createPaytmForm();
+                      }
+                      else {
+              
+                      }
+                    },
+                    error => {
+                      console.log(error);
+                    }
+                  );
+                }   
+                else if (this.property_data.payment_mode == 'Cash') {
+                  console.log(this.property_data.payment_mode);
+                  this.plansService.generateRentInvoice(res.data.order_id).subscribe(
+                    result => {
+                      console.log(result);
+                      this.router.navigate(['/invoice'], { queryParams: { 'invoice_no': result.data } });
+                    },
+                    err => {
+                      console.log(err);
+                    }
+                  );
+                }
+                
+              },
+              err => {
+  
+              }
+            );
+          }
           else {
             this.router.navigateByUrl(this.previousUrl)
-            .then(() => {
-              window.location.reload();
-            });
+              .then(() => {
+                window.location.reload();
+              });
           }
         },
         err => {
@@ -167,6 +229,29 @@ export class VerifyDetailsComponent implements OnInit {
         }
       );
     }
+  }
+
+  createPaytmForm() {
+    const my_form: any = document.createElement('form');
+    my_form.name = 'paytm_form';
+    my_form.method = 'post';
+    my_form.action = this.paytm_form_url;
+
+    const myParams = Object.keys(this.paytm_data);
+    for (let i = 0; i < myParams.length; i++) {
+      const key = myParams[i];
+      let my_tb: any = document.createElement('input');
+      my_tb.type = 'hidden';
+      my_tb.id = key;
+      my_tb.name = key;
+      my_tb.value = this.paytm_data[key];
+      my_form.appendChild(my_tb);
+    };
+    // console.log(my_form);
+    document.body.appendChild(my_form);
+    my_form.submit();
+    // after click will fire you will redirect to paytm payment page.
+    // after complete or fail transaction you will redirect to your CALLBACK URL
   }
 
 }

@@ -1,0 +1,107 @@
+<table class="table" *ngIf="response.source == 'myproperties'">
+    <tbody>
+        <tr>
+            <th>Invoice No: </th>
+            <td>{{ response.invoice_no }}</td>
+        </tr>
+        <tr>
+            <th>Payment Mode:</th>
+            <td>{{ response.payment_mode }}</td>
+        </tr>
+        <tr>
+            <th>Payment Status:</th>
+            <td>{{ response.payment_status }}</td>
+        </tr>
+        <tr>
+            <th>Plan Name:</th>
+            <td>{{ response.plan_name }}</td>
+        </tr>
+        <tr>
+            <th>Plan Price:</th>
+            <td>{{ response.plan_price }}</td>
+        </tr>
+        <tr>
+            <th>GST Amount:</th>
+            <td>{{ response.gst_amount }}</td>
+        </tr>
+        <tr>
+            <th>Security Deposit:</th>
+            <td>{{ response.security_deposit }}</td>
+        </tr>
+        <tr>
+            <th>Maintenance Charge:</th>
+            <td>{{ response.maintenance_charge }}</td>
+        </tr>
+        <tr>
+            <th>1 Month Rent:</th>
+            <td>{{ response.expected_rent }}</td>
+        </tr>
+        <tr>
+            <th>Total Amount:</th>
+            <td>{{ response.total_amount }}</td>
+        </tr>
+    </tbody>
+</table>
+<table class="table" *ngIf="response.source == 'mycredits'">
+    <tbody>
+        <tr>
+            <th>Property Name: </th>
+            <td>{{ response.property_name }}</td>
+        </tr>
+        <tr>
+            <th>Order ID: </th>
+            <td>{{ response.order_id }}</td>
+        </tr>
+        <tr>
+            <th>Invoice No: </th>
+            <td>{{ response.invoice_no }}</td>
+        </tr>
+        <tr>
+            <th>Payment Status:</th>
+            <td>{{ response.payment_status }}</td>
+        </tr>
+        <tr>
+            <th>Payment Mode:</th>
+            <td>{{ response.payment_mode }}</td>
+        </tr>
+        <tr>
+            <th>Amount Paid:</th>
+            <td>{{ response.amount_paid }}</td>
+        </tr>
+        <tr>
+            <th>Plan Name:</th>
+            <td>{{ response.plan_name }}</td>
+        </tr>
+        <tr>
+            <th>Plan Type:</th>
+            <td>{{ response.plan_type }}</td>
+        </tr>
+        <tr>
+            <th>Plan Price:</th>
+            <td>{{ response.plan_price }}</td>
+        </tr>
+        <tr>
+            <th>GST Amount:</th>
+            <td>{{ response.gst_amount }}</td>
+        </tr>
+        <tr>
+            <th>Security Deposit:</th>
+            <td>{{ response.security_deposit }}</td>
+        </tr>
+        <tr>
+            <th>Maintenance Charge:</th>
+            <td>{{ response.maintenance_charge }}</td>
+        </tr>
+        <tr>
+            <th>1 Month Rent:</th>
+            <td>{{ response.expected_rent }}</td>
+        </tr>
+        <tr>
+            <th>Total Amount:</th>
+            <td>{{ response.total_amount }}</td>
+        </tr>
+    </tbody>
+</table>
+<footer id="modal-footer" class="text-center">
+    <button mat-raised-button id="modal-cancel-button" (click)="closeModal()">Close</button>
+</footer>

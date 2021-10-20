@@ -16,6 +16,7 @@ export class LoginModalComponent implements OnInit {
   public returnUrl: string;
   public response: any;
   public plan_price: number;
+  public product_id: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -44,6 +45,14 @@ export class LoginModalComponent implements OnInit {
 
       this.tokenStorage.saveReturnURL(this.returnUrl);
       this.tokenStorage.savePlansData(JSON.stringify(this.response));
+    }
+    else if (this.returnUrl.includes('productpage')) {
+      this.tokenStorage.saveProductId(this.response.product_id);
+      this.tokenStorage.saveReturnURL(this.returnUrl);
+    }
+    else if(this.returnUrl.includes('pro_payment_summary')) {
+      this.tokenStorage.savePlansData(JSON.stringify(this.response));
+      this.tokenStorage.saveReturnURL(this.returnUrl);
     }
 
     this.router.navigate(['login']);

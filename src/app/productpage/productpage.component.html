@@ -288,8 +288,10 @@
 						</div>
 					</div>
 					<div class="col-lg-4 col-xl-4 mt30 single-page_rigth_sidebar">
-						<div class="sidebar_listing_list text-center"
-							*ngIf="product_data.expected_rent != null && isLoggedIn == true ">
+						<!--<div class="sidebar_listing_list text-center"
+							*ngIf="product_data.expected_rent != null && isLoggedIn == true ">-->
+							<div class="sidebar_listing_list text-center"
+							*ngIf="product_data.expected_rent != null">
 							<div *ngIf="user_transaction_status == true;else checkout">
 								<div *ngIf="order_data.user_id == login_userID;else property_sold">
 									<h4>

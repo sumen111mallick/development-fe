@@ -199,9 +199,9 @@ export class InsertproductRentComponent implements OnInit {
   });
 
   options: Options = {
-    //  step:100,
+    step:100,
     floor: 5000,
-    ceil: 500000,
+    ceil: 100000,
     translate: (value: number, label: LabelType): string => {
       return '₹' + value.toLocaleString('en');
     }

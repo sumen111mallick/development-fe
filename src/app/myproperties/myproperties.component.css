@@ -14,3 +14,7 @@
 .checkmark {
     color: #00D100;
   }
+
+  .btn-primary {
+      color: #fff !important;
+  }

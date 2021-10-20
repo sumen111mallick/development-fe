@@ -34,9 +34,4 @@ export class AppComponent {
         this.urlService.setPreviousUrl(this.previousUrl);
       }); */
     }
-
-    onDeactivate() {
-      //document.body.scrollTop = 0;
-       window.scrollTo(0, 0)
-    }
 }

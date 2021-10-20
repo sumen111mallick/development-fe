@@ -27,6 +27,7 @@ export class PropertyCreditModalComponent implements OnInit {
   public userDetails: any;
   public user_id: any;
   public plan_price: number;
+  public step: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   private router: Router,
@@ -39,7 +40,7 @@ export class PropertyCreditModalComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
     this.response = this.data;
-
+    this.step = this.response.dialog_step;
     this.plansService.getLetOutPlans().subscribe(
       res => {
         this.letout_response = res;

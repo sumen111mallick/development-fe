@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Plan Details</h2>
 <mat-dialog-content class="mat-typography">
   <mat-accordion class="example-headers-align">
-    <mat-expansion-panel expanded>
+    <mat-expansion-panel [expanded]="step === 0">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Plans Available
@@ -43,7 +43,7 @@
         </tbody>
       </table>
     </mat-expansion-panel>
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 1">
       <mat-expansion-panel-header>
         <mat-panel-title>
           Purchase a Plan

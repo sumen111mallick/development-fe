@@ -160,7 +160,8 @@
                                                 <th>&nbsp;</th>
                                                 <th *ngFor="let plan of response">
                                                     {{ plan.plan_name }}
-                                                    <span class="ptable-price pay_type">{{ plan.payment_type }} Payment</span>
+                                                    <span class="ptable-price pay_type">{{ plan.payment_type }}
+                                                        Payment</span>
                                                     <hr>
                                                     <span class="ptable-price">{{ plan.plan_price }} Days Rent</span>
                                                     <span class="ptable-price" *ngIf="value">Rs. {{ value /
@@ -218,8 +219,11 @@
                                             <!-- Buttons -->
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td class="bg-green"><a class="btn">Select Plan</a></td>
-                                                <td class="bg-green"><a class="btn">Select Plan</a></td>
+                                                <td *ngFor="let plan of response" class="bg-green"><a
+                                                        class="btn"
+                                                        (click)="plan_payment(plan.plan_name, plan.plan_ID, plan.payment_type, 'rent', value, plan.plan_price)">Fix Appointment</a></td>
+                                                <!--<td class="bg-green"><a class="btn">Select Plan</a></td>
+                                                <td class="bg-green"><a class="btn">Select Plan</a></td>-->
                                             </tr>
                                         </tbody>
                                     </table>
@@ -243,8 +247,8 @@
                                         <label for="expected_rent_amount">Enter Expected Rent</label>
                                         <input type="text" [(ngModel)]="expected_rent_value"
                                             (keypress)="keyPressNumbers($event)" class="form-control h50 pl20"
-                                            autocomplete="off" maxlength="5" min="0" formControlName="expected_rent_amount"
-                                            name="expected_rent_amount">
+                                            autocomplete="off" maxlength="5" min="0"
+                                            formControlName="expected_rent_amount" name="expected_rent_amount">
 
                                         <div *ngIf="g.expected_rent_amount.touched && g.expected_rent_amount.invalid"
                                             class="alert alert-danger">
@@ -293,17 +297,19 @@
                                             <tr>
                                                 <th>&nbsp;</th>
                                                 <th *ngFor="let letout_plan of letout_response">
-                                                    <tr rowspan="1">{{ letout_plan.plan_name }}</tr>
-                                                    <tr rowspan="1"><span class="ptable-price pay_type">{{ letout_plan.payment_type }}
-                                                        Payment</span></tr>
-                                                    <hr>
-                                                    <tr rowspan="1"><span class="ptable-price">{{ letout_plan.plan_price }} Days
-                                                        Rent</span></tr>
-                                                        <tr rowspan="1"><span class="ptable-price" *ngIf="expected_rent_value">&#8377; {{
-                                                        expected_rent_value /
-                                                        (30 / letout_plan.plan_price)}}</span></tr>
-                                                    <!--<span class="ptable-price" *ngIf="selected && plan.plan_price == 15">Rs. {{ selected.value / 2 }}</span>-->
-                                                </th>
+                                            <tr rowspan="1">{{ letout_plan.plan_name }}</tr>
+                                            <tr rowspan="1"><span class="ptable-price pay_type">{{
+                                                    letout_plan.payment_type }}
+                                                    Payment</span></tr>
+                                            <hr>
+                                            <tr rowspan="1"><span class="ptable-price">{{ letout_plan.plan_price }} Days
+                                                    Rent</span></tr>
+                                            <tr rowspan="1"><span class="ptable-price"
+                                                    *ngIf="expected_rent_value">&#8377; {{
+                                                    expected_rent_value /
+                                                    (30 / letout_plan.plan_price)}}</span></tr>
+                                            <!--<span class="ptable-price" *ngIf="selected && plan.plan_price == 15">Rs. {{ selected.value / 2 }}</span>-->
+                                            </th>
                                             </tr>
                                         </thead>
                                         <tbody *ngFor="let letout_feature of letout_feat_res">
@@ -354,9 +360,12 @@
                                             <!-- Buttons -->
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td *ngFor="let letout_plan of letout_response" class="bg-green"><a class="btn" (click)="plan_payment(letout_plan.plan_name, letout_plan.plan_ID, letout_plan.payment_type, 'let_out', expected_rent_value, letout_plan.plan_price)">Select Plan</a></td>
+                                                <td *ngFor="let letout_plan of letout_response" class="bg-green"><a
+                                                        class="btn"
+                                                        (click)="plan_payment(letout_plan.plan_name, letout_plan.plan_ID, letout_plan.payment_type, 'let_out', expected_rent_value, letout_plan.plan_price)">Select
+                                                        Plan</a></td>
                                             </tr>
-                                           <!-- <tr>
+                                            <!-- <tr>
                                                 <td>&nbsp;</td>
                                                 <td class="bg-green"><a class="btn" (click)="plan_payment('letout', 'maharaja', expected_rent_value)">Select Plan</a></td>
                                                 <td class="bg-green"><a class="btn" (click)="plan_payment('letout', 'raja', expected_rent_value)">Select Plan</a></td>

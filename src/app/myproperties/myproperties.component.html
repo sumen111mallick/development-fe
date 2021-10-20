@@ -55,7 +55,13 @@
                   <h3 class="breadcrumb_title">My Properties ({{contentLenght}})</h3>
                 </div>
               </div>
-
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="alert alert-dark" role="alert">
+                    Listed Properties
+                  </div>
+                </div>
+              </div>
               <div class="col-lg-12">
                 <div class="my_dashboard_review mb40">
                   <div class="property_table">
@@ -76,7 +82,7 @@
                             <div class="preloader1"></div>
                           </div>
                         </div>
-                        <tbody *ngFor="let number of content | paginate:{itemsPerPage:2, currentPage:p} ">
+                        <tbody *ngFor="let number of live_properties() | paginate:{itemsPerPage:2, currentPage:p} ">
                           <tr>
                             <td scope="row" style="width: 50%;">
                               <div class="feat_property list favorite_page style2">
@@ -134,16 +140,92 @@
                               <h4>Your property is not live</h4>
                             </td>
                             <td colspan="2">
-                              <button mat-raised-button color="primary" (click)="checkCredits(number.product_uid, number.expected_rent)">
+                              <button mat-raised-button color="primary"
+                                (click)="checkCredits(number.product_uid, number.expected_rent)">
                                 Make your property Live
                               </button>
                             </td>
                           </tr>
                           <tr *ngIf="number?.enabled == 'yes'">
                             <td class="enabled_text" colspan="4">
-                              <h4><span
-                                class="checkmark"><strong>&#10004;</strong></span> Your property is live</h4>
+                              <h4><span class="checkmark"><strong>&#10004;</strong></span> Your property is live</h4>
                             </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div class="col-lg-12  col-md-12 " *ngIf="contentLenght==0">
+                        <h3 class="breadcrumb_title">Product Listing Empty!!!...</h3>
+                      </div>
+                      <div class="col-lg-12 Agent_property " *ngIf="contentLenght>2">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="alert alert-dark" role="alert">
+                    Properties Sold/Rented
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="my_dashboard_review mb40">
+                  <div class="property_table">
+                    <div class="table-responsive mt0">
+                      <table class="table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Listing Title</th>
+                            <th scope="col" class="hidden-xs hidden-sm">Date published</th>
+                            <!-- <th scope="col">Status</th> -->
+                            <th scope="col" class="hidden-xs hidden-sm">Views</th>
+                          </tr>
+                        </thead>
+
+                        <div class="row" *ngIf="showLoadingIndicator">
+                          <div class="col-md-12 col-lg-12" class="loaderClass">
+                            <div class="preloader1"></div>
+                          </div>
+                        </div>
+                        <tbody *ngFor="let number of onRent_properties() | paginate:{itemsPerPage:2, currentPage:p} ">
+                          <tr>
+                            <td scope="row" style="width: 50%;">
+                              <div class="feat_property list favorite_page style2">
+                                <div class="thumb">
+                                  <img class="img-whp" *ngIf="number.product_img.length>0;else OtherImage"
+                                    src="{{ftpstring}}{{number.product_img[0].image}}" alt="fp1.jpg">
+                                  <ng-template #OtherImage>
+                                    <img class="img-whp" src="./../../assets/images/no_image_available.jpg"
+                                      alt="No Product Image">
+                                  </ng-template>
+                                  <div class="thmb_cntnt">
+                                    <ul class="tag mb0">
+                                      <li class="list-inline-item dn"></li>
+                                      <li class="list-inline-item" *ngIf=" number.rent_availability  != null"><a>For
+                                          Rent</a></li>
+                                      <li class="list-inline-item" *ngIf=" number.sale_availability  != null"><a>For
+                                          Sale</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="details">
+                                  <div class="tc_content">
+                                    <h4>{{ number.build_name | titlecase}}</h4>
+                                    <p><span class="flaticon-placeholder"></span>{{ number.address | titlecase }}</p>
+                                    <a class="fp_price text-thm" *ngIf="number.expected_pricing != null">₹
+                                      {{price_comma(number.expected_pricing) }}<small></small></a>
+                                    <a class="fp_price text-thm" *ngIf="number.expected_rent != null">₹
+                                      {{price_comma(number.expected_rent) }}<small></small></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <!-- <td>{{ number.updated_at }}</td> -->
+                            <td class="hidden-xs hidden-sm">{{ number.updated_at | date: 'MMM d, y, h:mm:ss a' }}</td>
+                            <!-- <td><span class="status_tag badge">Pending</span></td> -->
+                            <td class="hidden-xs hidden-sm">{{ number.view_counter }} </td>
                           </tr>
                         </tbody>
                       </table>
@@ -160,11 +242,17 @@
             </div>
             <!-- draft property -->
             <div class="row" *ngIf="draft_Lenght>0">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="alert alert-dark" role="alert">
+                    Draft Properties ({{draft_Lenght}})
+                  </div>
+                </div>
+              </div>
               <div class="col-lg-12">
                 <div class="my_dashboard_review mb40">
                   <div class="property_table">
                     <div class="table-responsive mt0">
-                      <span _ngcontent-bcc-c292="" class="status_tag badge">Draft Property({{draft_Lenght}})</span>
                       <table class="table">
                         <thead class="thead-light">
                           <tr>
@@ -247,92 +335,51 @@
               </div>
             </div>
             <!-- draft property  -->
-            <!-- Purchased properties  -->
-            <div class="row" *ngIf="purchased_Lenght>0">
+            <!-- Rented properties  -->
+            <div class="row">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="alert alert-dark" role="alert">
+                    Rented Properties (Properties taken on Rent)
+                  </div>
+                </div>
+              </div>
               <div class="col-lg-12">
                 <div class="my_dashboard_review mb40">
                   <div class="property_table">
                     <div class="table-responsive mt0">
-                      <span _ngcontent-bcc-c292="" class="status_tag badge">Purchased
-                        Property({{purchased_Lenght}})</span>
-                      <table class="table">
+                      <table class="table text-center">
                         <thead class="thead-light">
                           <tr>
-                            <th scope="col">Listing Title</th>
-                            <th scope="col">Order Details</th>
-                            <th scope="col" class="hidden-xs hidden-sm">Transaction Date</th>
-                            <th scope="col">Payment Status</th>
+                            <th scope="col">Sl. No</th>
+                            <th scope="col">Property Name</th>
+                            <th scope="col">Amount Paid</th>
+                            <th scope="col">Order ID</th>
+                            <th scope="col"></th>
                           </tr>
                         </thead>
-                        <div class="row" *ngIf="showLoadingIndicator">
-                          <div class="col-md-12 col-lg-12" class="loaderClass">
-                            <div class="preloader1"></div>
-                          </div>
-                        </div>
-                        <tbody>
-                          <tr
-                            *ngFor="let Purchased of purchased_pro_data | paginate:{itemsPerPage:2, currentPage:pur, id: 'pur'} ">
-                            <!-- {{Purchased | json}} -->
-                            <td scope="row" style="width: 50%;">
-                              <div class="feat_property list favorite_page style2">
-                                <div class="thumb">
-                                  <img class="img-whp" *ngIf="Purchased.pro_order.product_img.length>0;else OtherImage"
-                                    src="{{ftpstring}}{{Purchased.pro_order.product_img[0].image}}" alt="fp1.jpg">
-                                  <ng-template #OtherImage>
-                                    <img class="img-whp" src="./../../assets/images/no_image_available.jpg"
-                                      alt="No Product Image">
-                                  </ng-template>
-                                  <div class="thmb_cntnt">
-                                    <ul class="tag mb0">
-                                      <li class="list-inline-item dn"></li>
-                                      <li class="list-inline-item"
-                                        *ngIf="Purchased.pro_order.rent_availability  != null"><a>For
-                                          Rent</a></li>
-                                      <li class="list-inline-item"
-                                        *ngIf="Purchased.pro_order.sale_availability  != null"><a>For
-                                          Sale</a></li>
-                                    </ul>
-                                  </div>
-                                </div>
-                                <div class="details">
-                                  <div class="tc_content">
-                                    <h4 *ngIf="Purchased.pro_order.build_name != null">{{Purchased.pro_order.build_name
-                                      | titlecase}}</h4>
-                                    <p *ngIf="Purchased.pro_order.address != null"><span
-                                        class="flaticon-placeholder"></span>{{ Purchased.pro_order.address | titlecase
-                                      }}</p>
-                                    <a class="fp_price text-thm" *ngIf="Purchased.pro_order.expected_pricing != null">₹
-                                      {{price_comma(Purchased.pro_order.expected_pricing) }}<small></small></a>
-                                    <a class="fp_price text-thm" *ngIf="Purchased.pro_order.expected_rent != null">₹
-                                      {{price_comma(Purchased.pro_order.expected_rent) }}<small></small></a>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <!-- <h5><a class="fp_price text-thm">{{Purchased.user_email}}</a></h5> -->
-                              <h5><a class="fp_price text-thm">{{Purchased.orderId}}</a></h5>
-                            </td>
-                            <td class="hidden-xs hidden-sm" style="width: 35%;">{{Purchased.updated_at | date: 'MMM d,
-                              y, h:mm:ss a' }}</td>
-                            <td>
-                              <button class="btn btn-success">Success</button>
-                            </td>
+                        <tbody *ngFor="let property of rented_properties; index as i">
+                          <tr>
+                            <th scope="row">
+                              {{ i+1 }}
+                            </th>
+                            <td>{{ property.property_name }}</td>
+                            <td>{{ property.amount_paid }}</td>
+                            <td>{{ property.order_id }}</td>
+                            <td><a class="btn btn-primary" role="button" (click)="openModal(property)">
+                                More Details
+                              </a></td>
                           </tr>
                         </tbody>
                       </table>
-                      <div class="col-lg-12  col-md-12 " *ngIf="purchased_Lenght==0">
-                        <h2 class="breadcrumb_title">Product Listing Not Found!!!...</h2>
-                      </div>
-                      <div class="col-lg-12 Agent_property " *ngIf="purchased_Lenght>2">
-                        <pagination-controls (pageChange)="pur = $event" id="pur"></pagination-controls>
-                      </div>
                     </div>
+
                   </div>
+
                 </div>
               </div>
             </div>
-            <!-- Purchased properties  -->
+            <!-- Rented properties  -->
 
             <!-- SoldOut properties  -->
             <div class="row" *ngIf="solid_Lenght>0">

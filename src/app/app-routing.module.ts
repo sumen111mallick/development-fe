@@ -74,6 +74,8 @@ import { PaymentSummaryComponent } from './payment-summary/payment-summary.compo
 import { MyCreditsComponent } from './my-credits/my-credits.component';
 import { PlanApplyComponent } from './plan-apply/plan-apply.component';
 import{ LocalserviceComponent } from './localservice/localservice.component';
+import { ProductPaymentComponent } from './product-payment/product-payment.component';
+import { ProPaymentSummaryComponent } from './pro-payment-summary/pro-payment-summary.component';
 
 const routes: Routes = [
 
@@ -262,6 +264,8 @@ const routes: Routes = [
   {path: 'plan-apply', component: PlanApplyComponent},
 
   {path:'local-service', component: LocalserviceComponent},
+  {path: 'product_payment', component: ProductPaymentComponent},
+  {path: 'pro_payment_summary', component: ProPaymentSummaryComponent },
   {path: '**', component: NotfoundComponent},
 
 ];

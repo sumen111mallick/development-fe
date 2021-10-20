@@ -1,0 +1,94 @@
+<div class="container mt150">
+    <div class="card">
+        <div class="card-header">
+            Choose a Plan
+        </div>
+        <div class="card-body">
+            <div class="pricing">
+                <div class="container">
+                    <div class="pricing-table">
+                        <table class="table table-hover table-bordered">
+                            <!-- <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>
+                                        Platinum
+                                        <span class="ptable-price">Advance Payment</span>
+                                        <hr>
+                                        <span class="ptable-price">30 Days Rent</span>
+                                    </th>
+                                    <th>
+                                        Gold
+                                        <span class="ptable-price">Advance Payment</span>
+                                        <hr>
+                                        <span class="ptable-price">15 Days Rent</span>
+                                    </th>
+                                    <th>
+                                        Silver
+                                        <span class="ptable-price">Post Payment</span>
+                                        <hr>
+                                        <span class="ptable-price">15 Days Rent</span>
+                                    </th>
+                                </tr>
+                            </thead>-->
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th *ngFor="let plan of response">
+                                        {{ plan.plan_name }}
+                                        <span class="ptable-price pay_type">{{ plan.payment_type }}
+                                            Payment</span>
+                                        <hr>
+                                        <span class="ptable-price">{{ plan.plan_price }} Days Rent</span>
+                                        <span class="ptable-price">Rs. {{ expected_rent /
+                                            (30 / plan.plan_price)}}</span>
+                                        <!--<span class="ptable-price" *ngIf="selected && plan.plan_price == 15">Rs. {{ selected.value / 2 }}</span>-->
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let rent_feature of rent_feat_res">
+                                <tr class="visible-xs" aria-hidden="true">
+                                    <td>&nbsp;</td>
+                                    <td colspan="3">{{rent_feature.feature_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="ptable-title">{{rent_feature.feature_name}}</span>
+                                    </td>
+                                    
+                                    <td *ngIf="rent_feature.feature_details[0] === 'yes'"><span
+                                            class="checkmark">&#10004;</span></td>
+                                    <td *ngIf="rent_feature.feature_details[0] === 'no'">&#10006;</td>
+                                    <td
+                                        *ngIf="rent_feature.feature_details[0] != 'no' && rent_feature.feature_details[0] != 'yes'">
+                                        <span>{{rent_feature.feature_details[0]}}</span>
+                                    </td>
+
+                                    <td *ngIf="rent_feature.feature_details[1] === 'yes'"><span
+                                            class="checkmark">&#10004;</span></td>
+                                    <td *ngIf="rent_feature.feature_details[1] === 'no'">
+                                        <span>&#10006;</span>
+                                    </td>
+                                    <td
+                                        *ngIf="rent_feature.feature_details[1] != 'no' && rent_feature.feature_details[1] != 'yes'">
+                                        <span>{{rent_feature.feature_details[1]}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <!-- Buttons -->
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td *ngFor="let plan of response" class="bg-green"><a class="btn"
+                                            (click)="plan_payment(plan.plan_name, plan.plan_ID, plan.payment_type, 'rent', expected_rent, plan.plan_price)">Select
+                                            Plan</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
